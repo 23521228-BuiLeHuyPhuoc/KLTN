@@ -1,0 +1,15 @@
+# Repository riêng biệt
+NT114.Q21-Web-Copy-Writing/
+
+# Log files
+*.log
+
+# Scratch / Test folders
+scratch_test/
+scratch_test_bing/
+
+# Hệ điều hành & Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
