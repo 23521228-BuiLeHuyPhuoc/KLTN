@@ -1,5 +1,5 @@
 {
- "_doc": "Hồ sơ chuẩn hóa nhập tay từ evidence/2026-10-08/examples.json (trường values/quotes/conditions_summary) để kiểm thử scripts/abc_reference.py. Không phải đầu ra trích xuất tự động; không phải dữ liệu đánh giá. Người nhập: reviewer AI 08/10/2026 — sinh viên cần soát lại.",
+ "_doc": "Hồ sơ chuẩn hóa nhập tay từ evidence/2026-10-08/examples.json (trường values/quotes/conditions_summary) để kiểm thử scripts/abc_reference.py. Không phải đầu ra trích xuất tự động; không phải dữ liệu đánh giá. Người nhập: reviewer AI 08/10/2026 — sinh viên cần soát lại. Cập nhật 10/2026: claim_original của EX-13–15 bỏ ràng buộc market (quyết định D2).",
  "evidence_sets": {
   "a5": [
    {
@@ -902,7 +902,7 @@
    "claim_original": {
     "product": "AirPods 4",
     "version": "standard",
-    "market": "VN",
+    "market": null,
     "part": "earbud",
     "condition_ref": false,
     "attributes": [
@@ -937,7 +937,7 @@
      }
     ]
    },
-   "note": "SUY LUẬN: quảng cáo gốc tiếng Việt → thị trường VN; nguồn là trang Moldova."
+   "note": "SUY LUẬN: quảng cáo gốc tiếng Việt → thị trường VN; nguồn là trang Moldova. | 10/2026 (D2): câu gốc không nêu thị trường nên market=None; thị trường là thuộc tính của nguồn, được ghi market_substitute ở hồ sơ nguồn, không phải điều kiện của claim."
   },
   "EX-14": {
    "expected": "Supported",
@@ -945,7 +945,7 @@
    "claim_original": {
     "product": "AirPods 4",
     "version": "ANC",
-    "market": "VN",
+    "market": null,
     "part": "case",
     "condition_ref": false,
     "attributes": [
@@ -980,7 +980,7 @@
      }
     ]
    },
-   "note": ""
+   "note": "10/2026 (D2): câu gốc không nêu thị trường nên market=None; thị trường là thuộc tính của nguồn, được ghi market_substitute ở hồ sơ nguồn, không phải điều kiện của claim."
   },
   "EX-15": {
    "expected": "Refuted",
@@ -988,7 +988,7 @@
    "claim_original": {
     "product": "AirPods 4",
     "version": "standard",
-    "market": "VN",
+    "market": null,
     "part": "case",
     "condition_ref": false,
     "attributes": [
@@ -1023,7 +1023,7 @@
      }
     ]
    },
-   "note": ""
+   "note": "10/2026 (D2): câu gốc không nêu thị trường nên market=None; thị trường là thuộc tính của nguồn, được ghi market_substitute ở hồ sơ nguồn, không phải điều kiện của claim."
   },
   "EX-16": {
    "expected": "NEI-missing",

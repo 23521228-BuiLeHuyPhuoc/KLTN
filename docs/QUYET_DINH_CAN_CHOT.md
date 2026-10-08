@@ -1,5 +1,7 @@
 # Quyết định cần chốt (rà soát 08/10/2026)
 
+> **Bản 10/2026:** danh sách quyết định hiện hành là QĐ1–QĐ12 trong [sổ tay mục 10](KE_HOACH_CHI_TIET_SINH_VIEN.md#10-rủi-ro-quyết-định-và-thông-tin-cần-bổ-sung). Bảng D1–D12 dưới đây giữ làm lịch sử; D7 (dừng theo nhãn) và D8 (30 claim) đã được thay bằng quy tắc trong [GIAO_THUC_DANH_GIA.md](GIAO_THUC_DANH_GIA.md) §2 và §3.
+
 Mọi mục dưới đây là **DỰ THẢO — cần sinh viên/GVHD xác nhận**. Cột "Đề xuất" là phương án người rà soát chọn; chưa có giá trị phê duyệt.
 
 | # | Câu hỏi | Đề xuất | Phương án khác | Căn cứ | Hạn chốt |
@@ -10,7 +12,7 @@ Mọi mục dưới đây là **DỰ THẢO — cần sinh viên/GVHD xác nhậ
 | D4 | Có tính nhãn EX theo `original_claim` hay `reviewed_claim`? | Sau D1, gán cho `original_claim`; giữ `reviewed_claim` làm lịch sử | Giữ như hiện tại (chỉ câu sửa) | GIAO_THUC §1: thêm điều kiện = biến thể | 20/10 |
 | D5 | Mốc 15/10 | **(Sửa 08/10, redesign)** Gate 1 kéo đến 31/10: môi trường API + lô 0 (2 họ × 5 quảng cáo) + đo năng suất + hướng dẫn v1; pilot 45–60 claim / 6 họ thuộc Gate 2 (01–14/11) | Giữ pilot 45–60 vào 15/10 (không khả thi: 08/10 chưa có API/log) | Đến 08/10 chưa có quảng cáo LLM có log, chưa có cấu hình API | 10/10 |
 | D6 | Cỡ test và cách báo RQ3 | Giữ RQ3 thăm dò; nếu năng suất cho phép, nâng R+NEI test lên ≥ 40 | Tuyên bố có ý nghĩa thống kê với 4 họ | `scripts/simulate_power.py` | Gate 2 |
-| D7 | Tiêu chí dừng thu `ordinary_llm` | Đạt sàn, hoặc 3 lô liên tiếp một nhãn tăng < 2, hoặc chạm ngân sách [SINH VIÊN ĐIỀN] | Thu đến khi đủ cân bằng nhãn | GIAO_THUC §10 | 20/10 |
+| D7 | Tiêu chí dừng thu `ordinary_llm` | Đạt sàn, hoặc 3 lô liên tiếp một nhãn tăng < 2, hoặc chạm ngân sách [SINH VIÊN ĐIỀN] | Thu đến khi đủ cân bằng nhãn | GIAO_THUC (bản 08/10) §10 | 20/10 |
 | D8 | Người gán thứ hai cho 30 claim | Mời một bạn cùng khóa trước 20/10, gán sau khi khóa hướng dẫn | Chỉ tự gán lại 20% (ghi hạn chế) | GIAO_THUC §3 | 20/10 |
 
 ## Quyết định bổ sung khi thiết kế lại kế hoạch (08/10/2026, DỰ THẢO)

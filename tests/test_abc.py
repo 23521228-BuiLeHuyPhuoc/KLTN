@@ -1,4 +1,4 @@
-"""Kiểm thử luật A–B–C (docs/QUY_TAC_ABC.md). Chạy: python3 -m unittest discover -s tests -v"""
+"""Kiểm thử luật A–B–C (docs/QUY_TAC_ABC.md, bản 10/2026). Chạy: python3 -m unittest discover -s tests -v"""
 import json
 from pathlib import Path
 import sys
@@ -6,7 +6,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
-from abc_reference import S, R, U, RecordError, c2, verdict, label_of  # noqa: E402
+from abc_reference import S, R, U, RecordError, c2, verdict, safe_verdict, label_of  # noqa: E402
 
 FIX = json.loads((ROOT / 'tests/fixtures/examples_structured.json').read_text())
 EXAMPLES = json.loads((ROOT / 'evidence/2026-10-08/examples.json').read_text())['examples']
@@ -49,17 +49,26 @@ class TwentyThreeExamples(unittest.TestCase):
                     self.assertEqual(run(ex_id, 'claim_reviewed', policy), e['expected'])
 
     def test_original_claims_literal_policy_drift(self):
-        """Phát hiện T3: đọc B theo nghĩa đen, 11 câu gốc đổi nhãn sang NEI."""
+        """Đọc B theo nghĩa đen (chỉ còn là ablation P−inherit): 9 câu gốc đổi nhãn sang NEI.
+
+        Bản 08/10 là 11 câu; EX-14/15 (khối lượng, không có điều kiện thử) không còn lệch
+        sau khi bỏ ràng buộc thị trường khỏi claim gốc (D2, 10/2026).
+        """
         drift = {i for i, e in FIX['examples'].items()
                  if run(i, 'claim_original', 'literal') != e['expected']}
         self.assertEqual(drift, {'EX-04', 'EX-06', 'EX-09', 'EX-11', 'EX-12', 'EX-13',
-                                 'EX-14', 'EX-15', 'EX-17', 'EX-18', 'EX-19'})
+                                 'EX-17', 'EX-18', 'EX-19'})
 
-    def test_original_claims_inherit_policy_only_market_drift(self):
-        """Với luật DỰ THẢO D1 chỉ còn lệch do thị trường Moldova (D2)."""
+    def test_original_claims_shared_policy_no_drift(self):
+        """Chính sách chung inherit_headline v3 + D2: nhãn minh họa áp được cho câu gốc."""
         drift = {i for i, e in FIX['examples'].items()
                  if run(i, 'claim_original', 'inherit_headline') != e['expected']}
-        self.assertEqual(drift, {'EX-13', 'EX-14', 'EX-15'})
+        self.assertEqual(drift, set())
+
+    def test_default_policy_is_shared_policy(self):
+        e = FIX['examples']['EX-06']
+        evs = FIX['evidence_sets'][e['evidence_set']]
+        self.assertEqual(verdict(e['claim_original'], evs), verdict(e['claim_original'], evs, 'inherit_headline'))
 
 
 class MandatoryCasesSection3(unittest.TestCase):
@@ -169,6 +178,86 @@ class EdgeCases(unittest.TestCase):
         self.assertEqual(label_of(verdict(c, evs)), 'Refuted')
 
 
+class SharedPolicyV3(unittest.TestCase):
+    """Chính sách chung 10/2026: nhiều chế độ, con số trần, claim phổ quát, tổng hợp C3."""
+
+    MODES = [ev('on', M('4'), {'anc': 'on', 'volume': '50'}), ev('off', M('6'), {'anc': 'off', 'volume': '50'})]
+
+    def test_unspecified_mode_all_readings_refute(self):
+        self.assertEqual(label_of(verdict(claim(M('10')), self.MODES)), 'Refuted')
+
+    def test_unspecified_mode_mixed_readings_missing(self):
+        self.assertEqual(label_of(verdict(claim(M('6')), self.MODES)), 'NEI-missing')
+
+    def test_unspecified_mode_all_readings_support(self):
+        evs = [ev('on', M('6'), {'anc': 'on'}), ev('off', M('6'), {'anc': 'off'})]
+        self.assertEqual(label_of(verdict(claim(M('6')), evs)), 'Supported')
+
+    def test_explicit_mode_must_match(self):
+        self.assertEqual(label_of(verdict(claim(M('6'), {'anc': 'off'}), self.MODES)), 'Supported')
+        self.assertEqual(label_of(verdict(claim(M('6'), {'anc': 'on'}), self.MODES)), 'Refuted')
+
+    def test_bare_number_restates_declared_spec(self):
+        bare = {'kind': 'exact', 'role': 'stated_spec', 'a': '6'}
+        e = [ev('off', M('6'), {'anc': 'off'})]
+        self.assertEqual(label_of(verdict(claim(bare, {'anc': 'off'}), e)), 'Supported')
+        # "chính xác 6 giờ" là giá trị đo, không phải nhắc lại mức tối đa → chưa đủ.
+        self.assertEqual(label_of(verdict(claim(X('6'), {'anc': 'off'}), e)), 'NEI-missing')
+
+    def test_bare_number_against_measurement_source(self):
+        bare = {'kind': 'exact', 'role': 'stated_spec', 'a': '32.3'}
+        e = [dict(ev('w', X('32.3')), attribute='weight', unit='g')]
+        c = claim(bare)
+        c['attributes'][0].update(attribute='weight', unit='g')
+        self.assertEqual(label_of(verdict(c, e)), 'Supported')
+
+    def test_stated_spec_not_allowed_on_evidence(self):
+        with self.assertRaises(RecordError):
+            c2({'kind': 'exact', 'role': 'stated_spec', 'a': '6'}, X('6'))
+
+    def test_universal_claim_counterexample_refutes(self):
+        always = claim(X('6'), universal=True)
+        self.assertEqual(label_of(verdict(always, self.MODES)), 'Refuted')
+
+    def test_conflict_and_missing_attributes_give_conflict(self):
+        c = claim(X('32'))
+        c['attributes'].append({'attribute': 'charge', 'unit': 'min', 'value': X('60'), 'conditions': {}})
+        evs = [ev('a', X('32')), ev('b', X('34'))]
+        self.assertEqual(label_of(verdict(c, evs)), 'NEI-conflict')
+
+    def test_conflict_scope_is_per_attribute(self):
+        """Bất đồng ở thuộc tính khác không làm claim đã được hỗ trợ thành NEI."""
+        c = claim(X('5'))
+        other = [dict(ev('w1', X('32')), attribute='weight', unit='g'),
+                 dict(ev('w2', X('34')), attribute='weight', unit='g')]
+        self.assertEqual(label_of(verdict(c, [ev('b', X('5'))] + other)), 'Supported')
+
+
+class TechnicalErrors(unittest.TestCase):
+    """Hồ sơ hỏng là lỗi kỹ thuật (ERROR), không bao giờ là một nhãn NEI hợp lệ."""
+
+    def test_missing_attributes(self):
+        self.assertEqual(label_of(safe_verdict({'product': 'P', 'attributes': []}, [])), 'ERROR')
+
+    def test_bad_kind(self):
+        bad = claim({'kind': 'about', 'a': '5'})
+        self.assertEqual(label_of(safe_verdict(bad, [ev('e', X('5'))])), 'ERROR')
+
+    def test_unparseable_number(self):
+        self.assertEqual(label_of(safe_verdict(claim(X('năm')), [ev('e', X('5'))])), 'ERROR')
+
+    def test_duplicate_evidence_id(self):
+        self.assertEqual(label_of(safe_verdict(claim(X('5')), [ev('e', X('5')), ev('e', X('6'))])), 'ERROR')
+
+    def test_inverted_interval_in_pipeline(self):
+        res = safe_verdict(claim(X('25')), [ev('e', V('interval', '30', b='20'))])
+        self.assertEqual(label_of(res), 'ERROR')
+
+    def test_unknown_ablation_rejected(self):
+        with self.assertRaises(ValueError):
+            verdict(claim(X('5')), [ev('e', X('5'))], ablate=('C1',))
+
+
 class Ablations(unittest.TestCase):
     def test_minus_part_turns_ex03_into_conflict(self):
         e = FIX['examples']['EX-03']
@@ -179,6 +268,20 @@ class Ablations(unittest.TestCase):
         e = FIX['examples']['EX-10']
         res = verdict(e['claim_reviewed'], FIX['evidence_sets']['mx'], ablate=('B',))
         self.assertEqual(label_of(res), 'Supported')  # sai: đúng là tác động P−B cần đo
+
+    def test_minus_role_accepts_ex20(self):
+        """P−role: coi "lên đến 3" như số đo 3 → chấp nhận nhầm "chính xác 3" (EX-20)."""
+        self.assertEqual(c2(M('3'), X('3')), U)
+        self.assertEqual(c2(M('3'), X('3'), ablate=('role',)), S)
+        e = FIX['examples']['EX-20']
+        evs = FIX['evidence_sets'][e['evidence_set']]
+        self.assertEqual(label_of(verdict(e['claim_original'], evs)), 'NEI-missing')
+        self.assertEqual(label_of(verdict(e['claim_original'], evs, ablate=('role',))), 'Supported')
+
+    def test_minus_inherit_is_literal_policy(self):
+        e = FIX['examples']['EX-06']
+        evs = FIX['evidence_sets'][e['evidence_set']]
+        self.assertEqual(label_of(verdict(e['claim_original'], evs, 'literal')), 'NEI-missing')
 
 
 if __name__ == '__main__':

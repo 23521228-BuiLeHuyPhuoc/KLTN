@@ -1,4 +1,4 @@
-# Định vị đề tài, tính mới và đối chiếu tiêu chí chấm (08/10/2026)
+# Định vị đề tài, tính mới và đối chiếu tiêu chí chấm (08/10/2026, cập nhật 10/2026)
 
 Tài liệu do AI (Claude) soạn để sinh viên và GVHD xem xét. Mọi lựa chọn đều là **DỰ THẢO — cần GVHD xác nhận**.
 
@@ -32,9 +32,9 @@ Khảo sát nhanh trên web ngày 08/10/2026 chỉ tìm thấy hướng dẫn th
 
 | Đóng góp | Bằng chứng sẽ nộp | Rủi ro bị phản biện | Nếu kết quả âm / không đạt |
 |---|---|---|---|
-| C1. Bộ dữ liệu nhỏ có provenance: ordinary_llm tách khỏi controlled_variant, có search_log cho NEI, có người gán thứ hai | Dữ liệu và log sinh; kappa trên 30 phát biểu | "Quá nhỏ"; "nhãn do một người làm" | Báo đúng số lượng; nếu không có người thứ hai thì chỉ nêu tự nhất quán và hạ C1 thành "bộ thử có quy trình" |
-| C2. Đặc tả và cài đặt so sánh kiểu giá trị (x so với M, biên mở/đóng, gần đúng, phiên bản) cùng luật inherit_headline, có kiểm thử | QUY_TAC_ABC; `abc_reference.py`; 27+ kiểm thử | "Chỉ là luật thủ công"; "[1], [5] đã dùng luật" | Vẫn đứng được vì là đặc tả; kết hợp với phân tích lỗi để chỉ ra ca nào luật giúp và ca nào luật hại |
-| C3. So sánh có kiểm soát P với B1 trên cùng hồ sơ, tách tác động của bước quyết định | Bảng E3 chạy 3 lượt; ΔFAR kèm tử số và mẫu số | "4 họ test không đủ" | Báo là thăm dò. Nếu P không tốt hơn thì phân tích nguyên nhân (trích xuất hay luật); kết quả âm vẫn hợp lệ |
+| C1. Bộ dữ liệu nhỏ có provenance: ordinary_llm tách khỏi controlled_variant, có search_log cho NEI, có kiểm độ tin cậy nhãn | Dữ liệu và log sinh; κ trước hòa giải trên 40 claim (phương án A) hoặc tự nhất quán 20% (phương án B) — GIAO_THUC §3 | "Quá nhỏ"; "nhãn do một người làm" | Báo đúng số lượng; nếu không có người thứ hai thì chỉ nêu tự nhất quán và hạ C1 thành "bộ thử có quy trình" |
+| C2. Đặc tả và cài đặt so sánh kiểu giá trị (x so với M, biên mở/đóng, gần đúng, phiên bản) cùng luật inherit_headline, có kiểm thử | QUY_TAC_ABC; `abc_reference.py`; bộ kiểm thử trong `tests/` | "Chỉ là luật thủ công"; "[1], [5] đã dùng luật" | Vẫn đứng được vì là đặc tả; kết hợp với phân tích lỗi để chỉ ra ca nào luật giúp và ca nào luật hại |
+| C3. So sánh có kiểm soát P với B1 trên cùng hồ sơ, tách tác động của bước quyết định | TN2 (lượt 1 toàn test, lượt 2–3 trên m ≤ 30 claim), TN3 ablation, TN4 hồ sơ chuẩn; ΔFAR = FAR_P − FAR_B1 kèm tử số, mẫu số và cặp bất đồng (sổ tay mục 6) | "4 họ test không đủ" | Báo là thăm dò. Nếu P không tốt hơn thì phân tích nguyên nhân (trích xuất hay luật, qua TN4 và mã lỗi); kết quả âm vẫn hợp lệ |
 
 **KHÔNG được tuyên bố:** "đầu tiên" hay "chưa ai làm"; "có ý nghĩa thống kê"; "hệ thống end-to-end"; "tổng quát cho mọi tai nghe hoặc mọi hãng"; "hãng không công bố" (chỉ có thể nói "không tìm thấy trong corpus X"); "dùng Python ra nhãn là tính mới"; "bộ benchmark"; gọi kết quả tự gán lại là đồng thuận giữa hai người.
 

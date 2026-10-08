@@ -1,0 +1,300 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Hồ sơ trích xuất dùng chung cho B1 và P (docs/QUY_TAC_ABC.md §1)",
+  "description": "Thuần dữ kiện: không có nhãn, lý do, nhóm mẫu, thao tác biến thể hay kết quả kiểm luật. Giá trị chưa biết: null hoặc role=unknown. quote phải là chuỗi con nguyên văn của đoạn chunk_id (evidence) hoặc của claim_text (claim).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "claim_record",
+    "evidence_records"
+  ],
+  "$defs": {
+    "value": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "exact",
+            "gt",
+            "ge",
+            "lt",
+            "le",
+            "interval",
+            "approx",
+            "version"
+          ]
+        },
+        "role": {
+          "enum": [
+            "measurement",
+            "declared_maximum",
+            "declared_minimum",
+            "unknown",
+            "stated_spec"
+          ]
+        },
+        "a": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^-?[0-9]+([.][0-9]+)?$"
+        },
+        "b": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^-?[0-9]+([.][0-9]+)?$"
+        },
+        "closed": {
+          "type": "array",
+          "items": {
+            "type": "boolean"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "v": {
+          "type": "string"
+        },
+        "op": {
+          "enum": [
+            "eq",
+            "ge"
+          ]
+        }
+      }
+    },
+    "conditions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "properties": {
+        "anc": {
+          "enum": [
+            "on",
+            "off",
+            "transparency",
+            "adaptive"
+          ]
+        },
+        "volume": {
+          "type": "string"
+        },
+        "spatial": {
+          "type": "string"
+        },
+        "charge_minutes": {
+          "type": "string"
+        },
+        "case_type": {
+          "type": "string"
+        }
+      }
+    },
+    "attribute": {
+      "enum": [
+        "battery_single",
+        "battery_total",
+        "charge_time",
+        "quick_charge",
+        "weight",
+        "anc",
+        "bluetooth"
+      ]
+    },
+    "part": {
+      "enum": [
+        "earbud",
+        "earbuds_pair",
+        "case",
+        "headphone",
+        "headphone_with_case",
+        null
+      ]
+    }
+  },
+  "properties": {
+    "claim_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "product",
+        "attributes"
+      ],
+      "properties": {
+        "product": {
+          "type": "string"
+        },
+        "version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "market": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "part": {
+          "$ref": "#/$defs/part"
+        },
+        "condition_ref": {
+          "type": "boolean"
+        },
+        "universal": {
+          "type": "boolean"
+        },
+        "attributes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "attribute",
+              "unit",
+              "value",
+              "conditions"
+            ],
+            "properties": {
+              "attribute": {
+                "$ref": "#/$defs/attribute"
+              },
+              "part": {
+                "$ref": "#/$defs/part"
+              },
+              "unit": {
+                "enum": [
+                  "h",
+                  "min",
+                  "g",
+                  "kg",
+                  "-"
+                ]
+              },
+              "value": {
+                "$ref": "#/$defs/value"
+              },
+              "conditions": {
+                "$ref": "#/$defs/conditions"
+              },
+              "quote": {
+                "type": "string"
+              },
+              "char_start": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "char_end": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "evidence_records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "chunk_id",
+          "source_id",
+          "product",
+          "part",
+          "attribute",
+          "unit",
+          "value",
+          "conditions",
+          "quote"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^e_[0-9a-f]{6,}$"
+          },
+          "chunk_id": {
+            "type": "string",
+            "pattern": "^k_[0-9a-f]{6,}$"
+          },
+          "source_id": {
+            "type": "string"
+          },
+          "product": {
+            "type": "string"
+          },
+          "version": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "market": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "part": {
+            "$ref": "#/$defs/part"
+          },
+          "attribute": {
+            "$ref": "#/$defs/attribute"
+          },
+          "unit": {
+            "enum": [
+              "h",
+              "min",
+              "g",
+              "kg",
+              "-"
+            ]
+          },
+          "value": {
+            "$ref": "#/$defs/value"
+          },
+          "conditions": {
+            "$ref": "#/$defs/conditions"
+          },
+          "condition_ref": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "quote": {
+            "type": "string"
+          },
+          "char_start": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "char_end": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

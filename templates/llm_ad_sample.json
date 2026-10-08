@@ -1,11 +1,14 @@
 {
   "status": "template_not_a_sample",
-  "_doc": "Một bản ghi = một quảng cáo do LLM sinh trong thí nghiệm. Thu theo lô (docs/GIAO_THUC_DANH_GIA.md §10, thêm 08/10/2026). Không điền nhãn vàng ở đây; nhãn nằm ở file gán nhãn riêng.",
-  "sample_id": null,
+  "_doc": "Một bản ghi = một quảng cáo do LLM sinh trong thí nghiệm. Thu theo lô (docs/GIAO_THUC_DANH_GIA.md §2; sổ tay W5.1–W5.2). Không điền nhãn vàng ở đây; nhãn nằm ở file gán nhãn riêng.",
   "batch_id": null,
   "family_id": null,
   "split": null,
-  "product": {"name": null, "version": null, "market": null},
+  "product": {
+    "name": null,
+    "version": null,
+    "market": null
+  },
   "generation": {
     "provider": null,
     "model_requested_id": null,
@@ -17,10 +20,12 @@
     "prompt_sha256": null,
     "rendered_prompt_path": null,
     "spec_sheet_given_to_generator": null,
-    "requested_error_type": "none | wrong_value | wrong_part | wrong_mode | overclaim | none_requested",
-    "ordinary_llm": null,
     "started_at": null,
-    "timezone": null
+    "timezone": null,
+    "generation_condition": "g1_name_only | g2_with_spec",
+    "spec_source_id": null,
+    "spec_excerpt_sha256": null,
+    "note": "Không có trường \"yêu cầu tạo lỗi\": mọi quảng cáo trong file này thuộc ordinary_llm. Biến thể có kiểm soát nằm ở data/claims.jsonl (group=controlled_variant)."
   },
   "raw_ad_text": null,
   "raw_ad_sha256": null,
@@ -36,7 +41,11 @@
       "edit_note": null
     }
   ],
-  "exclusion": {"excluded": false, "note": null},
+  "exclusion": {
+    "excluded": false,
+    "note": null
+  },
   "collector": "[SINH VIÊN ĐIỀN]",
-  "collected_at": null
+  "collected_at": null,
+  "ad_id": null
 }
