@@ -135,14 +135,174 @@ Trong session chính (`78dcdd6e`), Claude đã tạo 7 subagents:
 
 ---
 
+## 📨 PROMPT GỐC CỦA CÁC SUBAGENT
+
+Claude CLI đã spawn 4 subagent chính với các prompt sau:
+
+### Subagent 1: "Phân tích tài liệu khóa luận" (model: sonnet)
+
+```
+Trong repo E:\baitap\KLTN\KLTN, hay đọc và phân tích hai file DOCX
+Đọc_báo_cùng_HuP_3_.docx và Đọc_báo_cùng_HuP_4_.docx (dùng python/docx nếu cần),
+xác định file nào là kế hoạch, file nào là báo cáo tháng 9, tóm tắt nội dung,
+điểm mạnh/yếu, các khoảng trống và đề xuất điều chỉnh. Không sửa file.
+Trả lời bằng tiếng Việt, nêu rõ cấu trúc và nội dung quan trọng.
+```
+
+### Subagent 2: "Phân tích các bài báo tham khảo" (model: sonnet)
+
+```
+Đọc các PDF trong thư mục E:\baitap\KLTN\KLTN\báo (bao gồm báo[1]-[6] và
+báo\báo con1\2003.00744v3.pdf) và các bản dịch tương ứng nếu cần.
+Tổng hợp cho từng bài: đề tài, dữ liệu, phương pháp/mô hình, kết quả,
+hạn chế, điểm có thể kế thừa và khoảng trống nghiên cứu.
+Đề xuất hướng đề tài khóa luận có tính mới nhưng khả thi cho sinh viên,
+cùng các bài báo bổ sung nên tìm. Không sửa file. Trả lời tiếng Việt.
+```
+
+### Subagent 3: "Kiểm tra điểm cần sửa" (model: haiku)
+
+```
+Chỉ đọc và khảo sát cấu trúc hai file DOCX trong E:\baitap\KLTN\KLTN:
+Đọc_báo_cùng_HuP_3_.docx và Đọc_báo_cùng_HuP_4_.docx. Xác định các vị trí/nội dung
+mà khi chỉnh sửa cần bảo toàn định dạng, các cảnh báo thực tế như URL/ngày/sản phẩm
+giả lập, và đề xuất phạm vi chỉnh sửa tối thiểu để nâng tính khả thi kế hoạch
+15/9-31/12. Không sửa gì. Trả lời tiếng Việt thật cô đọng.
+```
+
+### Subagent 4: "Thiết kế kế hoạch chỉnh sửa" (model: opus) ⭐ QUAN TRỌNG NHẤT
+
+```
+Bối cảnh đã khảo sát: Người dùng muốn sửa hai DOCX trong repo E:\baitap\KLTN\KLTN:
+file 4 là đề cương chi tiết, file 3 là báo cáo tiến độ tháng 09/2026.
+Đề tài: kiểm chứng phát biểu quảng cáo tiếng Việt do LLM tạo về tai nghe không dây
+dựa trên tài liệu chính thức, nhãn Supported/Refuted/NEI.
+Phương án có BM25, LLM trích xuất, quy tắc A-B-C; baseline B0 (LLM đọc trực tiếp),
+B1 (LLM quyết định trên hồ sơ chuẩn hóa); E1/E2/E3, P-A/P-B,
+mục tiêu 300 claims/30 families; timeline 15/9-31/12. Đánh giá FAR,
+supported recall, macro F1, evidence-set recall@k.
+Tài liệu tham khảo hiện có 6 bài. Các vấn đề: báo cáo tháng 9 ghi [Cần bổ sung]
+và 20 ví dụ có URL/ngày 07/10 nên không thuộc kỳ 9; kế hoạch quá tham vọng
+cho một sinh viên/3.5 tháng; cần tránh tuyên bố novelty chỉ vì dùng Python rules.
+
+Hay đề xuất một kế hoạch CHỈNH SỬA CỤ THỂ hai file sao cho đề tài mới vừa đủ,
+khả thi, chặt chẽ, và lịch tháng 10-12 hợp lý. Phân biệt: cần chỉnh câu chữ/
+thiết kế nghiên cứu (có thể thực hiện ngay) và không được bịa kết quả đã làm.
+Đưa đề xuất về scope tối giản/MVP vs hạng mục tùy chọn, quy mô dữ liệu và
+lịch có deliverables/gates. Cân nhắc đề xuất 2-3 tài liệu liên quan đáng tin cậy
+(ViFactCheck, ViWikiFC, ViNumFCR/FEVER/AVeriTeC) và cách trích dẫn.
+Không sửa file. Trả lời tiếng Việt, dạng plan rõ ràng để main agent viết vào plan file.
+```
+
+### Subagent 5: "Inspect DOCX work status" (model: haiku, session 6)
+
+```
+Read-only inspect the repository DOCX files Đọc_báo_cùng_HuP_3_.docx and _4_.docx
+plus git status. Determine whether any prior edits exist, summarize exact structure/
+content relevant to planned updates, and report any scripts or artifacts.
+Do not modify files or run destructive commands.
+```
+
+### Subagent 6: "Plan DOCX update" (model: opus, session 6)
+
+```
+We need plan implementation for directly updating two DOCX thesis docs.
+Background: _4_ is 98-row 2-column detailed thesis plan and _3_ is Sep 2026 progress
+report. Existing plan at C:\Users\HP\.claude\plans\indexed-scribbling-willow.md
+specifies required content updates. Constraints: preserve tables/styles, update both
+repeated columns consistently, don't fabricate results. Need explain practical
+python-docx implementation + robust verification. Do not modify any files;
+return detailed execution plan.
+```
+
+---
+
+## 🐍 SCRIPT PYTHON ĐÃ CHUẨN BỊ (chưa chạy)
+
+File: `C:\Users\HP\.claude\jobs\74321358\tmp\update_docs.py`
+
+Script này sử dụng `python-docx` để sửa trực tiếp 2 file DOCX. Nội dung chính:
+
+### Phần 1 — Sửa Đề cương (`Đọc_báo_cùng_HuP_4_.docx`):
+
+Cập nhật ~25 hàng trong bảng chính (bảng 98 hàng, 2 cột lặp), bao gồm:
+- **Hàng 13**: Thêm khung gán nhãn claim quảng cáo tiếng Việt
+- **Hàng 16**: Đóng góp = bộ dữ liệu có provenance + quy trình kiểm chứng nhận thức
+- **Hàng 19**: Thêm RQ1-RQ3 và tiêu chí thành công (FAR, Recall Supported, evidence-set recall@k)
+- **Hàng 49-51**: Quy mô dữ liệu theo tầng 120/180/300
+- **Hàng 53-54**: Phân chia dev/val/test theo hệ sản phẩm 40%/20%/40%
+- **Hàng 61-62**: BM25 + evidence retrieval recall@k
+- **Hàng 67-68**: MVP bắt buộc vs hạng mục tùy chọn
+- **Hàng 72-90**: Timeline mới theo 6 Gates (10/2026 → 12/2026)
+- **Hàng 96**: Thêm 6 tài liệu tham khảo mới [7]-[11]
+
+### Phần 2 — Sửa Báo cáo tháng 9 (`Đọc_báo_cùng_HuP_3_.docx`):
+
+- Sửa mô tả đề tài → làm rõ đóng góp thực sự
+- Thêm "mốc chốt minh chứng: 30/09/2026"
+- Phân biệt 3 trạng thái: đã có minh chứng / có bản thảo chưa xác nhận / chuyển tháng 10
+- Thay `[Cần bổ sung] Cấu hình thực tế` → yêu cầu điền CPU/RAM/GPU, model, mã thể, log
+- Thay `[Cần bổ sung] Khó khăn thực tế` → yêu cầu ghi đầu việc bị vướng, nguyên nhân
+- Sửa kế hoạch tháng 10 → tổ chức theo cổng nghiệm thu
+- Sửa bảng trạng thái (table 28) → 4 hàng với trạng thái minh chứng trung thực
+- Thêm "Đề xuất đọc thêm" (FEVER, AVeriTeC, ViFactCheck, ViWikiFC, ViNumFCR)
+- Thêm 6 tài liệu tham khảo [7]-[11] vào danh mục
+
+### Các helper functions:
+- `set_cell_text()` — Thay text cell giữ style, font Times New Roman 12pt
+- `set_row_both()` — Cập nhật cả 2 cột cùng lúc
+- `replace_paragraph_text()` — Replace text trong paragraph giữ style
+- `walk_paragraphs()` — Duyệt mọi paragraph (cả trong table)
+- `set_matching_paragraph()` — Tìm paragraph chứa marker rồi thay toàn bộ text
+- `insert_after()` — Chèn paragraph mới sau paragraph đã có
+
+### Cách chạy (nếu muốn thực hiện):
+```bash
+pip install python-docx
+python "C:\Users\HP\.claude\jobs\74321358\tmp\update_docs.py"
+```
+
+⚠️ Script tự backup trước khi sửa vào `C:\Users\HP\.claude\jobs\74321358\tmp\*.before-update.docx`
+
+---
+
+## 📋 CÔNG VIỆC CLAUDE CLI TÍNH LÀM TIẾP
+
+Dựa trên plans và cross-session messages, đây là các công việc Claude CLI dự định nhưng chưa hoàn thành:
+
+### Ưu tiên 1 — Sửa trực tiếp 2 file DOCX:
+1. Chạy `update_docs.py` để cập nhật đề cương và báo cáo
+2. Kiểm tra kết quả bằng python-docx (số bảng, heading, keyword verification)
+3. Convert DOCX → kiểm tra file không lỗi Open XML
+4. Báo rõ phần nào đã chỉnh vs phần nào cần người dùng/giảng viên điền
+
+### Ưu tiên 2 — Phân tích sâu bài báo tham khảo:
+1. Đọc kỹ 6 bài báo PDF + bài bổ trợ
+2. Tổng hợp: đề tài, dữ liệu, phương pháp, kết quả, hạn chế
+3. Xác định khoảng trống nghiên cứu
+4. Đề xuất hướng đề tài có tính mới nhưng khả thi
+
+### Ưu tiên 3 — Verification sau sửa:
+1. Mở lại 2 DOCX → xác minh số bảng, kích thước, heading không hỏng
+2. Trích xuất text → kiểm tra keywords: `120`, `180`, `300`, `B0`, `B1`, `P`, `FAR`, `Recall Supported`, `30/09/2026`, gates tháng 10-12
+3. Xác minh đề cương giữ nội dung nhất quán giữa 2 cột
+4. Xác minh báo cáo không còn `[Cần bổ sung]` trần trụi, không có ngày 07/10 được mô tả là minh chứng tháng 9
+5. Nếu có LibreOffice → convert để phát hiện lỗi Open XML
+
+---
+
 ## 🔧 Thông tin kỹ thuật
 
 - **Claude CLI sessions**: Lưu tại `C:\Users\HP\.claude\projects\E--baitap-KLTN-KLTN\`
 - **Plans**: Lưu tại `C:\Users\HP\.claude\plans\`
+  - `cuddly-juggling-peach.md` — Plan cập nhật đề cương và báo cáo
+  - `indexed-scribbling-willow.md` — Plan chi tiết hơn với hướng dẫn triển khai
+- **Script chưa chạy**: `C:\Users\HP\.claude\jobs\74321358\tmp\update_docs.py`
+- **Backup DOCX**: `C:\Users\HP\.claude\jobs\74321358\tmp\*.before-update.docx`
 - **API Endpoint**: `https://gpt.teamsoclo.site` (TeamSocLo gateway)
 - **Model**: `claude-opus-5-5` (default)
 - **Worktree**: `.claude\worktrees\agent-a775efa0b4ad438bb`
 
 ---
 
-*File này được tổng hợp từ dữ liệu thực tế của 7 sessions Claude CLI (JSONL logs) và 2 plan files.*
+*File này được tổng hợp từ dữ liệu thực tế của 7 sessions Claude CLI (JSONL logs), 2 plan files, và script update_docs.py.*
