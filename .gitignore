@@ -14,3 +14,12 @@ scripts/__pycache__/
 Thumbs.db
 .idea/
 .vscode/
+
+# Khóa API cục bộ — không commit
+.env
+.env.*
+
+# Bytecode và worktree tạm của công cụ AI
+__pycache__/
+*.pyc
+.claude/worktrees/
