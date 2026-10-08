@@ -1,0 +1,70 @@
+{
+  "id": "apple-airpods4-md",
+  "requested_url": "https://www.apple.com/md/airpods-4/specs/",
+  "captured_at_utc": "2026-10-08T02:34:01.409Z",
+  "capture_method": "Chromium via Playwright, live URL; no content replacement",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "files": {
+    "response.html": {
+      "sha256": "c67c2ee8c83ec07b04105ff8e379808ae39ca424c68f4ae856899b4dab4a229a",
+      "bytes": 125835
+    },
+    "page.html": {
+      "sha256": "9e87e8ffc519bd080cb28f2187a8f460de67b449dcac05ad95fc2633eca15460",
+      "bytes": 175794
+    },
+    "page.txt": {
+      "sha256": "371757d7eb6f27efedca536180b0f7073196df42c4837d82bf0f20507ecfcb38",
+      "bytes": 14605
+    },
+    "full-page.png": {
+      "sha256": "555c265e070ddb11d96495af6f55242cd1b20bfa5192231aa9bbef9946ae0ff9",
+      "bytes": 782770
+    },
+    "dimensions.png": {
+      "sha256": "86be851ab74469d47eeb86b2ec136e2d8be95782d5e267342676a59ca3fccfbe",
+      "bytes": 64060
+    },
+    "battery.png": {
+      "sha256": "24e79e15f460126af9676803c3cda97daa57504a314dc1b8e5c3f86f43f2ac7b",
+      "bytes": 100301
+    },
+    "connectivity.png": {
+      "sha256": "7abc2638f7f1878b32370065608955a5f1166fca07f3ba4e5ef1d7fe045e6233",
+      "bytes": 93197
+    },
+    "dimensions-section.png": {
+      "sha256": "74b0d9223b04f49b5bb155d1b48edd4d27a7681749f0d3354316fbb16afcba7b",
+      "bytes": 64717
+    },
+    "battery-section.png": {
+      "sha256": "787183f89ca3e783e4854dd724b921571f9055507a77ed14a291863ee72f4793",
+      "bytes": 68482
+    },
+    "footnotes-section.png": {
+      "sha256": "389b21a50833bfdac167bf20084beba66497ed915c5ded0be421789a09298c23",
+      "bytes": 285938
+    },
+    "connectivity-section.png": {
+      "sha256": "278461155a1e673ce0de4963582b4aebe92e8583a4b41195b409986cdd27d6b0",
+      "bytes": 6319
+    }
+  },
+  "final_url": "https://www.apple.com/md/airpods-4/specs/",
+  "status": 200,
+  "title": "AirPods 4 - Technical Specifications - Apple (MD)",
+  "supplement": {
+    "captured_at_utc": "2026-10-08T07:04:19.171Z",
+    "final_url": "https://www.apple.com/md/airpods-4/specs/",
+    "status": 200,
+    "screenshots": {
+      "dimensions-section.png": ".section-dimensions",
+      "battery-section.png": ".section-battery",
+      "connectivity-section.png": ".section-wireless",
+      "footnotes-section.png": ".ac-gf-sosumi"
+    }
+  }
+}

@@ -1,0 +1,61 @@
+ ACL Anthology
+About
+Using
+Contributions
+GitHub
+ViNumFCR: A Novel Vietnamese Benchmark for Numerical Reasoning Fact Checking on Social Media News
+
+Nhi Ngoc-Phuong Luong, Anh Thi-Lan Le, Tin Van Huynh, Kiet Van Nguyen, Ngan Luu-Thuy Nguyen
+
+Abstract
+In the digital era, the internet provides rapid and convenient access to vast amounts of information. However, much of this information remains unverified, particularly with the increasing prevalence of falsified numerical data, leading to public confusion and negative societal impacts. To address this issue, we developed ViNumFCR, a first dataset dedicated to fact-checking numerical information in Vietnamese. Comprising over 10,000 samples collected and constructed from online newspaper across 12 different topics. We assessed the performance of various fact-checking models, including Pretrained Language Models and Large Language Models, alongside retrieval techniques for gathering supporting evidence. Experimental results demonstrate that the XLM-R_Large model achieved the highest accuracy of 90.05% on the fact-checking task, while the combined SBERT + BM25 model attained a precision of over 97% on the evidence retrieval task. Additionally, we conducted an in-depth analysis of the linguistic features of the dataset to understand the factors influencing the performance models. The ViNumFCR dataset is publicly available to support further research.
+Anthology ID:
+2025.inlg-main.9
+Original:
+2025.inlg-main.9v1
+Version 2:
+2025.inlg-main.9v2
+Volume:
+Proceedings of the 18th International Natural Language Generation Conference
+Month:
+October
+Year:
+2025
+Address:
+Hanoi, Vietnam
+Editors:
+Lucie Flek, Shashi Narayan, Lê Hồng Phương, Jiahuan Pei
+Venue:
+INLG
+SIG:
+SIGGEN
+Publisher:
+Association for Computational Linguistics
+Note:
+Pages:
+134–147
+Language:
+URL:
+https://aclanthology.org/2025.inlg-main.9/
+DOI:
+Bibkey:
+luong-etal-2025-vinumfcr
+Cite (ACL):
+Nhi Ngoc-Phuong Luong, Anh Thi-Lan Le, Tin Van Huynh, Kiet Van Nguyen, and Ngan Luu-Thuy Nguyen. 2025. ViNumFCR: A Novel Vietnamese Benchmark for Numerical Reasoning Fact Checking on Social Media News. In Proceedings of the 18th International Natural Language Generation Conference, pages 134–147, Hanoi, Vietnam. Association for Computational Linguistics.
+Cite (Informal):
+ViNumFCR: A Novel Vietnamese Benchmark for Numerical Reasoning Fact Checking on Social Media News (Luong et al., INLG 2025)
+Copy Citation:
+BibTeX Markdown MODS XML Endnote More options…
+PDF:
+https://aclanthology.org/2025.inlg-main.9.pdf
+PDF (v2)
+PDF (v1)
+Cite
+Search
+Fix data
+
+ACL materials are Copyright © 1963–2026 ACL; other materials are copyrighted by their respective copyright holders. Materials prior to 2016 here are licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 International License. Permission is granted to make copies for the purposes of teaching and research. Materials published in or after 2016 are licensed on a Creative Commons Attribution 4.0 International License.
+
+The ACL Anthology is managed and built by the ACL Anthology team of volunteers.
+
+Site last built on 07 October 2026 at 23:43 UTC with commit aba352f.

@@ -1,0 +1,27 @@
+{
+  "id": "ref10-viwikifc",
+  "requested_url": "https://arxiv.org/abs/2405.07615v2",
+  "captured_at_utc": "2026-10-08T02:34:22.218Z",
+  "capture_method": "Chromium via Playwright, live URL; no content replacement",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "files": {
+    "response.html": {
+      "sha256": "433390aa4aecb158e6db97ba0dc7f299c9a1703e421c5762b429b80e810cc29e",
+      "bytes": 42002
+    },
+    "page.html": {
+      "sha256": "bf6257b4aa3c19248918fc0c6b150f0c0ecb5d81497737f949d614b0d5e4351f",
+      "bytes": 42336
+    },
+    "page.txt": {
+      "sha256": "1ffd419c85c40d0800f7896a41176d9e2d3b9381bf69d01e4b7bf0b9ef37ea84",
+      "bytes": 2953
+    }
+  },
+  "final_url": "https://arxiv.org/abs/2405.07615v2",
+  "status": 200,
+  "title": "[2405.07615v2] ViWikiFC: Fact-Checking for Vietnamese Wikipedia-Based Textual Knowledge Source"
+}

@@ -1,0 +1,1261 @@
+{
+  "schema_version": 1,
+  "purpose": "documentation_examples_not_experimental_dataset",
+  "source_docx_sha256": "aaff8fe1bf62a5c10e43f9c088a943f84972f59d378936329da35b279ba1eaf2",
+  "examples": [
+    {
+      "id": "EX-01",
+      "title": "EX-01 — Thay đổi khối lượng",
+      "group": "Sai giá trị khối lượng",
+      "original_ad": "“Hộp sạc USB-C đi kèm AirPods 5 có trọng lượng 40 gram”",
+      "original_claim": "Hộp sạc USB-C đi kèm AirPods 5 có trọng lượng 40 gram.",
+      "reviewed_claim": "Hộp sạc USB-C đi kèm AirPods 5 có trọng lượng 40 gram.",
+      "original_origin": "unknown_legacy",
+      "origin_verified_as_llm": false,
+      "original_generation": {
+        "model": null,
+        "prompt": null,
+        "run_id": null,
+        "timestamp": null
+      },
+      "revision_origin": "unchanged_claim",
+      "revision_editor": "Codex",
+      "revision_date": "2026-10-08",
+      "dataset_eligible": false,
+      "dataset_exclusion_reason": "Chưa xác minh nguồn gốc câu gốc; không phải log sinh LLM thí nghiệm.",
+      "legacy_source_date_unverified": "2026-10-07",
+      "source_checked_date": "2026-10-08",
+      "scope": "+ Sản phẩm: AirPods 5;\n+ Phiên bản: bản đi kèm Hộp Sạc USB-C;\n+ Bộ phận: hộp sạc;\n+ Thuộc tính: Khối lượng;",
+      "source_id": "apple-airpods5-vn",
+      "url": "https://www.apple.com/vn/airpods-5/specs/",
+      "locator": "Kích Thước Và Trọng Lượng → ul.data-containers.case, dưới hình hộp sạc 50,1 × 46,2 × 21,2 mm; không phải khối tai nghe",
+      "quotes": [
+        {
+          "text": "Trọng Lượng (AirPods 5): 32,3 gram",
+          "start_offset": 1995,
+          "end_offset": 2029,
+          "start_line": 75
+        }
+      ],
+      "source_snapshot": "evidence/2026-10-08/apple-airpods5-vn/page.txt",
+      "screenshot": "evidence/2026-10-08/apple-airpods5-vn/dimensions-section.png",
+      "full_screenshot": "evidence/2026-10-08/apple-airpods5-vn/full-page.png",
+      "condition_ref": null,
+      "conditions_summary": "Không áp dụng điều kiện pin; giữ đúng sản phẩm/phiên bản/bộ phận/thị trường.",
+      "values": "+ Phát biểu: 40g; giá trị chính xác; đối tượng là Hộp Sạc USB-C\n+ Bằng chứng: 32,3g; giá trị chính xác; đối tượng là Hộp Sạc USB-C\n+ Không có điều kiện áp dụng đi kèm   ",
+      "label": "Refuted",
+      "nei_type": null,
+      "label_scope": "reviewed_claim_only",
+      "reason": "Phát biểu và bằng chứng cùng nói về khối lượng của Hộp Sạc USB-C đi kèm AirPods 5. Tuy nhiên, phát biểu nêu 40 g, trong khi Apple công bố khối lượng là 32,3 g. Vì vậy, phát biểu bị bằng chứng trực tiếp bác bỏ. Đối chiếu khối DOM và ảnh toàn mục: 4,3 g thuộc tai nghe, 32,3 g thuộc hộp; không suy bộ phận chỉ từ tiêu đề chung “Mỗi Bên”."
+    },
+    {
+      "id": "EX-02",
+      "title": "EX-02 - Đúng hoàn toàn",
+      "group": "Đúng giá trị khối lượng",
+      "original_ad": "“Hộp sạc USB-C đi kèm AirPods 5 có trọng lượng 32,3 gram”",
+      "original_claim": "Hộp sạc USB-C đi kèm AirPods 5 có trọng lượng 32,3 gram.",
+      "reviewed_claim": "Hộp sạc USB-C đi kèm AirPods 5 có trọng lượng 32,3 gram.",
+      "original_origin": "unknown_legacy",
+      "origin_verified_as_llm": false,
+      "original_generation": {
+        "model": null,
+        "prompt": null,
+        "run_id": null,
+        "timestamp": null
+      },
+      "revision_origin": "unchanged_claim",
+      "revision_editor": "Codex",
+      "revision_date": "2026-10-08",
+      "dataset_eligible": false,
+      "dataset_exclusion_reason": "Chưa xác minh nguồn gốc câu gốc; không phải log sinh LLM thí nghiệm.",
+      "legacy_source_date_unverified": "2026-10-07",
+      "source_checked_date": "2026-10-08",
+      "scope": "+ Sản phẩm: AirPods 5;\n+ Phiên bản: bản đi kèm Hộp Sạc USB-C;\n+ Bộ phận: hộp sạc;\n+ Thuộc tính: Khối lượng;",
+      "source_id": "apple-airpods5-vn",
+      "url": "https://www.apple.com/vn/airpods-5/specs/",
+      "locator": "Khối hộp sạc: ul.data-containers.case; cùng tiêu đề chung “Mỗi Bên” nhưng nằm dưới hình hộp",
+      "quotes": [
+        {
+          "text": "Trọng Lượng (AirPods 5): 32,3 gram",
+          "start_offset": 1995,
+          "end_offset": 2029,
+          "start_line": 75
+        }
+      ],
+      "source_snapshot": "evidence/2026-10-08/apple-airpods5-vn/page.txt",
+      "screenshot": "evidence/2026-10-08/apple-airpods5-vn/dimensions-section.png",
+      "full_screenshot": "evidence/2026-10-08/apple-airpods5-vn/full-page.png",
+      "condition_ref": null,
+      "conditions_summary": "Không áp dụng điều kiện pin; giữ đúng sản phẩm/phiên bản/bộ phận/thị trường.",
+      "values": "+ Phát biểu: 32,3g; giá trị chính xác; đối tượng là Hộp Sạc USB-C\n+ Bằng chứng: 32,3g; giá trị chính xác; đối tượng là Hộp Sạc USB-C\n+ Không có điều kiện áp dụng đi kèm  ",
+      "label": "Supported",
+      "nei_type": null,
+      "label_scope": "reviewed_claim_only",
+      "reason": "Phát biểu và bằng chứng cùng nói về khối lượng của Hộp Sạc USB-C đi kèm AirPods 5. Phát biểu nêu 32,3g, Apple công bố khối lượng là 32,3 g. Vì vậy, phát biểu được bằng chứng hỗ trợ. Đối chiếu khối DOM và ảnh toàn mục: 4,3 g thuộc tai nghe, 32,3 g thuộc hộp; không suy bộ phận chỉ từ tiêu đề chung “Mỗi Bên”."
+    },
+    {
+      "id": "EX-03",
+      "title": "EX-03 — Sai bộ phận",
+      "group": "Sai bộ phận",
+      "original_ad": "“Mỗi bên tai nghe AirPods 5 có trọng lượng 32,3 gram.”",
+      "original_claim": "Mỗi bên tai nghe AirPods 5 có trọng lượng 32,3 gram.",
+      "reviewed_claim": "Mỗi bên tai nghe AirPods 5 có trọng lượng 32,3 gram.",
+      "original_origin": "unknown_legacy",
+      "origin_verified_as_llm": false,
+      "original_generation": {
+        "model": null,
+        "prompt": null,
+        "run_id": null,
+        "timestamp": null
+      },
+      "revision_origin": "unchanged_claim",
+      "revision_editor": "Codex",
+      "revision_date": "2026-10-08",
+      "dataset_eligible": false,
+      "dataset_exclusion_reason": "Chưa xác minh nguồn gốc câu gốc; không phải log sinh LLM thí nghiệm.",
+      "legacy_source_date_unverified": "2026-10-07",
+      "source_checked_date": "2026-10-08",
+      "scope": "+ Sản phẩm: AirPods 5;+ Phiên bản: không phân biệt phiên bản hộp sạc;+ Bộ phận: mỗi bên tai nghe;+ Thuộc tính: khối lượng.",
+      "source_id": "apple-airpods5-vn",
+      "url": "https://www.apple.com/vn/airpods-5/specs/",
+      "locator": "Khối tai nghe: ul.data-containers không có class case, dưới hình tai nghe 30,2 × 18,3 × 18,1 mm",
+      "quotes": [
+        {
+          "text": "Trọng Lượng: 4,3 gram",
+          "start_offset": 1907,
+          "end_offset": 1928,
+          "start_line": 67
+        }
+      ],
+      "source_snapshot": "evidence/2026-10-08/apple-airpods5-vn/page.txt",
+      "screenshot": "evidence/2026-10-08/apple-airpods5-vn/dimensions-section.png",
+      "full_screenshot": "evidence/2026-10-08/apple-airpods5-vn/full-page.png",
+      "condition_ref": null,
+      "conditions_summary": "Không áp dụng điều kiện pin; giữ đúng sản phẩm/phiên bản/bộ phận/thị trường.",
+      "values": "+ Phát biểu: 32,3 g; giá trị chính xác; đối tượng là mỗi bên tai nghe.+ Bằng chứng: 4,3 g; giá trị chính xác; đối tượng là mỗi bên tai nghe.+ Không có điều kiện áp dụng đi kèm.",
+      "label": "Refuted",
+      "nei_type": null,
+      "label_scope": "reviewed_claim_only",
+      "reason": "Phát biểu gán khối lượng 32,3 g cho mỗi bên tai nghe AirPods 5, trong khi Apple công bố mỗi bên chỉ nặng 4,3 g. Giá trị 32,3 g thực tế thuộc về Hộp Sạc USB-C. Vì vậy, phát biểu bị bằng chứng trực tiếp bác bỏ. Đối chiếu khối DOM và ảnh toàn mục: 4,3 g thuộc tai nghe, 32,3 g thuộc hộp; không suy bộ phận chỉ từ tiêu đề chung “Mỗi Bên”."
+    },
+    {
+      "id": "EX-04",
+      "title": "EX-04 — Sai điều kiện sử dụng",
+      "group": "Sai điều kiện sử dụng",
+      "original_ad": "“AirPods 5 có thời lượng pin lên đến 6 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn.”",
+      "original_claim": "AirPods 5 có thời lượng pin lên đến 6 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn.",
+      "reviewed_claim": "Theo thông số công bố của Apple, AirPods 5 bản đi kèm Hộp Sạc USB-C có thời lượng pin lên đến 6 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn; các điều kiện thử khác theo chú thích Apple được dẫn trong hồ sơ mẫu.",
+      "original_origin": "unknown_legacy",
+      "origin_verified_as_llm": false,
+      "original_generation": {
+        "model": null,
+        "prompt": null,
+        "run_id": null,
+        "timestamp": null
+      },
+      "revision_origin": "assistant_documentation_edit",
+      "revision_editor": "Codex",
+      "revision_date": "2026-10-08",
+      "dataset_eligible": false,
+      "dataset_exclusion_reason": "Chưa xác minh nguồn gốc câu gốc; không phải log sinh LLM thí nghiệm.",
+      "legacy_source_date_unverified": "2026-10-07",
+      "source_checked_date": "2026-10-08",
+      "scope": "+ Sản phẩm: AirPods 5;+ Phiên bản: bản đi kèm Hộp Sạc USB-C;+ Bộ phận: tai nghe;+ Thuộc tính: thời lượng pin với một lần sạc.",
+      "source_id": "apple-airpods5-vn",
+      "url": "https://www.apple.com/vn/airpods-5/specs/",
+      "locator": "Pin → AirPods 5 bản Hộp Sạc USB-C; chú thích 10",
+      "quotes": [
+        {
+          "text": "Thời lượng pin lên đến 4 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn",
+          "start_offset": 2296,
+          "end_offset": 2380,
+          "start_line": 85
+        },
+        {
+          "text": "Thời lượng pin lên đến 6 giờ với một lần sạc khi tắt kiểm soát tiếng ồn",
+          "start_offset": 2383,
+          "end_offset": 2454,
+          "start_line": 86
+        }
+      ],
+      "source_snapshot": "evidence/2026-10-08/apple-airpods5-vn/page.txt",
+      "screenshot": "evidence/2026-10-08/apple-airpods5-vn/battery-section.png",
+      "full_screenshot": "evidence/2026-10-08/apple-airpods5-vn/full-page.png",
+      "condition_ref": "apple-airpods5-vn#footnote-10",
+      "conditions_summary": "Âm lượng 50%; Âm Thanh Không Gian và Nhận Biết Cuộc Hội Thoại tắt. Claim ANC bật phải đối chiếu mức 4 giờ, không lấy mức 6 giờ ANC tắt.",
+      "values": "+ Phát biểu: tối đa 6 giờ; một lần sạc; bật Chủ Động Khử Tiếng Ồn.+ Bằng chứng cùng điều kiện: tối đa 4 giờ; một lần sạc; bật Chủ Động Khử Tiếng Ồn.+ Giá trị 6 giờ trong nguồn chỉ áp dụng khi tắt kiểm soát tiếng ồn.",
+      "label": "Refuted",
+      "nei_type": null,
+      "label_scope": "reviewed_claim_only",
+      "reason": "Phát biểu sử dụng giá trị 6 giờ nhưng gắn với điều kiện bật chống ồn. Nguồn chính thức cho biết AirPods 5 chỉ đạt tối đa 4 giờ trong điều kiện này; giá trị 6 giờ áp dụng khi tắt kiểm soát tiếng ồn. Vì vậy, phát biểu bị bằng chứng trực tiếp bác bỏ."
+    },
+    {
+      "id": "EX-05",
+      "title": "EX-05 — Đúng phiên bản Bluetooth",
+      "group": "Đúng phiên bản Bluetooth",
+      "original_ad": "“AirPods Pro 3 sử dụng công nghệ không dây Bluetooth 5.3.”",
+      "original_claim": "AirPods Pro 3 sử dụng công nghệ không dây Bluetooth 5.3.",
+      "reviewed_claim": "AirPods Pro 3 sử dụng công nghệ không dây Bluetooth 5.3.",
+      "original_origin": "unknown_legacy",
+      "origin_verified_as_llm": false,
+      "original_generation": {
+        "model": null,
+        "prompt": null,
+        "run_id": null,
+        "timestamp": null
+      },
+      "revision_origin": "unchanged_claim",
+      "revision_editor": "Codex",
+      "revision_date": "2026-10-08",
+      "dataset_eligible": false,
+      "dataset_exclusion_reason": "Chưa xác minh nguồn gốc câu gốc; không phải log sinh LLM thí nghiệm.",
+      "legacy_source_date_unverified": "2026-10-07",
+      "source_checked_date": "2026-10-08",
+      "scope": "+ Sản phẩm: AirPods Pro;+ Phiên bản: thế hệ 3;+ Bộ phận: hệ thống kết nối không dây;+ Thuộc tính: phiên bản Bluetooth.",
+      "source_id": "apple-pro3-vn",
+      "url": "https://www.apple.com/vn/airpods-pro/specs/",
+      "locator": "Kết Nối",
+      "quotes": [
+        {
+          "text": "Công nghệ không dây Bluetooth 5.3",
+          "start_offset": 2508,
+          "end_offset": 2541,
+          "start_line": 110
+        }
+      ],
+      "source_snapshot": "evidence/2026-10-08/apple-pro3-vn/page.txt",
+      "screenshot": "evidence/2026-10-08/apple-pro3-vn/connectivity-section.png",
+      "full_screenshot": "evidence/2026-10-08/apple-pro3-vn/full-page.png",
+      "condition_ref": null,
+      "conditions_summary": "Không áp dụng điều kiện pin; giữ đúng sản phẩm/phiên bản/bộ phận/thị trường.",
+      "values": "+ Phát biểu: Bluetooth 5.3; kiểu dữ liệu: chuỗi phiên bản.+ Bằng chứng: Bluetooth 5.3; kiểu dữ liệu: chuỗi phiên bản.+ Không có điều kiện áp dụng đi kèm.",
+      "label": "Supported",
+      "nei_type": null,
+      "label_scope": "reviewed_claim_only",
+      "reason": "Phát biểu và bằng chứng cùng nói về phiên bản Bluetooth của AirPods Pro 3. Phiên bản Bluetooth 5.3 trong phát biểu trùng với thông số do Apple công bố. Vì vậy, phát biểu được bằng chứng hỗ trợ."
+    },
+    {
+      "id": "EX-06",
+      "title": "EX-06 — Đúng thời lượng pin và điều kiện",
+      "group": "Đúng thời lượng pin và điều kiện sử dụng",
+      "original_ad": "“AirPods Pro 3 cho thời gian nghe lên đến 8 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn.”",
+      "original_claim": "AirPods Pro 3 cho thời gian nghe lên đến 8 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn.",
+      "reviewed_claim": "Theo thông số công bố của Apple, AirPods Pro 3 cho thời gian nghe lên đến 8 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn, ở âm lượng 50% và không bật đồng thời Âm Thanh Không Gian với Theo Dõi Chuyển Động Đầu; các điều kiện thử khác theo chú thích Apple được dẫn trong hồ sơ mẫu.",
+      "original_origin": "unknown_legacy",
+      "origin_verified_as_llm": false,
+      "original_generation": {
+        "model": null,
+        "prompt": null,
+        "run_id": null,
+        "timestamp": null
+      },
+      "revision_origin": "assistant_documentation_edit",
+      "revision_editor": "Codex",
+      "revision_date": "2026-10-08",
+      "dataset_eligible": false,
+      "dataset_exclusion_reason": "Chưa xác minh nguồn gốc câu gốc; không phải log sinh LLM thí nghiệm.",
+      "legacy_source_date_unverified": "2026-10-07",
+      "source_checked_date": "2026-10-08",
+      "scope": "+ Sản phẩm: AirPods Pro;+ Phiên bản: thế hệ 3;+ Bộ phận: tai nghe;+ Thuộc tính: thời gian nghe với một lần sạc.",
+      "source_id": "apple-pro3-vn",
+      "url": "https://www.apple.com/vn/airpods-pro/specs/",
+      "locator": "Pin → AirPods Pro 3; giữ cả ngoặc giới hạn 7,5 giờ; chú thích 13",
+      "quotes": [
+        {
+          "text": "Thời gian nghe lên đến 8 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn (lên đến 7,5 giờ khi bật Âm Thanh Không Gian và Theo Dõi Chuyển Động Đầu)",
+          "start_offset": 1970,
+          "end_offset": 2128,
+          "start_line": 103
+        }
+      ],
+      "source_snapshot": "evidence/2026-10-08/apple-pro3-vn/page.txt",
+      "screenshot": "evidence/2026-10-08/apple-pro3-vn/battery-section.png",
+      "full_screenshot": "evidence/2026-10-08/apple-pro3-vn/full-page.png",
+      "condition_ref": "apple-pro3-vn#footnote-13",
+      "conditions_summary": "Âm lượng 50%, ANC bật; không áp dụng mức 8 giờ cho chế độ bật Âm Thanh Không Gian và Theo Dõi Chuyển Động Đầu (nguồn ghi 7,5 giờ).",
+      "values": "+ Phát biểu: 8 giờ; giá trị tối đa; một lần sạc; bật Chủ Động Khử Tiếng Ồn.+ Bằng chứng: 8 giờ; giá trị tối đa; một lần sạc; bật Chủ Động Khử Tiếng Ồn.",
+      "label": "Supported",
+      "nei_type": null,
+      "label_scope": "reviewed_claim_only",
+      "reason": "Nhãn Supported áp dụng cho câu đã làm rõ phạm vi công bố và điều kiện: mức 8 giờ ANC bật; không lấy mức này cho cấu hình nguồn ghi 7,5 giờ. Câu cũ thiếu phạm vi này nên chưa đủ để coi Supported vô điều kiện."
+    },
+    {
+      "id": "EX-07",
+      "title": "EX-07 — Thiếu bằng chứng về thời gian sạc đầy",
+      "group": "Thiếu bằng chứng về thời gian sạc đầy",
+      "original_ad": "“AirPods Pro 3 cần 60 phút để sạc đầy khi được đặt trong Hộp Sạc MagSafe USB-C.”",
+      "original_claim": "AirPods Pro 3 cần 60 phút để sạc đầy khi được đặt trong Hộp Sạc MagSafe USB-C.",
+      "reviewed_claim": "Theo thông số công bố của Apple, AirPods Pro 3 cần 60 phút để sạc đầy khi được đặt trong Hộp Sạc MagSafe USB-C; các điều kiện thử khác theo chú thích Apple được dẫn trong hồ sơ mẫu.",
+      "original_origin": "unknown_legacy",
+      "origin_verified_as_llm": false,
+      "original_generation": {
+        "model": null,
+        "prompt": null,
+        "run_id": null,
+        "timestamp": null
+      },
+      "revision_origin": "assistant_documentation_edit",
+      "revision_editor": "Codex",
+      "revision_date": "2026-10-08",
+      "dataset_eligible": false,
+      "dataset_exclusion_reason": "Chưa xác minh nguồn gốc câu gốc; không phải log sinh LLM thí nghiệm.",
+      "legacy_source_date_unverified": "2026-10-07",
+      "source_checked_date": "2026-10-08",
+      "scope": "+ Sản phẩm: AirPods Pro;+ Phiên bản: thế hệ 3;+ Bộ phận: tai nghe;+ Thuộc tính: thời gian sạc đầy.",
+      "source_id": "apple-pro3-vn",
+      "url": "https://www.apple.com/vn/airpods-pro/specs/",
+      "locator": "Pin → AirPods Pro 3 với Hộp Sạc MagSafe (USB-C); chú thích 18; toàn trang lưu không nêu thời gian sạc đầy",
+      "quotes": [
+        {
+          "text": "5 phút để trong hộp sạc có thể tăng thời gian nghe khoảng 1 giờ",
+          "start_offset": 2434,
+          "end_offset": 2497,
+          "start_line": 108
+        }
+      ],
+      "source_snapshot": "evidence/2026-10-08/apple-pro3-vn/page.txt",
+      "screenshot": "evidence/2026-10-08/apple-pro3-vn/battery-section.png",
+      "full_screenshot": "evidence/2026-10-08/apple-pro3-vn/full-page.png",
+      "condition_ref": "apple-pro3-vn#footnote-18",
+      "conditions_summary": "Thông tin sạc nhanh: âm lượng 50%, ANC bật, tai nghe cạn pin được sạc 5 phút; không phải thời gian sạc đầy.",
+      "values": "+ Phát biểu: 60 phút; giá trị chính xác; thời gian để sạc đầy tai nghe trong Hộp Sạc MagSafe USB-C.+ Bằng chứng: sạc 5 phút cung cấp khoảng 1 giờ nghe; không nêu thời gian cần thiết để sạc đầy.",
+      "label": "NEI",
+      "nei_type": "missing",
+      "label_scope": "reviewed_claim_only",
+      "reason": "Nguồn chỉ cho biết sạc trong hộp 5 phút có thể cung cấp khoảng 1 giờ nghe, nhưng không nêu thời gian cần thiết để sạc đầy AirPods Pro 3. Không thể suy ra thời gian sạc đầy 60 phút từ thông tin sạc nhanh này. Vì vậy, chưa đủ bằng chứng để hỗ trợ hoặc bác bỏ phát biểu.",
+      "nei_search_log": {
+        "status": "limited_illustration_audit_not_pilot_ready",
+        "reviewer": "Codex (AI assistance); human confirmation pending",
+        "review_date": "2026-10-08",
+        "corpus_id": "apple-illustrations-snapshot-2026-10-08",
+        "corpus_scope": "Only the single captured official page listed for this example",
+        "missing_information": "Thời gian cần để sạc đầy tai nghe, không phải số giờ nghe sau sạc nhanh",
+        "checked_sources": [
+          {
+            "url": "https://www.apple.com/vn/airpods-pro/specs/",
+            "snapshot": "evidence/2026-10-08/apple-pro3-vn/page.txt",
+            "snapshot_sha256": "13619939afa612a8d8ca96753a6774d0689cf32a806d8a0c145c405a1ef790f1",
+            "source_accessed_at": "2026-10-08T02:34:03.897Z",
+            "review_scope": "Saved page text, battery section and linked footnotes",
+            "queries_and_matching_line_numbers": {
+              "sạc đầy": [
+                208
+              ],
+              "60 phút": [],
+              "5 phút": [
+                108,
+                209
+              ],
+              "fully charged": [],
+              "full charge": []
+            }
+          }
+        ],
+        "source_type_checks": {
+          "specification": "checked_saved_page",
+          "manual": "not_checked",
+          "support_or_official_pdf": "not_separately_checked"
+        },
+        "stop_reason": "This audit verifies an illustration against its named snapshot, not an exhaustive search of manufacturer materials.",
+        "coverage_limitations": [
+          "Other applicable official manuals/support documents have not been systematically searched for this claim.",
+          "Keyword hits alone neither prove nor disprove the claim; read their context."
+        ],
+        "production_label_ready": false
+      }
+    },
+    {
+      "id": "EX-08",
+      "title": "EX-08 — Sai phiên bản Bluetooth",
+      "group": "Sai phiên bản Bluetooth",
+      "original_ad": "“AirPods Pro 3 sử dụng công nghệ không dây Bluetooth 5.2.”",
+      "original_claim": "AirPods Pro 3 sử dụng công nghệ không dây Bluetooth 5.2.",
+      "reviewed_claim": "AirPods Pro 3 sử dụng công nghệ không dây Bluetooth 5.2.",
+      "original_origin": "unknown_legacy",
+      "origin_verified_as_llm": false,
+      "original_generation": {
+        "model": null,
+        "prompt": null,
+        "run_id": null,
+        "timestamp": null
+      },
+      "revision_origin": "unchanged_claim",
+      "revision_editor": "Codex",
+      "revision_date": "2026-10-08",
+      "dataset_eligible": false,
+      "dataset_exclusion_reason": "Chưa xác minh nguồn gốc câu gốc; không phải log sinh LLM thí nghiệm.",
+      "legacy_source_date_unverified": "2026-10-07",
+      "source_checked_date": "2026-10-08",
+      "scope": "+ Sản phẩm: AirPods Pro;+ Phiên bản: thế hệ 3;+ Bộ phận: hệ thống kết nối không dây;+ Thuộc tính: phiên bản Bluetooth.",
+      "source_id": "apple-pro3-vn",
+      "url": "https://www.apple.com/vn/airpods-pro/specs/",
+      "locator": "Kết Nối",
+      "quotes": [
+        {
+          "text": "Công nghệ không dây Bluetooth 5.3",
+          "start_offset": 2508,
+          "end_offset": 2541,
+          "start_line": 110
+        }
+      ],
+      "source_snapshot": "evidence/2026-10-08/apple-pro3-vn/page.txt",
+      "screenshot": "evidence/2026-10-08/apple-pro3-vn/connectivity-section.png",
+      "full_screenshot": "evidence/2026-10-08/apple-pro3-vn/full-page.png",
+      "condition_ref": null,
+      "conditions_summary": "Không áp dụng điều kiện pin; giữ đúng sản phẩm/phiên bản/bộ phận/thị trường.",
+      "values": "+ Phát biểu: Bluetooth 5.2; kiểu dữ liệu: chuỗi phiên bản.+ Bằng chứng: Bluetooth 5.3; kiểu dữ liệu: chuỗi phiên bản.+ Không có điều kiện áp dụng đi kèm.",
+      "label": "Refuted",
+      "nei_type": null,
+      "label_scope": "reviewed_claim_only",
+      "reason": "Phát biểu cho rằng AirPods Pro 3 sử dụng Bluetooth 5.2, trong khi Apple công bố sản phẩm sử dụng Bluetooth 5.3. Hai chuỗi phiên bản không trùng khớp. Vì vậy, phát biểu bị bằng chứng trực tiếp bác bỏ."
+    },
+    {
+      "id": "EX-09",
+      "title": "EX-09 — Đúng thời lượng pin và điều kiện",
+      "group": "Đúng thời lượng pin và điều kiện sử dụng",
+      "original_ad": "“AirPods Max 2 cho thời gian nghe lên đến 20 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn.”",
+      "original_claim": "AirPods Max 2 cho thời gian nghe lên đến 20 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn.",
+      "reviewed_claim": "Theo thông số công bố của Apple, AirPods Max 2 cho thời gian nghe lên đến 20 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn; các điều kiện thử khác theo chú thích Apple được dẫn trong hồ sơ mẫu.",
+      "original_origin": "unknown_legacy",
+      "origin_verified_as_llm": false,
+      "original_generation": {
+        "model": null,
+        "prompt": null,
+        "run_id": null,
+        "timestamp": null
+      },
+      "revision_origin": "assistant_documentation_edit",
+      "revision_editor": "Codex",
+      "revision_date": "2026-10-08",
+      "dataset_eligible": false,
+      "dataset_exclusion_reason": "Chưa xác minh nguồn gốc câu gốc; không phải log sinh LLM thí nghiệm.",
+      "legacy_source_date_unverified": "2026-10-07",
+      "source_checked_date": "2026-10-08",
+      "scope": "+ Sản phẩm: AirPods Max;+ Phiên bản: thế hệ 2;+ Bộ phận: tai nghe;+ Thuộc tính: thời gian nghe với một lần sạc.",
+      "source_id": "apple-max2-vn",
+      "url": "https://www.apple.com/vn/airpods-max/specs/",
+      "locator": "Pin → AirPods Max 2 (sạc đầy); chú thích 10",
+      "quotes": [
+        {
+          "text": "Thời gian nghe lên đến 20 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn",
+          "start_offset": 1790,
+          "end_offset": 1875,
+          "start_line": 102
+        }
+      ],
+      "source_snapshot": "evidence/2026-10-08/apple-max2-vn/page.txt",
+      "screenshot": "evidence/2026-10-08/apple-max2-vn/battery-section.png",
+      "full_screenshot": "evidence/2026-10-08/apple-max2-vn/full-page.png",
+      "condition_ref": "apple-max2-vn#footnote-10",
+      "conditions_summary": "Âm lượng 50%, ANC bật, Âm Thanh Không Gian cố định; phụ thuộc điều kiện thực tế.",
+      "values": "+ Phát biểu: 20 giờ; giá trị tối đa; một lần sạc; bật Chủ Động Khử Tiếng Ồn.+ Bằng chứng: 20 giờ; giá trị tối đa; một lần sạc; bật Chủ Động Khử Tiếng Ồn.",
+      "label": "Supported",
+      "nei_type": null,
+      "label_scope": "reviewed_claim_only",
+      "reason": "Phát biểu và bằng chứng cùng nói về thời gian nghe của AirPods Max 2 với một lần sạc khi bật chống ồn. Giá trị tối đa 20 giờ và điều kiện sử dụng hoàn toàn trùng khớp. Vì vậy, phát biểu được bằng chứng hỗ trợ."
+    },
+    {
+      "id": "EX-10",
+      "title": "EX-10 — Thiếu bằng chứng cho điều kiện tắt chống ồn",
+      "group": "Thiếu bằng chứng cho điều kiện được nêu",
+      "original_ad": "“AirPods Max 2 cho thời gian nghe lên đến 20 giờ với một lần sạc khi tắt tính năng Chủ Động Khử Tiếng Ồn.”",
+      "original_claim": "AirPods Max 2 cho thời gian nghe lên đến 20 giờ với một lần sạc khi tắt tính năng Chủ Động Khử Tiếng Ồn.",
+      "reviewed_claim": "Theo thông số công bố của Apple, AirPods Max 2 cho thời gian nghe lên đến 20 giờ với một lần sạc khi tắt tính năng Chủ Động Khử Tiếng Ồn; các điều kiện thử khác theo chú thích Apple được dẫn trong hồ sơ mẫu.",
+      "original_origin": "unknown_legacy",
+      "origin_verified_as_llm": false,
+      "original_generation": {
+        "model": null,
+        "prompt": null,
+        "run_id": null,
+        "timestamp": null
+      },
+      "revision_origin": "assistant_documentation_edit",
+      "revision_editor": "Codex",
+      "revision_date": "2026-10-08",
+      "dataset_eligible": false,
+      "dataset_exclusion_reason": "Chưa xác minh nguồn gốc câu gốc; không phải log sinh LLM thí nghiệm.",
+      "legacy_source_date_unverified": "2026-10-07",
+      "source_checked_date": "2026-10-08",
+      "scope": "+ Sản phẩm: AirPods Max;+ Phiên bản: thế hệ 2;+ Bộ phận: tai nghe;+ Thuộc tính: thời gian nghe với một lần sạc.",
+      "source_id": "apple-max2-vn",
+      "url": "https://www.apple.com/vn/airpods-max/specs/",
+      "locator": "Pin → AirPods Max 2 (sạc đầy); chú thích 10 chỉ nói ANC bật, không phải ANC tắt",
+      "quotes": [
+        {
+          "text": "Thời gian nghe lên đến 20 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn",
+          "start_offset": 1790,
+          "end_offset": 1875,
+          "start_line": 102
+        }
+      ],
+      "source_snapshot": "evidence/2026-10-08/apple-max2-vn/page.txt",
+      "screenshot": "evidence/2026-10-08/apple-max2-vn/battery-section.png",
+      "full_screenshot": "evidence/2026-10-08/apple-max2-vn/full-page.png",
+      "condition_ref": "apple-max2-vn#footnote-10",
+      "conditions_summary": "Nguồn thử âm lượng 50%, ANC bật, Âm Thanh Không Gian cố định. Claim ANC tắt: không có bằng chứng cùng chế độ trong trang đã lưu.",
+      "values": "+ Phát biểu: 20 giờ; giá trị tối đa; một lần sạc; tắt Chủ Động Khử Tiếng Ồn.+ Bằng chứng: 20 giờ; giá trị tối đa; một lần sạc; bật Chủ Động Khử Tiếng Ồn.+ Nguồn không nêu thời gian nghe khi tắt chống ồn.",
+      "label": "NEI",
+      "nei_type": "missing",
+      "label_scope": "reviewed_claim_only",
+      "reason": "Nguồn chỉ cung cấp thời gian nghe khi bật chống ồn, trong khi phát biểu nói về điều kiện tắt chống ồn. Hai điều kiện không giống nhau và nguồn không cung cấp thông tin để xác nhận hoặc bác bỏ thời lượng pin khi tắt chống ồn. Vì vậy, phát biểu được gán NEI.",
+      "nei_search_log": {
+        "status": "limited_illustration_audit_not_pilot_ready",
+        "reviewer": "Codex (AI assistance); human confirmation pending",
+        "review_date": "2026-10-08",
+        "corpus_id": "apple-illustrations-snapshot-2026-10-08",
+        "corpus_scope": "Only the single captured official page listed for this example",
+        "missing_information": "Thời lượng nghe khi ANC tắt, không phải phép thử ANC bật",
+        "checked_sources": [
+          {
+            "url": "https://www.apple.com/vn/airpods-max/specs/",
+            "snapshot": "evidence/2026-10-08/apple-max2-vn/page.txt",
+            "snapshot_sha256": "2a649d31fe357b8dd6710dc454b665ad2a9c6fac9ff886f443ac65a7c5969364",
+            "source_accessed_at": "2026-10-08T02:34:06.198Z",
+            "review_scope": "Saved page text, battery section and linked footnotes",
+            "queries_and_matching_line_numbers": {
+              "tắt": [
+                65,
+                172
+              ],
+              "Khử Tiếng Ồn": [
+                32,
+                53,
+                54,
+                102,
+                184,
+                185
+              ],
+              "20 giờ": [
+                102
+              ],
+              "noise control off": []
+            }
+          }
+        ],
+        "source_type_checks": {
+          "specification": "checked_saved_page",
+          "manual": "not_checked",
+          "support_or_official_pdf": "not_separately_checked"
+        },
+        "stop_reason": "This audit verifies an illustration against its named snapshot, not an exhaustive search of manufacturer materials.",
+        "coverage_limitations": [
+          "Other applicable official manuals/support documents have not been systematically searched for this claim.",
+          "Keyword hits alone neither prove nor disprove the claim; read their context."
+        ],
+        "production_label_ready": false
+      }
+    },
+    {
+      "id": "EX-11",
+      "title": "EX-11 — Sai thời lượng pin",
+      "group": "Sai thời lượng pin",
+      "original_ad": "“AirPods Max 2 cho thời gian nghe lên đến 25 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn.”",
+      "original_claim": "AirPods Max 2 cho thời gian nghe lên đến 25 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn.",
+      "reviewed_claim": "Theo thông số công bố của Apple, AirPods Max 2 cho thời gian nghe lên đến 25 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn; các điều kiện thử khác theo chú thích Apple được dẫn trong hồ sơ mẫu.",
+      "original_origin": "unknown_legacy",
+      "origin_verified_as_llm": false,
+      "original_generation": {
+        "model": null,
+        "prompt": null,
+        "run_id": null,
+        "timestamp": null
+      },
+      "revision_origin": "assistant_documentation_edit",
+      "revision_editor": "Codex",
+      "revision_date": "2026-10-08",
+      "dataset_eligible": false,
+      "dataset_exclusion_reason": "Chưa xác minh nguồn gốc câu gốc; không phải log sinh LLM thí nghiệm.",
+      "legacy_source_date_unverified": "2026-10-07",
+      "source_checked_date": "2026-10-08",
+      "scope": "+ Sản phẩm: AirPods Max;+ Phiên bản: thế hệ 2;+ Bộ phận: tai nghe;+ Thuộc tính: thời gian nghe với một lần sạc.",
+      "source_id": "apple-max2-vn",
+      "url": "https://www.apple.com/vn/airpods-max/specs/",
+      "locator": "Pin → AirPods Max 2 (sạc đầy); chú thích 10",
+      "quotes": [
+        {
+          "text": "Thời gian nghe lên đến 20 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn",
+          "start_offset": 1790,
+          "end_offset": 1875,
+          "start_line": 102
+        }
+      ],
+      "source_snapshot": "evidence/2026-10-08/apple-max2-vn/page.txt",
+      "screenshot": "evidence/2026-10-08/apple-max2-vn/battery-section.png",
+      "full_screenshot": "evidence/2026-10-08/apple-max2-vn/full-page.png",
+      "condition_ref": "apple-max2-vn#footnote-10",
+      "conditions_summary": "Âm lượng 50%, ANC bật, Âm Thanh Không Gian cố định; so mức tối đa công bố 25 với 20, không phải hai khoảng bao hàm.",
+      "values": "+ Phát biểu: 25 giờ; giá trị tối đa; một lần sạc; bật Chủ Động Khử Tiếng Ồn.+ Bằng chứng: 20 giờ; giá trị tối đa; một lần sạc; bật Chủ Động Khử Tiếng Ồn.",
+      "label": "Refuted",
+      "nei_type": null,
+      "label_scope": "reviewed_claim_only",
+      "reason": "Phát biểu và bằng chứng cùng nói về AirPods Max 2 trong điều kiện bật chống ồn. Tuy nhiên, phát biểu nêu thời gian nghe tối đa 25 giờ, trong khi Apple công bố tối đa 20 giờ. Vì vậy, phát biểu bị bằng chứng trực tiếp bác bỏ."
+    },
+    {
+      "id": "EX-12",
+      "title": "EX-12 — Đúng thông tin sạc nhanh và giá trị gần đúng",
+      "group": "Đúng thời gian sạc và giá trị gần đúng",
+      "original_ad": "“Sạc AirPods Max 2 trong 5 phút có thể đem đến khoảng 1,5 giờ nghe.”",
+      "original_claim": "Sạc AirPods Max 2 trong 5 phút có thể đem đến khoảng 1,5 giờ nghe.",
+      "reviewed_claim": "Theo thông số công bố của Apple, sạc AirPods Max 2 trong 5 phút có thể đem đến khoảng 1,5 giờ nghe; các điều kiện thử khác theo chú thích Apple được dẫn trong hồ sơ mẫu.",
+      "original_origin": "unknown_legacy",
+      "origin_verified_as_llm": false,
+      "original_generation": {
+        "model": null,
+        "prompt": null,
+        "run_id": null,
+        "timestamp": null
+      },
+      "revision_origin": "assistant_documentation_edit",
+      "revision_editor": "Codex",
+      "revision_date": "2026-10-08",
+      "dataset_eligible": false,
+      "dataset_exclusion_reason": "Chưa xác minh nguồn gốc câu gốc; không phải log sinh LLM thí nghiệm.",
+      "legacy_source_date_unverified": "2026-10-07",
+      "source_checked_date": "2026-10-08",
+      "scope": "+ Sản phẩm: AirPods Max;+ Phiên bản: thế hệ 2;+ Bộ phận: pin tai nghe;+ Thuộc tính: hiệu quả sạc nhanh.",
+      "source_id": "apple-max2-vn",
+      "url": "https://www.apple.com/vn/airpods-max/specs/",
+      "locator": "Pin → AirPods Max 2 (sạc đầy); chú thích 11",
+      "quotes": [
+        {
+          "text": "5 phút sạc đem đến thời gian nghe khoảng 1,5 giờ",
+          "start_offset": 1878,
+          "end_offset": 1926,
+          "start_line": 103
+        }
+      ],
+      "source_snapshot": "evidence/2026-10-08/apple-max2-vn/page.txt",
+      "screenshot": "evidence/2026-10-08/apple-max2-vn/battery-section.png",
+      "full_screenshot": "evidence/2026-10-08/apple-max2-vn/full-page.png",
+      "condition_ref": "apple-max2-vn#footnote-11",
+      "conditions_summary": "Âm lượng 50%, ANC bật, Âm Thanh Không Gian cố định, tai nghe cạn pin được sạc 5 phút.",
+      "values": "+ Phát biểu: sạc 5 phút; thời gian nghe khoảng 1,5 giờ; loại giá trị đầu ra: gần đúng.+ Bằng chứng: sạc 5 phút; thời gian nghe khoảng 1,5 giờ; loại giá trị đầu ra: gần đúng.",
+      "label": "Supported",
+      "nei_type": null,
+      "label_scope": "reviewed_claim_only",
+      "reason": "Phát biểu và bằng chứng cùng nêu rằng sạc AirPods Max 2 trong 5 phút có thể cung cấp khoảng 1,5 giờ nghe. Thời gian sạc, thời gian nghe và ý nghĩa gần đúng đều trùng khớp. Vì vậy, phát biểu được bằng chứng hỗ trợ."
+    },
+    {
+      "id": "EX-13",
+      "title": "EX-13 — Đúng thời lượng pin của phiên bản tiêu chuẩn",
+      "group": "Đúng thời lượng pin và phiên bản sản phẩm",
+      "original_ad": "“AirPods 4 bản tiêu chuẩn cho thời gian nghe lên đến 5 giờ với một lần sạc.”",
+      "original_claim": "AirPods 4 bản tiêu chuẩn cho thời gian nghe lên đến 5 giờ với một lần sạc.",
+      "reviewed_claim": "Theo thông số Apple tại Moldova, AirPods 4 bản tiêu chuẩn cho thời gian nghe lên đến 5 giờ với một lần sạc; các điều kiện thử khác theo chú thích Apple được dẫn trong hồ sơ mẫu.",
+      "original_origin": "unknown_legacy",
+      "origin_verified_as_llm": false,
+      "original_generation": {
+        "model": null,
+        "prompt": null,
+        "run_id": null,
+        "timestamp": null
+      },
+      "revision_origin": "assistant_documentation_edit",
+      "revision_editor": "Codex",
+      "revision_date": "2026-10-08",
+      "dataset_eligible": false,
+      "dataset_exclusion_reason": "Chưa xác minh nguồn gốc câu gốc; không phải log sinh LLM thí nghiệm.",
+      "legacy_source_date_unverified": "2026-10-07",
+      "source_checked_date": "2026-10-08",
+      "scope": "+ Sản phẩm: AirPods 4;+ Phiên bản: bản tiêu chuẩn, không có Chủ Động Khử Tiếng Ồn;+ Bộ phận: tai nghe;+ Thuộc tính: thời gian nghe với một lần sạc.",
+      "source_id": "apple-airpods4-md",
+      "url": "https://www.apple.com/md/airpods-4/specs/",
+      "locator": "Battery → AirPods 4 tiêu chuẩn; chú thích 8; thị trường Moldova, không suy ra trang Việt Nam",
+      "quotes": [
+        {
+          "text": "Up to 5 hours of listening time on a single charge",
+          "start_offset": 1660,
+          "end_offset": 1710,
+          "start_line": 78
+        }
+      ],
+      "source_snapshot": "evidence/2026-10-08/apple-airpods4-md/page.txt",
+      "screenshot": "evidence/2026-10-08/apple-airpods4-md/battery-section.png",
+      "full_screenshot": "evidence/2026-10-08/apple-airpods4-md/full-page.png",
+      "condition_ref": "apple-airpods4-md#footnote-8",
+      "conditions_summary": "Âm lượng 50%, Spatial Audio tắt, bản tiêu chuẩn; các điều kiện thử khác giữ theo chú thích 8.",
+      "values": "+ Phát biểu: 5 giờ; giá trị tối đa; một lần sạc; áp dụng cho AirPods 4 bản tiêu chuẩn.+ Bằng chứng: 5 giờ; giá trị tối đa; một lần sạc; áp dụng cho AirPods 4 bản tiêu chuẩn.",
+      "label": "Supported",
+      "nei_type": null,
+      "label_scope": "reviewed_claim_only",
+      "reason": "Phát biểu và bằng chứng cùng nói về AirPods 4 bản tiêu chuẩn. Giá trị tối đa 5 giờ với một lần sạc trùng khớp với thông số do Apple công bố. Vì vậy, phát biểu được bằng chứng hỗ trợ."
+    },
+    {
+      "id": "EX-14",
+      "title": "EX-14 — Đúng khối lượng hộp sạc của phiên bản chống ồn",
+      "group": "Đúng khối lượng, bộ phận và phiên bản",
+      "original_ad": "“Hộp sạc đi kèm AirPods 4 có Chủ Động Khử Tiếng Ồn có trọng lượng 34,7 gram.”",
+      "original_claim": "Hộp sạc đi kèm AirPods 4 có Chủ Động Khử Tiếng Ồn có trọng lượng 34,7 gram.",
+      "reviewed_claim": "Theo thông số Apple tại Moldova, hộp sạc đi kèm AirPods 4 có Chủ Động Khử Tiếng Ồn có trọng lượng 34,7 gram.",
+      "original_origin": "unknown_legacy",
+      "origin_verified_as_llm": false,
+      "original_generation": {
+        "model": null,
+        "prompt": null,
+        "run_id": null,
+        "timestamp": null
+      },
+      "revision_origin": "assistant_documentation_edit",
+      "revision_editor": "Codex",
+      "revision_date": "2026-10-08",
+      "dataset_eligible": false,
+      "dataset_exclusion_reason": "Chưa xác minh nguồn gốc câu gốc; không phải log sinh LLM thí nghiệm.",
+      "legacy_source_date_unverified": "2026-10-07",
+      "source_checked_date": "2026-10-08",
+      "scope": "+ Sản phẩm: AirPods 4;+ Phiên bản: bản có Chủ Động Khử Tiếng Ồn;+ Bộ phận: hộp sạc;+ Thuộc tính: khối lượng.",
+      "source_id": "apple-airpods4-md",
+      "url": "https://www.apple.com/md/airpods-4/specs/",
+      "locator": "Size and Weight → khối hộp sạc, bản ANC; thị trường Moldova",
+      "quotes": [
+        {
+          "text": "Weight (AirPods 4 with Active Noise Cancellation): 34.7 grams",
+          "start_offset": 1409,
+          "end_offset": 1470,
+          "start_line": 71
+        }
+      ],
+      "source_snapshot": "evidence/2026-10-08/apple-airpods4-md/page.txt",
+      "screenshot": "evidence/2026-10-08/apple-airpods4-md/dimensions-section.png",
+      "full_screenshot": "evidence/2026-10-08/apple-airpods4-md/full-page.png",
+      "condition_ref": null,
+      "conditions_summary": "Không áp dụng điều kiện pin; giữ đúng sản phẩm/phiên bản/bộ phận/thị trường.",
+      "values": "+ Phát biểu: 34,7 g; giá trị chính xác; đối tượng là hộp sạc của phiên bản có chống ồn.+ Bằng chứng: 34,7 g; giá trị chính xác; đối tượng là hộp sạc của phiên bản có chống ồn.",
+      "label": "Supported",
+      "nei_type": null,
+      "label_scope": "reviewed_claim_only",
+      "reason": "Phát biểu và bằng chứng cùng nói về hộp sạc của AirPods 4 có Chủ Động Khử Tiếng Ồn. Giá trị 34,7 g và phiên bản sản phẩm hoàn toàn trùng khớp. Vì vậy, phát biểu được bằng chứng hỗ trợ."
+    },
+    {
+      "id": "EX-15",
+      "title": "EX-15 — Gán thông số cho sai phiên bản",
+      "group": "Sai phiên bản sản phẩm",
+      "original_ad": "“Hộp sạc USB-C của AirPods 4 bản tiêu chuẩn có trọng lượng 34,7 gram.”",
+      "original_claim": "Hộp sạc USB-C của AirPods 4 bản tiêu chuẩn có trọng lượng 34,7 gram.",
+      "reviewed_claim": "Theo thông số Apple tại Moldova, hộp sạc USB-C của AirPods 4 bản tiêu chuẩn có trọng lượng 34,7 gram.",
+      "original_origin": "unknown_legacy",
+      "origin_verified_as_llm": false,
+      "original_generation": {
+        "model": null,
+        "prompt": null,
+        "run_id": null,
+        "timestamp": null
+      },
+      "revision_origin": "assistant_documentation_edit",
+      "revision_editor": "Codex",
+      "revision_date": "2026-10-08",
+      "dataset_eligible": false,
+      "dataset_exclusion_reason": "Chưa xác minh nguồn gốc câu gốc; không phải log sinh LLM thí nghiệm.",
+      "legacy_source_date_unverified": "2026-10-07",
+      "source_checked_date": "2026-10-08",
+      "scope": "+ Sản phẩm: AirPods 4;+ Phiên bản: bản tiêu chuẩn, không có Chủ Động Khử Tiếng Ồn;+ Bộ phận: hộp sạc USB-C;+ Thuộc tính: khối lượng.",
+      "source_id": "apple-airpods4-md",
+      "url": "https://www.apple.com/md/airpods-4/specs/",
+      "locator": "Size and Weight → khối hộp sạc, hai phiên bản riêng; thị trường Moldova",
+      "quotes": [
+        {
+          "text": "Weight (AirPods 4): 32.3 grams",
+          "start_offset": 1378,
+          "end_offset": 1408,
+          "start_line": 70
+        },
+        {
+          "text": "Weight (AirPods 4 with Active Noise Cancellation): 34.7 grams",
+          "start_offset": 1409,
+          "end_offset": 1470,
+          "start_line": 71
+        }
+      ],
+      "source_snapshot": "evidence/2026-10-08/apple-airpods4-md/page.txt",
+      "screenshot": "evidence/2026-10-08/apple-airpods4-md/dimensions-section.png",
+      "full_screenshot": "evidence/2026-10-08/apple-airpods4-md/full-page.png",
+      "condition_ref": null,
+      "conditions_summary": "Không áp dụng điều kiện pin; giữ đúng sản phẩm/phiên bản/bộ phận/thị trường.",
+      "values": "+ Phát biểu: 34,7 g; giá trị chính xác; hộp sạc của bản tiêu chuẩn.+ Bằng chứng đúng phạm vi: 32,3 g; giá trị chính xác; hộp sạc của bản tiêu chuẩn.+ Giá trị 34,7 g trong nguồn thuộc về bản có chống ồn.",
+      "label": "Refuted",
+      "nei_type": null,
+      "label_scope": "reviewed_claim_only",
+      "reason": "Phát biểu gán khối lượng 34,7 g cho hộp sạc của AirPods 4 bản tiêu chuẩn. Tuy nhiên, Apple công bố hộp sạc của bản tiêu chuẩn nặng 32,3 g; giá trị 34,7 g thuộc về bản có chống ồn. Vì vậy, phát biểu bị bằng chứng trực tiếp bác bỏ."
+    },
+    {
+      "id": "EX-16",
+      "title": "EX-16 — Thiếu bằng chứng cho điều kiện âm lượng",
+      "group": "Thiếu bằng chứng cho điều kiện được nêu",
+      "original_ad": "“AirPods 4 bản tiêu chuẩn cho thời gian nghe lên đến 5 giờ với một lần sạc ngay cả khi âm lượng được đặt ở mức 100%.”",
+      "original_claim": "AirPods 4 bản tiêu chuẩn cho thời gian nghe lên đến 5 giờ với một lần sạc khi âm lượng ở mức 100%.",
+      "reviewed_claim": "Theo thông số Apple tại Moldova, AirPods 4 bản tiêu chuẩn cho thời gian nghe lên đến 5 giờ với một lần sạc khi âm lượng ở mức 100%; các điều kiện thử khác theo chú thích Apple được dẫn trong hồ sơ mẫu.",
+      "original_origin": "unknown_legacy",
+      "origin_verified_as_llm": false,
+      "original_generation": {
+        "model": null,
+        "prompt": null,
+        "run_id": null,
+        "timestamp": null
+      },
+      "revision_origin": "assistant_documentation_edit",
+      "revision_editor": "Codex",
+      "revision_date": "2026-10-08",
+      "dataset_eligible": false,
+      "dataset_exclusion_reason": "Chưa xác minh nguồn gốc câu gốc; không phải log sinh LLM thí nghiệm.",
+      "legacy_source_date_unverified": "2026-10-07",
+      "source_checked_date": "2026-10-08",
+      "scope": "+ Sản phẩm: AirPods 4;+ Phiên bản: bản tiêu chuẩn, không có Chủ Động Khử Tiếng Ồn;+ Bộ phận: tai nghe;+ Thuộc tính: thời gian nghe với một lần sạc.",
+      "source_id": "apple-airpods4-md",
+      "url": "https://www.apple.com/md/airpods-4/specs/",
+      "locator": "Battery → AirPods 4; chú thích 8, không có phép thử âm lượng 100%",
+      "quotes": [
+        {
+          "text": "Up to 5 hours of listening time on a single charge",
+          "start_offset": 1660,
+          "end_offset": 1710,
+          "start_line": 78
+        },
+        {
+          "text": "Volume was set to 50% and Spatial Audio was off.",
+          "start_offset": 6307,
+          "end_offset": 6355,
+          "start_line": 146
+        }
+      ],
+      "source_snapshot": "evidence/2026-10-08/apple-airpods4-md/page.txt",
+      "screenshot": "evidence/2026-10-08/apple-airpods4-md/battery-section.png",
+      "full_screenshot": "evidence/2026-10-08/apple-airpods4-md/full-page.png",
+      "condition_ref": "apple-airpods4-md#footnote-8",
+      "conditions_summary": "Nguồn thử âm lượng 50%, Spatial Audio tắt; claim 100% không được kế thừa kết quả ở 50%.",
+      "values": "+ Phát biểu: 5 giờ; giá trị tối đa; một lần sạc; âm lượng 100%.+ Bằng chứng: 5 giờ; giá trị tối đa; một lần sạc; thử nghiệm ở âm lượng 50%.+ Nguồn không cung cấp thời lượng pin khi âm lượng ở mức 100%.",
+      "label": "NEI",
+      "nei_type": "missing",
+      "label_scope": "reviewed_claim_only",
+      "reason": "Giá trị 5 giờ được Apple xác định trong điều kiện thử nghiệm ở âm lượng 50%, trong khi phát biểu áp dụng giá trị này cho mức âm lượng 100%. Nguồn không cung cấp kết quả ở mức âm lượng 100% nên chưa thể hỗ trợ hoặc trực tiếp bác bỏ phát biểu. Vì vậy, phát biểu được gán NEI.",
+      "nei_search_log": {
+        "status": "limited_illustration_audit_not_pilot_ready",
+        "reviewer": "Codex (AI assistance); human confirmation pending",
+        "review_date": "2026-10-08",
+        "corpus_id": "apple-illustrations-snapshot-2026-10-08",
+        "corpus_scope": "Only the single captured official page listed for this example",
+        "missing_information": "Thời lượng pin ở âm lượng 100%, không phải phép thử 50%",
+        "checked_sources": [
+          {
+            "url": "https://www.apple.com/md/airpods-4/specs/",
+            "snapshot": "evidence/2026-10-08/apple-airpods4-md/page.txt",
+            "snapshot_sha256": "371757d7eb6f27efedca536180b0f7073196df42c4837d82bf0f20507ecfcb38",
+            "source_accessed_at": "2026-10-08T02:34:01.409Z",
+            "review_scope": "Saved page text, battery section and linked footnotes",
+            "queries_and_matching_line_numbers": {
+              "Volume": [
+                146,
+                147,
+                148,
+                149,
+                150,
+                151,
+                152,
+                153,
+                154,
+                155,
+                156,
+                157
+              ],
+              "50%": [
+                130,
+                146,
+                147,
+                148,
+                149,
+                150,
+                151,
+                152,
+                153,
+                154,
+                155,
+                156,
+                157
+              ],
+              "100%": [
+                126,
+                127,
+                128,
+                129,
+                131
+              ],
+              "single charge": [
+                78,
+                79,
+                87,
+                88,
+                89
+              ],
+              "Spatial Audio": [
+                26,
+                36,
+                141,
+                146,
+                147,
+                148,
+                149,
+                150,
+                151,
+                152,
+                153,
+                154,
+                155,
+                156,
+                157
+              ]
+            }
+          }
+        ],
+        "source_type_checks": {
+          "specification": "checked_saved_page",
+          "manual": "not_checked",
+          "support_or_official_pdf": "not_separately_checked"
+        },
+        "stop_reason": "This audit verifies an illustration against its named snapshot, not an exhaustive search of manufacturer materials.",
+        "coverage_limitations": [
+          "Other applicable official manuals/support documents have not been systematically searched for this claim.",
+          "Keyword hits alone neither prove nor disprove the claim; read their context."
+        ],
+        "production_label_ready": false
+      }
+    },
+    {
+      "id": "EX-17",
+      "title": "EX-17 — Đúng tổng thời gian nghe với hộp sạc",
+      "group": "Đúng giá trị và loại giá trị “hơn”",
+      "original_ad": "“AirPods 2 kết hợp với Hộp Sạc Lightning hoặc Hộp sạc không dây cho thời gian nghe hơn 24 giờ.”",
+      "original_claim": "AirPods 2 kết hợp với Hộp Sạc Lightning hoặc Hộp sạc không dây cho thời gian nghe hơn 24 giờ.",
+      "reviewed_claim": "Theo thông số công bố của Apple, AirPods 2 kết hợp với Hộp Sạc Lightning hoặc Hộp sạc không dây cho thời gian nghe hơn 24 giờ; các điều kiện thử khác theo chú thích Apple được dẫn trong hồ sơ mẫu.",
+      "original_origin": "unknown_legacy",
+      "origin_verified_as_llm": false,
+      "original_generation": {
+        "model": null,
+        "prompt": null,
+        "run_id": null,
+        "timestamp": null
+      },
+      "revision_origin": "assistant_documentation_edit",
+      "revision_editor": "Codex",
+      "revision_date": "2026-10-08",
+      "dataset_eligible": false,
+      "dataset_exclusion_reason": "Chưa xác minh nguồn gốc câu gốc; không phải log sinh LLM thí nghiệm.",
+      "legacy_source_date_unverified": "2026-10-07",
+      "source_checked_date": "2026-10-08",
+      "scope": "+ Sản phẩm: AirPods;+ Phiên bản: thế hệ 2;+ Bộ phận: tai nghe kết hợp với hộp sạc;+ Thuộc tính: tổng thời gian nghe khi sử dụng hộp sạc.",
+      "source_id": "apple-airpods2-vn",
+      "url": "https://support.apple.com/vi-vn/111856",
+      "locator": "Pin → tiêu đề riêng: AirPods với Hộp Sạc Lightning hoặc Hộp sạc không dây; dòng nghe >24; chú thích 3",
+      "quotes": [
+        {
+          "text": "Thời gian nghe hơn 24 giờ",
+          "start_offset": 761,
+          "end_offset": 786,
+          "start_line": 73
+        }
+      ],
+      "source_snapshot": "evidence/2026-10-08/apple-airpods2-vn/page.txt",
+      "screenshot": "evidence/2026-10-08/apple-airpods2-vn/battery.png",
+      "full_screenshot": "evidence/2026-10-08/apple-airpods2-vn/full-page.png",
+      "condition_ref": "apple-airpods2-vn#footnote-3",
+      "conditions_summary": "Âm lượng 50%; lặp chu kỳ sạc đầy và phát nhạc đến khi cả tai nghe và hộp cạn pin; không phải một lần sạc tai nghe.",
+      "values": "+ Phát biểu: hơn 24 giờ; giới hạn dưới; sử dụng tai nghe kết hợp với hộp sạc.+ Bằng chứng: hơn 24 giờ; giới hạn dưới; sử dụng tai nghe kết hợp với hộp sạc.",
+      "label": "Supported",
+      "nei_type": null,
+      "label_scope": "reviewed_claim_only",
+      "reason": "Phát biểu và bằng chứng cùng nói về tổng thời gian nghe của AirPods 2 khi sử dụng với hộp sạc. Giá trị “hơn 24 giờ”, loại giá trị và phạm vi áp dụng hoàn toàn trùng khớp. Vì vậy, phát biểu được bằng chứng hỗ trợ. Tiêu đề xác định tai nghe+hộp được lưu ở vị trí nguồn, không ghép vào câu trích nguyên văn."
+    },
+    {
+      "id": "EX-18",
+      "title": "EX-18 — Sai loại giá trị “hơn”",
+      "group": "Sai loại giá trị",
+      "original_ad": "“AirPods 2 kết hợp với Hộp Sạc Lightning hoặc Hộp sạc không dây cho thời gian nghe chính xác 24 giờ.”",
+      "original_claim": "AirPods 2 kết hợp với Hộp Sạc Lightning hoặc Hộp sạc không dây cho thời gian nghe chính xác 24 giờ.",
+      "reviewed_claim": "Theo thông số công bố của Apple, AirPods 2 kết hợp với Hộp Sạc Lightning hoặc Hộp sạc không dây cho thời gian nghe chính xác 24 giờ; các điều kiện thử khác theo chú thích Apple được dẫn trong hồ sơ mẫu.",
+      "original_origin": "unknown_legacy",
+      "origin_verified_as_llm": false,
+      "original_generation": {
+        "model": null,
+        "prompt": null,
+        "run_id": null,
+        "timestamp": null
+      },
+      "revision_origin": "assistant_documentation_edit",
+      "revision_editor": "Codex",
+      "revision_date": "2026-10-08",
+      "dataset_eligible": false,
+      "dataset_exclusion_reason": "Chưa xác minh nguồn gốc câu gốc; không phải log sinh LLM thí nghiệm.",
+      "legacy_source_date_unverified": "2026-10-07",
+      "source_checked_date": "2026-10-08",
+      "scope": "+ Sản phẩm: AirPods;+ Phiên bản: thế hệ 2;+ Bộ phận: tai nghe kết hợp với hộp sạc;+ Thuộc tính: tổng thời gian nghe khi sử dụng hộp sạc.",
+      "source_id": "apple-airpods2-vn",
+      "url": "https://support.apple.com/vi-vn/111856",
+      "locator": "Pin → tiêu đề riêng: AirPods với Hộp Sạc Lightning hoặc Hộp sạc không dây; dòng nghe >24; chú thích 3",
+      "quotes": [
+        {
+          "text": "Thời gian nghe hơn 24 giờ",
+          "start_offset": 761,
+          "end_offset": 786,
+          "start_line": 73
+        }
+      ],
+      "source_snapshot": "evidence/2026-10-08/apple-airpods2-vn/page.txt",
+      "screenshot": "evidence/2026-10-08/apple-airpods2-vn/battery.png",
+      "full_screenshot": "evidence/2026-10-08/apple-airpods2-vn/full-page.png",
+      "condition_ref": "apple-airpods2-vn#footnote-3",
+      "conditions_summary": "Cùng phạm vi phép thử tổng tai nghe+hộp, âm lượng 50%; >24 loại trừ =24.",
+      "values": "+ Phát biểu: chính xác 24 giờ; giá trị chính xác; sử dụng tai nghe kết hợp với hộp sạc.+ Bằng chứng: hơn 24 giờ; giới hạn dưới; sử dụng tai nghe kết hợp với hộp sạc.",
+      "label": "Refuted",
+      "nei_type": null,
+      "label_scope": "reviewed_claim_only",
+      "reason": "Phát biểu khẳng định thời gian nghe chính xác là 24 giờ, trong khi nguồn cho biết thời gian nghe lớn hơn 24 giờ. “Chính xác 24 giờ” không tương thích với “hơn 24 giờ”. Vì vậy, phát biểu bị bằng chứng trực tiếp bác bỏ. Tiêu đề xác định tai nghe+hộp được lưu ở vị trí nguồn, không ghép vào câu trích nguyên văn."
+    },
+    {
+      "id": "EX-19",
+      "title": "EX-19 — Đúng thông tin sạc nhanh và giá trị tối đa",
+      "group": "Đúng thời gian sạc và giá trị tối đa",
+      "original_ad": "“Đặt AirPods 2 trong hộp sạc 15 phút có thể cung cấp thời gian nghe lên đến 3 giờ.”",
+      "original_claim": "Đặt AirPods 2 trong hộp sạc 15 phút có thể cung cấp thời gian nghe lên đến 3 giờ.",
+      "reviewed_claim": "Theo thông số công bố của Apple, đặt AirPods 2 trong hộp sạc 15 phút có thể cung cấp thời gian nghe lên đến 3 giờ; các điều kiện thử khác theo chú thích Apple được dẫn trong hồ sơ mẫu.",
+      "original_origin": "unknown_legacy",
+      "origin_verified_as_llm": false,
+      "original_generation": {
+        "model": null,
+        "prompt": null,
+        "run_id": null,
+        "timestamp": null
+      },
+      "revision_origin": "assistant_documentation_edit",
+      "revision_editor": "Codex",
+      "revision_date": "2026-10-08",
+      "dataset_eligible": false,
+      "dataset_exclusion_reason": "Chưa xác minh nguồn gốc câu gốc; không phải log sinh LLM thí nghiệm.",
+      "legacy_source_date_unverified": "2026-10-07",
+      "source_checked_date": "2026-10-08",
+      "scope": "+ Sản phẩm: AirPods;+ Phiên bản: thế hệ 2;+ Bộ phận: tai nghe và hộp sạc;+ Thuộc tính: hiệu quả sạc nhanh.",
+      "source_id": "apple-airpods2-vn",
+      "url": "https://support.apple.com/vi-vn/111856",
+      "locator": "Pin → AirPods với hộp sạc; chú thích 4",
+      "quotes": [
+        {
+          "text": "15 phút để trong hộp sạc cung cấp thời gian nghe lên đến 3 giờ",
+          "start_offset": 789,
+          "end_offset": 851,
+          "start_line": 75
+        }
+      ],
+      "source_snapshot": "evidence/2026-10-08/apple-airpods2-vn/page.txt",
+      "screenshot": "evidence/2026-10-08/apple-airpods2-vn/battery.png",
+      "full_screenshot": "evidence/2026-10-08/apple-airpods2-vn/full-page.png",
+      "condition_ref": "apple-airpods2-vn#footnote-4",
+      "conditions_summary": "Âm lượng 50%; tai nghe cạn pin được sạc 15 phút trong hộp; thời lượng phụ thuộc thực tế.",
+      "values": "+ Phát biểu: sạc 15 phút; thời gian nghe tối đa 3 giờ.+ Bằng chứng: sạc 15 phút; thời gian nghe tối đa 3 giờ.+ Điều kiện: tai nghe được đặt trong hộp sạc.",
+      "label": "Supported",
+      "nei_type": null,
+      "label_scope": "reviewed_claim_only",
+      "reason": "Phát biểu và bằng chứng cùng nêu rằng đặt AirPods 2 trong hộp sạc 15 phút có thể cung cấp thời gian nghe lên đến 3 giờ. Thời gian sạc, thời gian nghe và ý nghĩa tối đa đều trùng khớp. Vì vậy, phát biểu được bằng chứng hỗ trợ."
+    },
+    {
+      "id": "EX-20",
+      "title": "EX-20 — Chuyển giá trị tối đa thành giá trị chính xác",
+      "group": "Chưa đủ bằng chứng cho giá trị chính xác",
+      "original_ad": "“Đặt AirPods 2 trong hộp sạc 15 phút sẽ cung cấp chính xác 3 giờ nghe.”",
+      "original_claim": "Đặt AirPods 2 trong hộp sạc 15 phút sẽ cung cấp chính xác 3 giờ nghe.",
+      "reviewed_claim": "Theo thông số công bố của Apple, đặt AirPods 2 trong hộp sạc 15 phút sẽ cung cấp chính xác 3 giờ nghe; các điều kiện thử khác theo chú thích Apple được dẫn trong hồ sơ mẫu.",
+      "original_origin": "unknown_legacy",
+      "origin_verified_as_llm": false,
+      "original_generation": {
+        "model": null,
+        "prompt": null,
+        "run_id": null,
+        "timestamp": null
+      },
+      "revision_origin": "assistant_documentation_edit",
+      "revision_editor": "Codex",
+      "revision_date": "2026-10-08",
+      "dataset_eligible": false,
+      "dataset_exclusion_reason": "Chưa xác minh nguồn gốc câu gốc; không phải log sinh LLM thí nghiệm.",
+      "legacy_source_date_unverified": "2026-10-07",
+      "source_checked_date": "2026-10-08",
+      "scope": "+ Sản phẩm: AirPods;+ Phiên bản: thế hệ 2;+ Bộ phận: tai nghe và hộp sạc;+ Thuộc tính: hiệu quả sạc nhanh.",
+      "source_id": "apple-airpods2-vn",
+      "url": "https://support.apple.com/vi-vn/111856",
+      "locator": "Pin → AirPods với hộp sạc; chú thích 4",
+      "quotes": [
+        {
+          "text": "15 phút để trong hộp sạc cung cấp thời gian nghe lên đến 3 giờ",
+          "start_offset": 789,
+          "end_offset": 851,
+          "start_line": 75
+        }
+      ],
+      "source_snapshot": "evidence/2026-10-08/apple-airpods2-vn/page.txt",
+      "screenshot": "evidence/2026-10-08/apple-airpods2-vn/battery.png",
+      "full_screenshot": "evidence/2026-10-08/apple-airpods2-vn/full-page.png",
+      "condition_ref": "apple-airpods2-vn#footnote-4",
+      "conditions_summary": "Cùng phép thử sạc 15 phút, âm lượng 50%; mức tối đa 3 giờ không bảo đảm chính xác 3 giờ.",
+      "values": "+ Phát biểu: sạc 15 phút; thời gian nghe chính xác 3 giờ.+ Bằng chứng: sạc 15 phút; thời gian nghe tối đa 3 giờ.+ Nguồn không bảo đảm mọi trường hợp đều đạt chính xác 3 giờ.",
+      "label": "NEI",
+      "nei_type": "missing",
+      "label_scope": "reviewed_claim_only",
+      "reason": "Cụm “lên đến 3 giờ” chỉ xác định giới hạn tối đa, không bảo đảm AirPods 2 luôn cung cấp chính xác 3 giờ nghe sau 15 phút sạc. Tuy nhiên, giá trị chính xác 3 giờ vẫn có thể xảy ra nên nguồn cũng không trực tiếp bác bỏ phát biểu. Vì vậy, phát biểu được gán NEI.",
+      "nei_search_log": {
+        "status": "limited_illustration_audit_not_pilot_ready",
+        "reviewer": "Codex (AI assistance); human confirmation pending",
+        "review_date": "2026-10-08",
+        "corpus_id": "apple-illustrations-snapshot-2026-10-08",
+        "corpus_scope": "Only the single captured official page listed for this example",
+        "missing_information": "Bảo đảm chính xác 3 giờ sau sạc 15 phút, không chỉ cận tối đa",
+        "checked_sources": [
+          {
+            "url": "https://support.apple.com/vi-vn/111856",
+            "snapshot": "evidence/2026-10-08/apple-airpods2-vn/page.txt",
+            "snapshot_sha256": "11cd5dda1585fd465ea293bc2e43b7ef84880e5589e56ae706341c6bc8dc48b6",
+            "source_accessed_at": "2026-10-08T02:34:08.578Z",
+            "review_scope": "Saved page text, battery section and linked footnotes",
+            "queries_and_matching_line_numbers": {
+              "15 phút": [
+                75,
+                135
+              ],
+              "3 giờ": [
+                75
+              ],
+              "chính xác": [],
+              "phụ thuộc": [
+                131,
+                133,
+                135,
+                147
+              ],
+              "50 phần trăm": [
+                131,
+                133,
+                135
+              ]
+            }
+          }
+        ],
+        "source_type_checks": {
+          "specification": "not_separately_checked",
+          "manual": "not_checked",
+          "support_or_official_pdf": "checked_saved_support_page"
+        },
+        "stop_reason": "This audit verifies an illustration against its named snapshot, not an exhaustive search of manufacturer materials.",
+        "coverage_limitations": [
+          "Other applicable official manuals/support documents have not been systematically searched for this claim.",
+          "Keyword hits alone neither prove nor disprove the claim; read their context."
+        ],
+        "production_label_ready": false
+      }
+    },
+    {
+      "id": "EX-21",
+      "title": "EX-21 — Xung đột pin (GIẢ LẬP)",
+      "group": "Hai nguồn giả lập cùng phạm vi, trái nhau; chưa có quy tắc ưu tiên",
+      "original_ad": "SIM-PIN-01 bản R1 có thời gian nghe tối đa công bố 20 giờ; ANC bật; âm lượng 50%; một lần sạc; cùng điều kiện thử.",
+      "original_claim": "SIM-PIN-01 bản R1 có thời gian nghe tối đa công bố 20 giờ; ANC bật; âm lượng 50%; một lần sạc; cùng điều kiện thử.",
+      "reviewed_claim": "SIM-PIN-01 bản R1 có thời gian nghe tối đa công bố 20 giờ; ANC bật; âm lượng 50%; một lần sạc; cùng điều kiện thử.",
+      "original_origin": "synthetic_test_fixture",
+      "origin_verified_as_llm": false,
+      "original_generation": null,
+      "revision_origin": "assistant_authored_test_fixture",
+      "revision_editor": "Codex",
+      "revision_date": "2026-10-08",
+      "creation_request": "Bổ sung ít nhất 2–3 ca xung đột, và ghi đúng nguồn gốc từng mẫu.",
+      "dataset_eligible": false,
+      "dataset_exclusion_reason": "Ca giả lập do trợ lý soạn để kiểm thử luật; không phải quảng cáo LLM trong thực nghiệm hoặc nguồn Apple.",
+      "scope": "Sản phẩm giả định SIM-PIN-01; bản R1; thị trường TEST; bộ phận tai nghe; thuộc tính thời gian nghe tối đa công bố; hiệu lực 08/10/2026.",
+      "source_id": null,
+      "url": null,
+      "quotes": [
+        {
+          "text": "Sản phẩm giả định SIM-PIN-01; bản R1; thị trường TEST; bộ phận tai nghe; thuộc tính thời gian nghe tối đa công bố; hiệu lực 08/10/2026. ANC bật; âm lượng 50%; một lần sạc; cùng điều kiện thử. Giá trị: 20 giờ.",
+          "fixture_id": "EX-21-1"
+        },
+        {
+          "text": "Sản phẩm giả định SIM-PIN-01; bản R1; thị trường TEST; bộ phận tai nghe; thuộc tính thời gian nghe tối đa công bố; hiệu lực 08/10/2026. ANC bật; âm lượng 50%; một lần sạc; cùng điều kiện thử. Giá trị: 24 giờ.",
+          "fixture_id": "EX-21-2"
+        }
+      ],
+      "conditions_summary": "ANC bật; âm lượng 50%; một lần sạc; cùng điều kiện thử",
+      "condition_ref": null,
+      "label": "NEI",
+      "nei_type": "conflict",
+      "values": "Nguồn giả lập 1: 20 giờ; nguồn giả lập 2: 24 giờ. Cùng phạm vi, điều kiện, hiệu lực và mức ưu tiên; không nguồn nào thay thế nguồn kia.",
+      "label_scope": "reviewed_claim_only",
+      "reason": "C1 phát hiện hai nguồn giả lập không tương thích về cùng thuộc tính và phạm vi, chưa có căn cứ giải quyết. Trả NEI-xung đột trước khi C2/C3 chấp nhận hay bác bỏ claim; lưu cả hai phía. Không gán thông số này cho Apple."
+    },
+    {
+      "id": "EX-22",
+      "title": "EX-22 — Xung đột khối lượng (GIẢ LẬP)",
+      "group": "Hai nguồn giả lập cùng phạm vi, trái nhau; chưa có quy tắc ưu tiên",
+      "original_ad": "SIM-MASS-01 bản R1 có khối lượng công bố 32 g; khối lượng hộp không có tai nghe; cùng cấu hình.",
+      "original_claim": "SIM-MASS-01 bản R1 có khối lượng công bố 32 g; khối lượng hộp không có tai nghe; cùng cấu hình.",
+      "reviewed_claim": "SIM-MASS-01 bản R1 có khối lượng công bố 32 g; khối lượng hộp không có tai nghe; cùng cấu hình.",
+      "original_origin": "synthetic_test_fixture",
+      "origin_verified_as_llm": false,
+      "original_generation": null,
+      "revision_origin": "assistant_authored_test_fixture",
+      "revision_editor": "Codex",
+      "revision_date": "2026-10-08",
+      "creation_request": "Bổ sung ít nhất 2–3 ca xung đột, và ghi đúng nguồn gốc từng mẫu.",
+      "dataset_eligible": false,
+      "dataset_exclusion_reason": "Ca giả lập do trợ lý soạn để kiểm thử luật; không phải quảng cáo LLM trong thực nghiệm hoặc nguồn Apple.",
+      "scope": "Sản phẩm giả định SIM-MASS-01; bản R1; thị trường TEST; bộ phận hộp sạc USB-C; thuộc tính khối lượng công bố; hiệu lực 08/10/2026.",
+      "source_id": null,
+      "url": null,
+      "quotes": [
+        {
+          "text": "Sản phẩm giả định SIM-MASS-01; bản R1; thị trường TEST; bộ phận hộp sạc USB-C; thuộc tính khối lượng công bố; hiệu lực 08/10/2026. khối lượng hộp không có tai nghe; cùng cấu hình. Giá trị: 32 g.",
+          "fixture_id": "EX-22-1"
+        },
+        {
+          "text": "Sản phẩm giả định SIM-MASS-01; bản R1; thị trường TEST; bộ phận hộp sạc USB-C; thuộc tính khối lượng công bố; hiệu lực 08/10/2026. khối lượng hộp không có tai nghe; cùng cấu hình. Giá trị: 34 g.",
+          "fixture_id": "EX-22-2"
+        }
+      ],
+      "conditions_summary": "khối lượng hộp không có tai nghe; cùng cấu hình",
+      "condition_ref": null,
+      "label": "NEI",
+      "nei_type": "conflict",
+      "values": "Nguồn giả lập 1: 32 g; nguồn giả lập 2: 34 g. Cùng phạm vi, điều kiện, hiệu lực và mức ưu tiên; không nguồn nào thay thế nguồn kia.",
+      "label_scope": "reviewed_claim_only",
+      "reason": "C1 phát hiện hai nguồn giả lập không tương thích về cùng thuộc tính và phạm vi, chưa có căn cứ giải quyết. Trả NEI-xung đột trước khi C2/C3 chấp nhận hay bác bỏ claim; lưu cả hai phía. Không gán thông số này cho Apple."
+    },
+    {
+      "id": "EX-23",
+      "title": "EX-23 — Xung đột Bluetooth (GIẢ LẬP)",
+      "group": "Hai nguồn giả lập cùng phạm vi, trái nhau; chưa có quy tắc ưu tiên",
+      "original_ad": "SIM-BT-01 bản R1 có phiên bản Bluetooth 5.2 ; cùng phần cứng/firmware.",
+      "original_claim": "SIM-BT-01 bản R1 có phiên bản Bluetooth 5.2 ; cùng phần cứng/firmware.",
+      "reviewed_claim": "SIM-BT-01 bản R1 có phiên bản Bluetooth 5.2 ; cùng phần cứng/firmware.",
+      "original_origin": "synthetic_test_fixture",
+      "origin_verified_as_llm": false,
+      "original_generation": null,
+      "revision_origin": "assistant_authored_test_fixture",
+      "revision_editor": "Codex",
+      "revision_date": "2026-10-08",
+      "creation_request": "Bổ sung ít nhất 2–3 ca xung đột, và ghi đúng nguồn gốc từng mẫu.",
+      "dataset_eligible": false,
+      "dataset_exclusion_reason": "Ca giả lập do trợ lý soạn để kiểm thử luật; không phải quảng cáo LLM trong thực nghiệm hoặc nguồn Apple.",
+      "scope": "Sản phẩm giả định SIM-BT-01; bản R1; thị trường TEST; bộ phận hệ thống kết nối; thuộc tính phiên bản Bluetooth; hiệu lực 08/10/2026.",
+      "source_id": null,
+      "url": null,
+      "quotes": [
+        {
+          "text": "Sản phẩm giả định SIM-BT-01; bản R1; thị trường TEST; bộ phận hệ thống kết nối; thuộc tính phiên bản Bluetooth; hiệu lực 08/10/2026. cùng phần cứng/firmware. Giá trị: 5.2.",
+          "fixture_id": "EX-23-1"
+        },
+        {
+          "text": "Sản phẩm giả định SIM-BT-01; bản R1; thị trường TEST; bộ phận hệ thống kết nối; thuộc tính phiên bản Bluetooth; hiệu lực 08/10/2026. cùng phần cứng/firmware. Giá trị: 5.3.",
+          "fixture_id": "EX-23-2"
+        }
+      ],
+      "conditions_summary": "cùng phần cứng/firmware",
+      "condition_ref": null,
+      "label": "NEI",
+      "nei_type": "conflict",
+      "values": "Nguồn giả lập 1: 5.2 ; nguồn giả lập 2: 5.3 . Cùng phạm vi, điều kiện, hiệu lực và mức ưu tiên; không nguồn nào thay thế nguồn kia.",
+      "label_scope": "reviewed_claim_only",
+      "reason": "C1 phát hiện hai nguồn giả lập không tương thích về cùng thuộc tính và phạm vi, chưa có căn cứ giải quyết. Trả NEI-xung đột trước khi C2/C3 chấp nhận hay bác bỏ claim; lưu cả hai phía. Không gán thông số này cho Apple."
+    }
+  ]
+}

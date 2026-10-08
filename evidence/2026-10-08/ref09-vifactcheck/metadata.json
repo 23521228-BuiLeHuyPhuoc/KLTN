@@ -1,0 +1,27 @@
+{
+  "id": "ref09-vifactcheck",
+  "requested_url": "https://arxiv.org/abs/2412.15308",
+  "captured_at_utc": "2026-10-08T02:34:21.829Z",
+  "capture_method": "Chromium via Playwright, live URL; no content replacement",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "files": {
+    "response.html": {
+      "sha256": "d7241a049ee593009cfff9c779c59ba12f1bbad17adc31b147868571092de67c",
+      "bytes": 42678
+    },
+    "page.html": {
+      "sha256": "961f83a130996b4d673dc4fd60b07bbbd323039fe670b0db89fd8560beddb2ec",
+      "bytes": 43009
+    },
+    "page.txt": {
+      "sha256": "09658aed39255b3bf8fde041d7bb9b000c07b64de85e9236b5632ddefdb617e0",
+      "bytes": 3103
+    }
+  },
+  "final_url": "https://arxiv.org/abs/2412.15308",
+  "status": 200,
+  "title": "[2412.15308] ViFactCheck: A New Benchmark Dataset and Methods for Multi-domain News Fact-Checking in Vietnamese"
+}

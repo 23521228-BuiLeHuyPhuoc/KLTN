@@ -1,0 +1,27 @@
+{
+  "id": "ref11-vinumfcr",
+  "requested_url": "https://aclanthology.org/2025.inlg-main.9/",
+  "captured_at_utc": "2026-10-08T02:34:22.596Z",
+  "capture_method": "Chromium via Playwright, live URL; no content replacement",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "files": {
+    "response.html": {
+      "sha256": "e99730e819f39d0658507a8fff6e11be2902ff9e5a54f297e8511bead13b1f90",
+      "bytes": 44336
+    },
+    "page.html": {
+      "sha256": "6a0ba266de27c6dead43a4e2ffe5e483742077cdc1cb61246658b44a8e03ba9c",
+      "bytes": 44664
+    },
+    "page.txt": {
+      "sha256": "9788da3a3fe473c1f2003ec9282c9abfd820c41ac08438a1cb6a79a8a7b859e8",
+      "bytes": 3169
+    }
+  },
+  "final_url": "https://aclanthology.org/2025.inlg-main.9/",
+  "status": 200,
+  "title": "ViNumFCR: A Novel Vietnamese Benchmark for Numerical Reasoning Fact Checking on Social Media News - ACL Anthology"
+}

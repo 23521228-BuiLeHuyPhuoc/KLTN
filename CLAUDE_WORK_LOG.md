@@ -5,6 +5,8 @@
 > **Tổng hợp từ:** 7 sessions Claude CLI (`E--baitap-KLTN-KLTN`)
 > **Cập nhật:** 2026-10-08
 
+> **Trạng thái mới nhất — rà soát phản biện 08/10/2026:** Hai DOCX đã được sửa tiếp: RQ3 tối thiểu là thăm dò; pilot cố định 6 họ; chọn cấu hình trên dev, val audit sau khóa; bổ sung C2 so loại giá trị và sửa P−A. Đã đối chiếu số liệu PDF và đủ [7]–[11], chụp năm trang Apple, rà 20 ví dụ cũ, thêm 3 ca xung đột giả lập. Nguồn gốc 20 câu cũ vẫn chưa xác định; chưa tính 23 ca là dữ liệu quảng cáo LLM. Xem [kết luận từng nhận xét](docs/KIEM_TRA_PHAN_BIEN_2026-10-08.md), [bàn giao](docs/BAN_GIAO_2026-10-08.md), [hồ sơ ảnh/nguồn](evidence/2026-10-08/README.md). Phần nhật ký bên dưới là lịch sử: kế hoạch pilot 6–8 họ, chọn k trên val hoặc giữ nguyên mọi trích dẫn trong lần sửa đầu **đã được thay thế**, không phải đặc tả hiện hành.
+
 ---
 
 ## 📊 Tổng quan các Sessions
@@ -306,3 +308,29 @@ Dựa trên plans và cross-session messages, đây là các công việc Claude
 ---
 
 *File này được tổng hợp từ dữ liệu thực tế của 7 sessions Claude CLI (JSONL logs), 2 plan files, và script update_docs.py.*
+
+---
+
+## Cập nhật tiếp nối lần 1 — Codex, 08/10/2026 (lịch sử)
+
+- [x] Sửa trực tiếp `Đọc_báo_cùng_HuP_4_.docx`: RQ1–RQ3, đóng góp, quy mô theo tầng, chia theo họ không rò pilot, MVP/tùy chọn, Gate 1–6, rủi ro và tài liệu [7]–[11].
+- [x] Sửa trực tiếp `Đọc_báo_cùng_HuP_3_.docx`: chốt minh chứng 30/09; sửa mâu thuẫn 20 ví dụ; phân biệt cập nhật 07/10; ghi nhãn minh họa dự kiến; các thông tin chưa có được ghi rõ, không bịa kết quả.
+- [x] Đối chiếu sáu bài chính và PhoBERT; ghi kết quả, hạn chế, phần kế thừa và các chỗ dễ trích số liệu sai tại `docs/PHAN_TICH_TAI_LIEU.md`.
+- [x] Kiểm tra cấu trúc: giữ 2/29 bảng, 98 hàng bảng đề cương, ô gộp, styles, hình, liên kết và chữ ký; kiểm tra toàn bộ XML; xuất PDF thành công (đề cương 12 trang, báo cáo 28 trang).
+- [x] Lưu script tái lập ở `scripts/update_thesis_docs.py`; sao lưu bản gốc và manifest tại `scratch_test/docx-review-2026-10-08/` (được Git bỏ qua).
+- [ ] Sinh viên xác nhận minh chứng đúng kỳ tháng 9, snapshot và nhãn ví dụ, cấu hình/API/ngân sách/mô hình/log và khó khăn thực tế.
+- [ ] Triển khai nghiên cứu Gate 1 trở đi: schema, dữ liệu pilot, BM25, extraction và B0/B1/P. Chưa có thực nghiệm mới trong lần cập nhật tài liệu này.
+
+Chi tiết thay đổi, kiểm tra, đường dẫn bản sao lưu và lệnh chạy lại: [docs/BAN_GIAO_2026-10-08.md](docs/BAN_GIAO_2026-10-08.md).
+
+## Rà soát phản biện lần 2 — Codex, 08/10/2026
+
+- [x] Đồng bộ quy mô với kết luận: RQ3 tối thiểu thăm dò, pilot đúng 6 họ, dev/val/test 6/2/4 hoặc 7/4/7 hoặc 8/4/8; val không dùng tìm kiếm cấu hình.
+- [x] Thêm C2 so kiểu giá trị và phân biệt mức tối đa công bố; P−A chỉ bỏ kiểm tra bộ phận. Đặc tả chi tiết ở `docs/QUY_TAC_ABC.md`; chưa triển khai pipeline nghiên cứu.
+- [x] Kiểm từng số bị nghi ngờ trong PDF gốc, lưu ảnh trang và hash; mở đủ [7]–[11]. Giữ các số được xác nhận, tách bất nhất “18,8%” khỏi chênh lệch Bảng 1.
+- [x] Mở năm trang Apple, lưu HTML/text/ảnh/hash; sửa nguồn trích, ngữ cảnh và điều kiện của 20 ví dụ. Giữ câu gốc riêng; nguồn gốc sinh của chúng vẫn chưa xác định.
+- [x] Thêm EX-21–23 giả lập xung đột, sản phẩm SIM-*, do Codex soạn; không gán cho Apple, không tính vào dữ liệu quảng cáo LLM. Hồ sơ đủ 23 mẫu: `evidence/2026-10-08/examples.json`.
+- [x] Kiểm tra DOCX/XML và đối chiếu mẫu/nguồn; báo cáo hiện 32 bảng, đề cương vẫn 2 bảng/98 hàng. Xuất PDF 37/12 trang và kiểm bố cục; lưu bản trước sửa trong `scratch_test/docx-review-2026-10-08/before-audit/`.
+- [ ] Vẫn cần log sinh quảng cáo thực để xác nhận phạm vi dữ liệu LLM, minh chứng tháng 9 và tài nguyên thí nghiệm; không thể điền bằng suy đoán.
+
+Xem [kết luận kiểm tra phản biện](docs/KIEM_TRA_PHAN_BIEN_2026-10-08.md) và [hồ sơ nguồn/ảnh](evidence/2026-10-08/README.md). Các mục pilot/chọn k/giữ nguyên trích dẫn ở phần lịch sử không còn là đặc tả hiện hành.

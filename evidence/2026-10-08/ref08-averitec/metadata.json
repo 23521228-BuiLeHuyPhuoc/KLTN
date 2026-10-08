@@ -1,0 +1,27 @@
+{
+  "id": "ref08-averitec",
+  "requested_url": "https://arxiv.org/abs/2305.13117",
+  "captured_at_utc": "2026-10-08T02:34:20.335Z",
+  "capture_method": "Chromium via Playwright, live URL; no content replacement",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "files": {
+    "response.html": {
+      "sha256": "0621562f812f5b763d126a9cd1be894165deca8da5832cb75d2aa30891e67ae0",
+      "bytes": 40702
+    },
+    "page.html": {
+      "sha256": "1cfc69ec0250f438dc8bd35ac4bbb2802c0d3804bf868bac87025362e7db2ad5",
+      "bytes": 42545
+    },
+    "page.txt": {
+      "sha256": "006b3aee92dcb8c71c57be276657625d7a13724f21971d1de842b7c78e5cea56",
+      "bytes": 2619
+    }
+  },
+  "final_url": "https://arxiv.org/abs/2305.13117",
+  "status": 200,
+  "title": "[2305.13117] AVeriTeC: A Dataset for Real-world Claim Verification with Evidence from the Web"
+}

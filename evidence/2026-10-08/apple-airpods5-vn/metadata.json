@@ -1,0 +1,70 @@
+{
+  "id": "apple-airpods5-vn",
+  "requested_url": "https://www.apple.com/vn/airpods-5/specs/",
+  "captured_at_utc": "2026-10-08T02:33:58.274Z",
+  "capture_method": "Chromium via Playwright, live URL; no content replacement",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "files": {
+    "response.html": {
+      "sha256": "e96936393bd07675752136e5e73a01d9bc5877eb0d9684016754ef16478ad0ee",
+      "bytes": 166440
+    },
+    "page.html": {
+      "sha256": "b1207e7144c6f44357e7824a5feb149785b283d0e0701ffff792480ba55f8414",
+      "bytes": 253569
+    },
+    "page.txt": {
+      "sha256": "c409281da5aa1fc88cb7fe59ffd4dca6a25073c9da953c03137852c8988f1e31",
+      "bytes": 23724
+    },
+    "full-page.png": {
+      "sha256": "bb9119ca00b2d44c146b9835d8e7631ea08d56da00e6f241b92395e192e987d0",
+      "bytes": 1043554
+    },
+    "dimensions.png": {
+      "sha256": "ac599983d32053193c70435d4bf2d1b62891a1dd872fadbe0cd132c994fef6c7",
+      "bytes": 84010
+    },
+    "battery.png": {
+      "sha256": "3d626f672f136c1c69d7e630f5e828ca8c2a55ee700b5fb302c12603ff31a386",
+      "bytes": 82847
+    },
+    "connectivity.png": {
+      "sha256": "28e21aeb42a2bfaa116c7a9191ce5d41a671b5401426ef1cffbfaf8623b90eed",
+      "bytes": 76532
+    },
+    "dimensions-section.png": {
+      "sha256": "fb8ff5fe7f284fa1ef3569a017914c44f461c072f8cb714b6555a25d269bbf6e",
+      "bytes": 67043
+    },
+    "battery-section.png": {
+      "sha256": "74fc3fced22671e183174f9ee8a6337466197506d12ffb0b3164702d5d8bfa4b",
+      "bytes": 37816
+    },
+    "footnotes-section.png": {
+      "sha256": "2e2ffc30838799c852727961038bd83345f0fc6575955539e95f228d20d3ed30",
+      "bytes": 342687
+    },
+    "connectivity-section.png": {
+      "sha256": "ed0ff985d010f198f3f479e65a6be88bfa5b84adbb26ea71cb3aef1fa154b339",
+      "bytes": 6019
+    }
+  },
+  "final_url": "https://www.apple.com/vn/airpods-5/specs/",
+  "status": 200,
+  "title": "AirPods 5 - Thông Số Kỹ Thuật - Apple (VN)",
+  "supplement": {
+    "captured_at_utc": "2026-10-08T07:04:13.842Z",
+    "final_url": "https://www.apple.com/vn/airpods-5/specs/",
+    "status": 200,
+    "screenshots": {
+      "dimensions-section.png": ".section-dimensions",
+      "battery-section.png": ".section-battery",
+      "connectivity-section.png": ".section-wireless",
+      "footnotes-section.png": ".ac-gf-sosumi"
+    }
+  }
+}

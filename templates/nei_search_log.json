@@ -1,0 +1,37 @@
+{
+  "status": "template_not_a_completed_search",
+  "claim_id": null,
+  "reviewer_code": null,
+  "corpus_id": null,
+  "corpus_version": null,
+  "corpus_sha256": null,
+  "claim_scope": {
+    "product": null,
+    "version": null,
+    "market": null,
+    "component": null,
+    "attribute": null,
+    "missing_information": null
+  },
+  "source_type_checks": {
+    "specification": "pending",
+    "manual": "pending",
+    "support_or_official_pdf": "pending"
+  },
+  "checked_sources": [],
+  "source_record_fields": [
+    "requested_url", "final_url", "source_type", "accessed_at", "access_status",
+    "snapshot_path", "snapshot_sha256", "locale", "applicable_version",
+    "sections_and_footnotes_checked", "queries_or_find_terms", "result", "exclusion_reason"
+  ],
+  "queries_vi": [],
+  "queries_en": [],
+  "other_official_sources_considered": [],
+  "inaccessible_or_not_found_sources": [],
+  "stop_reason": null,
+  "coverage_limitations": [],
+  "label_review_status": "pending",
+  "label_proposed": null,
+  "closed_at": null,
+  "note": "Record actions actually performed. Not found/inaccessible is not proof a document or fact does not exist. This annotation-side log must not be supplied as a label hint to B0/B1/P."
+}

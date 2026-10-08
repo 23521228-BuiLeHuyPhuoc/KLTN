@@ -1,0 +1,53 @@
+{
+  "status": "template_not_an_experiment_run",
+  "run_id": null,
+  "method": null,
+  "repeat_id": null,
+  "paired_run_group": null,
+  "started_at": null,
+  "ended_at": null,
+  "timezone": null,
+  "model_requested_id": null,
+  "model_revision_or_checkpoint_sha256": null,
+  "provider": null,
+  "endpoint_without_credentials": null,
+  "model_returned_id": null,
+  "backend_fingerprint_if_available": null,
+  "decoding": {
+    "temperature": null,
+    "top_p": null,
+    "max_tokens": null,
+    "seed_requested": null,
+    "seed_support_or_applied_status": null
+  },
+  "local_runtime_if_applicable": {
+    "inference_engine_version": null,
+    "quantization": null,
+    "precision": null,
+    "hardware": null
+  },
+  "unavailable_metadata": [],
+  "code_revision_or_sha256": null,
+  "label_guide_sha256": null,
+  "rendered_prompt_sha256": null,
+  "rendered_messages_path": null,
+  "corpus_id": null,
+  "corpus_sha256": null,
+  "split_sha256": null,
+  "sample_list_sha256": null,
+  "retrieval": {
+    "mode": null,
+    "index_sha256": null,
+    "chunking_config_sha256": null,
+    "query_config_sha256": null,
+    "k": null,
+    "per_claim_candidate_counts_and_k_eff_path": null
+  },
+  "extraction_run_id": null,
+  "normalized_records_sha256": null,
+  "cache_policy": null,
+  "retry_policy": null,
+  "request_response_error_log_path": null,
+  "usage_cost_latency_path": null,
+  "note": "No API keys/tokens in the manifest. B1/P must share extraction_run_id and normalized_records_sha256 within a repeat. Mark unsupported/undisclosed metadata unavailable; do not invent it."
+}

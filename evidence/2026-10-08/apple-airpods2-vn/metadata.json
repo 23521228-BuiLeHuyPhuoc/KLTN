@@ -1,0 +1,49 @@
+{
+  "id": "apple-airpods2-vn",
+  "requested_url": "https://support.apple.com/vi-vn/111856",
+  "captured_at_utc": "2026-10-08T02:34:08.578Z",
+  "capture_method": "Chromium via Playwright, live URL; no content replacement",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "files": {
+    "response.html": {
+      "sha256": "7aa6219c868f42d11e60b6e19a4c2aa07cac3d607293b19b685f3c2c498dae8a",
+      "bytes": 164489
+    },
+    "page.html": {
+      "sha256": "d38aeced0ee4ec6226694577be913423a1e0afe310ff6bd054c12dcfeda11665",
+      "bytes": 844788
+    },
+    "page.txt": {
+      "sha256": "11cd5dda1585fd465ea293bc2e43b7ef84880e5589e56ae706341c6bc8dc48b6",
+      "bytes": 6794
+    },
+    "full-page.png": {
+      "sha256": "6dca219bbcf9553f055ca16d3719dcf033dc2148ee1e503c55e2ddbc44070d1d",
+      "bytes": 394379
+    },
+    "dimensions.png": {
+      "sha256": "9d1779f747a5c9e0244c148331cc5e466f06cd538e73601ee08c25f8aa5555bb",
+      "bytes": 71330
+    },
+    "battery.png": {
+      "sha256": "76d196ee2805ad1da32679395b9e82674ce7af765c4b62b161b034f9d8d9e7eb",
+      "bytes": 86121
+    },
+    "connectivity.png": {
+      "sha256": "bb4707fb30eba6d28eb3998a320cf27e47392a52a4ae3e6d379c4d4ee1775bd3",
+      "bytes": 86139
+    }
+  },
+  "final_url": "https://support.apple.com/vi-vn/111856",
+  "status": 200,
+  "title": "AirPods 2 - Thông số kỹ thuật - Bộ phận hỗ trợ của Apple (VN)",
+  "supplement": {
+    "captured_at_utc": "2026-10-08T07:04:30.502Z",
+    "final_url": "https://support.apple.com/vi-vn/111856",
+    "status": 200,
+    "screenshots": {}
+  }
+}

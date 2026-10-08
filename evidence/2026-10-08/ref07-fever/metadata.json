@@ -1,0 +1,27 @@
+{
+  "id": "ref07-fever",
+  "requested_url": "https://aclanthology.org/N18-1074/",
+  "captured_at_utc": "2026-10-08T02:34:12.345Z",
+  "capture_method": "Chromium via Playwright, live URL; no content replacement",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "files": {
+    "response.html": {
+      "sha256": "37b736c759a52f0a52d01150f1c6333006b9ecc2ac4635abfc7dad44af3f9f91",
+      "bytes": 42011
+    },
+    "page.html": {
+      "sha256": "a988478a9abfba7a524ad7ef160c524e230fe69311e9ff073bc8f4716aa878ed",
+      "bytes": 42579
+    },
+    "page.txt": {
+      "sha256": "020ae9146206df2a7c66051365f84cdf9de93472bca4193e7f8b29d900c1bff1",
+      "bytes": 2950
+    }
+  },
+  "final_url": "https://aclanthology.org/N18-1074/",
+  "status": 200,
+  "title": "FEVER: a Large-scale Dataset for Fact Extraction and VERification - ACL Anthology"
+}
