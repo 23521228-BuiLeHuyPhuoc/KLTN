@@ -15,12 +15,14 @@ Kiểm tra nội dung và cấu trúc hai DOCX: `python3 scripts/update_thesis_d
 
 Kiểm hồ sơ ví dụ/hash nguồn: `python3 scripts/audit_examples.py --check`. Đối chiếu vị trí số liệu bài gốc: `python3 scripts/check_paper_facts.py` (cần Poppler). Đây là kiểm tra tài liệu, chưa phải chạy pipeline/thí nghiệm B0/B1/P.
 
-## Rà soát 08/10/2026 (nhánh `review/opus-2026-10-08`, chưa merge)
+## Kế hoạch 08/10/2026 (nhánh `plan/opus-2026-10-08`, chưa merge, chờ GVHD xác nhận)
 
-- [Nhật ký sửa](docs/NHAT_KY_SUA_2026-10-08.md), [quyết định cần chốt](docs/QUYET_DINH_CAN_CHOT.md), [kế hoạch thực tế](docs/KE_HOACH_THUC_TE_2026-10-08.md).
-- Kiểm thử luật: `python3 -m unittest discover -s tests -v` (hàm tham chiếu `scripts/abc_reference.py`).
-- Mô phỏng cỡ test: `python3 scripts/simulate_power.py`. Chặn rò nhãn vào prompt: `python3 scripts/check_input_leak.py <input.json>`.
-- `.env` không còn được theo dõi; khóa cũ đã nằm trong lịch sử công khai nên **phải thu hồi**.
+- Bắt đầu từ [kế hoạch chi tiết cho sinh viên](docs/KE_HOACH_CHI_TIET_SINH_VIEN.md), [định vị và tiêu chí](docs/DINH_VI_VA_TIEU_CHI.md), [câu hỏi phản biện](docs/CAU_HOI_PHAN_BIEN_DU_KIEN.md), [đối chiếu thay đổi](docs/DOI_CHIEU_THAY_DOI_KE_HOACH.md), [quyết định cần chốt](docs/QUYET_DINH_CAN_CHOT.md), [nhật ký](docs/NHAT_KY_SUA_2026-10-08.md).
+- Docx được sửa bằng `scripts/redesign_plan_2026_10_08.py` (đã áp dụng, script từ chối chạy lần hai). `review_patch_2026_10_08.py` đã bị thay thế.
+- Kiểm tra:
+  `python3 scripts/update_thesis_docs.py --check`; `python3 scripts/audit_examples.py --check`; `python3 scripts/check_paper_facts.py`; `python3 -m unittest discover -s tests`.
+- Mô phỏng cỡ test: `python3 scripts/simulate_power.py`. Chặn rò nhãn: `python3 scripts/check_input_leak.py <input.json>`.
+- Khóa API cũ nằm trong lịch sử công khai, **phải thu hồi**.
 
 ## Cấu trúc thư mục
 
