@@ -1,3 +1,5 @@
+> **Ghi chú 08/10/2026:** Địa chỉ cổng API và đường dẫn máy cá nhân trong tệp này đã được che. **Lịch sử Git vẫn còn bản cũ**; xem docs/NHAT_KY_SUA_2026-10-08.md mục bảo mật.
+
 # 📋 NHẬT KÝ CÔNG VIỆC CLAUDE CLI ĐÃ LÀM
 
 > **Dự án:** Khóa Luận Tốt Nghiệp (KLTN) - Kiểm chứng claim quảng cáo tai nghe không dây
@@ -96,7 +98,7 @@ Nội dung plan bao gồm:
 
 Claude đã chuẩn bị script `update_docs.py` tại:
 ```
-C:\Users\HP\.claude\jobs\74321358\tmp\update_docs.py
+[ĐÃ CHE: đường dẫn máy]
 ```
 Nhưng **chưa được chạy** do môi trường chặn thao tác thực thi.
 
@@ -144,7 +146,7 @@ Claude CLI đã spawn 4 subagent chính với các prompt sau:
 ### Subagent 1: "Phân tích tài liệu khóa luận" (model: sonnet)
 
 ```
-Trong repo E:\baitap\KLTN\KLTN, hay đọc và phân tích hai file DOCX
+Trong repo [ĐÃ CHE: đường dẫn máy] hay đọc và phân tích hai file DOCX
 Đọc_báo_cùng_HuP_3_.docx và Đọc_báo_cùng_HuP_4_.docx (dùng python/docx nếu cần),
 xác định file nào là kế hoạch, file nào là báo cáo tháng 9, tóm tắt nội dung,
 điểm mạnh/yếu, các khoảng trống và đề xuất điều chỉnh. Không sửa file.
@@ -154,7 +156,7 @@ Trả lời bằng tiếng Việt, nêu rõ cấu trúc và nội dung quan tr�
 ### Subagent 2: "Phân tích các bài báo tham khảo" (model: sonnet)
 
 ```
-Đọc các PDF trong thư mục E:\baitap\KLTN\KLTN\báo (bao gồm báo[1]-[6] và
+Đọc các PDF trong thư mục [ĐÃ CHE: đường dẫn máy] (bao gồm báo[1]-[6] và
 báo\báo con1\2003.00744v3.pdf) và các bản dịch tương ứng nếu cần.
 Tổng hợp cho từng bài: đề tài, dữ liệu, phương pháp/mô hình, kết quả,
 hạn chế, điểm có thể kế thừa và khoảng trống nghiên cứu.
@@ -165,7 +167,7 @@ cùng các bài báo bổ sung nên tìm. Không sửa file. Trả lời tiếng
 ### Subagent 3: "Kiểm tra điểm cần sửa" (model: haiku)
 
 ```
-Chỉ đọc và khảo sát cấu trúc hai file DOCX trong E:\baitap\KLTN\KLTN:
+Chỉ đọc và khảo sát cấu trúc hai file DOCX trong [ĐÃ CHE: đường dẫn máy]
 Đọc_báo_cùng_HuP_3_.docx và Đọc_báo_cùng_HuP_4_.docx. Xác định các vị trí/nội dung
 mà khi chỉnh sửa cần bảo toàn định dạng, các cảnh báo thực tế như URL/ngày/sản phẩm
 giả lập, và đề xuất phạm vi chỉnh sửa tối thiểu để nâng tính khả thi kế hoạch
@@ -175,7 +177,7 @@ giả lập, và đề xuất phạm vi chỉnh sửa tối thiểu để nâng 
 ### Subagent 4: "Thiết kế kế hoạch chỉnh sửa" (model: opus) ⭐ QUAN TRỌNG NHẤT
 
 ```
-Bối cảnh đã khảo sát: Người dùng muốn sửa hai DOCX trong repo E:\baitap\KLTN\KLTN:
+Bối cảnh đã khảo sát: Người dùng muốn sửa hai DOCX trong repo [ĐÃ CHE: đường dẫn máy]
 file 4 là đề cương chi tiết, file 3 là báo cáo tiến độ tháng 09/2026.
 Đề tài: kiểm chứng phát biểu quảng cáo tiếng Việt do LLM tạo về tai nghe không dây
 dựa trên tài liệu chính thức, nhãn Supported/Refuted/NEI.
@@ -210,7 +212,7 @@ Do not modify files or run destructive commands.
 ```
 We need plan implementation for directly updating two DOCX thesis docs.
 Background: _4_ is 98-row 2-column detailed thesis plan and _3_ is Sep 2026 progress
-report. Existing plan at C:\Users\HP\.claude\plans\indexed-scribbling-willow.md
+report. Existing plan at [ĐÃ CHE: đường dẫn máy]
 specifies required content updates. Constraints: preserve tables/styles, update both
 repeated columns consistently, don't fabricate results. Need explain practical
 python-docx implementation + robust verification. Do not modify any files;
@@ -221,7 +223,7 @@ return detailed execution plan.
 
 ## 🐍 SCRIPT PYTHON ĐÃ CHUẨN BỊ (chưa chạy)
 
-File: `C:\Users\HP\.claude\jobs\74321358\tmp\update_docs.py`
+File: `[ĐÃ CHE: đường dẫn máy]`
 
 Script này sử dụng `python-docx` để sửa trực tiếp 2 file DOCX. Nội dung chính:
 
@@ -261,10 +263,10 @@ Cập nhật ~25 hàng trong bảng chính (bảng 98 hàng, 2 cột lặp), bao
 ### Cách chạy (nếu muốn thực hiện):
 ```bash
 pip install python-docx
-python "C:\Users\HP\.claude\jobs\74321358\tmp\update_docs.py"
+python "[ĐÃ CHE: đường dẫn máy]"
 ```
 
-⚠️ Script tự backup trước khi sửa vào `C:\Users\HP\.claude\jobs\74321358\tmp\*.before-update.docx`
+⚠️ Script tự backup trước khi sửa vào `[ĐÃ CHE: đường dẫn máy]`
 
 ---
 
@@ -295,13 +297,13 @@ Dựa trên plans và cross-session messages, đây là các công việc Claude
 
 ## 🔧 Thông tin kỹ thuật
 
-- **Claude CLI sessions**: Lưu tại `C:\Users\HP\.claude\projects\E--baitap-KLTN-KLTN\`
-- **Plans**: Lưu tại `C:\Users\HP\.claude\plans\`
+- **Claude CLI sessions**: Lưu tại `[ĐÃ CHE: đường dẫn máy]`
+- **Plans**: Lưu tại `[ĐÃ CHE: đường dẫn máy]`
   - `cuddly-juggling-peach.md` — Plan cập nhật đề cương và báo cáo
   - `indexed-scribbling-willow.md` — Plan chi tiết hơn với hướng dẫn triển khai
-- **Script chưa chạy**: `C:\Users\HP\.claude\jobs\74321358\tmp\update_docs.py`
-- **Backup DOCX**: `C:\Users\HP\.claude\jobs\74321358\tmp\*.before-update.docx`
-- **API Endpoint**: `https://gpt.teamsoclo.site` (TeamSocLo gateway)
+- **Script chưa chạy**: `[ĐÃ CHE: đường dẫn máy]`
+- **Backup DOCX**: `[ĐÃ CHE: đường dẫn máy]`
+- **API Endpoint**: `[ĐÃ CHE: địa chỉ cổng API]` 
 - **Model**: `claude-opus-5-5` (default)
 - **Worktree**: `.claude\worktrees\agent-a775efa0b4ad438bb`
 
