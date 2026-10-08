@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
-"""Mô phỏng độ chính xác ước lượng ΔFAR (B1 − P) trên tập test theo họ sản phẩm.
+"""Mô phỏng độ chính xác ước lượng ΔFAR = FAR_P − FAR_B1 trên tập test theo họ.
 
-Mục đích (T4a, rà soát 08/10/2026): kiểm tra xem cỡ test dự kiến
-(4 họ, sàn 10 R + 10 NEI…) có đủ để phân biệt hai hệ thống không.
-Đây là mô phỏng với GIẢ ĐỊNH, không phải kết quả thí nghiệm.
+Quy ước dấu thống nhất (10/2026, docs/KE_HOACH_CHI_TIET_SINH_VIEN.md mục 6.3):
+ΔFAR = FAR_P − FAR_B1, ΔRecall = Recall_P − Recall_B1. ΔFAR ÂM nghĩa là P chấp
+nhận nhầm ít hơn B1. "Khoảng loại được 0" ở đây là cận trên của khoảng < 0.
+Bản 08/10 dùng chiều ngược lại (B1 − P); số trong tài liệu cũ không đổi độ lớn.
+
+Mục đích: xem cỡ test dự kiến (số họ × số claim R+NEI mỗi họ) có đủ để ước
+lượng ΔFAR với độ rộng chấp nhận được không. Đây là mô phỏng với GIẢ ĐỊNH,
+không phải kết quả thí nghiệm; không dùng để hứa trước kết quả.
 
 - FAR: tỷ lệ claim R hoặc NEI bị gán nhầm thành Supported.
 - Cluster bootstrap: lấy mẫu lại cả HỌ sản phẩm (không lấy từng claim) vì claim
@@ -37,8 +42,9 @@ def simulate_test(rng, families, per_family, far_b1, far_p, sd_family, corr):
 
 
 def delta(fams):
+    """ΔFAR = FAR_P − FAR_B1 trên các claim R/NEI (âm = P tốt hơn)."""
     rows = [r for f in fams for r in f]
-    return sum(a - b for a, b in rows) / len(rows)
+    return sum(p - b1 for b1, p in rows) / len(rows)
 
 
 def cluster_ci(rng, data, reps, alpha):
@@ -63,7 +69,8 @@ def main():
     rng = random.Random(a.seed)
     print(f'Giả định: FAR_B1={a.far_b1}, FAR_P={a.far_p}, sd_họ={a.sd_family}, tương quan={a.corr}, '
           f'{a.sims} mô phỏng × {a.reps} bootstrap, seed={a.seed}')
-    print('họ  claim_R+NEI  độ_rộng_CI95_TB  tỷ_lệ_CI_loại_0')
+    print('ΔFAR = FAR_P − FAR_B1 (âm = P tốt hơn); "CI<0" = tỷ lệ mô phỏng có cận trên khoảng < 0')
+    print('họ  claim_R+NEI  độ_rộng_CI95_TB  tỷ_lệ_CI<0')
     for k in a.families:
         for per in sorted({a.per_family, a.per_family * 2}):
             widths, excl = [], 0
@@ -71,7 +78,7 @@ def main():
                 d = simulate_test(rng, k, per, a.far_b1, a.far_p, a.sd_family, a.corr)
                 lo, hi = cluster_ci(rng, d, a.reps, 0.05)
                 widths.append(hi - lo)
-                excl += lo > 0
+                excl += hi < 0
             print(f'{k:>3}  {k*per:>11}  {sum(widths)/len(widths):>15.3f}  {excl/a.sims:>15.2f}')
 
 

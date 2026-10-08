@@ -1,87 +1,111 @@
-# Đặc tả A–B–C sau rà soát 08/10/2026
+# Đặc tả bộ quyết định P (A–B–C1–C2–C3) — bản 10/2026
 
-Đây là **đặc tả để triển khai**, không phải báo cáo đã chạy pipeline B0/B1/P. Các ví dụ và nhãn trong hồ sơ là ca minh họa; chưa phải kết quả dự đoán của chương trình.
+Đặc tả này hiện thực hóa [hướng dẫn nhãn chung v2](HUONG_DAN_GAN_NHAN.md) thành thuật toán tất định. Khi đặc tả và hướng dẫn khác nhau, **hướng dẫn là chuẩn ngữ nghĩa**; phải sửa đặc tả/code hoặc tăng phiên bản hướng dẫn, không để hai bên lệch nhau. Mã tham chiếu: [`scripts/abc_reference.py`](../scripts/abc_reference.py); kiểm thử: [`tests/test_abc.py`](../tests/test_abc.py).
 
-## 1. Phạm vi và thứ tự
+Trạng thái: mã tham chiếu chạy trên hồ sơ chuẩn hóa nhập tay. Chưa có bước trích xuất tự động, runner hay kết quả B0/B1/P (các module này là công việc W6–W8 trong [sổ tay](KE_HOACH_CHI_TIET_SINH_VIEN.md)). Các nhãn trong fixture là nhãn minh họa, không phải dự đoán của hệ thống.
 
-1. A đối chiếu sản phẩm, phiên bản, thị trường/hiệu lực nguồn, bộ phận, thuộc tính và đơn vị. Đổi đơn vị khi cùng đại lượng. Trích `value_kind`, nhưng **không loại nguồn chỉ vì khác loại giá trị**.
-2. B đối chiếu điều kiện thiết yếu và phạm vi claim. Thiếu điều kiện cần thiết → `UNKNOWN`; không liên quan → `NOT_APPLICABLE`. Không dùng nguồn ANC bật để kết luận số giờ ANC tắt. Nếu claim nói rõ theo thông số/phép thử hãng, giữ `condition_ref` tới đúng chú thích; không tự thêm điều kiện vào claim không có tham chiếu đó.
-3. C1 tìm xung đột giữa những nguồn cùng phạm vi còn áp dụng. Hai số khác nhau vì khác phiên bản/chế độ/thời điểm hiệu lực không tự tạo xung đột. Chỉ ưu tiên nguồn thay thế khi có căn cứ và quy tắc chốt trước, không chọn nguồn vì thuận claim. Xung đột chưa giải quyết → `NEI/conflict`.
-4. C2, nếu không có xung đột đó, đối chiếu kiểu giá trị theo bảng dưới, tạo quan hệ `SUPPORT / CONTRADICT / UNKNOWN` cho từng thuộc tính. Đây là bước bị thiếu trong bản trước.
-5. C3: có bác bỏ trực tiếp đối với một phần bắt buộc của claim → `Refuted`; hỗ trợ đầy đủ mọi phần bắt buộc → `Supported`; còn lại → `NEI/missing`. Không dùng bằng chứng bị A/B loại để bác bỏ. Nếu hồ sơ không parse được, ghi lỗi kỹ thuật riêng, không âm thầm coi là NEI hợp lệ.
+## 1. Hợp đồng đầu vào/đầu ra
 
-Phạm vi xung đột phải liên quan tới thuộc tính/điều kiện đang xét; bất đồng về một thông số không liên quan không làm mọi claim của sản phẩm thành NEI.
+Đầu vào của `verdict(claim, evidences, policy='inherit_headline', ablate=())`:
 
-## 2. Kiểu giá trị và luật C2
+- `claim`: `product`, `version`, `market` (null nếu claim không nêu), `part`, `condition_ref` (bool), `universal` (bool), `attributes` — danh sách thuộc tính; mỗi phần tử có `attribute`, `unit`, `value`, `conditions` (object), có thể có `part` riêng.
+- `evidences`: danh sách bản ghi bằng chứng, mỗi bản ghi có `id` (duy nhất), `product`, `version`, `market`, `part`, `attribute`, `unit`, `value`, `conditions`.
+- `value`: `kind ∈ {exact, gt, ge, lt, le, interval, approx, version}`; với số: `a` (và `b`, `closed` cho khoảng) dạng chuỗi thập phân; `role ∈ {measurement, declared_maximum, declared_minimum, unknown}`; riêng claim có thêm `stated_spec` (con số trần, hướng dẫn §5). Với phiên bản: `v`, `op ∈ {eq, ge}`.
 
-Hồ sơ cần `value_kind` (`exact`, `gt`, `ge`, `lt`, `le`, `interval`, `approx`, `version`), `value_role` (`measurement`, `declared_maximum`, `declared_minimum` hoặc `unknown`), đơn vị, biên đóng/mở, độ chính xác nguồn, điều kiện và mã trích dẫn. Số thập phân nên biểu diễn bằng Decimal; phiên bản Bluetooth là chuỗi.
+Đầu ra: `(nhãn, nei_type, vết)` với nhãn ∈ {Supported, Refuted, NEI}; `nei_type ∈ {missing, conflict, None}`; vết là danh sách `(quan hệ, lý do)` từng thuộc tính. Hồ sơ hỏng ném `RecordError`; `safe_verdict` trả `('ERROR', thông điệp, [])`. Runner phải ghi ERROR là lỗi kỹ thuật, không đổi thành NEI.
 
-Hai cách hiểu phải tách riêng:
+Hồ sơ đầu vào phải **thuần dữ kiện**: không có nhãn chuẩn, lý do người gán, nhật ký tìm nguồn, nhóm mẫu, thao tác tạo biến thể hoặc kết quả kiểm luật (kiểm bằng [`check_input_leak.py`](../scripts/check_input_leak.py)).
 
-- Mệnh đề về một đại lượng `x`: `x=24`, `x>24`, `x≤3`. Có thể xét miền giá trị.
-- Mệnh đề về **mức cực đại hãng công bố** `M`: “thời lượng tối đa công bố là 20 giờ” có `M=20`. Không được biến thành tập `[0,20]` rồi dùng phép bao hàm để hỗ trợ một quảng cáo nâng mức tối đa lên 25 giờ. “Tối đa 20” chỉ được gán vai trò này khi ngữ cảnh rõ đang trích thông số cực đại; nếu thực sự chỉ là một cận trên về `x`, dùng luật miền của `x`. Mơ hồ → `UNKNOWN`.
+## 2. Thuật toán
 
-Các luật sau giả định cùng phạm vi, đơn vị và điều kiện; `S/R/U` lần lượt là hỗ trợ/bác bỏ/chưa đủ.
+```text
+verdict(claim, evidences):
+  validate(claim, evidences)                       # lỗi → RecordError
+  for attr in claim.attributes:
+    cands = []
+    for ev in evidences:
+      A: bỏ ev nếu product/version/market/attribute khác (trường claim = null thì không ràng buộc),
+         hoặc part khác, hoặc không đổi được đơn vị về attr.unit
+      B: điều kiện claim nêu phải bằng điều kiện của ev, nếu không → bỏ
+         điều kiện ev có mà claim không nêu:
+           condition_ref → dùng đầy đủ
+           policy literal → bỏ  (chỉ dùng cho ablation P−inherit)
+           claim universal → chỉ dùng làm phản ví dụ (REFUTE_ONLY)
+           còn lại → kế thừa, dùng đầy đủ (FULL)
+      cands += ev
+    nếu cands rỗng → UNKNOWN
+    nhóm cands theo bộ điều kiện đầy đủ của ev
+    C1: trong cùng nhóm, có cặp ev mâu thuẫn (C2 cho CONTRADICT) → CONFLICT
+    phản ví dụ: nhóm REFUTE_ONLY có C2 = CONTRADICT → CONTRADICT
+    C2 cho từng nhóm FULL: CONTRADICT nếu có ev bác bỏ, SUPPORT nếu có ev hỗ trợ, ngược lại UNKNOWN
+    nhiều nhóm FULL: tất cả CONTRADICT → CONTRADICT; tất cả SUPPORT → SUPPORT; ngược lại UNKNOWN
+  C3: có CONTRADICT → Refuted; có CONFLICT → NEI-conflict; tất cả SUPPORT → Supported; còn lại NEI-missing
+```
+
+Lưu ý thiết kế:
+
+1. **Phạm vi xung đột** là một thuộc tính + một bộ điều kiện. Vì claim là phép hội, thuộc tính bị bác bỏ quyết định nhãn Refuted ngay cả khi thuộc tính khác xung đột (test `test_refutation_beats_conflict_on_other_attribute`). Trong cùng thuộc tính, C1 chạy trước C2 nên không có bác bỏ từ dữ liệu đang xung đột.
+2. **Nhiều chế độ** (claim không nêu chế độ, nguồn có nhiều chế độ) không phải xung đột; dùng quy tắc “mọi cách đọc” của hướng dẫn §4.3.
+3. **Lượng từ phổ quát** không được kế thừa điều kiện; chỉ có thể bị bác bỏ bởi phản ví dụ. P hiện chưa có luật xác nhận bao phủ “mọi chế độ” nên claim phổ quát không thể Supported qua kế thừa; đây là giới hạn được ghi nhận.
+4. A không loại bằng chứng vì khác `value_kind`; loại giá trị được xử lý ở C2.
+5. Dung sai mặc định 0; `approx` chỉ hỗ trợ `approx` cùng số; không tự tạo dung sai.
+
+## 3. Bảng C2 (cùng phạm vi, điều kiện, đơn vị; S/R/U = hỗ trợ/bác bỏ/chưa đủ)
 
 | Bằng chứng | Claim | Quan hệ |
 |---|---|---|
 | `x=a` | `x=b` | S nếu a=b; R nếu a≠b |
 | `x>a` | `x=b` | R nếu b≤a; U nếu b>a |
 | `x≥a` | `x=b` | R nếu b<a; U nếu b≥a |
-| `x≤u` (chỉ cận trên) | `x=b` | R nếu b>u; U nếu b≤u |
+| `x≤u` | `x=b` | R nếu b>u; U nếu b≤u |
 | `x<u` | `x=b` | R nếu b≥u; U nếu b<u |
 | `x>a` | `x>b` | S nếu a≥b; U nếu a<b |
-| `x=a` | Mệnh đề khoảng về x | S nếu a thuộc miền claim; R nếu không thuộc |
-| Miền nguồn E, miền claim Q về cùng x | Bất đẳng thức/khoảng | S nếu E⊆Q; R nếu E∩Q=∅; U nếu còn giao nhưng không bao hàm |
-| Mức tối đa công bố `M=a` | Mức tối đa công bố `M=b` | S nếu a=b; R nếu a≠b |
-| Mức tối thiểu công bố `m=a` | Mức tối thiểu công bố `m=b` | S nếu a=b; R nếu a≠b |
-| Hãng công bố lên đến u (nên x≤u) | x chính xác b | R nếu b>u; U nếu b≤u; không suy ra luôn đạt u |
-| Hãng công bố khoảng a, không có biên sai số | Cùng thông số công bố “khoảng a” | S nếu cùng phạm vi/cách hiểu |
-| “Khoảng a” không có biên | Số chính xác/“khoảng b” khác a | U, không tự tạo dung sai |
-| “Khoảng a” có biên sai số rõ | Mệnh đề khoảng/số về cùng x | Dùng đúng miền và biên được nguồn cho phép |
-| Phiên bản Bluetooth a | Phiên bản Bluetooth b | S nếu cùng chuỗi phiên bản chuẩn hóa; R nếu khác phiên bản xác định |
-| Khác vai trò đại lượng mà không có phép suy ra hợp lệ | Bất kỳ | U |
+| miền E | miền Q (cùng x) | S nếu E⊆Q; R nếu E∩Q=∅; U nếu giao mà không bao hàm |
+| `M=a` (tối đa công bố) | `M=b` | S nếu a=b; R nếu a≠b |
+| `m=a` (tối thiểu công bố) | `m=b` | S nếu a=b; R nếu a≠b |
+| `M=u` | `x=b` | R nếu b>u; U nếu b≤u |
+| `M=u` | miền Q về x (bất đẳng thức/khoảng) | S nếu `(−∞,u]⊆Q`; R nếu `(−∞,u]∩Q=∅`; U còn lại |
+| `x=a` (đo đạc) | `M=b` | U (đo đạc không suy ra mức công bố) |
+| bất kỳ vai trò | claim `stated_spec` = a | xử lý như claim cùng vai trò với bằng chứng (M nếu nguồn là M, x nếu nguồn là x) |
+| `approx a` | `approx b` | S nếu a=b và cùng vai trò; U nếu khác |
+| `approx a` | số chính xác/khoảng | U |
+| phiên bản a | phiên bản b | S nếu cùng chuỗi chuẩn hóa; R nếu khác; U nếu có `op=ge` hoặc chỉ số chính |
+| vai trò `unknown` | bất kỳ | U |
 
-Với miền khoảng, giữ biên mở/đóng: `(24,+∞)` không chứa 24; `[24,+∞)` chứa 24 nhưng không xác nhận `=24`. Khoảng đảo biên hoặc rỗng do trích xuất lỗi là lỗi hồ sơ, không lấy tập rỗng để suy ra mọi claim được hỗ trợ.
+## 4. Ca kiểm tra bắt buộc (đều có trong `tests/test_abc.py`)
 
-Nguồn/claim nêu “luôn”, “mọi chế độ” cần lượng từ/phạm vi riêng. Một phép thử ở một cấu hình không hỗ trợ mọi cấu hình. Bằng chứng cho thấy một trường hợp trái với khẳng định “luôn” có thể bác bỏ; chỉ biết giới hạn tối đa mà không có trường hợp trái thì chưa đủ.
-
-Dung sai mặc định bằng 0 cho thông số chính xác; chỉ đổi khi có sai số/làm tròn có căn cứ trong nguồn, khóa trước val/test. Không tối ưu dung sai theo nhãn. Quy tắc gần đúng không được mở rộng từ cách diễn đạt giống nhau sang khẳng định một số chính xác.
-
-## 3. Ca kiểm tra bắt buộc khi triển khai
-
-| Ca | Bằng chứng / claim | Kết quả mong đợi |
+| Ca | Bằng chứng / claim | Mong đợi |
 |---|---|---|
-| EX-18 | Tổng nghe `>24` / `=24`, cùng phạm vi phép thử | Refuted qua C2 |
-| Biên EX-18 | `>24` / `=25` | NEI-thiếu, không mặc định Supported |
-| Biên đóng | `≥24` / `=24` | NEI-thiếu, không Refuted |
-| EX-20 | Sau sạc 15 phút, “lên đến 3” / “chính xác 3” | NEI-thiếu qua C2 |
-| Vượt cận | “lên đến 3” / “chính xác 4” | Refuted nếu cùng điều kiện |
-| EX-11 | Mức tối đa công bố 20 / 25, ANC bật | Refuted; không dùng bao hàm khoảng |
-| EX-12 | Cùng thông tin “khoảng 1,5 giờ” sau sạc 5 phút | Supported cho câu đã giới hạn vào phép thử |
-| EX-10 | Nguồn ANC bật / claim ANC tắt | NEI-thiếu qua B; không gọi là xung đột |
-| EX-21 | Hai mức tối đa giả lập 20 và 24, cùng phạm vi | NEI-xung đột, C1 ưu tiên |
-| EX-22 | Hai khối lượng hộp giả lập 32 và 34 g | NEI-xung đột |
-| EX-23 | Hai phiên bản Bluetooth giả lập 5.2 và 5.3 | NEI-xung đột |
+| EX-18 | tổng nghe `>24` / `=24` | Refuted qua C2 |
+| biên EX-18 | `>24` / `=25` | NEI-missing |
+| biên đóng | `≥24` / `=24` | NEI-missing |
+| EX-20 | sau sạc 15 phút “lên đến 3” / “chính xác 3” | NEI-missing |
+| vượt cận | “lên đến 3” / “chính xác 4” | Refuted |
+| EX-11 | M=20 / M=25, chống ồn bật | Refuted, không dùng bao hàm |
+| EX-12 | cùng “khoảng 1,5 giờ” sau sạc 5 phút | Supported |
+| EX-10 | nguồn chống ồn bật / claim chống ồn tắt | NEI-missing qua B, không phải xung đột |
+| nhiều chế độ | nguồn 4 h (bật) và 6 h (tắt) / claim “lên đến 10 giờ” không nêu chế độ | Refuted (mọi cách đọc bác bỏ) |
+| nhiều chế độ | như trên / claim “lên đến 6 giờ” | NEI-missing |
+| con số trần | nguồn M=6 / claim “pin 6 giờ” (`stated_spec`) | Supported |
+| phổ quát | nguồn 4 h và 6 h / claim “luôn 6 giờ” | Refuted (phản ví dụ) |
+| EX-21–23 | hai nguồn giả lập cùng phạm vi, khác giá trị | NEI-conflict |
+| xung đột + bác bỏ | thuộc tính 1 xung đột, thuộc tính 2 bị bác bỏ | Refuted |
+| xung đột + thiếu | thuộc tính 1 xung đột, thuộc tính 2 thiếu | NEI-conflict |
+| hồ sơ hỏng | thiếu thuộc tính, kind lạ, số không đọc được, id trùng, khoảng đảo biên | ERROR |
 
-Ba ca cuối có sản phẩm `SIM-*`, do Codex soạn ngày 08/10/2026; không phải thông số hãng và không được tính vào đánh giá chính. Hồ sơ từng câu, hai phía nguồn và nguồn gốc nằm trong [examples.json](../evidence/2026-10-08/examples.json).
+EX-21–23 dùng sản phẩm `SIM-*` do AI soạn để kiểm thử; không phải thông số hãng và không tính vào đánh giá. EX-01–20 là ca minh họa có nguồn Apple đã đối chiếu nhưng câu gốc không có log sinh (`unknown_legacy`), nên chỉ dùng làm fixture/ví dụ, không vào tập dev/val/test.
 
-## 3b. Claim không nêu điều kiện thử (thêm 08/10/2026 — DỰ THẢO, cần sinh viên/GVHD xác nhận; QUYET_DINH_CAN_CHOT D1)
+Với chính sách chung, nhãn minh họa của cả 23 câu gốc (`original_claim`) khớp nhãn trong `examples.json` (test `test_original_claims_shared_policy_no_drift`). Đọc nghĩa đen (`literal`) làm 9 câu gốc chuyển sang NEI; đây là lý do giữ `literal` làm ablation P−inherit thay vì chính sách.
 
-Vấn đề (ĐÃ KIỂM bằng `tests/test_abc.py`): 13 `reviewed_claim` trong examples.json được thêm "Theo thông số công bố của Apple … các điều kiện thử khác theo chú thích". Theo §1 bước B đọc nghĩa đen, **câu gốc** thiếu điều kiện thử sẽ ra `UNKNOWN`; 11/23 câu gốc đổi nhãn (Supported 9→3, Refuted 7→4). Như vậy nhãn hiện tại chỉ đúng cho câu đã sửa — mà quảng cáo LLM thật sẽ không có câu "theo chú thích".
+## 5. Phân tích thành phần (ablation) — phần cốt lõi của RQ3
 
-Luật đề xuất `inherit_headline` (cài đặt trong `scripts/abc_reference.py`):
+Tất cả ablation chạy trên **đúng hồ sơ trích xuất của lượt 1** mà P và B1 đã dùng, nên không tốn lượt gọi LLM và chỉ thay đổi một thành phần của bộ quyết định:
 
-1. Claim không nêu một điều kiện mà nguồn công bố kèm (âm lượng, chu kỳ thử…) thì kế thừa điều kiện thử của chính thông số đó.
-2. Điều kiện claim nêu rõ (ANC tắt, âm lượng 100%) vẫn phải khớp; khác → nguồn bị loại (EX-10, EX-16 vẫn NEI).
-3. Claim có lượng từ phổ quát về điều kiện ("luôn", "mọi chế độ", "trong mọi điều kiện") không được kế thừa.
-4. Nếu sau kế thừa còn ≥ 2 chế độ với giá trị khác nhau → `UNKNOWN` (NEI-thiếu), không gọi là xung đột.
-5. "Chính xác" là định tính của giá trị, xử lý ở C2 (EX-18 Refuted, EX-20 NEI), không chặn kế thừa.
+| Mã | Tắt gì | Giữ nguyên | Câu hỏi trả lời |
+|---|---|---|---|
+| `P−part` | kiểm bộ phận ở A | sản phẩm/phiên bản/thuộc tính/đơn vị, B, C1–C3 | kiểm bộ phận ngăn bao nhiêu chấp nhận nhầm kiểu “khối lượng hộp ↔ tai nghe”? |
+| `P−B` | toàn bộ kiểm điều kiện (mọi nguồn cùng nhóm) | A, C | kiểm điều kiện ngăn bao nhiêu lỗi “sai chế độ”? Khi tắt B, C1 có thể báo xung đột giả; đó là tác động cần đo, không sửa C để bù |
+| `P−role` | phân biệt mức công bố với giá trị quan sát (mọi giá trị coi là đo đạc) | A, B, C1, C3 | phân biệt vai trò con số ngăn bao nhiêu lỗi “lên đến a” ↔ “chính xác a”? |
+| `P−inherit` | kế thừa điều kiện thử (dùng `literal`) | A, C | chính sách kế thừa làm thay đổi Recall Supported và FAR thế nào? |
 
-Phương án khác: (a) nghĩa đen — đơn giản nhưng gần như mọi claim pin thành NEI; (b) viết lại claim — không áp dụng được cho dữ liệu LLM thật. Sau khi chốt, nhãn EX gán cho `original_claim`; thị trường (EX-13–15 dùng trang Moldova) cần quyết định riêng (D2).
-
-## 4. Ablation không tự mâu thuẫn
-
-- `P−A(bộ phận)`: chỉ tắt kiểm tra bộ phận. Vẫn lọc sản phẩm/phiên bản/thị trường/thuộc tính/đơn vị và giữ B, C1–C3. Không gọi đây là bỏ toàn bộ A hoặc bỏ kiểm tra loại giá trị.
-- `P−B`: tắt kiểm tra điều kiện và yêu cầu bao phủ chế độ, giữ A và C. Khi B bị tắt, đầu vào C có thể chứa nguồn sai chế độ; đó là tác động cần đo, không sửa C để bù.
-- Dùng cùng hồ sơ trích xuất và quy tắc còn lại. Chỉ chạy ablation khi đã chọn ở Gate 4 và đủ thời gian; không phải yêu cầu MVP.
+Kết quả ablation là bằng chứng nhân quả **trong phạm vi bộ quyết định** (cùng hồ sơ, chỉ đổi một luật). Nó không đo tác động của trích xuất; lỗi trích xuất được tách bằng thí nghiệm hồ sơ chuẩn TN4 (sổ tay mục 6.1). Phân tích lỗi thủ công chỉ mô tả, không thay ablation.

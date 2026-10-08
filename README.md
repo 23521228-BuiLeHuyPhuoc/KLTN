@@ -22,6 +22,7 @@ Kiểm hồ sơ ví dụ/hash nguồn: `python3 scripts/audit_examples.py --chec
 - Kiểm tra:
   `python3 scripts/update_thesis_docs.py --check`; `python3 scripts/audit_examples.py --check`; `python3 scripts/check_paper_facts.py`; `python3 -m unittest discover -s tests`.
 - Mô phỏng cỡ test: `python3 scripts/simulate_power.py`. Chặn rò nhãn: `python3 scripts/check_input_leak.py <input.json>`.
+- **Cập nhật 10/2026 (dự thảo, chờ GVHD):** sổ tay viết lại theo mã công việc W0–W15 và thí nghiệm TN1–TN6; [giao thức](docs/GIAO_THUC_DANH_GIA.md) viết lại để khóa trước test. Ví dụ xuyên suốt AirPods Max 2 (hồ sơ nhập tay, không gọi mô hình, không phải kết quả thí nghiệm): `python3 scripts/demo_running_example.py`. Mẫu bản ghi: `templates/claim_record.json`, `label_record.json`, `extraction_schema.json`, `ad_prompts.json`. Chưa có dữ liệu quảng cáo LLM hay kết quả B0/B1/P.
 - Khóa API cũ nằm trong lịch sử công khai, **phải thu hồi**.
 
 ## Cấu trúc thư mục
