@@ -66,6 +66,20 @@ Dung sai mặc định bằng 0 cho thông số chính xác; chỉ đổi khi c�
 
 Ba ca cuối có sản phẩm `SIM-*`, do Codex soạn ngày 08/10/2026; không phải thông số hãng và không được tính vào đánh giá chính. Hồ sơ từng câu, hai phía nguồn và nguồn gốc nằm trong [examples.json](../evidence/2026-10-08/examples.json).
 
+## 3b. Claim không nêu điều kiện thử (thêm 08/10/2026 — DỰ THẢO, cần sinh viên/GVHD xác nhận; QUYET_DINH_CAN_CHOT D1)
+
+Vấn đề (ĐÃ KIỂM bằng `tests/test_abc.py`): 13 `reviewed_claim` trong examples.json được thêm "Theo thông số công bố của Apple … các điều kiện thử khác theo chú thích". Theo §1 bước B đọc nghĩa đen, **câu gốc** thiếu điều kiện thử sẽ ra `UNKNOWN`; 11/23 câu gốc đổi nhãn (Supported 9→3, Refuted 7→4). Như vậy nhãn hiện tại chỉ đúng cho câu đã sửa — mà quảng cáo LLM thật sẽ không có câu "theo chú thích".
+
+Luật đề xuất `inherit_headline` (cài đặt trong `scripts/abc_reference.py`):
+
+1. Claim không nêu một điều kiện mà nguồn công bố kèm (âm lượng, chu kỳ thử…) thì kế thừa điều kiện thử của chính thông số đó.
+2. Điều kiện claim nêu rõ (ANC tắt, âm lượng 100%) vẫn phải khớp; khác → nguồn bị loại (EX-10, EX-16 vẫn NEI).
+3. Claim có lượng từ phổ quát về điều kiện ("luôn", "mọi chế độ", "trong mọi điều kiện") không được kế thừa.
+4. Nếu sau kế thừa còn ≥ 2 chế độ với giá trị khác nhau → `UNKNOWN` (NEI-thiếu), không gọi là xung đột.
+5. "Chính xác" là định tính của giá trị, xử lý ở C2 (EX-18 Refuted, EX-20 NEI), không chặn kế thừa.
+
+Phương án khác: (a) nghĩa đen — đơn giản nhưng gần như mọi claim pin thành NEI; (b) viết lại claim — không áp dụng được cho dữ liệu LLM thật. Sau khi chốt, nhãn EX gán cho `original_claim`; thị trường (EX-13–15 dùng trang Moldova) cần quyết định riêng (D2).
+
 ## 4. Ablation không tự mâu thuẫn
 
 - `P−A(bộ phận)`: chỉ tắt kiểm tra bộ phận. Vẫn lọc sản phẩm/phiên bản/thị trường/thuộc tính/đơn vị và giữ B, C1–C3. Không gọi đây là bỏ toàn bộ A hoặc bỏ kiểm tra loại giá trị.

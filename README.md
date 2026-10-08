@@ -15,15 +15,26 @@ Kiểm tra nội dung và cấu trúc hai DOCX: `python3 scripts/update_thesis_d
 
 Kiểm hồ sơ ví dụ/hash nguồn: `python3 scripts/audit_examples.py --check`. Đối chiếu vị trí số liệu bài gốc: `python3 scripts/check_paper_facts.py` (cần Poppler). Đây là kiểm tra tài liệu, chưa phải chạy pipeline/thí nghiệm B0/B1/P.
 
+## Rà soát 08/10/2026 (nhánh `review/opus-2026-10-08`, chưa merge)
+
+- [Nhật ký sửa](docs/NHAT_KY_SUA_2026-10-08.md), [quyết định cần chốt](docs/QUYET_DINH_CAN_CHOT.md), [kế hoạch thực tế](docs/KE_HOACH_THUC_TE_2026-10-08.md).
+- Kiểm thử luật: `python3 -m unittest discover -s tests -v` (hàm tham chiếu `scripts/abc_reference.py`).
+- Mô phỏng cỡ test: `python3 scripts/simulate_power.py`. Chặn rò nhãn vào prompt: `python3 scripts/check_input_leak.py <input.json>`.
+- `.env` không còn được theo dõi; khóa cũ đã nằm trong lịch sử công khai nên **phải thu hồi**.
+
 ## Cấu trúc thư mục
 
 ```
 .
-├── báo/                  # Các bài báo nghiên cứu gốc (PDF)
-│   └── báo con1/         # Tài liệu bổ trợ / chuyên sâu
-├── dịch/                 # Các bản dịch song ngữ & đơn ngữ (PDF, CSV glossary)
-├── run_translate_batch.sh # Script tự động dịch hàng loạt sử dụng pdf2zh (Bing Translator)
-└── .gitignore            # Cấu hình bỏ qua file tạm, log và scratch
+├── báo/                  # Bài báo gốc (PDF) — bản quyền thuộc tác giả/nhà xuất bản
+├── dịch/                 # Bản dịch máy (PDF, glossary) — xem lưu ý bản quyền
+├── docs/                 # Hướng dẫn nhãn, đặc tả A–B–C, giao thức, kế hoạch, nhật ký
+├── evidence/2026-10-08/  # Snapshot nguồn Apple, examples.json, mã băm
+├── scripts/              # Kiểm tra docx/ví dụ/số liệu, hàm tham chiếu A–B–C, mô phỏng
+├── templates/            # Mẫu manifest, search_log, gán nhãn độc lập, mẫu quảng cáo LLM
+├── tests/                # unittest cho luật A–B–C
+├── run_translate_batch.sh # Dịch hàng loạt bằng pdf2zh (Bing Translator)
+└── .gitignore
 ```
 
 ## Hướng dẫn sử dụng công cụ dịch

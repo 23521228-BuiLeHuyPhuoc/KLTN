@@ -141,3 +141,16 @@ Mở PDF gốc trong `báo/`, kiểm tiêu đề hàng/cột, đơn vị và đi
 - Gate 4: khóa hash, danh sách phần mẫu/lượt chạy, tiêu chí thiếu mẫu, ngân sách và lựa chọn unfiltered; không thay theo test.
 - Gate 5: bảng toàn test/hai nhóm/họ, mẫu số, truy hồi kèm N, kết quả phần mẫu ba lượt và lỗi kỹ thuật; giới hạn thăm dò.
 - Gate 6: kết luận chỉ cho claim đã tách, không end-to-end; ghi AI hỗ trợ và phần sinh viên đã thực sự xác nhận; lưu bộ tài liệu/mã/log tái lập.
+
+## 10. Thu mẫu quảng cáo LLM theo lô (thêm 08/10/2026 — DỰ THẢO, cần sinh viên/GVHD xác nhận)
+
+Mỗi quảng cáo lưu theo [templates/llm_ad_sample.json](../templates/llm_ad_sample.json): nguyên văn đầu ra (`raw_ad_text` + SHA-256), prompt đã render, model/nhà cung cấp, tham số giải mã, thời điểm, và vị trí ký tự của từng claim tách ra. Nhãn vàng không nằm trong file mẫu.
+
+1. **Lô 0 (pilot, trước 15/10):** 2 họ dev × 5 quảng cáo `ordinary_llm`. Đo: số claim kiểm chứng được/quảng cáo, phút gán nhãn/claim trên 5 mẫu đầu, tỷ lệ claim NEI. Không dùng kết quả P/B0/B1 để chọn mẫu.
+2. **Lô k (k ≥ 1):** mỗi lô = mỗi họ chưa đạt sàn × 5 quảng cáo, cùng prompt template đã khóa. Không bỏ output nào; output lỗi kỹ thuật ghi `exclusion.note`.
+3. **Tiêu chí dừng (chốt trước, chỉ đọc số đếm nhãn, không đọc dự đoán):** dừng thu `ordinary_llm` khi (a) mọi tập đạt sàn ở §4 tính cả biến thể, hoặc (b) đã thu 3 lô liên tiếp mà một nhãn tăng < 2 claim — khi đó bổ sung `controlled_variant` cho nhãn thiếu, giữ tỷ lệ thông thường ≥ 50%, hoặc (c) chạm ngân sách [SINH VIÊN ĐIỀN: số quảng cáo tối đa / chi phí API tối đa]. Ghi lý do dừng vào nhật ký lô.
+4. Trước khi đưa vào prompt B0/B1, chạy `python3 scripts/check_input_leak.py <input.json>`; khóa nhãn/vết P (label, gold, nei_type, reason, trace…) làm FAIL.
+
+## 11. Độ chính xác ước lượng với tập test nhỏ (thêm 08/10/2026)
+
+`scripts/simulate_power.py` (seed 20261008, giả định FAR_B1 = 0,30, FAR_P = 0,15, độ lệch họ 0,5) cho thấy với 4 họ test và 20 claim R+NEI, khoảng tin cậy 95% bằng cluster bootstrap (lấy mẫu lại cả họ, không lấy từng claim) của ΔFAR rộng trung bình ≈ 0,32 và chỉ ≈ 35% lần mô phỏng loại được 0; với 40 claim R+NEI ≈ 53%. Đây là kết quả mô phỏng với giả định, không phải số đo. Hệ quả (DỰ THẢO): báo ΔFAR kèm khoảng tin cậy và số đếm lỗi từng claim, mô tả là **thăm dò**; không tuyên bố "P tốt hơn có ý nghĩa thống kê" chỉ từ 4 họ; nếu Gate 2 cho thấy năng suất cho phép, nâng R+NEI của test lên ≥ 40.

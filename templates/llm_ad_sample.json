@@ -1,0 +1,42 @@
+{
+  "status": "template_not_a_sample",
+  "_doc": "Một bản ghi = một quảng cáo do LLM sinh trong thí nghiệm. Thu theo lô (docs/GIAO_THUC_DANH_GIA.md §10, thêm 08/10/2026). Không điền nhãn vàng ở đây; nhãn nằm ở file gán nhãn riêng.",
+  "sample_id": null,
+  "batch_id": null,
+  "family_id": null,
+  "split": null,
+  "product": {"name": null, "version": null, "market": null},
+  "generation": {
+    "provider": null,
+    "model_requested_id": null,
+    "model_returned_id": null,
+    "temperature": null,
+    "top_p": null,
+    "seed_requested": null,
+    "prompt_template_id": null,
+    "prompt_sha256": null,
+    "rendered_prompt_path": null,
+    "spec_sheet_given_to_generator": null,
+    "requested_error_type": "none | wrong_value | wrong_part | wrong_mode | overclaim | none_requested",
+    "ordinary_llm": null,
+    "started_at": null,
+    "timezone": null
+  },
+  "raw_ad_text": null,
+  "raw_ad_sha256": null,
+  "raw_response_path": null,
+  "claims": [
+    {
+      "claim_id": null,
+      "char_start": null,
+      "char_end": null,
+      "claim_text_verbatim": null,
+      "extracted_by": "manual | script@sha",
+      "edited": false,
+      "edit_note": null
+    }
+  ],
+  "exclusion": {"excluded": false, "note": null},
+  "collector": "[SINH VIÊN ĐIỀN]",
+  "collected_at": null
+}
