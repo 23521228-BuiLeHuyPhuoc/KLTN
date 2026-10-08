@@ -8,7 +8,7 @@ Cập nhật 08/10/2026 theo bảy nhận xét phương pháp. Đây là **kế 
 
 Đánh giá E3 gồm truy hồi có điều kiện theo sản phẩm → trích xuất JSON → quyết định nhãn. Không bao gồm sai sót tự nhận diện sản phẩm hay tách claim từ quảng cáo thô. Website không phải bằng chứng chất lượng thuật toán; nếu có tách tự động, phải đo riêng bỏ sót, đổi nghĩa/điều kiện và đánh giá toàn trình trước khi kết luận về toàn trình.
 
-RQ3 tối thiểu vẫn thăm dò trên 12 họ chia 6/2/4; 18/20 họ dùng 7/4/7 hoặc 8/4/8. Pilot đúng 6 họ ở dev. Không đổi họ để cân bằng nhãn sau khi đã dùng phát triển. Chọn model/prompt/k trên dev, dung sai theo nguồn; val audit một lượt sau khóa, test không chọn cấu hình.
+RQ3 tối thiểu vẫn thăm dò trên 12 họ chia 6/2/4; 18 họ dùng 7/4/7 (sửa 08/10: bỏ phương án 20/30 họ, QUYET_DINH D12). Pilot đúng 6 họ ở dev. Không đổi họ để cân bằng nhãn sau khi đã dùng phát triển. Chọn model/prompt/k trên dev, dung sai theo nguồn; val audit một lượt sau khóa, test không chọn cấu hình.
 
 ## 2. Cùng tiêu chí nhãn, không dùng P làm chuẩn
 
@@ -146,7 +146,7 @@ Mở PDF gốc trong `báo/`, kiểm tiêu đề hàng/cột, đơn vị và đi
 
 Mỗi quảng cáo lưu theo [templates/llm_ad_sample.json](../templates/llm_ad_sample.json): nguyên văn đầu ra (`raw_ad_text` + SHA-256), prompt đã render, model/nhà cung cấp, tham số giải mã, thời điểm, và vị trí ký tự của từng claim tách ra. Nhãn vàng không nằm trong file mẫu.
 
-1. **Lô 0 (pilot, trước 15/10):** 2 họ dev × 5 quảng cáo `ordinary_llm`. Đo: số claim kiểm chứng được/quảng cáo, phút gán nhãn/claim trên 5 mẫu đầu, tỷ lệ claim NEI. Không dùng kết quả P/B0/B1 để chọn mẫu.
+1. **Lô 0 (trước 31/10, sửa theo D9):** 2 họ dev × 5 quảng cáo `ordinary_llm`. Đo: số claim kiểm chứng được/quảng cáo, phút gán nhãn/claim trên 5 mẫu đầu, tỷ lệ claim NEI. Không dùng kết quả P/B0/B1 để chọn mẫu.
 2. **Lô k (k ≥ 1):** mỗi lô = mỗi họ chưa đạt sàn × 5 quảng cáo, cùng prompt template đã khóa. Không bỏ output nào; output lỗi kỹ thuật ghi `exclusion.note`.
 3. **Tiêu chí dừng (chốt trước, chỉ đọc số đếm nhãn, không đọc dự đoán):** dừng thu `ordinary_llm` khi (a) mọi tập đạt sàn ở §4 tính cả biến thể, hoặc (b) đã thu 3 lô liên tiếp mà một nhãn tăng < 2 claim — khi đó bổ sung `controlled_variant` cho nhãn thiếu, giữ tỷ lệ thông thường ≥ 50%, hoặc (c) chạm ngân sách [SINH VIÊN ĐIỀN: số quảng cáo tối đa / chi phí API tối đa]. Ghi lý do dừng vào nhật ký lô.
 4. Trước khi đưa vào prompt B0/B1, chạy `python3 scripts/check_input_leak.py <input.json>`; khóa nhãn/vết P (label, gold, nei_type, reason, trace…) làm FAIL.

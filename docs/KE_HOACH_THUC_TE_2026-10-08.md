@@ -1,3 +1,5 @@
+> **Đã thay thế (08/10/2026)** bởi [KE_HOACH_CHI_TIET_SINH_VIEN.md](KE_HOACH_CHI_TIET_SINH_VIEN.md). Giữ lại để truy vết.
+
 # Kế hoạch thực tế 08/10–31/12/2026 (DỰ THẢO — cần sinh viên/GVHD xác nhận)
 
 Trạng thái xuất phát (ĐÃ KIỂM trong repo ngày 08/10): chưa có quảng cáo LLM nào có log; chưa có cấu hình máy/API; chưa có code BM25/B0/B1/P; đã có hướng dẫn nhãn, đặc tả A–B–C, 23 ví dụ minh họa, hàm tham chiếu A–B–C và 27 test. Số giờ dưới đây là **ước lượng của người rà soát (SUY LUẬN)**; sinh viên điền quỹ giờ thực: [SINH VIÊN ĐIỀN: giờ/tuần].
