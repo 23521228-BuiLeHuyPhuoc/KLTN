@@ -28,3 +28,18 @@ git clone --mirror https://github.com/23521228-BuiLeHuyPhuoc/KLTN KLTN-mirror &&
 git filter-repo --path .env --invert-paths
 git push --force --mirror   # viết lại lịch sử công khai: mọi bản clone khác phải clone lại
 ```
+
+## ĐÍNH CHÍNH — nhánh `plan/opus-2026-10-08` (gốc `ca2c849`, 08/10/2026)
+
+Kiểm lại trên `main` (`ca2c849`), bảng trên **không khớp thực tế** ở ba điểm:
+1. Hai docx chưa được vá (`--check` FAIL "độc lập 30").
+2. `tests/fixtures/examples_structured.json` không có (unittest lỗi ImportError).
+3. Gitlink `.claude/worktrees/agent-…` vẫn còn được theo dõi.
+
+Những gì nhánh này đã làm thật:
+- **32f0415**: tạo lại fixture; `git rm --cached` gitlink và thêm `.claude/` vào .gitignore; che 14 chỗ (địa chỉ cổng API, đường dẫn máy) trong CLAUDE_WORK_LOG.md. **Lịch sử Git vẫn còn bản gốc.**
+- **16d1d41**: `redesign_plan_2026_10_08.py` thiết kế lại HuP_4 và HuP_3 (chữ đỏ). Bản gốc sao lưu ngoài repo kèm SHA256SUMS (HuP_3 `cd2528…`, HuP_4 `465bea…`). Sau khi sửa: HuP_3 `91113cbc…`, HuP_4 `19c0a1e2…`. `validate_content` được đổi theo thiết kế mới.
+- Các commit sau: docs (QUYET_DINH D9–D12, DINH_VI, KE_HOACH_CHI_TIET, CAU_HOI, DOI_CHIEU); tests/test_docs.py; README.
+- Máy không có LibreOffice nên **chưa xem bố cục PDF**.
+
+Khóa API: sinh viên phải thu hồi khóa cũ và tạo khóa mới. Lệnh `git filter-repo` có trong KE_HOACH_CHI_TIET_SINH_VIEN §10; AI không chạy lệnh này.

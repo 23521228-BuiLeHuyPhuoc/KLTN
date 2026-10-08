@@ -1,0 +1,1391 @@
+{
+ "_doc": "Hồ sơ chuẩn hóa nhập tay từ evidence/2026-10-08/examples.json (trường values/quotes/conditions_summary) để kiểm thử scripts/abc_reference.py. Không phải đầu ra trích xuất tự động; không phải dữ liệu đánh giá. Người nhập: reviewer AI 08/10/2026 — sinh viên cần soát lại.",
+ "evidence_sets": {
+  "a5": [
+   {
+    "id": "a5-case",
+    "product": "AirPods 5",
+    "version": null,
+    "market": "VN",
+    "part": "case",
+    "attribute": "weight",
+    "unit": "g",
+    "value": {
+     "kind": "exact",
+     "role": "measurement",
+     "a": "32.3"
+    },
+    "conditions": {}
+   },
+   {
+    "id": "a5-bud",
+    "product": "AirPods 5",
+    "version": null,
+    "market": "VN",
+    "part": "earbud",
+    "attribute": "weight",
+    "unit": "g",
+    "value": {
+     "kind": "exact",
+     "role": "measurement",
+     "a": "4.3"
+    },
+    "conditions": {}
+   },
+   {
+    "id": "a5-bat-anc",
+    "product": "AirPods 5",
+    "version": "USB-C",
+    "market": "VN",
+    "part": "earbud",
+    "attribute": "battery_single",
+    "unit": "h",
+    "value": {
+     "kind": "exact",
+     "role": "declared_maximum",
+     "a": "4"
+    },
+    "conditions": {
+     "anc": "on",
+     "volume": "50",
+     "spatial": "off"
+    }
+   },
+   {
+    "id": "a5-bat-off",
+    "product": "AirPods 5",
+    "version": "USB-C",
+    "market": "VN",
+    "part": "earbud",
+    "attribute": "battery_single",
+    "unit": "h",
+    "value": {
+     "kind": "exact",
+     "role": "declared_maximum",
+     "a": "6"
+    },
+    "conditions": {
+     "anc": "off",
+     "volume": "50",
+     "spatial": "off"
+    }
+   }
+  ],
+  "p3": [
+   {
+    "id": "p3-bt",
+    "product": "AirPods Pro 3",
+    "version": null,
+    "market": "VN",
+    "part": "system",
+    "attribute": "bluetooth",
+    "unit": "-",
+    "value": {
+     "kind": "version",
+     "v": "5.3"
+    },
+    "conditions": {}
+   },
+   {
+    "id": "p3-bat",
+    "product": "AirPods Pro 3",
+    "version": null,
+    "market": "VN",
+    "part": "earbud",
+    "attribute": "battery_single",
+    "unit": "h",
+    "value": {
+     "kind": "exact",
+     "role": "declared_maximum",
+     "a": "8"
+    },
+    "conditions": {
+     "anc": "on",
+     "volume": "50",
+     "spatial_headtrack": "not_both"
+    }
+   },
+   {
+    "id": "p3-quick",
+    "product": "AirPods Pro 3",
+    "version": null,
+    "market": "VN",
+    "part": "earbud",
+    "attribute": "quick_charge_listen",
+    "unit": "h",
+    "value": {
+     "kind": "approx",
+     "role": "measurement",
+     "a": "1"
+    },
+    "conditions": {
+     "charge_minutes": "5",
+     "anc": "on",
+     "volume": "50"
+    }
+   }
+  ],
+  "mx": [
+   {
+    "id": "mx-bat",
+    "product": "AirPods Max 2",
+    "version": null,
+    "market": "VN",
+    "part": "headphone",
+    "attribute": "battery_single",
+    "unit": "h",
+    "value": {
+     "kind": "exact",
+     "role": "declared_maximum",
+     "a": "20"
+    },
+    "conditions": {
+     "anc": "on",
+     "volume": "50",
+     "spatial": "fixed"
+    }
+   },
+   {
+    "id": "mx-quick",
+    "product": "AirPods Max 2",
+    "version": null,
+    "market": "VN",
+    "part": "headphone",
+    "attribute": "quick_charge_listen",
+    "unit": "h",
+    "value": {
+     "kind": "approx",
+     "role": "measurement",
+     "a": "1.5"
+    },
+    "conditions": {
+     "charge_minutes": "5",
+     "anc": "on",
+     "volume": "50",
+     "spatial": "fixed"
+    }
+   }
+  ],
+  "a4": [
+   {
+    "id": "a4-bat",
+    "product": "AirPods 4",
+    "version": "standard",
+    "market": "MD",
+    "part": "earbud",
+    "attribute": "battery_single",
+    "unit": "h",
+    "value": {
+     "kind": "exact",
+     "role": "declared_maximum",
+     "a": "5"
+    },
+    "conditions": {
+     "volume": "50",
+     "spatial": "off"
+    }
+   },
+   {
+    "id": "a4-case-std",
+    "product": "AirPods 4",
+    "version": "standard",
+    "market": "MD",
+    "part": "case",
+    "attribute": "weight",
+    "unit": "g",
+    "value": {
+     "kind": "exact",
+     "role": "measurement",
+     "a": "32.3"
+    },
+    "conditions": {}
+   },
+   {
+    "id": "a4-case-anc",
+    "product": "AirPods 4",
+    "version": "ANC",
+    "market": "MD",
+    "part": "case",
+    "attribute": "weight",
+    "unit": "g",
+    "value": {
+     "kind": "exact",
+     "role": "measurement",
+     "a": "34.7"
+    },
+    "conditions": {}
+   }
+  ],
+  "a2": [
+   {
+    "id": "a2-total",
+    "product": "AirPods 2",
+    "version": null,
+    "market": "VN",
+    "part": "earbuds+case",
+    "attribute": "battery_total",
+    "unit": "h",
+    "value": {
+     "kind": "gt",
+     "role": "measurement",
+     "a": "24"
+    },
+    "conditions": {
+     "volume": "50",
+     "cycle": "until_both_empty"
+    }
+   },
+   {
+    "id": "a2-quick",
+    "product": "AirPods 2",
+    "version": null,
+    "market": "VN",
+    "part": "earbud",
+    "attribute": "quick_charge_listen",
+    "unit": "h",
+    "value": {
+     "kind": "exact",
+     "role": "declared_maximum",
+     "a": "3"
+    },
+    "conditions": {
+     "charge_minutes": "15",
+     "volume": "50"
+    }
+   }
+  ],
+  "sim21": [
+   {
+    "id": "s21-1",
+    "product": "SIM-PIN-01",
+    "version": "R1",
+    "market": "TEST",
+    "part": "earbud",
+    "attribute": "battery_single",
+    "unit": "h",
+    "value": {
+     "kind": "exact",
+     "role": "declared_maximum",
+     "a": "20"
+    },
+    "conditions": {
+     "anc": "on",
+     "volume": "50",
+     "charge": "single"
+    }
+   },
+   {
+    "id": "s21-2",
+    "product": "SIM-PIN-01",
+    "version": "R1",
+    "market": "TEST",
+    "part": "earbud",
+    "attribute": "battery_single",
+    "unit": "h",
+    "value": {
+     "kind": "exact",
+     "role": "declared_maximum",
+     "a": "24"
+    },
+    "conditions": {
+     "anc": "on",
+     "volume": "50",
+     "charge": "single"
+    }
+   }
+  ],
+  "sim22": [
+   {
+    "id": "s22-1",
+    "product": "SIM-MASS-01",
+    "version": "R1",
+    "market": "TEST",
+    "part": "case",
+    "attribute": "weight",
+    "unit": "g",
+    "value": {
+     "kind": "exact",
+     "role": "measurement",
+     "a": "32"
+    },
+    "conditions": {}
+   },
+   {
+    "id": "s22-2",
+    "product": "SIM-MASS-01",
+    "version": "R1",
+    "market": "TEST",
+    "part": "case",
+    "attribute": "weight",
+    "unit": "g",
+    "value": {
+     "kind": "exact",
+     "role": "measurement",
+     "a": "34"
+    },
+    "conditions": {}
+   }
+  ],
+  "sim23": [
+   {
+    "id": "s23-1",
+    "product": "SIM-BT-01",
+    "version": "R1",
+    "market": "TEST",
+    "part": "system",
+    "attribute": "bluetooth",
+    "unit": "-",
+    "value": {
+     "kind": "version",
+     "v": "5.2"
+    },
+    "conditions": {}
+   },
+   {
+    "id": "s23-2",
+    "product": "SIM-BT-01",
+    "version": "R1",
+    "market": "TEST",
+    "part": "system",
+    "attribute": "bluetooth",
+    "unit": "-",
+    "value": {
+     "kind": "version",
+     "v": "5.3"
+    },
+    "conditions": {}
+   }
+  ]
+ },
+ "examples": {
+  "EX-01": {
+   "expected": "Refuted",
+   "evidence_set": "a5",
+   "claim_original": {
+    "product": "AirPods 5",
+    "version": null,
+    "market": "VN",
+    "part": "case",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "weight",
+      "unit": "g",
+      "value": {
+       "kind": "exact",
+       "role": "measurement",
+       "a": "40"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "claim_reviewed": {
+    "product": "AirPods 5",
+    "version": null,
+    "market": "VN",
+    "part": "case",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "weight",
+      "unit": "g",
+      "value": {
+       "kind": "exact",
+       "role": "measurement",
+       "a": "40"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "note": ""
+  },
+  "EX-02": {
+   "expected": "Supported",
+   "evidence_set": "a5",
+   "claim_original": {
+    "product": "AirPods 5",
+    "version": null,
+    "market": "VN",
+    "part": "case",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "weight",
+      "unit": "g",
+      "value": {
+       "kind": "exact",
+       "role": "measurement",
+       "a": "32.3"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "claim_reviewed": {
+    "product": "AirPods 5",
+    "version": null,
+    "market": "VN",
+    "part": "case",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "weight",
+      "unit": "g",
+      "value": {
+       "kind": "exact",
+       "role": "measurement",
+       "a": "32.3"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "note": ""
+  },
+  "EX-03": {
+   "expected": "Refuted",
+   "evidence_set": "a5",
+   "claim_original": {
+    "product": "AirPods 5",
+    "version": null,
+    "market": "VN",
+    "part": "earbud",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "weight",
+      "unit": "g",
+      "value": {
+       "kind": "exact",
+       "role": "measurement",
+       "a": "32.3"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "claim_reviewed": {
+    "product": "AirPods 5",
+    "version": null,
+    "market": "VN",
+    "part": "earbud",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "weight",
+      "unit": "g",
+      "value": {
+       "kind": "exact",
+       "role": "measurement",
+       "a": "32.3"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "note": ""
+  },
+  "EX-04": {
+   "expected": "Refuted",
+   "evidence_set": "a5",
+   "claim_original": {
+    "product": "AirPods 5",
+    "version": null,
+    "market": "VN",
+    "part": "earbud",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "battery_single",
+      "unit": "h",
+      "value": {
+       "kind": "exact",
+       "role": "declared_maximum",
+       "a": "6"
+      },
+      "conditions": {
+       "anc": "on"
+      }
+     }
+    ]
+   },
+   "claim_reviewed": {
+    "product": "AirPods 5",
+    "version": "USB-C",
+    "market": "VN",
+    "part": "earbud",
+    "condition_ref": true,
+    "attributes": [
+     {
+      "attribute": "battery_single",
+      "unit": "h",
+      "value": {
+       "kind": "exact",
+       "role": "declared_maximum",
+       "a": "6"
+      },
+      "conditions": {
+       "anc": "on"
+      }
+     }
+    ]
+   },
+   "note": "Câu gốc không nêu bản USB-C; fixture coi version=None (không ràng buộc)."
+  },
+  "EX-05": {
+   "expected": "Supported",
+   "evidence_set": "p3",
+   "claim_original": {
+    "product": "AirPods Pro 3",
+    "version": null,
+    "market": "VN",
+    "part": "system",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "bluetooth",
+      "unit": "-",
+      "value": {
+       "kind": "version",
+       "v": "5.3"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "claim_reviewed": {
+    "product": "AirPods Pro 3",
+    "version": null,
+    "market": "VN",
+    "part": "system",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "bluetooth",
+      "unit": "-",
+      "value": {
+       "kind": "version",
+       "v": "5.3"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "note": ""
+  },
+  "EX-06": {
+   "expected": "Supported",
+   "evidence_set": "p3",
+   "claim_original": {
+    "product": "AirPods Pro 3",
+    "version": null,
+    "market": "VN",
+    "part": "earbud",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "battery_single",
+      "unit": "h",
+      "value": {
+       "kind": "exact",
+       "role": "declared_maximum",
+       "a": "8"
+      },
+      "conditions": {
+       "anc": "on"
+      }
+     }
+    ]
+   },
+   "claim_reviewed": {
+    "product": "AirPods Pro 3",
+    "version": null,
+    "market": "VN",
+    "part": "earbud",
+    "condition_ref": true,
+    "attributes": [
+     {
+      "attribute": "battery_single",
+      "unit": "h",
+      "value": {
+       "kind": "exact",
+       "role": "declared_maximum",
+       "a": "8"
+      },
+      "conditions": {
+       "anc": "on",
+       "volume": "50",
+       "spatial_headtrack": "not_both"
+      }
+     }
+    ]
+   },
+   "note": ""
+  },
+  "EX-07": {
+   "expected": "NEI-missing",
+   "evidence_set": "p3",
+   "claim_original": {
+    "product": "AirPods Pro 3",
+    "version": null,
+    "market": "VN",
+    "part": "earbud",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "full_charge_time",
+      "unit": "min",
+      "value": {
+       "kind": "exact",
+       "role": "measurement",
+       "a": "60"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "claim_reviewed": {
+    "product": "AirPods Pro 3",
+    "version": null,
+    "market": "VN",
+    "part": "earbud",
+    "condition_ref": true,
+    "attributes": [
+     {
+      "attribute": "full_charge_time",
+      "unit": "min",
+      "value": {
+       "kind": "exact",
+       "role": "measurement",
+       "a": "60"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "note": ""
+  },
+  "EX-08": {
+   "expected": "Refuted",
+   "evidence_set": "p3",
+   "claim_original": {
+    "product": "AirPods Pro 3",
+    "version": null,
+    "market": "VN",
+    "part": "system",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "bluetooth",
+      "unit": "-",
+      "value": {
+       "kind": "version",
+       "v": "5.2"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "claim_reviewed": {
+    "product": "AirPods Pro 3",
+    "version": null,
+    "market": "VN",
+    "part": "system",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "bluetooth",
+      "unit": "-",
+      "value": {
+       "kind": "version",
+       "v": "5.2"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "note": ""
+  },
+  "EX-09": {
+   "expected": "Supported",
+   "evidence_set": "mx",
+   "claim_original": {
+    "product": "AirPods Max 2",
+    "version": null,
+    "market": "VN",
+    "part": "headphone",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "battery_single",
+      "unit": "h",
+      "value": {
+       "kind": "exact",
+       "role": "declared_maximum",
+       "a": "20"
+      },
+      "conditions": {
+       "anc": "on"
+      }
+     }
+    ]
+   },
+   "claim_reviewed": {
+    "product": "AirPods Max 2",
+    "version": null,
+    "market": "VN",
+    "part": "headphone",
+    "condition_ref": true,
+    "attributes": [
+     {
+      "attribute": "battery_single",
+      "unit": "h",
+      "value": {
+       "kind": "exact",
+       "role": "declared_maximum",
+       "a": "20"
+      },
+      "conditions": {
+       "anc": "on"
+      }
+     }
+    ]
+   },
+   "note": ""
+  },
+  "EX-10": {
+   "expected": "NEI-missing",
+   "evidence_set": "mx",
+   "claim_original": {
+    "product": "AirPods Max 2",
+    "version": null,
+    "market": "VN",
+    "part": "headphone",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "battery_single",
+      "unit": "h",
+      "value": {
+       "kind": "exact",
+       "role": "declared_maximum",
+       "a": "20"
+      },
+      "conditions": {
+       "anc": "off"
+      }
+     }
+    ]
+   },
+   "claim_reviewed": {
+    "product": "AirPods Max 2",
+    "version": null,
+    "market": "VN",
+    "part": "headphone",
+    "condition_ref": true,
+    "attributes": [
+     {
+      "attribute": "battery_single",
+      "unit": "h",
+      "value": {
+       "kind": "exact",
+       "role": "declared_maximum",
+       "a": "20"
+      },
+      "conditions": {
+       "anc": "off"
+      }
+     }
+    ]
+   },
+   "note": ""
+  },
+  "EX-11": {
+   "expected": "Refuted",
+   "evidence_set": "mx",
+   "claim_original": {
+    "product": "AirPods Max 2",
+    "version": null,
+    "market": "VN",
+    "part": "headphone",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "battery_single",
+      "unit": "h",
+      "value": {
+       "kind": "exact",
+       "role": "declared_maximum",
+       "a": "25"
+      },
+      "conditions": {
+       "anc": "on"
+      }
+     }
+    ]
+   },
+   "claim_reviewed": {
+    "product": "AirPods Max 2",
+    "version": null,
+    "market": "VN",
+    "part": "headphone",
+    "condition_ref": true,
+    "attributes": [
+     {
+      "attribute": "battery_single",
+      "unit": "h",
+      "value": {
+       "kind": "exact",
+       "role": "declared_maximum",
+       "a": "25"
+      },
+      "conditions": {
+       "anc": "on"
+      }
+     }
+    ]
+   },
+   "note": ""
+  },
+  "EX-12": {
+   "expected": "Supported",
+   "evidence_set": "mx",
+   "claim_original": {
+    "product": "AirPods Max 2",
+    "version": null,
+    "market": "VN",
+    "part": "headphone",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "quick_charge_listen",
+      "unit": "h",
+      "value": {
+       "kind": "approx",
+       "role": "measurement",
+       "a": "1.5"
+      },
+      "conditions": {
+       "charge_minutes": "5"
+      }
+     }
+    ]
+   },
+   "claim_reviewed": {
+    "product": "AirPods Max 2",
+    "version": null,
+    "market": "VN",
+    "part": "headphone",
+    "condition_ref": true,
+    "attributes": [
+     {
+      "attribute": "quick_charge_listen",
+      "unit": "h",
+      "value": {
+       "kind": "approx",
+       "role": "measurement",
+       "a": "1.5"
+      },
+      "conditions": {
+       "charge_minutes": "5"
+      }
+     }
+    ]
+   },
+   "note": ""
+  },
+  "EX-13": {
+   "expected": "Supported",
+   "evidence_set": "a4",
+   "claim_original": {
+    "product": "AirPods 4",
+    "version": "standard",
+    "market": "VN",
+    "part": "earbud",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "battery_single",
+      "unit": "h",
+      "value": {
+       "kind": "exact",
+       "role": "declared_maximum",
+       "a": "5"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "claim_reviewed": {
+    "product": "AirPods 4",
+    "version": "standard",
+    "market": "MD",
+    "part": "earbud",
+    "condition_ref": true,
+    "attributes": [
+     {
+      "attribute": "battery_single",
+      "unit": "h",
+      "value": {
+       "kind": "exact",
+       "role": "declared_maximum",
+       "a": "5"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "note": "SUY LUẬN: quảng cáo gốc tiếng Việt → thị trường VN; nguồn là trang Moldova."
+  },
+  "EX-14": {
+   "expected": "Supported",
+   "evidence_set": "a4",
+   "claim_original": {
+    "product": "AirPods 4",
+    "version": "ANC",
+    "market": "VN",
+    "part": "case",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "weight",
+      "unit": "g",
+      "value": {
+       "kind": "exact",
+       "role": "measurement",
+       "a": "34.7"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "claim_reviewed": {
+    "product": "AirPods 4",
+    "version": "ANC",
+    "market": "MD",
+    "part": "case",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "weight",
+      "unit": "g",
+      "value": {
+       "kind": "exact",
+       "role": "measurement",
+       "a": "34.7"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "note": ""
+  },
+  "EX-15": {
+   "expected": "Refuted",
+   "evidence_set": "a4",
+   "claim_original": {
+    "product": "AirPods 4",
+    "version": "standard",
+    "market": "VN",
+    "part": "case",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "weight",
+      "unit": "g",
+      "value": {
+       "kind": "exact",
+       "role": "measurement",
+       "a": "34.7"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "claim_reviewed": {
+    "product": "AirPods 4",
+    "version": "standard",
+    "market": "MD",
+    "part": "case",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "weight",
+      "unit": "g",
+      "value": {
+       "kind": "exact",
+       "role": "measurement",
+       "a": "34.7"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "note": ""
+  },
+  "EX-16": {
+   "expected": "NEI-missing",
+   "evidence_set": "a4",
+   "claim_original": {
+    "product": "AirPods 4",
+    "version": "standard",
+    "market": "VN",
+    "part": "earbud",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "battery_single",
+      "unit": "h",
+      "value": {
+       "kind": "exact",
+       "role": "declared_maximum",
+       "a": "5"
+      },
+      "conditions": {
+       "volume": "100"
+      }
+     }
+    ]
+   },
+   "claim_reviewed": {
+    "product": "AirPods 4",
+    "version": "standard",
+    "market": "MD",
+    "part": "earbud",
+    "condition_ref": true,
+    "attributes": [
+     {
+      "attribute": "battery_single",
+      "unit": "h",
+      "value": {
+       "kind": "exact",
+       "role": "declared_maximum",
+       "a": "5"
+      },
+      "conditions": {
+       "volume": "100"
+      }
+     }
+    ]
+   },
+   "note": ""
+  },
+  "EX-17": {
+   "expected": "Supported",
+   "evidence_set": "a2",
+   "claim_original": {
+    "product": "AirPods 2",
+    "version": null,
+    "market": "VN",
+    "part": "earbuds+case",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "battery_total",
+      "unit": "h",
+      "value": {
+       "kind": "gt",
+       "role": "measurement",
+       "a": "24"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "claim_reviewed": {
+    "product": "AirPods 2",
+    "version": null,
+    "market": "VN",
+    "part": "earbuds+case",
+    "condition_ref": true,
+    "attributes": [
+     {
+      "attribute": "battery_total",
+      "unit": "h",
+      "value": {
+       "kind": "gt",
+       "role": "measurement",
+       "a": "24"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "note": ""
+  },
+  "EX-18": {
+   "expected": "Refuted",
+   "evidence_set": "a2",
+   "claim_original": {
+    "product": "AirPods 2",
+    "version": null,
+    "market": "VN",
+    "part": "earbuds+case",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "battery_total",
+      "unit": "h",
+      "value": {
+       "kind": "exact",
+       "role": "measurement",
+       "a": "24"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "claim_reviewed": {
+    "product": "AirPods 2",
+    "version": null,
+    "market": "VN",
+    "part": "earbuds+case",
+    "condition_ref": true,
+    "attributes": [
+     {
+      "attribute": "battery_total",
+      "unit": "h",
+      "value": {
+       "kind": "exact",
+       "role": "measurement",
+       "a": "24"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "note": ""
+  },
+  "EX-19": {
+   "expected": "Supported",
+   "evidence_set": "a2",
+   "claim_original": {
+    "product": "AirPods 2",
+    "version": null,
+    "market": "VN",
+    "part": "earbud",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "quick_charge_listen",
+      "unit": "h",
+      "value": {
+       "kind": "exact",
+       "role": "declared_maximum",
+       "a": "3"
+      },
+      "conditions": {
+       "charge_minutes": "15"
+      }
+     }
+    ]
+   },
+   "claim_reviewed": {
+    "product": "AirPods 2",
+    "version": null,
+    "market": "VN",
+    "part": "earbud",
+    "condition_ref": true,
+    "attributes": [
+     {
+      "attribute": "quick_charge_listen",
+      "unit": "h",
+      "value": {
+       "kind": "exact",
+       "role": "declared_maximum",
+       "a": "3"
+      },
+      "conditions": {
+       "charge_minutes": "15"
+      }
+     }
+    ]
+   },
+   "note": ""
+  },
+  "EX-20": {
+   "expected": "NEI-missing",
+   "evidence_set": "a2",
+   "claim_original": {
+    "product": "AirPods 2",
+    "version": null,
+    "market": "VN",
+    "part": "earbud",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "quick_charge_listen",
+      "unit": "h",
+      "value": {
+       "kind": "exact",
+       "role": "measurement",
+       "a": "3"
+      },
+      "conditions": {
+       "charge_minutes": "15"
+      }
+     }
+    ]
+   },
+   "claim_reviewed": {
+    "product": "AirPods 2",
+    "version": null,
+    "market": "VN",
+    "part": "earbud",
+    "condition_ref": true,
+    "attributes": [
+     {
+      "attribute": "quick_charge_listen",
+      "unit": "h",
+      "value": {
+       "kind": "exact",
+       "role": "measurement",
+       "a": "3"
+      },
+      "conditions": {
+       "charge_minutes": "15"
+      }
+     }
+    ]
+   },
+   "note": ""
+  },
+  "EX-21": {
+   "expected": "NEI-conflict",
+   "evidence_set": "sim21",
+   "claim_original": {
+    "product": "SIM-PIN-01",
+    "version": "R1",
+    "market": "TEST",
+    "part": "earbud",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "battery_single",
+      "unit": "h",
+      "value": {
+       "kind": "exact",
+       "role": "declared_maximum",
+       "a": "20"
+      },
+      "conditions": {
+       "anc": "on",
+       "volume": "50",
+       "charge": "single"
+      }
+     }
+    ]
+   },
+   "claim_reviewed": {
+    "product": "SIM-PIN-01",
+    "version": "R1",
+    "market": "TEST",
+    "part": "earbud",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "battery_single",
+      "unit": "h",
+      "value": {
+       "kind": "exact",
+       "role": "declared_maximum",
+       "a": "20"
+      },
+      "conditions": {
+       "anc": "on",
+       "volume": "50",
+       "charge": "single"
+      }
+     }
+    ]
+   },
+   "note": ""
+  },
+  "EX-22": {
+   "expected": "NEI-conflict",
+   "evidence_set": "sim22",
+   "claim_original": {
+    "product": "SIM-MASS-01",
+    "version": "R1",
+    "market": "TEST",
+    "part": "case",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "weight",
+      "unit": "g",
+      "value": {
+       "kind": "exact",
+       "role": "measurement",
+       "a": "32"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "claim_reviewed": {
+    "product": "SIM-MASS-01",
+    "version": "R1",
+    "market": "TEST",
+    "part": "case",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "weight",
+      "unit": "g",
+      "value": {
+       "kind": "exact",
+       "role": "measurement",
+       "a": "32"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "note": ""
+  },
+  "EX-23": {
+   "expected": "NEI-conflict",
+   "evidence_set": "sim23",
+   "claim_original": {
+    "product": "SIM-BT-01",
+    "version": "R1",
+    "market": "TEST",
+    "part": "system",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "bluetooth",
+      "unit": "-",
+      "value": {
+       "kind": "version",
+       "v": "5.2"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "claim_reviewed": {
+    "product": "SIM-BT-01",
+    "version": "R1",
+    "market": "TEST",
+    "part": "system",
+    "condition_ref": false,
+    "attributes": [
+     {
+      "attribute": "bluetooth",
+      "unit": "-",
+      "value": {
+       "kind": "version",
+       "v": "5.2"
+      },
+      "conditions": {}
+     }
+    ]
+   },
+   "note": ""
+  }
+ }
+}
