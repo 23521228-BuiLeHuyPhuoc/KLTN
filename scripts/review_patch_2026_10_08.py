@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Vá tại chỗ hai docx theo rà soát 08/10/2026 (nhánh review/opus-2026-10-08).
+"""ĐÃ THAY THẾ ngày 08/10/2026 bởi redesign_plan_2026_10_08.py; script này không còn áp dụng
+cho docx hiện tại và chỉ giữ lại để truy vết lịch sử.
+
+Vá tại chỗ hai docx theo rà soát 08/10/2026 (nhánh review/opus-2026-10-08).
 
 Lý do: update_thesis_docs.py --apply không tái lập được vì bản gốc nằm trong
 scratch_test/ (bị .gitignore, không có trong repo), nên docx đã commit không
@@ -138,6 +141,8 @@ def build(path, fn):
 
 
 def main():
+    if 'chờ GVHD xác nhận' in text(minidom.parseString(ZipFile(ROOT / PROPOSAL).read('word/document.xml'))):
+        raise SystemExit('Đã thay bằng scripts/redesign_plan_2026_10_08.py; không chạy trên docx hiện tại.')
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--apply', action='store_true')
     args = ap.parse_args()

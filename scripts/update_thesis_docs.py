@@ -355,21 +355,35 @@ def revise_report(doc):
 
 
 def validate_content(name, doc):
+    """Kiểm nội dung theo thiết kế 08/10/2026 (redesign_plan_2026_10_08.py).
+
+    Đổi phía kiểm tra ngày 08/10/2026: chuỗi cũ ('đúng 6 họ' ở Gate 1 01–15/10, '7/4/7 hoặc 8/4/8',
+    mức 300 là phương án) thuộc thiết kế đã thay; xem docs/DOI_CHIEU_THAY_DOI_KE_HOACH.md.
+    """
     s = text(doc)
     if name == PROPOSAL:
         assert [len(t) for t in structure(doc)] == [1, 98]
-        for token in ['120', '180', '300', 'RQ1', 'RQ2', 'RQ3', 'MVP', 'Gate 1', 'Gate 2', 'Gate 3', 'Gate 4', 'Gate 5', 'Gate 6', '6/2/4', '7/4/7', '8/4/8', 'FAR', 'Recall Supported', 'C2', 'thăm dò', 'đúng 6 họ']:
-            assert token in s, token
         assert structure(doc)[1] == [1] * 97 + [2]
+        for token in ['Bản đề xuất điều chỉnh, chờ GVHD xác nhận', '120', 'RQ1', 'RQ2', 'RQ3', 'MVP',
+                      'Gate 1 (08–31/10)', 'Gate 2', 'Gate 3', 'Gate 4', 'Gate 5', 'Gate 6', '6/2/4', '7/4/7',
+                      'FAR', 'Recall Supported', 'C2', 'thăm dò', 'đúng 6 họ', 'inherit_headline',
+                      'ordinary_llm', 'controlled_variant', 'end-to-end', 'DỰ THẢO', 'ngoài Apple',
+                      'cluster bootstrap', 'không phải khẳng định “đầu tiên”']:
+            assert token in s, token
+        for forbidden in ('Gate 1 (01–15/10)', '8/4/8', 'mở rộng 300 phát biểu / 30 họ chỉ khi'):
+            assert forbidden not in s, forbidden
     else:
         assert len(structure(doc)) == 32
-        assert '[Cần bổ sung]' not in s
-        assert 'Chưa có danh sách và số lượng ví dụ' not in s
+        for forbidden in ('[Cần bổ sung]', '[chưa có]', '[chưa xác nhận]', 'Chưa có danh sách và số lượng ví dụ',
+                          'Hồ sơ sử dụng để lập báo cáo', 'GHI CHÚ NỘI BỘ', 'Gate 1 (01–15/10)'):
+            assert forbidden not in s, forbidden
         assert 'Mốc chốt minh chứng: 30/09/2026' in s
         assert s.count('Nhãn minh họa dự kiến') == 23
         for i in range(1, 24):
             assert f'EX-{i:02}' in s
-        assert 'không phải minh chứng hoàn thành tháng 9' in s
+        for token in ('không phải minh chứng hoàn thành tháng 9', 'KHAI BÁO SỬ DỤNG CÔNG CỤ AI',
+                      'inherit_headline', 'Moldova', 'SINH VIÊN ĐIỀN'):
+            assert token in s, token
     for forbidden in ('6–8 họ', '8/2/4', 'bỏ kiểm tra bộ phận và loại giá trị', 'k cuối cùng chốt trên tập kiểm định'):
         assert forbidden not in s, forbidden
     for number in range(7, 12):
