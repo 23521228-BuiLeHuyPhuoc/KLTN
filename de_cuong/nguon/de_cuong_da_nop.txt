@@ -1,0 +1,288 @@
+ĐẠI HỌC QUỐC GIA TP. HỒ CHÍ MINH
+
+CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
+
+TRƯỜNG ĐẠI HỌC
+
+Độc Lập - Tự Do - Hạnh Phúc
+
+CÔNG NGHỆ THÔNG TIN
+
+ĐỀ CƯƠNG CHI TIẾT
+TÊN ĐỀ TÀI:
+-
+
+Tiếng Việt: Phương pháp kiểm chứng thông tin quảng cáo dựa trên bằng
+chứng văn bản cho tai nghe không dây
+
+-
+
+Tiếng Anh: Text-evidence-based method for verifying advertising claims
+about wireless headphones
+
+Cán bộ hướng dẫn: ThS Trần Hồng Nghi
+Thời gian thực hiện: Từ ngày 15/09/2026 đến ngày 31/12/2026
+Sinh viên thực hiện:
+Bùi Lê Huy Phước – 23521228 - 0373025859
+Nội dung đề tài: Nghiên cứu các phương pháp kiểm chứng những thông tin trong nội
+dung quảng cáo về tai nghe không dây do các mô hình ngôn ngữ lớn (LLM) tạo ra, sử
+dụng tài liệu văn bản về tai nghe không dây làm bằng chứng. Đề tài thực hiện thu thập dữ
+liệu, tách thông tin quảng cáo, truy hồi bằng chứng, trích xuất thông số và điều kiện áp
+dụng, sau đó gán nhãn Supported (đủ bằng chứng), Refuted (bị bác bỏ) hoặc NEI (chưa
+đủ bằng chứng). Phương pháp đề xuất sẽ được so sánh với các phương pháp nền để xem
+khả năng kiểm chứng quảng cáo có chính xác hơn hay không.
+Mục tiêu:
+-
+
+Thu thập các quảng cáo về tai nghe không dây do LLM tạo ra và tài liệu tham chiếu
+của đúng sản phẩm được quảng cáo để làm bằng chứng kiểm chứng.
+
+-
+
+Xây dựng hệ thống tự động tách quảng cáo thành từng thông tin có thể kiểm tra
+
+1
+
+-
+
+Sử dụng BM25 để tìm và xếp hạng các đoạn nguồn liên quan, nhằm chọn ra top-k
+đoạn có khả năng chứa bằng chứng cho từng thông tin.
+
+-
+
+Xây dựng phương pháp P, trong đó LLM trích xuất thông tin và Python dùng bộ
+quyết định A–B–C để gán nhãn: A kiểm tra đúng sản phẩm và thông số, B kiểm tra
+đúng điều kiện áp dụng. Điều kiện bị thiếu được giữ là UNKNOWN, không tự
+động xem là khớp. C tổng hợp bằng chứng để kết luận Supported, Refuted hoặc
+NEI.
+
+-
+
+Xây dựng và so sánh P với B0 (LLM tự đọc bằng chứng và gán nhãn) và B1 (LLM
+nhận thông tin đã cấu trúc nhưng vẫn tự gán nhãn), nhằm xác định A–B–C có giúp
+giảm chấp nhận nhầm quảng cáo hay không.
+
+Phạm vi: Kiểm chứng các thông tin trong quảng cáo tiếng Việt do LLM tạo về tai nghe
+không dây, tập trung vào thời lượng pin, thời gian sạc, khối lượng, chống ồn và phiên bản
+Bluetooth. Hệ thống chỉ sử dụng tài liệu văn bản của đúng sản phẩm làm bằng chứng.
+Đối tượng: Các phương pháp kiểm chứng tuyên bố quảng cáo do LLM tạo bằng bằng
+chứng văn bản, tập trung phát hiện thông số không phù hợp với tài liệu của sản phẩm hoặc
+phiên bản được quảng cáo, cũng như các thông số được áp dụng sai điều kiện.
+Phương pháp thực hiện:
+-
+
+Khảo sát các nghiên cứu về kiểm chứng bài đăng quảng cáo [1], kiểm chứng từng
+phát biểu nhỏ [2], kiểm chứng phát biểu chứa số liệu [3], cũng như xử lý sự không
+chắc chắn và xung đột giữa các bằng chứng [4], [5].
+
+-
+
+Thu thập quảng cáo do LLM (mô hình ngôn ngữ lớn) tạo và tài liệu sản phẩm; sau
+đó gán nhãn Supported (đủ bằng chứng xác nhận), Refuted (có bằng chứng bác
+bỏ) hoặc NEI (chưa đủ bằng chứng kết luận).
+
+-
+
+Tách nội dung quảng cáo thành các phát biểu nhỏ có thể kiểm chứng độc lập, đồng
+thời giữ lại ngữ cảnh để không làm thay đổi ý nghĩa ban đầu, giống như hướng
+kiểm chứng từng phát biểu nhỏ của FactLens [2].
+
+2
+
+-
+
+Sử dụng BM25 làm phương pháp truy hồi nền để xếp hạng các đoạn tài liệu
+theo mức độ liên quan; cách áp dụng BM25 được tham khảo từ giai đoạn đầu
+trong quy trình truy hồi bằng chứng của Fathom [6].
+
+-
+
+Xây dựng quy trình tách thông tin, tìm bằng chứng bằng BM25 (thuật toán tìm
+kiếm và xếp hạng văn bản), trích xuất thông tin bằng LLM và quyết định nhãn bằng
+A–B–C (A: kiểm tra đúng đối tượng; B: kiểm tra đúng điều kiện; C: tổng hợp bằng
+chứng và gán nhãn).
+
+-
+
+Cài đặt và so sánh B0 (LLM đọc trực tiếp rồi gán nhãn), B1 (LLM nhận thông tin
+có cấu trúc rồi gán nhãn) và P (LLM trích xuất thông tin, Python dùng A–B–C để
+gán nhãn).
+
+-
+
+Đánh giá bằng FAR (tỷ lệ chấp nhận nhầm), Precision (độ chính xác của dự đoán),
+Recall (khả năng tìm đủ mẫu đúng) và F1 (chỉ số cân bằng giữa Precision và
+Recall) để xác định P có tốt hơn B0 và B1 hay không.
+
+Kết quả mong đợi:
+-
+
+Bộ dữ liệu gồm các thông tin quảng cáo, tài liệu làm bằng chứng và nhãn kiểm
+chứng.
+
+-
+
+Hệ thống trả về nhãn Supported (đủ bằng chứng), Refuted (bị bằng chứng bác bỏ)
+hoặc NEI (chưa đủ bằng chứng), kèm đoạn nguồn và lý do.
+
+-
+
+Ba phiên bản B0, B1 và P hoạt động được trên cùng bộ dữ liệu.
+
+-
+
+Báo cáo thực nghiệm xác định phương pháp P có giảm FAR (tỷ lệ chấp nhận nhầm)
+so với B0 và B1 mà không bỏ sót quá nhiều thông tin đúng hay không.
+
+-
+
+Website minh họa cho phép người dùng tạo quảng cáo và xem kết quả kiểm chứng.
+
+Kế hoạch thực hiện: Nhóm có 1 thành viên
+-
+
+Tháng 09/2026:
++ Khảo sát các nghiên cứu về kiểm chứng thông tin, truy hồi bằng chứng, kiểm
+chứng phát biểu chứa số liệu và suy luận có điều kiện.
++ Xây dựng tiêu chí chọn nguồn, cấu trúc lưu dữ liệu và hướng dẫn gán nhãn.
+
+3
+
++ Soạn ít nhất 20 ví dụ gán nhãn minh họa cho các trường hợp đúng, sai đối
+tượng, sai điều kiện, thiếu và xung đột bằng chứng. Khi tách thông tin quảng
+cáo, phải giữ lại sản phẩm, phiên bản, thuộc tính và điều kiện cần thiết để
+phát biểu không thay đổi ý nghĩa.
++ Kiểm tra tài nguyên máy và thử các LLM mã nguồn mở có kích thước phù
+hợp để thử trên bộ pilot.
+-
+
+Tháng 10/2026:
++ Thu thập bộ pilot (bộ thử ban đầu) khoảng 60 phát biểu thuộc 5-10 mẫu tai
+nghe không dây, kèm tài liệu và đường dẫn đến nguồn chính thức của đúng
+sản phẩm và phiên bản được quảng cáo.
++ Tách quảng cáo thành từng phát biểu có thể kiểm chứng độc lập, đồng thời
+giữ lại đầy đủ sản phẩm, phiên bản, thuộc tính và điều kiện áp dụng.
++ Chia tài liệu thành các đoạn nhưng giữ thông số cùng điều kiện đi kèm.
++ Gán nhãn thủ công và lưu lý do cho từng thông tin.
++ Xây dựng mô-đun truy hồi BM25 để xếp hạng và chọn top-k đoạn nguồn
+liên quan.
++ Xây dựng B0 (LLM đọc trực tiếp thông tin và bằng chứng rồi tự gán nhãn).
++ Phân tích lỗi trên bộ pilot để điều chỉnh hướng dẫn nhãn và cấu trúc dữ liệu.
+
+-
+
+Tháng 11/2026:
++ Mở rộng và hoàn thiện bộ dữ liệu chính theo quy mô khả thi sau khi
+chốt thử trên bộ pilot.
++ Chia dữ liệu theo họ sản phẩm thành tập phát triển, tập kiểm định và tập
+kiểm tra cuối.
++ Xây dựng chức năng dùng LLM trích xuất sản phẩm, phiên bản, bộ phận,
+thông số, giá trị, đơn vị và điều kiện áp dụng.
++ Sử dụng Python để chuẩn hóa tên sản phẩm, phiên bản, giá trị và đơn vị đo
+về dạng biểu diễn nhất quán trước khi so sánh.
+
+4
+
++ Xây dựng mô-đun A để kiểm tra phát biểu và bằng chứng có khớp về sản
+phẩm, phiên bản, bộ phận, loại thông số và đơn vị hay không.
++ Xây dựng mô-đun B để kiểm tra đúng và đủ điều kiện áp dụng.
++ Xây dựng mô-đun C để tổng hợp bằng chứng và quyết định nhãn. Nếu các
+nguồn cùng phạm vi xung đột và chưa thể giải quyết thì gán NEI; nếu có
+bằng chứng bác bỏ trực tiếp thì gán Refuted; nếu bằng chứng hỗ trợ đầy đủ
+thì gán Supported; các trường hợp còn lại gán NEI.
++ Hoàn thiện P (LLM trích xuất thông tin, Python dùng A–B–C để gán nhãn).
++ Xây dựng B1 (LLM nhận thông tin đã được cấu trúc nhưng vẫn tự gán
+nhãn).
++ Xây dựng các phiên bản lần lượt bỏ đi A, B hoặc C để đánh giá vai trò của
+từng thành phần A-B-C khi mất đi.
++ Để bảo đảm so sánh công bằng, B0, B1 và P sử dụng cùng phát biểu, cùng
+top-k đoạn bằng chứng, cùng LLM và cùng cấu hình. B1 và P nhận cùng
+thông tin đã được cấu trúc; điểm khác nhau là B1 để LLM quyết định nhãn,
+còn P sử dụng mã Python và bộ quyết định A–B–C.
++ Chọn mô hình, giá trị k và các ngưỡng trên tập kiểm định; sau đó giữ cố
+định cấu hình.
+-
+
+Tháng 12/2026:
++ Chạy B0, B1, P, P−A và P−B trên cùng dữ liệu để đánh giá vai trò của
+từng thành phần.
++ Tính FAR (tỷ lệ chấp nhận nhầm), Precision (độ chính xác của dự đoán),
+Recall (khả năng tìm đủ mẫu đúng), F1 và Macro-F1.
++ So sánh khả năng tìm bằng chứng của BM25 bằng Recall@k (tỷ lệ tìm đủ
+bằng chứng trong k đoạn đầu).
++ Phân tích các lỗi sai sản phẩm, sai phiên bản, sai điều kiện, thiếu bằng chứng
+và xung đột nguồn.
+
+5
+
++ Kiểm tra P có giảm chấp nhận nhầm so với B0 và B1 mà không bỏ sót quá
+nhiều thông tin đúng hay không.
++ Tích hợp phương pháp P vào website để người dùng nhập quảng cáo và xem
+nhãn, bằng chứng, lý do.
++ Hoàn thiện luận văn, biểu đồ, bảng kết quả, hướng dẫn cài đặt và hướng dẫn
+chạy lại.
++ Kiểm tra toàn bộ mã nguồn, dữ liệu trước ngày 31/12/2026.
+Tài liệu tham khảo
+[1] T. T. Nguyen, H. Nguyen Thi Phuong, T. P. Le, and B. T. Nguyen, “Fact-checking for
+online advertisement posts,” in Proceedings of the 38th Pacific Asia Conference on
+Language, Information and Computation (PACLIC), 2024, pp. 398–406. [Online].
+Available: https://aclanthology.org/2024.paclic-1.40/
+[2] K. Mitra, D. Zhang, S. Rahman, and E. Hruschka, “FactLens: Benchmarking finegrained fact verification,” in Findings of the Association for Computational Linguistics:
+ACL 2025, 2025, pp. 18085–18096. https://doi.org/10.18653/v1/2025.findings-acl.929
+[3] P. Chungkham, V. V, V. Setty, and A. Anand, “Think right, not more: Test-time
+scaling for numerical claim verification,” in Findings of the Association for
+Computational
+
+Linguistics:
+
+EMNLP
+
+2025,
+
+2025,
+
+pp.
+
+24345–24363.
+
+https://doi.org/10.18653/v1/2025.findings-emnlp.1322
+[4] J. Sun, G. Warren, I. Shklovski, and I. Augenstein, “Explaining sources of uncertainty
+in automated fact-checking,” in Proceedings of the 64th Annual Meeting of the
+Association
+
+for
+
+Computational
+
+Linguistics
+
+(ACL),
+
+2026,
+
+pp.
+
+45510–45534.
+
+https://doi.org/10.18653/v1/2026.acl-long.2110
+[5] S. Zhang et al., “CoVer: Conflict-aware claim verification,” arXiv preprint
+arXiv:2609.00508, 2026. [Online]. Available: https://arxiv.org/abs/2609.00508
+
+6
+
+[6] F. B. Rashid and S. Hakak, “Fathom: A fast and modular RAG pipeline for factchecking,” in Proceedings of the Eighth Fact Extraction and VERification Workshop
+(FEVER), 2025, pp. 258–265. https://doi.org/10.18653/v1/2025.fever-1.20
+Xác nhận của CBHD
+
+TP. HCM, ngày 15 tháng 09 năm 2026
+
+(Ký tên và ghi rõ họ tên)
+
+Sinh viên
+
+Phước
+Bùi Lê Huy Phước
+
+7
+
+
