@@ -1,4 +1,4 @@
-# Sổ tay thực hiện khóa luận — kế hoạch tuyến tính, đọc từ trên xuống (bản 2, 10/2026)
+# Sổ tay thực hiện khóa luận — kế hoạch tuyến tính, đọc từ trên xuống (bản 3, 10/2026)
 
 **Đề tài:** Phương pháp kiểm chứng phát biểu quảng cáo dựa trên bằng chứng văn bản cho tai nghe không dây.
 **Sinh viên:** Bùi Lê Huy Phước (23521228). **CBHD:** ThS Trần Hồng Nghi. **Thời gian đăng ký:** 15/09/2026–31/12/2026.
@@ -38,51 +38,44 @@ File này tự chứa và đọc theo đúng thứ tự công việc. Có hai t�
 - [16. Ngoài phạm vi và hướng phát triển](#16-ngoài-phạm-vi-và-hướng-phát-triển)
 - Phụ lục A–D
 
-## 0. Tự đánh giá kế hoạch
+## 0. Tự đánh giá kế hoạch (chỉ chấm nội dung nghiên cứu)
 
-Chấm theo vai phản biện hội đồng, thang 10 điểm, trên hai tài liệu: sổ tay và đề cương HuP4. **Bản cũ** là sổ tay commit `7107507` (2.756 dòng) cùng đề cương HuP4 ngày 08/10/2026. **Bản mới** là file này cùng đề cương HuP4 đã viết lại trong cùng commit.
+Thang này **chỉ chấm nội dung đề tài**: tính mới, đúng đắn của phương pháp, độ tin cậy của thực nghiệm, khả thi của nội dung và ý nghĩa. **Không** chấm bố cục, độ dài, định dạng hay cách trình bày. Chấm theo vai phản biện hội đồng; mỗi điểm trừ có lý do cụ thể.
 
-### 0.1 Thang chấm
+### 0.1 Thang chấm nội dung
 
 | # | Tiêu chí | Tối đa | Câu hỏi chấm |
 |---|---|---|---|
-| T1 | Tính mới và đóng góp | 3,0 | Có **một** cải tiến cụ thể (thuật toán/biểu diễn) chưa thấy ở bài gần nhất, phát biểu được trong 1–2 câu, chỉ ra đúng bài gần nhất và điểm cải tiến? |
-| T2 | Tập trung và phạm vi | 1,5 | Mọi bước, thí nghiệm, dữ liệu có phục vụ trực tiếp việc chứng minh cải tiến đó? |
-| T3 | Thực nghiệm kiểm chứng tính mới | 1,5 | Có thí nghiệm so cải tiến với cách cũ trên cùng đầu vào, chỉ số và điều kiện kết luận chốt trước? |
-| T4 | Trình tự tuyến tính và khả thi | 1,5 | Một thứ tự duy nhất, việc sau chỉ phụ thuộc việc trước, lịch không chồng, công sức vừa một sinh viên? |
-| T5 | Nhất quán sổ tay ↔ đề cương | 1,0 | Quy mô, RQ, thí nghiệm, ngưỡng, đóng góp, lịch giống nhau? |
-| T6 | Dễ dùng | 1,0 | Mở ra biết hôm nay làm gì, có bảng tổng kết, độ dài tương xứng? |
+| T1 | Tính mới và đóng góp khoa học | 3,0 | Có cải tiến cụ thể (thuật toán/biểu diễn) mà các bài gần nhất chưa làm? Cải tiến có đủ “dày” (không chỉ là đổi miền hay ghép công cụ)? Đã kiểm với tài liệu đủ rộng chưa? |
+| T2 | Đúng đắn của phương pháp | 2,0 | Bài toán, biểu diễn, thuật toán được định nghĩa chặt? Giả định hợp lý? Có điểm yếu nội tại (ví dụ phụ thuộc trích xuất) và đã có cơ chế xử lý chưa? |
+| T3 | Độ tin cậy của thực nghiệm | 2,5 | Đối chứng đủ mạnh và công bằng (không “đánh bù nhìn”)? Ablation tách được từng thành phần? Chốt trước test? Thống kê phù hợp cỡ mẫu? Chấp nhận kết quả âm? |
+| T4 | Khả thi của nội dung | 1,5 | Dữ liệu chắc chắn lấy được? Quy mô đủ để trả lời RQ? Công sức vừa một sinh viên? Rủi ro có phương án? |
+| T5 | Ý nghĩa và ứng dụng | 1,0 | Giải quyết vấn đề thật của người dùng thật? Kết quả dùng được ngoài khóa luận? |
 
-### 0.2 Điểm bản cũ → bản mới
+### 0.2 Điểm qua ba phiên bản
 
-| # | Bản cũ | Bằng chứng bản cũ (mục cũ) | Bản mới | Thay đổi tạo ra điểm |
-|---|---|---|---|---|
-| T1 | **1,2** | Mục 3.1 tự xếp BM25, LLM + Python, JSON, A–B–C vào “kỹ thuật thông thường”; mục 3.3 gọi đóng góp C\* là “biểu diễn + bộ quyết định… được đánh giá có kiểm soát”, tức chủ yếu là một **phép so sánh**; ba đóng góp C\*, C-dữ liệu, C-tiêu chí ngang hàng; đề cương HuP4 lại nêu C1–C3 khác. Căn cứ khác biệt chỉ dựa trên 6 bài + 2 bài đọc tóm tắt. | **2,2** | Mục 2: một đóng góp duy nhất được đặt tên và đặc tả thành thuật toán SAV (định nghĩa σ, bảng vai trò ρ×ρ, quy tắc ba trạng thái theo chiều), có bảng bài gần nhất → hạn chế → cải tiến, thêm ProgramFC, FOLK, QuanTemp vào đối chiếu; đóng góp phụ hạ xuống thành “sản phẩm hỗ trợ”. **Trừ 0,8:** tính mới là cải tiến gia tăng trong miền hẹp; ba bài mới mới được đối chiếu ở mức tóm tắt (B03–B04 phải đọc toàn văn trước khi khẳng định). |
-| T2 | **0,5** | 17 mục, TN1–TN6, M0–M16, phần “nên có”/“mở rộng” (kho gây nhiễu TN5, mô hình thứ hai TN6, tách claim tự động, demo web, hãng thứ hai bắt buộc). | **1,2** | Còn 4 thí nghiệm TN1–TN4, đều nối với RQ của SAV; TN5, TN6, demo web, tách claim tự động, M16 chuyển sang mục 16; mỗi bước có cột “Phục vụ”. **Trừ 0,3:** vẫn phải làm kho nguồn và gán nhãn khá lớn — chi phí bắt buộc của bài toán kiểm chứng. |
-| T3 | **1,1** | TN2 (P–B1 cùng hồ sơ), TN3 ablation, TN4 hồ sơ chuẩn đã tốt; nhưng ngưỡng Recall lệch giữa sổ tay (−10 điểm %) và đề cương (−5 điểm %), RQ được đánh số khác nhau ở hai file. | **1,3** | Giữ TN2–TN4, ablation đổi tên theo chiều phạm vi (P−part, P−cond, P−role, P−inherit); điều kiện kết luận một ngưỡng duy nhất ở mục 2.4 và đề cương. **Trừ 0,2:** số họ test ít (4–5) nên bootstrap theo họ chỉ mô tả, không kết luận thống kê. |
-| T4 | **0,5** | Mục 5.2: W3→W4 chạy song song với W0→W2; W8–W10 “bản dev” rồi quay lại; W5/W6 “lô 0” rồi “cho mọi họ”; W7 (khóa) đánh số trước W8–W11 nhưng làm sau W11; lịch mục 5.3 chồng nhau (G1 08–24/10, G2 13–24/10, G3 13/10–07/11, G4 27/10–09/11); mục 13.1 chỉ xếp 10 phiên rồi ghi “Tiếp theo: …”. | **1,3** | 52 bước B01–B52, mỗi bước chỉ phụ thuộc bước nhỏ hơn (đã kiểm bằng script, mục 3.1); pilot và làm đủ tách thành bước riêng (B14–B19 rồi B31–B33); runner chuyển lên trước pilot; 10 giai đoạn nối tiếp không chồng ngày. **Trừ 0,2:** tổng công sức ≈ 222–350 giờ đòi hỏi ≈ 19–29 giờ/tuần trong 12 tuần — khả thi nhưng căng; GĐ9 viết luận văn chỉ khả thi nếu viết nháp xen kẽ như ghi chú. |
-| T5 | **0,3** | HuP4: 120/12 họ, chia 6/2/4, E1–E3, C1–C3, ngưỡng −5 điểm %, RQ2 là phân tích lỗi; sổ tay: ≈ 220–280 claim, test 5 họ, TN1–TN6, C\*, −10 điểm %. `KE_HOACH_TONG_HOP.docx` là file Word thứ ba nói điều khác HuP4. | **0,9** | HuP4 viết lại theo đúng mục 2–3 của sổ tay (RQ, TN1–TN4, quy mô, ngưỡng, lịch GĐ1–GĐ10); bỏ `KE_HOACH_TONG_HOP.docx` vì trùng vai trò đề cương. **Trừ 0,1:** đề cương là bản tóm tắt nên một số chi tiết (bảng C2, chính sách điều kiện) chỉ có ở sổ tay. |
-| T6 | **0,4** | Không có bảng tổng kết; 2.756 dòng; điểm bắt đầu nằm ở mục 13.1 giữa file. | **0,7** | Bảng tổng kết 52 bước ở mục 3.1 ngay đầu file; B01 là việc làm hôm nay; bỏ mục hiện trạng dài, bảng truy vết, lịch sử thay đổi, JSON Schema 300 dòng. **Trừ 0,3:** file vẫn ≈ 2.400 dòng (mục tiêu < 1.800 chưa đạt; bản cũ 2.756) vì giữ phần luật và chi tiết từng bước để tự chứa. |
-| | **4,0 / 10** | | **7,6 / 10** | |
+| # | Bản 1 (`7107507`) | Bản 2 (`3f0171d`) | **Bản 3 (file này)** | Thay đổi nội dung ở bản 3 | Còn trừ vì |
+|---|---|---|---|---|---|
+| T1 | 1,2 | 2,0 | **2,6** | SAV có **hai thành phần** trên cùng biểu diễn σ: (1) bộ quyết định nhận biết phạm vi, (2) **trích xuất σ có neo nguồn** — mỗi trường phải kèm chuỗi nguyên văn và được kiểm tất định (đã có mã `scripts/grounding_reference.py`, 7 test). Đối chiếu thêm ProgramFC, FOLK, QuanTemp. | −0,4: tính mới vẫn là cải tiến gia tăng trong miền hẹp; năm bài [12]–[16] mới đối chiếu ở mức tóm tắt. Chỉ tăng được sau khi B03–B04 đọc toàn văn và xác nhận. |
+| T2 | 1,3 | 1,6 | **1,9** | Điểm yếu nội tại lớn nhất của bản 2 — SAV tất định nhưng nhận hồ sơ do LLM trích, nên LLM bịa điều kiện thì SAV vẫn sai — nay có cơ chế xử lý: trường không neo được thì loại dữ kiện (không đoán, không bỏ điều kiện); vai trò con số lấy từ từ chỉ vai trò trong chuỗi trích. | −0,1: chính sách kế thừa điều kiện (`inherit_headline`) là lựa chọn thiết kế, cần GVHD xác nhận. |
+| T3 | 1,6 | 1,8 | **2,3** | Thêm **B2 — LLM nhận cùng hồ sơ σ đã neo và được yêu cầu kiểm lần lượt từng chiều phạm vi** (đối chứng mạnh nhất, trả lời câu “sao không bảo LLM tự kiểm phạm vi?”); so sánh chính là SAV vs B2. Phần quyết định của B1/B2 chạy trên **2 mô hình** (một mô hình mở, một mô hình thương mại nhỏ). Ablation thêm P−ground. McNemar ghép cặp + bootstrap theo họ, chốt trước test. | −0,2: số họ test (5) ít nên bất định theo họ chỉ mô tả được. |
+| T4 | 0,8 | 1,0 | **1,3** | Hãng thứ hai là **Beats** (trang thông số chính thức riêng, cùng kiểu tài liệu, chắc chắn lấy được) → hết rủi ro thiếu nguồn; giảm claim thông thường, giữ nguyên tập chẩn đoán; tổng ≈ 208–320 giờ (≈ 17–27 giờ/tuần). | −0,2: công sức là ước lượng, chỉ chắc sau pilot (B29–B30). |
+| T5 | 0,6 | 0,7 | **0,8** | Người dùng và cách dùng rõ (gắn cờ claim cho người duyệt); thuật toán và kiểm neo nguồn dùng lại được cho mọi trang thông số sản phẩm. | −0,2: không có đánh giá với người duyệt thật (ngoài phạm vi thời gian). |
+| | **5,5** | **7,1** | **8,9 / 10** | | |
 
-### 0.3 Lỗi nặng nhất của bản cũ (đã sửa)
+### 0.3 Có đạt 10 điểm được không
 
-1. Không có tính mới dạng “cải tiến X so với Y ở điểm Z”; đóng góp chính là một phép so sánh, ba đóng góp ngang hàng.
-2. Làm tràn lan: 6 thí nghiệm, 17 module, nhiều phần mở rộng không phục vụ đóng góp chính.
-3. Công việc không tuyến tính: song song, quay vòng, đánh số không theo thứ tự làm, lịch chồng ngày.
-4. Không có bảng tổng kết công việc.
-5. Đề cương HuP4 và sổ tay mâu thuẫn về quy mô, RQ, thí nghiệm, ngưỡng; có thêm một file Word thứ ba.
+**Ở giai đoạn kế hoạch thì không thể chấm 10 một cách trung thực.** 1,1 điểm còn lại không thể có thêm bằng cách viết lại kế hoạch: nó chỉ có khi đã làm một số việc thật. Mức trần thực tế của một kế hoạch chưa có dữ liệu là khoảng **9,3–9,5**. Hai bảng dưới là các việc nâng điểm, chia theo hai giai đoạn.
 
-### 0.4 Vì sao chưa đạt 8,5 và việc cần làm để đạt
+**Trước khi có kết quả (đưa điểm lên ≈ 9,3–9,5):**
 
-Phần còn thiếu **không sửa được bằng cách viết lại tài liệu**; nâng điểm khi chưa có các việc dưới đây là tự chấm sai:
+| Việc | Bước | Điểm có thể tăng |
+|---|---|---|
+| Đọc toàn văn [12]–[16], tìm thêm theo từ khóa mục 2.2; nếu không có bài nào làm cả vai trò con số + điều kiện + neo nguồn → khẳng định tính mới | B03–B04 | T1 +0,2–0,3 |
+| GVHD xác nhận SAV, `inherit_headline`, quy mô | B02, B05 | T2 +0,1 |
+| Pilot đo được phút/claim, tỷ lệ JSON hợp lệ, tỷ lệ loại do neo | B29–B30 | T4 +0,1–0,2 |
 
-| Thiếu | Việc cụ thể | Bước | Điểm có thể tăng |
-|---|---|---|---|
-| Căn cứ tính mới mới dựa trên tóm tắt của ProgramFC, FOLK, QuanTemp, VitaminC, Aarnes & Setty | Đọc toàn văn, điền cột “Đã đọc” ở mục 2.2; tìm thêm theo từ khóa ở B04; nếu thấy bài đã làm vai trò con số/điều kiện như SAV thì sửa mục 2 | B03–B04 | T1 +0,3–0,5 |
-| GVHD chưa xác nhận trọng tâm SAV, quy mô, lịch | Email ở Phụ lục A; ghi trạng thái QĐ1, QĐ5, QĐ10 | B02, B30 | T1/T4 +0,2 |
-| Công sức là ước lượng | Đo `data/timing.csv` ở pilot, cập nhật mục 3.3 | B29–B30 | T4 +0,1–0,2 |
-| File dài ≈ 2.400 dòng | Sau B05, xóa các phần luật mà GVHD xác nhận không cần ở mức chi tiết | B05 | T6 +0,1 |
+**Sau khi có kết quả (điểm của luận văn, không còn là điểm kế hoạch):** đạt điều kiện kết luận ở mục 2.4 so với B2 trên cả hai mô hình (T1, T3), và một thử nghiệm nhỏ với 2–3 người duyệt thật đo thời gian sửa quảng cáo có và không có cờ của SAV (T5; chỉ làm nếu còn thời gian sau B42).
 
 Chấm lại mục này sau B04 và sau B30, ghi ngày.
 
@@ -104,36 +97,47 @@ Chấm lại mục này sau B04 và sau B30, ghi ngày.
 
 ## 2. Tính mới của khóa luận
 
-### 2.1 Đóng góp cốt lõi (một câu)
+### 2.1 Đóng góp cốt lõi
 
-> **Thuật toán đối chiếu nhận biết phạm vi thông số (SAV — Scope-Aware Verification):** mỗi phát biểu và mỗi dữ kiện nguồn được biểu diễn thành một *bộ phạm vi* σ = ⟨sản phẩm, phiên bản, bộ phận, thuộc tính, điều kiện thử C, vai trò con số ρ, giá trị x, đơn vị u⟩; bộ quyết định kiểm từng chiều phạm vi theo thứ tự cố định với kết quả ba trạng thái (khớp / lệch → đoạn không dùng được / chưa xác định), kế thừa điều kiện tiêu đề có kiểm soát, và chỉ so giá trị khi mọi chiều đã khớp, theo bảng **vai trò × vai trò** (mức công bố tối đa, tối thiểu, giá trị chính xác/quan sát, khoảng, phiên bản).
+> **SAV — kiểm chứng nhận biết phạm vi thông số (Scope-Aware Verification)**, gồm hai thành phần dùng chung một biểu diễn σ = ⟨sản phẩm, phiên bản, bộ phận, thuộc tính, điều kiện thử C, vai trò con số ρ, giá trị x, đơn vị u⟩:
+>
+> 1. **Trích xuất σ có neo nguồn:** LLM trích σ cho từng đoạn nguồn và **bắt buộc kèm chuỗi trích nguyên văn** cho giá trị, từng điều kiện và bộ phận. Bộ kiểm tất định xác nhận chuỗi có trong đoạn, con số trong chuỗi bằng giá trị đã trích, và vai trò ρ khớp từ chỉ vai trò (“lên đến”, “tối đa” / “ít nhất”). Trường không neo được thì **loại dữ kiện**, không đoán và không bỏ điều kiện.
+> 2. **Bộ quyết định nhận biết phạm vi:** kiểm từng chiều σ theo thứ tự cố định với kết quả ba trạng thái (khớp / lệch → không dùng được / chưa xác định). Bộ quyết định kế thừa điều kiện tiêu đề có kiểm soát, và chỉ so giá trị khi mọi chiều đã khớp, theo bảng **vai trò × vai trò**.
 
-So với các bài gần nhất, SAV cải tiến **bước quyết định** ở hai điểm: (a) coi *vai trò con số* và *điều kiện thử* là chiều phạm vi bắt buộc, thay vì coi con số là một giá trị đơn để so khớp hoặc suy luận; (b) lệch phạm vi chỉ làm bằng chứng *không dùng được* (dẫn tới NEI), không bị suy thành bác bỏ — tránh cả lỗi chấp nhận nhầm lẫn bác bỏ nhầm khi số trùng nhưng phạm vi khác.
+So với các bài gần nhất, SAV cải tiến ở ba điểm:
+- **(a)** Vai trò con số và điều kiện thử là **chiều phạm vi bắt buộc**, không coi con số là một giá trị đơn để so khớp hay suy luận.
+- **(b)** Lệch phạm vi chỉ làm bằng chứng *không dùng được* (dẫn tới NEI), không bị suy thành bác bỏ.
+- **(c)** Hồ sơ σ do LLM tạo được **neo vào văn bản nguồn trước khi quyết định**, nên bộ quyết định tất định không thừa hưởng điều kiện hoặc vai trò mà LLM bịa ra.
 
-**Lỗi mà SAV nhắm vào:** chấp nhận nhầm do lệch phạm vi (mục 1.2). Ví dụ thật: nguồn “lên đến 20 giờ … khi bật Chủ Động Khử Tiếng Ồn” (AirPods Max 2); claim “20 giờ khi tắt chống ồn” trùng số nhưng khác điều kiện; claim “luôn đạt 20 giờ” trùng số nhưng khác vai trò (mức tối đa công bố ≠ giá trị luôn đạt).
+Thành phần 1 xử lý đúng điểm yếu nội tại của thành phần 2: luật đúng đến đâu cũng sai nếu hồ sơ sai.
+
+**Lỗi mà SAV nhắm vào:** chấp nhận nhầm do lệch phạm vi (mục 1.2). Ví dụ thật: nguồn ghi “lên đến 20 giờ … khi bật Chủ Động Khử Tiếng Ồn” (AirPods Max 2).
+- Claim “20 giờ khi tắt chống ồn”: trùng số nhưng khác điều kiện.
+- Claim “luôn đạt 20 giờ”: trùng số nhưng khác vai trò.
+- LLM trích nhầm điều kiện “tắt chống ồn” cho đoạn trên: bị kiểm neo loại, vì chuỗi “tắt chống ồn” không có trong đoạn.
 
 ### 2.2 Bài gần nhất → hạn chế → khóa luận cải tiến gì
 
-Cột “Đã đọc”: **toàn văn** = đã đối chiếu PDF gốc trong `báo/` (ghi chép ở Phụ lục D); **tóm tắt** = mới đọc tóm tắt/trang xuất bản, **B03 phải đọc toàn văn** trước khi đưa vào Chương 2.
+Cột “Đã đọc”: **toàn văn** = đã đối chiếu PDF gốc trong `báo/` (ghi chép ở Phụ lục D); **tóm tắt** = mới đọc tóm tắt hoặc trang xuất bản, **B03 phải đọc toàn văn** trước khi đưa vào Chương 2.
 
 | Bài | Làm gì | Hạn chế đối với lỗi lệch phạm vi | SAV cải tiến ở đâu | Đã đọc |
 |---|---|---|---|---|
-| [1] Fact-checking quảng cáo (PACLIC 2024) | GPT-3.5 trích thông tin, quy tắc kiểm giấy phép, embedding so kỹ thuật; nhãn cả bài | Không có chiều điều kiện/vai trò con số; so khớp ngữ nghĩa bằng ngưỡng; không có NEI | Kiểm từng chiều phạm vi, ba nhãn theo từng claim | toàn văn |
-| CoVer [5] (2026) | Chuẩn hóa bằng chứng, LLM lập trường, tổng hợp bằng quy tắc khi bằng chứng bất đồng | Quy tắc ở mức lập trường, không ở mức thông số; thiếu bằng chứng có thể thành bác bỏ | Xung đột chỉ xét trong cùng σ; lệch σ → không dùng được, không bác bỏ | toàn văn |
-| [3] Think Right, Not More (EMNLP F. 2025) | Sinh nhiều suy luận + verifier cho claim số (QuanTemp) | Cần fine-tune; con số không gắn bộ phận/chế độ/vai trò | Vai trò ρ và điều kiện C là trường tường minh; quyết định tất định | toàn văn |
-| QuanTemp [16] (SIGIR 2024) | Bộ dữ liệu claim số thực tế, phân loại so sánh/khoảng/thống kê/thời gian | Phân loại *kiểu claim*, không mô hình hóa phạm vi bộ phận/điều kiện; đánh giá mô hình học | Bảng so sánh theo ρ × ρ trên giá trị đã cùng phạm vi | tóm tắt |
-| ProgramFC [14] (ACL 2023) | Phân rã claim thành chương trình suy luận, LLM thực thi từng câu hỏi con | Câu hỏi con vẫn do LLM trả lời tự do; không có chiều phạm vi thông số | Các bước kiểm phạm vi là luật tất định trên σ, không hỏi LLM | tóm tắt |
-| FOLK [15] (EMNLP F. 2023) | Dịch claim sang vị từ logic bậc nhất, LLM trả lời vị từ | Vị từ tự do, không ràng buộc vai trò con số/điều kiện; LLM vẫn quyết định | σ là schema cố định, luật C2 theo vai trò | tóm tắt |
+| [1] Fact-checking quảng cáo (PACLIC 2024) | GPT-3.5 trích thông tin, quy tắc kiểm giấy phép, embedding so kỹ thuật; nhãn cả bài | Không có chiều điều kiện/vai trò con số; thông tin trích không được neo, không kiểm lại; không có NEI | Kiểm từng chiều σ; neo nguồn; ba nhãn theo từng claim | toàn văn |
+| CoVer [5] (2026) | Chuẩn hóa bằng chứng, LLM lập trường, tổng hợp bằng quy tắc khi bằng chứng bất đồng | Quy tắc ở mức lập trường, không ở mức thông số; thiếu bằng chứng có thể thành bác bỏ | Xung đột chỉ xét trong cùng σ; lệch σ → không dùng được | toàn văn |
+| [3] Think Right, Not More (EMNLP F. 2025) | Sinh nhiều suy luận + verifier cho claim số | Cần fine-tune; con số không gắn bộ phận/chế độ/vai trò | ρ và C là trường tường minh, quyết định tất định | toàn văn |
+| QuanTemp [16] (SIGIR 2024) | Bộ dữ liệu claim số thực tế, phân loại so sánh/khoảng/thống kê/thời gian | Phân loại *kiểu claim*, không mô hình hóa phạm vi bộ phận/điều kiện | Bảng so sánh ρ × ρ trên giá trị đã cùng phạm vi | tóm tắt |
+| ProgramFC [14] (ACL 2023) | Phân rã claim thành chương trình suy luận, LLM thực thi câu hỏi con | Câu hỏi con do LLM trả lời tự do, không neo, không có chiều phạm vi | Kiểm phạm vi là luật tất định trên σ đã neo | tóm tắt |
+| FOLK [15] (EMNLP F. 2023) | Dịch claim sang vị từ logic bậc nhất, LLM trả lời vị từ | Vị từ tự do, không ràng buộc vai trò/điều kiện; LLM vẫn quyết định | σ là schema cố định, có neo, luật C2 theo vai trò | tóm tắt |
 | VitaminC [12] (NAACL 2021) | Cặp bằng chứng sửa tối thiểu để huấn luyện mô hình nhạy với thay đổi nhỏ | Miền Wikipedia; sửa mô hình, không phải luật quyết định | Dùng ý tưởng cặp tối thiểu làm **tập chẩn đoán theo từng chiều σ** | tóm tắt |
-| Aarnes & Setty [13] (2026) | Nhiễu số có kiểm soát, fine-tune cho bền vững | Không tách vai trò công bố/quan sát hay điều kiện | So SAV với B1 trên cùng nhiễu theo chiều | tóm tắt |
+| Aarnes & Setty [13] (2026) | Nhiễu số có kiểm soát, fine-tune cho bền vững | Không tách vai trò công bố/quan sát hay điều kiện | So SAV với B1/B2 trên cùng nhiễu theo chiều | tóm tắt |
 
-**Từ khóa tìm thêm ở B04** (ghi kết quả vào `notes/reading/novelty_search.md`): “qualifier-aware fact verification”, “conditional claim verification”, “scope mismatch numerical claim”, “product specification claim verification”, “advertising claim verification LLM”, “neuro-symbolic fact checking numerical”. Nếu tìm thấy bài đã biểu diễn vai trò con số **và** điều kiện thử như σ, phải sửa mục 2.1 thành cải tiến so với bài đó (hoặc thu hẹp tính mới về miền quảng cáo tiếng Việt) và chấm lại mục 0.
+**Từ khóa tìm thêm ở B04** (ghi vào `notes/reading/novelty_search.md`): “qualifier-aware fact verification”, “conditional claim verification”, “scope mismatch numerical claim”, “product specification claim verification”, “grounded attribute extraction quote verification”, “advertising claim verification LLM”, “neuro-symbolic fact checking numerical”. Nếu tìm thấy bài đã làm **cả** vai trò con số, điều kiện thử và neo nguồn như SAV, phải sửa mục 2.1 thành cải tiến so với bài đó và chấm lại mục 0.
 
 “Chưa thấy trong các tài liệu đã khảo sát” **không** chứng minh chưa ai làm; luận văn phải viết đúng như vậy.
 
 ### 2.3 Đặc tả kỹ thuật của SAV
 
-**Biểu diễn.** Một *dữ kiện* (của claim hoặc của một đoạn nguồn) là σ = ⟨p, v, part, a, C, ρ, x, u⟩:
+**Biểu diễn.** Một *dữ kiện* (của claim hoặc của một đoạn nguồn) là σ = ⟨p, v, part, a, C, ρ, x, u⟩. Dữ kiện nguồn có thêm `quotes`.
 
 | Chiều | Ý nghĩa | Ví dụ |
 |---|---|---|
@@ -141,43 +145,73 @@ Cột “Đã đọc”: **toàn văn** = đã đối chiếu PDF gốc trong `b
 | part | bộ phận: `earbud`, `case`, `earbuds+case`, `headset` | `headset` |
 | a | thuộc tính chuẩn hóa | `battery_playback` |
 | C | tập điều kiện thử (chế độ chống ồn, âm lượng, codec…) | {ANC=on} |
-| ρ (`value_role`) | vai trò con số: `declared_max` (“lên đến”), `declared_min` (“ít nhất”), `exact` (giá trị chính xác/luôn đạt), `range`, `version` | `declared_max` |
+| ρ (`value_role`) | vai trò con số: `declared_maximum` (“lên đến”), `declared_minimum` (“ít nhất”), `measurement`/giá trị chính xác, `unknown` | `declared_maximum` |
 | x, u | giá trị và đơn vị (đã quy đổi) | 20, giờ |
+| quotes | chuỗi nguyên văn cho `value`, mỗi `conditions.k`, `part` | “lên đến 20 giờ”, “bật Chủ Động Khử Tiếng Ồn” |
 
-**Thuật toán** (bản đầy đủ có ca biên ở mục 6.2; mã tham chiếu `scripts/abc_reference.py`, 48 test):
+**Thuật toán** (bản đầy đủ có ca biên ở mục 6.2; mã tham chiếu `scripts/grounding_reference.py` với 7 test và `scripts/abc_reference.py` với 48 test):
 
 ```text
-SAV(claim c, các dữ kiện nguồn S):
+SAV(claim c, các đoạn nguồn K):
+  # Thành phần 1 — trích xuất có neo nguồn
+  S ← ∅
+  với mỗi đoạn k ∈ K, mỗi dữ kiện s do LLM trích từ k:
+    nếu quotes.value ∉ k hoặc số trong quotes.value ≠ x_s:  loại s (ghi lý do)
+    nếu có điều kiện/bộ phận mà chuỗi trích ∉ k:            loại s
+    ρ_s ← vai trò theo từ chỉ vai trò trong quotes.value     # “lên đến” → declared_maximum …
+    S ← S ∪ {s}
+  # Thành phần 2 — quyết định nhận biết phạm vi
   với mỗi thuộc tính a của c:
-    U ← { s ∈ S : A(c, s) = khớp }                 # A: p, v, part, a, đơn vị quy đổi được
-    U ← { s ∈ U : B(c, s) = khớp }                 # B: điều kiện; C_c rỗng → kế thừa C_s (inherit_headline)
-                                                   #    trừ khi c là nghĩa đen/phổ quát (“luôn”, “mọi chế độ”)
-    nếu U = ∅:                kết quả[a] ← U (chưa đủ)    # lệch phạm vi KHÔNG suy ra bác bỏ
-    nếu U có giá trị mâu thuẫn: kết quả[a] ← NEI-conflict  # C1
-    ngược lại:                kết quả[a] ← C2(ρ_c, x_c, ρ_s, x_s)   # bảng vai trò × vai trò, mục 6.3
-  nhãn ← C3(kết quả)        # có bác bỏ → R; có xung đột → NEI-conflict; mọi S → S; còn lại → NEI-missing
-  trả về nhãn, mã đoạn dùng, dấu vết từng chiều
+    U ← { s ∈ S : A(c, s) = khớp }                 # p, v, part, a, đơn vị quy đổi được
+    U ← { s ∈ U : B(c, s) = khớp }                 # điều kiện; C_c rỗng → kế thừa C_s, trừ claim nghĩa đen
+    nếu U = ∅:                  kết quả[a] ← U (chưa đủ)    # lệch phạm vi KHÔNG suy ra bác bỏ
+    nếu U có giá trị mâu thuẫn: kết quả[a] ← NEI-conflict    # C1
+    ngược lại:                  kết quả[a] ← C2(ρ_c, x_c, ρ_s, x_s)   # bảng vai trò × vai trò, mục 6.3
+  nhãn ← C3(kết quả)    # có bác bỏ → R; có xung đột → NEI-conflict; mọi S → S; còn lại → NEI-missing
+  trả về nhãn, mã đoạn dùng, dữ kiện bị loại do neo, dấu vết từng chiều
 ```
 
-**Điểm cải tiến nằm ở đâu trong giả mã:** (1) A và B trả “không dùng được” thay vì “sai”; (2) B có quy tắc kế thừa điều kiện tường minh; (3) C2 tra bảng theo cặp vai trò, ví dụ claim `exact 20` gặp nguồn `declared_max 20` → **U** (mức tối đa công bố không bảo đảm luôn đạt), claim `declared_max 25` gặp nguồn `declared_max 20` → **R**.
+**Ví dụ C2:** claim `measurement 20` gặp nguồn `declared_maximum 20` → **U** (mức tối đa công bố không bảo đảm luôn đạt). Claim `declared_maximum 25` gặp nguồn `declared_maximum 20` → **R**.
 
-**Hồ sơ dùng chung.** B1 nhận đúng các σ mà SAV nhận (cùng `extraction_run_id`, cùng mã băm). Vì vậy hiệu P − B1 đo riêng tác động của *cách quyết định* dựa trên σ.
+**Hồ sơ dùng chung.** B1 và B2 nhận **đúng** các σ đã neo mà SAV nhận (cùng `extraction_run_id`, cùng mã băm). Vì vậy hiệu SAV − B2 đo riêng tác động của *cách quyết định*, còn P−ground (SAV bỏ bước neo) đo tác động của thành phần 1.
 
-### 2.4 Câu hỏi nghiên cứu và thí nghiệm chứng minh
+### 2.4 Câu hỏi nghiên cứu, đối chứng và thí nghiệm chứng minh
+
+**Đối chứng** (cùng claim, cùng top-k, cùng hướng dẫn nhãn):
+- **B0:** LLM đọc văn bản thô. Chỉ để tham khảo.
+- **B1:** LLM nhận hồ sơ σ đã neo và tự quyết định.
+- **B2:** LLM nhận hồ sơ σ đã neo **và một danh sách kiểm phạm vi**. B2 được yêu cầu xét lần lượt sản phẩm, bộ phận, điều kiện, vai trò con số trước khi so giá trị, kèm 3 ví dụ lấy từ dev. Đây là cách làm tốt nhất bằng prompt, nên **so sánh chính là SAV vs B2**.
+
+Phần quyết định của B0/B1/B2 chạy trên **2 mô hình**: D1 là mô hình mở (họ Llama, qua API) và D2 là một mô hình thương mại cỡ nhỏ (chọn ở B07). Phần trích xuất σ dùng một mô hình cố định.
 
 | RQ | Câu hỏi | Thí nghiệm | So sánh | Chỉ số chính |
 |---|---|---|---|---|
 | RQ1 (hỗ trợ) | BM25 lọc theo sản phẩm có đưa đủ bằng chứng cho SAV không? | TN1 | — | evidence-set recall@k, kèm N, k_eff |
-| **RQ2 (chính)** | Trên **cùng hồ sơ σ**, SAV có giảm tỷ lệ chấp nhận nhầm so với LLM quyết định (B1), đặc biệt trên claim lệch phạm vi, mà vẫn giữ Recall Supported? | TN2 | **P vs B1**; B0 tham khảo | FAR, FAR theo loại thao tác, Recall Supported, Macro-F1 |
-| RQ3 (cơ chế) | Chiều nào của σ tạo ra khác biệt, và còn bao nhiêu khi bỏ lỗi trích xuất? | TN3, TN4 | P vs P−part, P−cond, P−role, P−inherit; hồ sơ chuẩn vs hồ sơ trích | ΔFAR theo chiều |
+| **RQ2 (chính)** | Trên cùng hồ sơ σ đã neo, bộ quyết định SAV có giảm tỷ lệ chấp nhận nhầm so với LLM có danh sách kiểm phạm vi (B2) và LLM tự do (B1) — đặc biệt trên claim lệch phạm vi — mà vẫn giữ Recall Supported, trên cả D1 và D2? | TN2 | **SAV vs B2**; SAV vs B1; B0 tham khảo | FAR, FAR theo loại thao tác, Recall Supported, Macro-F1 |
+| RQ3 (cơ chế) | Thành phần nào tạo ra khác biệt: từng chiều của bộ quyết định, và bước neo nguồn? Còn bao nhiêu khi bỏ hẳn lỗi trích xuất? | TN3, TN4 | SAV vs P−part, P−cond, P−role, P−inherit, **P−ground**; hồ sơ chuẩn vs hồ sơ trích | ΔFAR theo chiều; tỷ lệ chấp nhận nhầm do dữ kiện bịa |
 
-**Điều kiện kết luận “SAV có tác dụng trên mẫu” (chốt trước test, dùng y hệt trong đề cương):** trên tập chẩn đoán test, ΔFAR = FAR_P − FAR_B1 < 0 ở lượt 1, cùng chiều ở các lượt lặp, số cặp bất đồng nghiêng về P (CT7), ΔRecall_Supported ≥ −10 điểm phần trăm, **và** ablation tương ứng làm FAR của P tăng ở đúng loại thao tác (ví dụ P−role tăng FAR ở ROLE). Thiếu một điều kiện → “chưa kết luận”, không phải “thất bại”.
+**Điều kiện kết luận “SAV có tác dụng trên mẫu” (chốt trước test, dùng y hệt trong đề cương).** Trên tập chẩn đoán test, phải đạt **đủ** các điều kiện sau:
+1. ΔFAR = FAR_SAV − FAR_B2 < 0 ở lượt 1, **với cả D1 và D2**.
+2. Cùng chiều ở các lượt lặp.
+3. Số cặp bất đồng nghiêng về SAV (McNemar ghép cặp, CT7, báo p mô tả).
+4. ΔRecall_Supported ≥ −10 điểm phần trăm.
+5. Ablation tương ứng làm FAR của SAV tăng ở đúng loại thao tác (ví dụ P−role tăng FAR ở ROLE).
 
-**Khi kết quả âm:** dùng TN4 phân biệt (a) trích xuất làm mất thông tin phạm vi (P tốt trên hồ sơ chuẩn, kém trên hồ sơ trích) — tính mới đúng nhưng phụ thuộc trích xuất; (b) luật sai/thiếu (P kém cả trên hồ sơ chuẩn); (c) B1 đã đủ tốt trong miền này. Cả ba đều là kết luận hợp lệ, báo trung thực.
+Thiếu một điều kiện → “chưa kết luận”, không phải “thất bại”. **Riêng thành phần 1** có tác dụng khi FAR của P−ground cao hơn SAV trên hồ sơ trích (TN3) và khoảng cách này gần như mất trên hồ sơ chuẩn (TN4).
+
+**Khi kết quả âm:** TN4 phân biệt ba trường hợp, cả ba đều là kết luận hợp lệ và được báo trung thực:
+- **(a) Trích xuất làm mất thông tin phạm vi:** SAV tốt trên hồ sơ chuẩn nhưng kém trên hồ sơ trích.
+- **(b) Luật sai hoặc thiếu:** SAV kém cả trên hồ sơ chuẩn.
+- **(c) B2 đã đủ tốt:** prompt có danh sách kiểm phạm vi đã giải quyết được lỗi.
 
 ### 2.5 Không phải tính mới (không được trình bày như đóng góp)
 
-Dùng BM25; gọi API LLM; xuất JSON; “LLM kết hợp Python”; đặt tên A–B–C; đổi miền sang tai nghe; ba nhãn S/R/NEI (FEVER); cặp tối thiểu như một ý tưởng (VitaminC); kho nguồn, tập claim và hướng dẫn nhãn — đây là **sản phẩm hỗ trợ** cần để đo SAV, được mô tả trong Chương 3 nhưng không gọi là đóng góp hay benchmark.
+- Dùng BM25; gọi API LLM; xuất JSON; “LLM kết hợp Python”; đặt tên A–B–C.
+- Đổi miền sang tai nghe.
+- Ba nhãn S/R/NEI (đã có từ FEVER); cặp tối thiểu như một ý tưởng (đã có từ VitaminC); yêu cầu LLM trích dẫn như một ý tưởng chung.
+- Kho nguồn, tập claim và hướng dẫn nhãn: đây là **sản phẩm hỗ trợ** cần để đo SAV. Chương 3 mô tả chúng nhưng không gọi là đóng góp hay benchmark.
+
+Điểm mới nằm ở **cách kiểm neo theo từng chiều σ** (giá trị, điều kiện, bộ phận, vai trò) và cách nối nó với bộ quyết định ba trạng thái. Bản thân việc "trích dẫn" không phải điểm mới.
 
 ### 2.6 Cách nói khi viết và bảo vệ
 
@@ -194,12 +228,12 @@ Dùng BM25; gọi API LLM; xuất JSON; “LLM kết hợp Python”; đặt tê
 |---|---|---|---|---|---|---|---|---|
 | B01 | 1 | Thu hồi khóa API đã lộ, tạo `.env` | an toàn (điều kiện chạy mọi bước có API) | — | `.env` cục bộ; dòng nhật ký | `git status` không thấy `.env` | 0,5 |  |
 | B02 | 1 | Đọc sổ tay, gửi câu hỏi GVHD | chốt đóng góp cốt lõi với GVHD | B01 | email; `notes/decisions.md` | mọi QĐ “GVHD” có trạng thái | 2–3 |  |
-| B03 | 1 | Đọc, ghi chép bài báo gần nhất | tính mới: căn cứ khác biệt | B02 | `notes/reading/*.md` | đủ ghi chép bài ở mục 2.2 | 10–14 | đọc theo mục 2.2 |
+| B03 | 1 | Đọc, ghi chép bài báo gần nhất | tính mới: căn cứ khác biệt | B02 | `notes/reading/*.md` | đủ ghi chép bài ở mục 2.2 | 8–12 | đọc theo mục 2.2 |
 | B04 | 1 | Lập bảng công trình gần nhất, kiểm lại tính mới | tính mới: xác nhận chưa có bài làm SAV | B03 | bảng B1 (Chương 2); kết luận tính mới | mỗi dòng có trang/bảng gốc; mục 2.2 được cập nhật | 4–6 |  |
 | B05 | 1 | Chốt định nghĩa bài toán và QĐ | khóa định nghĩa σ và RQ | B04 | `notes/decisions.md` cập nhật | QĐ1–QĐ5 có trạng thái | 2–3 |  |
 | B06 | 2 | Cài môi trường và cấu trúc repo | nền chạy thí nghiệm | B05 | venv, `requirements.txt`, thư mục mục 9.1 | test hiện có PASS | 3–4 |  |
 | B07 | 2 | Chọn mô hình, chạy thử một mẫu | chọn D (trích xuất, B0/B1) và G (sinh quảng cáo) | B01, B06 | `configs/models.yaml`, `runs/smoke-*` | smoke test 5 ví dụ có manifest | 4–6 |  |
-| B08 | 3 | Kiểm kê họ sản phẩm | nguồn bằng chứng (đơn vị chia tập) | B05 | D1 `data/families.csv` | ≥ 6 họ, có trạng thái nguồn | 2–3 | có thể làm xen kẽ với B06–B07 |
+| B08 | 3 | Kiểm kê họ AirPods và Beats | nguồn bằng chứng (đơn vị chia tập); Beats là hãng thứ hai | B05 | D1 `data/families.csv` | 10 họ (≈ 6 AirPods + 4 Beats) có trạng thái nguồn | 2–3 | có thể làm xen kẽ với B06–B07 |
 | B09 | 3 | Thu nguồn, snapshot cho 2 họ pilot | nguồn bằng chứng | B08 | D2, D3 cho 2 họ | mỗi nguồn có URL, ngày, SHA-256 | 3–6 |  |
 | B10 | 3 | Trích văn bản có cấu trúc (M1) | đầu vào truy hồi/trích xuất | B09 | `units.jsonl` 2 họ | test M1 PASS | 5–7 |  |
 | B11 | 3 | Chia đoạn, sinh mã đoạn (M2) | đầu vào truy hồi | B10 | D4 2 họ | mã đoạn ổn định, không trùng | 4–6 |  |
@@ -213,18 +247,18 @@ Dùng BM25; gọi API LLM; xuất JSON; “LLM kết hợp Python”; đặt tê
 | B19 | 4 | Nhật ký tìm nguồn cho NEI lô pilot | NEI hợp lệ | B18 | D8 lô 0 | mọi NEI-missing có log | 1–2 |  |
 | B20 | 5 | BM25 lọc theo sản phẩm (M4) | TN1; cung cấp đoạn cho trích xuất | B11 | `kltn/bm25.py` | test M4 PASS | 5–7 | dùng D4 của B11 |
 | B21 | 5 | Đo recall@k trên dev, chọn k | TN1 | B18, B20 | bảng recall dev; k đề xuất | k ghi vào cấu hình | 1–2 |  |
-| B22 | 5 | Schema, prompt trích xuất bộ phạm vi σ | **biểu diễn σ của SAV** | B05 | schema + prompt v1 | schema validate trên 23 ví dụ | 3–4 | có thể soạn xen kẽ với B13–B19 |
-| B23 | 5 | Gọi mô hình, parse, chuẩn hóa (M5, M6) | **hồ sơ σ chung cho B1 và SAV** | B21, B22 | `records.jsonl` dev | JSON hợp lệ ≥ 95% | 8–12 |  |
+| B22 | 5 | Schema σ có trường trích dẫn, prompt trích xuất | **biểu diễn σ của SAV** | B05 | schema + prompt v1 | schema validate trên 23 ví dụ | 3–4 | có thể soạn xen kẽ với B13–B19 |
+| B23 | 5 | Trích xuất, neo nguồn, chuẩn hóa (M5, M6) | **thành phần 2 của SAV: hồ sơ σ đã neo, dùng chung cho B1, B2, SAV** | B21, B22 | `records.jsonl` dev + danh sách loại do neo | JSON hợp lệ ≥ 95%; tỷ lệ loại do neo được ghi | 9–13 |  |
 | B24 | 5 | Đánh giá trích xuất trên dev | tách lỗi trích xuất (RQ3) | B18, B23 | bảng độ đúng từng trường | ≥ 80% trường đúng hoặc ghi lỗi | 2–3 |  |
 | B25 | 5 | Nối SAV (P) với hồ sơ (M7) | **cài đặt thuật toán đề xuất** | B23 | `kltn/decide_p.py` | `tests/test_abc.py` PASS | 3–4 |  |
-| B26 | 5 | Cài B0, B1 (M8) | đối chứng của RQ2 | B23 | `kltn/baselines.py` | parse 100% trên dev hoặc ERROR | 4–6 |  |
+| B26 | 5 | Cài B0, B1, B2 (M8) | **đối chứng mạnh của RQ2: B2 = LLM có checklist phạm vi, 2 mô hình quyết định** | B23 | `kltn/baselines.py` | parse 100% trên dev hoặc ERROR | 5–7 |  |
 | B27 | 5 | Kiểm công bằng, rò nhãn (M9) | bảo đảm so sánh P–B1 hợp lệ | B25, B26 | báo cáo kiểm rò | `check_input_leak` PASS | 1–2 |  |
 | B28 | 5 | Runner, manifest, cache (M10) | chạy TN1–TN4 tái lập | B27 | `kltn/runner.py` | chạy lại được sau lỗi | 5–8 | chuyển lên trước pilot (bản cũ đặt sau) |
 | B29 | 5 | Chạy pilot trên dev | đo công sức, lỗi, tín hiệu sớm | B28 | `runs/pilot-*`; báo cáo pilot | đủ output cho mọi claim dev | 3–5 |  |
 | B30 | 5 | Chốt quy mô, cấu hình, mức kết luận | quy mô đủ cho RQ2 | B29 | QĐ5 chốt; mục 3.4 cập nhật | GVHD xác nhận hoặc ghi ngày hỏi | 2–3 |  |
-| B31 | 6 | Thu nguồn, chia đoạn các họ còn lại | nguồn bằng chứng | B30 | D1–D4 cho mọi họ | độ phủ 100% | 12–28 | lặp quy trình B09–B12 |
-| B32 | 6 | Sinh quảng cáo, tách claim, biến thể còn lại | dữ liệu thông thường + **tập chẩn đoán** | B30, B31 | D5, D6 đủ quy mô B30 | đạt sàn mục 3.4 | 6–10 | lặp B14–B17 |
-| B33 | 6 | Gán nhãn, nhật ký NEI phần còn lại | nhãn vàng | B32 | D7, D8 đủ | test không còn `pending_review` | 15–35 | lặp B18–B19 |
+| B31 | 6 | Thu nguồn, chia đoạn các họ còn lại | nguồn bằng chứng | B30 | D1–D4 cho mọi họ | độ phủ 100% | 8–16 | lặp quy trình B09–B12 |
+| B32 | 6 | Sinh quảng cáo, tách claim, biến thể còn lại | dữ liệu thông thường + **tập chẩn đoán** | B30, B31 | D5, D6 đủ quy mô B30 | đạt sàn mục 3.4 | 4–8 | lặp B14–B17 |
+| B33 | 6 | Gán nhãn, nhật ký NEI phần còn lại | nhãn vàng | B32 | D7, D8 đủ | test không còn `pending_review` | 10–22 | lặp B18–B19 |
 | B34 | 6 | Kiểm độ tin cậy nhãn | độ tin cậy nhãn vàng | B33 | D10; Cohen’s κ | κ báo trước hòa giải | 3–5 |  |
 | B35 | 7 | Chia tập theo họ | test độc lập theo họ | B33 | D9 split | không họ nào ở hai tập | 1 |  |
 | B36 | 7 | Hồ sơ chuẩn cho TN4 | TN4: tách trích xuất khỏi quyết định | B35 | D9b hồ sơ chuẩn | đủ n_4 claim | 6–8 |  |
@@ -242,13 +276,13 @@ Dùng BM25; gọi API LLM; xuất JSON; “LLM kết hợp Python”; đặt tê
 | B48 | 9 | Hình, bảng, công thức xuất bản | trình bày | B47 | hình/bảng cuối | đánh số khớp | 4–6 |  |
 | B49 | 9 | Tham khảo, thuật ngữ, khai báo AI, định dạng | tuân thủ mẫu Khoa | B48 | bản PDF + Word | qua kiểm đạo văn | 4–6 |  |
 | B50 | 10 | Gói tái lập, demo dòng lệnh, README | tái lập kết quả | B40 | gói tái lập | chạy lại trên bản sao mới | 6–10 | gồm demo dòng lệnh (bỏ demo web) |
-| B51 | 10 | Slide và chuẩn bị bảo vệ | bảo vệ tính mới trước hội đồng | B49 | slide; câu hỏi có số liệu | tập dượt ≥ 2 lần | 8–12 |  |
+| B51 | 10 | Slide và chuẩn bị bảo vệ | bảo vệ tính mới trước hội đồng | B49 | slide; câu hỏi có số liệu | tập dượt ≥ 2 lần | 6–10 |  |
 | B52 | 10 | Kiểm điều kiện hoàn thành | nghiệm thu | B50, B51 | checklist | mọi mục đạt | 1 |  |
-| | | **Tổng** | | | | | **≈ 222–350 giờ** | ≈ 19–29 giờ/tuần trong 12 tuần |
+| | | **Tổng** | | | | | **≈ 208–320 giờ** | ≈ 17–27 giờ/tuần trong 12 tuần |
 
 ### 3.2 Giai đoạn, lịch và mốc kiểm tra
 
-Mười giai đoạn **nối tiếp, không chồng ngày**, tính từ 09/10/2026 đến hết thời gian đăng ký 31/12/2026. Giả định ≈ 19–29 giờ/tuần (tổng ở mục 3.1 chia 12 tuần). Hạn nộp và ngày bảo vệ chính thức chưa xác minh (mục 14.3); lịch dời theo thông báo của Khoa. **Cần GVHD xác nhận.**
+Mười giai đoạn **nối tiếp, không chồng ngày**, tính từ 09/10/2026 đến hết thời gian đăng ký 31/12/2026. Giả định ≈ 17–27 giờ/tuần (tổng ở mục 3.1 chia 12 tuần). Hạn nộp và ngày bảo vệ chính thức chưa xác minh (mục 14.3); lịch dời theo thông báo của Khoa. **Cần GVHD xác nhận.**
 
 | GĐ | Tên | Ngày | Bước | Mốc kiểm tra (qua / không qua) |
 |---|---|---|---|---|
@@ -269,27 +303,44 @@ Mười giai đoạn **nối tiếp, không chồng ngày**, tính từ 09/10/20
 
 Tổng ở bảng mục 3.1 cộng từ ước lượng từng bước. Các giả định chính: thu nguồn 1,5–3 giờ/họ; gán nhãn claim thông thường 6–10 phút (gồm tìm bằng chứng), biến thể 2–4 phút; nhật ký NEI 8–12 phút; lập trình có AI hỗ trợ nhưng sinh viên đọc hiểu và kiểm. Yếu tố làm tăng: nguồn hãng thứ hai khó lưu, nhiều NEI, JSON lỗi nhiều, phải gán lại do đổi hướng dẫn. Yếu tố làm giảm: biến thể dùng lại bằng chứng của câu cha. Cập nhật mục này ở B30 bằng `data/timing.csv`.
 
-Nếu chỉ có 12–15 giờ/tuần: báo GVHD ngay sau B30 để dời mốc hoặc áp dụng phương án dự phòng (mục 14.4). Cắt theo thứ tự: giảm claim thông thường ở test → bỏ người gán thứ hai (dùng tự nhất quán) → thu hẹp về chỉ Apple. **Không cắt** tập chẩn đoán, TN2, TN3, TN4 vì chúng là phép đo tính mới.
+Nếu chỉ có 12–15 giờ/tuần: báo GVHD ngay sau B30 để dời mốc hoặc áp dụng phương án dự phòng (mục 14.4). Cắt theo thứ tự: giảm claim thông thường ở test xuống sàn → bỏ lặp 3 lượt (chỉ lượt 1) → bỏ người gán thứ hai (dùng tự nhất quán) → chỉ chạy D1. **Không cắt** tập chẩn đoán, B2, TN3, TN4 vì chúng là phép đo tính mới.
 
 ### 3.4 Phạm vi và quy mô dữ liệu
 
-**Cốt lõi (phải có để đo SAV):** kho nguồn ≥ 6 họ (mục tiêu 10–12; cố gắng có một hãng ngoài Apple, không có thì áp dụng mục 14.4), tập claim có nhãn chia theo họ, BM25 lọc sản phẩm (TN1), trích xuất σ, B0/B1/P (TN2), ablation (TN3), hồ sơ chuẩn (TN4), phân tích lỗi, luận văn và gói tái lập. Người gán thứ hai cho 40 claim và lặp 3 lượt trên m claim nằm trong cốt lõi vì cần cho độ tin cậy kết luận. Mọi phần khác ở mục 16.
+**Cốt lõi (phải có để đo SAV):** kho nguồn 10 họ (≈ 6 AirPods + 4 Beats; tối thiểu 6), tập claim có nhãn chia theo họ, BM25 lọc sản phẩm (TN1), trích xuất σ có neo (thành phần 1), B0/B1/B2/SAV trên 2 mô hình quyết định (TN2), ablation gồm P−ground (TN3), hồ sơ chuẩn (TN4), người gán thứ hai cho 40 claim, lặp 3 lượt trên m claim, phân tích lỗi, luận văn và gói tái lập. Mọi phần khác ở mục 16.
 
-**Quy mô đề xuất — sẽ chốt bằng số đo pilot ở B30:**
+**Vì sao chọn Beats làm hãng thứ hai:** Beats có trang sản phẩm và thông số chính thức riêng (thời lượng pin theo chế độ ANC/Transparency, hộp sạc, sạc nhanh, Bluetooth, chống nước) với cách trình bày khác Apple. Như vậy kho nguồn có hai phong cách tài liệu, và nguồn chắc chắn thu được — rủi ro lớn nhất về nguồn ở bản cũ được loại bỏ. Giới hạn: Beats thuộc Apple, nên luận văn ghi rõ là “hai thương hiệu, một tập đoàn”. Nếu ở B08 thu được thêm trang thông số văn bản của một hãng độc lập (ví dụ Sony, Samsung) thì thêm 1–2 họ vào test; đây không phải điều kiện hoàn thành.
+
+**Quy mô đề xuất — chốt bằng số đo pilot ở B30:**
 
 | Tập | Họ | Claim thông thường | Claim chẩn đoán (biến thể) | Sàn tối thiểu để dừng hợp lệ |
 |---|---|---|---|---|
-| dev (gồm pilot) | 3–4 | 40–60 | 20–30 | dùng để phát triển, không có sàn |
-| val | 2 | 15–25 | 10–15 | ≥ 1 ca mỗi nhãn |
-| test | 5 (tối thiểu 4) | 60–80 | 60–75 (≥ 12 mỗi loại thao tác × 5 loại) | R+NEI ≥ 40, S ≥ 20, ≥ 8 ca mỗi loại thao tác chính (COND, PART, ROLE) |
+| dev (gồm pilot) | 3 | 30–40 | 20–30 | dùng để phát triển, không có sàn |
+| val | 2 | 12–15 | 10–15 | ≥ 1 ca mỗi nhãn |
+| test | 5 (≥ 2 Beats) | 40–60 | 60–75 (≥ 12 mỗi loại thao tác × 5 loại) | R+NEI ≥ 40, S ≥ 20, ≥ 8 ca mỗi loại thao tác chính (COND, PART, ROLE) |
 
-Lý do (thay cho mốc 120/12 hoặc 180/18 cũ): (1) RQ2 so sánh ghép cặp trên tập chẩn đoán, nên số ca mỗi loại thao tác quyết định độ chi tiết kết luận; ≥ 12 ca/loại cho phép báo tỷ lệ với bước 8 điểm %, ít hơn chỉ mô tả. (2) `simulate_power.py` (giả định FAR 0,30 → 0,15, chỉ minh họa) cho độ rộng khoảng ΔFAR trung bình ≈ 0,23 với 4 họ × 10 claim R+NEI và ≈ 0,20 với 5 họ × 12; nhiều họ và nhiều claim mỗi họ đều giúp, nhưng dưới 5 họ thì bootstrap theo họ rất thô. (3) Tổng ≈ 220–280 claim, trong đó ≈ 40% là biến thể dùng lại bằng chứng của câu cha nên công sức gán thấp hơn; ước lượng ≈ 35–55 giờ gán nhãn + tìm nguồn (mục 3.3). Nếu pilot đo công sức cao hơn, giảm claim thông thường trước, giữ sàn tập chẩn đoán.
+**Lý do:**
+1. RQ2 so sánh ghép cặp trên **tập chẩn đoán**, nên số ca mỗi loại thao tác quyết định độ chi tiết của kết luận. Vì vậy tập chẩn đoán được giữ nguyên, còn claim thông thường được giảm, vì claim thông thường chủ yếu cho biết phân bố lỗi thực tế.
+2. Mô phỏng `simulate_power.py` (giả định FAR 0,30 → 0,15, chỉ để minh họa) cho thấy với 5 họ × 12 claim R+NEI, độ rộng khoảng ΔFAR khoảng 0,20. McNemar ghép cặp trên ≈ 60–75 cặp chẩn đoán phát hiện được chênh lệch cỡ 15 điểm phần trăm nếu tỷ lệ bất đồng không quá thấp. Đây chỉ là minh họa; luận văn không tuyên bố ý nghĩa thống kê.
+3. Tổng ≈ 170–235 claim, trong đó hơn một nửa là biến thể dùng lại bằng chứng của câu cha, nên công sức gán nhãn thấp.
 
-Tỷ lệ “≥ 50% claim thông thường” của bản cũ được bỏ: hai tập luôn được báo **riêng**, nên không cần trộn theo tỷ lệ để bảo vệ tính hợp lệ; bảng gộp chỉ là phụ.
+Hai tập luôn được báo **riêng**; bảng gộp chỉ là phụ.
 
-### 3.5 Hiện trạng repository (commit `7107507`)
+### 3.5 Vì sao kế hoạch khả thi
 
-Đã có: snapshot 5 trang thông số Apple (`evidence/2026-10-08/`), 23 ví dụ minh họa không dùng làm dữ liệu (`examples.json`, `dataset_eligible=false`), mã tham chiếu luật SAV `scripts/abc_reference.py` (48 test), mẫu prompt B0/B1, kiểm rò nhãn (7 test), mô phỏng độ rộng khoảng (`simulate_power.py`), các mẫu JSON trong `templates/`. **Chưa có:** dữ liệu quảng cáo LLM có log, nhãn, chia tập, pipeline, runner, kết quả. Các test PASS chỉ chứng minh mã tham chiếu đúng với đặc tả trên ca nhập tay.
+| Rủi ro nội dung | Vì sao đã được kiểm soát |
+|---|---|
+| Không có nguồn | 5 trang Apple đã có snapshot; Beats có trang chính thức cùng kiểu; chỉ dùng trang thông số văn bản |
+| Luật quá phức tạp để cài | Luật đã có mã tham chiếu và 48 test; kiểm neo đã có mã và 7 test; việc còn lại là nối dữ liệu |
+| LLM trích sai làm hỏng SAV | Thành phần 1 loại dữ kiện không neo được; TN4 đo phần còn lại |
+| Đối chứng bị chê là yếu | Có B2 (prompt kiểm phạm vi + ví dụ) và 2 mô hình quyết định |
+| Gán nhãn quá tốn | Hơn một nửa claim là biến thể dùng lại bằng chứng; claim thông thường đã giảm |
+| Thiếu thời gian | Tổng ≈ 208–320 giờ; thứ tự cắt ở mục 3.3 không đụng tới phép đo tính mới |
+| Chi phí API | ≈ 170–235 claim × (1 lượt trích xuất + 3 phương pháp × 2 mô hình) + 2 lượt lặp trên m claim; đo token thật ở B07, đặt trần ngân sách ở QĐ7 |
+
+### 3.6 Hiện trạng repository (commit `3f0171d`)
+
+Đã có: snapshot 5 trang thông số Apple (`evidence/2026-10-08/`), 23 ví dụ minh họa không dùng làm dữ liệu (`examples.json`, `dataset_eligible=false`), mã tham chiếu luật SAV `scripts/abc_reference.py` (48 test), kiểm neo nguồn `scripts/grounding_reference.py` (7 test), mẫu prompt B0/B1, kiểm rò nhãn (7 test), mô phỏng độ rộng khoảng (`simulate_power.py`), các mẫu JSON trong `templates/`. **Chưa có:** dữ liệu quảng cáo LLM có log, nhãn, chia tập, pipeline, runner, kết quả. Các test PASS chỉ chứng minh mã tham chiếu đúng với đặc tả trên ca nhập tay.
 
 ---
 
@@ -416,7 +467,7 @@ Ghi nhãn, kiểu NEI nếu có, danh sách mã đoạn/bản ghi bằng chứng
 
 Đặc tả này biến hướng dẫn ở mục 5 thành thuật toán tất định. Khi đặc tả và hướng dẫn khác nhau, **hướng dẫn là chuẩn ngữ nghĩa**: sửa đặc tả/code hoặc tăng phiên bản hướng dẫn, không để hai bên lệch nhau. Mã tham chiếu: `scripts/abc_reference.py`; kiểm thử: `tests/test_abc.py`.
 
-Trạng thái: mã tham chiếu chạy trên hồ sơ chuẩn hóa nhập tay. Chưa có bước trích xuất tự động, runner hay kết quả B0/B1/P (các module này là công việc B20–B28 ở mục 12). Các nhãn trong fixture là nhãn minh họa, không phải dự đoán của hệ thống.
+Trạng thái: mã tham chiếu chạy trên hồ sơ chuẩn hóa nhập tay. Chưa có bước trích xuất tự động, runner hay kết quả B0/B1/B2/P (các module này là công việc B20–B28 ở mục 12). Các nhãn trong fixture là nhãn minh họa, không phải dự đoán của hệ thống.
 
 ### 6.1 Hợp đồng đầu vào/đầu ra
 
@@ -528,7 +579,7 @@ Kết quả ablation là bằng chứng nhân quả **trong phạm vi bộ quy�
 
 Giao thức ghi **cái gì được cố định trước khi chạy test và cái gì phải báo**. Cách làm từng bước ở mục 12. Khi khóa (B38), SHA-256 của các file cấu hình và nhãn được ghi vào `data/locks/protocol_lock.json`; sau đó mọi thay đổi phải tăng phiên bản và ghi lý do.
 
-Trạng thái: chưa có dữ liệu thí nghiệm, chưa có người gán thứ hai, chưa có lượt chạy B0/B1/P nào.
+Trạng thái: chưa có dữ liệu thí nghiệm, chưa có người gán thứ hai, chưa có lượt chạy B0/B1/B2/P nào.
 
 ### 7.1 Phạm vi kết luận
 
@@ -596,8 +647,8 @@ Ký hiệu: n_t = số claim test (thông thường + chẩn đoán), m = min(30
 | TN | Phương pháp | Tập mẫu | Bằng chứng / hồ sơ | Số lượt | Câu hỏi | Cốt lõi? |
 |---|---|---|---|---|---|---|
 | TN1 | BM25 lọc sản phẩm | test (claim có bộ chuẩn) | corpus đã khóa | 1 (tất định) | RQ1 | cốt lõi |
-| TN2 | B0, B1, P | toàn test, báo riêng thông thường / chẩn đoán | B0: top-k văn bản; B1, P: **cùng** hồ sơ trích xuất của lượt | lượt 1 toàn test; lượt 2, 3 trên m claim (trích xuất mới mỗi lượt) | RQ2 | cốt lõi |
-| TN3 | P−part, P−B, P−role, P−inherit | toàn test | hồ sơ trích xuất **lượt 1** (giữ nguyên) | 1 (tất định, 0 lượt LLM) | RQ3 (thành phần) | cốt lõi |
+| TN2 | B0, B1, B2, P | toàn test, báo riêng thông thường / chẩn đoán | B0: top-k văn bản; B1, P: **cùng** hồ sơ trích xuất của lượt | lượt 1 toàn test; lượt 2, 3 trên m claim (trích xuất mới mỗi lượt) | RQ2 | cốt lõi |
+| TN3 | P−part, P−cond, P−role, P−inherit, P−ground | toàn test | hồ sơ trích xuất **lượt 1** (giữ nguyên) | 1 (tất định, 0 lượt LLM) | RQ3 (thành phần) | cốt lõi |
 | TN4 | P, B1 (và ablation của P) | n_4 claim chẩn đoán test + câu cha | **hồ sơ chuẩn** viết tay (B36) | 1 | RQ3 (tách trích xuất khỏi quyết định) | cốt lõi |
 
 Đầu vào thay đổi và phần giữ cố định:
@@ -766,7 +817,7 @@ def opaque(prefix, *parts):
 
 **D11 `data/splits.json`**: `{"version": "v1", "seed": 20261101, "dev": [family_id…], "val": […], "test": […], "created_at": "…", "rule": "…"}`.
 
-**Dự đoán `runs/<run_id>/predictions.jsonl`**: `claim_id, method (B0/B1/P/P−part/…), repeat_id, extraction_run_id, records_sha256, label, nei_type, evidence_ids, reason, status (ok/ERROR/NO_OUTPUT), error_message, latency_s, tokens_in, tokens_out`.
+**Dự đoán `runs/<run_id>/predictions.jsonl`**: `claim_id, method (B0/B1/B2/P/P−part/…), repeat_id, extraction_run_id, records_sha256, label, nei_type, evidence_ids, reason, status (ok/ERROR/NO_OUTPUT), error_message, latency_s, tokens_in, tokens_out`.
 
 Nội dung đầy đủ của mọi file mẫu (JSON, CSV, prompt) ở **Phụ lục C** — đặt ở cuối file để không cắt ngang phần đọc.
 
@@ -1017,6 +1068,7 @@ Mỗi bước có các mục: **Mục đích · Bắt đầu khi · Đầu vào 
 #### B04 — Lập bảng công trình gần nhất, kiểm lại tính mới (cũ: W1.2)
 
 - **Phục vụ:** tính mới: xác nhận chưa có bài làm SAV.
+- **Bổ sung bản 3:** kiểm riêng từng thành phần của SAV: (1) có bài nào neo từng trường thông số vào chuỗi nguyên văn rồi kiểm tất định chưa; (2) có bài nào coi vai trò con số và điều kiện thử là chiều phạm vi chưa. Ghi kết quả vào cột “Đã đọc” và “SAV cải tiến ở đâu” của mục 2.2.
 
 - **Mục đích:** chứng minh vị trí đóng góp C\* bằng nguồn, không bằng tuyên bố.
 - **Bắt đầu khi:** B03 xong ít nhất [1], [3], [5], [12], [13].
@@ -1091,9 +1143,10 @@ Mỗi bước có các mục: **Mục đích · Bắt đầu khi · Đầu vào 
 
 ### GĐ3 Nguồn cho 2 họ pilot (23/10–01/11)
 
-#### B08 — Kiểm kê họ sản phẩm (cũ: W3.1)
+#### B08 — Kiểm kê họ AirPods và Beats (cũ: W3.1)
 
-- **Phục vụ:** nguồn bằng chứng (đơn vị chia tập).
+- **Phục vụ:** nguồn bằng chứng (đơn vị chia tập); Beats là hãng thứ hai.
+- **Bổ sung bản 3:** thêm 4 họ Beats từ trang chính thức beatsbydre.com (ví dụ Powerbeats Pro 2, Beats Studio Pro, Beats Solo 4, Beats Fit Pro — kiểm lại danh sách đang bán ở ngày thu); ghi `brand=Beats`. Nếu thấy trang thông số văn bản của hãng độc lập, ghi vào D1 như họ tùy chọn.
 
 - **Mục đích:** chọn họ có đủ nguồn chính thức cho các thuộc tính trong phạm vi; tránh chọn họ thiếu dữ liệu rồi phải bỏ.
 - **Bắt đầu khi:** B05.
@@ -1397,9 +1450,10 @@ Mỗi bước có các mục: **Mục đích · Bắt đầu khi · Đầu vào 
 - **Công sức & dừng:** 2–3 h.
 - **Tiếp theo:** B38 (khóa k), TN1.
 
-#### B22 — Schema, prompt trích xuất bộ phạm vi σ (cũ: W9.1)
+#### B22 — Schema σ có trường trích dẫn, prompt trích xuất (cũ: W9.1)
 
 - **Phục vụ:** **biểu diễn σ của SAV**.
+- **Bổ sung bản 3:** schema σ của dữ kiện nguồn có thêm `quotes` (`value` bắt buộc, `conditions.<k>`, `part`); prompt yêu cầu chép nguyên văn, không diễn giải. Thử trên 23 ví dụ sẵn có: mọi chuỗi trích phải qua `grounding_reference.ground`.
 
 - **Mục đích:** hồ sơ chung cho B1 và P, thuần dữ kiện.
 - **Bắt đầu khi:** B07, B20.
@@ -1423,9 +1477,10 @@ Mỗi bước có các mục: **Mục đích · Bắt đầu khi · Đầu vào 
 - **Công sức & dừng:** 4–6 h.
 - **Tiếp theo:** B23.
 
-#### B23 — Gọi mô hình, parse, chuẩn hóa (M5, M6) (cũ: W9.2)
+#### B23 — Trích xuất, neo nguồn, chuẩn hóa (M5, M6) (cũ: W9.2)
 
-- **Phục vụ:** **hồ sơ σ chung cho B1 và SAV**.
+- **Phục vụ:** **thành phần 2 của SAV: hồ sơ σ đã neo, dùng chung cho B1, B2, SAV**.
+- **Bổ sung bản 3:** sau khi parse, gọi `grounding_reference.ground_all(records, chunks)`; lưu `kept` làm hồ sơ chung cho B1, B2, SAV và `dropped` (kèm lý do) vào `records_dropped.jsonl`. Báo tỷ lệ loại theo lý do trên dev; nếu > 20% thì sửa prompt trước khi khóa (không nới kiểm neo).
 
 - **Mục đích:** biến phản hồi thành hồ sơ hợp lệ hoặc lỗi kỹ thuật có ghi chép.
 - **Bắt đầu khi:** B22.
@@ -1475,6 +1530,7 @@ Mỗi bước có các mục: **Mục đích · Bắt đầu khi · Đầu vào 
 #### B25 — Nối SAV (P) với hồ sơ (M7) (cũ: W10.1)
 
 - **Phục vụ:** **cài đặt thuật toán đề xuất**.
+- **Bổ sung bản 3:** thêm ablation **P−ground**: SAV nhận hồ sơ *trước* khi neo (cùng lượt trích xuất), để đo đóng góp của thành phần 1.
 
 - **Mục đích:** P chạy trên hồ sơ trích xuất thật.
 - **Bắt đầu khi:** B23.
@@ -1491,9 +1547,10 @@ Mỗi bước có các mục: **Mục đích · Bắt đầu khi · Đầu vào 
 - **Công sức & dừng:** 4–6 h.
 - **Tiếp theo:** B27.
 
-#### B26 — Cài B0, B1 (M8) (cũ: W10.2)
+#### B26 — Cài B0, B1, B2 (M8) (cũ: W10.2)
 
-- **Phục vụ:** đối chứng của RQ2.
+- **Phục vụ:** **đối chứng mạnh của RQ2: B2 = LLM có checklist phạm vi, 2 mô hình quyết định**.
+- **Bổ sung bản 3:** thêm **B2**: prompt B1 + danh sách kiểm phạm vi (sản phẩm → bộ phận → điều kiện → vai trò con số → giá trị) + 3 ví dụ lấy từ dev (không từ test). Chạy B0/B1/B2 với hai mô hình quyết định D1 (mở) và D2 (thương mại nhỏ) ghi trong `configs/models.yaml`; cùng tham số giải mã.
 
 - **Mục đích:** đối chứng công bằng: cùng claim, cùng mô hình, cùng hướng dẫn, cùng cấu hình.
 - **Bắt đầu khi:** B07, B20, B23.
@@ -1535,7 +1592,7 @@ Mỗi bước có các mục: **Mục đích · Bắt đầu khi · Đầu vào 
 - **Bắt đầu khi:** M4–M9 xong.
 - **Đầu vào:** `configs/runs/<tn>.yaml`; protocol_lock.
 - **Các bước:**
-  1. Cấu hình một lượt chạy: `split, methods [B0,B1,P,P−part,P−B,P−role,P−inherit], repeat_id, sample_list (all | repeat_subset), records_source (extracted | gold)`.
+  1. Cấu hình một lượt chạy: `split, methods [B0,B1,P,P−part,P−cond,P−role,P−inherit], repeat_id, sample_list (all | repeat_subset), records_source (extracted | gold)`.
   2. Kiểm trước chạy: `lock verify`; danh sách claim = danh sách đã khóa; số đoạn top-k có sẵn; ngân sách còn lại ≥ ước tính CT11.
   3. Thứ tự trong một lượt: retrieval → extraction (một lần/claim, `extraction_run_id` mới cho mỗi lượt) → P và ablation (không gọi LLM) → B1 (cùng records) → B0.
   4. Ghi tăng dần `predictions.jsonl`; chạy lại bỏ qua claim × method đã có `status=ok`; ERROR được retry theo chính sách (tối đa 2 lần, cách 30 giây), vẫn lỗi → giữ ERROR.
@@ -1552,12 +1609,12 @@ Mỗi bước có các mục: **Mục đích · Bắt đầu khi · Đầu vào 
 
 - **Phục vụ:** đo công sức, lỗi, tín hiệu sớm.
 
-- **Mục đích:** kiểm các giả định khả thi trước khi thu đủ dữ liệu: số claim/quảng cáo, công sức, lỗi JSON, recall@k, chi phí, hành vi B0/B1/P.
+- **Mục đích:** kiểm các giả định khả thi trước khi thu đủ dữ liệu: số claim/quảng cáo, công sức, lỗi JSON, recall@k, chi phí, hành vi B0/B1/B2/P.
 - **Bắt đầu khi:** lô 0 (2 họ dev × 6 quảng cáo) đã tách và gán nhãn; M1–M11 bản đầu chạy được.
 - **Đầu vào:** dev lô 0 + biến thể của nó (mục tiêu ≈ 40 claim thông thường + ≈ 20 biến thể); D12 thời gian.
 - **Các bước:**
   1. Đo công sức thật từ D12: t_nguồn/họ, t_tách/quảng cáo, t_claim, t_var, t_log; số claim hợp lệ/quảng cáo (c̄).
-  2. Chạy TN1–TN3 bản thử trên dev (chỉ dev): recall@k, B0/B1/P, ablation; ghi tỷ lệ ERROR, token, độ trễ, chi phí.
+  2. Chạy TN1–TN3 bản thử trên dev (chỉ dev): recall@k, B0/B1/B2/P, ablation; ghi tỷ lệ ERROR, token, độ trễ, chi phí.
   3. Đọc 20 ca P và B1 bất đồng; gắn mã lỗi (B41) để biết lỗi chủ yếu ở đâu.
   4. Ghi `notes/pilot_report.md`: bảng số đo, so với giả định ở mục 3.3, vấn đề và sửa đổi.
 - **Ví dụ/mẫu (giả lập):** c̄ = 4,2 → muốn 70 claim thông thường test cần ⌈70 / 4,2⌉ = 17 quảng cáo test; t_claim = 8,5 phút → 150 claim thông thường ≈ 21 h.
@@ -1720,11 +1777,12 @@ Mỗi bước có các mục: **Mục đích · Bắt đầu khi · Đầu vào 
 #### B39 — Chạy TN1–TN4 (cũ: W12.2)
 
 - **Phục vụ:** **trả lời RQ1–RQ3**.
+- **Bổ sung bản 3:** TN2 gồm B0, B1, B2, SAV × {D1, D2}; TN3 gồm thêm P−ground; so sánh chính là SAV vs B2.
 
 - **Bắt đầu khi:** B38 khóa; B28.
 - **Đầu vào:** ma trận ở mục 8.1.
 - **Các bước:**
-  1. Val một lượt (B0/B1/P) bằng cấu hình khóa → chỉ kiểm lỗi phần mềm/pipeline; ghi kết quả val riêng, không chỉnh theo điểm.
+  1. Val một lượt (B0/B1/B2/P) bằng cấu hình khóa → chỉ kiểm lỗi phần mềm/pipeline; ghi kết quả val riêng, không chỉnh theo điểm.
   2. Test lượt 1 (TN1 + TN2 + TN3) toàn bộ test.
   3. TN4: P và B1 trên `records_source=gold` cho tập chẩn đoán test + câu cha.
   4. Lượt 2 và 3 trên `repeat_subset` (30 claim chọn bằng seed lúc khóa, phân tầng nhãn/nhóm/họ), mỗi lượt có trích xuất mới.
@@ -1928,7 +1986,7 @@ Hàng mẫu B5 (để trống khi chưa chạy): `| P | n_S=… | n_R=… | n_NE
 | H4 | ΔFAR và ΔRecall_S (P − B1) theo tập | trục x: hiệu (điểm %), y: tập (thông thường, chẩn đoán, từng loại); điểm + khoảng bootstrap | M11 | matplotlib | 4 |
 | H5 | Tỷ lệ chấp nhận nhầm theo loại thao tác | cột nhóm: loại × phương pháp; nhãn tử/mẫu trên cột | B6 | matplotlib | 4 |
 | H6 | recall@k theo k | x: k ∈ {1…10}, y: recall; đường test, chấm k khóa | TN1 | matplotlib | 4 |
-| H7 | Ma trận nhầm lẫn B0/B1/P | 3 ma trận 3×4 (thêm cột ERROR) | TN2 | matplotlib | 4 |
+| H7 | Ma trận nhầm lẫn B0/B1/B2/P | 3 ma trận 3×4 (thêm cột ERROR) | TN2 | matplotlib | 4 |
 | H8 | Ảnh nguồn minh họa lệch điều kiện | dòng “20 giờ … khi bật” + chú thích 10 AirPods Max 2 | D3 | ảnh chụp | 1 |
 | H9 | ΔFAR bỏ từng họ | x: họ bị bỏ, y: ΔFAR | M11 | matplotlib | 4 |
 
@@ -2015,7 +2073,7 @@ Hướng trả lời; khi bảo vệ phải thay bằng số liệu thật của
 Các mục dưới đây **không làm** trong khóa luận vì không phục vụ trực tiếp việc đo SAV. Chỉ nhắc ở Chương 5 như hướng phát triển.
 
 - TN5 — kho gây nhiễu cùng hãng, BM25 không lọc sản phẩm (bản cũ: “nên có”).
-- TN6 — chạy B1/P với mô hình trích xuất thứ hai.
+- TN6 — trích xuất σ bằng mô hình thứ hai (phần *quyết định* của B1/B2 đã chạy trên 2 mô hình trong TN2).
 - Tách claim tự động và tự nhận diện sản phẩm (đầu vào giữ là claim tách tay + mã sản phẩm).
 - Demo giao diện web (M16 cũ); thay bằng demo dòng lệnh trong gói tái lập (B50).
 - Truy hồi nhận biết phạm vi (xếp lại BM25 theo mức khớp σ) — hướng mở rộng tự nhiên của SAV nếu TN1 cho thấy truy hồi là nút thắt.
@@ -2207,7 +2265,7 @@ Các file mẫu dưới đây nằm trong `templates/` để code đọc; nội 
   "label_review_status": "pending",
   "label_proposed": null,
   "closed_at": null,
-  "note": "Record actions actually performed. Not found/inaccessible is not proof a document or fact does not exist. This annotation-side log must not be supplied as a label hint to B0/B1/P."
+  "note": "Record actions actually performed. Not found/inaccessible is not proof a document or fact does not exist. This annotation-side log must not be supplied as a label hint to B0/B1/B2/P."
 }
 ```
 

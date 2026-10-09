@@ -2,12 +2,12 @@
 
 Repository lưu trữ tài liệu nghiên cứu, bài báo tham khảo và các công cụ dịch tự động phục vụ quá trình thực hiện Khóa luận tốt nghiệp.
 
-## Tài liệu KLTN đang làm việc (bản 2, 10/2026 — chờ GVHD xác nhận)
+## Tài liệu KLTN đang làm việc (bản 3, 10/2026 — chờ GVHD xác nhận)
 
 Hai tài liệu chính, khớp nhau về tính mới, câu hỏi nghiên cứu, thí nghiệm TN1–TN4, quy mô và lịch:
 
-- [Đề cương chi tiết](Đọc_báo_cùng_HuP_4_.docx): đề tài, **tính mới (thuật toán SAV — đối chiếu nhận biết phạm vi thông số)**, mục tiêu, phương pháp, thực nghiệm, kế hoạch 10 giai đoạn nối tiếp. Dựng lại bằng `python3 scripts/build_proposal.py` (khung HuP4 ở commit `7107507`, tên đề tài giữ nguyên).
-- [Sổ tay thực hiện](deliverables/KE_HOACH_CHI_TIET_SINH_VIEN.md): tự chấm kế hoạch /10, tính mới, **bảng tổng kết 52 bước B01–B52 theo thứ tự tuyến tính**, luật gán nhãn, đặc tả SAV, giao thức, chi tiết từng bước.
+- [Đề cương chi tiết](Đọc_báo_cùng_HuP_4_.docx): đề tài, **tính mới (SAV — trích xuất σ có neo nguồn + bộ quyết định nhận biết phạm vi, so với LLM có danh sách kiểm phạm vi B2)**, mục tiêu, phương pháp, thực nghiệm, kế hoạch 10 giai đoạn nối tiếp. Dựng lại bằng `python3 scripts/build_proposal.py` (khung HuP4 ở commit `7107507`, tên đề tài giữ nguyên).
+- [Sổ tay thực hiện](deliverables/KE_HOACH_CHI_TIET_SINH_VIEN.md): tự chấm nội dung đề tài /10, tính mới, **bảng tổng kết 52 bước B01–B52 theo thứ tự tuyến tính**, luật gán nhãn, đặc tả SAV, giao thức, chi tiết từng bước.
 
 `deliverables/KE_HOACH_TONG_HOP.docx` đã được bỏ vì trùng vai trò với đề cương. Mọi file trong `docs/`, `Đọc_báo_cùng_HuP_3_.docx` và các mục bên dưới là **lịch sử**, không cần đọc để thực hiện.
 
@@ -43,7 +43,7 @@ Kiểm hồ sơ ví dụ/hash nguồn: `python3 scripts/audit_examples.py --chec
 ├── deliverables/         # Sổ tay thực hiện (tài liệu chính)
 ├── docs/                 # Lịch sử: bản 08/10 của hướng dẫn nhãn, giao thức, kế hoạch, nhật ký
 ├── evidence/2026-10-08/  # Snapshot nguồn Apple, examples.json, mã băm
-├── scripts/              # Dựng đề cương, kiểm tra docx/ví dụ/số liệu, hàm tham chiếu SAV (A–B–C), mô phỏng
+├── scripts/              # Dựng đề cương, kiểm tra docx/ví dụ/số liệu, mã tham chiếu SAV (abc_reference, grounding_reference), mô phỏng
 ├── templates/            # Mẫu manifest, search_log, gán nhãn độc lập, mẫu quảng cáo LLM
 ├── tests/                # unittest cho luật A–B–C
 ├── run_translate_batch.sh # Dịch hàng loạt bằng pdf2zh (Bing Translator)
