@@ -1,58 +1,59 @@
-# KLTN - Khóa Luận Tốt Nghiệp
+# KLTN – Khóa luận tốt nghiệp
 
-Repository lưu trữ tài liệu nghiên cứu, bài báo tham khảo và các công cụ dịch tự động phục vụ quá trình thực hiện Khóa luận tốt nghiệp.
+**Đề tài:** Phương pháp kiểm chứng tuyên bố về thông số kỹ thuật có điều kiện ràng buộc trong quảng cáo
+(*A method for verifying conditional technical specification claims in advertisements*)
 
-## Tài liệu KLTN đang làm việc (bản 3, 10/2026 — chờ GVHD xác nhận)
+**Sinh viên:** Bùi Lê Huy Phước (23521228) · **CBHD:** ThS Trần Hồng Nghi · **Thời gian:** 15/09/2026 – 31/12/2026
 
-Hai tài liệu chính, khớp nhau về tính mới, câu hỏi nghiên cứu, thí nghiệm TN1–TN4, quy mô và lịch:
+## Hai tài liệu chính
 
-- [Đề cương chi tiết](Đọc_báo_cùng_HuP_4_.docx): đề tài, **tính mới (SAV — trích xuất σ có neo nguồn + bộ quyết định nhận biết phạm vi, so với LLM có danh sách kiểm phạm vi B2)**, mục tiêu, phương pháp, thực nghiệm, kế hoạch 10 giai đoạn nối tiếp. Dựng lại bằng `python3 scripts/build_proposal.py` (khung HuP4 ở commit `7107507`, tên đề tài giữ nguyên).
-- [Sổ tay thực hiện](deliverables/KE_HOACH_CHI_TIET_SINH_VIEN.md): tự chấm nội dung đề tài /10, tính mới, **bảng tổng kết 52 bước B01–B52 theo thứ tự tuyến tính**, luật gán nhãn, đặc tả SAV, giao thức, chi tiết từng bước.
+| Tài liệu | Nội dung |
+|---|---|
+| [Đề cương](de_cuong/) | `23521228_BuiLeHuyPhuoc_DeCuongKLTN.docx` là bản sạch để nộp. `..._chu_do.docx` tô đỏ phần sửa so với đề cương đã nộp. Mỗi bản có kèm PDF. |
+| [Chi tiết tuyến tính của khóa luận](CHI_TIET_TUYEN_TINH_KHOA_LUAN.md) | Kế hoạch từ đầu đến cuối: 45 bước theo ngày (09/10–31/12/2026 và bảo vệ), mốc kiểm tra, hướng dẫn gán nhãn, đặc tả phương pháp, giao thức thực nghiệm, tích hợp CopyPro, câu hỏi phản biện, tự chấm theo thang 10. |
 
-`deliverables/KE_HOACH_TONG_HOP.docx` đã được bỏ vì trùng vai trò với đề cương. Mọi file trong `docs/`, `Đọc_báo_cùng_HuP_3_.docx` và các mục bên dưới là **lịch sử**, không cần đọc để thực hiện.
-
-## Tài liệu lịch sử (08/10/2026)
-
-- [Báo cáo tháng 09/2026](Đọc_báo_cùng_HuP_3_.docx).
-- [Phân tích bảy bài tham khảo](docs/PHAN_TICH_TAI_LIEU.md).
-- [Bàn giao sau khi tiếp nối Claude](docs/BAN_GIAO_2026-10-08.md): thay đổi, kiểm tra, bản sao lưu và thông tin còn cần xác nhận.
-- [Kiểm tra phản biện và các sửa đổi lần hai](docs/KIEM_TRA_PHAN_BIEN_2026-10-08.md): tiêu chí RQ3, A–B–C, số liệu gốc và 23 ví dụ.
-- [Đặc tả A–B–C](docs/QUY_TAC_ABC.md), [ảnh chụp và hồ sơ nguồn](evidence/2026-10-08/README.md).
-- [Nhật ký công việc](CLAUDE_WORK_LOG.md).
-
-Kiểm tra DOCX cũ (chỉ còn đúng với HuP3; HuP4 nay kiểm bằng `tests/test_docs.py`): `python3 scripts/update_thesis_docs.py --check`. Script chỉ dùng thư viện chuẩn Python; mặc định chạy xem trước, chỉ sửa file khi có `--apply`.
-
-Kiểm hồ sơ ví dụ/hash nguồn: `python3 scripts/audit_examples.py --check`. Đối chiếu vị trí số liệu bài gốc: `python3 scripts/check_paper_facts.py` (cần Poppler). Đây là kiểm tra tài liệu, chưa phải chạy pipeline/thí nghiệm B0/B1/P.
-
-## Kế hoạch 08/10/2026 (nhánh `plan/opus-2026-10-08`, chưa merge, chờ GVHD xác nhận)
-
-- Bắt đầu từ [kế hoạch chi tiết cho sinh viên](docs/KE_HOACH_CHI_TIET_SINH_VIEN.md), [định vị và tiêu chí](docs/DINH_VI_VA_TIEU_CHI.md), [câu hỏi phản biện](docs/CAU_HOI_PHAN_BIEN_DU_KIEN.md), [đối chiếu thay đổi](docs/DOI_CHIEU_THAY_DOI_KE_HOACH.md), [quyết định cần chốt](docs/QUYET_DINH_CAN_CHOT.md), [nhật ký](docs/NHAT_KY_SUA_2026-10-08.md).
-- Docx được sửa bằng `scripts/redesign_plan_2026_10_08.py` (đã áp dụng, script từ chối chạy lần hai). `review_patch_2026_10_08.py` đã bị thay thế.
-- Kiểm tra:
-  `python3 scripts/update_thesis_docs.py --check`; `python3 scripts/audit_examples.py --check`; `python3 scripts/check_paper_facts.py`; `python3 -m unittest discover -s tests`.
-- Mô phỏng cỡ test: `python3 scripts/simulate_power.py`. Chặn rò nhãn: `python3 scripts/check_input_leak.py <input.json>`.
-- **Cập nhật 10/2026 (dự thảo, chờ GVHD):** sổ tay viết lại theo mã công việc W0–W15 và thí nghiệm TN1–TN6; [giao thức](docs/GIAO_THUC_DANH_GIA.md) viết lại để khóa trước test. Ví dụ xuyên suốt AirPods Max 2 (hồ sơ nhập tay, không gọi mô hình, không phải kết quả thí nghiệm): `python3 scripts/demo_running_example.py`. Mẫu bản ghi: `templates/claim_record.json`, `label_record.json`, `extraction_schema.json`, `ad_prompts.json`. Chưa có dữ liệu quảng cáo LLM hay kết quả B0/B1/P.
-- Khóa API cũ nằm trong lịch sử công khai, **phải thu hồi**.
+Đề cương đã sửa theo nhận xét của Khoa và đang chờ CBHD xác nhận. Repo chưa có dữ liệu thực nghiệm. Thư mục `data/`, `src/`, `tests/`, `ket_qua/`, `luan_van/` được tạo ở bước 03 của kế hoạch.
 
 ## Cấu trúc thư mục
 
 ```
 .
-├── báo/                  # Bài báo gốc (PDF) — bản quyền thuộc tác giả/nhà xuất bản
-├── dịch/                 # Bản dịch máy (PDF, glossary) — xem lưu ý bản quyền
-├── deliverables/         # Sổ tay thực hiện (tài liệu chính)
-├── docs/                 # Lịch sử: bản 08/10 của hướng dẫn nhãn, giao thức, kế hoạch, nhật ký
-├── evidence/2026-10-08/  # Snapshot nguồn Apple, examples.json, mã băm
-├── scripts/              # Dựng đề cương, kiểm tra docx/ví dụ/số liệu, mã tham chiếu SAV (abc_reference, grounding_reference), mô phỏng
-├── templates/            # Mẫu manifest, search_log, gán nhãn độc lập, mẫu quảng cáo LLM
-├── tests/                # unittest cho luật A–B–C
-├── run_translate_batch.sh # Dịch hàng loạt bằng pdf2zh (Bing Translator)
-└── .gitignore
+├── CHI_TIET_TUYEN_TINH_KHOA_LUAN.md   # kế hoạch tuyến tính
+├── de_cuong/                          # đề cương: bản sạch, bản chữ đỏ, PDF
+│   └── nguon/                         # mã dựng đề cương từ khung của Khoa và nội dung
+├── báo/                               # bài báo gốc (PDF), bản quyền thuộc tác giả và nhà xuất bản
+├── dịch/                              # bản dịch máy để đọc
+└── run_translate_batch.sh             # dịch hàng loạt PDF bằng pdf2zh
 ```
 
-## Hướng dẫn sử dụng công cụ dịch
+## Dựng lại đề cương sau khi sửa nội dung
 
-Script `run_translate_batch.sh` hỗ trợ dịch batch các file PDF trong thư mục `báo/` sang tiếng Việt và lưu kết quả vào thư mục `dịch/`:
+Sửa chữ trong `de_cuong/nguon/noi_dung.py`. Hàm `K(...)` giữ nguyên chữ của bản đã nộp (chữ đen), hàm `N(...)` đánh dấu phần mới hoặc sửa (chữ đỏ). Sau đó chạy:
+
+```bash
+cd de_cuong/nguon
+pip install python-docx lxml matplotlib
+python3 ve_hinh1.py            # vẽ Hình 1
+python3 dung_docx.py           # bản chữ đỏ
+python3 dung_docx.py --sach    # bản sạch để nộp
+python3 kiem_tra.py            # chữ đen khớp bản đã nộp, mọi tài liệu đều được trích
+```
+
+Trích dẫn được đánh số tự động theo thứ tự xuất hiện (chuẩn IEEE).
+
+## Tài liệu cũ
+
+Phiên bản trước của đề tài ("kiểm chứng thông tin quảng cáo dựa trên bằng chứng văn bản cho tai nghe không dây") đã được gỡ khỏi thư mục làm việc. Phiên bản đó gồm sổ tay B01–B52, `docs/`, `evidence/`, `scripts/`, `templates/`, `tests/`, `Đọc_báo_cùng_HuP_3_.docx` và `Đọc_báo_cùng_HuP_4_.docx`, và vẫn còn trong lịch sử Git ở commit `ba88a48`. Ví dụ, để lấy lại một tệp:
+
+```bash
+git checkout ba88a48 -- scripts/capture_evidence.mjs
+```
+
+**Bảo mật:** lịch sử Git từng chứa tệp `.env`. Nếu khóa API trong đó chưa được thu hồi, hãy thu hồi ở trang của nhà cung cấp và tạo khóa mới. Khóa chỉ để trong `.env` cục bộ; tệp này đã được đưa vào `.gitignore`.
+
+## Công cụ dịch bài báo
+
+Script `run_translate_batch.sh` dịch các PDF trong `báo/` sang tiếng Việt và lưu vào `dịch/`. Trước khi chạy, sửa các đường dẫn `VENV`, `INPUT_DIR`, `OUTPUT_DIR` trong script cho đúng máy.
 
 ```bash
 bash run_translate_batch.sh
