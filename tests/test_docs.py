@@ -42,13 +42,13 @@ class DocsTest(unittest.TestCase):
         xml = raw(u.PROPOSAL)
         s = text(xml)
         for must in ('SAV', 'RQ1', 'RQ2', 'RQ3', 'TN1', 'TN2', 'TN3', 'TN4', '−10 điểm phần trăm',
-                     'GĐ1', 'GĐ10', '≈ 222–350 giờ', 'Không phải đóng góp'):
+                     'GĐ1', 'GĐ10', '≈ 208–320 giờ', 'Không phải đóng góp', 'B2', 'neo nguồn', 'Beats', 'P−ground'):
             self.assertIn(must, s)
         for banned in ('DỰ THẢO', 'Bản đề xuất điều chỉnh', 'TN5', 'TN6', 'E1', 'E3', '120 phát biểu'):
             self.assertNotIn(banned, s)
         self.assertNotRegex(xml, r'w:color w:val="[cC]00000"')
         nb = (ROOT / 'deliverables/KE_HOACH_CHI_TIET_SINH_VIEN.md').read_text(encoding='utf-8')
-        for shared in ('SAV', '≈ 222–350 giờ', '−10 điểm phần trăm', '09/10–18/10', '28/12–31/12'):
+        for shared in ('SAV', '≈ 208–320 giờ', 'B2', 'neo nguồn', 'Beats', 'P−ground', 'FAR_SAV − FAR_B2', '−10 điểm phần trăm', '09/10–18/10', '28/12–31/12'):
             self.assertIn(shared, nb)
 
 
@@ -58,7 +58,8 @@ class NotebookTest(unittest.TestCase):
 
     def test_sections(self):
         for h in ('## 0. Tự đánh giá kế hoạch', '## 2. Tính mới của khóa luận',
-                  '### 3.1 Bảng tổng kết toàn bộ công việc', '## 16. Ngoài phạm vi'):
+                  '### 3.1 Bảng tổng kết toàn bộ công việc', '## 16. Ngoài phạm vi',
+                  '### 0.1 Thang chấm nội dung', '### 3.5 Vì sao kế hoạch khả thi'):
             self.assertIn(h, self.nb)
 
     def test_linear_dependencies(self):

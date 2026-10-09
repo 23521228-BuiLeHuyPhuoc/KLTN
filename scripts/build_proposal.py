@@ -134,14 +134,14 @@ def section(title, intro, bullets, kind='b7'):
 B1 = []
 B1 += label_row('Nội dung đề tài:', 'Nghiên cứu phương pháp kiểm chứng từng phát biểu thông số (claim) trong quảng cáo tiếng Việt về tai nghe không dây do mô hình ngôn ngữ lớn (LLM) tạo ra, dùng tài liệu văn bản chính thức của hãng làm bằng chứng. Mỗi claim được gán Supported (được nguồn hỗ trợ), Refuted (bị nguồn bác bỏ) hoặc NEI (chưa đủ thông tin), kèm mã đoạn nguồn và lý do. Người dùng dự kiến là người duyệt nội dung quảng cáo: claim Refuted/NEI được gắn cờ để sửa hoặc tìm thêm nguồn trước khi đăng.')
 B1 += [[para('plain', '**Vấn đề trọng tâm:** lỗi chấp nhận nhầm do *lệch phạm vi thông số* — con số trong quảng cáo trùng con số trong nguồn nhưng khác điều kiện thử (chống ồn bật/tắt), khác bộ phận (tai nghe/hộp sạc), khác vai trò con số (mức tối đa công bố/giá trị luôn đạt) hoặc khác sản phẩm. Ví dụ: trang AirPods Max 2 chỉ công bố “lên đến 20 giờ … khi bật Chủ Động Khử Tiếng Ồn”; claim “20 giờ khi tắt chống ồn” trùng số nhưng không được nguồn hỗ trợ.')]]
-B1 += [[para('plain', '**Đóng góp cốt lõi — thuật toán đối chiếu nhận biết phạm vi thông số (SAV, Scope-Aware Verification):** mỗi claim và mỗi dữ kiện nguồn được biểu diễn thành bộ phạm vi σ = ⟨sản phẩm, phiên bản, bộ phận, thuộc tính, điều kiện thử, vai trò con số, giá trị, đơn vị⟩; bộ quyết định kiểm từng chiều phạm vi với kết quả ba trạng thái, coi lệch phạm vi là bằng chứng không dùng được (dẫn tới NEI) thay vì bác bỏ, kế thừa điều kiện tiêu đề có kiểm soát, và chỉ so giá trị theo bảng vai trò × vai trò khi mọi chiều đã khớp.')]]
+B1 += [[para('plain', '**Đóng góp cốt lõi — phương pháp kiểm chứng nhận biết phạm vi thông số (SAV, Scope-Aware Verification)**, gồm hai thành phần trên cùng biểu diễn σ = ⟨sản phẩm, phiên bản, bộ phận, thuộc tính, điều kiện thử, vai trò con số, giá trị, đơn vị⟩: (1) **trích xuất σ có neo nguồn** — LLM phải kèm chuỗi nguyên văn cho giá trị, điều kiện và bộ phận; bộ kiểm tất định xác nhận chuỗi có trong đoạn, con số khớp và vai trò con số khớp từ chỉ vai trò, trường không neo được thì loại dữ kiện; (2) **bộ quyết định nhận biết phạm vi** — kiểm từng chiều σ với kết quả ba trạng thái, coi lệch phạm vi là bằng chứng không dùng được (dẫn tới NEI) thay vì bác bỏ, kế thừa điều kiện tiêu đề có kiểm soát, và chỉ so giá trị theo bảng vai trò × vai trò khi mọi chiều đã khớp.')]]
 B1 += label_row('Mục tiêu:', None, [
-    'M1. Đề xuất và đặc tả thuật toán SAV: định nghĩa bộ phạm vi σ, quy tắc kiểm từng chiều, chính sách kế thừa điều kiện và bảng so sánh theo vai trò con số; cài đặt có kiểm thử đơn vị.',
-    'M2. Xây dựng bước trích xuất σ bằng LLM theo schema cố định và truy hồi bằng chứng BM25 lọc theo sản phẩm để SAV chạy trên văn bản nguồn thật.',
-    'M3. Đánh giá SAV so với LLM quyết định trên **cùng** hồ sơ σ (B1) và LLM đọc văn bản thô (B0), trên tập claim quảng cáo LLM và tập chẩn đoán cặp tối thiểu theo từng chiều phạm vi; phân tích thành phần và đánh giá trên hồ sơ chuẩn để tách lỗi trích xuất khỏi lỗi quyết định.',
-    'M4. Chuẩn bị dữ liệu cần cho phép đo (sản phẩm hỗ trợ, không phải đóng góp): kho tài liệu chính thức có snapshot và mã băm cho ≥ 6 họ sản phẩm, tập claim tiếng Việt có nguồn gốc truy vết, hướng dẫn gán nhãn dùng chung cho người gán, B0, B1 và SAV.',
+    'M1. Đề xuất và đặc tả SAV: định nghĩa bộ phạm vi σ, quy tắc neo nguồn theo từng trường, quy tắc kiểm từng chiều, chính sách kế thừa điều kiện và bảng so sánh theo vai trò con số; cài đặt có kiểm thử đơn vị.',
+    'M2. Xây dựng bước trích xuất σ có neo nguồn bằng LLM theo schema cố định và truy hồi bằng chứng BM25 lọc theo sản phẩm để SAV chạy trên văn bản nguồn thật.',
+    'M3. Đánh giá SAV so với LLM có danh sách kiểm phạm vi (B2), LLM tự quyết định (B1) — cả hai nhận **cùng** hồ sơ σ đã neo — và LLM đọc văn bản thô (B0), với hai mô hình quyết định, trên tập claim quảng cáo LLM và tập chẩn đoán cặp tối thiểu theo từng chiều phạm vi; phân tích thành phần (gồm bỏ bước neo) và đánh giá trên hồ sơ chuẩn để tách lỗi trích xuất khỏi lỗi quyết định.',
+    'M4. Chuẩn bị dữ liệu cần cho phép đo (sản phẩm hỗ trợ, không phải đóng góp): kho tài liệu chính thức có snapshot và mã băm cho 10 họ sản phẩm AirPods và Beats (tối thiểu 6), tập claim tiếng Việt có nguồn gốc truy vết, hướng dẫn gán nhãn dùng chung cho người gán, B0, B1 và SAV.',
 ])
-B1 += [[para('plain', '**Phạm vi:** claim về thời lượng pin, thời gian sạc, phiên bản Bluetooth, chống nước/bụi, chống ồn và các thông số có số liệu trên tài liệu chính thức của hãng (Apple và, nếu thu được, một hãng khác). Đầu vào là claim đã tách thủ công và mã sản phẩm đang quảng cáo. Không thuộc phạm vi: tách claim tự động, tự nhận diện sản phẩm, kho gây nhiễu nhiều sản phẩm, mô hình thứ hai, giao diện web.')]]
+B1 += [[para('plain', '**Phạm vi:** claim về thời lượng pin, thời gian sạc, phiên bản Bluetooth, chống nước/bụi, chống ồn và các thông số có số liệu trên tài liệu chính thức của hãng (AirPods của Apple và Beats; thêm hãng độc lập nếu thu được trang thông số văn bản). Đầu vào là claim đã tách thủ công và mã sản phẩm đang quảng cáo. Không thuộc phạm vi: tách claim tự động, tự nhận diện sản phẩm, kho gây nhiễu nhiều sản phẩm, mô hình thứ hai, giao diện web.')]]
 B1 += [[para('plain', '**Giới hạn kết luận:** hệ thống kiểm mức độ được tài liệu chính thức hỗ trợ, không kiểm hiệu năng thực tế, không đưa kết luận pháp lý. NEI nghĩa là “chưa tìm thấy trong kho nguồn đã khóa”. Kết luận chỉ áp dụng cho các họ sản phẩm và kho nguồn đã chọn.')]]
 B1 += [[para('plain', '**Đối tượng:** bài toán kiểm chứng phát biểu thông số sản phẩm dựa trên bằng chứng văn bản; biểu diễn phạm vi thông số; bộ quyết định tất định so với bộ quyết định bằng LLM.')]]
 
@@ -150,54 +150,54 @@ B1 += [[para('label', '**Phương pháp thực hiện:**'), para('h2', 'Cơ sở
 B1 += [[para('b7', b)] for b in [
     '[1] đã dùng LLM trích xuất kết hợp quy tắc, nhưng so khớp ngữ nghĩa theo ngưỡng, gán nhãn cả bài, không có chiều điều kiện hay vai trò con số. CoVer [5] tổng hợp bằng quy tắc ở mức lập trường, không ở mức thông số.',
     '[3], QuanTemp [16] và Aarnes & Setty [13] xử lý claim số bằng mô hình học hoặc phân loại kiểu claim; con số không gắn bộ phận, điều kiện thử và vai trò công bố/quan sát.',
-    'ProgramFC [14] và FOLK [15] phân rã claim thành chương trình/vị từ, nhưng từng bước vẫn do LLM trả lời tự do, không có schema phạm vi cố định.',
-    '**Điểm mới của SAV:** vai trò con số và điều kiện thử là chiều phạm vi bắt buộc; lệch phạm vi không bị suy thành bác bỏ; so sánh theo bảng vai trò × vai trò. Trong các tài liệu đã khảo sát chưa thấy cách làm này cho thông số sản phẩm; nhận định sẽ được kiểm lại khi đọc toàn văn các bài [12]–[16] ở giai đoạn 1.',
+    'ProgramFC [14] và FOLK [15] phân rã claim thành chương trình/vị từ, nhưng từng bước vẫn do LLM trả lời tự do, không neo vào nguồn và không có schema phạm vi cố định.',
+    '**Điểm mới của SAV:** vai trò con số và điều kiện thử là chiều phạm vi bắt buộc; hồ sơ do LLM trích được neo vào văn bản nguồn theo từng chiều trước khi quyết định; lệch phạm vi không bị suy thành bác bỏ; so sánh theo bảng vai trò × vai trò. Trong các tài liệu đã khảo sát chưa thấy cách làm này cho thông số sản phẩm; nhận định sẽ được kiểm lại khi đọc toàn văn các bài [12]–[16] ở giai đoạn 1.',
     '**Không phải đóng góp:** dùng BM25, gọi API LLM, xuất JSON, kết hợp LLM với Python, đổi miền sang tai nghe, kho dữ liệu và hướng dẫn nhãn.',
 ]]
 B1 += [[para('h2', 'Câu hỏi nghiên cứu')]]
 B1 += [[para('b7', b)] for b in [
     '**RQ1 (hỗ trợ):** BM25 lọc theo sản phẩm có đưa đủ bằng chứng cho SAV không? Đo evidence-set recall@k kèm số đoạn ứng viên N và k_eff = min(k, N) (TN1).',
-    '**RQ2 (chính):** trên cùng hồ sơ σ, SAV có giảm tỷ lệ chấp nhận nhầm (FAR) so với B1, đặc biệt trên claim lệch phạm vi, mà vẫn giữ Recall Supported? (TN2).',
-    '**RQ3 (cơ chế):** chiều nào của σ tạo ra khác biệt, và còn bao nhiêu khi bỏ lỗi trích xuất? (TN3 — tắt từng chiều; TN4 — hồ sơ chuẩn).',
+    '**RQ2 (chính):** trên cùng hồ sơ σ đã neo, SAV có giảm tỷ lệ chấp nhận nhầm (FAR) so với LLM có danh sách kiểm phạm vi (B2) và LLM tự do (B1), đặc biệt trên claim lệch phạm vi, mà vẫn giữ Recall Supported, với cả hai mô hình quyết định? (TN2).',
+    '**RQ3 (cơ chế):** thành phần nào tạo ra khác biệt — từng chiều của bộ quyết định và bước neo nguồn — và còn bao nhiêu khi bỏ hẳn lỗi trích xuất? (TN3 — tắt từng thành phần; TN4 — hồ sơ chuẩn).',
 ]]
 B1 += section('Dữ liệu và nhãn chuẩn',
               'Thu tài liệu thông số chính thức (snapshot, URL, ngày truy cập, SHA-256), chia đoạn có mã; sinh quảng cáo bằng LLM có lưu prompt, tham số, đầu ra thô; tách claim thủ công.', [
     'Hai tập báo riêng: claim từ quảng cáo LLM thông thường, và tập chẩn đoán gồm biến thể cặp tối thiểu của câu cha (đổi điều kiện, bộ phận, vai trò con số, giá trị, sản phẩm) để đo SAV theo từng chiều phạm vi.',
-    'Quy mô dự kiến, chốt sau pilot: dev 3–4 họ (40–60 claim thông thường, 20–30 biến thể); val 2 họ (15–25; 10–15); test 5 họ, tối thiểu 4 (60–80; 60–75, ≥ 12 mỗi loại thao tác). Sàn test: R+NEI ≥ 40, S ≥ 20, ≥ 8 ca mỗi loại COND/PART/ROLE.',
+    'Quy mô dự kiến, chốt sau pilot: dev 3 họ (30–40 claim thông thường, 20–30 biến thể); val 2 họ (12–15; 10–15); test 5 họ, ít nhất 2 họ Beats (40–60; 60–75, ≥ 12 mỗi loại thao tác). Tổng ≈ 170–235 claim, hơn một nửa là biến thể dùng lại bằng chứng của câu cha. Sàn test: R+NEI ≥ 40, S ≥ 20, ≥ 8 ca mỗi loại COND/PART/ROLE.',
     'Nhãn theo hướng dẫn dùng chung có phiên bản và mã băm: chỉ dùng tài liệu trong kho; claim và nguồn phải khớp sản phẩm, phiên bản, bộ phận, thuộc tính, đơn vị, điều kiện; mọi NEI-missing có nhật ký tìm nguồn. Claim nhiều thuộc tính: có bác bỏ → Refuted; có xung đột → NEI; mọi thuộc tính được hỗ trợ → Supported.',
     'Chia tập theo họ sản phẩm. Người gán thứ hai độc lập cho 40 claim, báo Cohen’s κ trước hòa giải; nếu không có người thứ hai, báo tự nhất quán và ghi rõ giới hạn.',
 ])
 B1 += section('Quy trình xử lý',
-              'Claim + mã sản phẩm → BM25 lấy top-k đoạn của đúng sản phẩm → LLM trích hồ sơ σ cho claim và từng đoạn → chuẩn hóa đơn vị → SAV → nhãn, mã bằng chứng, lý do, dấu vết từng chiều.', [
+              'Claim + mã sản phẩm → BM25 lấy top-k đoạn của đúng sản phẩm → LLM trích hồ sơ σ kèm chuỗi nguyên văn → kiểm neo nguồn (loại dữ kiện không neo được) → chuẩn hóa đơn vị → bộ quyết định → nhãn, mã bằng chứng, dữ kiện bị loại, dấu vết từng chiều.', [
     'A — phạm vi: sản phẩm, phiên bản, bộ phận, thuộc tính, đơn vị quy đổi được. B — điều kiện thử, có kế thừa điều kiện tiêu đề trừ claim nghĩa đen (“luôn”, “mọi chế độ”). Lệch ở A/B → đoạn không dùng được.',
     'C1 — xung đột chỉ xét trong cùng σ → NEI-conflict. C2 — so sánh theo vai trò × vai trò, dung sai mặc định 0 (ví dụ claim “luôn 20 giờ” gặp nguồn “lên đến 20 giờ” → chưa đủ; claim “lên đến 25 giờ” gặp “lên đến 20 giờ” → bác bỏ). C3 — tổng hợp nhãn.',
     'Lỗi JSON, hồ sơ thiếu, lỗi gọi mô hình được ghi là ERROR, không đổi thành NEI. Hồ sơ không chứa nhãn chuẩn hay thông tin lộ nhãn (có kiểm tự động).',
-    'Đối chứng: B1 nhận đúng hồ sơ σ của SAV và cùng hướng dẫn nhãn rồi để LLM quyết định — hiệu SAV − B1 đo riêng tác động của cách quyết định; B0 đọc văn bản thô, chỉ để tham khảo.',
+    'Đối chứng: B1 nhận đúng hồ sơ σ đã neo của SAV và cùng hướng dẫn nhãn rồi để LLM quyết định; B2 như B1 nhưng có thêm danh sách kiểm phạm vi (sản phẩm → bộ phận → điều kiện → vai trò con số → giá trị) và 3 ví dụ từ dev — đối chứng mạnh nhất bằng prompt, nên so sánh chính là SAV − B2; B0 đọc văn bản thô, chỉ để tham khảo. Phần quyết định của B0/B1/B2 chạy trên hai mô hình: một mô hình mở (họ Llama) và một mô hình thương mại cỡ nhỏ.',
 ])
 B1 += section('Thiết kế thực nghiệm và tiêu chí đánh giá',
               'Mô hình, prompt, k, hướng dẫn nhãn, tập chia và mã nguồn được khóa bằng mã băm trước khi chạy test; val chạy một lần sau khóa.', [
-    'TN1: recall@k của BM25 trên test. TN2: B0, B1, SAV trên toàn test; lượt 1 là bảng chính, lượt 2–3 trên min(30, n_test) claim chọn trước. TN3: SAV tắt lần lượt kiểm bộ phận, điều kiện, vai trò con số, kế thừa điều kiện, trên cùng hồ sơ lượt 1. TN4: SAV và B1 trên hồ sơ chuẩn viết tay cho tập chẩn đoán test.',
+    'TN1: recall@k của BM25 trên test. TN2: B0, B1, B2, SAV × hai mô hình quyết định trên toàn test; lượt 1 là bảng chính, lượt 2–3 trên min(30, n_test) claim chọn trước. TN3: SAV tắt lần lượt kiểm bộ phận, điều kiện, vai trò con số, kế thừa điều kiện và bước neo nguồn (P−ground), trên cùng lượt trích xuất 1. TN4: SAV, B1, B2 trên hồ sơ chuẩn viết tay cho tập chẩn đoán test.',
     'Chỉ số: FAR = (Refuted→Supported + NEI→Supported) / (số claim Refuted + NEI); Recall Supported; FAR theo loại thao tác; precision/recall/F1 từng nhãn, Macro-F1; ΔFAR, ΔRecall; số lượt gọi, token, thời gian, chi phí.',
-    '**Điều kiện kết luận SAV có tác dụng trên mẫu (chốt trước test):** trên tập chẩn đoán test, ΔFAR = FAR_SAV − FAR_B1 < 0 ở lượt 1, cùng chiều ở các lượt lặp, cặp bất đồng nghiêng về SAV, ΔRecall Supported ≥ −10 điểm phần trăm, và ablation tương ứng làm FAR tăng ở đúng loại thao tác. Thiếu một điều kiện → “chưa kết luận”.',
-    'Khi kết quả âm, TN4 phân biệt: trích xuất làm mất thông tin phạm vi, luật sai/thiếu, hoặc B1 đã đủ tốt. Mọi trường hợp đều được báo cáo.',
+    '**Điều kiện kết luận SAV có tác dụng trên mẫu (chốt trước test):** trên tập chẩn đoán test, ΔFAR = FAR_SAV − FAR_B2 < 0 ở lượt 1 với cả hai mô hình, cùng chiều ở các lượt lặp, cặp bất đồng nghiêng về SAV (McNemar ghép cặp), ΔRecall Supported ≥ −10 điểm phần trăm, và ablation tương ứng làm FAR tăng ở đúng loại thao tác. Thiếu một điều kiện → “chưa kết luận”. Bước neo nguồn có tác dụng khi P−ground có FAR cao hơn SAV trên hồ sơ trích và khoảng cách gần như mất trên hồ sơ chuẩn.',
+    'Khi kết quả âm, TN4 phân biệt: trích xuất làm mất thông tin phạm vi, luật sai/thiếu, hoặc B2 đã đủ tốt. Mọi trường hợp đều được báo cáo.',
     'Bất định mô tả bằng bootstrap theo họ sản phẩm, kết quả từng họ và bỏ lần lượt từng họ; không tuyên bố ý nghĩa thống kê khi số họ ít.',
 ])
 B1 += [[para('label', '**Kết quả mong đợi:**')]]
 B1 += [[para('b3', b)] for b in [
-    'Đặc tả và mã nguồn thuật toán SAV có kiểm thử; bước trích xuất σ và truy hồi BM25 chạy trên tài liệu thật.',
+    'Đặc tả và mã nguồn SAV (kiểm neo nguồn và bộ quyết định) có kiểm thử; bước trích xuất σ và truy hồi BM25 chạy trên tài liệu thật.',
     'Bảng TN1–TN4 trên test đã khóa, mọi số truy được về file kết quả; kết luận về RQ2–RQ3 theo đúng điều kiện chốt trước, kể cả khi không cải thiện.',
     'Kho nguồn, tập claim có nhãn và nguồn gốc truy vết, hướng dẫn gán nhãn có phiên bản; phân tích lỗi trên mẫu chọn trước.',
     'Luận văn, slide và gói tái lập (chương trình dòng lệnh trả nhãn, bằng chứng, lý do, dấu vết cho từng claim).',
 ]]
 
 B2 = []
-B2 += [[para('label', '**Kế hoạch thực hiện:** một sinh viên thực hiện; các giai đoạn nối tiếp, giai đoạn sau chỉ bắt đầu khi giai đoạn trước đạt mốc kiểm tra. Ước lượng ≈ 222–350 giờ (≈ 19–29 giờ/tuần). Danh sách 52 bước chi tiết ở sổ tay thực hiện kèm theo.')]]
+B2 += [[para('label', '**Kế hoạch thực hiện:** một sinh viên thực hiện; các giai đoạn nối tiếp, giai đoạn sau chỉ bắt đầu khi giai đoạn trước đạt mốc kiểm tra. Ước lượng ≈ 208–320 giờ (≈ 17–27 giờ/tuần). Danh sách 52 bước chi tiết ở sổ tay thực hiện kèm theo.')]]
 GATES = [
     ('GĐ1 (09/10–18/10) — Khởi động và chốt tính mới', ['Đọc toàn văn các bài gần nhất, lập bảng đối chiếu, xác nhận điểm mới của SAV; chốt định nghĩa σ và câu hỏi nghiên cứu với GVHD.']),
     ('GĐ2 (19/10–22/10) — Môi trường', ['Cài môi trường, chọn mô hình LLM, chạy thử trên ví dụ có sẵn.']),
-    ('GĐ3 (23/10–01/11) — Nguồn cho 2 họ pilot', ['Thu tài liệu chính thức, snapshot, trích văn bản, chia đoạn, kiểm độ phủ.']),
+    ('GĐ3 (23/10–01/11) — Nguồn cho 2 họ pilot', ['Kiểm kê 10 họ AirPods và Beats; thu tài liệu chính thức, snapshot, trích văn bản, chia đoạn, kiểm độ phủ cho 2 họ pilot.']),
     ('GĐ4 (02/11–09/11) — Dữ liệu pilot', ['Sinh quảng cáo, tách claim, tạo biến thể cặp tối thiểu, gán nhãn và đo thời gian gán.']),
-    ('GĐ5 (10/11–23/11) — Pipeline trên dev và pilot', ['Cài BM25, trích xuất σ, SAV, B0/B1, kiểm rò nhãn, runner; chạy pilot; chốt quy mô.']),
+    ('GĐ5 (10/11–23/11) — Pipeline trên dev và pilot', ['Cài BM25, trích xuất σ có neo nguồn, bộ quyết định, B0/B1/B2, kiểm rò nhãn, runner; chạy pilot; chốt quy mô.']),
     ('GĐ6 (24/11–07/12) — Dữ liệu đủ quy mô', ['Mở rộng nguồn, claim, biến thể, nhãn cho mọi họ; kiểm độ tin cậy nhãn.']),
     ('GĐ7 (08/12–11/12) — Chia tập và khóa', ['Chia theo họ, viết hồ sơ chuẩn cho TN4, kiểm dữ liệu, khóa giao thức.']),
     ('GĐ8 (12/12–17/12) — Thực nghiệm và phân tích', ['Chạy TN1–TN4, tính chỉ số, phân tích lỗi, case study.']),
@@ -207,9 +207,9 @@ GATES = [
 for g, items in GATES:
     B2 += [[para('gate', g, bold=True)]] + [[para('item', it)] for it in items]
 B2 += section('Rủi ro và phương án', None, [
-    'Không thu được tài liệu hãng thứ hai hoặc tổng số họ < 6: thu hẹp kết luận về tài liệu Apple, giữ RQ2–RQ3 và tập chẩn đoán.',
+    'Hãng thứ hai là Beats (trang chính thức riêng) nên nguồn chắc chắn có; giới hạn “hai thương hiệu cùng tập đoàn” được ghi rõ. Nếu tổng số họ < 6: giữ RQ2–RQ3 và tập chẩn đoán, hạ mức kết luận.',
     'Gán nhãn chậm hơn dự kiến: giảm claim thông thường ở test, giữ tập chẩn đoán và TN2–TN4.',
-    'Trích xuất lỗi nhiều: sửa prompt/schema hoặc đổi mô hình trên dev trước khi khóa; TN4 tách ảnh hưởng của trích xuất.',
+    'Trích xuất lỗi nhiều: kiểm neo loại dữ kiện bịa; nếu tỷ lệ loại > 20% trên dev thì sửa prompt/schema trước khi khóa (không nới kiểm neo); TN4 tách phần ảnh hưởng còn lại.',
     'Lịch chính thức của Khoa khác dự kiến: dời các giai đoạn theo thông báo, giữ nguyên thứ tự.',
 ])
 B2 += [[para('b7', '**Cần GVHD xác nhận:** trọng tâm SAV và RQ1–RQ3; chính sách kế thừa điều kiện; quy mô chốt sau pilot; lịch so với hạn chính thức; ngân sách API.')]]
