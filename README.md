@@ -2,16 +2,25 @@
 
 Repository lưu trữ tài liệu nghiên cứu, bài báo tham khảo và các công cụ dịch tự động phục vụ quá trình thực hiện Khóa luận tốt nghiệp.
 
-## Tài liệu KLTN đang làm việc
+## Tài liệu KLTN đang làm việc (bản 2, 10/2026 — chờ GVHD xác nhận)
 
-- [Đề cương chi tiết](Đọc_báo_cùng_HuP_4_.docx) và [báo cáo tháng 09/2026](Đọc_báo_cùng_HuP_3_.docx), cập nhật ngày 08/10/2026.
+Hai tài liệu chính, khớp nhau về tính mới, câu hỏi nghiên cứu, thí nghiệm TN1–TN4, quy mô và lịch:
+
+- [Đề cương chi tiết](Đọc_báo_cùng_HuP_4_.docx): đề tài, **tính mới (thuật toán SAV — đối chiếu nhận biết phạm vi thông số)**, mục tiêu, phương pháp, thực nghiệm, kế hoạch 10 giai đoạn nối tiếp. Dựng lại bằng `python3 scripts/build_proposal.py` (khung HuP4 ở commit `7107507`, tên đề tài giữ nguyên).
+- [Sổ tay thực hiện](deliverables/KE_HOACH_CHI_TIET_SINH_VIEN.md): tự chấm kế hoạch /10, tính mới, **bảng tổng kết 52 bước B01–B52 theo thứ tự tuyến tính**, luật gán nhãn, đặc tả SAV, giao thức, chi tiết từng bước.
+
+`deliverables/KE_HOACH_TONG_HOP.docx` đã được bỏ vì trùng vai trò với đề cương. Mọi file trong `docs/`, `Đọc_báo_cùng_HuP_3_.docx` và các mục bên dưới là **lịch sử**, không cần đọc để thực hiện.
+
+## Tài liệu lịch sử (08/10/2026)
+
+- [Báo cáo tháng 09/2026](Đọc_báo_cùng_HuP_3_.docx).
 - [Phân tích bảy bài tham khảo](docs/PHAN_TICH_TAI_LIEU.md).
 - [Bàn giao sau khi tiếp nối Claude](docs/BAN_GIAO_2026-10-08.md): thay đổi, kiểm tra, bản sao lưu và thông tin còn cần xác nhận.
 - [Kiểm tra phản biện và các sửa đổi lần hai](docs/KIEM_TRA_PHAN_BIEN_2026-10-08.md): tiêu chí RQ3, A–B–C, số liệu gốc và 23 ví dụ.
 - [Đặc tả A–B–C](docs/QUY_TAC_ABC.md), [ảnh chụp và hồ sơ nguồn](evidence/2026-10-08/README.md).
 - [Nhật ký công việc](CLAUDE_WORK_LOG.md).
 
-Kiểm tra nội dung và cấu trúc hai DOCX: `python3 scripts/update_thesis_docs.py --check`. Script chỉ dùng thư viện chuẩn Python; mặc định chạy xem trước, chỉ sửa file khi có `--apply`.
+Kiểm tra DOCX cũ (chỉ còn đúng với HuP3; HuP4 nay kiểm bằng `tests/test_docs.py`): `python3 scripts/update_thesis_docs.py --check`. Script chỉ dùng thư viện chuẩn Python; mặc định chạy xem trước, chỉ sửa file khi có `--apply`.
 
 Kiểm hồ sơ ví dụ/hash nguồn: `python3 scripts/audit_examples.py --check`. Đối chiếu vị trí số liệu bài gốc: `python3 scripts/check_paper_facts.py` (cần Poppler). Đây là kiểm tra tài liệu, chưa phải chạy pipeline/thí nghiệm B0/B1/P.
 
@@ -31,9 +40,10 @@ Kiểm hồ sơ ví dụ/hash nguồn: `python3 scripts/audit_examples.py --chec
 .
 ├── báo/                  # Bài báo gốc (PDF) — bản quyền thuộc tác giả/nhà xuất bản
 ├── dịch/                 # Bản dịch máy (PDF, glossary) — xem lưu ý bản quyền
-├── docs/                 # Hướng dẫn nhãn, đặc tả A–B–C, giao thức, kế hoạch, nhật ký
+├── deliverables/         # Sổ tay thực hiện (tài liệu chính)
+├── docs/                 # Lịch sử: bản 08/10 của hướng dẫn nhãn, giao thức, kế hoạch, nhật ký
 ├── evidence/2026-10-08/  # Snapshot nguồn Apple, examples.json, mã băm
-├── scripts/              # Kiểm tra docx/ví dụ/số liệu, hàm tham chiếu A–B–C, mô phỏng
+├── scripts/              # Dựng đề cương, kiểm tra docx/ví dụ/số liệu, hàm tham chiếu SAV (A–B–C), mô phỏng
 ├── templates/            # Mẫu manifest, search_log, gán nhãn độc lập, mẫu quảng cáo LLM
 ├── tests/                # unittest cho luật A–B–C
 ├── run_translate_batch.sh # Dịch hàng loạt bằng pdf2zh (Bing Translator)
