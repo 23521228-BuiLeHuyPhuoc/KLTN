@@ -54,14 +54,23 @@ for p in doc.element.body.iter(q("p")):
             print("Chữ đen không có trong bản đã nộp:", s[:120])
 print(f"Đoạn chữ đen: {so_doan}, sai khác: {loi}")
 
-text = "\n".join(p.text for p in doc.paragraphs)
-for t in doc.tables:
-    for row in t.rows:
-        for cell in row.cells:
-            text += "\n" + cell.text
-refs = re.findall(r"^\[(\d+)\] ", text, flags=re.M)
-cited = {int(n) for n in re.findall(r"\[(\d+)\]", text)}
-n_refs = len(set(refs))
+# Lấy chữ của mọi đoạn, kể cả đoạn trong bảng lồng, theo đúng thứ tự trong văn bản.
+lines = ["".join(t.text or "" for t in p.iter(q("t"))) for p in doc.element.body.iter(q("p"))]
+cut = lines.index("Tài liệu tham khảo")
+body, ref_part = "\n".join(lines[:cut]), "\n".join(lines[cut + 1:])
+refs = [int(n) for n in re.findall(r"^\[(\d+)\] ", ref_part, flags=re.M)]
+n_refs = len(refs)
+assert refs == list(range(1, n_refs + 1)), refs
+cited = {int(n) for n in re.findall(r"\[(\d+)\]", body)}
 thieu = [i for i in range(1, n_refs + 1) if i not in cited]
-print(f"Tài liệu tham khảo: {n_refs}, số chưa được trích: {thieu or 'không có'}")
-sys.exit(1 if loi or thieu else 0)
+thua = sorted(n for n in cited if n > n_refs)
+# Trích dẫn theo thứ tự xuất hiện: lần đầu nhắc tới tài liệu n phải sau lần đầu nhắc tới n-1.
+first = []
+for m in re.finditer(r"\[(\d+)\]", body):
+    if int(m.group(1)) not in first:
+        first.append(int(m.group(1)))
+sai_thu_tu = first != sorted(first)
+print(f"Tài liệu tham khảo: {n_refs}, số chưa được trích: {thieu or 'không có'}, "
+      f"số trích không có trong danh mục: {thua or 'không có'}, "
+      f"thứ tự trích dẫn: {'sai' if sai_thu_tu else 'đúng'}")
+sys.exit(1 if loi or thieu or thua or sai_thu_tu else 0)

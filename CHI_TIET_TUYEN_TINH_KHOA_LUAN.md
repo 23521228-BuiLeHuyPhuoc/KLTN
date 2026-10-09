@@ -7,7 +7,7 @@
 | **Sinh viên** | Bùi Lê Huy Phước – 23521228 |
 | **Cán bộ hướng dẫn (CBHD)** | ThS Trần Hồng Nghi |
 | **Thời gian** | 15/09/2026 – 31/12/2026; bảo vệ theo lịch Khoa (dự kiến tháng 01/2027) |
-| **Cập nhật** | 09/10/2026, khớp với đề cương trong thư mục `de_cuong/` |
+| **Cập nhật** | 10/10/2026, khớp với đề cương trong thư mục `de_cuong/` (bản đã bổ sung Bảng 1, Bảng 2 và câu hỏi nghiên cứu, xem mục 4.4) |
 
 > **Trạng thái:** đề cương đã sửa theo nhận xét của Khoa, đang chờ CBHD xác nhận. Repo chưa có dữ liệu thực nghiệm và chưa có kết quả. Mọi số giờ, quy mô và ngày tháng dưới đây là ước lượng. Sau bộ thử ban đầu (bước 15) phải cập nhật lại bằng số đo thật.
 
@@ -18,6 +18,8 @@
 | Bước 01–45 | Các bước công việc |
 | Mốc 0–8 | Các mốc |
 | M1–M4 | Mục tiêu trong đề cương |
+| CH1–CH3 | Câu hỏi nghiên cứu trong đề cương |
+| H1–H4 | Giả thuyết (mục 8.6) |
 | B0–B3 | Các phương pháp đối chứng |
 | P | Phương pháp đề xuất |
 
@@ -119,11 +121,13 @@ Các phương pháp kiểm chứng hiện có chủ yếu xét mức khớp nộ
 - Macro-F1;
 - Recall của nhãn Đúng.
 
-**Giả thuyết:**
+**Câu hỏi nghiên cứu và giả thuyết** (đề cương mục 2 và Nội dung 3; cách kết luận ở mục 8.6):
 
-- P có FAR thấp hơn B0–B3.
-- P có F1 của nhãn Lệch điều kiện cao hơn B1 và B2.
-- Recall của nhãn Đúng không thấp hơn quá 5 điểm phần trăm so với đối chứng tốt nhất.
+| Câu hỏi | Giả thuyết |
+|---|---|
+| CH1. Đối chiếu tường minh điều kiện có giảm tỷ lệ tuyên bố sai hoặc lệch bị chấp nhận là Đúng so với các cách kiểm chứng hiện có, mà không bỏ sót nhiều tuyên bố đúng? | H1: P có FAR thấp hơn B0–B3. H4: Recall của nhãn Đúng không thấp hơn quá 5 điểm phần trăm so với đối chứng tốt nhất |
+| CH2. Quy tắc tường minh trên dữ liệu đã neo nguồn có phát hiện Lệch điều kiện tốt hơn để LLM tự gán nhãn? | H2: P có F1 của nhãn Lệch điều kiện cao hơn B1 và B2 |
+| CH3. Neo nguồn và đối chiếu điều kiện đóng góp thế nào? | H3: P tốt hơn P−NN về FAR và F1 Lệch; P−ĐK để kiểm tra hợp lý |
 
 **Sản phẩm cuối:**
 
@@ -321,6 +325,44 @@ Tuần 10–13 là cao điểm, khoảng 31–32 giờ/tuần. Nếu chậm hơn
 | Định dạng gạch đầu dòng, in đậm, in nghiêng không thống nhất | Dùng mẫu Word của Khoa; kiểm ở bước 44 |
 | Đặt "..." trong văn bản khoa học | Không dùng |
 | Phạm vi không khớp tên đề tài | Phạm vi trong đề cương nêu tiêu chí chọn nhóm sản phẩm; khóa luận giữ nguyên |
+| Biến, tham số, công thức dùng mà chưa định nghĩa | Mọi ký hiệu (q, s, D(s), c, y(c), e(c), r(c), k, FAR) được định nghĩa ở lần xuất hiện đầu |
+| Ghi sai nội dung bài được trích (Khoa có đọc bài gốc, ví dụ ghi bài báo có "research gap" trong khi bài chỉ có "research question") | Mỗi câu nói về bài khác phải khớp số trang trong bài gốc (bước 01) |
+| Trích dẫn lệch: nhiều tài liệu cho phần độ đo, ít cho công trình liên quan; hoặc quá nhiều tài liệu | Phần lớn tài liệu dùng cho tổng quan và so sánh; giữ khoảng 25 tài liệu, tài liệu nào cũng có vai trò |
+| Gộp nhiều kỹ thuật, nhiều thành phần cho một khóa luận | Một câu hỏi trung tâm (đối chiếu điều kiện); CopyPro là nơi triển khai, không phải bài toán thứ hai |
+| Viết hoa không cần thiết trong nội dung | Chỉ viết hoa tên riêng; tên chế độ của hãng viết thường (ví dụ "chế độ nguồn điện thấp") |
+| Đoạn đầu tổng quan trộn ngữ cảnh với nghiên cứu hiện có | Tách đoạn: bối cảnh, CopyPro, các nghiên cứu liên quan, hạn chế |
+
+### 4.4 Bài học từ 38 đề cương được đánh giá Đạt (đọc ngày 10/10/2026)
+
+**Số liệu từ file xét đề cương.** Mỗi đề cương nhóm hai người chiếm hai dòng, nên đếm theo dòng có tên đề tài:
+
+| Danh sách | Số đề cương | Đạt | Tỷ lệ |
+|---|---|---|---|
+| NT505.R11 (lớp của mình) | 48 | 2 | 4% |
+| NT505.R11.ANTT | 64 | 24 | 38% |
+| NT505.R11.ANTN | 17 | 12 | 71% |
+
+Hội đồng của lớp NT505.R11 yêu cầu sửa 46/48 đề cương, nên bị yêu cầu sửa là bình thường. Nhận xét cho 46 đề cương đó, đếm theo từ khóa nên chỉ là ước lượng, xoay quanh: hình thức (khoảng 20), tổng quan và trích dẫn (khoảng 16), tên đề tài (khoảng 15), thực nghiệm chưa cụ thể (khoảng 13), nội dung thực hiện chưa cụ thể hoặc chưa khớp mục tiêu (khoảng 9), định vị đóng góp so với cách sẵn có (4), phạm vi và trọng tâm (4), biến chưa định nghĩa (4). Nhận xét của đề tài này rơi vào ba nhóm nội dung nặng nhất: tổng quan, đóng góp, phạm vi.
+
+**Điểm chung của hai đề cương Đạt ở NT505.R11 (23520008, 23520810):**
+
+1. Tổng quan đi theo mạch: bối cảnh → từng nhóm nghiên cứu, mỗi ý có trích dẫn → hạn chế của nhóm đó → khoảng trống → hướng của đề tài. Không có câu nào nói về bài khác mà thiếu trích dẫn.
+2. Có bảng so sánh các công trình liên quan, cột cuối là hạn chế so với đề tài (23520810).
+3. Có câu hỏi nghiên cứu hoặc câu hỏi chính mà thực nghiệm phải trả lời (23520008).
+4. Nêu rõ dữ liệu, đối chứng, độ đo, kịch bản thực nghiệm; có mục giới hạn của đề tài nói rõ phần nào không làm và vì sao.
+5. Kế hoạch theo tuần, có các lần gặp cán bộ hướng dẫn.
+
+**Điểm cộng thường gặp ở các đề cương Đạt khác (ANTT, ANTN):**
+
+1. Mục "Tính mới và đóng góp" nói thẳng thành phần nào đã có trong nghiên cứu trước, điểm mới nằm ở đâu, và khác từng bài gần nhất thế nào (23520197).
+2. Bảng các phương pháp được so sánh, ghi vai trò của từng cặp so sánh, tức cặp nào tách riêng đóng góp của thành phần nào (23520197).
+3. LLM luôn đi kèm một bước kiểm chứng tất định: tên đề tài và phương pháp dùng các cụm "có kiểm chứng", "dựa trên bằng chứng", "xác minh có chọn lọc" (23520295, 23521179, 23521735, 23520315, 23521602). Hướng neo nguồn và bộ quyết định bằng quy tắc của đề tài này cùng mạch đó.
+4. Tiêu chí thành công chốt trước khi chạy tập kiểm tra và cam kết báo cáo cả kết quả âm.
+5. Khoảng trống nghiên cứu đánh số và mỗi khoảng trống gắn với một phần việc của đề tài (23521179, 23520295).
+
+**Đã đưa vào đề cương (bản 10/10/2026, chữ đỏ):** Bảng 1 so sánh nghiên cứu liên quan; câu nói rõ thành phần nào đã có và điểm mới nằm ở đâu (mục 3); ví dụ bốn nhãn với Galaxy Buds3 Pro (mục 2); ba câu hỏi nghiên cứu CH1–CH3 (mục 2) và giả thuyết H1–H3 tương ứng (Nội dung 3); Bảng 2 các phương pháp được so sánh và vai trò; các mốc gặp cán bộ hướng dẫn trong kế hoạch; sửa "bộ pilot" thành "bộ dữ liệu thử ban đầu", viết thường tên chế độ của hãng.
+
+**Không đổi:** kế hoạch vẫn theo tháng như khung đề cương đã nộp. Hội đồng không nhận xét về phần kế hoạch của đề tài này, và các mốc gặp cán bộ hướng dẫn đã được thêm vào từng tháng.
 
 ---
 
@@ -489,8 +531,8 @@ Các con số đã đối chiếu với trang chính hãng tiếng Việt ngày 
 | 10 | Galaxy Buds3 Pro pin 8 giờ | C4 | Sai | Thuận lợi hơn mọi giá trị công bố (6 và 7 giờ) |
 | 11 | Hộp sạc Galaxy Buds3 Pro cũng chống nước IP57 | C3 | Lệch (`doi_bo_phan`) | IP57 là của tai nghe; hộp sạc không kháng nước |
 | 12 | Galaxy Buds3 Pro luôn nghe đủ 6 giờ | C1 | Lệch (`doi_kieu_gia_tri`) | Tài liệu ghi "lên đến 6 giờ" |
-| 13 | Apple Watch SE 3 dùng đến 32 giờ ở Chế Độ Nguồn Điện Thấp | C2 | Đúng | Khớp |
-| 14 | Apple Watch SE 3 pin 32 giờ | C3 | Lệch (`bo_dieu_kien`) | Chế độ chưa xác định; 32 giờ chỉ ở Chế Độ Nguồn Điện Thấp |
+| 13 | Apple Watch SE 3 dùng đến 32 giờ ở chế độ nguồn điện thấp | C2 | Đúng | Khớp |
+| 14 | Apple Watch SE 3 pin 32 giờ | C3 | Lệch (`bo_dieu_kien`) | Chế độ chưa xác định; 32 giờ chỉ ở chế độ nguồn điện thấp |
 | 15 | Apple Watch SE 3 luôn dùng đủ 18 giờ mỗi ngày | C1 | Lệch (`doi_kieu_gia_tri`) | Tài liệu ghi "lên đến 18 giờ" |
 | 16 | Xiaomi 15T có độ sáng cực đại 3200 nit | C2 | Đúng | Cùng chế độ cực đại; phần 25% diện tích chỉ ghi vào lý do |
 | 17 | Màn hình Xiaomi 15T sáng 3200 nit | C3 | Lệch (`bo_dieu_kien`) | Không nói "cực đại" nên hiểu là chế độ thông thường; 3200 nit là độ sáng cực đại đo trên 25% diện tích |
@@ -742,6 +784,8 @@ B0 và B3 không bao giờ dự đoán Lệch. Vì vậy:
 | H2 | P có F1 Lệch cao hơn B1 và B2 | Khoảng tin cậy của hiệu F1 Lệch (P trừ B1, P trừ B2) nằm hoàn toàn trên 0 |
 | H3 | Neo nguồn có ích | P tốt hơn P−NN về FAR và F1 Lệch, khoảng tin cậy của hiệu không chứa 0. P−ĐK chỉ để kiểm tra hợp lý, kỳ vọng F1 Lệch gần 0 |
 | H4 | P không làm mất tuyên bố đúng | Kiểm tra "không kém hơn" ở 8.5 đạt |
+
+Đề cương viết gọn thành ba giả thuyết H1–H3 ứng với CH1–CH3; điều kiện của H4 nằm trong H1 của đề cương. Khi viết khóa luận, giữ bốn giả thuyết như bảng trên và ghi rõ ánh xạ: CH1 ↔ H1, H4; CH2 ↔ H2; CH3 ↔ H3.
 
 Phân tích phụ (không phải giả thuyết; dùng làm khuyến nghị cho CopyPro):
 

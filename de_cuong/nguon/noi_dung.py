@@ -25,6 +25,83 @@ GHI_CHU = ("Bản sửa theo nhận xét của Khoa (tháng 10/2026): chữ đ�
            "và chuyển chữ đỏ về màu đen.")
 
 # ---------------------------------------------------------------------------
+# Bảng. Mỗi ô là danh sách run; độ rộng cột tính bằng dxa (1 cm ≈ 567 dxa), tổng 9200.
+# ---------------------------------------------------------------------------
+BANG_1 = {
+    "widths": [1900, 2300, 2300, 2700],
+    "header": [[N("Nghiên cứu")], [N("Dữ liệu và nhãn")], [N("Cách xác định nhãn")],
+               [N("Xử lý điều kiện ràng buộc của thông số")]],
+    "rows": [
+        [[N("FEVER {ref:fever}")],
+         [N("Tuyên bố tạo từ câu Wikipedia; ba nhãn Supported, Refuted, NEI")],
+         [N("Truy hồi bằng chứng rồi phân loại cặp tuyên bố và bằng chứng")],
+         [N("Không có; tuyên bố đúng con số nhưng sai điều kiện không có nhãn riêng")]],
+        [[N("AVeriTeC {ref:averitec}, Fathom {ref:fathom}")],
+         [N("Tuyên bố thực tế, bằng chứng trên web; thêm nhãn Conflicting/Cherry-picking")],
+         [N("LLM hoặc mô hình phân loại gán nhãn từ bằng chứng truy hồi")],
+         [N("Lớp gây hiểu nhầm không gắn với điều kiện cụ thể; Fathom đạt F1 bằng 0 ở lớp này trên tập phát "
+            "triển")]],
+        [[N("ViFactCheck {ref:vifactcheck}, ViWikiFC {ref:viwikifc}, SemViQA {ref:semviqa}")],
+         [N("Tin tức và Wikipedia tiếng Việt; ba nhãn")],
+         [N("Chọn hoặc truy hồi bằng chứng rồi phân loại nhãn")],
+         [N("Không có; dữ liệu không thuộc miền thông số kỹ thuật")]],
+        [[N("ViNumFCR {ref:vinumfcr}, NumPert {ref:numpert}, Chungkham và cộng sự {ref:thinkright}")],
+         [N("Tuyên bố chứa số liệu")],
+         [N("Mô hình ngôn ngữ suy luận trên con số")],
+         [N("Tập trung vào giá trị con số, không biểu diễn điều kiện đi kèm con số")]],
+        [[N("MiniCheck {ref:minicheck}")],
+         [N("Câu trong văn bản do LLM tạo và tài liệu nền; được hỗ trợ hay không")],
+         [N("Mô hình nhỏ kiểm tra từng câu với tài liệu nền")],
+         [N("Không phân biệt sai giá trị với lệch điều kiện")]],
+        [[N("Jiang và cộng sự {ref:jiang}")],
+         [N("Thông tin sản phẩm do LLM bổ sung trên sàn thương mại điện tử")],
+         [N("Phát hiện ảo giác ở mức thuộc tính sản phẩm")],
+         [N("Không biểu diễn điều kiện để giá trị thuộc tính đúng")]],
+        [[N("Nguyen và cộng sự {ref:paclic}")],
+         [N("Bài quảng cáo dịch vụ làm đẹp, thẩm mỹ; một nhãn vi phạm cho cả bài")],
+         [N("LLM trích giấy phép, địa chỉ, dịch vụ rồi so khớp với dữ liệu cấp phép theo ngưỡng độ tương đồng")],
+         [N("Không chỉ ra nội dung nào sai, không xét điều kiện áp dụng")]],
+        [[N("Đề tài này", b=True)],
+         [N("Quảng cáo tiếng Việt do LLM tạo về thiết bị điện tử tiêu dùng; bốn nhãn, có Lệch điều kiện")],
+         [N("LLM trích xuất có neo nguồn; bộ quyết định dựa trên quy tắc")],
+         [N("Biểu diễn tường minh và đối chiếu khi quyết định nhãn; trả nhãn cho từng tuyên bố kèm đoạn nguồn "
+            "và lý do")]],
+    ],
+}
+
+BANG_2 = {
+    "widths": [1100, 4700, 3400],
+    "header": [[N("Ký hiệu")], [N("Cách gán nhãn")], [N("Vai trò trong so sánh")]],
+    "rows": [
+        [[K("B0")],
+         [K("LLM đọc trực tiếp rồi gán nhãn"), N(" theo ba lớp Supported, Refuted, NEI")],
+         [N("Đại diện cách kiểm chứng ba nhãn phổ biến {ref:fever}")]],
+        [[K("B1")],
+         [K("LLM nhận thông tin có cấu trúc rồi gán nhãn"),
+          N(" theo bốn lớp, dùng cùng bộ thông số và cùng hướng dẫn gán nhãn với P")],
+         [N("So với P để tách riêng tác động của bộ quyết định")]],
+        [[N("B2")],
+         [N("LLM đọc bằng chứng và gán bốn nhãn theo hướng dẫn gán nhãn, có định nghĩa và ví dụ cho nhãn Lệch "
+            "điều kiện")],
+         [N("Đại diện cách khắc phục chỉ bằng câu lệnh, theo cách đặt nhãn của AVeriTeC {ref:averitec}")]],
+        [[N("B3")],
+         [N("Mô hình phân loại ba nhãn tiếng Việt đã huấn luyện sẵn do nhóm SemViQA {ref:semviqa} công bố, "
+            "chạy trên cặp tuyên bố và bằng chứng")],
+         [N("Đại diện hệ thống kiểm chứng tiếng Việt sẵn có")]],
+        [[N("P−ĐK")],
+         [N("P bỏ bước đối chiếu điều kiện, chỉ so giá trị")],
+         [N("Đo đóng góp của bước đối chiếu điều kiện")]],
+        [[N("P−NN")],
+         [N("P bỏ bước neo nguồn và kiểm tra đầy đủ")],
+         [N("Đo đóng góp của neo nguồn")]],
+        [[K("P")],
+         [K("LLM trích xuất thông tin"), N(" có neo nguồn"), K(", Python dùng "),
+          N("bộ quyết định có đối chiếu điều kiện"), K(" để gán nhãn"), N(" bốn lớp")],
+         [N("Phương pháp đề xuất")]],
+    ],
+}
+
+# ---------------------------------------------------------------------------
 # Phần 1: Nội dung đề tài (từ dòng "Nội dung đề tài" đến hết "Kết quả mong đợi")
 # Mỗi phần tử của SEC_NOI_DUNG là một hàng của bảng; mỗi hàng là danh sách đoạn.
 # ---------------------------------------------------------------------------
@@ -90,33 +167,36 @@ SEC_NOI_DUNG = [
      ])],
 
     [("text", [
-        N("Với tuyên bố chứa số liệu, {ref:thinkright} huấn luyện một mô hình kiểm định để chọn đường suy luận "
-          "tốt nhất trong nhiều đường do LLM sinh, còn {ref:numpert} cho thấy độ chính xác của các mô hình "
+        N("Với tuyên bố chứa số liệu, Chungkham và cộng sự {ref:thinkright} huấn luyện một mô hình kiểm định để "
+          "chọn đường suy luận tốt nhất trong nhiều đường do LLM sinh, còn NumPert {ref:numpert} cho thấy độ "
+          "chính xác của các mô hình "
           "ngôn ngữ, kể cả mô hình thương mại hàng đầu, có thể giảm đến 62% khi con số trong tuyên bố bị thay "
           "đổi có kiểm soát. FactLens {ref:factlens} đánh giá việc tách tuyên bố phức tạp thành các tuyên bố "
           "nhỏ để kiểm chứng. Với văn bản do LLM tạo, MiniCheck {ref:minicheck} kiểm tra các tuyên bố trong "
           "đầu ra có được tài liệu nền hỗ trợ hay không, ViHallu {ref:vihallu} cung cấp dữ liệu phát hiện ảo "
-          "giác tiếng Việt. Gần nhất với đề tài, {ref:paclic} dùng LLM trích giấy phép, địa chỉ và dịch vụ "
-          "trong bài quảng cáo dịch vụ làm đẹp và thẩm mỹ rồi so khớp với dữ liệu cấp phép của cơ quan y tế, "
-          "còn {ref:jiang} phát hiện ảo giác trong thông tin sản phẩm do LLM bổ sung trên sàn thương mại điện "
-          "tử. Các nghiên cứu về giải thích độ bất định {ref:clue}, xử lý bằng chứng xung đột {ref:cover} và "
+          "giác tiếng Việt. Gần nhất với đề tài, Nguyen và cộng sự {ref:paclic} dùng LLM trích giấy phép, địa "
+          "chỉ và dịch vụ trong bài quảng cáo dịch vụ làm đẹp và thẩm mỹ rồi so khớp với dữ liệu cấp phép của "
+          "cơ quan y tế, còn Jiang và cộng sự {ref:jiang} phát hiện ảo giác trong thông tin sản phẩm do LLM bổ "
+          "sung trên sàn thương mại điện tử. Các nghiên cứu về giải thích độ bất định {ref:clue}, xử lý bằng "
+          "chứng xung đột {ref:cover} và "
           "truy hồi bằng chứng nhanh {ref:fathom} cung cấp kỹ thuật cho từng bước của quy trình kiểm chứng."),
      ])],
 
     [("text", [
         N("Hạn chế của các phương pháp hiện có. ", b=True, i=True),
-        N("Các phương pháp trên chủ yếu xét mức khớp nội dung giữa tuyên bố và bằng chứng, chưa biểu diễn "
-          "tường minh điều kiện ràng buộc của thông số kỹ thuật như chế độ đo, bộ phận hoặc phụ kiện đi kèm, "
-          "phiên bản máy hay kiểu giá trị “lên đến”. Hệ quả là: (1) với tập ba nhãn như FEVER {ref:fever}, "
-          "tuyên bố đúng con số nhưng thiếu điều kiện không có nhãn riêng nên có nguy cơ bị chấp nhận là "
-          "Supported; (2) với tập nhãn có lớp gây hiểu nhầm, lớp này vẫn là điểm yếu, ví dụ Fathom "
-          "{ref:fathom} đạt F1 bằng 0 ở nhãn Conflicting/Cherry-picking trên tập phát triển của AVeriTeC; "
-          "(3) {ref:paclic} so khớp bằng ngưỡng độ tương đồng và chỉ gán một nhãn vi phạm hoặc không vi phạm "
-          "cho cả bài quảng cáo, nên không chỉ ra nội dung nào sai và không xét điều kiện áp dụng; (4) "
-          "{ref:jiang} xét ảo giác ở mức thuộc tính sản phẩm nhưng không biểu diễn điều kiện để giá trị thuộc "
-          "tính đúng. Trong các tài liệu đã khảo sát, chưa thấy nghiên cứu kiểm chứng tuyên bố thông số có "
-          "điều kiện ràng buộc trong quảng cáo tiếng Việt bằng phép đối chiếu tường minh điều kiện."),
+        N("Bảng 1 tóm tắt các nghiên cứu trên. Các phương pháp này chủ yếu xét mức khớp nội dung giữa tuyên "
+          "bố và bằng chứng, chưa biểu diễn tường minh điều kiện ràng buộc của thông số kỹ thuật như chế độ "
+          "đo, bộ phận hoặc phụ kiện đi kèm, phiên bản máy hay kiểu giá trị “lên đến”. Với tập ba nhãn như "
+          "FEVER {ref:fever}, tuyên bố đúng con số nhưng thiếu điều kiện không có nhãn riêng nên có nguy cơ bị "
+          "chấp nhận là Supported. Với tập nhãn có lớp gây hiểu nhầm, lớp này vẫn là điểm yếu: Fathom "
+          "{ref:fathom} đạt F1 bằng 0 ở nhãn Conflicting/Cherry-picking trên tập phát triển của AVeriTeC. Hai "
+          "hướng gần với đề tài nhất kiểm tra thông tin trong bài quảng cáo {ref:paclic} và thông tin sản phẩm "
+          "do LLM bổ sung {ref:jiang}, nhưng chưa đưa điều kiện ràng buộc vào phép so khớp. Trong các tài liệu "
+          "đã khảo sát, chưa thấy nghiên cứu kiểm chứng tuyên bố thông số có điều kiện ràng buộc trong quảng "
+          "cáo tiếng Việt bằng phép đối chiếu tường minh điều kiện."),
      ])],
+    [("table_caption", [N("Bảng 1. So sánh các nghiên cứu liên quan với đề tài", i=True)]),
+     ("table", BANG_1)],
 
     # ----- 2. Phát biểu bài toán -----
     [("sub", [N("2. Phát biểu bài toán", b=True)]),
@@ -140,11 +220,29 @@ SEC_NOI_DUNG = [
                  "điều kiện đo), hoặc tuyên bố biến mức tối đa “lên đến” thành mức chắc chắn đạt.")])],
     [("dash", [N("Chưa đủ thông tin: kho tài liệu không có thông số cùng sản phẩm và thuộc tính, không công bố giá "
                  "trị ở điều kiện mà tuyên bố nêu, hoặc ghi mâu thuẫn.")])],
+    [("text", [N("Ví dụ, trang thông số Galaxy Buds3 Pro ghi thời lượng phát nhạc lên đến 6 giờ khi bật chống ồn "
+                 "và 7 giờ khi tắt chống ồn {ref:samsung_buds}. Với tài liệu này, tuyên bố “nghe nhạc 6 giờ khi "
+                 "bật chống ồn” là Đúng; “nghe nhạc 7 giờ khi bật chống ồn” là Lệch điều kiện vì 7 giờ chỉ đạt "
+                 "khi tắt chống ồn; “pin 8 giờ” là Sai vì thuận lợi hơn mọi giá trị được công bố; tuyên bố về "
+                 "thời lượng pin ở một chế độ mà trang không công bố là Chưa đủ thông tin. Phép so khớp chỉ dựa "
+                 "trên con số dễ chấp nhận tuyên bố thứ hai vì con số 7 giờ có trong tài liệu.")])],
+    [("text", [N("Đề tài trả lời ba câu hỏi nghiên cứu:")]),
+     ("dash", [N("CH1. Đối chiếu tường minh điều kiện ràng buộc có làm giảm tỷ lệ tuyên bố sai hoặc lệch điều kiện "
+                 "bị chấp nhận là Đúng so với các cách kiểm chứng hiện có, mà không bỏ sót nhiều tuyên bố đúng "
+                 "hay không?")]),
+     ],
+    [("dash", [N("CH2. Quyết định nhãn bằng quy tắc tường minh trên dữ liệu đã neo nguồn có phát hiện tuyên bố Lệch "
+                 "điều kiện tốt hơn cách để LLM tự gán nhãn hay không?")])],
+    [("dash", [N("CH3. Neo nguồn và đối chiếu điều kiện đóng góp thế nào vào kết quả?")])],
 
     # ----- 3. Tính mới, đóng góp và cải tiến -----
     [("sub", [N("3. Tính mới, đóng góp và cải tiến so với các phương pháp kiểm chứng hiện có", b=True)]),
      ("text", [N("Đề tài không xây dựng lại một hệ thống kiểm chứng tổng quát mà tập trung khắc phục hạn chế "
-                 "nêu trên cho tuyên bố có điều kiện ràng buộc.")]),
+                 "nêu trên cho tuyên bố có điều kiện ràng buộc. Các thành phần riêng lẻ như tách tuyên bố "
+                 "{ref:factlens}, truy hồi bằng BM25 {ref:bm25}, dùng LLM trích thông tin rồi so khớp với dữ liệu "
+                 "tham chiếu {ref:paclic} hay tập nhãn có lớp gây hiểu nhầm {ref:averitec} đã có trong các nghiên "
+                 "cứu trước; điểm mới của đề tài nằm ở cách biểu diễn và đối chiếu điều kiện ràng buộc nêu dưới "
+                 "đây.")]),
      ("text", [N("Tính mới.", b=True, i=True)]),
      ("dash", [N("Cụ thể hóa lớp tuyên bố gây hiểu nhầm (tương tự nhãn Cherry-picking của AVeriTeC "
                  "{ref:averitec}) thành nhãn Lệch điều kiện cho thông số kỹ thuật. Nhãn này được xác định bằng "
@@ -238,10 +336,11 @@ SEC_NOI_DUNG = [
                  "thông số; (4) có sản phẩm của cùng các hãng để nguồn bằng chứng đồng nhất.")])],
     [("dash", [N("Ba nhóm được chọn thỏa cả bốn tiêu chí. Với điện thoại, độ sáng cực đại 3200 nit của Xiaomi 15T "
                  "được công bố “trên 25% diện tích màn hình” {ref:xiaomi}; độ sáng tối đa 4500 nit của OPPO Find X8 "
-                 "được ghi kèm điều kiện 1% APL, tức chỉ một vùng rất nhỏ của màn hình hiển thị sáng {ref:oppo}. Với tai nghe, Galaxy Buds3 Pro "
-                 "phát nhạc lên đến 6 giờ khi bật chống ồn và 7 giờ khi tắt, đạt IP57 ở tai nghe nhưng hộp sạc "
-                 "không có khả năng kháng nước {ref:samsung_buds}. Với đồng hồ, Apple Watch SE 3 dùng được lên đến "
-                 "18 giờ ở chế độ thường và 32 giờ ở Chế Độ Nguồn Điện Thấp {ref:apple_watch}.")])],
+                 "được ghi kèm điều kiện 1% APL, tức chỉ một vùng rất nhỏ của màn hình hiển thị sáng {ref:oppo}. "
+                 "Với tai nghe, Galaxy Buds3 Pro công bố thời lượng pin theo chế độ chống ồn như ví dụ ở mục 2, "
+                 "và chỉ tai nghe đạt IP57 còn hộp sạc không có khả năng kháng nước {ref:samsung_buds}. Với đồng "
+                 "hồ, Apple Watch SE 3 dùng được lên đến 18 giờ ở chế độ thường và 32 giờ ở chế độ nguồn điện "
+                 "thấp {ref:apple_watch}.")])],
     [("dash", [N("Sản phẩm: khoảng 12 mẫu (khoảng 5 điện thoại, 4 tai nghe không dây, 3 đồng hồ thông minh) "
                  "đang bán chính hãng tại Việt Nam của ít nhất ba hãng (dự kiến Apple, Samsung, Xiaomi, OPPO), ưu "
                  "tiên các trang có chú thích điều kiện đầy đủ.")])],
@@ -339,38 +438,28 @@ SEC_NOI_DUNG = [
 
     # ----- Nội dung 3 -----
     [("sub", [N("Nội dung 3 (ứng với M3): Thực nghiệm và đánh giá", b=True)]),
-     ("dash", [K("Cài đặt và so sánh B0 (LLM đọc trực tiếp rồi gán nhãn"),
-               N(" theo ba lớp Supported, Refuted, NEI, đại diện cho cách kiểm chứng phổ biến {ref:fever}"),
-               K("), B1 (LLM nhận thông tin có cấu trúc rồi gán nhãn"),
-               N(" theo bốn lớp, dùng cùng bộ thông số và cùng hướng dẫn gán nhãn với P để tách riêng tác động của bộ "
-                 "quyết định"),
-               K(") và P (LLM trích xuất thông tin"),
-               N(" có neo nguồn"),
-               K(", Python dùng "),
-               N("bộ quyết định có đối chiếu điều kiện"),
-               K(" để gán nhãn)."),
+     ("dash", [K("Cài đặt và so sánh "),
+               N("P với bốn phương pháp đối chứng B0–B3 đại diện cho các cách kiểm chứng hiện có và hai bản bỏ "
+                 "thành phần P−ĐK, P−NN (Bảng 2). Mọi phương pháp dùng cùng tuyên bố, cùng k đoạn bằng chứng xếp "
+                 "hạng cao nhất (top-k), cùng LLM và cùng cấu hình. B0 và B3 chỉ có ba nhãn nên được so sánh chủ "
+                 "yếu bằng FAR và các nhãn chung."),
                ]),
      ],
-    [("dash", [N("Bổ sung B2: LLM đọc bằng chứng và gán bốn nhãn theo hướng dẫn gán nhãn, có định nghĩa và ví dụ "
-                 "cho nhãn Lệch điều kiện theo cách đặt nhãn của AVeriTeC {ref:averitec}, đại diện cho cách khắc "
-                 "phục chỉ bằng câu lệnh; B3: mô hình phân loại ba nhãn tiếng Việt đã huấn luyện sẵn do nhóm SemViQA {ref:semviqa} "
-                 "công bố, chạy trên cặp (tuyên bố, bằng chứng), đại diện cho hệ thống kiểm chứng tiếng Việt sẵn "
-                 "có. Với B0 và B3 chỉ có ba nhãn, so sánh chính dựa trên FAR và các nhãn chung.")])],
-    [("dash", [N("Phân tích thành phần: P−ĐK bỏ bước đối chiếu điều kiện (chỉ so giá trị), P−NN bỏ bước neo "
-                 "nguồn. Mọi phương pháp dùng cùng tuyên bố, cùng top-k đoạn bằng chứng, cùng LLM và cùng cấu "
-                 "hình.")])],
+    [("table_caption", [N("Bảng 2. Các phương pháp được so sánh và vai trò của từng phương pháp", i=True)]),
+     ("table", BANG_2)],
     [("dash", [K("Đánh giá bằng FAR (tỷ lệ chấp nhận nhầm), Precision (độ chính xác của dự đoán), Recall (khả "
                  "năng tìm đủ mẫu đúng) và F1 (chỉ số cân bằng giữa Precision và Recall)"),
                N(" của từng nhãn và Macro-F1; FAR là tỷ lệ tuyên bố bị gán Đúng trong số các tuyên bố có nhãn chuẩn "
                  "khác Đúng. Đo thêm Recall@k của BM25, độ đúng từng trường trích xuất, Precision và Recall của "
                  "bước tách tuyên bố tự động, thời gian và chi phí gọi LLM. Khoảng tin cậy 95% được ước lượng bằng "
-                 "bootstrap theo cụm quảng cáo; chênh lệch FAR giữa P và từng đối chứng được kiểm định bằng "
-                 "McNemar có hiệu chỉnh Holm cho nhiều phép so sánh."),
+                 "phương pháp bootstrap (lấy mẫu lặp có hoàn lại) theo cụm quảng cáo; chênh lệch FAR giữa P và từng "
+                 "đối chứng được kiểm định bằng McNemar có hiệu chỉnh Holm cho nhiều phép so sánh."),
                ])],
-    [("dash", [N("Giả thuyết: P có FAR thấp hơn B0–B3 và F1 của nhãn Lệch điều kiện cao hơn B1, B2, trong khi Recall "
-                 "của nhãn Đúng không thấp hơn quá 5 điểm phần trăm so với đối chứng tốt nhất. Mô hình, câu lệnh và "
-                 "giá trị k được chọn trên tập phát triển và khóa trước khi chạy tập kiểm tra; kết quả được báo "
-                 "cáo cả khi không đạt giả thuyết.")])],
+    [("dash", [N("Giả thuyết ứng với ba câu hỏi nghiên cứu: (H1) FAR của P thấp hơn B0–B3 và Recall của nhãn Đúng "
+                 "không thấp hơn quá 5 điểm phần trăm so với đối chứng tốt nhất; (H2) F1 của nhãn Lệch điều kiện "
+                 "của P cao hơn B1 và B2; (H3) P tốt hơn P−NN về FAR và F1 của nhãn Lệch điều kiện. Mô hình, câu "
+                 "lệnh và giá trị k được chọn trên tập phát triển và khóa trước khi chạy tập kiểm tra; kết quả được "
+                 "báo cáo cả khi không đạt giả thuyết.")])],
     [("dash", [N("Báo kết quả riêng cho tuyên bố từ quảng cáo thông thường và cho tập cặp tối thiểu, theo từng "
                  "loại biến đổi, từng nhóm sản phẩm, từng hãng và từng LLM sinh quảng cáo; báo thêm kết quả đầu–cuối "
                  "(tách tuyên bố tự động rồi kiểm chứng) trên quảng cáo của tập kiểm tra; phân tích lỗi theo nguồn "
@@ -432,8 +521,8 @@ SEC_KE_HOACH = [
     [("plus", [K("Soạn ít nhất 20 ví dụ gán nhãn minh họa cho các trường hợp đúng, sai đối tượng, sai điều kiện, "
                  "thiếu và xung đột bằng chứng. Khi tách thông tin quảng cáo, phải giữ lại sản phẩm, phiên bản, "
                  "thuộc tính và điều kiện cần thiết để phát biểu không thay đổi ý nghĩa.")])],
-    [("plus", [K("Kiểm tra tài nguyên máy và thử các LLM mã nguồn mở có kích thước phù hợp để thử trên bộ "
-                 "pilot.")])],
+    [("plus", [K("Kiểm tra tài nguyên máy và thử các LLM mã nguồn mở có kích thước phù hợp để "),
+               N("chạy trên bộ dữ liệu thử ban đầu"), K(".")])],
 
     [("month", [K("Tháng 10/2026:", b=True)]),
      ("plus", [N("Điều chỉnh đề tài theo nhận xét của Khoa: tập trung vào tuyên bố về thông số kỹ thuật có điều "
@@ -450,7 +539,7 @@ SEC_KE_HOACH = [
     [("plus", [N("Định nghĩa điều kiện bắt buộc cho sáu nhóm thông số, lưu thành tệp cấu hình theo nhóm sản phẩm; "
                  "viết hướng dẫn gán nhãn bốn lớp; giữ các ví dụ minh họa về tai nghe và bổ sung ví dụ cho điện "
                  "thoại, đồng hồ thông minh.")])],
-    [("plus", [K("Thu thập bộ pilot (bộ thử ban đầu) khoảng 60 "),
+    [("plus", [K("Thu thập "), N("bộ dữ liệu thử ban đầu"), K(" khoảng 60 "),
                N("tuyên bố có điều kiện ràng buộc từ quảng cáo do CopyPro tạo cho 2 mẫu thử ban đầu"),
                K(", kèm tài liệu và đường dẫn đến nguồn chính thức của đúng sản phẩm và phiên bản được quảng cáo."),
                ])],
@@ -460,10 +549,14 @@ SEC_KE_HOACH = [
                ])],
     [("plus", [K("Xây dựng mô-đun truy hồi BM25 để xếp hạng và chọn top-k đoạn nguồn liên quan.")])],
     [("plus", [K("Xây dựng B0 (LLM đọc trực tiếp thông tin và bằng chứng rồi tự gán nhãn).")])],
-    [("plus", [K("Phân tích lỗi trên bộ pilot để điều chỉnh hướng dẫn nhãn và cấu trúc dữ liệu.")])],
+    [("plus", [K("Phân tích lỗi trên "), N("bộ dữ liệu thử ban đầu"),
+               K(" để điều chỉnh hướng dẫn nhãn và cấu trúc dữ liệu.")])],
+    [("plus", [N("Mốc kiểm tra với cán bộ hướng dẫn: chốt đề cương và tên đề tài (12/10); báo cáo kết quả trên bộ "
+                 "dữ liệu thử ban đầu và quy mô dữ liệu đã chốt (31/10).")])],
 
     [("month", [K("Tháng 11/2026:", b=True)]),
-     ("plus", [K("Mở rộng và hoàn thiện bộ dữ liệu chính theo quy mô khả thi sau khi chốt thử trên bộ pilot."),
+     ("plus", [K("Mở rộng và hoàn thiện bộ dữ liệu chính theo quy mô khả thi sau khi chốt thử trên "),
+               N("bộ dữ liệu thử ban đầu"), K("."),
                N(" Sinh quảng cáo cho các mẫu sản phẩm còn lại, tạo tập cặp tối thiểu, gán lại 20% số tuyên bố và "
                  "nhờ người thứ hai gán độc lập khoảng 60 tuyên bố."),
                ]),
@@ -498,19 +591,13 @@ SEC_KE_HOACH = [
                K(" để đánh giá vai trò của từng thành phần"),
                K("."),
                ])],
-    [("plus", [K("Để bảo đảm so sánh công bằng, "),
-               N("các phương pháp"),
-               K(" sử dụng cùng phát biểu, cùng top-k đoạn bằng chứng, cùng LLM và cùng cấu hình. B1 và P nhận "
-                 "cùng thông tin đã được cấu trúc; điểm khác nhau là B1 để LLM quyết định nhãn, còn P sử dụng mã "
-                 "Python và bộ quyết định "),
-               N("bốn nhãn"),
-               K("."),
-               ])],
     [("plus", [K("Chọn mô hình, giá trị k và các ngưỡng trên tập "),
                N("phát triển"),
                K("; sau đó giữ cố định cấu hình."),
                ])],
     [("plus", [N("Bắt đầu tích hợp tính năng kiểm chứng vào CopyPro.")])],
+    [("plus", [N("Mốc kiểm tra với cán bộ hướng dẫn (27/11): dữ liệu và độ tin cậy nhãn hoàn tất; P và các đối "
+                 "chứng chạy trên tập phát triển; cấu hình đã khóa trước khi chạy tập kiểm tra.")])],
 
     [("month", [K("Tháng 12/2026:", b=True)]),
      ("plus", [K("Chạy "),
@@ -540,6 +627,8 @@ SEC_KE_HOACH = [
                K(" và xem nhãn, bằng chứng, lý do."),
                ])],
     [("plus", [K("Hoàn thiện luận văn, biểu đồ, bảng kết quả, hướng dẫn cài đặt và hướng dẫn chạy lại.")])],
+    [("plus", [N("Mốc kiểm tra với cán bộ hướng dẫn: kết quả trên tập kiểm tra (08/12), tính năng chạy trên CopyPro "
+                 "(13/12), bản thảo khóa luận đầy đủ (18/12).")])],
     [("plus", [K("Kiểm tra toàn bộ mã nguồn, dữ liệu trước ngày 31/12/2026.")])],
 
     # ----- Rủi ro -----
