@@ -12,7 +12,7 @@
 | [Đề cương](de_cuong/) | `23521228_BuiLeHuyPhuoc_DeCuongKLTN.docx` là bản sạch để nộp. `..._chu_do.docx` tô đỏ phần sửa so với đề cương đã nộp. Mỗi bản có kèm PDF. |
 | [Chi tiết tuyến tính của khóa luận](CHI_TIET_TUYEN_TINH_KHOA_LUAN.md) | Kế hoạch từ đầu đến cuối: 45 bước theo ngày (09/10–31/12/2026 và bảo vệ), mốc kiểm tra, hướng dẫn gán nhãn, đặc tả phương pháp, giao thức thực nghiệm, tích hợp CopyPro, câu hỏi phản biện, tự chấm theo thang 10. |
 
-Đề cương đã sửa theo nhận xét của Khoa và đang chờ CBHD xác nhận. Repo chưa có dữ liệu thực nghiệm. Thư mục `data/`, `src/`, `tests/`, `ket_qua/`, `luan_van/` được tạo ở bước 03 của kế hoạch.
+Đề cương đã sửa theo nhận xét của Khoa và đang chờ CBHD xác nhận. Bản ngày 10/10/2026 bổ sung thêm những gì các đề cương được đánh giá Đạt có mà đề cương này còn thiếu: bảng so sánh nghiên cứu liên quan, câu hỏi nghiên cứu, bảng các phương pháp được so sánh và các mốc gặp CBHD (phân tích ở mục 4.4 của kế hoạch). Repo chưa có dữ liệu thực nghiệm. Thư mục `data/`, `src/`, `tests/`, `ket_qua/`, `luan_van/` được tạo ở bước 03 của kế hoạch.
 
 ## Cấu trúc thư mục
 
@@ -36,10 +36,10 @@ pip install python-docx lxml matplotlib
 python3 ve_hinh1.py            # vẽ Hình 1
 python3 dung_docx.py           # bản chữ đỏ
 python3 dung_docx.py --sach    # bản sạch để nộp
-python3 kiem_tra.py            # chữ đen khớp bản đã nộp, mọi tài liệu đều được trích
+python3 kiem_tra.py            # chữ đen khớp bản đã nộp, mọi tài liệu đều được trích, đúng thứ tự
 ```
 
-Trích dẫn được đánh số tự động theo thứ tự xuất hiện (chuẩn IEEE).
+Trích dẫn được đánh số tự động theo thứ tự xuất hiện (chuẩn IEEE). Bảng khai báo trong `noi_dung.py` (`BANG_1`, `BANG_2`), mỗi ô là danh sách `K(...)`/`N(...)` như đoạn văn. Xuất PDF bằng LibreOffice: `soffice --headless --convert-to pdf ../*.docx`.
 
 ## Tài liệu cũ
 
