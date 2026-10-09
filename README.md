@@ -4,10 +4,11 @@ Repository lưu trữ tài liệu nghiên cứu, bài báo tham khảo và các 
 
 ## Tài liệu KLTN đang làm việc (bản 3, 10/2026 — chờ GVHD xác nhận)
 
-Hai tài liệu chính, khớp nhau về tính mới, câu hỏi nghiên cứu, thí nghiệm TN1–TN4, quy mô và lịch:
+Đề cương và kế hoạch khớp nhau về tính mới, câu hỏi nghiên cứu, thí nghiệm TN1–TN4, quy mô và lịch:
 
 - [Đề cương chi tiết](Đọc_báo_cùng_HuP_4_.docx): đề tài, **tính mới (SAV — trích xuất σ có neo nguồn + bộ quyết định nhận biết phạm vi, so với LLM có danh sách kiểm phạm vi B2)**, mục tiêu, phương pháp, thực nghiệm, kế hoạch 10 giai đoạn nối tiếp. Dựng lại bằng `python3 scripts/build_proposal.py` (khung HuP4 ở commit `7107507`, tên đề tài giữ nguyên).
-- [Sổ tay thực hiện](deliverables/KE_HOACH_CHI_TIET_SINH_VIEN.md): tự chấm nội dung đề tài /10, tính mới, **bảng tổng kết 52 bước B01–B52 theo thứ tự tuyến tính**, luật gán nhãn, đặc tả SAV, giao thức, chi tiết từng bước.
+- [Kế hoạch công việc](deliverables/KE_HOACH_CHI_TIET_SINH_VIEN.md): **52 việc B01–B52 làm lần lượt từ đầu đến cuối**, mỗi việc có “cần xong trước”, các bước làm, cách xử lý khi vướng và **checklist bàn giao**; cuối mỗi giai đoạn có checklist bàn giao giai đoạn.
+- [Tra cứu](deliverables/TRA_CUU_KLTN.md): tự chấm nội dung /10, tính mới SAV, luật gán nhãn, đặc tả thuật toán, giao thức, mẫu file — chỉ mở khi một việc ghi “tra cứu §x”.
 
 `deliverables/KE_HOACH_TONG_HOP.docx` đã được bỏ vì trùng vai trò với đề cương. Mọi file trong `docs/`, `Đọc_báo_cùng_HuP_3_.docx` và các mục bên dưới là **lịch sử**, không cần đọc để thực hiện.
 

@@ -47,34 +47,35 @@ class DocsTest(unittest.TestCase):
         for banned in ('DỰ THẢO', 'Bản đề xuất điều chỉnh', 'TN5', 'TN6', 'E1', 'E3', '120 phát biểu'):
             self.assertNotIn(banned, s)
         self.assertNotRegex(xml, r'w:color w:val="[cC]00000"')
-        nb = (ROOT / 'deliverables/KE_HOACH_CHI_TIET_SINH_VIEN.md').read_text(encoding='utf-8')
+        nb = (ROOT / 'deliverables/TRA_CUU_KLTN.md').read_text(encoding='utf-8')
         for shared in ('SAV', '≈ 208–320 giờ', 'B2', 'neo nguồn', 'Beats', 'P−ground', 'FAR_SAV − FAR_B2', '−10 điểm phần trăm', '09/10–18/10', '28/12–31/12'):
             self.assertIn(shared, nb)
 
 
-class NotebookTest(unittest.TestCase):
+class PlanTest(unittest.TestCase):
+    """Kế hoạch công việc: 52 việc tuyến tính, mỗi việc có checklist, mỗi giai đoạn có checklist."""
+
     def setUp(self):
-        self.nb = (ROOT / 'deliverables/KE_HOACH_CHI_TIET_SINH_VIEN.md').read_text(encoding='utf-8')
+        self.plan = (ROOT / 'deliverables/KE_HOACH_CHI_TIET_SINH_VIEN.md').read_text(encoding='utf-8')
+        self.ref = (ROOT / 'deliverables/TRA_CUU_KLTN.md').read_text(encoding='utf-8')
 
-    def test_sections(self):
-        for h in ('## 0. Tự đánh giá kế hoạch', '## 2. Tính mới của khóa luận',
-                  '### 3.1 Bảng tổng kết toàn bộ công việc', '## 16. Ngoài phạm vi',
-                  '### 0.1 Thang chấm nội dung', '### 3.5 Vì sao kế hoạch khả thi'):
-            self.assertIn(h, self.nb)
+    def test_steps_in_order_with_checklist(self):
+        parts = re.split(r'^### (B\d\d) · ', self.plan, flags=re.M)
+        codes = parts[1::2]
+        self.assertEqual(codes, [f'B{i:02d}' for i in range(1, 53)])
+        for code, body in zip(codes, parts[2::2]):
+            body = body.split('\n### ')[0]
+            for part in ('**Cần xong trước:**', '**Làm:**', '**Checklist bàn giao:**', '- [ ] '):
+                self.assertIn(part, body, code)
 
-    def test_linear_dependencies(self):
-        rows = re.findall(r'^\| (B\d\d) \| \d+ \|[^|]*\|[^|]*\| ([^|]*) \|', self.nb, flags=re.M)
-        self.assertEqual([r[0] for r in rows], [f'B{i:02d}' for i in range(1, 53)])
-        for code, deps in rows:
+    def test_dependencies_point_backwards(self):
+        for code, deps in re.findall(r'^### (B\d\d) · .*?\n\n\*\*Cần xong trước:\*\* ([^·]*)', self.plan, flags=re.M):
             for d in re.findall(r'B\d\d', deps):
                 self.assertLess(int(d[1:]), int(code[1:]), (code, d))
 
-    def test_step_details_in_order(self):
-        heads = re.findall(r'^#### (B\d\d) — ', self.nb, flags=re.M)
-        self.assertEqual(heads, [f'B{i:02d}' for i in range(1, 53)])
-
-    def test_schedule_not_overlapping(self):
-        spans = re.findall(r'^\| \d+ \| [^|]+ \| (\d\d)/(\d\d)–(\d\d)/(\d\d) \| B', self.nb, flags=re.M)
+    def test_phase_checklists_and_schedule(self):
+        self.assertEqual(len(re.findall(r'^### Checklist bàn giao giai đoạn \d+$', self.plan, flags=re.M)), 10)
+        spans = re.findall(r'^## Giai đoạn \d+ — .*\((\d\d)/(\d\d)–(\d\d)/(\d\d)\)$', self.plan, flags=re.M)
         self.assertEqual(len(spans), 10)
         prev = None
         for d1, m1, d2, m2 in spans:
@@ -83,6 +84,11 @@ class NotebookTest(unittest.TestCase):
             if prev:
                 self.assertLess(prev, start)
             prev = end
+
+    def test_plan_has_no_reference_material(self):
+        for h in ('## 0. Tự đánh giá', '## 5. Hướng dẫn gán nhãn', 'Phụ lục C — Mẫu file'):
+            self.assertNotIn(h, self.plan)
+            self.assertIn(h, self.ref)
 
 
 if __name__ == '__main__':
