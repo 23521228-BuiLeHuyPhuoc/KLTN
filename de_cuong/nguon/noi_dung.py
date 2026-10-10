@@ -333,9 +333,10 @@ SEC_NOI_DUNG = [
                  "đang bán chính hãng tại Việt Nam của ít nhất ba hãng (dự kiến Apple, Samsung, Xiaomi, OPPO), ưu "
                  "tiên các trang có chú thích điều kiện đầy đủ.")])],
     [("dash", [N("Quảng cáo: do CopyPro tạo ở ngành Công nghệ bằng hai LLM thuộc hai họ mô hình khác nhau (dự kiến "
-                 "Gemini 2.5 Flash và GPT-OSS 120B qua Groq, thay cho Llama 3.3 70B đã bị Groq ngừng phục vụ từ "
-                 "16/08/2026), với ba loại bài mô tả sản phẩm, bài đăng mạng xã hội, trang đích, ở hai chế độ: chỉ "
-                 "nhập tên sản phẩm, và nhập thêm đoạn thông số chính hãng vào ô thông tin bổ sung.")])],
+                 "Gemini 3.6 Flash và GPT-OSS 120B qua Groq, đều chưa có lịch ngừng phục vụ; Llama 3.3 70B mà website "
+                 "đang dùng đã bị Groq ngừng từ 16/08/2026), với ba loại bài mô tả sản phẩm, bài đăng mạng xã hội, "
+                 "trang đích, ở hai chế độ: chỉ nhập tên sản phẩm, và nhập thêm đoạn thông số chính hãng vào ô thông "
+                 "tin bổ sung.")])],
     [("dash", [N("Không thuộc phạm vi: tuyên bố về thông số không kèm điều kiện (ví dụ khối lượng, kích thước, "
                  "phiên bản Bluetooth), tuyên bố cảm tính, so sánh với sản phẩm khác, giá và khuyến mãi; đo hiệu năng "
                  "thực tế; kết luận pháp lý; đánh giá trên quảng cáo do người viết; tự nhận diện sản phẩm (người dùng "
