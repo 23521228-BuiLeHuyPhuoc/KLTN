@@ -19,13 +19,13 @@ GAP = (W_CM - 3 * BOX_W) / 4          # khoảng cách đều giữa các khối
 XS = [GAP + i * (BOX_W + GAP) for i in range(3)]
 Y_TOP, Y_BOT = 3.8, 0.3             # góc dưới của hàng trên / hàng dưới
 
-NEW = "#d9d9d9"                        # nền xám = thành phần mới
+NEW = "#d9d9d9"                        # nền xám = bước chứa điểm mới (bộ quyết định)
 
 boxes = [
     (XS[0], Y_TOP, "Quảng cáo do CopyPro\ntạo bằng LLM", None),
     (XS[1], Y_TOP, "Tách tuyên bố thông số\ncó điều kiện ràng buộc", None),
     (XS[2], Y_TOP, "Truy hồi BM25 trong tài liệu\nchính hãng của mẫu sản phẩm\nngười dùng đã chọn", None),
-    (XS[0], Y_BOT, "Trích xuất bộ thông số\ncó neo nguồn\n(kiểm tra câu trích)", NEW),
+    (XS[0], Y_BOT, "Trích xuất bộ thông số\ncó neo nguồn\n(kiểm tra câu trích)", None),
     (XS[1], Y_BOT, "Bộ quyết định:\nA khớp sản phẩm, thuộc tính\nB đối chiếu điều kiện\nC so giá trị, D tổng hợp nhãn", NEW),
     (XS[2], Y_BOT, "Đúng / Sai / Lệch điều kiện /\nChưa đủ thông tin, kèm đoạn\nnguồn và lý do trên CopyPro", None),
 ]
