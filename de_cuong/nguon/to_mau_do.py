@@ -86,6 +86,15 @@ for tag, i1, i2, j1, j2 in sm.get_opcodes():
             if best is not None and score >= 0.7:
                 pair[j] = best
 
+# Đoạn bị dời sang chỗ khác (ví dụ khi chia lại đề mục) mà chữ giữ nguyên: ghép theo chữ giống hệt.
+theo_chu = {}
+for i, (t, _) in enumerate(old):
+    if t.strip():
+        theo_chu.setdefault(t, i)
+for j, t in enumerate(new_txt):
+    if j not in pair and t.strip() and t in theo_chu:
+        pair[j] = theo_chu[t]
+
 # ------------------------------------------------ màu từng ký tự của bản mới
 colors = []
 for j, t in enumerate(new_txt):
