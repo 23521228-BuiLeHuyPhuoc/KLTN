@@ -147,12 +147,13 @@ SEC_NOI_DUNG = [
      ])],
 
     [("text", [
-        N("Website CopyPro mà sinh viên xây dựng trong đồ án chuyên ngành cho thấy rõ vấn đề này. CopyPro tạo "
-          "quảng cáo cho 10 ngành bằng nhiều LLM; phần mô tả yêu cầu gồm ngành, loại bài, giọng điệu, tên sản "
-          "phẩm, từ khóa, đối tượng và thông tin bổ sung nhập tự do, không có trường nào chứa thông số sản phẩm. "
-          "Nếu người dùng không tự dán thông số, con số trong bài do LLM tự sinh; khi thiếu tên sản phẩm, câu "
-          "lệnh còn yêu cầu LLM “tự giả định hợp lý”. CopyPro chấm điểm chất lượng (bài có số liệu được cộng "
-          "điểm) và kiểm tra đạo văn, nhưng chưa kiểm tra số liệu có đúng với sản phẩm hay không."),
+        N("Đề tài được xây dựng thành một tính năng của website CopyPro mà sinh viên phát triển trong đồ án "
+          "chuyên ngành. CopyPro dùng nhiều LLM để tạo quảng cáo cho 10 ngành, đã có chấm điểm chất lượng và "
+          "kiểm tra đạo văn, nhưng chưa có bước kiểm tra thông số trong bài có khớp với tài liệu chính hãng hay "
+          "không. Bước kiểm tra này cần ngay cả khi người dùng đưa đủ thông số cho LLM: khi viết lại cho ngắn gọn "
+          "và hấp dẫn, LLM có thể giữ con số nhưng bỏ hoặc đổi điều kiện đi kèm, như câu “sạc 50% chỉ trong 20 "
+          "phút” ở trên. Vì vậy đề tài kiểm chứng quảng cáo sau khi tạo, và đánh giá ở cả hai trường hợp: có và "
+          "không có đoạn thông số chính hãng trong yêu cầu gửi cho LLM."),
      ])],
 
     [("text", [
