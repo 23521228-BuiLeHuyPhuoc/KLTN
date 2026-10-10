@@ -154,7 +154,7 @@ def make_par(kind, runs):
     return p
 
 
-TABLE_SIZE = 22  # cỡ chữ trong bảng: 11 pt
+TABLE_SIZE = 21  # cỡ chữ trong bảng: 10,5 pt
 
 
 def _sub(parent, tag, **attrs):
@@ -265,8 +265,8 @@ pending_images = []
 # - Hàng chứa hình hoặc bảng không bao giờ ngắt, để tên bảng, bảng, hình và tên hình đi cùng nhau
 #   (LibreOffice cũng không ngắt bảng lồng trong ô qua hai trang).
 HEADINGS = {"sub", "label", "label_keep", "month", "ref_label"}
-SPLIT_AT = 700          # hàng dài hơn mức này được phép ngắt trang
-SPLIT_AT_HEADING = 1100  # mức tương ứng cho hàng mở đầu bằng tiêu đề
+SPLIT_AT = 450          # hàng dài hơn mức này (khoảng 5 dòng) được phép ngắt trang
+SPLIT_AT_HEADING = 700  # mức tương ứng cho hàng mở đầu bằng tiêu đề
 
 
 def add_section(rows):
