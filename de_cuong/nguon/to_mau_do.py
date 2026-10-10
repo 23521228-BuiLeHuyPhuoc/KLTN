@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 """Tạo bản chữ đỏ: chữ đen = còn nguyên văn từ đề cương đã nộp, chữ đỏ = mới hoặc đã sửa.
 
-Màu được kế thừa từ bản chữ đỏ cũ (trên GitHub) ở những chỗ chữ không đổi; chỗ thêm hoặc sửa
-thành đỏ. Cuối cùng, mọi đoạn chữ đen phải có nguyên văn trong de_cuong_da_nop.txt, nếu không
-thì cũng tô đỏ.
+Dùng khi đã sửa bản sạch (ví dụ trên Google Docs) và cần tô lại bản chữ đỏ. Màu được kế thừa
+từ bản chữ đỏ cũ ở những chỗ chữ không đổi; chỗ thêm hoặc sửa thành đỏ. Cuối cùng, mọi đoạn chữ
+đen phải có trong de_cuong_da_nop.txt hoặc trong mẫu đề cương của Khoa (có thể ghép từ các khúc
+của hai nguồn này, như nhãn của mẫu cộng phần điền còn nguyên văn), nếu không thì cũng tô đỏ.
 
-Chạy: python3 to_mau_do.py <bản đỏ cũ.docx> <thư mục đã giải nén của bản sạch mới> <de_cuong_da_nop.txt>
-(thư mục được sửa tại chỗ)
+Chạy: python3 to_mau_do.py <bản đỏ cũ.docx> <thư mục đã giải nén của bản sạch mới> <de_cuong_da_nop.txt> [mẫu.docx]
+(thư mục được sửa tại chỗ; mẫu mặc định là mau_DeCuongChiTiet_Khoa-MMT_2025.docx cạnh tệp .txt)
 """
 import copy
 import difflib
@@ -18,6 +19,8 @@ import docx
 from lxml import etree
 
 OLD, NEWDIR, GOC = Path(sys.argv[1]), Path(sys.argv[2]), Path(sys.argv[3])
+MAU = Path(sys.argv[4]) if len(sys.argv) > 4 else GOC.parent / "mau_DeCuongChiTiet_Khoa-MMT_2025.docx"
+MIN_KHUC = 4           # khúc ngắn hơn thế không được tính là có trong nguồn
 W = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
 RED = "FF0000"
 MIN_BLOCK = 6          # khối trùng ngắn hơn thế không được giữ màu đen (tránh vụn)
@@ -95,8 +98,35 @@ for j, t in enumerate(new_txt):
                     red[b + k] = oc[a + k]
     colors.append(red)
 
-# Kiểm tra an toàn: đoạn chữ đen phải có nguyên văn trong đề cương đã nộp.
-raw = norm(GOC.read_text(encoding="utf-8"))
+# Kiểm tra an toàn: đoạn chữ đen phải có trong đề cương đã nộp hoặc trong mẫu của Khoa.
+nguon = [norm(GOC.read_text(encoding="utf-8"))]
+if MAU.exists():
+    md = docx.Document(str(MAU))
+    nguon.append(norm("\n".join("".join(t.text or "" for t in p.iter(q("t"))) for p in md.element.body.iter(q("p")))))
+
+
+def co_trong_nguon(s):
+    s = norm(s)
+    if not s or any(s in n for n in nguon):
+        return True
+    i = 0
+    while i < len(s):
+        dai = 0
+        for n in nguon:
+            lo, hi = 0, len(s) - i
+            while lo < hi:
+                mid = (lo + hi + 1) // 2
+                if s[i:i + mid] in n:
+                    lo = mid
+                else:
+                    hi = mid - 1
+            dai = max(dai, lo)
+        if dai < MIN_KHUC:
+            return False
+        i += dai
+    return True
+
+
 sua = 0
 for j, t in enumerate(new_txt):
     red = colors[j]
@@ -109,12 +139,12 @@ for j, t in enumerate(new_txt):
         while e < len(t) and not red[e]:
             e += 1
         seg = t[k:e]
-        if seg.strip() and norm(seg) not in raw:
+        if seg.strip() and not co_trong_nguon(seg):
             for x in range(k, e):
                 red[x] = True
             sua += 1
         k = e
-print("Đoạn chữ đen không có trong bản đã nộp, đã chuyển sang đỏ:", sua)
+print("Đoạn chữ đen không có trong bản đã nộp hay mẫu, đã chuyển sang đỏ:", sua)
 
 # ------------------------------------------------ tách run và tô màu
 ORDER_AFTER = ["spacing", "w", "kern", "position", "sz", "szCs", "highlight", "u", "effect", "bdr",
