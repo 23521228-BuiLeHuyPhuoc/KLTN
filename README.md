@@ -1,25 +1,26 @@
 # KLTN – Khóa luận tốt nghiệp
 
 **Đề tài:** Phương pháp kiểm chứng tuyên bố về thông số kỹ thuật có điều kiện ràng buộc trong quảng cáo
-(*A method for verifying conditional technical specification claims in advertisements*)
+(*A method for condition-aware verification of technical specification claims in advertising*)
 
-**Sinh viên:** Bùi Lê Huy Phước (23521228) · **CBHD:** ThS Trần Hồng Nghi · **Thời gian:** 15/09/2026 – 31/12/2026
+**Sinh viên:** Bùi Lê Huy Phước (23521228, MMTT2023.2) · **CBHD:** ThS Trần Hồng Nghi · **Thời gian:** 15/09/2026 – 31/12/2026
 
 ## Hai tài liệu chính
 
 | Tài liệu | Nội dung |
 |---|---|
-| [Đề cương](de_cuong/) | `23521228_BuiLeHuyPhuoc_DeCuongKLTN.docx` là bản sạch để nộp. `..._chu_do.docx` tô đỏ phần sửa so với đề cương đã nộp. Mỗi bản có kèm PDF. |
-| [Chi tiết tuyến tính của khóa luận](CHI_TIET_TUYEN_TINH_KHOA_LUAN.md) | Kế hoạch từ đầu đến cuối: 45 bước theo ngày (09/10–31/12/2026 và bảo vệ), mốc kiểm tra, hướng dẫn gán nhãn, đặc tả phương pháp, giao thức thực nghiệm, tích hợp CopyPro, câu hỏi phản biện, tự chấm theo thang 10. |
+| [Đề cương bản cuối](de_cuong/23521228_DECUONGKHOALUAN_UIT.pdf) | `de_cuong/23521228_DECUONGKHOALUAN_UIT.pdf`, bản cuối ngày 10/10/2026, xuất từ Google Docs. Mọi kế hoạch bám theo bản này. |
+| [Bản làm việc của đề cương](de_cuong/) | `23521228_BuiLeHuyPhuoc_DeCuongKLTN.docx` và `..._chu_do.docx` (tô đỏ phần sửa so với đề cương đã nộp) là các bản trước bản cuối, có vài chỗ khác bản cuối (ví dụ tên tiếng Anh). |
+| [Chi tiết tuyến tính của khóa luận](CHI_TIET_TUYEN_TINH_KHOA_LUAN.md) | Kế hoạch khớp đề cương bản cuối: 45 bước theo thời gian (15/09–31/12/2026 và bảo vệ), 7 mốc kiểm tra với CBHD, biểu đồ thời gian, công sức theo tuần, hướng dẫn gán nhãn, đặc tả phương pháp P, thực nghiệm, tích hợp CopyPro, rủi ro, các điểm cần chốt khi làm thử, câu hỏi phản biện, bảng đối chiếu với đề cương. |
 
-Đề cương đã sửa theo nhận xét của Khoa và đang chờ CBHD xác nhận. Bản ngày 10/10/2026 bổ sung thêm những gì các đề cương được đánh giá Đạt có mà đề cương này còn thiếu: bảng so sánh nghiên cứu liên quan, câu hỏi nghiên cứu, bảng các phương pháp được so sánh và các mốc gặp CBHD (phân tích ở mục 4.4 của kế hoạch). Repo chưa có dữ liệu thực nghiệm. Thư mục `data/`, `src/`, `tests/`, `ket_qua/`, `luan_van/` được tạo ở bước 03 của kế hoạch.
+Đề cương đã sửa theo nhận xét của Khoa; bản cuối ngày 10/10/2026 chờ CBHD xác nhận ở mốc 12/10. Repo chưa có dữ liệu thực nghiệm. Thư mục `data/`, `src/`, `tests/`, `ket_qua/`, `luan_van/` được tạo ở Bước 05 của kế hoạch.
 
 ## Cấu trúc thư mục
 
 ```
 .
 ├── CHI_TIET_TUYEN_TINH_KHOA_LUAN.md   # kế hoạch tuyến tính
-├── de_cuong/                          # đề cương: bản sạch, bản chữ đỏ, PDF
+├── de_cuong/                          # đề cương: bản cuối (PDF), bản làm việc (.docx, bản chữ đỏ)
 │   └── nguon/                         # mã dựng đề cương từ khung của Khoa và nội dung
 ├── báo/                               # bài báo gốc (PDF), bản quyền thuộc tác giả và nhà xuất bản
 ├── dịch/                              # bản dịch máy để đọc
@@ -27,6 +28,8 @@
 ```
 
 ## Dựng lại đề cương sau khi sửa nội dung
+
+> Bản cuối (PDF) được sửa trên Google Docs, không dựng từ các script dưới đây. Chạy `dung_docx.py` sẽ ghi đè hai tệp `.docx` làm việc bằng nội dung cũ trong `noi_dung.py`.
 
 Sửa chữ trong `de_cuong/nguon/noi_dung.py`. Hàm `K(...)` giữ nguyên chữ của bản đã nộp (chữ đen), hàm `N(...)` đánh dấu phần mới hoặc sửa (chữ đỏ). Sau đó chạy:
 
