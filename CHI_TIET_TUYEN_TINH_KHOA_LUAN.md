@@ -96,17 +96,18 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Để làm gì.** Chốt đề cương và tên đề tài với CBHD đúng hạn 12/10. Đề cương bản cuối là chuẩn cho mọi bước sau.
 
-> Sửa trên file Google Docs của đề cương, tức file xuất ra bản PDF gửi CBHD (`de_cuong/23521228_BuiLeHuyPhuoc_DeCuongKLTN.pdf`, bản ngày 11/10/2026). **Không** sửa các tệp `.docx` trong repo: đó là bản dựng bằng script trước khi chuyển sang Google Docs, đã cũ.
+> Bản gửi CBHD là `de_cuong/23521228_BuiLeHuyPhuoc_DeCuongKLTN.pdf`, xuất từ `de_cuong/23521228_BuiLeHuyPhuoc_DeCuongKLTN_ban_cuoi.docx`: bản Google Docs ngày 11/10/2026 tải về dạng .docx, đã sửa các chỗ dưới đây. File Google Docs vẫn là nội dung cũ, nên nếu còn sửa đề cương thì sửa trên tệp `_ban_cuoi.docx` này (hoặc mở nó bằng Google Docs) rồi xuất lại PDF. Hai tệp `23521228_BuiLeHuyPhuoc_DeCuongKLTN.docx` và `..._chu_do.docx` là bản dựng bằng script trước khi chuyển sang Google Docs, đã cũ, không sửa.
 
 **Việc cần làm**
 
-- [ ] Sửa bốn chỗ còn sót trong bản ngày 11/10/2026:
-  - **Trích dẫn MeasEval (chưa sửa).** Mục Tính mới ghi "MeasEval [14]", nhưng [14] trong danh mục là BM25. Đổi thứ tự ba mục cuối của danh mục thành [14] MeasEval, [15] VitaminC, [16] BM25, đúng thứ tự xuất hiện trong bài theo chuẩn IEEE. Trong bài giữ "MeasEval [14]", sửa "VitaminC [16]" (mục Đóng góp) thành "VitaminC [15]", và "theo mức độ liên quan [14]" (Nội dung 2) thành "theo mức độ liên quan [16]".
-  - **Bảy trường (chưa sửa).** Ở Nội dung 2, thay "điền bảy trường thông số nêu ở mục 3" bằng "điền bảy trường thông số (sản phẩm, phiên bản, bộ phận, thông số, giá trị, đơn vị, điều kiện áp dụng cùng kiểu giá trị)", vì mục 3 (Phạm vi) không liệt kê bảy trường.
-  - **Hình 1 (mới sửa một nửa).** Chú thích đã đổi thành "khối nền xanh", khớp màu. Nhưng hình vẫn tô xanh hai khối, gồm cả khối "Trích xuất bộ thông số có neo nguồn", trong khi mục Tính mới nói điểm mới không nằm ở bước trích xuất. Bỏ màu nền của khối trích xuất, chỉ để khối "Bộ quyết định" màu xanh; nhân lúc sửa hình, đổi chữ trong khối này thành "Bộ quyết định: A khớp sản phẩm, thuộc tính; B đối chiếu điều kiện; C so giá trị; D tổng hợp nhãn". Nếu khó sửa hình thì đổi chú thích thành: "Hình 1. Quy trình kiểm chứng đề xuất; hai khối nền xanh là hai thành phần của P, trong đó bộ quyết định là bước chứa điểm mới của đề tài."
-  - **Phân công công việc (chưa có).** Tiêu đề phần Kế hoạch thực hiện theo mẫu của Khoa có "phân công công việc cho từng sinh viên", nhưng phần này mới có "1. Mô tả kế hoạch làm việc" và "2. Thời gian biểu". Thêm mục "3. Phân công công việc" ngay trước "Tài liệu tham khảo", nội dung: "Sinh viên Bùi Lê Huy Phước thực hiện toàn bộ công việc của đề tài. Người gán nhãn thứ hai chỉ gán độc lập khoảng 60 tuyên bố theo cùng hướng dẫn để tính hệ số kappa của Cohen."
-- [ ] Sửa luôn hai lỗi nhỏ: mục Đóng góp ghi "bộ quyết định bốn nhãn (Supported, Refuted, NEI, Lệch điều kiện)", lẫn tên tiếng Anh với tiếng Việt, nên sửa thành "(Đúng, Sai, Lệch điều kiện, Chưa đủ thông tin)" cho thống nhất với các mục khác; rủi ro thứ năm thiếu dấu chấm sau "giữ đủ ba nhóm trong tập kiểm tra".
-- [ ] Xuất lại PDF, thay tệp `de_cuong/23521228_BuiLeHuyPhuoc_DeCuongKLTN.pdf` trong repo và commit.
+- [x] Sửa bốn chỗ còn sót trong bản ngày 11/10/2026:
+  - **Trích dẫn MeasEval (đã sửa).** Ba mục cuối của danh mục xếp lại thành [14] MeasEval, [15] VitaminC, [16] BM25, đúng thứ tự xuất hiện trong bài theo chuẩn IEEE. Trong bài: "MeasEval [14]" (mục Tính mới), "VitaminC [15]" (mục Đóng góp), "theo mức độ liên quan [16]" (Nội dung 2).
+  - **Bảy trường (đã sửa).** Nội dung 2 ghi "điền bảy trường thông số (sản phẩm, phiên bản, bộ phận, thông số, giá trị, đơn vị, điều kiện áp dụng cùng kiểu giá trị)" thay cho "nêu ở mục 3".
+  - **Hình 1 (đã sửa).** Chỉ khối "Bộ quyết định" có nền xanh; khối "Trích xuất bộ thông số có neo nguồn" để nền trắng, khớp chú thích "khối nền xanh là bước chứa điểm mới của đề tài".
+  - **Phân công công việc (đã thêm).** Mục "3. Phân công công việc" ngay trước "Tài liệu tham khảo": "Sinh viên Bùi Lê Huy Phước thực hiện toàn bộ công việc của đề tài. Người gán nhãn thứ hai chỉ gán độc lập khoảng 60 tuyên bố theo cùng hướng dẫn để tính hệ số kappa của Cohen."
+- [x] Sửa các lỗi nhỏ: mục Đóng góp ghi tên nhãn tiếng Việt "(Đúng, Sai, Lệch điều kiện, Chưa đủ thông tin)"; thêm dấu chấm cuối rủi ro thứ năm; thống nhất thuật ngữ "tuyên bố" ở ba chỗ còn ghi "phát biểu" (Nội dung 1: "từng tuyên bố nhỏ của FactLens"; Thời gian biểu tháng 09/2026: "kiểm chứng tuyên bố chứa số liệu", "để tuyên bố không thay đổi ý nghĩa"), giữ "phát biểu chính trị" khi nói về dữ liệu của Tang và cộng sự.
+- [x] Sửa định dạng: bản tải từ Google Docs không ghi phông mặc định và cấm nhiều hàng của khung bảng ngắt trang, nên mở ở chỗ khác bị đổi phông và có chỗ trống đến nửa trang. Bản cuối đặt Times New Roman làm phông mặc định, cho các hàng ngắt trang bình thường, chỉ giữ trọn hàng khi cần để tiêu đề không nằm một mình cuối trang (19 trang).
+- [x] Xuất lại PDF, thay tệp `de_cuong/23521228_BuiLeHuyPhuoc_DeCuongKLTN.pdf` trong repo và commit.
 - [ ] Gửi đề cương cho CBHD và nộp theo lịch của Khoa.
 - [ ] Cập nhật tên đề tài trên hệ thống đăng ký; so từng ký tự với đề cương, cả tên tiếng Anh.
 - [ ] Hỏi CBHD có đồng ý nhờ một bạn làm người gán nhãn thứ hai cho khoảng 60 tuyên bố không. Người này nhận việc vào 16/11 ([Bước 26](#b26)).
@@ -157,14 +158,14 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Ngày:** Thứ Tư 14/10 – Thứ Năm 15/10 · **Thời lượng:** khoảng 8 giờ · **Thuộc:** Việc chung
 
-> Bước này gồm việc tháng 9 (khảo sát nghiên cứu về kiểm chứng thông tin, truy hồi bằng chứng, phát biểu chứa số liệu, suy luận có điều kiện) và việc khảo sát bổ sung tháng 10 của đề cương. Phần nào đã làm thì chỉ kiểm tra lại rồi đánh dấu xong.
+> Bước này gồm việc tháng 9 (khảo sát nghiên cứu về kiểm chứng thông tin, truy hồi bằng chứng, tuyên bố chứa số liệu, suy luận có điều kiện) và việc khảo sát bổ sung tháng 10 của đề cương. Phần nào đã làm thì chỉ kiểm tra lại rồi đánh dấu xong.
 
 **Để làm gì.** Nắm các hướng kiểm chứng đã có, để viết Chương 2 và trả lời được câu "đề tài khác gì các bài trước".
 
 **Việc cần làm**
 
 - [ ] Gom đủ bài gốc. Thư mục `báo/` hiện có 6 bài của đề cương cũ, đánh số theo danh mục cũ: `[1].pdf` là Nguyen và cộng sự ([12] trong danh mục mới), `[2].pdf` là FactLens ([10]), `[6].pdf` là Fathom ([13]); ba bài còn lại không còn trong danh mục mới. Tải các bài còn thiếu và đặt tên tệp theo tên bài (ví dụ `FEVER.pdf`), vì số thứ tự có thể đổi khi sửa đề cương.
-- [ ] Đọc các nhóm nghiên cứu trong đề cương: kiểm chứng tự động (FEVER [2], AVeriTeC [3]); tuyên bố nửa sự thật (Tang và cộng sự [4]); kiểm chứng tiếng Việt (ViFactCheck [5], ViNumFCR [6], SemViQA [7]); tuyên bố số liệu (NumPert [8], VeriFin [9]); văn bản do LLM tạo (FactLens [10], MiniCheck [11]); kiểm chứng quảng cáo và mô tả sản phẩm (Nguyen và cộng sự [12], Jiang và cộng sự [1]); truy hồi bằng chứng (Fathom [13], BM25); thông tin đi kèm số đo (MeasEval); cặp tương phản (VitaminC). Ba tài liệu cuối không ghi số vì số của chúng có thể đổi ở Bước 1.
+- [ ] Đọc các nhóm nghiên cứu trong đề cương: kiểm chứng tự động (FEVER [2], AVeriTeC [3]); tuyên bố nửa sự thật (Tang và cộng sự [4]); kiểm chứng tiếng Việt (ViFactCheck [5], ViNumFCR [6], SemViQA [7]); tuyên bố số liệu (NumPert [8], VeriFin [9]); văn bản do LLM tạo (FactLens [10], MiniCheck [11]); kiểm chứng quảng cáo và mô tả sản phẩm (Nguyen và cộng sự [12], Jiang và cộng sự [1]); truy hồi bằng chứng (Fathom [13], BM25 [16]); thông tin đi kèm số đo (MeasEval [14]); cặp tương phản (VitaminC [15]).
 - [ ] Khảo sát bổ sung theo đề cương tháng 10: ảo giác của LLM, tuyên bố nửa sự thật, kiểm chứng kết hợp ký hiệu, kiểm chứng tiếng Việt.
 - [ ] Mỗi bài ghi: bài toán, dữ liệu, cách gán nhãn, kết quả chính, hạn chế so với đề tài, và **số trang** của từng ý sẽ trích.
 - [ ] Đối chiếu các con số đề cương đã trích với bài gốc, ví dụ: Fathom đạt F1 bằng 0 ở nhãn Conflicting/Cherry-picking trên tập phát triển AVeriTeC; NumPert giảm độ chính xác đến 62%; MiniCheck rẻ hơn GPT-4 khoảng 400 lần.
@@ -2234,13 +2235,13 @@ Riêng khi chậm vì gán nhãn (rủi ro "Gán nhãn chậm" trong đề cươ
 
 ### T14. Đối chiếu kế hoạch với đề cương
 
-Hai bảng dưới cho thấy mọi việc trong "Thời gian biểu" và mọi "Kết quả mong đợi" của đề cương đều có bước tương ứng.
+Các mục dưới cho thấy mọi việc trong "Thời gian biểu", mọi "Kết quả mong đợi" và phần "Phân công công việc" của đề cương đều có bước tương ứng.
 
 **T14.1 Thời gian biểu**
 
 | Tháng | Việc trong đề cương | Bước |
 |---|---|---|
-| 09 | Khảo sát các nghiên cứu về kiểm chứng thông tin, truy hồi bằng chứng, kiểm chứng phát biểu chứa số liệu và suy luận có điều kiện | [3](#b03) |
+| 09 | Khảo sát các nghiên cứu về kiểm chứng thông tin, truy hồi bằng chứng, kiểm chứng tuyên bố chứa số liệu và suy luận có điều kiện | [3](#b03) |
 | 09 | Xây dựng tiêu chí chọn nguồn, cấu trúc lưu dữ liệu và hướng dẫn gán nhãn | [2](#b02) (cấu trúc thư mục), [4](#b04) (tiêu chí nguồn), [9](#b09) (hướng dẫn) |
 | 09 | Soạn ít nhất 20 ví dụ gán nhãn minh họa; giữ ngữ cảnh khi tách thông tin quảng cáo | [9](#b09) |
 | 09 | Kiểm tra tài nguyên máy, thử các LLM mã nguồn mở | [2](#b02) |
@@ -2284,6 +2285,10 @@ Hai bảng dưới cho thấy mọi việc trong "Thời gian biểu" và mọi 
 | P, B0–B3 và hai bản bỏ thành phần chạy được trên cùng dữ liệu; mã nguồn P có kiểm thử cho từng quy tắc | `src/kiemchung/`, `tests/` | [15](#b15), [27](#b27)–[31](#b31) |
 | Báo cáo thực nghiệm về FAR và nhãn Lệch điều kiện, kể cả khi không cải thiện | Chương 4 | [37](#b37)–[39](#b39), [42](#b42) |
 | Website minh họa có tính năng "Kiểm chứng thông số" | Nhánh `kiem-chung-thong-so` của CopyPro | [40](#b40), [41](#b41) |
+
+**T14.3 Phân công công việc**
+
+Mục 3 của Kế hoạch thực hiện trong đề cương: sinh viên làm toàn bộ công việc; người gán nhãn thứ hai chỉ gán độc lập khoảng 60 tuyên bố theo cùng hướng dẫn để tính hệ số kappa của Cohen. Bước tương ứng: [1](#b01) (hỏi CBHD về người gán thứ hai), [26](#b26) (gửi việc cho người gán thứ hai), [32](#b32) (tính kappa).
 
 <a id="t15"></a>
 

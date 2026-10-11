@@ -9,18 +9,18 @@
 
 | Tài liệu | Nội dung |
 |---|---|
-| [Đề cương bản cuối](de_cuong/23521228_BuiLeHuyPhuoc_DeCuongKLTN.pdf) | `de_cuong/23521228_BuiLeHuyPhuoc_DeCuongKLTN.pdf`, bản gửi CBHD ngày 11/10/2026, soạn và xuất từ Google Docs. Mọi kế hoạch bám theo bản này. Bản ngày 10/10/2026 (`23521228_DECUONGKHOALUAN_UIT.pdf`) đã được thay, vẫn còn trong lịch sử Git ở commit `cf9dfd3`. |
+| [Đề cương bản cuối](de_cuong/23521228_BuiLeHuyPhuoc_DeCuongKLTN.pdf) | `de_cuong/23521228_BuiLeHuyPhuoc_DeCuongKLTN.pdf`, bản gửi CBHD ngày 11/10/2026, xuất từ `de_cuong/23521228_BuiLeHuyPhuoc_DeCuongKLTN_ban_cuoi.docx` (bản Google Docs tải về dạng .docx, đã sửa các chỗ ghi ở Bước 1 của kế hoạch và sửa định dạng: phông Times New Roman, không còn khoảng trống lớn). Mọi kế hoạch bám theo bản này. Bản ngày 10/10/2026 (`23521228_DECUONGKHOALUAN_UIT.pdf`) đã được thay, vẫn còn trong lịch sử Git ở commit `cf9dfd3`. |
 | [Bản làm việc cũ của đề cương](de_cuong/) | `23521228_BuiLeHuyPhuoc_DeCuongKLTN.docx` và `..._chu_do.docx`/`.pdf` (tô đỏ phần sửa so với đề cương đã nộp) được dựng bằng script trước khi chuyển sang Google Docs. Đây không phải bản gửi CBHD và không cần sửa; nội dung có vài chỗ khác bản cuối (ví dụ tên tiếng Anh). |
 | [Chi tiết tuyến tính của khóa luận](CHI_TIET_TUYEN_TINH_KHOA_LUAN.md) | Kế hoạch khớp đề cương bản cuối, đọc từ trên xuống là làm theo: đầu file là danh sách 47 bước theo đúng thứ tự làm (từ 11/10/2026 đến khi bảo vệ, bắt đầu ở Bước 1), xen 7 mốc kiểm tra với CBHD; mỗi bước có ngày, việc cần làm, tệp phải làm ra và tiêu chí xong. Phần Tra cứu cuối file gồm lịch tổng thể, quy ước dự án, hướng dẫn gán nhãn, đặc tả phương pháp P, thực nghiệm, tích hợp CopyPro, rủi ro, các điểm cần chốt khi làm thử, câu hỏi phản biện, bảng đối chiếu với đề cương. |
 
-Đề cương đã sửa theo nhận xét của Khoa; bản cuối ngày 11/10/2026 chờ CBHD xác nhận ở mốc 12/10 (các chỗ còn cần sửa ghi ở Bước 1 của kế hoạch). Repo chưa có dữ liệu thực nghiệm. Thư mục `data/`, `src/`, `tests/`, `scripts/`, `ket_qua/`, `luan_van/` được tạo ở Bước 2 của kế hoạch.
+Đề cương đã sửa theo nhận xét của Khoa và các chỗ ghi ở Bước 1 của kế hoạch; bản cuối ngày 11/10/2026 chờ CBHD xác nhận ở mốc 12/10. Repo chưa có dữ liệu thực nghiệm. Thư mục `data/`, `src/`, `tests/`, `scripts/`, `ket_qua/`, `luan_van/` được tạo ở Bước 2 của kế hoạch.
 
 ## Cấu trúc thư mục
 
 ```
 .
 ├── CHI_TIET_TUYEN_TINH_KHOA_LUAN.md   # kế hoạch: danh sách việc ở đầu file, tra cứu ở cuối
-├── de_cuong/                          # đề cương: bản cuối (PDF), bản làm việc cũ (.docx, bản chữ đỏ)
+├── de_cuong/                          # đề cương: bản cuối (PDF, _ban_cuoi.docx), bản làm việc cũ (.docx, bản chữ đỏ)
 │   └── nguon/                         # mã dựng đề cương từ khung của Khoa và nội dung
 ├── báo/                               # bài báo gốc (PDF), bản quyền thuộc tác giả và nhà xuất bản
 ├── dịch/                              # bản dịch máy để đọc
@@ -29,7 +29,7 @@
 
 ## Dựng lại đề cương sau khi sửa nội dung
 
-> Bản cuối (PDF) được sửa trên Google Docs, không dựng từ các script dưới đây. Các script chỉ dựng lại bản làm việc cũ: chạy `dung_docx.py` sẽ ghi đè hai tệp `.docx` làm việc bằng nội dung cũ trong `noi_dung.py`, và PDF xuất từ các tệp này không được chép đè lên `23521228_BuiLeHuyPhuoc_DeCuongKLTN.pdf` (bản cuối).
+> Bản cuối (PDF) xuất từ `23521228_BuiLeHuyPhuoc_DeCuongKLTN_ban_cuoi.docx`, không dựng từ các script dưới đây. Các script chỉ dựng lại bản làm việc cũ: chạy `dung_docx.py` sẽ ghi đè hai tệp `.docx` làm việc (không đụng tới tệp `_ban_cuoi.docx`) bằng nội dung cũ trong `noi_dung.py`, và PDF xuất từ các tệp này không được chép đè lên `23521228_BuiLeHuyPhuoc_DeCuongKLTN.pdf` (bản cuối).
 
 Sửa chữ trong `de_cuong/nguon/noi_dung.py`. Hàm `K(...)` giữ nguyên chữ của bản đã nộp (chữ đen), hàm `N(...)` đánh dấu phần mới hoặc sửa (chữ đỏ). Sau đó chạy:
 
