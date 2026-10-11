@@ -2,7 +2,7 @@
 
 **Đề tài:** Phương pháp kiểm chứng tuyên bố về thông số kỹ thuật có điều kiện ràng buộc trong quảng cáo  
 **Sinh viên:** Bùi Lê Huy Phước (23521228) · **CBHD** (cán bộ hướng dẫn): ThS Trần Hồng Nghi · **Hạn nộp:** 31/12/2026  
-Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_DECUONGKHOALUAN_UIT.pdf) ngày 10/10/2026. Cập nhật lần cuối: 11/10/2026.
+Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPhuoc_DeCuongKLTN.pdf) ngày 11/10/2026. Cập nhật lần cuối: 11/10/2026.
 
 > **Cách dùng file này**
 >
@@ -96,14 +96,17 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_DECUONGKHO
 
 **Để làm gì.** Chốt đề cương và tên đề tài với CBHD đúng hạn 12/10. Đề cương bản cuối là chuẩn cho mọi bước sau.
 
+> Sửa trên file Google Docs của đề cương, tức file xuất ra bản PDF gửi CBHD (`de_cuong/23521228_BuiLeHuyPhuoc_DeCuongKLTN.pdf`, bản ngày 11/10/2026). **Không** sửa các tệp `.docx` trong repo: đó là bản dựng bằng script trước khi chuyển sang Google Docs, đã cũ.
+
 **Việc cần làm**
 
-- [ ] Đọc lại bản PDF cuối (`de_cuong/23521228_DECUONGKHOALUAN_UIT.pdf`). Nếu còn kịp, sửa bốn chỗ sau:
-  - Mục Tính mới ghi "MeasEval [14]", nhưng [14] trong danh mục là BM25. Để giữ đúng thứ tự xuất hiện theo chuẩn IEEE, sắp lại danh mục thành [14] MeasEval, [15] VitaminC, [16] BM25; trong bài giữ "MeasEval [14]", sửa "VitaminC [16]" (mục Đóng góp) thành [15] và "[14]" sau câu về BM25 (Nội dung 2) thành [16].
-  - Nội dung 2 ghi "điền bảy trường thông số nêu ở mục 3", nhưng mục 3 (Phạm vi) không liệt kê bảy trường. Thay bằng đúng danh sách ở Thời gian biểu tháng 11: "điền bảy trường thông số (sản phẩm, phiên bản, bộ phận, thông số, giá trị, đơn vị, điều kiện áp dụng cùng kiểu giá trị)".
-  - Chú thích Hình 1 ghi "khối nền xám", nhưng trong hình có hai khối tô màu xanh, gồm cả khối trích xuất, trong khi mục Tính mới nói điểm mới không nằm ở bước tách điều kiện. Chỉ tô khối bộ quyết định và sửa chú thích cho khớp màu.
-  - Phần Kế hoạch thực hiện không còn mục "3. Phân công công việc", trong khi tiêu đề phần này trong mẫu của Khoa yêu cầu phân công cho từng sinh viên. Thêm lại: sinh viên thực hiện toàn bộ công việc; người gán nhãn thứ hai chỉ gán độc lập khoảng 60 tuyên bố.
-- [ ] Nếu đã sửa, thay tệp PDF trong `de_cuong/` bằng bản mới và commit.
+- [ ] Sửa bốn chỗ còn sót trong bản ngày 11/10/2026:
+  - **Trích dẫn MeasEval (chưa sửa).** Mục Tính mới ghi "MeasEval [14]", nhưng [14] trong danh mục là BM25. Đổi thứ tự ba mục cuối của danh mục thành [14] MeasEval, [15] VitaminC, [16] BM25, đúng thứ tự xuất hiện trong bài theo chuẩn IEEE. Trong bài giữ "MeasEval [14]", sửa "VitaminC [16]" (mục Đóng góp) thành "VitaminC [15]", và "theo mức độ liên quan [14]" (Nội dung 2) thành "theo mức độ liên quan [16]".
+  - **Bảy trường (chưa sửa).** Ở Nội dung 2, thay "điền bảy trường thông số nêu ở mục 3" bằng "điền bảy trường thông số (sản phẩm, phiên bản, bộ phận, thông số, giá trị, đơn vị, điều kiện áp dụng cùng kiểu giá trị)", vì mục 3 (Phạm vi) không liệt kê bảy trường.
+  - **Hình 1 (mới sửa một nửa).** Chú thích đã đổi thành "khối nền xanh", khớp màu. Nhưng hình vẫn tô xanh hai khối, gồm cả khối "Trích xuất bộ thông số có neo nguồn", trong khi mục Tính mới nói điểm mới không nằm ở bước trích xuất. Bỏ màu nền của khối trích xuất, chỉ để khối "Bộ quyết định" màu xanh; nhân lúc sửa hình, đổi chữ trong khối này thành "Bộ quyết định: A khớp sản phẩm, thuộc tính; B đối chiếu điều kiện; C so giá trị; D tổng hợp nhãn". Nếu khó sửa hình thì đổi chú thích thành: "Hình 1. Quy trình kiểm chứng đề xuất; hai khối nền xanh là hai thành phần của P, trong đó bộ quyết định là bước chứa điểm mới của đề tài."
+  - **Phân công công việc (chưa có).** Tiêu đề phần Kế hoạch thực hiện theo mẫu của Khoa có "phân công công việc cho từng sinh viên", nhưng phần này mới có "1. Mô tả kế hoạch làm việc" và "2. Thời gian biểu". Thêm mục "3. Phân công công việc" ngay trước "Tài liệu tham khảo", nội dung: "Sinh viên Bùi Lê Huy Phước thực hiện toàn bộ công việc của đề tài. Người gán nhãn thứ hai chỉ gán độc lập khoảng 60 tuyên bố theo cùng hướng dẫn để tính hệ số kappa của Cohen."
+- [ ] Sửa luôn hai lỗi nhỏ: mục Đóng góp ghi "bộ quyết định bốn nhãn (Supported, Refuted, NEI, Lệch điều kiện)", lẫn tên tiếng Anh với tiếng Việt, nên sửa thành "(Đúng, Sai, Lệch điều kiện, Chưa đủ thông tin)" cho thống nhất với các mục khác; rủi ro thứ năm thiếu dấu chấm sau "giữ đủ ba nhóm trong tập kiểm tra".
+- [ ] Xuất lại PDF, thay tệp `de_cuong/23521228_BuiLeHuyPhuoc_DeCuongKLTN.pdf` trong repo và commit.
 - [ ] Gửi đề cương cho CBHD và nộp theo lịch của Khoa.
 - [ ] Cập nhật tên đề tài trên hệ thống đăng ký; so từng ký tự với đề cương, cả tên tiếng Anh.
 - [ ] Hỏi CBHD có đồng ý nhờ một bạn làm người gán nhãn thứ hai cho khoảng 60 tuyên bố không. Người này nhận việc vào 16/11 ([Bước 26](#b26)).
@@ -1288,10 +1291,10 @@ Tiêu chí kết luận "đạt" hay "không đạt" được ghi trước ở [
 
 | Ý trong đề cương | Bằng chứng trong khóa luận | Bước tạo ra |
 |---|---|---|
-| **Tính mới 1.** Xét riêng tuyên bố thông số có điều kiện ràng buộc trong quảng cáo tiếng Việt do LLM tạo; nhãn Lệch điều kiện được định nghĩa bằng quy tắc cụ thể để người gán nhãn và hệ thống dùng cùng tiêu chí | Hướng dẫn gán nhãn công bố kèm khóa luận; quy tắc trong mã trùng với hướng dẫn; kappa giữa hai người gán | [9](#b09), [27](#b27), [32](#b32) |
+| **Tính mới 1.** Xét riêng loại tuyên bố thông số có điều kiện ràng buộc trong quảng cáo tiếng Việt do LLM tạo, loại tuyên bố mà các nghiên cứu đã khảo sát chưa xét riêng | Bảng so sánh với các nghiên cứu trước (Chương 2); bộ dữ liệu và hướng dẫn gán nhãn bốn lớp cho riêng loại tuyên bố này; kappa giữa hai người gán | [3](#b03), [9](#b09), [17](#b17), [32](#b32) |
 | **Tính mới 2.** Kết luận bằng phép đối chiếu điều kiện: Lệch điều kiện khi con số trùng giá trị công bố ở điều kiện khác, hoặc khi mức "lên đến" bị viết thành mức chắc chắn | F1 Lệch của P so với B1 (cùng bộ thông số, LLM tự gán) và B2 (cùng bốn nhãn, LLM tự gán); P so với P−ĐK | [27](#b27), [28](#b28), [30](#b30), [31](#b31), [37](#b37) |
 | **Tính mới 3.** Sáu loại điều kiện làm danh mục để so từng loại (cụ thể hóa lược đồ MeasEval cho thông số sản phẩm) | Tệp cấu hình ba nhóm sản phẩm; kết quả theo từng loại biến đổi trên tập cặp tối thiểu | [8](#b08), [25](#b25), [37](#b37) |
-| **Đóng góp 1.** Phương pháp P, có kiểm thử cho từng quy tắc | Mã nguồn `src/kiemchung/`, `tests/` | [21](#b21), [22](#b22), [27](#b27)–[29](#b29) |
+| **Đóng góp 1.** Phương pháp P gồm trích xuất có neo nguồn và bộ quyết định bốn nhãn, cài thành mã nguồn có kiểm thử cho từng quy tắc | Mã nguồn `src/kiemchung/`, `tests/` | [21](#b21), [22](#b22), [27](#b27)–[29](#b29) |
 | **Đóng góp 2.** Bộ dữ liệu tiếng Việt bốn nhãn, kèm đoạn nguồn, lý do và tập cặp tối thiểu | Thư mục `data/`, thẻ dữ liệu, bảng thống kê dữ liệu | [4](#b04)–[13](#b13), [18](#b18)–[20](#b20), [23](#b23)–[26](#b26), [32](#b32) |
 | **Đóng góp 3.** Số liệu cho biết LLM bỏ hoặc đổi điều kiện thường đến mức nào, theo hai chế độ sinh | Tỷ lệ Lệch điều kiện và Sai theo chế độ có hoặc không có đoạn thông số | [39](#b39) |
 | **Đóng góp 4.** Đánh giá có đối chứng với bốn cách kiểm chứng hiện có và hai bản bỏ thành phần | Bảng kết quả chính có KTC và kiểm định | [36](#b36)–[39](#b39) |
