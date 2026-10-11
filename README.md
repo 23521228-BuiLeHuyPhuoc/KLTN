@@ -11,15 +11,15 @@
 |---|---|
 | [Đề cương bản cuối](de_cuong/23521228_DECUONGKHOALUAN_UIT.pdf) | `de_cuong/23521228_DECUONGKHOALUAN_UIT.pdf`, bản cuối ngày 10/10/2026, xuất từ Google Docs. Mọi kế hoạch bám theo bản này. |
 | [Bản làm việc của đề cương](de_cuong/) | `23521228_BuiLeHuyPhuoc_DeCuongKLTN.docx` và `..._chu_do.docx` (tô đỏ phần sửa so với đề cương đã nộp) là các bản trước bản cuối, có vài chỗ khác bản cuối (ví dụ tên tiếng Anh). |
-| [Chi tiết tuyến tính của khóa luận](CHI_TIET_TUYEN_TINH_KHOA_LUAN.md) | Kế hoạch khớp đề cương bản cuối: 45 bước theo thời gian (15/09–31/12/2026 và bảo vệ), 7 mốc kiểm tra với CBHD, biểu đồ thời gian, công sức theo tuần, hướng dẫn gán nhãn, đặc tả phương pháp P, thực nghiệm, tích hợp CopyPro, rủi ro, các điểm cần chốt khi làm thử, câu hỏi phản biện, bảng đối chiếu với đề cương. |
+| [Chi tiết tuyến tính của khóa luận](CHI_TIET_TUYEN_TINH_KHOA_LUAN.md) | Kế hoạch khớp đề cương bản cuối, đọc từ trên xuống là làm theo: đầu file là danh sách 47 bước theo đúng thứ tự làm (từ 11/10/2026 đến khi bảo vệ, bắt đầu ở Bước 1), xen 7 mốc kiểm tra với CBHD; mỗi bước có ngày, việc cần làm, tệp phải làm ra và tiêu chí xong. Phần Tra cứu cuối file gồm lịch tổng thể, quy ước dự án, hướng dẫn gán nhãn, đặc tả phương pháp P, thực nghiệm, tích hợp CopyPro, rủi ro, các điểm cần chốt khi làm thử, câu hỏi phản biện, bảng đối chiếu với đề cương. |
 
-Đề cương đã sửa theo nhận xét của Khoa; bản cuối ngày 10/10/2026 chờ CBHD xác nhận ở mốc 12/10. Repo chưa có dữ liệu thực nghiệm. Thư mục `data/`, `src/`, `tests/`, `ket_qua/`, `luan_van/` được tạo ở Bước 05 của kế hoạch.
+Đề cương đã sửa theo nhận xét của Khoa; bản cuối ngày 10/10/2026 chờ CBHD xác nhận ở mốc 12/10. Repo chưa có dữ liệu thực nghiệm. Thư mục `data/`, `src/`, `tests/`, `scripts/`, `ket_qua/`, `luan_van/` được tạo ở Bước 2 của kế hoạch.
 
 ## Cấu trúc thư mục
 
 ```
 .
-├── CHI_TIET_TUYEN_TINH_KHOA_LUAN.md   # kế hoạch tuyến tính
+├── CHI_TIET_TUYEN_TINH_KHOA_LUAN.md   # kế hoạch: danh sách việc ở đầu file, tra cứu ở cuối
 ├── de_cuong/                          # đề cương: bản cuối (PDF), bản làm việc (.docx, bản chữ đỏ)
 │   └── nguon/                         # mã dựng đề cương từ khung của Khoa và nội dung
 ├── báo/                               # bài báo gốc (PDF), bản quyền thuộc tác giả và nhà xuất bản
