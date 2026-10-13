@@ -1,0 +1,12 @@
+{
+  "checked_on": "2026-10-13",
+  "parameters": {"temperature": 0, "top_p": 1, "max_output_tokens": 2048},
+  "timeout_s": 30,
+  "max_retries": 2,
+  "interval_s": 20,
+  "models": [
+    {"provider": "gemini", "model": "gemini-3.6-flash"},
+    {"provider": "groq", "model": "openai/gpt-oss-20b"},
+    {"provider": "groq", "model": "openai/gpt-oss-120b"}
+  ]
+}

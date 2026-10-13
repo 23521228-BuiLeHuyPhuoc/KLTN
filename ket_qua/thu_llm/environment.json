@@ -1,0 +1,365 @@
+{
+  "recorded_at": "2026-10-13T06:21:21.703611+00:00",
+  "scope": "Environment executing this script; ownership/personal-machine status not established",
+  "os": {
+    "NAME": "Ubuntu",
+    "ID": "ubuntu",
+    "PRETTY_NAME": "Ubuntu 26.04.1 LTS",
+    "VERSION_ID": "26.04",
+    "VERSION": "26.04.1 LTS (Resolute Raccoon)",
+    "VERSION_CODENAME": "resolute",
+    "ID_LIKE": "debian",
+    "HOME_URL": "https://www.ubuntu.com/",
+    "SUPPORT_URL": "https://help.ubuntu.com/",
+    "BUG_REPORT_URL": "https://bugs.launchpad.net/ubuntu/",
+    "PRIVACY_POLICY_URL": "https://www.ubuntu.com/legal/terms-and-policies/privacy-policy",
+    "UBUNTU_CODENAME": "resolute",
+    "LOGO": "ubuntu-logo"
+  },
+  "kernel": "7.0.0-38-generic",
+  "python": "3.14.4",
+  "python_executable": "/home/phuocblh/KLTN/KLTN/.venv/bin/python",
+  "virtualenv": "/home/phuocblh/KLTN/KLTN/.venv",
+  "cpu": "Intel(R) Core(TM) i7-4770 CPU @ 3.40GHz",
+  "logical_cpus": 8,
+  "cpu_affinity": 8,
+  "memory": {
+    "MemTotal_KiB": 15751808,
+    "MemAvailable_KiB": 4137900,
+    "SwapTotal_KiB": 4194300,
+    "SwapFree_KiB": 60
+  },
+  "disk_bytes": {
+    "total": 234039422976,
+    "used": 117576220672,
+    "free": 104500051968
+  },
+  "graphics": [
+    "00:02.0 VGA compatible controller [0300]: Intel Corporation Xeon E3-1200 v3/4th Gen Core Processor Integrated Graphics Controller [8086:0412] (rev 06)"
+  ],
+  "nvidia": {
+    "exit_code": null,
+    "stdout": "unavailable"
+  },
+  "virtualization": {
+    "exit_code": 1,
+    "stdout": "none"
+  },
+  "cgroup_limits": {
+    "memory.max": null,
+    "cpu.max": null
+  },
+  "packages": {
+    "kltn-kiemchung": {
+      "version": "0.1.0",
+      "requires_python": ">=3.12"
+    },
+    "certifi": {
+      "version": "2026.7.22",
+      "requires_python": ">=3.7"
+    },
+    "distro": {
+      "version": "1.9.0",
+      "requires_python": ">=3.6"
+    },
+    "pandas": {
+      "version": "3.0.6",
+      "requires_python": ">=3.11"
+    },
+    "six": {
+      "version": "1.17.0",
+      "requires_python": ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
+    },
+    "contourpy": {
+      "version": "1.4.0",
+      "requires_python": ">=3.12"
+    },
+    "cryptography": {
+      "version": "50.0.2",
+      "requires_python": ">=3.9, !=3.9.0, !=3.9.1"
+    },
+    "python-crfsuite": {
+      "version": "0.9.12",
+      "requires_python": ">=3.10"
+    },
+    "cloudpickle": {
+      "version": "3.1.2",
+      "requires_python": ">=3.8"
+    },
+    "charset-normalizer": {
+      "version": "3.5.2",
+      "requires_python": ">=3.7"
+    },
+    "pyparsing": {
+      "version": "3.3.3",
+      "requires_python": ">=3.9"
+    },
+    "pytest": {
+      "version": "9.1.1",
+      "requires_python": ">=3.10"
+    },
+    "wrapt": {
+      "version": "2.5.0",
+      "requires_python": ">=3.9"
+    },
+    "PyYAML": {
+      "version": "6.0.3",
+      "requires_python": ">=3.8"
+    },
+    "cycler": {
+      "version": "0.12.1",
+      "requires_python": ">=3.8"
+    },
+    "urllib3": {
+      "version": "2.8.0",
+      "requires_python": ">=3.10"
+    },
+    "typing-inspection": {
+      "version": "0.4.4",
+      "requires_python": ">=3.10"
+    },
+    "requests": {
+      "version": "2.34.2",
+      "requires_python": ">=3.10"
+    },
+    "pyvi": {
+      "version": "0.1.1",
+      "requires_python": null
+    },
+    "google-genai": {
+      "version": "2.30.0",
+      "requires_python": ">=3.10"
+    },
+    "click": {
+      "version": "8.5.0",
+      "requires_python": ">=3.10"
+    },
+    "annotated-types": {
+      "version": "0.8.0",
+      "requires_python": ">=3.10"
+    },
+    "pyasn1_modules": {
+      "version": "0.4.2",
+      "requires_python": ">=3.8"
+    },
+    "annotated-doc": {
+      "version": "0.0.5",
+      "requires_python": ">=3.9"
+    },
+    "sniffio": {
+      "version": "1.3.1",
+      "requires_python": ">=3.7"
+    },
+    "typing_extensions": {
+      "version": "4.16.0",
+      "requires_python": ">=3.9"
+    },
+    "pycparser": {
+      "version": "3.11",
+      "requires_python": ">=3.10"
+    },
+    "sklearn-crfsuite": {
+      "version": "0.5.0",
+      "requires_python": null
+    },
+    "greenlet": {
+      "version": "3.5.6",
+      "requires_python": ">=3.10"
+    },
+    "pydantic": {
+      "version": "2.14.1",
+      "requires_python": ">=3.10"
+    },
+    "packaging": {
+      "version": "26.3",
+      "requires_python": ">=3.9"
+    },
+    "formulaic": {
+      "version": "1.2.2",
+      "requires_python": ">=3.9"
+    },
+    "tabulate": {
+      "version": "0.10.0",
+      "requires_python": ">=3.10"
+    },
+    "opentelemetry-api": {
+      "version": "1.45.1",
+      "requires_python": ">=3.10"
+    },
+    "playwright": {
+      "version": "1.63.0",
+      "requires_python": ">=3.10"
+    },
+    "scipy": {
+      "version": "1.18.1",
+      "requires_python": ">=3.12"
+    },
+    "pip": {
+      "version": "25.1.1",
+      "requires_python": ">=3.9"
+    },
+    "tenacity": {
+      "version": "9.1.4",
+      "requires_python": ">=3.10"
+    },
+    "python-dotenv": {
+      "version": "1.2.4",
+      "requires_python": ">=3.10"
+    },
+    "Pygments": {
+      "version": "2.21.0",
+      "requires_python": ">=3.9"
+    },
+    "python-dateutil": {
+      "version": "2.9.0.post0",
+      "requires_python": "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
+    },
+    "uvicorn": {
+      "version": "0.54.0",
+      "requires_python": ">=3.10"
+    },
+    "starlette": {
+      "version": "1.7.0",
+      "requires_python": ">=3.10"
+    },
+    "pluggy": {
+      "version": "1.6.0",
+      "requires_python": ">=3.9"
+    },
+    "numpy": {
+      "version": "2.5.4",
+      "requires_python": ">=3.12"
+    },
+    "fastapi": {
+      "version": "0.143.0",
+      "requires_python": ">=3.10"
+    },
+    "pyee": {
+      "version": "13.0.1",
+      "requires_python": ">=3.8"
+    },
+    "httpx": {
+      "version": "0.28.1",
+      "requires_python": ">=3.8"
+    },
+    "google-auth": {
+      "version": "2.62.0",
+      "requires_python": ">=3.10"
+    },
+    "matplotlib": {
+      "version": "3.11.2",
+      "requires_python": ">=3.11"
+    },
+    "interface_meta": {
+      "version": "2.0.1",
+      "requires_python": ">=3.10"
+    },
+    "kiwisolver": {
+      "version": "1.5.1",
+      "requires_python": ">=3.10"
+    },
+    "websockets": {
+      "version": "16.1.1",
+      "requires_python": ">=3.10"
+    },
+    "rank-bm25": {
+      "version": "0.2.2",
+      "requires_python": null
+    },
+    "tqdm": {
+      "version": "4.70.1",
+      "requires_python": ">=3.8"
+    },
+    "pydantic_core": {
+      "version": "2.50.1",
+      "requires_python": ">=3.10"
+    },
+    "pyasn1": {
+      "version": "0.6.4",
+      "requires_python": ">=3.8"
+    },
+    "idna": {
+      "version": "3.20",
+      "requires_python": ">=3.9"
+    },
+    "iniconfig": {
+      "version": "2.3.1",
+      "requires_python": ">=3.10"
+    },
+    "anyio": {
+      "version": "4.15.1",
+      "requires_python": ">=3.10"
+    },
+    "statsmodels": {
+      "version": "0.15.0",
+      "requires_python": ">=3.10"
+    },
+    "cffi": {
+      "version": "2.1.1",
+      "requires_python": ">=3.10"
+    },
+    "pillow": {
+      "version": "12.3.0",
+      "requires_python": ">=3.10"
+    },
+    "threadpoolctl": {
+      "version": "3.7.0",
+      "requires_python": ">=3.9"
+    },
+    "joblib": {
+      "version": "1.6.0",
+      "requires_python": ">=3.10"
+    },
+    "patsy": {
+      "version": "1.0.3",
+      "requires_python": ">=3.6"
+    },
+    "groq": {
+      "version": "1.7.0",
+      "requires_python": ">=3.10"
+    },
+    "scikit-learn": {
+      "version": "1.9.1",
+      "requires_python": ">=3.11"
+    },
+    "fonttools": {
+      "version": "4.66.1",
+      "requires_python": ">=3.11"
+    },
+    "httpcore": {
+      "version": "1.0.9",
+      "requires_python": ">=3.8"
+    },
+    "narwhals": {
+      "version": "2.27.1",
+      "requires_python": ">=3.10"
+    },
+    "h11": {
+      "version": "0.16.0",
+      "requires_python": ">=3.8"
+    }
+  },
+  "imports": {
+    "rank_bm25": "ok",
+    "pyvi": "ok",
+    "pydantic": "ok",
+    "yaml": "ok",
+    "google.genai": "ok",
+    "groq": "ok",
+    "fastapi": "ok",
+    "uvicorn": "ok",
+    "pytest": "ok",
+    "sklearn": "ok",
+    "statsmodels.api": "ok",
+    "pandas": "ok",
+    "matplotlib": "ok",
+    "playwright.sync_api": "ok",
+    "dotenv": "ok",
+    "kiemchung": "ok"
+  },
+  "pyvi_example": "Điện_thoại có thời_lượng pin tốt",
+  "pip_check": {
+    "exit_code": 0,
+    "stdout": "No broken requirements found."
+  }
+}

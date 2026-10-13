@@ -1,0 +1,175 @@
+[
+  {
+    "id": "t46-01",
+    "source": "CHI_TIET_TUYEN_TINH_KHOA_LUAN.md#t4-6, ví dụ 1",
+    "split": "development_example_only",
+    "text": "iPhone 17 sạc nhanh lên đến 50% trong 20 phút với bộ sạc 40W trở lên",
+    "expected": {
+      "san_pham": "iPhone 17",
+      "phien_ban": null,
+      "bo_phan": null,
+      "thuoc_tinh": "thoi_gian_sac",
+      "gia_tri": 20,
+      "don_vi": "phut",
+      "dieu_kien": {
+        "moc_sac": "lên đến 50%",
+        "cong_suat_sac": "40W trở lên"
+      },
+      "kieu_gia_tri": "khong_neu"
+    }
+  },
+  {
+    "id": "t46-02",
+    "source": "CHI_TIET_TUYEN_TINH_KHOA_LUAN.md#t4-6, ví dụ 2",
+    "split": "development_example_only",
+    "text": "iPhone 17 sạc 50% chỉ trong 20 phút",
+    "expected": {
+      "san_pham": "iPhone 17",
+      "phien_ban": null,
+      "bo_phan": null,
+      "thuoc_tinh": "thoi_gian_sac",
+      "gia_tri": 20,
+      "don_vi": "phut",
+      "dieu_kien": {
+        "moc_sac": "50%"
+      },
+      "kieu_gia_tri": "khong_neu"
+    }
+  },
+  {
+    "id": "t46-06",
+    "source": "CHI_TIET_TUYEN_TINH_KHOA_LUAN.md#t4-6, ví dụ 6",
+    "split": "development_example_only",
+    "text": "Galaxy Buds3 Pro nghe nhạc 6 giờ khi bật chống ồn",
+    "expected": {
+      "san_pham": "Galaxy Buds3 Pro",
+      "phien_ban": null,
+      "bo_phan": null,
+      "thuoc_tinh": "thoi_luong_pin",
+      "gia_tri": 6,
+      "don_vi": "gio",
+      "dieu_kien": {
+        "che_do_chong_on": "bat"
+      },
+      "kieu_gia_tri": "khong_neu"
+    }
+  },
+  {
+    "id": "t46-08",
+    "source": "CHI_TIET_TUYEN_TINH_KHOA_LUAN.md#t4-6, ví dụ 8",
+    "split": "development_example_only",
+    "text": "Galaxy Buds3 Pro pin 7 giờ",
+    "expected": {
+      "san_pham": "Galaxy Buds3 Pro",
+      "phien_ban": null,
+      "bo_phan": null,
+      "thuoc_tinh": "thoi_luong_pin",
+      "gia_tri": 7,
+      "don_vi": "gio",
+      "dieu_kien": {},
+      "kieu_gia_tri": "khong_neu"
+    }
+  },
+  {
+    "id": "t46-09",
+    "source": "CHI_TIET_TUYEN_TINH_KHOA_LUAN.md#t4-6, ví dụ 9",
+    "split": "development_example_only",
+    "text": "Galaxy Buds3 Pro nghe nhạc đến 6 giờ",
+    "expected": {
+      "san_pham": "Galaxy Buds3 Pro",
+      "phien_ban": null,
+      "bo_phan": null,
+      "thuoc_tinh": "thoi_luong_pin",
+      "gia_tri": 6,
+      "don_vi": "gio",
+      "dieu_kien": {},
+      "kieu_gia_tri": "toi_da"
+    }
+  },
+  {
+    "id": "t46-11",
+    "source": "CHI_TIET_TUYEN_TINH_KHOA_LUAN.md#t4-6, ví dụ 11",
+    "split": "development_example_only",
+    "text": "Hộp sạc Galaxy Buds3 Pro cũng chống nước IP57",
+    "expected": {
+      "san_pham": "Galaxy Buds3 Pro",
+      "phien_ban": null,
+      "bo_phan": "hop_sac",
+      "thuoc_tinh": "khang_nuoc",
+      "gia_tri": "IP57",
+      "don_vi": null,
+      "dieu_kien": {},
+      "kieu_gia_tri": "khong_neu"
+    }
+  },
+  {
+    "id": "t46-12",
+    "source": "CHI_TIET_TUYEN_TINH_KHOA_LUAN.md#t4-6, ví dụ 12",
+    "split": "development_example_only",
+    "text": "Galaxy Buds3 Pro luôn nghe đủ 6 giờ",
+    "expected": {
+      "san_pham": "Galaxy Buds3 Pro",
+      "phien_ban": null,
+      "bo_phan": null,
+      "thuoc_tinh": "thoi_luong_pin",
+      "gia_tri": 6,
+      "don_vi": "gio",
+      "dieu_kien": {},
+      "kieu_gia_tri": "khang_dinh"
+    }
+  },
+  {
+    "id": "t46-13",
+    "source": "CHI_TIET_TUYEN_TINH_KHOA_LUAN.md#t4-6, ví dụ 13",
+    "split": "development_example_only",
+    "text": "Apple Watch SE 3 dùng đến 32 giờ ở chế độ nguồn điện thấp",
+    "expected": {
+      "san_pham": "Apple Watch SE 3",
+      "phien_ban": null,
+      "bo_phan": null,
+      "thuoc_tinh": "thoi_luong_pin",
+      "gia_tri": 32,
+      "don_vi": "gio",
+      "dieu_kien": {
+        "che_do_nguon": "nguon_dien_thap"
+      },
+      "kieu_gia_tri": "toi_da"
+    }
+  },
+  {
+    "id": "t46-16",
+    "source": "CHI_TIET_TUYEN_TINH_KHOA_LUAN.md#t4-6, ví dụ 16",
+    "split": "development_example_only",
+    "text": "Xiaomi 15T có độ sáng cực đại 3200 nit",
+    "expected": {
+      "san_pham": "Xiaomi 15T",
+      "phien_ban": null,
+      "bo_phan": null,
+      "thuoc_tinh": "do_sang",
+      "gia_tri": 3200,
+      "don_vi": "nit",
+      "dieu_kien": {
+        "che_do_hien_thi": "cuc_dai"
+      },
+      "kieu_gia_tri": "khong_neu"
+    }
+  },
+  {
+    "id": "t46-18",
+    "source": "CHI_TIET_TUYEN_TINH_KHOA_LUAN.md#t4-6, ví dụ 18",
+    "split": "development_example_only",
+    "text": "Galaxy Buds3 Pro nghe 5 giờ ở chế độ xuyên âm",
+    "expected": {
+      "san_pham": "Galaxy Buds3 Pro",
+      "phien_ban": null,
+      "bo_phan": null,
+      "thuoc_tinh": "thoi_luong_pin",
+      "gia_tri": 5,
+      "don_vi": "gio",
+      "dieu_kien": {
+        "che_do_chong_on": "xuyen_am"
+      },
+      "kieu_gia_tri": "khong_neu"
+    }
+  }
+]

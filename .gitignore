@@ -18,6 +18,16 @@ Thumbs.db
 # Khóa API cục bộ — không commit
 .env
 .env.*
+!.env.example
+
+# Môi trường thực nghiệm cục bộ (kết quả JSON/JSONL vẫn được lưu trong Git)
+.venv/
+.venv-*/
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+*.tmp
 
 # Bytecode và worktree tạm của công cụ AI
 __pycache__/

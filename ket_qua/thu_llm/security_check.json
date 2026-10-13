@@ -1,0 +1,18 @@
+{
+  "checked_at": "2026-10-13T06:27:27.573439+00:00",
+  "env_ignore": ".env",
+  "tracked_env_files": [],
+  "env_history_metadata": [
+    "966f8ad 2026-10-08 bảo mật: ngừng theo dõi .env (khóa đã lộ trong lịch sử — cần thu hồi)",
+    "8946bb0 2026-10-08 up up"
+  ],
+  "rotation_verified": false,
+  "local_env_exists": false,
+  "key_presence": {
+    "GEMINI_API_KEY": false,
+    "GROQ_API_KEY": false
+  },
+  "files_scanned": 102,
+  "secret_pattern_or_current_env_value_hits": [],
+  "scan_scope": "New step-2 sources/artifacts plus README; no historical key values read. Not proof of revocation."
+}

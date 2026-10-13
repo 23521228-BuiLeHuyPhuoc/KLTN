@@ -1,0 +1,1 @@
+{"checked_on":"2026-10-13","interval_s":20,"max_retries":2,"models":[{"model":"gemini-3.6-flash","provider":"gemini"},{"model":"openai/gpt-oss-20b","provider":"groq"},{"model":"openai/gpt-oss-120b","provider":"groq"}],"parameters":{"max_output_tokens":2048,"temperature":0,"top_p":1},"timeout_s":30}
