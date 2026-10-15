@@ -9,6 +9,7 @@ import os
 from pathlib import Path
 import statistics
 import subprocess
+import sys
 import time
 
 from dotenv import load_dotenv
@@ -45,6 +46,10 @@ def main() -> int:
     output.mkdir(parents=True, exist_ok=False)  # Never overwrite a previous run.
     (output / "cases.json").write_text(canonical_json(cases) + "\n", encoding="utf-8")
     (output / "config.json").write_text(canonical_json(config) + "\n", encoding="utf-8")
+    def progress(message: str) -> None:
+        print(message, file=sys.stderr, flush=True)
+
+    progress(f"Bắt đầu {args.mode}. Kết quả: {output}")
     summaries, all_rows = [], []
     for candidate in candidates:
         provider, model = candidate["provider"], candidate["model"]
@@ -63,8 +68,10 @@ def main() -> int:
             summary.update(status="blocked", reasons=reasons, completed_samples=0,
                            api_calls_successful=0, cache_repeats=0)
             summaries.append(summary)
+            progress(f"{model}: bị chặn ({', '.join(reasons)})")
             continue
-        for case in cases:
+        for index, case in enumerate(cases, start=1):
+            progress(f"{model} — câu {index}/{len(cases)} ({case['id']}): đang xử lý...")
             params = dict(config["parameters"], **candidate.get("parameters", {}))
             call_args = dict(provider=provider, model=model, messages=messages_for(case),
                              parameters=params, json_output=True)
@@ -79,12 +86,15 @@ def main() -> int:
                                else "failed", reason=exc.code)
                 all_rows.append({"id": case["id"], "provider": provider, "model": model,
                                  "mode": args.mode, "error": exc.code})
+                progress(f"{model}: lỗi {exc.code}")
                 break  # Avoid repeating authentication, quota or model errors 10 times.
             row = {"id": case["id"], "provider": provider, "model": model,
                    "mode": args.mode, "first": asdict(first), "repeat": asdict(second),
                    "evaluation": evaluate(first.text, case) if args.mode == "live" else None}
             all_rows.append(row)
+            progress(f"  Xong ({'cache' if first.cache_hit else args.mode}); kiểm tra cache OK.")
             if args.mode == "live" and not first.cache_hit:
+                progress(f"  Chờ {config['interval_s']} giây theo cấu hình giới hạn tốc độ...")
                 time.sleep(config["interval_s"])  # Small budget; account quotas still apply.
         rows = [r for r in all_rows if r["model"] == model and r["provider"] == provider
                 and "first" in r]
