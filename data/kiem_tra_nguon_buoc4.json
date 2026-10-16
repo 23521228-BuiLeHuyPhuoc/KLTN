@@ -1,0 +1,518 @@
+{
+  "phien_ban": 2,
+  "ngay_kiem_tra": "2026-10-15",
+  "muc_dich": "Kiểm điều kiện chọn nguồn ở Bước 4; không phải nhãn chuẩn nghiên cứu.",
+  "quy_tac": "Chỉ đếm giá trị thuộc phạm vi T4.1/T4.5 và có điều kiện cụ thể gắn với chính giá trị đó. Không dùng chú thích chung kết quả có thể khác làm điều kiện duy nhất.",
+  "gioi_han": "Không yêu cầu ba thuộc tính khác nhau. Không khẳng định hãng đã công bố đầy đủ mọi thiết lập thử nghiệm. HTML/PDF tải để đối chiếu đang ở thư mục tạm; hồ sơ này ghi nguồn, thời điểm, hash và vị trí, chưa thay bộ lưu bằng chứng Bước 5–6.",
+  "csv_sha256": "9f44937436f149d33ece3061a26061c916c94c731c48b448e3a302ac56ec278e",
+  "nguon": [
+    {
+      "id": "dt-apple-iphone17",
+      "url": "https://www.apple.com/vn/iphone-17/specs/",
+      "final_url": "https://www.apple.com/vn/iphone-17/specs/",
+      "status": 200,
+      "checked_at": "2026-10-15T06:39:51.640254+00:00",
+      "sha256": "abcf12cf57593de9f6f8759a6ee0ab7385cc4cdaf229cd1ba237cbed72b09ee6",
+      "lines": 621,
+      "bytes": 220284
+    },
+    {
+      "id": "dt-xiaomi-15t",
+      "url": "https://www.mi.com/vn/product/xiaomi-15t/specs/",
+      "final_url": "https://www.mi.com/vn/product/xiaomi-15t/specs/",
+      "status": 200,
+      "checked_at": "2026-10-15T06:39:51.640293+00:00",
+      "sha256": "475a3cffd3103f5c3511edc58e62b1ab4fbf7878621dcc0723c8f9d70fc2bf1d",
+      "lines": 199,
+      "bytes": 201407
+    },
+    {
+      "id": "tn-samsung-buds3pro",
+      "url": "https://www.samsung.com/vn/audio-sound/galaxy-buds/galaxy-buds3-pro-silver-sm-r630nzaaxxv/",
+      "final_url": "https://www.samsung.com/vn/audio-sound/galaxy-buds/galaxy-buds3-pro-silver-sm-r630nzaaxxv/",
+      "status": 200,
+      "checked_at": "2026-10-15T06:39:51.620491+00:00",
+      "sha256": "e2f4526c43488d5e0c99df0200320a96039262263b47e3b252bc793caee15c34",
+      "lines": 3624,
+      "bytes": 4466052
+    },
+    {
+      "id": "dh-apple-watchse3",
+      "url": "https://www.apple.com/vn/apple-watch-se-3/specs/",
+      "final_url": "https://www.apple.com/vn/apple-watch-se-3/specs/",
+      "status": 200,
+      "checked_at": "2026-10-15T06:39:51.609720+00:00",
+      "sha256": "f157baf8a8e4ae146bd6f1bf05a4a45c3a78fe9c905009f770c7f8fb380e95a8",
+      "lines": 435,
+      "bytes": 180497
+    },
+    {
+      "id": "dt-oppo-findx8",
+      "url": "https://www.oppo.com/vn/smartphones/series-find-x/find-x8/specs/",
+      "final_url": "https://www.oppo.com/vn/smartphones/series-find-x/find-x8/specs/",
+      "status": 200,
+      "checked_at": "2026-10-15T06:39:51.263222+00:00",
+      "sha256": "110cf67ca985d14a61f5e3c6f9db97593ad78f7a4538805a0c8efedf7997e653",
+      "lines": 407,
+      "bytes": 227425
+    },
+    {
+      "id": "dt-oppo-findx8-extra",
+      "url": "https://www.oppo.com/vn/smartphones/series-find-x/find-x8/",
+      "final_url": "https://www.oppo.com/vn/smartphones/series-find-x/find-x8/",
+      "status": 200,
+      "checked_at": "2026-10-15T06:39:51.360454+00:00",
+      "sha256": "84cfd8f0878412fb1a6011028974dfad7f5c9b5f33130e578a18d4ad141dd05c",
+      "lines": 796,
+      "bytes": 571416
+    },
+    {
+      "id": "dt-samsung-galaxys25ultra",
+      "url": "https://www.samsung.com/vn/smartphones/galaxy-s25-ultra/specs/",
+      "final_url": "https://www.samsung.com/vn/smartphones/galaxy-s25-ultra/specs/",
+      "status": 200,
+      "checked_at": "2026-10-15T06:39:51.791613+00:00",
+      "sha256": "4d2e599b685b8e62f11ae3ea93ec75f5e2cfc1258cdcefd633b639778eace112",
+      "lines": 540,
+      "bytes": 368471
+    },
+    {
+      "id": "dt-samsung-galaxys25ultra-extra",
+      "url": "https://www.samsung.com/vn/smartphones/galaxy-s25-ultra/",
+      "final_url": "https://www.samsung.com/vn/smartphones/galaxy-s25-ultra/",
+      "status": 200,
+      "checked_at": "2026-10-15T06:39:51.889717+00:00",
+      "sha256": "90d1f5ff30deda593059ef88d96718397231e663d5d2192fe00aa00a61fff7de",
+      "lines": 913,
+      "bytes": 1184591
+    },
+    {
+      "id": "dt-xiaomi-redminote14proplus5g",
+      "url": "https://www.mi.com/vn/product/redmi-note-14-pro-plus-5g/specs/",
+      "final_url": "https://www.mi.com/vn/product/redmi-note-14-pro-plus-5g/specs/",
+      "status": 200,
+      "checked_at": "2026-10-15T06:39:52.137026+00:00",
+      "sha256": "b171277d2d05f207a7302758f168d907d47fcdd3e226a1244b269c12d5e111c7",
+      "lines": 115,
+      "bytes": 171015
+    },
+    {
+      "id": "dt-xiaomi-redminote14proplus5g-extra",
+      "url": "https://www.mi.com/vn/product/redmi-note-14-pro-plus-5g/",
+      "final_url": "https://www.mi.com/vn/product/redmi-note-14-pro-plus-5g/",
+      "status": 200,
+      "checked_at": "2026-10-15T06:39:52.257856+00:00",
+      "sha256": "bc93cc46bada34612de309c4d5cbdfff11a1676f59316ff578a1667663dc20ce",
+      "lines": 343,
+      "bytes": 302323
+    },
+    {
+      "id": "tn-apple-airpodspro3",
+      "url": "https://www.apple.com/vn/airpods-pro/specs/",
+      "final_url": "https://www.apple.com/vn/airpods-pro/specs/",
+      "status": 200,
+      "checked_at": "2026-10-15T06:39:52.154636+00:00",
+      "sha256": "787750fccb26454048e56c99d3bd9c90ba950f4e20b7c6bc2d8ab5388e2ac0c4",
+      "lines": 333,
+      "bytes": 161953
+    },
+    {
+      "id": "tn-apple-airpods4",
+      "url": "https://support.apple.com/vi-vn/121203",
+      "final_url": "https://support.apple.com/vi-vn/121203",
+      "status": 200,
+      "checked_at": "2026-10-15T06:39:53.033926+00:00",
+      "sha256": "c8c36f848ba603d4b75c36b491f82e3732f0f4a30630b7dcbc50cfcb6eeb6137",
+      "lines": 171,
+      "bytes": 172319
+    },
+    {
+      "id": "tn-xiaomi-redmibuds6pro",
+      "url": "https://www.mi.com/vn/product/redmi-buds-6-pro/specs/",
+      "final_url": "https://www.mi.com/vn/product/redmi-buds-6-pro/specs/",
+      "status": 200,
+      "checked_at": "2026-10-15T06:39:52.289331+00:00",
+      "sha256": "edeab66d510ad1e7e887e98ca821e2791086d95726dd2b46b51d0407de0a3dc3",
+      "lines": 53,
+      "bytes": 118658
+    },
+    {
+      "id": "tn-xiaomi-redmibuds6pro-extra",
+      "url": "https://www.mi.com/vn/product/redmi-buds-6-pro/",
+      "final_url": "https://www.mi.com/vn/product/redmi-buds-6-pro/",
+      "status": 200,
+      "checked_at": "2026-10-15T06:39:52.789770+00:00",
+      "sha256": "2593e80c0cf697bd0a26a05b13a295316c6d7468205a84d7291956ed9367f40b",
+      "lines": 145,
+      "bytes": 161164
+    },
+    {
+      "id": "dh-samsung-galaxywatch8",
+      "url": "https://www.samsung.com/vn/watches/galaxy-watch/galaxy-watch8-44mm-silver-bluetooth-sm-l330nzsaxxv/",
+      "final_url": "https://www.samsung.com/vn/watches/galaxy-watch/galaxy-watch8-44mm-silver-bluetooth-sm-l330nzsaxxv/",
+      "status": 200,
+      "checked_at": "2026-10-15T06:39:52.766243+00:00",
+      "sha256": "03bd9e9f26ba6e43a2e3106a57cbf41472846e1953ecabbbdb29d4785273574f",
+      "lines": 3238,
+      "bytes": 4310414
+    },
+    {
+      "id": "dh-xiaomi-watchs4",
+      "url": "https://www.mi.com/vn/product/xiaomi-watch-s4/specs/",
+      "final_url": "https://www.mi.com/vn/product/xiaomi-watch-s4/specs/",
+      "status": 200,
+      "checked_at": "2026-10-15T06:39:52.766566+00:00",
+      "sha256": "2b81d5190b841fb49c8f0be9a386456c3c08458ddb08e6caed79681706961268",
+      "lines": 56,
+      "bytes": 120266
+    },
+    {
+      "id": "dh-xiaomi-watchs4-extra",
+      "url": "https://www.mi.com/vn/product/xiaomi-watch-s4/",
+      "final_url": "https://www.mi.com/vn/product/xiaomi-watch-s4/",
+      "status": 200,
+      "checked_at": "2026-10-15T06:39:52.766306+00:00",
+      "sha256": "f693f13103b86fc40560d9d23d7ebe24790f5c8c9d87df644bff60b3360f055e",
+      "lines": 136,
+      "bytes": 159419
+    },
+    {
+      "id": "dt-xiaomi-15t-extra",
+      "url": "https://www.mi.com/vn/product/xiaomi-15t/",
+      "final_url": "https://www.mi.com/vn/product/xiaomi-15t/",
+      "status": 200,
+      "checked_at": "2026-10-15T06:41:27.636755+00:00",
+      "sha256": "72dda9ea4e97c83417ea7e735db6521746c0ccd25b3565fde8ada729a952cc21",
+      "lines": 363,
+      "bytes": 298112
+    },
+    {
+      "id": "dh-samsung-galaxywatch8-manual",
+      "url": "https://downloadcenter.samsung.com/content/UM/202507/20250730155623720/SM-L32X_L33X_L50X_UG_SEA_Android_Vie_Rev.1.1_250728.pdf",
+      "final_url": "https://downloadcenter.samsung.com/content/UM/202507/20250730155623720/SM-L32X_L33X_L50X_UG_SEA_Android_Vie_Rev.1.1_250728.pdf",
+      "status": 200,
+      "checked_at": "2026-10-15T06:46:58.610480+00:00",
+      "sha256": "89da5793c7ca3da5b09ff5f2833d6d7fcfd1df42e471440e4b82f4afd41c11ef",
+      "bytes": 3756881,
+      "pages": 158,
+      "checked_pages": [
+        1,
+        149
+      ]
+    }
+  ],
+  "san_pham": [
+    {
+      "ma_mau": "dt-apple-iphone17",
+      "ten": "iPhone 17",
+      "ket_qua": "dat_tieu_chi_chon_nguon",
+      "so_thong_so_da_kiem": 3,
+      "thong_so": [
+        {
+          "gia_tri": "Độ sáng đỉnh 3.000 nit",
+          "dieu_kien": "Chế độ ngoài trời.",
+          "nguon": "dt-apple-iphone17",
+          "vi_tri": "Mục màn hình"
+        },
+        {
+          "gia_tri": "Kháng nước IP68",
+          "dieu_kien": "Bài thử phòng thí nghiệm: tối đa 6 m trong tối đa 30 phút; không phải mức được bảo đảm ở mọi tình huống sử dụng.",
+          "nguon": "dt-apple-iphone17",
+          "vi_tri": "Mục chống nước và chú thích 3"
+        },
+        {
+          "gia_tri": "Sạc đến 50% trong 20 phút",
+          "dieu_kien": "Cáp USB-C, bộ tiếp hợp từ 40 W; thử từ pin cạn.",
+          "nguon": "dt-apple-iphone17",
+          "vi_tri": "Mục pin/sạc và chú thích 6"
+        }
+      ]
+    },
+    {
+      "ma_mau": "dt-xiaomi-15t",
+      "ten": "Xiaomi 15T",
+      "ket_qua": "dat_tieu_chi_chon_nguon",
+      "so_thong_so_da_kiem": 3,
+      "thong_so": [
+        {
+          "gia_tri": "Độ sáng cực đại 3.200 nit",
+          "dieu_kien": "Đo trên 25% diện tích màn hình.",
+          "nguon": "dt-xiaomi-15t",
+          "vi_tri": "Mục màn hình"
+        },
+        {
+          "gia_tri": "Tần số quét tối đa 120 Hz",
+          "dieu_kien": "Tần số thay đổi theo giao diện ứng dụng và chất lượng hình ảnh của trò chơi.",
+          "nguon": "dt-xiaomi-15t-extra",
+          "vi_tri": "Chú thích 6"
+        },
+        {
+          "gia_tri": "Kháng nước IP68",
+          "dieu_kien": "Ngâm nước ngọt tĩnh 3 m, tối đa 30 phút, chênh nhiệt không quá 5 K.",
+          "nguon": "dt-xiaomi-15t",
+          "vi_tri": "Mục chống bụi và nước"
+        }
+      ]
+    },
+    {
+      "ma_mau": "tn-samsung-buds3pro",
+      "ten": "Galaxy Buds3 Pro",
+      "ket_qua": "dat_tieu_chi_chon_nguon",
+      "so_thong_so_da_kiem": 3,
+      "thong_so": [
+        {
+          "gia_tri": "Nghe nhạc tối đa 7 giờ",
+          "dieu_kien": "Chỉ tai nghe; tắt chống ồn chủ động.",
+          "nguon": "tn-samsung-buds3pro",
+          "vi_tri": "Mục thời lượng sử dụng khi tắt ANC"
+        },
+        {
+          "gia_tri": "Nghe nhạc tối đa 6 giờ",
+          "dieu_kien": "Chỉ tai nghe; bật chống ồn chủ động.",
+          "nguon": "tn-samsung-buds3pro",
+          "vi_tri": "Mục thời lượng sử dụng khi bật ANC"
+        },
+        {
+          "gia_tri": "Kháng nước IP57",
+          "dieu_kien": "Tai nghe được thử với nước ngọt ở 1 m trong tối đa 30 phút; hộp sạc không kháng nước.",
+          "nguon": "tn-samsung-buds3pro",
+          "vi_tri": "Chú thích IP57"
+        }
+      ]
+    },
+    {
+      "ma_mau": "dh-apple-watchse3",
+      "ten": "Apple Watch SE 3",
+      "ket_qua": "dat_tieu_chi_chon_nguon",
+      "so_thong_so_da_kiem": 3,
+      "thong_so": [
+        {
+          "gia_tri": "Pin tối đa 18 giờ",
+          "dieu_kien": "Dùng bình thường theo bài thử của Apple; bản GPS kết nối iPhone qua Bluetooth suốt 18 giờ.",
+          "nguon": "dh-apple-watchse3",
+          "vi_tri": "Mục pin và chú thích 8"
+        },
+        {
+          "gia_tri": "Pin tối đa 32 giờ",
+          "dieu_kien": "Bật chế độ nguồn điện thấp; bài thử có 6 giờ theo dõi giấc ngủ; bản GPS kết nối iPhone qua Bluetooth.",
+          "nguon": "dh-apple-watchse3",
+          "vi_tri": "Mục pin và chú thích 8"
+        },
+        {
+          "gia_tri": "Pin tối đa 7 giờ",
+          "dieu_kien": "Chạy bộ ngoài trời, không ghép đôi iPhone, bật cảm biến nhịp tim.",
+          "nguon": "dh-apple-watchse3",
+          "vi_tri": "Mục pin và chú thích 9"
+        }
+      ]
+    },
+    {
+      "ma_mau": "dt-oppo-findx8",
+      "ten": "OPPO Find X8",
+      "ket_qua": "dat_tieu_chi_chon_nguon",
+      "so_thong_so_da_kiem": 3,
+      "thong_so": [
+        {
+          "gia_tri": "Độ sáng 800 nit",
+          "dieu_kien": "Chế độ thông thường mặc định.",
+          "nguon": "dt-oppo-findx8-extra",
+          "vi_tri": "Chú thích 13"
+        },
+        {
+          "gia_tri": "Độ sáng 4.500 nit",
+          "dieu_kien": "Mức cực đại cục bộ, không phải toàn màn hình luôn sáng ở mức đó.",
+          "nguon": "dt-oppo-findx8-extra",
+          "vi_tri": "Chú thích 13"
+        },
+        {
+          "gia_tri": "Kháng nước IP68",
+          "dieu_kien": "Nước tĩnh ở 1,5 m trong 30 phút, chênh nhiệt không quá 5 °C.",
+          "nguon": "dt-oppo-findx8-extra",
+          "vi_tri": "Chú thích 11"
+        }
+      ]
+    },
+    {
+      "ma_mau": "dt-samsung-galaxys25ultra",
+      "ten": "Galaxy S25 Ultra",
+      "ket_qua": "dat_tieu_chi_chon_nguon",
+      "so_thong_so_da_kiem": 3,
+      "thong_so": [
+        {
+          "gia_tri": "Xem video tối đa 31 giờ",
+          "dieu_kien": "Bài thử video 720p lưu trên máy, tai nghe Bluetooth, thiết lập mặc định trên LTE.",
+          "nguon": "dt-samsung-galaxys25ultra-extra",
+          "vi_tri": "Mục pin và chú thích thử phát lại video"
+        },
+        {
+          "gia_tri": "Thu phóng tối đa 100x",
+          "dieu_kien": "Thu phóng kỹ thuật số, không phải zoom quang học 100x.",
+          "nguon": "dt-samsung-galaxys25ultra",
+          "vi_tri": "Câu hỏi về zoom 100x"
+        },
+        {
+          "gia_tri": "Kháng nước IP68",
+          "dieu_kien": "Bài thử ngâm nước ngọt ở độ sâu tối đa 1,5 m trong tối đa 30 phút.",
+          "nguon": "dt-samsung-galaxys25ultra-extra",
+          "vi_tri": "Chú thích thử kháng nước"
+        }
+      ]
+    },
+    {
+      "ma_mau": "dt-xiaomi-redminote14proplus5g",
+      "ten": "Redmi Note 14 Pro+ 5G",
+      "ket_qua": "dat_tieu_chi_chon_nguon",
+      "so_thong_so_da_kiem": 3,
+      "thong_so": [
+        {
+          "gia_tri": "Pin 19,5 giờ",
+          "dieu_kien": "Hoạt động mạng xã hội; kết quả thử nghiệm nội bộ của hãng. Hãng không nêu đầy đủ thiết lập của bài thử này.",
+          "nguon": "dt-xiaomi-redminote14proplus5g-extra",
+          "vi_tri": "Khối pin: số 19,5 giờ và hoạt động bên dưới"
+        },
+        {
+          "gia_tri": "Pin 9 giờ",
+          "dieu_kien": "Xem video trực tuyến; kết quả thử nghiệm nội bộ của hãng. Hãng không nêu đầy đủ thiết lập của bài thử này.",
+          "nguon": "dt-xiaomi-redminote14proplus5g-extra",
+          "vi_tri": "Khối pin: số 9 giờ và hoạt động bên dưới"
+        },
+        {
+          "gia_tri": "Kháng nước IP68",
+          "dieu_kien": "Nước ngọt tĩnh 1,5 m, tối đa 30 phút, chênh nhiệt không quá 5 K.",
+          "nguon": "dt-xiaomi-redminote14proplus5g",
+          "vi_tri": "Mục chống bụi và nước"
+        }
+      ]
+    },
+    {
+      "ma_mau": "tn-apple-airpodspro3",
+      "ten": "AirPods Pro 3",
+      "ket_qua": "dat_tieu_chi_chon_nguon",
+      "so_thong_so_da_kiem": 3,
+      "thong_so": [
+        {
+          "gia_tri": "Nghe tối đa 8 giờ",
+          "dieu_kien": "Một lần sạc; bật chống ồn, âm lượng 50%, bài thử AAC 256 Kbps.",
+          "nguon": "tn-apple-airpodspro3",
+          "vi_tri": "Mục pin và chú thích 13"
+        },
+        {
+          "gia_tri": "Nghe tối đa 7,5 giờ",
+          "dieu_kien": "Bật thêm âm thanh không gian và theo dõi chuyển động đầu trong bài thử của chú thích 13.",
+          "nguon": "tn-apple-airpodspro3",
+          "vi_tri": "Mục pin và chú thích 13"
+        },
+        {
+          "gia_tri": "Nghe tối đa 6,5 giờ",
+          "dieu_kien": "Bật cảm biến nhịp tim và Xuyên Âm, âm lượng 50%; đi bộ ngoài trời và nghe nhạc từ iPhone.",
+          "nguon": "tn-apple-airpodspro3",
+          "vi_tri": "Mục pin và chú thích 14"
+        }
+      ]
+    },
+    {
+      "ma_mau": "tn-apple-airpods4",
+      "ten": "AirPods 4",
+      "ket_qua": "dat_tieu_chi_chon_nguon",
+      "so_thong_so_da_kiem": 3,
+      "thong_so": [
+        {
+          "gia_tri": "Nghe tối đa 5 giờ",
+          "dieu_kien": "Tai nghe bản thường, một lần sạc; âm lượng 50%, tắt âm thanh không gian, bài thử AAC 256 Kbps.",
+          "nguon": "tn-apple-airpods4",
+          "vi_tri": "Mục pin và chú thích 9"
+        },
+        {
+          "gia_tri": "Nghe tổng cộng tối đa 30 giờ",
+          "dieu_kien": "Tính cả các lần sạc lại bằng hộp; cùng thiết lập âm thanh, thử đến khi cả tai nghe và hộp cạn pin.",
+          "nguon": "tn-apple-airpods4",
+          "vi_tri": "Mục pin và chú thích 10"
+        },
+        {
+          "gia_tri": "Thêm khoảng 1 giờ nghe",
+          "dieu_kien": "Tai nghe ban đầu cạn pin được sạc 5 phút trong hộp; âm lượng 50%, tắt âm thanh không gian.",
+          "nguon": "tn-apple-airpods4",
+          "vi_tri": "Mục pin và chú thích 11"
+        }
+      ]
+    },
+    {
+      "ma_mau": "tn-xiaomi-redmibuds6pro",
+      "ten": "Redmi Buds 6 Pro",
+      "ket_qua": "dat_tieu_chi_chon_nguon",
+      "so_thong_so_da_kiem": 3,
+      "thong_so": [
+        {
+          "gia_tri": "Nghe 9,5 giờ",
+          "dieu_kien": "Một lần sạc đầy; codec AAC, âm lượng 50%, tắt chống ồn, thiết lập còn lại mặc định.",
+          "nguon": "tn-xiaomi-redmibuds6pro-extra",
+          "vi_tri": "Khối pin và chú thích thử thời lượng"
+        },
+        {
+          "gia_tri": "Nghe tổng cộng 36 giờ",
+          "dieu_kien": "Tính cả hộp sạc; codec AAC, âm lượng 50%, tắt chống ồn.",
+          "nguon": "tn-xiaomi-redmibuds6pro-extra",
+          "vi_tri": "Khối pin và chú thích thử thời lượng"
+        },
+        {
+          "gia_tri": "Nghe thêm 2 giờ",
+          "dieu_kien": "Sạc 5 phút; hộp còn ít nhất 20%; AAC, âm lượng 50%, tắt chống ồn.",
+          "nguon": "tn-xiaomi-redmibuds6pro-extra",
+          "vi_tri": "Chú thích sạc nhanh"
+        }
+      ]
+    },
+    {
+      "ma_mau": "dh-samsung-galaxywatch8",
+      "ten": "Galaxy Watch8",
+      "ket_qua": "dat_tieu_chi_chon_nguon",
+      "so_thong_so_da_kiem": 3,
+      "thong_so": [
+        {
+          "gia_tri": "Pin tối đa 40 giờ",
+          "dieu_kien": "Tắt màn hình luôn hiển thị (AOD).",
+          "nguon": "dh-samsung-galaxywatch8",
+          "vi_tri": "Thông số pin, AOD Off"
+        },
+        {
+          "gia_tri": "Pin tối đa 30 giờ",
+          "dieu_kien": "Bật AOD; câu hỏi về pin xác nhận cho cả bản 40 mm và 44 mm.",
+          "nguon": "dh-samsung-galaxywatch8",
+          "vi_tri": "Câu hỏi về dung lượng pin"
+        },
+        {
+          "gia_tri": "Kháng nước 5ATM",
+          "dieu_kien": "Bài thử để yên trong nước thường ở 50 m trong 10 phút theo ISO 22810:2010; không hiểu là cho phép lặn ở 50 m.",
+          "nguon": "dh-samsung-galaxywatch8-manual",
+          "vi_tri": "PDF trang 149; bìa trang 1 có SM-L330"
+        }
+      ]
+    },
+    {
+      "ma_mau": "dh-xiaomi-watchs4",
+      "ten": "Xiaomi Watch S4",
+      "ket_qua": "dat_tieu_chi_chon_nguon",
+      "so_thong_so_da_kiem": 3,
+      "thong_so": [
+        {
+          "gia_tri": "Độ sáng HBM 1.500 nit",
+          "dieu_kien": "Toàn bộ màn hình sáng.",
+          "nguon": "dh-xiaomi-watchs4",
+          "vi_tri": "Mục màn hình và chú thích HBM"
+        },
+        {
+          "gia_tri": "Độ sáng cực đại 2.200 nit",
+          "dieu_kien": "Chỉ một vùng màn hình sáng.",
+          "nguon": "dh-xiaomi-watchs4-extra",
+          "vi_tri": "Khối màn hình và chú thích cách đo"
+        },
+        {
+          "gia_tri": "Pin tối đa 15 ngày",
+          "dieu_kien": "Bài thử dùng thông thường: mặt Rainbow; tắt theo dõi giấc ngủ chính xác cao, nhịp thở khi ngủ, căng thẳng và SpO2 cả ngày; đo nhịp tim mỗi 10 phút. Còn định mức thông báo, bật màn hình, gọi và tập luyện trong chú thích.",
+          "nguon": "dh-xiaomi-watchs4-extra",
+          "vi_tri": "Chú thích cuối trang về bài thử pin 15 ngày"
+        }
+      ]
+    }
+  ]
+}

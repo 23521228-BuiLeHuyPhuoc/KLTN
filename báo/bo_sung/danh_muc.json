@@ -1,0 +1,42 @@
+[
+  {
+    "id": "FActScore",
+    "filename": "FActScore.pdf",
+    "download_url": "https://aclanthology.org/2023.emnlp-main.741.pdf",
+    "downloaded_at": "2026-10-15T02:52:01.124266+00:00",
+    "pages": 25,
+    "sha256": "8486fe22a15aaf3fe2e1d7043d169000600205dde9c601c9fd31c0dd6f7380e9"
+  },
+  {
+    "id": "ProgramFC",
+    "filename": "ProgramFC.pdf",
+    "download_url": "https://aclanthology.org/2023.acl-long.386.pdf",
+    "downloaded_at": "2026-10-15T02:52:03.774301+00:00",
+    "pages": 24,
+    "sha256": "0928396891b1b209c34dcc16f44f334beaec69cc18c8d15d4d411239d5e40e26"
+  },
+  {
+    "id": "ViWikiFC",
+    "filename": "ViWikiFC.pdf",
+    "download_url": "https://arxiv.org/pdf/2405.07615",
+    "downloaded_at": "2026-10-15T02:52:04.348634+00:00",
+    "pages": 16,
+    "sha256": "0cc6ffd6781f6ac300b8628191a5a8ff0f2a0ffe746d7f73fdce895e911a12cd"
+  },
+  {
+    "id": "Beyond_Binary",
+    "filename": "Beyond_Binary.pdf",
+    "download_url": "https://aclanthology.org/2025.rocling-main.5.pdf",
+    "downloaded_at": "2026-10-15T02:52:06.563331+00:00",
+    "pages": 10,
+    "sha256": "c608b1fefefd9d29003548a65df5c6c2e3fc355ad1431e7d8e9ac3fa0d42fe98"
+  },
+  {
+    "id": "FTC_Up_To_2012",
+    "filename": "FTC_Up_To_2012.pdf",
+    "download_url": "https://search.ftc.gov/sites/default/files/documents/reports/effects-bristol-windows-advertisement-savings-claim-consumer-take-away-beliefs/120629bristolwindowsreport.pdf",
+    "downloaded_at": "2026-10-15T02:53:49.524745+00:00",
+    "pages": 35,
+    "sha256": "78d7b21ea64826499c0a8bf285e512fd0910befe053e9b5071cd2f470c97f1b6"
+  }
+]

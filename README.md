@@ -27,6 +27,10 @@
 └── run_translate_batch.sh             # dịch hàng loạt PDF bằng pdf2zh
 ```
 
+Ghi chú khảo sát Bước 3 đã có tại [luan_van/ghi_chu_tai_lieu.md](luan_van/ghi_chu_tai_lieu.md): 16 bài chính, bốn bài bổ sung, báo cáo FTC và bảng đối chiếu trích dẫn theo trang. Các nhận định cần diễn đạt lại được đánh dấu; chưa sửa bản đề cương đã nộp.
+
+Bước 4 đã chia [12 mẫu sản phẩm](data/mau_san_pham.csv) thành 4 mẫu phát triển và 8 mẫu kiểm tra. [Thẻ dữ liệu bản đầu](data/THE_DU_LIEU.md) ghi nguồn chính hãng, điều kiện chọn mẫu và quy tắc sử dụng hai tập.
+
 ## Môi trường thực nghiệm Bước 2
 
 Các thư mục mới: `data/thu_llm/` (10 câu, đáp án trích xuất và cấu hình model),

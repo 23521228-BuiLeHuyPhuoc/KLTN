@@ -19,8 +19,8 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 - [ ] [Bước 1](#b01) · 11/10 – 12/10 · Sửa và nộp đề cương, chốt tên đề tài
 - 🏁 [**Mốc 1** · 12/10 · Chốt đề cương](#m1)
 - [ ] [Bước 2](#b02) · 13/10 · Dựng môi trường thực nghiệm, thử LLM
-- [ ] [Bước 3](#b03) · 14/10 – 15/10 · Khảo sát tài liệu, ghi chú có số trang
-- [ ] [Bước 4](#b04) · 16/10 · Chọn 12 mẫu sản phẩm, chia trước hai tập
+- [x] [Bước 3](#b03) · 14/10 – 15/10 · Khảo sát tài liệu, ghi chú có số trang
+- [x] [Bước 4](#b04) · 16/10 · Chọn 12 mẫu sản phẩm, chia trước hai tập
 - [ ] [Bước 5](#b05) · 17/10 · Thu thập trang thông số của 2 mẫu thử
 - [ ] [Bước 6](#b06) · 18/10 · Thu thập trang thông số của 10 mẫu còn lại
 - [ ] [Bước 7](#b07) · 19/10 · Chia tài liệu thành đoạn
@@ -164,13 +164,15 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Gom đủ bài gốc. Thư mục `báo/` hiện có 6 bài của đề cương cũ, đánh số theo danh mục cũ: `[1].pdf` là Nguyen và cộng sự ([12] trong danh mục mới), `[2].pdf` là FactLens ([10]), `[6].pdf` là Fathom ([13]); ba bài còn lại không còn trong danh mục mới. Tải các bài còn thiếu và đặt tên tệp theo tên bài (ví dụ `FEVER.pdf`), vì số thứ tự có thể đổi khi sửa đề cương.
-- [ ] Đọc các nhóm nghiên cứu trong đề cương: kiểm chứng tự động (FEVER [2], AVeriTeC [3]); tuyên bố nửa sự thật (Tang và cộng sự [4]); kiểm chứng tiếng Việt (ViFactCheck [5], ViNumFCR [6], SemViQA [7]); tuyên bố số liệu (NumPert [8], VeriFin [9]); văn bản do LLM tạo (FactLens [10], MiniCheck [11]); kiểm chứng quảng cáo và mô tả sản phẩm (Nguyen và cộng sự [12], Jiang và cộng sự [1]); truy hồi bằng chứng (Fathom [13], BM25 [16]); thông tin đi kèm số đo (MeasEval [14]); cặp tương phản (VitaminC [15]).
-- [ ] Khảo sát bổ sung theo đề cương tháng 10: ảo giác của LLM, tuyên bố nửa sự thật, kiểm chứng kết hợp ký hiệu, kiểm chứng tiếng Việt.
-- [ ] Mỗi bài ghi: bài toán, dữ liệu, cách gán nhãn, kết quả chính, hạn chế so với đề tài, và **số trang** của từng ý sẽ trích.
-- [ ] Đối chiếu các con số đề cương đã trích với bài gốc, ví dụ: Fathom đạt F1 bằng 0 ở nhãn Conflicting/Cherry-picking trên tập phát triển AVeriTeC; NumPert giảm độ chính xác đến 62%; MiniCheck rẻ hơn GPT-4 khoảng 400 lần.
+- [x] Gom đủ bài gốc. Từ 14/10, thư mục `báo/` đã có đủ 16 PDF đánh số theo đề cương hiện tại; tên bài, phiên bản và mã băm nằm trong `báo/README.md` và `báo/danh_muc.json`. Bộ sáu bài cũ đã được thay. Bài bổ sung lưu theo tên tại `báo/bo_sung/`, không đổi số của đề cương.
+- [x] Đọc các nhóm nghiên cứu trong đề cương: kiểm chứng tự động (FEVER [2], AVeriTeC [3]); tuyên bố nửa sự thật (Tang và cộng sự [4]); kiểm chứng tiếng Việt (ViFactCheck [5], ViNumFCR [6], SemViQA [7]); tuyên bố số liệu (NumPert [8], VeriFin [9]); văn bản do LLM tạo (FactLens [10], MiniCheck [11]); kiểm chứng quảng cáo và mô tả sản phẩm (Nguyen và cộng sự [12], Jiang và cộng sự [1]); truy hồi bằng chứng (Fathom [13], BM25 [16]); thông tin đi kèm số đo (MeasEval [14]); cặp tương phản (VitaminC [15]).
+- [x] Khảo sát bổ sung theo đề cương tháng 10: ảo giác của LLM, tuyên bố nửa sự thật, kiểm chứng kết hợp ký hiệu, kiểm chứng tiếng Việt. Đã ghi FActScore, Beyond Binary, ProgramFC, ViWikiFC; kiểm thêm báo cáo FTC được nhắc trong bối cảnh.
+- [x] Mỗi bài ghi: bài toán, dữ liệu, cách gán nhãn, kết quả chính, hạn chế so với đề tài, và **số trang** của từng ý sẽ trích.
+- [x] Đối chiếu các con số đề cương đã trích với bài gốc. Fathom F1 = 0 được xác nhận trên dev; NumPert cần phân biệt điểm phần trăm và không coi 62 là mức giảm tối đa chung; MiniCheck cần nêu thiết lập BAcc/chi phí. Chi tiết và các chỗ cần diễn đạt lại nằm trong ghi chú.
 
 **Làm ra:** `luan_van/ghi_chu_tai_lieu.md`.
+
+**Đã đối chiếu ngày 15/10/2026:** [ghi chú và bảng kiểm trích dẫn](luan_van/ghi_chu_tai_lieu.md). Hoàn thành khảo sát/kiểm nguồn; các nhận định cần thu hẹp hoặc sửa cách trích được đánh dấu để dùng khi viết Chương 2, chưa sửa PDF/DOCX đề cương đã nộp.
 
 **Xong khi:** mỗi câu nói về bài khác trong đề cương có số trang trong bài gốc.
 
@@ -188,21 +190,23 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Ghi tiêu chí chọn nguồn vào `data/THE_DU_LIEU.md` (mục "Nguồn"; thẻ dữ liệu được hoàn thiện ở Bước 45): trang thông số chính thức tiếng Việt của hãng; có con số kèm chú thích điều kiện; ghi được đường dẫn và ngày truy cập.
-- [ ] Mở trang thông số tiếng Việt của các ứng viên; chỉ giữ mẫu có ít nhất 3 thông số kèm điều kiện:
+- [x] Ghi tiêu chí chọn nguồn vào `data/THE_DU_LIEU.md` (mục "Nguồn"; thẻ dữ liệu được hoàn thiện ở Bước 45): trang thông số chính thức tiếng Việt của hãng; có con số kèm chú thích điều kiện; ghi được đường dẫn và ngày truy cập.
+- [x] Mở trang thông số tiếng Việt của các ứng viên; chỉ giữ mẫu có ít nhất 3 thông số kèm điều kiện:
   - điện thoại: iPhone 17, Xiaomi 15T, OPPO Find X8, một mẫu Galaxy S, một mẫu khác;
   - tai nghe: Galaxy Buds3 Pro, AirPods Pro 3, AirPods 4, một mẫu Xiaomi hoặc OPPO;
   - đồng hồ: Apple Watch SE 3, một mẫu Galaxy Watch, một mẫu Xiaomi.
-- [ ] Ghi `data/mau_san_pham.csv`: mã mẫu (theo [T3.2](#t3-2)), nhóm, hãng, tên, URL, tập.
-- [ ] Chia trước (đề xuất):
+- [x] Ghi `data/mau_san_pham.csv`: mã mẫu (theo [T3.2](#t3-2)), nhóm, hãng, tên, URL, tập.
+- [x] Chia trước (đề xuất):
   - **tập phát triển, 4 mẫu:** iPhone 17 và Galaxy Buds3 Pro (2 mẫu thử), Apple Watch SE 3, Xiaomi 15T;
   - **tập kiểm tra, 8 mẫu còn lại:** nhóm nào và hãng nào cũng có mẫu.
-- [ ] Không đặt hai mẫu cùng dòng (ví dụ Xiaomi 15T và 15T Pro) vào hai tập khác nhau.
-- [ ] Ghi vào nhật ký: từ hôm nay, mọi lựa chọn thiết kế (tệp cấu hình, ví dụ trong hướng dẫn, câu lệnh, tham số) chỉ dựa trên tập phát triển ([T3.5](#t3-5), quy tắc 4).
+- [x] Không đặt hai mẫu cùng dòng (ví dụ Xiaomi 15T và 15T Pro) vào hai tập khác nhau.
+- [x] Ghi vào nhật ký: từ hôm nay, mọi lựa chọn thiết kế (tệp cấu hình, ví dụ trong hướng dẫn, câu lệnh, tham số) chỉ dựa trên tập phát triển ([T3.5](#t3-5), quy tắc 4).
 
 **Làm ra:** `data/mau_san_pham.csv`, `data/THE_DU_LIEU.md` (bản đầu).
 
 **Xong khi:** đủ 3 nhóm và ít nhất 3 hãng; tập phát triển có đủ 3 nhóm; tập kiểm tra có đủ nhóm và đủ hãng.
+
+**Đã thực hiện ngày 15/10/2026:** [danh sách 12 mẫu](data/mau_san_pham.csv) và [thẻ dữ liệu bản đầu](data/THE_DU_LIEU.md). Đã kiểm lại từng giá trị/điều kiện theo T4.1/T4.5 trong [hồ sơ kiểm nguồn](data/kiem_tra_nguon_buoc4.json), sửa các căn cứ chưa đúng phạm vi và bổ sung chú thích; giữ nguyên 4 mẫu phát triển/8 mẫu kiểm tra; cả hai tập có đủ ba nhóm, tập kiểm tra có đủ bốn hãng. Chưa thực hiện thu thập bằng chứng của Bước 5–6.
 
 **Tra cứu:** [T1.6](#t1-6) (phạm vi), [T3.2](#t3-2) (mã định danh), [T6.3](#t6-3) (chia tập).
 
