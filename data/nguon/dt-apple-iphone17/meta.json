@@ -1,0 +1,47 @@
+{
+  "ma_mau": "dt-apple-iphone17",
+  "vai_tro": "url",
+  "requested_url": "https://www.apple.com/vn/iphone-17/specs/",
+  "final_url": "https://www.apple.com/vn/iphone-17/specs/",
+  "http_status": 200,
+  "title": "iPhone 17 - Thông Số Kỹ Thuật - Apple (VN)",
+  "captured_at_utc": "2026-10-18T17:14:29+00:00",
+  "captured_at": "2026-10-19T00:14:29+07:00",
+  "playwright_version": "1.63.0",
+  "chromium_version": "153.0.8010.12",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+  "expansion_clicks": [],
+  "script": "scripts/chup_nguon.py",
+  "script_sha256": "69a5f59f11d02faf7675a994549d76fe1e985c8dfab9b54faabc7a50d1e9ed46",
+  "git_head": "c138e4e49d24249d3a5e149616c028b02180759a",
+  "networkidle": true,
+  "consent": {
+    "banner_detected": false,
+    "rejected": null,
+    "banner_visible_at_capture": false
+  },
+  "expansion_skipped": [],
+  "page_scroll_height": 19936,
+  "full_png": {
+    "width": 1440,
+    "height": 19936
+  },
+  "files": {
+    "page.html": {
+      "sha256": "3189a7b5d682140bcc8adfafe70131b39d5551260a74428cf53f1c7421b2d939",
+      "bytes": 307357
+    },
+    "page.txt": {
+      "sha256": "ea32933e8bdde9e50960bf0784cede146cb1be32c25a70244b8891cfc7abb364",
+      "bytes": 36899
+    },
+    "full.png": {
+      "sha256": "cc1db234026b05a2e46ad1beb7c35b0f3375793f10f0b82a3ce7be17adac6197",
+      "bytes": 2632384
+    }
+  }
+}

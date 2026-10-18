@@ -220,15 +220,17 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Viết script Playwright: mở URL, chờ tải xong, mở các mục "Xem thêm" và chú thích, rồi lưu `page.html`, `page.txt` (chữ hiển thị), `full.png` (ảnh chụp toàn trang) và `meta.json` (URL, thời điểm truy cập, mã băm SHA-256, tức "dấu vân tay" của tệp: đổi một ký tự là đổi mã). Có thể lấy lại `scripts/capture_evidence.mjs` từ commit `ba88a48`.
-- [ ] Chạy cho iPhone 17 và Galaxy Buds3 Pro. Đặt `page.txt` cạnh trang trên trình duyệt: mọi chú thích điều kiện (dấu *, số mũ, "kết quả có thể thay đổi") phải có trong `page.txt`.
-- [ ] Kiểm chỗ nghi vấn thấy khi xem trang ngày 09/10/2026: chú thích chế độ chống ồn cho tổng thời gian kèm hộp sạc trên trang Galaxy Buds3 Pro.
-- [ ] Kiểm lại trên bản chụp các con số dùng trong ví dụ 1–12 và 18 của hướng dẫn gán nhãn ([T4.6](#t4-6)).
+- [x] Viết script Playwright: mở URL, chờ tải xong, mở các mục "Xem thêm" và chú thích, rồi lưu `page.html`, `page.txt` (chữ hiển thị), `full.png` (ảnh chụp toàn trang) và `meta.json` (URL, thời điểm truy cập, mã băm SHA-256, tức "dấu vân tay" của tệp: đổi một ký tự là đổi mã). Có thể lấy lại `scripts/capture_evidence.mjs` từ commit `ba88a48`. Đã viết lại bằng Python: `scripts/chup_nguon.py`, test ở `tests/test_chup_nguon.py`.
+- [x] Chạy cho iPhone 17 và Galaxy Buds3 Pro. Đặt `page.txt` cạnh trang trên trình duyệt: mọi chú thích điều kiện (dấu *, số mũ, "kết quả có thể thay đổi") phải có trong `page.txt`.
+- [x] Kiểm chỗ nghi vấn thấy khi xem trang ngày 09/10/2026: chú thích chế độ chống ồn cho tổng thời gian kèm hộp sạc trên trang Galaxy Buds3 Pro. Vẫn còn: khối thông số ghi "Đến 7/30 giờ" khi tắt ANC và "Đến 6/26 giờ" khi bật ANC, nhưng chú thích ghi "với tính năng bật/tắt ANC … tối đa 30 giờ". Giữ nguyên quyết định ở mục 5 của `data/THE_DU_LIEU.md`: không dùng tổng 26/30 giờ làm căn cứ.
+- [x] Kiểm lại trên bản chụp các con số dùng trong ví dụ 1–12 và 18 của hướng dẫn gán nhãn ([T4.6](#t4-6)). Các con số đều khớp. Trang Samsung gọi chế độ xuyên âm là "Ambient", nên ví dụ 18 cần tệp cấu hình biết cả hai cách gọi.
 - [ ] Sao lưu ảnh chụp ra ngoài máy, ví dụ lên Google Drive.
 
 **Làm ra:** script chụp trang trong `scripts/`; `data/nguon/dt-apple-iphone17/` và `data/nguon/tn-samsung-buds3pro/`, mỗi thư mục 4 tệp.
 
 **Xong khi:** hai mẫu có đủ 4 tệp; mọi chú thích điều kiện có trong `page.txt`; các con số của ví dụ đã được kiểm.
+
+**Đã thực hiện ngày 19/10/2026:** [iPhone 17](data/nguon/dt-apple-iphone17/meta.json) và [Galaxy Buds3 Pro](data/nguon/tn-samsung-buds3pro/meta.json) đều HTTP 200, đủ 4 tệp, mã băm khớp. `page.txt` có đủ chú thích điều kiện đã ghi ở Bước 4; không có chú thích thông số nào bị ẩn. `.gitattributes` giữ nguyên từng byte của `data/nguon/` để mã băm không đổi khi checkout trên Windows. Còn việc sao lưu ảnh chụp ra ngoài máy.
 
 **Tra cứu:** [T3.1](#t3-1), [T3.2](#t3-2), [T4.6](#t4-6).
 

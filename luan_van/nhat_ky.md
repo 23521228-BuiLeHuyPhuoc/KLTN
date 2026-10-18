@@ -1,5 +1,12 @@
 # Nhật ký khóa luận
 
+## 19/10/2026 — Bước 5
+
+- Viết `scripts/chup_nguon.py` bằng Python Playwright 1.63.0 (Chromium 1243) thay cho script `.mjs` cũ; 27 test ở `tests/test_chup_nguon.py` đạt. Tạo `.venv` trên máy Windows, mới cài `playwright` và `pytest`; các test cần `pydantic` chưa chạy được.
+- Chụp iPhone 17 và Galaxy Buds3 Pro vào `data/nguon/`: HTTP 200, đủ 4 tệp, mã băm khớp. Trang Samsung cần bấm "Xem thêm" của mục thông số; các nút con ghi sai trạng thái `aria-expanded`, nên script kiểm văn bản sau mỗi lần bấm và hoàn tác khi nội dung bị thu lại. Không bấm vùng đánh giá của người dùng; banner cookie Samsung chỉ có nút "Chấp nhận" nên để nguyên, không che thông số.
+- Chỗ nghi vấn tổng pin Buds3 Pro vẫn còn: khối thông số ghi 26 giờ khi bật ANC, chú thích ghi tối đa 30 giờ cho cả bật/tắt ANC. Giữ quyết định không dùng tổng 26/30 giờ. Các con số của ví dụ 1–12, 18 ở T4.6 khớp bản chụp; trang Samsung gọi xuyên âm là "Ambient".
+- Thêm `.gitattributes` để `data/nguon/` không bị đổi xuống dòng khi checkout. Chưa sao lưu ảnh chụp ra ngoài máy. Với Bước 6: `url_bo_sung` của Galaxy Watch8 là PDF, script hiện chưa tải được.
+
 ## 15/10/2026 — Kiểm lại Bước 4 theo yêu cầu
 
 - Đọc lại 18 trang HTML chính hãng và hướng dẫn Watch8 tiếng Việt (bìa có SM-L330; kiểm trực tiếp trang 149). Hồ sơ `data/kiem_tra_nguon_buoc4.json` ghi ba giá trị/điều kiện cho mỗi mẫu, URL, thời điểm và hash nguồn. Đây là kiểm nguồn, không phải gán nhãn chuẩn.
