@@ -1,5 +1,11 @@
 # Nhật ký khóa luận
 
+## 20/10/2026 — Làm rõ phạm vi điều kiện trong kế hoạch
+
+- Theo trao đổi với người thực hiện, giữ nguyên 12 mẫu và chia tập ở Bước 4; bổ sung Bước 8 bảng bao phủ từ bốn mẫu phát triển, phạm vi áp dụng và phân biệt không áp dụng/không nêu/chưa xác định. Chưa tạo cấu hình hoặc đánh dấu hoàn thành Bước 8–9.
+- Làm rõ Bước 9 và T5.3/T5.7: nhãn chuẩn dựa trên bằng chứng, không theo giới hạn hỗ trợ của hệ thống; không dùng điều kiện riêng của tập kiểm tra để bổ sung quy tắc.
+- Bổ sung kiểm thử ở Bước 27 và phân tích độ bao phủ ở Bước 37–38; giữ các ca chưa hỗ trợ trong chỉ số chính. Đây là điều chỉnh kế hoạch, chưa thực hiện thí nghiệm hoặc sửa dữ liệu/nhãn.
+
 ## 19/10/2026 — Bước 5
 
 - Viết `scripts/chup_nguon.py` bằng Python Playwright 1.63.0 (Chromium 1243) thay cho script `.mjs` cũ; 27 test ở `tests/test_chup_nguon.py` đạt. Tạo `.venv` trên máy Windows, mới cài `playwright` và `pytest`; các test cần `pydantic` chưa chạy được.

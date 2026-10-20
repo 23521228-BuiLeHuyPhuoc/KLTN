@@ -2,7 +2,7 @@
 
 **Đề tài:** Phương pháp kiểm chứng tuyên bố về thông số kỹ thuật có điều kiện ràng buộc trong quảng cáo  
 **Sinh viên:** Bùi Lê Huy Phước (23521228) · **CBHD** (cán bộ hướng dẫn): ThS Trần Hồng Nghi · **Hạn nộp:** 31/12/2026  
-Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPhuoc_DeCuongKLTN.pdf) ngày 11/10/2026. Cập nhật lần cuối: 13/10/2026.
+Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPhuoc_DeCuongKLTN.pdf) ngày 11/10/2026. Cập nhật lần cuối: 20/10/2026.
 
 > **Cách dùng file này**
 >
@@ -293,11 +293,15 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 - [ ] Mỗi thuộc tính có: đơn vị; hướng thuận lợi (cao hơn tốt hơn hay thấp hơn tốt hơn); kiểu giá trị mặc định; các điều kiện bắt buộc và loại của từng điều kiện (một trong sáu loại); cách hiểu thông thường; các cách diễn đạt của từng điều kiện. Mỗi tệp có thêm bảng bí danh tên sản phẩm và phiên bản ([T5.4](#t5-4)).
 - [ ] Ghi danh sách từ khẳng định chắc chắn ("luôn", "đảm bảo", "ít nhất", "mọi lúc").
 - [ ] **Chỉ dùng trang của tập phát triển** khi viết.
+- [ ] Lập `data/cau_hinh/bao_phu_dieu_kien.md` từ bốn mẫu phát triển: thuộc tính → điều kiện → loại điều kiện → phạm vi áp dụng → nguồn/chú thích → cách xử lý khi không nêu. Giữ nguyên 12 mẫu và cách chia tập; tiêu chí ba thông số có điều kiện ở Bước 4 chưa đảm bảo cấu hình bao phủ đủ.
+- [ ] Chốt điều kiện tham gia quyết định nhãn và điều kiện chỉ lưu làm ngữ cảnh thử nghiệm, kèm lý do. Không mặc nhiên coi mọi chú thích là điều kiện bắt buộc. Kiểm tra dữ liệu Bước 5–7 giữ được liên kết giữa con số và chú thích.
+- [ ] Quy định phạm vi áp dụng của từng điều kiện theo T5.7; phân biệt không áp dụng, không nêu và chưa xác định. Không ép mọi sản phẩm trong nhóm có cùng điều kiện, không đổi trường trống thành "tắt" hoặc "không có".
+- [ ] Không bổ sung quy tắc/bí danh điều kiện từ tám mẫu kiểm tra để xử lý riêng các mẫu đó. Điều kiện chưa hỗ trợ xử lý theo T5.3 và ghi nhận khi đánh giá; xem nguồn để chọn mẫu không có nghĩa được dùng nguồn đó để thiết kế cấu hình.
 - [ ] Chốt điểm 2, 3, 4, 11 và 12 ở [T10](#t10); ghi kết quả vào nhật ký.
 
-**Làm ra:** `data/cau_hinh/dien_thoai.yaml`, `data/cau_hinh/tai_nghe.yaml`, `data/cau_hinh/dong_ho.yaml`.
+**Làm ra:** `data/cau_hinh/dien_thoai.yaml`, `data/cau_hinh/tai_nghe.yaml`, `data/cau_hinh/dong_ho.yaml`, `data/cau_hinh/bao_phu_dieu_kien.md`.
 
-**Xong khi:** mọi thuộc tính trong sáu nhóm thông số có đủ các khóa như mẫu ở T5.7.
+**Xong khi:** mọi thuộc tính trong sáu nhóm thông số có đủ các khóa như mẫu ở T5.7; có bảng bao phủ từ tập phát triển, phạm vi áp dụng, quy tắc xử lý ba trạng thái và phần chưa hỗ trợ. Không yêu cầu bao phủ trước mọi điều kiện của tập kiểm tra.
 
 **Tra cứu:** [T5.7](#t5-7) (mẫu tệp cấu hình), [T4.5](#t4-5) (cách hiểu thông thường), [T10](#t10) (điểm cần chốt).
 
@@ -319,7 +323,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Làm ra:** `data/huong_dan_gan_nhan.md` (bản 1).
 
-**Xong khi:** có ít nhất 24 ví dụ, mỗi ví dụ có nhãn, dòng quyết định và lý do; mọi cách hiểu thông thường trong hướng dẫn trùng với tệp cấu hình.
+**Xong khi:** có ít nhất 24 ví dụ, mỗi ví dụ có nhãn, dòng quyết định và lý do; mọi cách hiểu thông thường trong hướng dẫn trùng với tệp cấu hình. Hướng dẫn phân biệt ba trạng thái ở T5.7: không nêu điều kiện không tự động mang nhãn Lệch; nhãn chuẩn dựa trên bằng chứng và hướng dẫn, không đổi thành Chưa đủ thông tin chỉ vì hệ thống chưa hỗ trợ điều kiện. Các cách hiểu mặc định ảnh hưởng đến nhãn được kiểm tra ở Bước 10.
 
 **Tra cứu:** [T4](#t4) (toàn bộ hướng dẫn gán nhãn), [T3.4](#t3-4) (định dạng nhãn).
 
@@ -700,6 +704,8 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 ### Bước 27 · Cài bộ quyết định A–D, sinh lý do, kiểm thử
 
+**Bổ sung kiểm thử điều kiện:** kiểm tra riêng không áp dụng, không nêu, chưa xác định và điều kiện chưa hỗ trợ theo T5.7. Ca kiểm thử lấy từ tập phát triển hoặc tình huống tổng hợp theo quy tắc đã chốt, không lấy mẫu kiểm tra. Khi tạo cặp tối thiểu ở Bước 25, chỉ dùng phép đổi điều kiện có ý nghĩa trong phạm vi áp dụng của tuyên bố gốc.
+
 **Ngày:** Thứ Ba 17/11 – Thứ Năm 19/11 · **Thời lượng:** khoảng 12 giờ · **Thuộc:** Nội dung 2 (phương pháp P)
 
 **Để làm gì.** Cài phần chứa điểm mới: kết luận nhãn bằng phép đối chiếu điều kiện, có kiểm thử cho từng quy tắc.
@@ -923,6 +929,8 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 ### Bước 37 · Tính chỉ số, khoảng tin cậy, kiểm định
 
+**Bổ sung về độ bao phủ:** ngoài chỉ số chính trên toàn tập, báo số lượng và kết quả theo loại điều kiện khi đủ mẫu; ghi mẫu số, một tuyên bố có thể thuộc nhiều loại. Báo số/tỷ lệ đầu ra Chưa đủ thông tin do điều kiện chưa hỗ trợ hoặc chưa xác định phạm vi áp dụng. Không loại các ca này khỏi chỉ số chính; phân tích nhóm chỉ mang tính mô tả khi ít mẫu.
+
 **Ngày:** Thứ Năm 03/12 – Thứ Sáu 04/12 · **Thời lượng:** khoảng 8 giờ · **Thuộc:** Nội dung 3 (thực nghiệm)
 
 **Để làm gì.** Tính mọi chỉ số đề cương đã nêu, kèm mức độ chắc chắn của từng con số.
@@ -953,6 +961,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 - [ ] Với mỗi lỗi của P (tối đa 60, lấy ngẫu nhiên nếu nhiều hơn), xác định nguồn gốc: tách tuyên bố, truy hồi, trích xuất, quyết định, hay nhãn chuẩn.
 - [ ] Lỗi do nhãn chuẩn thì không sửa nhãn; ghi vào mục mối đe dọa đến tính hợp lệ ([T6.3](#t6-3)).
 - [ ] Phân loại theo kiểu lỗi: sai sản phẩm, sai phiên bản, sai điều kiện, thiếu bằng chứng.
+- [ ] Với lỗi điều kiện, ghi thêm nguyên nhân: cấu hình chưa bao phủ/sai phạm vi áp dụng; truy hồi thiếu chú thích; trích xuất bỏ sót/sai; quyết định sai dù trường đầu vào đúng. Không sửa cấu hình theo tập kiểm tra sau khi khóa ở Bước 33.
 - [ ] Gán tay giá trị đúng của từng trường cho 30 tuyên bố tập kiểm tra rồi tính độ đúng trích xuất trên tập kiểm tra.
 - [ ] Chọn 3–5 trường hợp điển hình để đưa vào khóa luận.
 
@@ -1609,6 +1618,8 @@ Hai khái niệm dùng chung:
 
 Đi từ trên xuống, **dừng ở dòng đầu tiên thỏa**. Các dòng D1–D6 theo đúng thứ tự quy tắc D trong đề cương; hai dòng D1a, D1b lấy từ những chỗ khác của đề cương (xem ghi chú dưới bảng).
 
+Khi gán nhãn chuẩn, người gán xác định điều kiện từ tài liệu và hướng dẫn: thiếu hỗ trợ trong cấu hình của hệ thống không đủ để gán Chưa đủ thông tin. Ví dụ về cấu hình chưa biết ở D1a mô tả giới hạn xử lý tự động; ghi riêng giới hạn này khi so đầu ra với nhãn chuẩn. Áp dụng phân biệt ba trạng thái ở T5.7 trước khi xét điều kiện.
+
 | Dòng | Kiểm tra | Nhãn |
 |---|---|---|
 | D1 | Tài liệu không có thông số cùng sản phẩm và thuộc tính | Chưa đủ thông tin |
@@ -1753,6 +1764,8 @@ Trường `mac_dinh` liệt kê các trường lấy theo cách hiểu thông th
 
 #### T5.3 Trích xuất có neo nguồn và kiểm tra đầy đủ
 
+Trước khi kiểm tra đầy đủ, xác định phạm vi áp dụng theo T5.7. Chỉ yêu cầu điều kiện áp dụng cho trường hợp đang xét; không xem không áp dụng là trích xuất thiếu. Quảng cáo không nêu điều kiện thì dùng cách hiểu đã chốt và ghi vào trường mặc định; chưa đủ căn cứ xác định phạm vi áp dụng thì hệ thống dừng ở D1a. Điều kiện chưa hỗ trợ được ghi riêng để phân tích ở Bước 37–38. Đây là giới hạn đầu ra hệ thống, không phải căn cứ tự động thay nhãn chuẩn.
+
 **(a) LLM trích:** nhận tuyên bố và top-k đoạn; trả JSON theo lược đồ ở T5.1 cho tuyên bố và cho từng thông số liên quan trong bằng chứng. Mỗi trường kèm `trich`, là câu gốc chép nguyên văn.
 
 **(b) Python kiểm tra neo nguồn** (tất định, tức cùng đầu vào luôn ra cùng kết quả):
@@ -1848,6 +1861,18 @@ Lý do được ghép từ dấu vết `vet` theo mẫu câu cố định, nên 
 <a id="t5-7"></a>
 
 #### T5.7 Tệp cấu hình (ví dụ `data/cau_hinh/tai_nghe.yaml`)
+
+Mẫu dưới đây chỉ minh họa, chưa phải cấu hình đầy đủ cho mọi sản phẩm. Ở Bước 8, bổ sung phạm vi áp dụng và căn cứ của từng điều kiện vào bảng `bao_phu_dieu_kien.md`, rồi thể hiện quy tắc trong YAML. Quy tắc dựa trên thuộc tính/khả năng có bằng chứng, không viết ngoại lệ theo tên mẫu kiểm tra. Các điều kiện cùng thuộc loại "chế độ hoạt động" vẫn phải giữ riêng nếu khác nghĩa.
+
+Ba trạng thái phải được biểu diễn tách biệt với giá trị điều kiện:
+
+| Trạng thái | Căn cứ và cách xử lý |
+|---|---|
+| Không áp dụng | Có bằng chứng cho thấy điều kiện không áp dụng trong trường hợp này; không bắt buộc trích giá trị đó. Không suy từ việc tài liệu im lặng. Nếu tuyên bố khẳng định một tính năng không có, vẫn đối chiếu khẳng định theo D1–D6. |
+| Không nêu | Quảng cáo không nói điều kiện; dùng cách hiểu thông thường chốt ở Bước 8–10 và ghi vào `mac_dinh`, không tự động gán Lệch. |
+| Chưa xác định | Không đủ căn cứ xác định điều kiện hoặc phạm vi áp dụng; hệ thống trả Chưa đủ thông tin theo D1a và ghi nguyên nhân. |
+
+Điều kiện chưa được hỗ trợ là hạn chế bao phủ, xử lý theo T5.3. Thuộc sáu loại điều kiện không có nghĩa mọi giá trị/cách diễn đạt đều đã được hỗ trợ. Bảng T4.5 là bản đề xuất, chỉ áp dụng sau khi xác định phạm vi và chốt ở Bước 8–10. Cấu hình và bảng bao phủ được khóa cùng nhau ở Bước 33; thông tin cung cấp cho các đối chứng Bước 30 tuân thủ T6.2.
 
 ```yaml
 nhom: tai_nghe
