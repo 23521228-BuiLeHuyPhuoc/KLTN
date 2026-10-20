@@ -17,6 +17,8 @@
         1,
         2,
         3,
+        4,
+        5,
         6,
         7,
         8
@@ -151,6 +153,7 @@
       "sha256": "f63a76e127c1bceaae4bf0f8985bc15c44596b34d746424b37f91e34f0dacc14",
       "physical_pages": 30,
       "pages_used_for_notes": [
+        1,
         2,
         5,
         6,
@@ -166,6 +169,8 @@
       "pages_used_for_notes": [
         1,
         3,
+        4,
+        5,
         6,
         8
       ]
