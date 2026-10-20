@@ -244,16 +244,18 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Chạy script của Bước 5 cho 10 mẫu còn lại.
-- [ ] Mỗi mẫu: kiểm `page.txt` có đủ chú thích điều kiện. Thiếu thì chụp lại sau khi trang hiển thị xong; vẫn thiếu thì ghi vào nhật ký (rủi ro thứ hai ở [T9.1](#t9-1)).
-- [ ] Kiểm chỗ nghi vấn trên trang OPPO Find X8: giá trị "định mức" lớn hơn giá trị "tiêu chuẩn".
-- [ ] Kiểm lại trên bản chụp các con số của ví dụ 13–17 ở [T4.6](#t4-6) (Apple Watch SE 3, Xiaomi 15T).
-- [ ] Với 8 mẫu của tập kiểm tra, chỉ kiểm tệp có đủ chú thích; không lấy ý tưởng cho tệp cấu hình hay ví dụ hướng dẫn từ các trang này.
+- [x] Chạy script của Bước 5 cho 10 mẫu còn lại. 4 mẫu Xiaomi bị www.mi.com chặn (HTTP 403) nên lưu `page.html`/`page.txt` từ Chrome thật và nhập bằng `scripts/nhap_nguon_thu_cong.py`; `full.png` của các trang này dựng lại từ `page.html`.
+- [x] Mỗi mẫu: kiểm `page.txt` có đủ chú thích điều kiện. Thiếu thì chụp lại sau khi trang hiển thị xong; vẫn thiếu thì ghi vào nhật ký (rủi ro thứ hai ở [T9.1](#t9-1)).
+- [x] Kiểm chỗ nghi vấn trên trang OPPO Find X8: giá trị "định mức" lớn hơn giá trị "tiêu chuẩn". Vẫn còn: trang thông số ghi định mức 5630mAh, tiêu chuẩn 5490mAh; chú thích trang giới thiệu ghi ngược lại.
+- [x] Kiểm lại trên bản chụp các con số của ví dụ 13–17 ở [T4.6](#t4-6) (Apple Watch SE 3, Xiaomi 15T). Đều khớp.
+- [x] Với 8 mẫu của tập kiểm tra, chỉ kiểm tệp có đủ chú thích; không lấy ý tưởng cho tệp cấu hình hay ví dụ hướng dẫn từ các trang này.
 - [ ] Sao lưu ảnh chụp ra ngoài máy.
 
 **Làm ra:** `data/nguon/<ma_mau>/` của 10 mẫu còn lại.
 
 **Xong khi:** đủ 12 mẫu, mỗi mẫu 4 tệp; mọi chú thích điều kiện có mặt trong `page.txt`.
+
+**Đã thực hiện ngày 20/10/2026:** đủ 12 mẫu trong `data/nguon/`, trang chính của mỗi mẫu có 4 tệp, mã băm khớp. `scripts/chup_nguon.py` thêm nhánh PDF (hướng dẫn Galaxy Watch8 lưu thành `bo_sung/tai_lieu.pdf` và `page.txt`). 4 mẫu Xiaomi lưu thủ công từ Chrome, ghi rõ trong `meta.json` và `data/nguon/thu_cong_20261020.json`; 4 trang `bo_sung` của Xiaomi chưa có `full.png`. Còn việc sao lưu ảnh chụp ra ngoài máy. Chi tiết trong [nhật ký](luan_van/nhat_ky.md).
 
 **Tra cứu:** [T9.1](#t9-1) (rủi ro trang thiếu chú thích).
 

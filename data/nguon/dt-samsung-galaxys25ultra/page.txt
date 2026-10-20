@@ -1,0 +1,392 @@
+Skip to content
+
+Samsung và Cookies
+
+Trang web này sử dụng các Cookies để cá nhân hóa trải nghiệm của bạn, phân tích lưu lượng truy cập trang web và theo dõi các mặt hàng được lưu lại trong giỏ hàng của bạn. Bằng cách nhấp vào CHẤP NHẬN hoặc tiếp tục duyệt trang web, bạn đồng ý với việc sử dụng các Cookies của chúng tôi. Tìm hiểu Chính sách Bảo Mật của chúng tôi tại đây.
+
+Chấp nhận
+close
+global navigation bar
+Cửa Hàng
+Cửa Hàng
+Di động
+Di động
+TV & AV
+TV & AV
+Gia Dụng
+Gia Dụng
+Màn hình và Thiết bị lưu trữ
+Màn hình và Thiết bị lưu trữ
+Thiết bị đeo
+Thiết bị đeo
+Phụ kiện
+Phụ kiện
+Samsung Week
+Hỗ Trợ
+For Business
+Tìm kiếm
+Tìm kiếm
+Giỏ hàng
+Đăng nhập/Đăng ký
+Galaxy S25 Ultra
+THÔNG SỐ KỸ THUẬT
+ 
+ĐÁNH GIÁ
+ 
+Mua ngay
+Tính năng
+	
+So sánh
+	
+Chuyển sang Galaxy
+	
+Phụ kiện
+Thông số kỹ thuật
+Thiết kế
+Galaxy S25 Ultra Galaxy S25+ Galaxy S25
+Màu sắc
+	
+Xanh Titan
+	
+Đen Titan
+	
+Xám Titan
+	
+Bạc Titan
+	
+Đen Tuyền Titan
+	
+Xanh Ngọc Titan
+	
+Vàng Hồng Titan
+
+* Màu sắc có thể thay đổi tùy theo quốc gia hoặc nhà cung cấp dịch vụ.
+* Chỉ có tại Samsung.com.
+
+Thông số kỹ thuật
+Galaxy S25 Ultra (256GB) Galaxy S25 Ultra (512GB) Galaxy S25 Ultra (1TB)
+Galaxy S25+ (256GB) Galaxy S25+ (512GB)
+Galaxy S25 (256GB) Galaxy S25 (512GB)
+Bộ vi xử lý
+	
+Tốc độ CPU
+4.47GHz, 3.5GHz
+Loại CPU
+8 nhân
+
+
+Hiển Thị
+	
+Kích cỡ (Màn hình chính)
+174.2mm (6.9" hình chữ nhật hoàn chỉnh) / 172.2mm (6.8" tính đến các góc bo tròn)
+Độ phân giải (Màn hình chính)
+3120 X 1440 (Độ phân giải Quad HD+)
+Công nghệ màn hình (màn hình chính)
+Dynamic AMOLED 2X
+Độ sâu màu sắc (Màn hình chính)
+16M
+Tần số làm tươi màn hình (Màn hình chính)
+120 Hz
+
+
+Hỗ trợ S Pen
+	
+Có
+
+
+Camera
+	
+Camera sau - Độ phân giải (Multiple)
+200.0 MP + 50.0 MP + 50.0 MP + 10.0 MP
+Camera sau - Khẩu độ (Đa khẩu độ)
+F1.7 , F3.4 , F1.9 , F2.4
+Camera chính - Tự động lấy nét
+Có
+Camera sau - OIS
+Có
+Camera sau- Zoom
+Zoom quang học 3x và 5x, chất lượng Zoom quang học 2x và 10x (Kích hoạt bởi cảm biến Adaptive Pixel), Zoom kỹ thuật số lên đến 100x
+Camera trước - Độ phân giải
+12.0 MP
+Camera trước - Khẩu độ
+F2.2
+Camera trước - Tự động lấy nét
+Có
+Camera chính - Flash
+Có
+Độ Phân Giải Quay Video
+UHD 8K (7680 x 4320)@30fps
+Quay Chậm
+240fps @FHD, 120fps @FHD, 120fps @UHD
+
+
+Lưu trữ/Bộ nhớ đệm
+	
+Bộ nhớ đệm (GB)
+12
+Lưu trữ (GB)
+256
+Có sẵn lưu trữ (GB)
+222.7
+
+
+Mạng hỗ trợ
+	
+Số lượng SIM
+SIM Kép
+Kích thước SIM
+SIM Nano (4FF), SIM đã gắn
+Loại khe Sim
+SIM 1 + SIM 2 / SIM 1 + eSIM / Dual eSIM
+Infra
+2G GSM, 3G WCDMA, 4G LTE FDD, 4G LTE TDD, 5G Sub6 FDD, 5G Sub6 TDD
+2G GSM
+GSM850, GSM900, DCS1800, PCS1900
+3G UMTS
+B1(2100), B2(1900), B4(AWS), B5(850), B8(900)
+4G FDD LTE
+B1(2100), B2(1900), B3(1800), B4(AWS), B5(850), B7(2600), B8(900), B12(700), B13(700), B17(700), B18(800), B19(800), B20(800), B25(1900), B26(850), B28(700), B66(AWS-3)
+4G TDD LTE
+B38(2600), B39(1900), B40(2300), B41(2500)
+5G FDD Sub6
+N1(2100), N2(1900), N3(1800), N5(850), N7(2600), N8(900), N12(700), N20(800), N25(1900), N26(850), N28(700), N66(AWS-3)
+5G TDD Sub6
+N38(2600), N40(2300), N41(2500), N77(3700), N78(3500)
+
+
+Kết Nối
+	
+Giao diện USB
+USB Type-C
+Phiên bản USB
+USB 3.2 Gen 1
+Công nghệ định vị
+GPS, Glonass, Beidou, Galileo, QZSS
+Earjack
+USB Type-C
+MHL
+Không
+Wi-Fi
+802.11a/b/g/n/ac/ax/be 2.4GHz+5GHz+6GHz, EHT320, MIMO, 4096-QAM
+Wi-Fi Direct
+Có
+Phiên bản Bluetooth
+Bluetooth v5.4
+NFC
+Có
+UWB (Ultra-Wideband)
+Có
+PC Sync.
+Smart Switch (bản dành cho PC)
+
+
+Hệ điều hành
+	
+Android
+
+
+Thông tin chung
+	
+Hình dạng thiết bị
+Touch Bar
+
+
+Cảm biến
+	
+Gia tốc, Áp suất kế, Cảm biến vân tay, Cảm biến Gyro, Cảm biến Geomagnetic, Cảm biến Hall, Cảm biến ánh sáng, Cảm biến tiệm cận
+
+
+Đặc điểm kỹ thuật
+	
+Kích thước (HxWxD, mm)
+162.8 x 77.6 x 8.2
+Trọng lượng (g)
+218
+
+
+Pin
+	
+Thời gian phát lại Video (Giờ)
+Lên tới 31
+Dung lượng pin (mAh, Typical)
+5000
+Có thể tháo rời
+Không
+
+
+Âm thanh và Video
+	
+Hỗ Trợ Âm Thanh Nổi
+Có
+Định Dạng Phát Video
+MP4, M4V, 3GP, 3G2, AVI, FLV, MKV, WEBM
+Độ Phân Giải Phát Video
+UHD 8K (7680 x 4320)@60fps
+Định Dạng Phát Âm thanh
+MP3, M4A, 3GA, AAC, OGG, OGA, WAV, AMR, AWB, FLAC, MID, MIDI, XMF, MXMF, IMY, RTTTL, RTX, OTA, DFF, DSF, APE
+
+
+Dịch vụ và Ứng dụng
+	
+Hỗ trợ Gear
+Galaxy Ring, Galaxy Buds3 Pro, Galaxy Buds2 Pro, Galaxy Buds Pro, Galaxy Buds Live, Galaxy Buds+, Galaxy Buds3, Galaxy Buds2, Galaxy Buds, Galaxy Buds FE, Galaxy Fit3, Galaxy Fit2, Galaxy Fit e, Galaxy Fit, Galaxy Watch FE, Galaxy Watch Ultra, Galaxy Watch7, Galaxy Watch6, Galaxy Watch5, Galaxy Watch4, Galaxy Watch3, Galaxy Watch, Galaxy Watch Active2, Galaxy Watch Active
+Hỗ trợ Samsung DeX
+Có
+Hỗ trợ thiết bị trợ thính qua Bluetooth
+Truyền phát âm thanh cho thiết bị trợ thính của Android (ASHA)
+Hỗ trợ SmartThings
+Có
+Mobile TV
+Không
+
+
+Cập nhật Bảo mật
+	
+Thời gian Cập nhật Bảo mật (Có hiệu lực đến)
+31 January 2032
+* Pin: Thời lượng pin thực tế thay đổi tùy thuộc vào môi trường mạng, các tính năng và ứng dụng được dùng, tần suất cuộc gọi và tin nhắn, số lần sạc và nhiều yếu tố khác.
+* Bộ nhớ người dùng khả dụng: Bộ nhớ người dùng nhỏ hơn tổng bộ nhớ do bộ nhớ của hệ điều hành và phần mềm được sử dụng để chạy các tính năng của thiết bị. Bộ nhớ người dùng thực tế thay đổi tùy thuộc vào nhà mạng và có thể thay đổi sau khi thực hiện nâng cấp phần mềm.
+* Mạng: Các băng thông mà thiết bị hỗ trợ có thể thay đổi tùy thuộc vào khu vực hoặc nhà cung cấp dịch vụ.
+* Giá trị tiêu chuẩn được thử nghiệm trong điều kiện phòng thí nghiệm của bên thứ ba. Giá trị tiêu chuẩn là giá trị trung bình ước tính khi xem xét độ lệch về dung lượng pin trong số các mẫu pin được thử nghiệm theo tiêu chuẩn IEC 61960. Dung lượng định mức là 3885mAh cho Galaxy S25, 4755mAh cho Galaxy S25+ và 4855mAh cho Galaxy S25 Ultra.
+* Được đo theo đường chéo với hình chữ nhật đầy đủ. Vùng hiển thị hình ảnh thực tế nhỏ hơn do các góc bo tròn và/hoặc ống kính camera.
+Đo theo đường chéo, kích thước màn hình của Galaxy S25 là 6,2" với hình chữ nhật hoàn chỉnh và 6,0" nếu tính các góc bo tròn; Kích thước màn hình của Galaxy S25+ là 6,7" với hình chữ nhật hoàn chỉnh và 6,5" nếu tính các góc bo tròn; và kích thước màn hình của Galaxy S25 Ultra là 6,9" với hình chữ nhật đầy đủ và 6,8" nếu tính các góc bo tròn; vùng hiển thị hình ảnh thực tế có thể nhỏ hơn do các góc tròn và ống kính camera.
+* Tính khả dụng Wi-Fi 7 có thể khác nhau tùy theo quốc gia/khu vực, nhà cung cấp mạng và môi trường người dùng. Yêu cầu kết nối mạng ổn định. Sẽ yêu cầu cài đặt router Wi-Fi 7.
+Thông Số Kỹ Thuật Samsung Galaxy S25 Ultra:
+
+Hãy khám phá chi tiết về thông số kỹ thuật Galaxy S25 Ultra mới nhất!
+
+• Kích thước: Galaxy S25 Ultra có kích thước 162.8 x 77.6 x 8.2 (HxWxD, mm).
+• Trọng lượng: Galaxy S25 Ultra nặng 218 g.
+• Màn hình: Kích thước màn hình Galaxy S25 Ultra đo theo đường chéo là 6.9” toàn hình chữ nhật.
+• Camera: Hệ thống camera của Galaxy S25 Ultra gồm 200 MP (F1.7) + 50 MP (F3.4) + 50 MP (F1.9) + 10 MP (F2.4) ở mặt sau và camera trước có độ phân giải 12 MP (F2.2). Hỗ trợ quay video UHD 8K với độ phân giải 7680 x 4320 @ 30fps, quay chậm ở tốc độ 240fps (FHD) và 120fps (UHD). Hệ thống camera cũng tích hợp Nightography và zoom AI, mang lại hiệu suất chụp ảnh tối ưu.
+• Độ bền: Galaxy S25 Ultra được chế tác với khung vỏ titanium, màn hình Corning® Gorilla® Victus® 2 và đạt chuẩn kháng nước, kháng bụi IP68.
+• Chip xử lý: Galaxy S25 Ultra sử dụng chip Snapdragon® 8 Elite với tốc độ CPU lên đến 4.47 GHz.
+• Thời lượng pin: Với dung lượng pin 5000mAh, Galaxy S25 Ultra có thể hoạt động liên tục lên đến 31 giờ.
+• Giá bán: Galaxy S25 Ultra có giá 33.990.000đ cho bản 256GB, 37.490.000đ cho bản 512GB và 44.790.000đ cho bản 1TB.
+• Màu sắc: Galaxy S25 Ultra có các màu: Đen Titan, Xám Titan, Xanh Bạc Titan và Trắng Bạc Titan, cùng 3 màu độc quyền trực tuyến - Xanh Jade Titan, Đen Jet Titan và Vàng Hồng Titan.
+• Galaxy AI: Galaxy S25 Ultra được tích hợp các tính năng AI như Khoanh Tròn Để Tìm Kiếm (Circle to Search), Trợ Lý Chat (Chat Assist), Trợ Lý Ghi Chú (Note Assist), Dịch Trực Tiếp (Live Translate) và nhiều hơn nữa.
+
+Câu hỏi thường gặp:
+
+• Galaxy S25 Ultra có chống nước không?
+Galaxy S25 Ultra đạt tiêu chuẩn IP68, đảm bảo khả năng chống nước và bụi.
+
+• Galaxy S25 Ultra sử dụng bộ xử lý nào?
+Galaxy S25 Ultra được trang bị chip Snapdragon® 8 Elite với tốc độ CPU lên đến 4.47 GHz.
+
+• Thông số màn hình của Galaxy S25 Ultra là gì?
+Galaxy S25 Ultra có kích thước màn hình 6.9” khi đo theo đường chéo toàn hình chữ nhật.
+
+• Galaxy S25 Ultra có tích hợp AI không?
+Có, Galaxy S25 Ultra tích hợp các tính năng AI như Khoanh Tròn để Tìm Kiếm, Trợ Lý Chat, Trợ Lý Ghi Chú, Dịch Trực Tiếp và nhiều hơn nữa.
+
+• Galaxy S25 Ultra có hỗ trợ zoom 100x không?
+Camera của Galaxy S25 Ultra hỗ trợ zoom số lên đến 100x, cùng với zoom quang học chất lượng cao 3x và 5x, kết hợp với zoom AI Nightography.
+
+• Pin Galaxy S25 Ultra sử dụng được bao lâu?
+Với pin 5000mAh, Galaxy S25 Ultra có thể hoạt động liên tục lên đến 31 giờ.
+
+• Camera của Galaxy S25 Ultra có chế độ chụp đêm không?
+Có, camera của Galaxy S25 Ultra hỗ trợ chế độ Nightography, giúp chụp ảnh xuất sắc trong điều kiện ánh sáng yếu.
+
+• Những tính năng camera cao cấp của Galaxy S25 Ultra là gì?
+Hệ thống camera của Galaxy S25 Ultra gồm200 MP (F1.7) + 50 MP (F3.4) + 50 MP (F1.9) + 10 MP (F2.4), hỗ trợ quay video UHD 8K (7680 x 4320) @ 30fps, quay chậm 240fps (FHD) và 120fps (UHD). Camera hỗ trợ zoom quang học chất lượng cao 3x và 5x, cùng với zoom AI Nightography trong điều kiện thiếu sáng.
+
+• Galaxy S25 Ultra có bao nhiêu RAM?
+Galaxy S25 Ultra có RAM 12GB.
+
+• Galaxy S25 Ultra có dung lượng lưu trữ bao nhiêu?
+Galaxy S25 Ultra có dung lượng lưu trữ 256GB ở phiên bản cơ bản, và còn các tùy chọn 512GB và 1TB.
+
+Trang Chủ
+ 
+Di động
+ 
+Điện Thoại Thông Minh
+ 
+Galaxy S25 Ultra
+ 
+Thông số kỹ thuật
+Footer Navigation
+Mua Trực Tuyến
+Trang chủ Mua trực tuyến
+Mua Hàng Trực Tiếp Ưu Đãi Vượt Trội
+AI Living
+SmartThings
+Samsung Care+
+Hướng dẫn chọn mua điện thoại
+Ưu đãi nhân viên đối tác
+Ưu đãi VIP Mall
+Ưu đãi Chính phủ
+Ưu đãi HSSV & ngành Giáo dục
+Samsung 68
+Samsung West Lake
+Khám Phá
+Sản Phẩm
+Điện thoại thông minh Galaxy
+Galaxy Tab
+Galaxy Watch
+Galaxy Buds
+TVs
+Máy Chiếu
+Thiết Bị Âm Thanh
+Tủ Lạnh
+Máy giặt & Sấy
+Máy Hút Bụi
+Màn Hình
+Thiết bị lưu trữ bộ nhớ
+Phụ kiện
+Bạn Cần Hỗ Trợ?
+Trang chủ Hỗ Trợ
+Hướng dẫn sử dụng & Software
+Tìm kiếm
+FAQ Hỗ trợ mua trực tuyến
+Thông tin Bảo hành
+Bảng giá linh kiện
+Gói sửa chữa màn hình
+Tìm Trung Tâm Bảo Hành
+Tình Trạng Sửa Chữa
+Tư Vấn Trực Tuyến
+Gọi Điện Thoại
+Ngôn Ngữ Ký Hiệu
+Gửi thư cho Ban Giám đốc 
+Tài khoản
+Vì sao nên tạo Samsung Account
+Samsung Rewards
+Samsung Members
+Đơn hàng của tôi 
+Trang của tôi
+Sản phẩm của tôi
+Khuyến Mãi 
+Sự bền vững
+Môi trường
+Bảo mật & Quyền riêng tư
+Trợ năng
+Nơi làm việc Hòa nhập
+Công dân Doanh nghiệp 
+Tính bền vững của Doanh nghiệp 
+Giới thiệu về chúng tôi
+Thông tin về Công ty
+Lĩnh vực kinh doanh
+Nhận diện thương hiệu
+Nghề nghiệp
+Quan hệ với nhà đầu tư 
+Newsroom 
+Đạo đức
+Samsung Design 
+
+Bản quyền ©1995-2026 Samsung bảo lưu mọi quyền.
+
+CÔNG TY TNHH ĐIỆN TỬ SAMSUNG VINA
+Địa chỉ: Lầu 25, Tòa nhà tài chính Bitexco, Số 02 Hải Triều, Phường Sài Gòn, Thành phố Hồ Chí Minh, Việt Nam
+GCNĐKDN: 0300741922 do Sở Kế hoạch và Đầu tư Thành phố Hồ Chí Minh (nay là Sở Tài chính Thành phố Hồ Chí Minh) cấp lần đầu vào ngày 28/08/2007
+Người đại diện theo pháp luật: Ông JOO HYUNG BIN
+	
+Việt Nam/Tiếng Việt
+Bảo Mật
+ 
+Pháp Lý
+Kết Nối với Chúng Tôi	
+ 
+ 
+ 

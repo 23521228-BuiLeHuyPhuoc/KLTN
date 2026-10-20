@@ -1,0 +1,49 @@
+{
+  "ma_mau": "dt-xiaomi-15t",
+  "vai_tro": "url",
+  "requested_url": "https://www.mi.com/vn/product/xiaomi-15t/specs/",
+  "final_url": "https://www.mi.com/vn/product/xiaomi-15t/specs/",
+  "http_status": 200,
+  "title": "Xiaomi 15T Việt Nam – Trang chính thức Xiaomi",
+  "captured_at_utc": "2026-10-20T08:35:07+00:00",
+  "captured_at": "2026-10-20T15:35:07+07:00",
+  "phuong_phap": "thu_cong_chrome",
+  "ghi_chu_phuong_phap": "Ngày 20/10/2026, scripts/chup_nguon.py (Chromium headless) bị www.mi.com trả HTTP 403 'Access Denied' cho cả 4 mẫu Xiaomi. Theo đồng ý của người thực hiện, page.html và page.txt được lưu từ Chrome thật của người thực hiện qua tiện ích Claude in Chrome: mở trang, chờ tải xong, cuộn hết trang (bước 800 px), cuộn về đầu, rồi tải '<!DOCTYPE html>\\n' + document.documentElement.outerHTML làm page.html và document.body.innerText làm page.txt. Không trang nào có nút 'Xem thêm'/mở rộng ở phần nội dung. Không chụp được ảnh toàn trang bằng công cụ này.",
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "viewport": {
+    "width": 1536,
+    "height": 742
+  },
+  "page_scroll_height": 12633,
+  "full_png": {
+    "width": 1958,
+    "height": 40352,
+    "cach_tao": "Dựng lại từ page.html đã lưu bằng Chromium headless, tắt JavaScript; không phải ảnh chụp trực tiếp trang trên Chrome",
+    "dung_luc_utc": "2026-10-20T08:45:29+00:00",
+    "networkidle": true,
+    "tai_nguyen_loi": {
+      "www.mi.com": 10,
+      "s.go-mpulse.net": 1
+    },
+    "ghi_chu": "Ảnh cao 40352 px khác chiều cao trang 12633 px"
+  },
+  "script": "scripts/nhap_nguon_thu_cong.py",
+  "script_sha256": "56781a17f3313067f868a4d5b6120e03089aee0d1394a42dc049687a20f1318a",
+  "playwright_version": "1.63.0",
+  "chromium_version": "153.0.8010.12",
+  "git_head": "2e8354b603593e4170508d82257161348e5539a7",
+  "files": {
+    "page.html": {
+      "sha256": "412955ec6063ad5cfb5c236e88b0f02a156a5c4e7cc51523b43025212906f244",
+      "bytes": 771340
+    },
+    "page.txt": {
+      "sha256": "41a2fae4cf501022b729c584aa6b30ef9ede5d214a3552d2b1f0e029ed54a8cc",
+      "bytes": 12671
+    },
+    "full.png": {
+      "sha256": "6623de89ce6c3cfbe3b9f0ee58bf4765c6dbb965b9fb74786e6d1d2a89b7a155",
+      "bytes": 4949467
+    }
+  }
+}

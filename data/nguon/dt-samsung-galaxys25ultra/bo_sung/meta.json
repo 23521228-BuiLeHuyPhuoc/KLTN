@@ -1,0 +1,52 @@
+{
+  "ma_mau": "dt-samsung-galaxys25ultra",
+  "vai_tro": "url_bo_sung",
+  "requested_url": "https://www.samsung.com/vn/smartphones/galaxy-s25-ultra/",
+  "final_url": "https://www.samsung.com/vn/smartphones/galaxy-s25-ultra/",
+  "http_status": 200,
+  "title": "Galaxy S25 Ultra, Điện Thoại AI Mới Nhất | Samsung Việt Nam",
+  "captured_at_utc": "2026-10-20T06:08:25+00:00",
+  "captured_at": "2026-10-20T13:08:25+07:00",
+  "playwright_version": "1.63.0",
+  "chromium_version": "153.0.8010.12",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+  "expansion_clicks": [],
+  "script": "scripts/chup_nguon.py",
+  "script_sha256": "4627c4950b8e9d254f29b226b8a2e8882c8abd6092b95e93846bd1a586f3020a",
+  "git_head": "2e8354b603593e4170508d82257161348e5539a7",
+  "networkidle": false,
+  "consent": {
+    "banner_detected": true,
+    "rejected": null,
+    "banner_visible_at_capture": true
+  },
+  "expansion_skipped": [
+    {
+      "text": "TỐC ĐỘ MẠNG CỦA TÔI",
+      "ly_do": "làm thu gọn 16 ký tự; đã bấm lại để khôi phục; còn thiếu 16 ký tự so với trước khi bấm"
+    }
+  ],
+  "page_scroll_height": 38453,
+  "full_png": {
+    "width": 1440,
+    "height": 38453
+  },
+  "files": {
+    "page.html": {
+      "sha256": "d54f22b212b2186cb401996a603e92c7f1b851e7f84d8ba8a536967d1221c3f6",
+      "bytes": 2315499
+    },
+    "page.txt": {
+      "sha256": "e768eb84cab515647206aeec52c72d04e6ee3c2d7828ea485848cb4cf7069dbb",
+      "bytes": 99631
+    },
+    "full.png": {
+      "sha256": "39c65dce6bba74efc7a54417df46057dc3810c41e74ef6ab2de8db6ee8fcf56b",
+      "bytes": 13639028
+    }
+  }
+}

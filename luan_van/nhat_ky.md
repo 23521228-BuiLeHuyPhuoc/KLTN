@@ -1,5 +1,22 @@
 # Nhật ký khóa luận
 
+## 20/10/2026 — Bước 6
+
+- Bổ sung 4 mẫu Xiaomi: theo đồng ý của người thực hiện, `page.html` (`<!DOCTYPE html>` + DOM sau khi cuộn hết trang) và `page.txt` (`document.body.innerText`) của 8 trang (`url` và `url_bo_sung`) được tải từ Chrome thật qua Claude in Chrome lúc 15:35–15:38 (HTTP 200, không trang nào có nút mở rộng ở phần nội dung). Không giả User-Agent hay lách chặn của Chromium headless. Thông tin lúc lưu ở `data/nguon/thu_cong_20261020.json`.
+- `scripts/nhap_nguon_thu_cong.py` chép nguyên byte vào `data/nguon/`, tạo `meta.json` (`"phuong_phap": "thu_cong_chrome"`) và dựng `full.png` từ `page.html` đã lưu bằng Chromium headless, tắt JavaScript. Ảnh này không phải ảnh chụp trực tiếp: www.mi.com chặn 10 tệp CSS khi dựng, nên phần đầu/cuối trang vỡ bố cục, phần thông số vẫn đọc được. 4 trang `url` có đủ 4 tệp; 4 trang `bo_sung` thiếu `full.png` vì thiếu CSS làm trang cao 247.000–461.000 px, Chromium không chụp được. 66 test đạt; mã băm `page.html`/`page.txt` khớp giữa Downloads, thư mục đích và `meta.json`.
+- Trước khi nhập, `data/nguon/dt-xiaomi-15t/` có thêm `page.html`, `page.txt`, `full.png` và `bo_sung/full.png` ghi lúc 14:13–15:18 không rõ nguồn (không do lần chạy nào được ghi ở đây); các tệp này đã bị thay bằng bản lưu từ Chrome.
+- Ví dụ 16–17 khớp: trang thông số Xiaomi 15T ghi "Độ sáng cực đại: 3200 nit trên 25% diện tích màn hình". Cả 8 trang Xiaomi có chú thích dạng `*`/"thử nghiệm" trong `page.txt`; với 8 mẫu tập kiểm tra chỉ kiểm có mặt chú thích, không dùng để thiết kế.
+- Kết quả: đủ 12 mẫu, trang `url` của mỗi mẫu có 4 tệp. Còn: sao lưu ảnh ra ngoài máy; 4 `bo_sung/full.png` của Xiaomi.
+
+## 20/10/2026 — Bước 6 (lần chạy đầu: chưa chụp được 4 mẫu Xiaomi)
+
+- Thêm nhánh PDF vào `scripts/chup_nguon.py` (tải bằng `context.request`, lưu `tai_lieu.pdf`, `page.txt` trích bằng `pypdf` có dòng `=== Trang N ===`, `meta.json`; không có `page.html`/`full.png`). Thêm `pypdf==6.21.1` vào `requirements.txt`. Sửa `full_page_png`: lần chụp đầu quá 15 giây thì chụp lại với 60 giây (trang bổ sung của OPPO Find X8 kẹt ở lần đầu, chưa rõ nguyên nhân; `meta.json` ghi chú việc chụp lại). Tất cả 50 test của `tests/test_chup_nguon.py` đạt.
+- Chụp được 6/10 mẫu, mã băm khớp: Apple Watch SE 3, OPPO Find X8 (kèm `bo_sung/`), Galaxy S25 Ultra (kèm `bo_sung/`), AirPods Pro 3, AirPods 4, Galaxy Watch8 (trang + PDF hướng dẫn 158 trang, bản trích 255.281 ký tự).
+- 4 mẫu Xiaomi (Xiaomi 15T, Redmi Note 14 Pro+ 5G, Redmi Buds 6 Pro, Xiaomi Watch S4) trả HTTP 403 "Access Denied" khi chụp bằng Chromium headless, cả `url` và `url_bo_sung`; `curl` thường thì nhận HTTP 200. Chưa tìm cách vượt chặn; thư mục các mẫu này mới chỉ có `meta.json` ghi lỗi. Xiaomi 15T thuộc tập phát triển nên cần giải quyết trước Bước 8.
+- Chỗ nghi vấn OPPO Find X8 xác nhận: trang thông số ghi "Giá trị định mức 5630mAh, giá trị tiêu chuẩn 5490mAh", còn chú thích trên trang giới thiệu ghi ngược lại (tiêu chuẩn 5.630, định mức 5.490). Hai trang của hãng không thống nhất; xử lý như điều kiện không rõ khi dùng làm nhãn.
+- Apple Watch SE 3 khớp ví dụ 13–15: "lên đến 18 giờ khi sử dụng bình thường", "lên đến 32 giờ ở Chế Độ Nguồn Điện Thấp". Ví dụ 16–17 (Xiaomi 15T) chưa kiểm được vì chưa chụp. Chưa kiểm hết chú thích điều kiện của 6 mẫu đã chụp và chưa sao lưu ảnh.
+- `data/nguon/dt-apple-iphone17/page.html` bị ghi đè lúc 13:01 (không rõ nguyên nhân, mã băm lệch `meta.json`); đã khôi phục từ commit e69fe57, mã băm khớp lại.
+
 ## 20/10/2026 — Làm rõ phạm vi điều kiện trong kế hoạch
 
 - Theo trao đổi với người thực hiện, giữ nguyên 12 mẫu và chia tập ở Bước 4; bổ sung Bước 8 bảng bao phủ từ bốn mẫu phát triển, phạm vi áp dụng và phân biệt không áp dụng/không nêu/chưa xác định. Chưa tạo cấu hình hoặc đánh dấu hoàn thành Bước 8–9.

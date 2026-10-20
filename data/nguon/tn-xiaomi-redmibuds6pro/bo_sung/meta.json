@@ -1,0 +1,34 @@
+{
+  "ma_mau": "tn-xiaomi-redmibuds6pro",
+  "vai_tro": "url_bo_sung",
+  "requested_url": "https://www.mi.com/vn/product/redmi-buds-6-pro/",
+  "final_url": "https://www.mi.com/vn/product/redmi-buds-6-pro/",
+  "http_status": 200,
+  "title": "REDMI Buds 6 Pro | Xiaomi Việt Nam | Tất cả thông số kỹ thuật và tính năng",
+  "captured_at_utc": "2026-10-20T08:37:38+00:00",
+  "captured_at": "2026-10-20T15:37:38+07:00",
+  "phuong_phap": "thu_cong_chrome",
+  "ghi_chu_phuong_phap": "Ngày 20/10/2026, scripts/chup_nguon.py (Chromium headless) bị www.mi.com trả HTTP 403 'Access Denied' cho cả 4 mẫu Xiaomi. Theo đồng ý của người thực hiện, page.html và page.txt được lưu từ Chrome thật của người thực hiện qua tiện ích Claude in Chrome: mở trang, chờ tải xong, cuộn hết trang (bước 800 px), cuộn về đầu, rồi tải '<!DOCTYPE html>\\n' + document.documentElement.outerHTML làm page.html và document.body.innerText làm page.txt. Không trang nào có nút 'Xem thêm'/mở rộng ở phần nội dung. Không chụp được ảnh toàn trang bằng công cụ này.",
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "viewport": {
+    "width": 1536,
+    "height": 742
+  },
+  "page_scroll_height": 27435,
+  "error": "Error: Page.screenshot: Protocol error (Page.captureScreenshot): Unable to capture screenshot",
+  "script": "scripts/nhap_nguon_thu_cong.py",
+  "script_sha256": "56781a17f3313067f868a4d5b6120e03089aee0d1394a42dc049687a20f1318a",
+  "playwright_version": "1.63.0",
+  "chromium_version": "153.0.8010.12",
+  "git_head": "2e8354b603593e4170508d82257161348e5539a7",
+  "files": {
+    "page.html": {
+      "sha256": "834b9018af9945903b2afcbe5459c51e07d10d580f5b83e739d61cf383543aaf",
+      "bytes": 744129
+    },
+    "page.txt": {
+      "sha256": "3e028c5955fef0b7c9de24847074d8de00dda3adf4ae068d1634ea2254ba4911",
+      "bytes": 18307
+    }
+  }
+}

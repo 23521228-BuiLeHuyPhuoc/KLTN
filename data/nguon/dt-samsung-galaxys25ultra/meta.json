@@ -1,0 +1,47 @@
+{
+  "ma_mau": "dt-samsung-galaxys25ultra",
+  "vai_tro": "url",
+  "requested_url": "https://www.samsung.com/vn/smartphones/galaxy-s25-ultra/specs/",
+  "final_url": "https://www.samsung.com/vn/smartphones/galaxy-s25-ultra/specs/",
+  "http_status": 200,
+  "title": "Thông Số & Tính Năng AI Samsung Galaxy S25 Ultra 5G | Samsung Việt Nam",
+  "captured_at_utc": "2026-10-20T06:07:59+00:00",
+  "captured_at": "2026-10-20T13:07:59+07:00",
+  "playwright_version": "1.63.0",
+  "chromium_version": "153.0.8010.12",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+  "expansion_clicks": [],
+  "script": "scripts/chup_nguon.py",
+  "script_sha256": "4627c4950b8e9d254f29b226b8a2e8882c8abd6092b95e93846bd1a586f3020a",
+  "git_head": "2e8354b603593e4170508d82257161348e5539a7",
+  "networkidle": false,
+  "consent": {
+    "banner_detected": true,
+    "rejected": null,
+    "banner_visible_at_capture": true
+  },
+  "expansion_skipped": [],
+  "page_scroll_height": 8927,
+  "full_png": {
+    "width": 1440,
+    "height": 8927
+  },
+  "files": {
+    "page.html": {
+      "sha256": "19db4b10046ae3ca842ca52efe3ada8580734866f2ed599a464bb9d2ed54ab9b",
+      "bytes": 1456716
+    },
+    "page.txt": {
+      "sha256": "3f2effb30c764a68e1bce1f9db342fd1909c33a8fb250e31965cf76d2405e185",
+      "bytes": 13546
+    },
+    "full.png": {
+      "sha256": "2e7adf72fbb84991b20f225ae85b74aeac6790222dad2353d2f3aa97bd719652",
+      "bytes": 1015522
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "ma_mau": "dt-xiaomi-15t",
+  "vai_tro": "url_bo_sung",
+  "requested_url": "https://www.mi.com/vn/product/xiaomi-15t/",
+  "final_url": "https://www.mi.com/vn/product/xiaomi-15t/",
+  "http_status": 200,
+  "title": "Xiaomi 15T Việt Nam – Trang chính thức Xiaomi",
+  "captured_at_utc": "2026-10-20T08:35:57+00:00",
+  "captured_at": "2026-10-20T15:35:57+07:00",
+  "phuong_phap": "thu_cong_chrome",
+  "ghi_chu_phuong_phap": "Ngày 20/10/2026, scripts/chup_nguon.py (Chromium headless) bị www.mi.com trả HTTP 403 'Access Denied' cho cả 4 mẫu Xiaomi. Theo đồng ý của người thực hiện, page.html và page.txt được lưu từ Chrome thật của người thực hiện qua tiện ích Claude in Chrome: mở trang, chờ tải xong, cuộn hết trang (bước 800 px), cuộn về đầu, rồi tải '<!DOCTYPE html>\\n' + document.documentElement.outerHTML làm page.html và document.body.innerText làm page.txt. Không trang nào có nút 'Xem thêm'/mở rộng ở phần nội dung. Không chụp được ảnh toàn trang bằng công cụ này.",
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "viewport": {
+    "width": 1536,
+    "height": 742
+  },
+  "page_scroll_height": 42238,
+  "error": "Error: Page.screenshot: Protocol error (Page.captureScreenshot): Unable to capture screenshot",
+  "script": "scripts/nhap_nguon_thu_cong.py",
+  "script_sha256": "56781a17f3313067f868a4d5b6120e03089aee0d1394a42dc049687a20f1318a",
+  "playwright_version": "1.63.0",
+  "chromium_version": "153.0.8010.12",
+  "git_head": "2e8354b603593e4170508d82257161348e5539a7",
+  "files": {
+    "page.html": {
+      "sha256": "a1e65784c87ae8de4957a38385121f9d4df0990aa29c9b1e06986a17e0ac95d8",
+      "bytes": 881769
+    },
+    "page.txt": {
+      "sha256": "a2fffc2591e1f314e13602f9c1169a05fc8a78ef0c0415633d0fbcec7e9ff1e5",
+      "bytes": 25255
+    }
+  }
+}

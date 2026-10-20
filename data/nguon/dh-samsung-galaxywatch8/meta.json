@@ -1,0 +1,91 @@
+{
+  "ma_mau": "dh-samsung-galaxywatch8",
+  "vai_tro": "url",
+  "requested_url": "https://www.samsung.com/vn/watches/galaxy-watch/galaxy-watch8-44mm-silver-bluetooth-sm-l330nzsaxxv/",
+  "final_url": "https://www.samsung.com/vn/watches/galaxy-watch/galaxy-watch8-44mm-silver-bluetooth-sm-l330nzsaxxv/",
+  "http_status": 200,
+  "title": "Samsung Galaxy Watch8 Bluetooth 44 mm màu Bạc | Samsung Việt Nam",
+  "captured_at_utc": "2026-10-20T06:09:46+00:00",
+  "captured_at": "2026-10-20T13:09:46+07:00",
+  "playwright_version": "1.63.0",
+  "chromium_version": "153.0.8010.12",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+  "expansion_clicks": [
+    "Xem thêm",
+    "Xem thêm"
+  ],
+  "script": "scripts/chup_nguon.py",
+  "script_sha256": "4627c4950b8e9d254f29b226b8a2e8882c8abd6092b95e93846bd1a586f3020a",
+  "git_head": "2e8354b603593e4170508d82257161348e5539a7",
+  "networkidle": false,
+  "consent": {
+    "banner_detected": true,
+    "rejected": null,
+    "banner_visible_at_capture": true
+  },
+  "expansion_skipped": [
+    {
+      "text": "Mạng hỗ trợ",
+      "ly_do": "làm thu gọn 34 ký tự; đã bấm lại để khôi phục"
+    },
+    {
+      "text": "Âm thanh và Video",
+      "ly_do": "làm thu gọn 71 ký tự; đã bấm lại để khôi phục"
+    },
+    {
+      "text": "Kết Nối",
+      "ly_do": "làm thu gọn 170 ký tự; đã bấm lại để khôi phục"
+    },
+    {
+      "text": "Hệ điều hành",
+      "ly_do": "làm thu gọn 29 ký tự; đã bấm lại để khôi phục"
+    },
+    {
+      "text": "Hiển Thị",
+      "ly_do": "làm thu gọn 173 ký tự; đã bấm lại để khôi phục"
+    },
+    {
+      "text": "Bộ vi xử lý",
+      "ly_do": "làm thu gọn 47 ký tự; đã bấm lại để khôi phục"
+    },
+    {
+      "text": "Lưu trữ/Bộ nhớ đệm",
+      "ly_do": "làm thu gọn 66 ký tự; đã bấm lại để khôi phục"
+    },
+    {
+      "text": "Cảm biến",
+      "ly_do": "làm thu gọn 197 ký tự; đã bấm lại để khôi phục"
+    },
+    {
+      "text": "Đặc điểm kỹ thuật",
+      "ly_do": "làm thu gọn 100 ký tự; đã bấm lại để khôi phục"
+    },
+    {
+      "text": "Pin",
+      "ly_do": "làm thu gọn 108 ký tự; đã bấm lại để khôi phục"
+    }
+  ],
+  "page_scroll_height": 53298,
+  "full_png": {
+    "width": 1440,
+    "height": 53279
+  },
+  "files": {
+    "page.html": {
+      "sha256": "b6953e05281b57587a8c74f8927916d33015398b4a3377f143c7b1b7a4a090a2",
+      "bytes": 5942771
+    },
+    "page.txt": {
+      "sha256": "c1016dc8dfa5df7ad7e7517db77aea1b6a1215daf438751868abb1bb4e181db2",
+      "bytes": 102551
+    },
+    "full.png": {
+      "sha256": "02dd6c55e8524645a8e3e0735c2b78fe694ef774bec74188f824f0a726a627f0",
+      "bytes": 2616731
+    }
+  }
+}

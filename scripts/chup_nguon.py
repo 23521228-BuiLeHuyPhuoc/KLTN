@@ -3,12 +3,16 @@
 Mỗi trang lưu đúng 4 tệp vào data/nguon/<ma_mau>/ (trang url_bo_sung vào bo_sung/):
 page.html (sau khi mở rộng), page.txt (văn bản nhìn thấy), full.png, meta.json.
 Không sửa nội dung trang: chỉ cuộn, bấm nút mở rộng, và (nếu có) bấm "từ chối" cookie.
+
+URL có đường dẫn kết thúc .pdf đi nhánh riêng (Chromium headless không hiển thị PDF): tải thẳng
+bằng context.request rồi lưu tai_lieu.pdf (nguyên byte), page.txt (văn bản trích bằng pypdf), meta.json.
 """
 import argparse
 import csv
 from datetime import datetime, timedelta, timezone
 import hashlib
 from importlib import metadata
+import io
 import json
 from pathlib import Path
 import re
@@ -16,6 +20,9 @@ import struct
 import subprocess
 import sys
 from urllib.parse import urlparse
+
+from playwright.sync_api import TimeoutError as PlaywrightTimeout
+from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = "scripts/chup_nguon.py"
@@ -28,8 +35,14 @@ TIMEZONE = "Asia/Ho_Chi_Minh"
 # Việt Nam không có giờ mùa hè nên UTC+7 cố định đúng; tránh phụ thuộc tzdata trên Windows.
 VN_TZ = timezone(timedelta(hours=7))
 
-PAGE_FILES = ("page.html", "page.txt", "full.png", "meta.json")
-HASHED_FILES = ("page.html", "page.txt", "full.png")
+PAGE_FILES = ("page.html", "page.txt", "full.png", "tai_lieu.pdf", "meta.json")
+HASHED_FILES = ("tai_lieu.pdf", "page.html", "page.txt", "full.png")
+
+PDF_MAGIC = b"%PDF"
+PDF_TIMEOUT_MS = 60000
+PDF_MIN_CHARS = 200  # page.txt ngắn hơn mức này thì nhiều khả năng PDF là ảnh quét, không có lớp chữ
+# Trường của nhánh trang thường không có nghĩa với PDF.
+HTML_ONLY_META = ("title", "viewport", "user_agent", "expansion_clicks")
 
 EXPAND_TEXT = re.compile(r"xem thêm|mở rộng|chi tiết|thông số|xem tất cả|lưu ý|chú thích", re.I)
 REJECT_TEXT = re.compile(r"từ chối|reject|decline|refuse|deny", re.I)
@@ -55,6 +68,10 @@ MAX_CLICKS = 40
 MAX_RESTARTS = 2
 CLICK_TIMEOUT_MS = 2000
 MAX_SHOT_HEIGHT = 16000  # Chromium cắt ảnh toàn trang cao hơn khoảng 16384 px
+# Thời hạn (ms) từng lần chụp ảnh toàn trang. Có trang (vd. OPPO Find X8) kẹt vô hạn ở lần chụp
+# toàn trang đầu tiên dù timeout dài bao nhiêu, nhưng sau khi lần đó bị hủy thì lần kế chụp xong
+# trong vài giây; nên lần đầu để ngắn rồi chụp lại thay vì chờ 60 s.
+SHOT_TIMEOUTS_MS = (15000, 60000)
 
 # Chạy trong trang, chỉ đọc DOM. `els` là danh sách ElementHandle.
 INFO_JS = """([els, area, consent, nav, exclude]) => els.map(el => {
@@ -152,6 +169,46 @@ def targets_for(row, out_root=OUT_ROOT):
 def host_of(url):
     host = (urlparse(url).hostname or "").lower()
     return host[4:] if host.startswith("www.") else host
+
+
+def is_pdf_url(url):
+    """Đường dẫn (bỏ query/fragment) kết thúc .pdf, không phân biệt hoa thường."""
+    return urlparse(url).path.lower().endswith(".pdf")
+
+
+def check_pdf_response(status, body):
+    """Ném RuntimeError nếu phản hồi không phải PDF hợp lệ (HTTP khác 200 hoặc thiếu %PDF)."""
+    if status != 200:
+        raise RuntimeError(f"HTTP {status}")
+    if not body.startswith(PDF_MAGIC):
+        raise RuntimeError("Nội dung tải về không bắt đầu bằng %PDF")
+
+
+def extract_pdf_text(data):
+    """(văn bản, số trang). Mỗi trang mở đầu bằng dòng '=== Trang N ==='."""
+    reader = PdfReader(io.BytesIO(data))
+    parts = [f"=== Trang {n} ===\n{(page.extract_text() or '').strip()}\n"
+             for n, page in enumerate(reader.pages, start=1)]
+    return "\n".join(parts), len(reader.pages)
+
+
+def pdf_text_chars(text):
+    """Số ký tự văn bản trích, không tính các dòng '=== Trang N ===' và khoảng trắng đầu/cuối."""
+    return len(re.sub(r"^=== Trang \d+ ===$", "", text, flags=re.M).strip())
+
+
+def pdf_meta_fields(pages, content_type, size):
+    """Trường meta riêng của nhánh PDF."""
+    return {"loai": "pdf", "pdf": {"pages": pages, "content_type": content_type, "bytes": size}}
+
+
+def pdf_text_warning(chars):
+    """Cảnh báo nếu văn bản trích quá ngắn; None nếu ổn."""
+    if chars == 0:
+        return "page.txt rỗng: PDF có thể là ảnh, cần OCR hoặc kiểm tay"
+    if chars < PDF_MIN_CHARS:
+        return f"page.txt chỉ có {chars} ký tự (< {PDF_MIN_CHARS}): PDF có thể là ảnh, cần kiểm tay"
+    return None
 
 
 def is_expand_candidate(info):
@@ -372,13 +429,81 @@ def expand_collapsed(page, loads):
 
 
 def full_page_png(page, scroll_height):
-    """Ảnh toàn trang; trả về (bytes, ghi_chu). Ghi chú nếu ảnh không phủ hết chiều cao trang."""
-    data = page.screenshot(full_page=True, animations="disabled", timeout=60000)
+    """Ảnh toàn trang; trả về (bytes, ghi_chu). Ghi chú nếu phải chụp lại hoặc ảnh không phủ hết chiều cao trang."""
+    notes = []
+    for attempt, timeout in enumerate(SHOT_TIMEOUTS_MS, start=1):
+        try:
+            data = page.screenshot(full_page=True, animations="disabled", timeout=timeout)
+            break
+        except PlaywrightTimeout:
+            if attempt == len(SHOT_TIMEOUTS_MS):
+                raise
+            notes.append(f"Lần chụp {attempt} quá {timeout} ms, đã chụp lại")
     width, height = png_size(data)
-    note = None
     if abs(height - scroll_height) > 50:  # lệch vài px do trang tự co giãn là bình thường
-        note = f"Ảnh cao {height} px khác chiều cao trang {scroll_height} px"
-    return data, note
+        notes.append(f"Ảnh cao {height} px khác chiều cao trang {scroll_height} px")
+    return data, "; ".join(notes) or None
+
+
+def capture_html(context, base, report, out_dir, url):
+    """Nhánh trang thường: mở bằng trình duyệt, mở rộng nội dung, lưu html/txt/png."""
+    page = context.new_page()
+    context.on("page", lambda p: p.close() if p is not page else None)
+    loads = []
+    page.on("load", lambda _: loads.append(1))
+    response = page.goto(url, wait_until="domcontentloaded", timeout=45000)
+    base["networkidle"] = True
+    try:
+        page.wait_for_load_state("networkidle", timeout=15000)
+    except Exception:
+        base["networkidle"] = False  # trang còn gọi mạng liên tục; vẫn chụp tiếp
+    base["final_url"] = page.url
+    base["http_status"] = response.status if response else None
+    base["title"] = page.title()
+    base["user_agent"] = page.evaluate("navigator.userAgent")
+    if base["http_status"] != 200:
+        raise RuntimeError(f"HTTP {base['http_status']}")
+    if host_of(page.url) != host_of(url):
+        raise RuntimeError(f"URL cuối khác host: {page.url}")
+
+    base["consent"] = reject_consent(page)
+    page.evaluate(SCROLL_JS, [SCROLL_STEP, SCROLL_PAUSE_MS])
+    clicks, skipped, restarts = expand_collapsed(page, loads)
+    scroll_height = page.evaluate(SCROLL_JS, [SCROLL_STEP, SCROLL_PAUSE_MS])
+    base["expansion_clicks"] = clicks
+    base["expansion_skipped"] = skipped
+    if restarts:
+        base["expansion_restarts"] = restarts
+    base["consent"]["banner_visible_at_capture"] = banner_visible(page)
+
+    inner_text = page.locator("body").inner_text()
+    report["hidden"] = hidden_footnotes(page.evaluate(TEXT_NODES_JS), inner_text)
+    write_text(out_dir / "page.html", page.content())
+    write_text(out_dir / "page.txt", inner_text)
+    png, note = full_page_png(page, scroll_height)
+    (out_dir / "full.png").write_bytes(png)
+    width, height = png_size(png)
+    base["page_scroll_height"] = scroll_height
+    base["full_png"] = {"width": width, "height": height}
+    if note:
+        base["full_png"]["ghi_chu"] = note
+
+
+def capture_pdf(context, base, report, out_dir, url):
+    """Nhánh PDF: tải bằng APIRequestContext (giữ Accept-Language), lưu nguyên byte + văn bản trích."""
+    for key in HTML_ONLY_META:
+        base.pop(key, None)
+    base["loai"] = "pdf"
+    response = context.request.get(url, headers={"Accept-Language": "vi-VN"}, timeout=PDF_TIMEOUT_MS)
+    body = response.body()
+    base["final_url"] = response.url
+    base["http_status"] = response.status
+    check_pdf_response(response.status, body)
+    (out_dir / "tai_lieu.pdf").write_bytes(body)  # lưu trước khi trích: lỗi trích vẫn còn bản gốc
+    text, pages = extract_pdf_text(body)
+    write_text(out_dir / "page.txt", text)
+    base.update(pdf_meta_fields(pages, response.headers.get("content-type"), len(body)))
+    report["pdf_chars"] = pdf_text_chars(text)
 
 
 def capture_target(browser, ma_mau, vai_tro, url, out_dir):
@@ -395,46 +520,10 @@ def capture_target(browser, ma_mau, vai_tro, url, out_dir):
     context = browser.new_context(viewport=VIEWPORT, locale=LOCALE, timezone_id=TIMEZONE,
                                   device_scale_factor=1, extra_http_headers={"Accept-Language": "vi-VN"})
     try:
-        page = context.new_page()
-        context.on("page", lambda p: p.close() if p is not page else None)
-        loads = []
-        page.on("load", lambda _: loads.append(1))
-        response = page.goto(url, wait_until="domcontentloaded", timeout=45000)
-        base["networkidle"] = True
-        try:
-            page.wait_for_load_state("networkidle", timeout=15000)
-        except Exception:
-            base["networkidle"] = False  # trang còn gọi mạng liên tục; vẫn chụp tiếp
-        base["final_url"] = page.url
-        base["http_status"] = response.status if response else None
-        base["title"] = page.title()
-        base["user_agent"] = page.evaluate("navigator.userAgent")
-        if base["http_status"] != 200:
-            raise RuntimeError(f"HTTP {base['http_status']}")
-        if host_of(page.url) != host_of(url):
-            raise RuntimeError(f"URL cuối khác host: {page.url}")
-
-        base["consent"] = reject_consent(page)
-        page.evaluate(SCROLL_JS, [SCROLL_STEP, SCROLL_PAUSE_MS])
-        clicks, skipped, restarts = expand_collapsed(page, loads)
-        scroll_height = page.evaluate(SCROLL_JS, [SCROLL_STEP, SCROLL_PAUSE_MS])
-        base["expansion_clicks"] = clicks
-        base["expansion_skipped"] = skipped
-        if restarts:
-            base["expansion_restarts"] = restarts
-        base["consent"]["banner_visible_at_capture"] = banner_visible(page)
-
-        inner_text = page.locator("body").inner_text()
-        report["hidden"] = hidden_footnotes(page.evaluate(TEXT_NODES_JS), inner_text)
-        write_text(out_dir / "page.html", page.content())
-        write_text(out_dir / "page.txt", inner_text)
-        png, note = full_page_png(page, scroll_height)
-        (out_dir / "full.png").write_bytes(png)
-        width, height = png_size(png)
-        base["page_scroll_height"] = scroll_height
-        base["full_png"] = {"width": width, "height": height}
-        if note:
-            base["full_png"]["ghi_chu"] = note
+        if is_pdf_url(url):
+            capture_pdf(context, base, report, out_dir, url)
+        else:
+            capture_html(context, base, report, out_dir, url)
     except Exception as exc:
         base["error"] = f"{type(exc).__name__}: {str(exc).splitlines()[0] if str(exc) else ''}"
     finally:
@@ -450,10 +539,18 @@ def print_report(meta, report, out_dir):
     if meta.get("error"):
         print(f"LỖI {label}: {meta['error']}")
         return
+    where = out_dir.relative_to(ROOT) if out_dir.is_relative_to(ROOT) else out_dir
+    if meta.get("loai") == "pdf":
+        chars = report.get("pdf_chars", 0)
+        print(f"OK {label}: HTTP {meta['http_status']}, PDF {meta['pdf']['pages']} trang, "
+              f"{chars} ký tự trích, tai_lieu.pdf {meta['pdf']['bytes']} byte, ghi vào {where}")
+        warning = pdf_text_warning(chars)
+        if warning:
+            print(f"    CẢNH BÁO: {warning}")
+        return
     size = meta.get("full_png", {})
     print(f"OK {label}: HTTP {meta['http_status']}, {len(meta['expansion_clicks'])} cú bấm mở rộng, "
-          f"full.png {size.get('width')}x{size.get('height')}, "
-          f"ghi vào {out_dir.relative_to(ROOT) if out_dir.is_relative_to(ROOT) else out_dir}")
+          f"full.png {size.get('width')}x{size.get('height')}, ghi vào {where}")
     for text in meta["expansion_clicks"]:
         print(f"    bấm: {text}")
     for item in meta.get("expansion_skipped", []):

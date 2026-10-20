@@ -1,0 +1,47 @@
+{
+  "ma_mau": "tn-apple-airpodspro3",
+  "vai_tro": "url",
+  "requested_url": "https://www.apple.com/vn/airpods-pro/specs/",
+  "final_url": "https://www.apple.com/vn/airpods-pro/specs/",
+  "http_status": 200,
+  "title": "AirPods Pro 3 - Thông Số Kỹ Thuật - Apple (VN)",
+  "captured_at_utc": "2026-10-20T06:09:20+00:00",
+  "captured_at": "2026-10-20T13:09:20+07:00",
+  "playwright_version": "1.63.0",
+  "chromium_version": "153.0.8010.12",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+  "expansion_clicks": [],
+  "script": "scripts/chup_nguon.py",
+  "script_sha256": "4627c4950b8e9d254f29b226b8a2e8882c8abd6092b95e93846bd1a586f3020a",
+  "git_head": "2e8354b603593e4170508d82257161348e5539a7",
+  "networkidle": true,
+  "consent": {
+    "banner_detected": false,
+    "rejected": null,
+    "banner_visible_at_capture": false
+  },
+  "expansion_skipped": [],
+  "page_scroll_height": 9269,
+  "full_png": {
+    "width": 1440,
+    "height": 9269
+  },
+  "files": {
+    "page.html": {
+      "sha256": "734d199b4ca06ded02452ee2c504d8f3f3660e7b5958f74c11d91a8a2004c611",
+      "bytes": 248674
+    },
+    "page.txt": {
+      "sha256": "4a25a28e97b938c17e45e872d2eafd58cb8098db523aa67ac38da2dd0575ace9",
+      "bytes": 22203
+    },
+    "full.png": {
+      "sha256": "4734577f813baeda9a966253e71f1d7d42ff75ab725097c2fd24dd0fe1b54c02",
+      "bytes": 1187057
+    }
+  }
+}

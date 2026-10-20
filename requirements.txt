@@ -14,3 +14,4 @@ pandas==3.0.6
 matplotlib==3.11.2
 playwright==1.63.0
 python-dotenv==1.2.4
+pypdf==6.21.1

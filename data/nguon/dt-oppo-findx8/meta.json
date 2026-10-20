@@ -1,0 +1,47 @@
+{
+  "ma_mau": "dt-oppo-findx8",
+  "vai_tro": "url",
+  "requested_url": "https://www.oppo.com/vn/smartphones/series-find-x/find-x8/specs/",
+  "final_url": "https://www.oppo.com/vn/smartphones/series-find-x/find-x8/specs/",
+  "http_status": 200,
+  "title": "OPPO Find X8 - Thông Số Kỹ Thuật | OPPO Việt Nam",
+  "captured_at_utc": "2026-10-20T06:42:03+00:00",
+  "captured_at": "2026-10-20T13:42:03+07:00",
+  "playwright_version": "1.63.0",
+  "chromium_version": "153.0.8010.12",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+  "expansion_clicks": [],
+  "script": "scripts/chup_nguon.py",
+  "script_sha256": "5ba1779142919ad09fb9adda55984698935dd121bc0af615617478ec2e293f32",
+  "git_head": "2e8354b603593e4170508d82257161348e5539a7",
+  "networkidle": true,
+  "consent": {
+    "banner_detected": false,
+    "rejected": null,
+    "banner_visible_at_capture": false
+  },
+  "expansion_skipped": [],
+  "page_scroll_height": 5004,
+  "full_png": {
+    "width": 1440,
+    "height": 5004
+  },
+  "files": {
+    "page.html": {
+      "sha256": "0f161ddbb7ff9e23b6154db77ad4064b980bdbdf1789587f60a82eb3506d08cf",
+      "bytes": 395137
+    },
+    "page.txt": {
+      "sha256": "633fef2245307a51955662e7419c6d91d6f42b6aa2f1c06078b0bea5721735d0",
+      "bytes": 8081
+    },
+    "full.png": {
+      "sha256": "c526d305883f50e4711c2c9eaafb960a5d9ee9eba3343df1146a2f51093fcc88",
+      "bytes": 495729
+    }
+  }
+}

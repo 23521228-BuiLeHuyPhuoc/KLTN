@@ -1,0 +1,17 @@
+{
+  "ghi_chu": "Ngày 20/10/2026, scripts/chup_nguon.py (Chromium headless) bị www.mi.com trả HTTP 403 'Access Denied' cho cả 4 mẫu Xiaomi. Theo đồng ý của người thực hiện, page.html và page.txt được lưu từ Chrome thật của người thực hiện qua tiện ích Claude in Chrome: mở trang, chờ tải xong, cuộn hết trang (bước 800 px), cuộn về đầu, rồi tải '<!DOCTYPE html>\\n' + document.documentElement.outerHTML làm page.html và document.body.innerText làm page.txt. Không trang nào có nút 'Xem thêm'/mở rộng ở phần nội dung. Không chụp được ảnh toàn trang bằng công cụ này.",
+  "trinh_duyet": {
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "viewport": {"width": 1536, "height": 742}
+  },
+  "trang": [
+    {"ma_mau": "dt-xiaomi-15t", "vai_tro": "url", "url": "https://www.mi.com/vn/product/xiaomi-15t/specs/", "http_status": 200, "title": "Xiaomi 15T Việt Nam – Trang chính thức Xiaomi", "captured_at_utc": "2026-10-20T08:35:07+00:00", "page_scroll_height": 12633},
+    {"ma_mau": "dt-xiaomi-15t", "vai_tro": "url_bo_sung", "url": "https://www.mi.com/vn/product/xiaomi-15t/", "http_status": 200, "title": "Xiaomi 15T Việt Nam – Trang chính thức Xiaomi", "captured_at_utc": "2026-10-20T08:35:57+00:00", "page_scroll_height": 42238},
+    {"ma_mau": "dt-xiaomi-redminote14proplus5g", "vai_tro": "url", "url": "https://www.mi.com/vn/product/redmi-note-14-pro-plus-5g/specs/", "http_status": 200, "title": "Redmi Note 14 Pro Plus 5g Thông số - Xiaomi Việt Nam", "captured_at_utc": "2026-10-20T08:36:26+00:00", "page_scroll_height": 9194},
+    {"ma_mau": "dt-xiaomi-redminote14proplus5g", "vai_tro": "url_bo_sung", "url": "https://www.mi.com/vn/product/redmi-note-14-pro-plus-5g/", "http_status": 200, "title": "Redmi Note 14 Pro Plus 5g - Xiaomi Việt Nam", "captured_at_utc": "2026-10-20T08:36:45+00:00", "page_scroll_height": 50856},
+    {"ma_mau": "tn-xiaomi-redmibuds6pro", "vai_tro": "url", "url": "https://www.mi.com/vn/product/redmi-buds-6-pro/specs/", "http_status": 200, "title": "REDMI Buds 6 Pro | Xiaomi Việt Nam | Tất cả thông số kỹ thuật và tính năng", "captured_at_utc": "2026-10-20T08:37:23+00:00", "page_scroll_height": 3434},
+    {"ma_mau": "tn-xiaomi-redmibuds6pro", "vai_tro": "url_bo_sung", "url": "https://www.mi.com/vn/product/redmi-buds-6-pro/", "http_status": 200, "title": "REDMI Buds 6 Pro | Xiaomi Việt Nam | Tất cả thông số kỹ thuật và tính năng", "captured_at_utc": "2026-10-20T08:37:38+00:00", "page_scroll_height": 27435},
+    {"ma_mau": "dh-xiaomi-watchs4", "vai_tro": "url", "url": "https://www.mi.com/vn/product/xiaomi-watch-s4/specs/", "http_status": 200, "title": "Xiaomi Watch S4 - Xiaomi Việt Nam", "captured_at_utc": "2026-10-20T08:37:50+00:00", "page_scroll_height": 5900},
+    {"ma_mau": "dh-xiaomi-watchs4", "vai_tro": "url_bo_sung", "url": "https://www.mi.com/vn/product/xiaomi-watch-s4/", "http_status": 200, "title": "Xiaomi Watch S4 - Xiaomi Việt Nam", "captured_at_utc": "2026-10-20T08:38:06+00:00", "page_scroll_height": 28490}
+  ]
+}

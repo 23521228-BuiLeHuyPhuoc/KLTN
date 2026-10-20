@@ -1,0 +1,49 @@
+{
+  "ma_mau": "tn-xiaomi-redmibuds6pro",
+  "vai_tro": "url",
+  "requested_url": "https://www.mi.com/vn/product/redmi-buds-6-pro/specs/",
+  "final_url": "https://www.mi.com/vn/product/redmi-buds-6-pro/specs/",
+  "http_status": 200,
+  "title": "REDMI Buds 6 Pro | Xiaomi Việt Nam | Tất cả thông số kỹ thuật và tính năng",
+  "captured_at_utc": "2026-10-20T08:37:23+00:00",
+  "captured_at": "2026-10-20T15:37:23+07:00",
+  "phuong_phap": "thu_cong_chrome",
+  "ghi_chu_phuong_phap": "Ngày 20/10/2026, scripts/chup_nguon.py (Chromium headless) bị www.mi.com trả HTTP 403 'Access Denied' cho cả 4 mẫu Xiaomi. Theo đồng ý của người thực hiện, page.html và page.txt được lưu từ Chrome thật của người thực hiện qua tiện ích Claude in Chrome: mở trang, chờ tải xong, cuộn hết trang (bước 800 px), cuộn về đầu, rồi tải '<!DOCTYPE html>\\n' + document.documentElement.outerHTML làm page.html và document.body.innerText làm page.txt. Không trang nào có nút 'Xem thêm'/mở rộng ở phần nội dung. Không chụp được ảnh toàn trang bằng công cụ này.",
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "viewport": {
+    "width": 1536,
+    "height": 742
+  },
+  "page_scroll_height": 3434,
+  "full_png": {
+    "width": 1977,
+    "height": 31808,
+    "cach_tao": "Dựng lại từ page.html đã lưu bằng Chromium headless, tắt JavaScript; không phải ảnh chụp trực tiếp trang trên Chrome",
+    "dung_luc_utc": "2026-10-20T08:46:08+00:00",
+    "networkidle": true,
+    "tai_nguyen_loi": {
+      "www.mi.com": 10,
+      "s.go-mpulse.net": 1
+    },
+    "ghi_chu": "Ảnh cao 31808 px khác chiều cao trang 3434 px"
+  },
+  "script": "scripts/nhap_nguon_thu_cong.py",
+  "script_sha256": "56781a17f3313067f868a4d5b6120e03089aee0d1394a42dc049687a20f1318a",
+  "playwright_version": "1.63.0",
+  "chromium_version": "153.0.8010.12",
+  "git_head": "2e8354b603593e4170508d82257161348e5539a7",
+  "files": {
+    "page.html": {
+      "sha256": "a978cab34f6d95578f182404faf9fa54f99c1f888b074e32311a4be22887e94c",
+      "bytes": 692782
+    },
+    "page.txt": {
+      "sha256": "fbf7b44df6452bd29c64c6b325092bffd90595361deed8bdadfdaf0667ac65de",
+      "bytes": 3178
+    },
+    "full.png": {
+      "sha256": "030c0b7f398e9bfd49ddb4f0766862ea9e4de46623e812ac5cdacf86cc036526",
+      "bytes": 5066887
+    }
+  }
+}

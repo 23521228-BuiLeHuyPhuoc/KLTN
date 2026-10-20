@@ -1,0 +1,47 @@
+{
+  "ma_mau": "dh-apple-watchse3",
+  "vai_tro": "url",
+  "requested_url": "https://www.apple.com/vn/apple-watch-se-3/specs/",
+  "final_url": "https://www.apple.com/vn/apple-watch-se-3/specs/",
+  "http_status": 200,
+  "title": "Apple Watch SE 3 - Thông Số Kỹ Thuật - Apple (VN)",
+  "captured_at_utc": "2026-10-20T06:05:51+00:00",
+  "captured_at": "2026-10-20T13:05:51+07:00",
+  "playwright_version": "1.63.0",
+  "chromium_version": "153.0.8010.12",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+  "expansion_clicks": [],
+  "script": "scripts/chup_nguon.py",
+  "script_sha256": "4627c4950b8e9d254f29b226b8a2e8882c8abd6092b95e93846bd1a586f3020a",
+  "git_head": "2e8354b603593e4170508d82257161348e5539a7",
+  "networkidle": true,
+  "consent": {
+    "banner_detected": false,
+    "rejected": null,
+    "banner_visible_at_capture": false
+  },
+  "expansion_skipped": [],
+  "page_scroll_height": 11876,
+  "full_png": {
+    "width": 1440,
+    "height": 11876
+  },
+  "files": {
+    "page.html": {
+      "sha256": "08638334c87bf4fd7878c2cf433ddf76c4b5edcb84ab14531b7e63408544756c",
+      "bytes": 267705
+    },
+    "page.txt": {
+      "sha256": "cf6e014d25ba9036c1dc984d8c0b496a9c3e2806238325387a555de628951cd2",
+      "bytes": 26299
+    },
+    "full.png": {
+      "sha256": "6c1b2b1f4a844ca0b7d4b50da325dc62993e892e8b8dee3e53143e807241837f",
+      "bytes": 1531555
+    }
+  }
+}

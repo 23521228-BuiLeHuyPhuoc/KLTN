@@ -1,0 +1,34 @@
+{
+  "ma_mau": "dt-xiaomi-redminote14proplus5g",
+  "vai_tro": "url_bo_sung",
+  "requested_url": "https://www.mi.com/vn/product/redmi-note-14-pro-plus-5g/",
+  "final_url": "https://www.mi.com/vn/product/redmi-note-14-pro-plus-5g/",
+  "http_status": 200,
+  "title": "Redmi Note 14 Pro Plus 5g - Xiaomi Việt Nam",
+  "captured_at_utc": "2026-10-20T08:36:45+00:00",
+  "captured_at": "2026-10-20T15:36:45+07:00",
+  "phuong_phap": "thu_cong_chrome",
+  "ghi_chu_phuong_phap": "Ngày 20/10/2026, scripts/chup_nguon.py (Chromium headless) bị www.mi.com trả HTTP 403 'Access Denied' cho cả 4 mẫu Xiaomi. Theo đồng ý của người thực hiện, page.html và page.txt được lưu từ Chrome thật của người thực hiện qua tiện ích Claude in Chrome: mở trang, chờ tải xong, cuộn hết trang (bước 800 px), cuộn về đầu, rồi tải '<!DOCTYPE html>\\n' + document.documentElement.outerHTML làm page.html và document.body.innerText làm page.txt. Không trang nào có nút 'Xem thêm'/mở rộng ở phần nội dung. Không chụp được ảnh toàn trang bằng công cụ này.",
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "viewport": {
+    "width": 1536,
+    "height": 742
+  },
+  "page_scroll_height": 50856,
+  "error": "Error: Page.screenshot: Protocol error (Page.captureScreenshot): Unable to capture screenshot",
+  "script": "scripts/nhap_nguon_thu_cong.py",
+  "script_sha256": "56781a17f3313067f868a4d5b6120e03089aee0d1394a42dc049687a20f1318a",
+  "playwright_version": "1.63.0",
+  "chromium_version": "153.0.8010.12",
+  "git_head": "2e8354b603593e4170508d82257161348e5539a7",
+  "files": {
+    "page.html": {
+      "sha256": "b1b3b900adbcc469bcdc1583f008422c75aab81b8df874775c638f3f1770002d",
+      "bytes": 892148
+    },
+    "page.txt": {
+      "sha256": "e35a99c150a53bfdd2480e8ed7b80bf39320a22fb765e33776718e757c6108c3",
+      "bytes": 28418
+    }
+  }
+}

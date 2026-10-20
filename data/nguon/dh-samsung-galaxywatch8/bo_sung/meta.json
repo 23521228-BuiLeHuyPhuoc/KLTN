@@ -1,0 +1,30 @@
+{
+  "ma_mau": "dh-samsung-galaxywatch8",
+  "vai_tro": "url_bo_sung",
+  "requested_url": "https://downloadcenter.samsung.com/content/UM/202507/20250730155623720/SM-L32X_L33X_L50X_UG_SEA_Android_Vie_Rev.1.1_250728.pdf",
+  "final_url": "https://downloadcenter.samsung.com/content/UM/202507/20250730155623720/SM-L32X_L33X_L50X_UG_SEA_Android_Vie_Rev.1.1_250728.pdf",
+  "http_status": 200,
+  "captured_at_utc": "2026-10-20T06:12:24+00:00",
+  "captured_at": "2026-10-20T13:12:24+07:00",
+  "playwright_version": "1.63.0",
+  "chromium_version": "153.0.8010.12",
+  "script": "scripts/chup_nguon.py",
+  "script_sha256": "4627c4950b8e9d254f29b226b8a2e8882c8abd6092b95e93846bd1a586f3020a",
+  "git_head": "2e8354b603593e4170508d82257161348e5539a7",
+  "loai": "pdf",
+  "pdf": {
+    "pages": 158,
+    "content_type": "application/pdf",
+    "bytes": 3756881
+  },
+  "files": {
+    "tai_lieu.pdf": {
+      "sha256": "89da5793c7ca3da5b09ff5f2833d6d7fcfd1df42e471440e4b82f4afd41c11ef",
+      "bytes": 3756881
+    },
+    "page.txt": {
+      "sha256": "c7b0f856a656902e50d5b16fd985bd6897a474d4c0cb6143271cbc36947a772c",
+      "bytes": 330397
+    }
+  }
+}

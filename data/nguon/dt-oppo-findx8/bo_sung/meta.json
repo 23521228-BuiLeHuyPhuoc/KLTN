@@ -1,0 +1,48 @@
+{
+  "ma_mau": "dt-oppo-findx8",
+  "vai_tro": "url_bo_sung",
+  "requested_url": "https://www.oppo.com/vn/smartphones/series-find-x/find-x8/",
+  "final_url": "https://www.oppo.com/vn/smartphones/series-find-x/find-x8/",
+  "http_status": 200,
+  "title": "OPPO Find X8 | OPPO Việt Nam",
+  "captured_at_utc": "2026-10-20T06:42:19+00:00",
+  "captured_at": "2026-10-20T13:42:19+07:00",
+  "playwright_version": "1.63.0",
+  "chromium_version": "153.0.8010.12",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+  "expansion_clicks": [],
+  "script": "scripts/chup_nguon.py",
+  "script_sha256": "5ba1779142919ad09fb9adda55984698935dd121bc0af615617478ec2e293f32",
+  "git_head": "2e8354b603593e4170508d82257161348e5539a7",
+  "networkidle": false,
+  "consent": {
+    "banner_detected": false,
+    "rejected": null,
+    "banner_visible_at_capture": false
+  },
+  "expansion_skipped": [],
+  "page_scroll_height": 35901,
+  "full_png": {
+    "width": 1440,
+    "height": 35898,
+    "ghi_chu": "Lần chụp 1 quá 15000 ms, đã chụp lại"
+  },
+  "files": {
+    "page.html": {
+      "sha256": "8101fb6ba5fb643e9adf59fb753175737278c3bcb4fefd45e475e1ab24b5900f",
+      "bytes": 701722
+    },
+    "page.txt": {
+      "sha256": "7cfa49691fb43039ed1dd89103ee16f7c379df460ca01aeca19a222d29dfa6d3",
+      "bytes": 28927
+    },
+    "full.png": {
+      "sha256": "d0cbcf289beee41961015c74df5472ef442181c4b62c1d58c16fba04613c6ff6",
+      "bytes": 3860215
+    }
+  }
+}
