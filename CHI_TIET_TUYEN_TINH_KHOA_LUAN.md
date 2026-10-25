@@ -269,15 +269,17 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Viết hàm chia đoạn đọc `page.txt`: mỗi dòng hoặc mục thông số là một đoạn.
-- [ ] Nối chú thích (dấu *, số mũ, "kết quả có thể thay đổi") vào đoạn mang ký hiệu tương ứng.
-- [ ] Đặt tên mục ("Pin", "Màn hình") ở đầu mỗi đoạn để giữ ngữ cảnh.
-- [ ] Đặt mã đoạn theo dạng `<ma_mau>#<số>` ([T3.2](#t3-2)).
-- [ ] Chạy cho 12 mẫu; lấy ngẫu nhiên 20 đoạn để kiểm bằng mắt.
+- [x] Viết hàm chia đoạn đọc `page.txt`: mỗi dòng hoặc mục thông số là một đoạn.
+- [x] Nối chú thích (dấu *, số mũ, "kết quả có thể thay đổi") vào đoạn mang ký hiệu tương ứng.
+- [x] Đặt tên mục ("Pin", "Màn hình") ở đầu mỗi đoạn để giữ ngữ cảnh.
+- [x] Đặt mã đoạn theo dạng `<ma_mau>#<số>` ([T3.2](#t3-2)).
+- [x] Chạy cho 12 mẫu; lấy ngẫu nhiên 20 đoạn để kiểm bằng mắt.
 
 **Làm ra:** `data/nguon/<ma_mau>/doan.jsonl` của 12 mẫu.
 
 **Xong khi:** trong 20 đoạn kiểm ngẫu nhiên, không đoạn nào mất điều kiện đi kèm con số.
+
+**Đã thực hiện ngày 25/10/2026:** `src/kiemchung/chia_doan.py` (luật tách ghi ở docstring), `scripts/chia_doan.py`, `tests/test_chia_doan.py`; 12 mẫu có `doan.jsonl`, tổng 1.215 đoạn. Luật tách thiết kế trên 4 mẫu phát triển; với tập kiểm tra chỉ sửa phần đọc định dạng. Lần kiểm 1 ([kiem_doan_buoc7.md](data/kiem_doan_buoc7.md)) không đạt: 2/20 đoạn mất chú thích, kèm lỗi lệch số chú thích Samsung. Sau khi sửa, lần kiểm 2 với 20 đoạn mới ([kiem_doan_buoc7_lan2.md](data/kiem_doan_buoc7_lan2.md)) đạt 20/20. Chú thích không được đoạn nào dẫn tới: 0 ở 11 mẫu, 3 ở Xiaomi 15T (trang không có ký hiệu). Chi tiết và rủi ro cho Bước 8 trong [nhật ký](luan_van/nhat_ky.md).
 
 **Tra cứu:** [T3.2](#t3-2) (mã đoạn).
 

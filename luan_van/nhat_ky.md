@@ -1,5 +1,14 @@
 # Nhật ký khóa luận
 
+## 25/10/2026 — Bước 7
+
+- Viết `src/kiemchung/chia_doan.py`, `scripts/chia_doan.py` và `tests/test_chia_doan.py`; 101 test của `test_chia_doan.py`, `test_chup_nguon.py`, `test_nhap_nguon_thu_cong.py` đạt. Ghi `doan.jsonl` cho 12 mẫu, tổng 1.215 đoạn, mã đoạn 3 chữ số (nhiều nhất là Watch8 với 596 đoạn). Tệp bằng chứng không đổi: mã băm 19 trang vẫn khớp `meta.json`.
+- Luật tách thiết kế trên 4 mẫu phát triển. Số chú thích hiển thị lấy từ `page.html`, vì `page.txt` của Apple và Samsung không giữ số; nội dung chú thích vẫn lấy từ `page.txt`. Khi chạy trên tập kiểm tra chỉ sửa phần đọc định dạng (thẻ `<button>`, `data-sup="N"`, danh sách `<ol>` không ghi số, `*` sau khoảng trắng hoặc ngoặc, dòng dài 10.000 ký tự). Danh sách đủ ở docstring.
+- Lần kiểm 1 (`data/kiem_doan_buoc7.md`, seed 20261019) không đạt: OPPO Find X8 #054 mất chú thích 7 (định mức 5.490mAh) và chú thích 10; S25 Ultra #113 mất chú thích 3 ("Ultra Wide3"). Bản lần 1 còn gắn lệch số chú thích trên S25 Ultra và Buds3 Pro, vì số hiển thị khác mã trong HTML. Cả ba là lỗi áp dụng luật đã có từ tập phát triển (luật thứ tự quá chặt, đọc sai số), không thêm luật theo nội dung trang tập kiểm tra.
+- Lần kiểm 2 (`data/kiem_doan_buoc7_lan2.md`, seed 20261025, 20 đoạn mới, Claude kiểm) đạt 20/20. Cách rút ở cả hai lần: mỗi mẫu một đoạn, thêm 8 đoạn ưu tiên đoạn có chữ số, vì rút thuần ngẫu nhiên thì PDF Watch8 chiếm gần nửa số đoạn. Hạn chế: chỉ khoảng 6/20 đoạn có thông số kèm chú thích, còn lại là menu, địa chỉ, hướng dẫn PDF. Vì vậy dùng thêm chỉ số tự động: số chú thích không được đoạn nào dẫn tới bằng 0 ở 11 mẫu; Xiaomi 15T còn 3 (chú thích 1, 2, 12 không có ký hiệu trong cả `page.txt` lẫn `page.html`).
+- Bổ sung cho Bước 6: trang `url` của Galaxy Watch8 có ký hiệu 12, 13, 14, 34, 35, nhưng nội dung các chú thích này (cùng chú thích 47) chỉ có trong `page.html`, không có trong `page.txt`. S25 Ultra có ký hiệu 24 không có chú thích tương ứng. Đây là rủi ro thứ hai ở T9.1; chưa kiểm các chú thích này có mang điều kiện của thông số không.
+- Rủi ro cho Bước 8: bảng so sánh Buds3 Pro / Buds3 / Buds FE của Samsung nằm chung đoạn nên số liệu ba máy trộn lẫn; một số đoạn gắn thừa chú thích (OPPO #065 có 10 chú thích, #055 có thêm chú thích ốp lưng từ tính); tên mục chỉ gần đúng; chữ vỡ trong PDF Watch8 ("v ào") giữ nguyên; menu và đánh giá người dùng vẫn nằm trong `doan.jsonl`.
+
 ## 20/10/2026 — Bước 6
 
 - Bổ sung 4 mẫu Xiaomi: theo đồng ý của người thực hiện, `page.html` (`<!DOCTYPE html>` + DOM sau khi cuộn hết trang) và `page.txt` (`document.body.innerText`) của 8 trang (`url` và `url_bo_sung`) được tải từ Chrome thật qua Claude in Chrome lúc 15:35–15:38 (HTTP 200, không trang nào có nút mở rộng ở phần nội dung). Không giả User-Agent hay lách chặn của Chromium headless. Thông tin lúc lưu ở `data/nguon/thu_cong_20261020.json`.
