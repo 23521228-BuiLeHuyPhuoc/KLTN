@@ -224,13 +224,13 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 - [x] Chạy cho iPhone 17 và Galaxy Buds3 Pro. Đặt `page.txt` cạnh trang trên trình duyệt: mọi chú thích điều kiện (dấu *, số mũ, "kết quả có thể thay đổi") phải có trong `page.txt`.
 - [x] Kiểm chỗ nghi vấn thấy khi xem trang ngày 09/10/2026: chú thích chế độ chống ồn cho tổng thời gian kèm hộp sạc trên trang Galaxy Buds3 Pro. Vẫn còn: khối thông số ghi "Đến 7/30 giờ" khi tắt ANC và "Đến 6/26 giờ" khi bật ANC, nhưng chú thích ghi "với tính năng bật/tắt ANC … tối đa 30 giờ". Giữ nguyên quyết định ở mục 5 của `data/THE_DU_LIEU.md`: không dùng tổng 26/30 giờ làm căn cứ.
 - [x] Kiểm lại trên bản chụp các con số dùng trong ví dụ 1–12 và 18 của hướng dẫn gán nhãn ([T4.6](#t4-6)). Các con số đều khớp. Trang Samsung gọi chế độ xuyên âm là "Ambient", nên ví dụ 18 cần tệp cấu hình biết cả hai cách gọi.
-- [ ] Sao lưu ảnh chụp ra ngoài máy, ví dụ lên Google Drive.
+- [x] Sao lưu ảnh chụp ra ngoài máy, ví dụ lên Google Drive.
 
 **Làm ra:** script chụp trang trong `scripts/`; `data/nguon/dt-apple-iphone17/` và `data/nguon/tn-samsung-buds3pro/`, mỗi thư mục 4 tệp.
 
 **Xong khi:** hai mẫu có đủ 4 tệp; mọi chú thích điều kiện có trong `page.txt`; các con số của ví dụ đã được kiểm.
 
-**Đã thực hiện ngày 19/10/2026:** [iPhone 17](data/nguon/dt-apple-iphone17/meta.json) và [Galaxy Buds3 Pro](data/nguon/tn-samsung-buds3pro/meta.json) đều HTTP 200, đủ 4 tệp, mã băm khớp. `page.txt` có đủ chú thích điều kiện đã ghi ở Bước 4; không có chú thích thông số nào bị ẩn. `.gitattributes` giữ nguyên từng byte của `data/nguon/` để mã băm không đổi khi checkout trên Windows. Còn việc sao lưu ảnh chụp ra ngoài máy.
+**Đã thực hiện ngày 19/10/2026:** [iPhone 17](data/nguon/dt-apple-iphone17/meta.json) và [Galaxy Buds3 Pro](data/nguon/tn-samsung-buds3pro/meta.json) đều HTTP 200, đủ 4 tệp, mã băm khớp. `page.txt` có đủ chú thích điều kiện đã ghi ở Bước 4; không có chú thích thông số nào bị ẩn. `.gitattributes` giữ nguyên từng byte của `data/nguon/` để mã băm không đổi khi checkout trên Windows. Đã sao lưu `data/nguon/` lên Google Drive ngày 25/10/2026.
 
 **Tra cứu:** [T3.1](#t3-1), [T3.2](#t3-2), [T4.6](#t4-6).
 
@@ -249,13 +249,13 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 - [x] Kiểm chỗ nghi vấn trên trang OPPO Find X8: giá trị "định mức" lớn hơn giá trị "tiêu chuẩn". Vẫn còn: trang thông số ghi định mức 5630mAh, tiêu chuẩn 5490mAh; chú thích trang giới thiệu ghi ngược lại.
 - [x] Kiểm lại trên bản chụp các con số của ví dụ 13–17 ở [T4.6](#t4-6) (Apple Watch SE 3, Xiaomi 15T). Đều khớp.
 - [x] Với 8 mẫu của tập kiểm tra, chỉ kiểm tệp có đủ chú thích; không lấy ý tưởng cho tệp cấu hình hay ví dụ hướng dẫn từ các trang này.
-- [ ] Sao lưu ảnh chụp ra ngoài máy.
+- [x] Sao lưu ảnh chụp ra ngoài máy.
 
 **Làm ra:** `data/nguon/<ma_mau>/` của 10 mẫu còn lại.
 
 **Xong khi:** đủ 12 mẫu, mỗi mẫu 4 tệp; mọi chú thích điều kiện có mặt trong `page.txt`.
 
-**Đã thực hiện ngày 20/10/2026:** đủ 12 mẫu trong `data/nguon/`, trang chính của mỗi mẫu có 4 tệp, mã băm khớp. `scripts/chup_nguon.py` thêm nhánh PDF (hướng dẫn Galaxy Watch8 lưu thành `bo_sung/tai_lieu.pdf` và `page.txt`). 4 mẫu Xiaomi lưu thủ công từ Chrome, ghi rõ trong `meta.json` và `data/nguon/thu_cong_20261020.json`; 4 trang `bo_sung` của Xiaomi chưa có `full.png`. Còn việc sao lưu ảnh chụp ra ngoài máy. Chi tiết trong [nhật ký](luan_van/nhat_ky.md).
+**Đã thực hiện ngày 20/10/2026:** đủ 12 mẫu trong `data/nguon/`, trang chính của mỗi mẫu có 4 tệp, mã băm khớp. `scripts/chup_nguon.py` thêm nhánh PDF (hướng dẫn Galaxy Watch8 lưu thành `bo_sung/tai_lieu.pdf` và `page.txt`). 4 mẫu Xiaomi lưu thủ công từ Chrome, ghi rõ trong `meta.json` và `data/nguon/thu_cong_20261020.json`; 4 trang `bo_sung` của Xiaomi chưa có `full.png`. Đã sao lưu `data/nguon/` lên Google Drive ngày 25/10/2026. Chi tiết trong [nhật ký](luan_van/nhat_ky.md).
 
 **Tra cứu:** [T9.1](#t9-1) (rủi ro trang thiếu chú thích).
 
