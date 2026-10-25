@@ -25,6 +25,22 @@
     "page.txt": {
       "sha256": "c7b0f856a656902e50d5b16fd985bd6897a474d4c0cb6143271cbc36947a772c",
       "bytes": 330397
+    },
+    "page_pdftotext.txt": {
+      "sha256": "4736aa17d8381468aea1792f141aef5d1a08ce5c42db9587482a2eb4c41f3b59",
+      "bytes": 283185
     }
+  },
+  "trich_lai_pdf": {
+    "tep": "page_pdftotext.txt",
+    "cong_cu": "pdftotext",
+    "phien_ban": "4.00",
+    "lenh": "pdftotext -enc UTF-8 tai_lieu.pdf -",
+    "captured_at_utc": "2026-10-25T14:36:18+00:00",
+    "captured_at": "2026-10-25T21:36:18+07:00",
+    "script": "scripts/trich_pdf_pdftotext.py",
+    "script_sha256": "fa15f41ff48ecbaa5d81ecb64d419044ef094db6d9b5cef875bb96cab3bde6c5",
+    "git_head": "ca38ebcccc022f70f2eb4fd9b685275ba0963302",
+    "ly_do": "pypdf tách âm tiết và tách số (ví dụ '1 00–150 BPM'); bản này dùng để chia đoạn, page.txt (pypdf) giữ nguyên"
   }
 }

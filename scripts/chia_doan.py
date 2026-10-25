@@ -19,6 +19,7 @@ from kiemchung import chia_doan as cd  # noqa: E402
 CSV_PATH = ROOT / "data/mau_san_pham.csv"
 OUT_ROOT = ROOT / "data/nguon"
 KIEM_PATH = ROOT / "data/kiem_doan_buoc7_lan2.md"
+TEP_PDF = "page_pdftotext.txt"  # PDF: dùng bản pdftotext nếu có (pypdf tách âm tiết và số), xem trich_pdf_pdftotext.py
 SEED_KIEM = 20261025
 SO_DOAN_KIEM = 20
 TRAN_3_CHU_SO = 999  # quá mức này thì mã đoạn dùng 4 chữ số cho cả 12 mẫu
@@ -58,7 +59,8 @@ def chia_mot_mau(row, out_root=OUT_ROOT):
     theo_trang = []
     tong = {"khong_tim_duoc": [], "khong_duoc_dan": [], "gan_theo_vi_tri": [], "khong_co_trong_txt": []}
     for trang, thu_muc in trang_cua_mau(row, out_root):
-        van_ban = (thu_muc / "page.txt").read_text(encoding="utf-8")
+        tep = TEP_PDF if (thu_muc / TEP_PDF).exists() else "page.txt"
+        van_ban = (thu_muc / tep).read_text(encoding="utf-8")
         ma_html = (thu_muc / "page.html").read_text(encoding="utf-8") if (thu_muc / "page.html").exists() else ""
         doan, thong_ke = cd.chia_doan_day_du(van_ban, cd.doc_chu_thich_html(ma_html))
         theo_trang.append((trang, doan))
@@ -150,9 +152,12 @@ def main(argv=None):
                            ("khong_co_trong_txt", "chú thích chỉ có trong HTML")):
             if tk[khoa]:
                 print(f"    {nhan}: {', '.join(tk[khoa])}")
+    print(f"Mã đoạn dùng {rong} chữ số (đoạn nhiều nhất của một mẫu: {lon_nhat}).")
+    if KIEM_PATH.exists():  # tệp kiểm đã có kết quả kiểm bằng mắt, không ghi đè
+        print(f"Giữ nguyên {KIEM_PATH.relative_to(ROOT)} (đã có).")
+        return 0
     mau, so_co_so = lay_mau_kiem(tat_ca)
     KIEM_PATH.write_text(viet_kiem_md(mau, so_co_so, len(tat_ca)), encoding="utf-8", newline="\n")
-    print(f"Mã đoạn dùng {rong} chữ số (đoạn nhiều nhất của một mẫu: {lon_nhat}).")
     print(f"Ghi {len(mau)} đoạn kiểm (seed {SEED_KIEM}) vào {KIEM_PATH.relative_to(ROOT)}")
     return 0
 

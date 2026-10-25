@@ -24,6 +24,7 @@ Ba phần: (1) đọc chú thích (số, dấu *, chú thích nối liền trong
 from dataclasses import dataclass, replace
 import html
 import re
+import unicodedata
 
 DONG_TRANG_PDF = re.compile(r"^=== Trang (\d+) ===$")
 # Chữ giao diện không mang thông số; giữ danh sách này ngắn (thà giữ thừa còn hơn bỏ sót).
@@ -83,8 +84,15 @@ class Manh:
 
 # --- Đọc dòng ---
 
+KY_TU_AN = re.compile(r"[\u00ad\u200b-\u200d\u2060\ufeff]")  # g\u1ea1ch m\u1ec1m, k\u00fd t\u1ef1 \u0111\u1ed9 r\u1ed9ng 0
+GACH_DAC_BIET = re.compile(r"[\u2010\u2011]")  # 'sub\u20116' (g\u1ea1ch kh\u00f4ng ng\u1eaft) -> 'sub-6'
+
+
 def lam_sach(dong):
-    dong = dong.replace("\u200b", "").replace("\ufeff", "")
+    """NFC tr\u01b0\u1edbc: trang OPPO/Xiaomi c\u00f3 ch\u1eef Vi\u1ec7t d\u1ea1ng d\u1ea5u t\u00e1ch r\u1eddi (NFD), nh\u00ecn gi\u1ed1ng
+    nh\u01b0ng kh\u00f4ng kh\u1edbp khi t\u00ecm ki\u1ebfm."""
+    dong = unicodedata.normalize("NFC", dong)
+    dong = GACH_DAC_BIET.sub("-", KY_TU_AN.sub("", dong))
     return re.sub(r"\s+", " ", dong).strip()
 
 

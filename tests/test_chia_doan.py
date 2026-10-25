@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import unicodedata
 from pathlib import Path
 
 import pytest
@@ -22,6 +23,7 @@ def doc_that(ma_mau, trang="url"):
 
 
 def doan_chua(doan, mau):
+    mau = cd.GACH_DAC_BIET.sub("-", mau)  # đoạn đã chuẩn hóa ('Wi‑Fi' -> 'Wi-Fi')
     ket_qua = [d for d in doan if mau in d["noi_dung"]]
     assert ket_qua, f"không đoạn nào chứa {mau!r}"
     return ket_qua[0]
@@ -340,6 +342,14 @@ def test_pdf_ngat_doan_o_dong_phan_trang():
 def test_dong_trong_va_dong_lap_bi_bo_nhung_giu_dau_gach_cheo():
     dong = cd.doc_dong("A1\n\n   \n•\nA1\nA1\nPlay\nĐến\n/\n30")
     assert [(d.so, d.chu) for d in dong] == [(1, "A1"), (8, "Đến"), (9, "/"), (10, "30")]
+
+
+def test_lam_sach_chuan_hoa_nfc_gach_noi_va_ky_tu_an():
+    nfd = unicodedata.normalize("NFD", "Nhiệt độ")
+    assert nfd != "Nhiệt độ"
+    assert cd.lam_sach(nfd) == "Nhiệt độ"
+    assert cd.lam_sach("5G (sub‑6 GHz)") == "5G (sub-6 GHz)"
+    assert cd.lam_sach("Pin­​ 5000 mAh") == "Pin 5000 mAh"
 
 
 # --- Mã đoạn ---
