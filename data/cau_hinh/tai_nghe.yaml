@@ -1,0 +1,131 @@
+# Tệp cấu hình nhóm tai nghe (Bước 8). Căn cứ: data/cau_hinh/bao_phu_dieu_kien.md, mục 3.
+# Tập phát triển của nhóm chỉ có tn-samsung-buds3pro; phần không có bằng chứng ghi can_cu: hieu_biet_chung.
+nhom: tai_nghe
+ke_thua: chung.yaml
+
+thuoc_tinh:
+  thoi_luong_pin:
+    don_vi: gio
+    huong_thuan_loi: cao_hon_tot_hon
+    kieu_gia_tri_mac_dinh: toi_da           # như hãng công bố; bỏ "lên đến" vẫn khớp (điểm 2, T10)
+    dieu_kien_bat_buoc:
+      che_do_chong_on: che_do_hoat_dong
+      bo_phan: bo_phan
+      hoat_dong: che_do_hoat_dong
+    hieu_thong_thuong:
+      che_do_chong_on: bat                 # Samsung: "ANC được bật theo mặc định"; xác nhận ở Bước 10
+      bo_phan: tai_nghe
+      hoat_dong: nghe_nhac                 # xác nhận ở Bước 10
+    pham_vi_ap_dung:
+      che_do_chong_on: tai nghe có chống ồn chủ động; tài liệu ghi không có thì không áp dụng
+      bo_phan: tai nghe có hộp sạc
+      hoat_dong: khi hãng công bố riêng theo hoạt động
+    can_cu: [tn-samsung-buds3pro#038, tn-samsung-buds3pro#044, tn-samsung-buds3pro#020]
+
+  sac_nhanh:                               # số giờ dùng sau X phút sạc
+    don_vi: gio
+    huong_thuan_loi: cao_hon_tot_hon
+    kieu_gia_tri_mac_dinh: toi_da           # như hãng công bố (điểm 2, T10)
+    dieu_kien_bat_buoc:
+      so_phut_sac: dieu_kien_do
+      bo_phan: bo_phan
+    hieu_thong_thuong:
+      so_phut_sac: khong_co_mac_dinh
+      bo_phan: tai_nghe
+    pham_vi_ap_dung:
+      bo_phan: tai nghe có hộp sạc
+    can_cu: hieu_biet_chung                # Buds3 Pro không công bố sạc nhanh
+
+  khang_nuoc:
+    don_vi: ma_ip
+    huong_thuan_loi: theo_nhanh_ip
+    kieu_gia_tri_mac_dinh: nhu_hang_cong_bo
+    dieu_kien_bat_buoc:
+      bo_phan: bo_phan
+      dieu_kien_thu: dieu_kien_do
+      hoat_dong_bi_cam: dieu_kien_do
+    hieu_thong_thuong:
+      bo_phan: tai_nghe
+      dieu_kien_thu: nhu_hang_cong_bo
+      hoat_dong_bi_cam: nhu_hang_cong_bo
+    pham_vi_ap_dung:
+      bo_phan: hộp sạc không kháng nước thì quảng cáo nói hộp sạc kháng nước là Sai
+      hoat_dong_bi_cam: khi hãng nêu
+    can_cu: [tn-samsung-buds3pro#044, tn-samsung-buds3pro#038]
+
+  dung_luong_pin:
+    don_vi: mAh
+    huong_thuan_loi: cao_hon_tot_hon
+    kieu_gia_tri_mac_dinh: dien_hinh
+    dieu_kien_bat_buoc:
+      bo_phan: bo_phan
+    hieu_thong_thuong:
+      bo_phan: tai_nghe
+    pham_vi_ap_dung:
+      bo_phan: tai nghe có hộp sạc
+    can_cu: [tn-samsung-buds3pro#044]
+
+cach_dien_dat:
+  che_do_chong_on:
+    bat:
+      tu_tai_lieu: ["bật ANC", "Tính năng ANC Bật", "BẬT Tính năng ANC"]
+      hieu_biet_chung: ["bật chống ồn", "bật khử ồn", "khử tiếng ồn chủ động", "chống ồn chủ động"]
+    tat:
+      tu_tai_lieu: ["tắt ANC", "Tính năng ANC Tắt", "Tắt Tính năng ANC"]
+      hieu_biet_chung: ["tắt chống ồn", "tắt khử ồn"]
+    xuyen_am:                              # hãng không công bố số liệu; quảng cáo nêu thì chưa xác định
+      tu_tai_lieu: ["Ambient", "Môi trường xung quanh"]
+      hieu_biet_chung: ["xuyên âm", "âm thanh xung quanh"]
+  bo_phan:
+    tai_nghe:
+      tu_tai_lieu: ["tai nghe"]
+      hieu_biet_chung: ["riêng tai nghe", "mỗi lần sạc"]
+    hop_sac:
+      tu_tai_lieu: ["hộp sạc"]
+      hieu_biet_chung: ["case"]
+    kem_hop_sac:
+      tu_tai_lieu: ["Tổng thời gian", "tai nghe và hộp tai nghe"]
+      hieu_biet_chung: ["kèm hộp sạc", "tính cả hộp sạc", "cùng hộp sạc"]
+  hoat_dong:
+    nghe_nhac:
+      tu_tai_lieu: ["phát nhạc", "Thời gian phát"]
+      hieu_biet_chung: ["nghe nhạc"]
+    dam_thoai:
+      tu_tai_lieu: ["đàm thoại"]
+      hieu_biet_chung: ["gọi điện", "nghe gọi", "thời gian thoại"]
+  so_phut_sac:
+    gia_tri_so:
+      tu_tai_lieu: []
+      hieu_biet_chung: ["sạc nhanh", "phút sạc"]
+  dieu_kien_thu:
+    nuoc_ngot_1m_30_phut:
+      tu_tai_lieu: ["1 mét nước ngọt"]
+      hieu_biet_chung: []
+  hoat_dong_bi_cam:
+    tam_bien_be_boi:
+      tu_tai_lieu: ["tắm biển", "bể bơi"]
+      hieu_biet_chung: ["đi bơi", "bơi lội"]
+
+# Bảng bí danh (T5.4). Tên lấy từ data/mau_san_pham.csv; khong_nham_voi ghi sản phẩm gần tên
+# mà không phải mẫu này (nguồn: trang tập phát triển hoặc hiểu biết chung về dòng sản phẩm).
+san_pham:
+  tn-samsung-buds3pro:
+    ten: Galaxy Buds3 Pro
+    bi_danh: ["Galaxy Buds3 Pro", "Buds3 Pro", "Galaxy Buds 3 Pro", "Buds 3 Pro", "Samsung Galaxy Buds3 Pro"]
+    khong_nham_voi: ["Galaxy Buds3", "Galaxy Buds FE", "Galaxy Buds4 Pro", "Galaxy Buds Core"]
+    phien_ban: SM-R630NZAAXXV (Bạc)
+  tn-apple-airpodspro3:
+    ten: AirPods Pro 3
+    bi_danh: ["AirPods Pro 3", "Apple AirPods Pro 3"]
+    khong_nham_voi: ["AirPods Pro 2", "AirPods Pro"]
+    phien_ban: Hộp sạc MagSafe USB-C
+  tn-apple-airpods4:
+    ten: AirPods 4
+    bi_danh: ["AirPods 4", "Apple AirPods 4"]
+    khong_nham_voi: ["AirPods 4 với Chủ Động Khử Tiếng Ồn", "AirPods 4 ANC"]
+    phien_ban: Bản thường; không có chống ồn chủ động
+  tn-xiaomi-redmibuds6pro:
+    ten: Redmi Buds 6 Pro
+    bi_danh: ["Redmi Buds 6 Pro", "Xiaomi Redmi Buds 6 Pro"]
+    khong_nham_voi: ["Redmi Buds 6", "Redmi Buds 6 Active"]
+    phien_ban: M2430E1

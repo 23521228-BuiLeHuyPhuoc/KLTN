@@ -1,0 +1,112 @@
+# Phần dùng chung cho mọi nhóm sản phẩm (Bước 8).
+# Căn cứ: data/cau_hinh/bao_phu_dieu_kien.md. Chỉ viết từ 4 mẫu tập phát triển, chuẩn quốc tế
+# và hiểu biết chung (T3.5 quy tắc 4, T5.7). Mỗi cụm diễn đạt ghi rõ nguồn:
+#   tu_tai_lieu: có trong doan.jsonl của tập phát triển (scripts/kiem_cau_hinh.py kiểm)
+#   hieu_biet_chung: cách nói thường gặp, chưa có trong tài liệu tập phát triển
+phien_ban: 1
+ngay: 2026-10-26
+
+loai_dieu_kien: [che_do_hoat_dong, bo_phan, phu_kien, dieu_kien_do, phien_ban, kieu_gia_tri]
+trang_thai_dieu_kien: [khong_ap_dung, khong_neu, chua_xac_dinh]
+
+# Giá trị đặc biệt dùng trong hieu_thong_thuong, ngoài các giá trị khai báo ở cach_dien_dat.
+hieu_thong_thuong_dac_biet:
+  kem_thuan_loi_nhat: chọn giá trị kém thuận lợi nhất trong các giá trị hãng công bố cho điều kiện này
+  nhu_hang_cong_bo: lấy đúng điều kiện hãng công bố cho giá trị đang so
+  khong_mua_them: chỉ có phụ kiện trong hộp; giá trị cần phụ kiện mua riêng thì không đạt
+  khong_co_mac_dinh: quảng cáo không nêu thì chưa xác định (D1a)
+
+# Chọn con số để so khi quảng cáo không nêu điều kiện (bảng bao phủ, mục 1).
+chon_gia_tri_khi_khong_neu:
+  mot_gia_tri_khong_dieu_kien: so_thang     # chỉ khi giá trị không kèm cụm điều kiện nào, kể cả cụm cấu hình chưa biết
+  nhieu_gia_tri_co_dieu_kien: theo_hieu_thong_thuong
+  khong_xac_dinh_duoc: D1a
+
+# Điều kiện lạ trong tài liệu (T10 điểm 15; luan_van/phan_tich_dieu_kien_ngoai_cau_hinh.md).
+# Phát hiện điều kiện làm theo kiểu mở, hiểu điều kiện làm theo kiểu đóng.
+dieu_kien_la:
+  truong_trich_xuat: dieu_kien_khac   # mỗi mục: loại (một trong sáu), cụm điều kiện, câu trích
+  quy_tac:
+    - ghi mọi cụm điều kiện gắn với giá trị trong tài liệu; không bỏ cụm nào vì cấu hình không biết
+    - cụm chỉ là câu rào chung (ngu_canh_khong_quyet_dinh) không tính là điều kiện lạ
+    - giá trị có dieu_kien_khac thì điều kiện đó chưa xác định; quảng cáo khớp giá trị này ra D1a, không bao giờ ra Đúng
+  nguyen_nhan_D1a: dieu_kien_la
+  # Phương án 2, chọn ở Bước 33 trên tập phát triển: tài liệu có từ hai giá trị chỉ khác nhau ở cùng một điều kiện lạ
+  # thì coi là lựa chọn của người dùng và áp kem_thuan_loi_nhat.
+  luat_chung_cho_nhieu_gia_tri: tat
+
+# Chữ gọi mức cao (điểm 12, T10, làm rõ 26/10): dùng để phân biệt từ hai giá trị trở lên thì là chế độ
+# (tra cach_goi_theo_hang); gắn với một giá trị duy nhất thì là kiểu giá trị toi_da.
+tu_goi_muc_cao:
+  tu_tai_lieu: ["tối đa", "đỉnh", "cực đại"]
+  hieu_biet_chung: ["peak"]
+  mot_gia_tri: toi_da
+  nhieu_gia_tri: che_do_theo_hang
+
+kieu_gia_tri:
+  toi_da:
+    tu_tai_lieu: ["lên đến", "tối đa", "đến"]
+    hieu_biet_chung: ["up to", "tới"]
+  dien_hinh:
+    tu_tai_lieu: ["typ", "typical"]
+    hieu_biet_chung: ["điển hình"]
+  dinh_muc:
+    tu_tai_lieu: []
+    hieu_biet_chung: ["định mức", "rated"]
+  thich_ung:
+    tu_tai_lieu: ["thích ứng"]
+    hieu_biet_chung: []
+
+# Kiểu giá trị mặc định khi quảng cáo không nêu (điểm 2, T10, đảo lại chiều 26/10 theo số liệu gốc FTC 2012):
+# như hãng công bố; quảng cáo bỏ "lên đến" vẫn khớp, chỉ ghi chú trong lý do.
+ghi_chu_bo_len_den: quảng cáo bỏ "lên đến"
+
+# Từ khẳng định chắc chắn cho dòng D2 (điểm 4, T10).
+tu_khang_dinh:
+  tu: ["luôn", "đảm bảo", "bảo đảm", "ít nhất", "mọi lúc"]
+  pham_vi: cau_trich_gia_tri   # chỉ xét trong câu trích của trường giá trị
+  bo_qua_khi_co: ["không đảm bảo", "không được đảm bảo", "không bảo đảm", "không phải lúc nào", "không luôn"]
+  ghi_chu: chưa thêm "tối thiểu" vì trùng "độ sáng tối thiểu"; bổ sung từ bộ thử ở Bước 16
+
+chuan_hoa:
+  don_vi:
+    gio: ["giờ", "tiếng", "h"]
+    phut: ["phút", "min"]
+    nit: ["nit", "nits", "cd/m²"]
+    W: ["W"]
+    mAh: ["mAh"]
+    Hz: ["Hz"]
+    x: ["x"]
+    m: ["m", "mét"]
+    phan_tram: ["%"]
+  # Tài liệu tập phát triển dùng cả hai kiểu: "3.000 mét", "3.200 nit" (chấm ngăn hàng nghìn)
+  # và "4.5" giờ, "5.4" g của Samsung (chấm thập phân); "13,19 giờ", "7,95 mm" (phẩy thập phân).
+  so:
+    cham_ngan_hang_nghin: dấu chấm theo sau đúng 3 chữ số (3.000 = 3000)
+    cham_thap_phan: dấu chấm theo sau 1 hoặc 2 chữ số (4.5 = 4,5)
+    phay_thap_phan: dấu phẩy luôn là thập phân (13,19 = 13.19)
+  ma_ip:
+    # So theo nhánh của IEC 60529 (điểm 11, T10).
+    chu_so_bui: {thang: [0, 1, 2, 3, 4, 5, 6], huong: cao_hon_tot_hon}
+    chu_so_nuoc:
+      nhanh_tia_nuoc: [0, 1, 2, 3, 4, 5, 6]
+      nhanh_ngam: [7, 8]
+      quy_tac: chỉ so trong cùng nhánh; 8 khắc nghiệt hơn 7; khác nhánh thì không khớp
+    ky_tu_khong_xet: "X"   # IPX7: không công bố chữ số bụi
+  iso_22810:
+    don_vi: m
+    huong: cao_hon_tot_hon
+    quy_doi: {"5ATM": 50, "WR50": 50, "10ATM": 100}
+
+# Chú thích chỉ lưu làm ngữ cảnh, không tham gia quyết định nhãn (bảng bao phủ, mục 5).
+ngu_canh_khong_quyet_dinh:
+  tu_tai_lieu:
+    - "phòng thí nghiệm"
+    - "tiền sản xuất"
+    - "phần mềm tiền phát hành"
+    - "kết quả thực tế"
+    - "không phải là các điều kiện vĩnh viễn"
+    - "không phải là điều kiện cố định"
+    - "cạn pin"
+    - "logo Apple xuất hiện"
+  hieu_biet_chung: ["thử nghiệm nội bộ"]

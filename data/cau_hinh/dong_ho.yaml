@@ -1,0 +1,151 @@
+# Tệp cấu hình nhóm đồng hồ (Bước 8). Căn cứ: data/cau_hinh/bao_phu_dieu_kien.md, mục 4.
+# Tập phát triển của nhóm chỉ có dh-apple-watchse3.
+nhom: dong_ho
+ke_thua: chung.yaml
+
+thuoc_tinh:
+  thoi_luong_pin:
+    don_vi: gio
+    huong_thuan_loi: cao_hon_tot_hon
+    kieu_gia_tri_mac_dinh: toi_da           # như hãng công bố; bỏ "lên đến" vẫn khớp (điểm 2, T10)
+    dieu_kien_bat_buoc:
+      che_do_nguon: che_do_hoat_dong
+      hoat_dong: che_do_hoat_dong
+      phien_ban: phien_ban
+    hieu_thong_thuong:
+      che_do_nguon: thuong
+      hoat_dong: su_dung_binh_thuong        # xác nhận ở Bước 10
+      phien_ban: nhu_hang_cong_bo
+    pham_vi_ap_dung:
+      che_do_nguon: máy có chế độ nguồn thấp
+      hoat_dong: khi hãng công bố riêng theo hoạt động
+      phien_ban: khi tài liệu tách số liệu theo phiên bản; Watch SE 3 cùng 18 giờ cho hai phiên bản
+    can_cu: [dh-apple-watchse3#008, dh-apple-watchse3#002]
+
+  sac_nhanh:                               # hai dạng: tới mốc phần trăm; số giờ dùng sau X phút sạc
+    don_vi: phut_hoac_gio
+    huong_thuan_loi: theo_dang              # dạng 1: thấp hơn tốt hơn; dạng 2: cao hơn tốt hơn
+    kieu_gia_tri_mac_dinh: toi_da           # như hãng công bố (điểm 2, T10)
+    dieu_kien_bat_buoc:
+      bo_tiep_hop: phu_kien
+      cap_sac: phu_kien
+      moc_phan_tram: dieu_kien_do
+      so_phut_sac: dieu_kien_do
+      hoat_dong: che_do_hoat_dong
+    hieu_thong_thuong:
+      bo_tiep_hop: khong_mua_them           # bộ 20W chỉ ghi trong chú thích, không có trong hộp
+      cap_sac: cap_di_kem
+      moc_phan_tram: khong_co_mac_dinh
+      so_phut_sac: khong_co_mac_dinh
+      hoat_dong: su_dung_binh_thuong
+    pham_vi_ap_dung:
+      moc_phan_tram: dạng 1
+      so_phut_sac: dạng 2
+      hoat_dong: dạng 2
+    can_cu: [dh-apple-watchse3#009, dh-apple-watchse3#023]
+
+  khang_nuoc:
+    don_vi: m
+    huong_thuan_loi: cao_hon_tot_hon        # ISO 22810; mã IP thì theo nhánh (chung.yaml)
+    kieu_gia_tri_mac_dinh: nhu_hang_cong_bo
+    dieu_kien_bat_buoc:
+      chuan_do_sau: dieu_kien_do
+      hoat_dong_cho_phep: dieu_kien_do
+    hieu_thong_thuong:
+      chuan_do_sau: nhu_hang_cong_bo
+      hoat_dong_cho_phep: nhu_hang_cong_bo
+    pham_vi_ap_dung:
+      hoat_dong_cho_phep: quảng cáo gợi ý hoạt động bị cấm là Lệch
+    can_cu: [dh-apple-watchse3#016]
+
+  do_sang:
+    don_vi: nit
+    huong_thuan_loi: cao_hon_tot_hon
+    kieu_gia_tri_mac_dinh: toi_da
+    dieu_kien_bat_buoc:
+      che_do_hien_thi: che_do_hoat_dong
+    hieu_thong_thuong:
+      che_do_hien_thi: thong_thuong         # một con số không kèm cụm điều kiện nào thì so thẳng (chung.yaml)
+    pham_vi_ap_dung: {}
+    can_cu: [dh-apple-watchse3#007]
+
+cach_dien_dat:
+  che_do_nguon:
+    thuong:
+      tu_tai_lieu: []
+      hieu_biet_chung: ["chế độ thường"]
+    nguon_thap:
+      tu_tai_lieu: ["Chế Độ Nguồn Điện Thấp"]
+      hieu_biet_chung: ["tiết kiệm pin", "nguồn điện thấp"]
+  hoat_dong:
+    su_dung_binh_thuong:
+      tu_tai_lieu: ["sử dụng bình thường"]
+      hieu_biet_chung: ["dùng bình thường", "dùng hằng ngày"]
+    tap_luyen:
+      tu_tai_lieu: ["tập luyện ngoài trời"]
+      hieu_biet_chung: ["tập luyện", "tập thể thao"]
+    theo_doi_giac_ngu:
+      tu_tai_lieu: ["theo dõi giấc ngủ"]
+      hieu_biet_chung: []
+  phien_ban:
+    gps:
+      tu_tai_lieu: ["(GPS)"]
+      hieu_biet_chung: []
+    gps_cellular:
+      tu_tai_lieu: ["(GPS + Cellular)"]
+      hieu_biet_chung: ["bản di động", "eSIM"]
+  bo_tiep_hop:
+    co_bo_tiep_hop:
+      tu_tai_lieu: ["Bộ Tiếp Hợp Nguồn USB-C 20W"]
+      hieu_biet_chung: ["cục sạc", "củ sạc"]
+  cap_sac:
+    cap_di_kem:
+      tu_tai_lieu: ["Cáp Sạc Nhanh Từ Tính"]
+      hieu_biet_chung: ["cáp đi kèm"]
+  moc_phan_tram:
+    phan_tram:
+      tu_tai_lieu: ["Sạc lên đến 80%"]
+      hieu_biet_chung: ["sạc đầy"]
+  so_phut_sac:
+    phut:
+      tu_tai_lieu: ["Sạc 15 phút", "Sạc 8 phút"]
+      hieu_biet_chung: []
+  chuan_do_sau:
+    iso_22810:
+      tu_tai_lieu: ["ISO 22810", "độ sâu 50m"]
+      hieu_biet_chung: ["5ATM", "WR50"]
+  hoat_dong_cho_phep:
+    duoc_phep:
+      tu_tai_lieu: ["bơi lội trong bể bơi", "dưới biển"]
+      hieu_biet_chung: []
+    bi_cam:
+      tu_tai_lieu: ["lặn với bình dưỡng khí", "lướt ván"]
+      hieu_biet_chung: ["lặn sâu"]
+  che_do_hien_thi:
+    thong_thuong:
+      tu_tai_lieu: []
+      hieu_biet_chung: ["bình thường"]
+    # "Độ sáng đỉnh 1000 nit" của Watch SE 3 gắn với một giá trị duy nhất nên là kiểu giá trị toi_da,
+    # không phải chế độ (chung.yaml, tu_goi_muc_cao).
+
+# Bảng bí danh (T5.4). Tên lấy từ data/mau_san_pham.csv.
+san_pham:
+  dh-apple-watchse3:
+    ten: Apple Watch SE 3
+    bi_danh: ["Apple Watch SE 3", "Watch SE 3"]
+    khong_nham_voi: ["Apple Watch SE 2", "Apple Watch SE", "Apple Watch Series 12", "Apple Watch Ultra 4"]
+    phien_ban: GPS 44 mm
+    bi_danh_phien_ban:
+      gps: ["GPS"]
+      gps_cellular: ["GPS + Cellular"]
+      co_vo: ["40mm", "44mm"]
+  dh-samsung-galaxywatch8:
+    ten: Galaxy Watch8
+    bi_danh: ["Galaxy Watch8", "Galaxy Watch 8", "Samsung Galaxy Watch8"]
+    khong_nham_voi: ["Galaxy Watch8 Classic", "Galaxy Watch7", "Galaxy Watch Ultra"]
+    phien_ban: Bluetooth 44 mm; SM-L330NZSAXXV
+  dh-xiaomi-watchs4:
+    ten: Xiaomi Watch S4
+    bi_danh: ["Xiaomi Watch S4", "Watch S4"]
+    khong_nham_voi: ["Xiaomi Watch S4 41mm", "Xiaomi Watch S3"]
+    phien_ban: Bản Việt Nam 47.3 mm

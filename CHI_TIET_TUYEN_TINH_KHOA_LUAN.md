@@ -293,19 +293,21 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Viết 3 tệp `dien_thoai.yaml`, `tai_nghe.yaml`, `dong_ho.yaml` theo mẫu ở [T5.7](#t5-7), dựa vào bảng cách hiểu thông thường ở [T4.5](#t4-5).
-- [ ] Mỗi thuộc tính có: đơn vị; hướng thuận lợi (cao hơn tốt hơn hay thấp hơn tốt hơn); kiểu giá trị mặc định; các điều kiện bắt buộc và loại của từng điều kiện (một trong sáu loại); cách hiểu thông thường; các cách diễn đạt của từng điều kiện. Mỗi tệp có thêm bảng bí danh tên sản phẩm và phiên bản ([T5.4](#t5-4)).
-- [ ] Ghi danh sách từ khẳng định chắc chắn ("luôn", "đảm bảo", "ít nhất", "mọi lúc").
-- [ ] **Chỉ dùng trang của tập phát triển** khi viết.
-- [ ] Lập `data/cau_hinh/bao_phu_dieu_kien.md` từ bốn mẫu phát triển: thuộc tính → điều kiện → loại điều kiện → phạm vi áp dụng → nguồn/chú thích → cách xử lý khi không nêu. Giữ nguyên 12 mẫu và cách chia tập; tiêu chí ba thông số có điều kiện ở Bước 4 chưa đảm bảo cấu hình bao phủ đủ.
-- [ ] Chốt điều kiện tham gia quyết định nhãn và điều kiện chỉ lưu làm ngữ cảnh thử nghiệm, kèm lý do. Không mặc nhiên coi mọi chú thích là điều kiện bắt buộc. Kiểm tra dữ liệu Bước 5–7 giữ được liên kết giữa con số và chú thích.
-- [ ] Quy định phạm vi áp dụng của từng điều kiện theo T5.7; phân biệt không áp dụng, không nêu và chưa xác định. Không ép mọi sản phẩm trong nhóm có cùng điều kiện, không đổi trường trống thành "tắt" hoặc "không có".
-- [ ] Không bổ sung quy tắc/bí danh điều kiện từ tám mẫu kiểm tra để xử lý riêng các mẫu đó. Điều kiện chưa hỗ trợ xử lý theo T5.3 và ghi nhận khi đánh giá; xem nguồn để chọn mẫu không có nghĩa được dùng nguồn đó để thiết kế cấu hình.
-- [ ] Chốt điểm 2, 3, 4, 11 và 12 ở [T10](#t10); ghi kết quả vào nhật ký.
+- [x] Viết 3 tệp `dien_thoai.yaml`, `tai_nghe.yaml`, `dong_ho.yaml` theo mẫu ở [T5.7](#t5-7), dựa vào bảng cách hiểu thông thường ở [T4.5](#t4-5).
+- [x] Mỗi thuộc tính có: đơn vị; hướng thuận lợi (cao hơn tốt hơn hay thấp hơn tốt hơn); kiểu giá trị mặc định; các điều kiện bắt buộc và loại của từng điều kiện (một trong sáu loại); cách hiểu thông thường; các cách diễn đạt của từng điều kiện. Mỗi tệp có thêm bảng bí danh tên sản phẩm và phiên bản ([T5.4](#t5-4)).
+- [x] Ghi danh sách từ khẳng định chắc chắn ("luôn", "đảm bảo", "ít nhất", "mọi lúc").
+- [x] **Chỉ dùng trang của tập phát triển** khi viết.
+- [x] Lập `data/cau_hinh/bao_phu_dieu_kien.md` từ bốn mẫu phát triển: thuộc tính → điều kiện → loại điều kiện → phạm vi áp dụng → nguồn/chú thích → cách xử lý khi không nêu. Giữ nguyên 12 mẫu và cách chia tập; tiêu chí ba thông số có điều kiện ở Bước 4 chưa đảm bảo cấu hình bao phủ đủ.
+- [x] Chốt điều kiện tham gia quyết định nhãn và điều kiện chỉ lưu làm ngữ cảnh thử nghiệm, kèm lý do. Không mặc nhiên coi mọi chú thích là điều kiện bắt buộc. Kiểm tra dữ liệu Bước 5–7 giữ được liên kết giữa con số và chú thích.
+- [x] Quy định phạm vi áp dụng của từng điều kiện theo T5.7; phân biệt không áp dụng, không nêu và chưa xác định. Không ép mọi sản phẩm trong nhóm có cùng điều kiện, không đổi trường trống thành "tắt" hoặc "không có".
+- [x] Không bổ sung quy tắc/bí danh điều kiện từ tám mẫu kiểm tra để xử lý riêng các mẫu đó. Điều kiện chưa hỗ trợ xử lý theo T5.3 và ghi nhận khi đánh giá; xem nguồn để chọn mẫu không có nghĩa được dùng nguồn đó để thiết kế cấu hình.
+- [x] Chốt điểm 2, 3, 4, 11 và 12 ở [T10](#t10); ghi kết quả vào nhật ký.
 
 **Làm ra:** `data/cau_hinh/dien_thoai.yaml`, `data/cau_hinh/tai_nghe.yaml`, `data/cau_hinh/dong_ho.yaml`, `data/cau_hinh/bao_phu_dieu_kien.md`.
 
 **Xong khi:** mọi thuộc tính trong sáu nhóm thông số có đủ các khóa như mẫu ở T5.7; có bảng bao phủ từ tập phát triển, phạm vi áp dụng, quy tắc xử lý ba trạng thái và phần chưa hỗ trợ. Không yêu cầu bao phủ trước mọi điều kiện của tập kiểm tra.
+
+**Đã thực hiện ngày 26/10/2026:** [bao_phu_dieu_kien.md](data/cau_hinh/bao_phu_dieu_kien.md) lập từ việc đọc trọn trang của 4 mẫu phát triển; mỗi điều kiện có loại, phạm vi áp dụng, cách hiểu khi không nêu, vai trò (quyết định nhãn hay chỉ ngữ cảnh), căn cứ và mã đoạn nguồn. Kế hoạch ghi "sáu nhóm thông số" nhưng không liệt kê; cấu hình dùng 16 thuộc tính (điện thoại 8, gồm công suất sạc mới thêm; tai nghe 4; đồng hồ 4). Cấu hình gồm `chung.yaml` (chuẩn hóa, kiểu giá trị, từ khẳng định, cách chọn con số khi quảng cáo không nêu điều kiện) và 3 tệp nhóm có bảng bí danh 12 mẫu. `scripts/kiem_cau_hinh.py` kiểm đủ khóa, sáu loại điều kiện, căn cứ chỉ từ tập phát triển, mỗi cụm "tu_tai_lieu" có trong tài liệu tập phát triển: 0 lỗi; 115 test đạt. Đã chốt điểm 2, 3, 4, 11, 12 ở T10 (điểm 11, 12 đổi so với đề xuất; điểm 2 giữ như đề xuất sau khi đọc báo cáo gốc FTC 2012) và tạm chốt cách hiểu ở điểm 1; thêm điểm 15 (luật chặn điều kiện lạ trong tài liệu, phân tích ở `luan_van/phan_tich_dieu_kien_ngoai_cau_hinh.md`); thêm khảo sát 20–30 người ở Bước 10, điểm dừng cho nhãn Lệch ở Bước 16 và phân tích độ nhạy, độ bao phủ ở Bước 37. Chưa làm: thử độ bao phủ trên 3 sản phẩm ngoài 12 mẫu (làm trước Bước 9, là một tiêu chí của điểm dừng Bước 16). Chi tiết trong [nhật ký](luan_van/nhat_ky.md).
 
 **Tra cứu:** [T5.7](#t5-7) (mẫu tệp cấu hình), [T4.5](#t4-5) (cách hiểu thông thường), [T10](#t10) (điểm cần chốt).
 
@@ -333,7 +335,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 <a id="b10"></a>
 
-### Bước 10 · Khảo sát cách hiểu của 5–10 người đọc
+### Bước 10 · Khảo sát cách hiểu của 20–30 người đọc
 
 **Ngày:** Thứ Sáu 23/10 · **Thời lượng:** khoảng 2 giờ · **Thuộc:** Nội dung 1 (dữ liệu)
 
@@ -342,7 +344,8 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 **Việc cần làm**
 
 - [ ] Soạn phiếu (ví dụ bằng Google Forms) khoảng 8 tuyên bố không nêu điều kiện, chỉ lấy mẫu của tập phát triển, ví dụ "Apple Watch SE 3 pin 32 giờ", "iPhone 17 sạc 50% trong 20 phút", "Galaxy Buds3 Pro pin 7 giờ". Với mỗi tuyên bố, hỏi người đọc hiểu là trong điều kiện nào (chọn một phương án hoặc tự ghi).
-- [ ] Gửi cho 5–10 người, ưu tiên người không học công nghệ thông tin vì gần với người mua thông thường.
+- [ ] Gửi cho 20–30 người (sửa 26/10, trước là 5–10: quá ít để nói "đa số người mua hiểu là..."), ưu tiên người không học công nghệ thông tin vì gần với người mua thông thường.
+- [ ] Phiếu phải có các câu kiểm cách hiểu đã tạm chốt ở Bước 8: "Galaxy Buds3 Pro pin 6 giờ" (nghe nhạc hay đàm thoại, bật hay tắt chống ồn), "Apple Watch SE 3 pin 18 giờ" (sử dụng bình thường hay tập luyện), và một câu bỏ "lên đến" (người đọc hiểu là thường đạt hay tối đa; đối chiếu với kết quả FTC 2012, nơi bỏ "up to" không làm cách hiểu khác đi có ý nghĩa thống kê).
 - [ ] Ghi tỷ lệ người hiểu giống cách hiểu thông thường trong tệp cấu hình. Câu nào quá nửa số người hiểu khác thì sửa tệp cấu hình, hướng dẫn gán nhãn và nhãn của các ví dụ liên quan (ví dụ 8, 9, 14 ở [T4.6](#t4-6)).
 - [ ] Chốt điểm 1 ở [T10](#t10).
 - [ ] Nếu trong ngày chưa đủ 5 câu trả lời thì vẫn sang Bước 11; tổng hợp khi đủ, nhưng phải xong trước Bước 13 (gán nhãn bộ thử).
@@ -479,6 +482,11 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 - [ ] Giải quyết các "câu hỏi nhãn" của Bước 13; sửa thành hướng dẫn bản 2; gán lại bộ thử theo bản 2.
 - [ ] Chốt quy mô: số bài cần sinh cho mỗi mẫu để tổng đạt 250–300 tuyên bố, tính cả bộ thử. Nếu trung bình dưới 2 tuyên bố có điều kiện mỗi bài thì áp dụng phương án ở [T9.1](#t9-1): tăng số bài; nếu vẫn thiếu thì điền tên các nhóm thông số (không kèm con số) vào ô từ khóa cho **mọi** bài và sinh lại 24 bài của bộ thử, để bộ thử và bộ chính cùng thiết lập (điểm 13 ở [T10](#t10)).
 - [ ] Bổ sung danh sách từ khẳng định từ bộ thử (điểm 4 ở T10).
+- [ ] **Điểm dừng cho nhãn Lệch điều kiện** (thêm 26/10, xem `luan_van/phan_tich_dieu_kien_ngoai_cau_hinh.md` mục 7). Đạt cả ba thì giữ bốn nhãn:
+  - bộ thử có ít nhất 10 tuyên bố Lệch không thuộc loại "lên đến"; không đủ thì tăng bài sinh theo [T9.1](#t9-1), vẫn thiếu thì đánh giá nhãn Lệch chủ yếu trên tập cặp tối thiểu và ghi rõ giới hạn;
+  - nhờ một người thứ hai gán độc lập ít nhất 30 tuyên bố của bộ thử, gồm mọi tuyên bố Lệch; kappa của riêng nhãn Lệch đạt ít nhất 0,6; không đạt thì sửa hướng dẫn rồi gán lại;
+  - bước thử độ bao phủ trên 3 sản phẩm ngoài 12 mẫu (làm trước Bước 9) nhận ra ít nhất 80% cụm điều kiện quyết định; không đạt thì bổ sung luật từ chính 3 trang đó.
+- [ ] Nếu sau khi sửa vẫn không đạt: dùng **phương án lùi**: ba nhãn Đúng, Sai, Chưa đủ thông tin cộng cờ "thiếu hoặc đổi điều kiện" kèm loại điều kiện. Giả thuyết 1 (FAR) và câu hỏi 3 giữ nguyên; giả thuyết 2 đo F1 của cờ thay cho F1 nhãn Lệch. Ghi quyết định vào nhật ký và báo CBHD.
 - [ ] Viết báo cáo 1–2 trang và gửi CBHD.
 
 **Làm ra:** `ket_qua/bo_thu/bao_cao.md`, hướng dẫn gán nhãn bản 2.
@@ -611,6 +619,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 - [ ] Viết câu lệnh trích xuất từ khung T12.4 ở [T12](#t12), theo lược đồ bảy trường ở [T5.1](#t5-1).
 - [ ] Cài kiểm tra neo nguồn, khâu (b) ở [T5.3](#t5-3): câu trích phải có trong văn bản; con số phải khớp giá trị đã điền; trường không đạt bị bỏ, không đoán.
 - [ ] Cài kiểm tra đầy đủ, khâu (c) ở T5.3: dò các cụm từ điều kiện trong tệp cấu hình để bổ sung điều kiện LLM bỏ sót; vẫn không xác định được điều kiện thì đánh dấu để bộ quyết định kết luận Chưa đủ thông tin (dòng D1a).
+- [ ] Trích xuất điều kiện theo kiểu mở (thêm 26/10, điểm 15 ở [T10](#t10)): với mỗi giá trị trong tài liệu, ghi **mọi** cụm điều kiện gắn với nó, kèm loại (một trong sáu) và câu trích; cụm không khớp cách diễn đạt nào trong tệp cấu hình ghi vào `dieu_kien_khac`, không được bỏ. Câu rào chung trong `ngu_canh_khong_quyet_dinh` không tính. Kiểm thử: giá trị có cụm điều kiện lạ phải còn `dieu_kien_khac` sau khi qua kiểm tra neo nguồn.
 - [ ] Viết kiểm thử cho neo nguồn và kiểm tra đầy đủ: câu trích không có trong nguồn, con số sai, điều kiện bịa, điều kiện bị bỏ sót.
 - [ ] Chạy trên tập phát triển; đếm số trường bị loại và số điều kiện được bổ sung (khâu (d) ở T5.3).
 
@@ -719,6 +728,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 - [ ] Cài bốn bước A–D theo mã giả ở [T5.5](#t5-5), đúng thứ tự trong đề cương; các dòng D1–D6 ở [T4.3](#t4-3).
 - [ ] Sinh lý do từ dấu vết theo mẫu câu ở [T5.6](#t5-6).
 - [ ] Viết kiểm thử theo [T5.8](#t5-8): mỗi dòng D1–D6 (kể cả D1a, D1b) ít nhất 3 kiểm thử (khớp, không khớp, trường hợp biên); mọi ví dụ trong hướng dẫn gán nhãn thành kiểm thử hồi quy.
+- [ ] Cài luật chặn điều kiện lạ (thêm 26/10, điểm 15 ở [T10](#t10), `chung.yaml` mục `dieu_kien_la`): giá trị có `dieu_kien_khac` không bao giờ dẫn tới Đúng; quảng cáo khớp giá trị này ra D1a với nguyên nhân `dieu_kien_la`. "So thẳng" chỉ khi giá trị không kèm cụm điều kiện nào. Kiểm thử ba tình huống ở mục 4 của `luan_van/phan_tich_dieu_kien_ngoai_cau_hinh.md`. Cài luật chung cho nhiều giá trị khác nhau ở cùng điều kiện lạ thành công tắc, mặc định tắt, chọn ở Bước 33.
 - [ ] Chốt điểm 5, 6 và 14 ở [T10](#t10).
 
 **Làm ra:** `src/kiemchung/quyet_dinh.py`, `tests/test_quyet_dinh.py`.
@@ -944,6 +954,8 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 - [ ] Viết `danh_gia.py` theo [T6.4](#t6-4) và [T6.5](#t6-5): FAR, Precision, Recall, F1 từng nhãn, Macro-F1; Recall@k của BM25; Precision và Recall của tách tự động; thời gian và chi phí gọi LLM. Độ đúng trích xuất trên tập kiểm tra tính ở Bước 38, sau khi gán tay.
 - [ ] Tính KTC bằng bootstrap theo cụm quảng cáo; kiểm định McNemar có hiệu chỉnh Holm cho chênh lệch FAR giữa P và từng đối chứng.
 - [ ] Báo riêng theo [T6.7](#t6-7): tuyên bố thường và tập cặp tối thiểu; từng loại biến đổi, nhóm sản phẩm, hãng, LLM sinh quảng cáo, chế độ sinh.
+- [ ] Phân tích độ nhạy (thêm 26/10): tính lại chỉ số khi mọi tuyên bố có nhãn phụ thuộc cách hiểu mặc định (trường `mac_dinh` khác rỗng) được đổi thành Chưa đủ thông tin. Báo số nhãn thay đổi và P còn hơn các đối chứng hay không, để kết luận không chỉ dựa vào giả định của tệp cấu hình.
+- [ ] Báo độ bao phủ của cấu hình (thêm 26/10): tỷ lệ giá trị trong bằng chứng có `dieu_kien_khac`, tỷ lệ tuyên bố ra Chưa đủ thông tin vì `dieu_kien_la`, chia theo hãng và nhóm; đối chiếu với dự đoán ghi trước ở `bao_phu_dieu_kien.md` mục 7. Báo riêng F1 nhãn Lệch theo loại (`bo_dieu_kien`, `doi_dieu_kien`, `doi_bo_phan`, `doi_kieu_gia_tri`...) và riêng cho tập cặp tối thiểu, vì tập này chỉ chứa các biến đổi cấu hình đã biết.
 - [ ] Xuất bảng ra CSV và vẽ hình theo [T6.9](#t6-9).
 
 **Làm ra:** `src/kiemchung/danh_gia.py`, `ket_qua/kiem_tra/bang/*.csv`, `ket_qua/kiem_tra/hinh/*.png`.
@@ -1627,7 +1639,7 @@ Khi gán nhãn chuẩn, người gán xác định điều kiện từ tài li�
 | Dòng | Kiểm tra | Nhãn |
 |---|---|---|
 | D1 | Tài liệu không có thông số cùng sản phẩm và thuộc tính | Chưa đủ thông tin |
-| D1a | Không xác định được điều kiện của tuyên bố, kể cả sau khi dò cụm từ trong tệp cấu hình (ví dụ tuyên bố nêu một chế độ mà tệp cấu hình không biết) | Chưa đủ thông tin |
+| D1a | Không xác định được điều kiện của tuyên bố, kể cả sau khi dò cụm từ trong tệp cấu hình (ví dụ tuyên bố nêu một chế độ mà tệp cấu hình không biết); hoặc giá trị khớp trong tài liệu kèm điều kiện lạ, tức cụm điều kiện mà tệp cấu hình không biết (thêm 26/10, điểm 15 ở [T10](#t10)) | Chưa đủ thông tin |
 | D1b | Tài liệu ghi hai giá trị khác nhau cho cùng sản phẩm, thuộc tính và điều kiện của tuyên bố | Chưa đủ thông tin, đặt cờ `tai_lieu_mau_thuan` |
 | D2 | Tuyên bố biến mức "lên đến" thành mức chắc chắn đạt: có từ khẳng định ("luôn", "đảm bảo", "ít nhất", "mọi lúc") cho một mức không cao hơn mức "lên đến" ở cùng điều kiện | Lệch điều kiện (`doi_kieu_gia_tri`) |
 | D3 | Có thông số cùng điều kiện và giá trị khớp | Đúng |
@@ -2180,6 +2192,7 @@ Năm rủi ro đầu lấy từ đề cương. Cột "Dấu hiệu sớm" cho bi
 | Thiếu thời gian | Chậm hơn ngày ghi ở bước đang làm quá 2 ngày | Áp dụng thứ tự rút gọn ở T9.2 |
 | B3 (SemViQA) không cài được | Lỗi cài gói, thiếu RAM | Chạy trên Google Colab; vẫn lỗi thì ghi rõ và báo CBHD, vì B3 thuộc phần lõi trong đề cương |
 | Trễ tích hợp CopyPro | Bước 40 trễ quá 2 ngày | Giao diện tối giản (một bảng danh sách) nhưng vẫn lưu kết quả vào `Content`, giữ cam kết của Nội dung 4 |
+| Nhãn Lệch điều kiện không khả thi: quá ít ca thật, người gán không đồng thuận, hoặc cấu hình phủ kém (thêm 26/10) | Bước 16: không đạt điểm dừng | Sửa hướng dẫn, bổ sung luật; vẫn không đạt thì dùng phương án lùi ở Bước 16 (ba nhãn cộng cờ thiếu điều kiện) |
 | P không đạt giả thuyết | Bước 39 | Báo trung thực; phân tích lỗi chỉ ra khối gây lỗi; đề xuất cải tiến ở Chương 6 |
 
 <a id="t9-2"></a>
@@ -2205,20 +2218,21 @@ Riêng khi chậm vì gán nhãn (rủi ro "Gán nhãn chậm" trong đề cươ
 
 | # | Điểm cần chốt | Phương án đề xuất | Chốt ở |
 |---|---|---|---|
-| 1 | Cách hiểu thông thường khi tuyên bố không nêu chế độ người dùng tự chọn (chống ồn, tiết kiệm pin, hoạt động sử dụng) | Chế độ kém thuận lợi nhất trong các chế độ hãng công bố | [Bước 10](#b10), bằng khảo sát |
-| 2 | Kiểu giá trị mặc định của từng thuộc tính khi tuyên bố không nêu | Dung lượng pin: điển hình; thời lượng pin, độ sáng: tối đa như hãng công bố | [Bước 8](#b08) |
-| 3 | Zoom quang học hay kỹ thuật số thuộc loại điều kiện nào (đề cương coi là điều kiện bắt buộc nhưng chưa xếp loại) | Chế độ hoạt động | [Bước 8](#b08) |
-| 4 | Danh sách từ khẳng định chắc chắn cho dòng D2 | "luôn", "đảm bảo", "ít nhất", "mọi lúc"; bổ sung từ bộ thử | [Bước 8](#b08), [16](#b16) |
+| 1 | Cách hiểu thông thường khi tuyên bố không nêu chế độ người dùng tự chọn (chống ồn, tiết kiệm pin, hoạt động sử dụng) | Chế độ kém thuận lợi nhất trong các chế độ hãng công bố. **Tạm chốt 26/10 (Bước 8):** chống ồn hiểu là bật (Samsung ghi ANC bật mặc định); chế độ nguồn hiểu là thường; hoạt động: điện thoại lấy hoạt động kém thuận lợi nhất hãng công bố, tai nghe hiểu là nghe nhạc, đồng hồ hiểu là sử dụng bình thường | [Bước 10](#b10), bằng khảo sát |
+| 2 | Kiểu giá trị mặc định của từng thuộc tính khi tuyên bố không nêu | Dung lượng pin: điển hình; thời lượng pin, độ sáng: tối đa như hãng công bố. **Đã chốt 26/10:** giữ như đề xuất. Thời lượng pin, thời gian sạc, độ sáng, tần số quét, zoom, công suất sạc: tối đa như hãng công bố; quảng cáo bỏ "lên đến" vẫn khớp, lý do ghi thêm ghi chú. Dung lượng pin: điển hình. Sáng 26/10 từng chốt "bỏ lên đến là Lệch", chiều 26/10 đảo lại sau khi đọc báo cáo gốc FTC 2012: quảng cáo "up to 47%" và "47%" không khác nhau có ý nghĩa thống kê về cách người đọc hiểu (Q4b 48,2% so với 40,9%; Q5 43,0% so với 45,2%), nên chép con số mà bỏ "lên đến" không gây hiểu sai hơn tài liệu; khớp ví dụ đoạn 73 của đề cương. Xem `luan_van/phan_tich_dieu_kien_ngoai_cau_hinh.md` mục 8.1 | [Bước 8](#b08) |
+| 3 | Zoom quang học hay kỹ thuật số thuộc loại điều kiện nào (đề cương coi là điều kiện bắt buộc nhưng chưa xếp loại) | Chế độ hoạt động. **Đã chốt 26/10:** chế độ hoạt động; thêm độ phóng đại hay phạm vi thu phóng (điều kiện đo) và chụp ảnh hay quay video (chế độ hoạt động), vì iPhone 17 ghi phạm vi quang học 4x và kỹ thuật số 10x khi chụp, 6x khi quay | [Bước 8](#b08) |
+| 4 | Danh sách từ khẳng định chắc chắn cho dòng D2 | "luôn", "đảm bảo", "ít nhất", "mọi lúc"; bổ sung từ bộ thử. **Đã chốt 26/10:** thêm "bảo đảm" (biến thể chính tả); chỉ xét từ nằm trong câu trích của giá trị, vì tài liệu có "Màn hình Luôn Bật", "Luôn kết nối"; bỏ dạng phủ định ("không đảm bảo"); chưa thêm "tối thiểu" vì trùng "độ sáng tối thiểu" | [Bước 8](#b08), [16](#b16) |
 | 5 | Dòng D2 có áp dụng khi tuyên bố khẳng định một mức thấp hơn mức "lên đến" không | Có: khẳng định chắc chắn một mức không cao hơn mức "lên đến" ở cùng điều kiện là Lệch điều kiện | [Bước 27](#b27) |
 | 6 | Vị trí kiểm tra "tài liệu ghi mâu thuẫn" (có trong định nghĩa nhãn Chưa đủ thông tin, không có trong chuỗi D) | Ngay sau D1a, trước D2 (dòng D1b) | [Bước 27](#b27) |
 | 7 | Số phiên bản mỗi lần gọi khi sinh quảng cáo (CopyPro mặc định 3) | 1 phiên bản mỗi lần gọi, để mỗi bài là một lần sinh độc lập; nếu giữ 3 thì gom cụm bootstrap theo lần gọi | [Bước 11](#b11) |
 | 8 | Ngưỡng sai số làm tròn khi so giá trị | 1%, chọn lại trên tập phát triển | [Bước 33](#b33) |
 | 9 | LLM dùng cho P và B0–B2; LLM mạnh hơn cho B4 | Chọn trên tập phát triển trong số các LLM đã thử ở Bước 2 | [Bước 33](#b33) |
 | 10 | Điều kiện gặp trong dữ liệu mà không xếp được vào sáu loại | Ghi vào `ghi_chu` khi gán nhãn; thống kê và báo trong phần giới hạn | [Bước 13](#b13), [20](#b20), [24](#b24) |
-| 11 | So khớp chuẩn IP: đề cương coi giá trị kém thuận lợi hơn là khớp, nhưng các mức chống nước không xếp thành một thang | Mã IP phải bằng đúng, vì theo IEC 60529 mức 7–8 không mặc nhiên bao gồm mức 5–6 | [Bước 8](#b08) |
-| 12 | Cách gọi độ sáng khác nhau giữa các hãng ("tối đa", "cực đại", "đỉnh") | Khai báo cách gọi theo từng mẫu trong tệp cấu hình; với độ sáng, các từ này là chế độ hiển thị, không phải kiểu giá trị | [Bước 8](#b08) |
+| 11 | So khớp chuẩn IP: đề cương coi giá trị kém thuận lợi hơn là khớp, nhưng các mức chống nước không xếp thành một thang | Mã IP phải bằng đúng, vì theo IEC 60529 mức 7–8 không mặc nhiên bao gồm mức 5–6. **Đã chốt 26/10, đổi so với đề xuất:** so theo nhánh của IEC 60529: chữ số bụi 0–6 xếp thành thang; chữ số nước tách hai nhánh 0–6 (tia nước) và 7–8 (ngâm), mức 8 khắc nghiệt hơn mức 7, chỉ so trong cùng nhánh. Đồng hồ theo ISO 22810: chuẩn hóa 5ATM = 50 m, mức cao hơn là tốt hơn. Cần trích nguyên văn chuẩn khi viết | [Bước 8](#b08) |
+| 12 | Cách gọi độ sáng khác nhau giữa các hãng ("tối đa", "cực đại", "đỉnh") | Khai báo cách gọi theo từng mẫu trong tệp cấu hình; với độ sáng, các từ này là chế độ hiển thị, không phải kiểu giá trị. **Đã chốt 26/10, đổi so với đề xuất:** khai báo theo hãng và chỉ từ tập phát triển (khai báo theo từng mẫu buộc phải đọc trang tập kiểm tra): Apple "tối đa" là tiêu chuẩn, "đỉnh" là HDR hoặc ngoài trời; Xiaomi "cực đại" là chế độ tự tăng sáng đo trên 25% diện tích. Chữ trỏ tới nhiều chế độ thì D1a. Tài liệu chỉ có một con số không kèm điều kiện thì so thẳng. **Làm rõ chiều 26/10:** chữ dùng để phân biệt từ hai giá trị trở lên là chế độ; gắn với một giá trị duy nhất (Watch SE 3 "đỉnh 1000 nit") là kiểu giá trị tối đa, áp được cho cả hãng chưa có trong tập phát triển | [Bước 8](#b08) |
 | 13 | Ô từ khóa khi sinh quảng cáo | Để trống để chế độ `ten` đúng là "chỉ nhập tên sản phẩm". Nếu Bước 16 thấy quá ít tuyên bố: điền tên các nhóm thông số, không kèm con số, cho mọi bài và sinh lại bộ thử | [Bước 11](#b11), [16](#b16) |
 | 14 | Khi không xác định được điều kiện: kết luận ngay (theo câu ở Nội dung 2) hay xét tiếp các dòng sau | Kết luận ngay là Chưa đủ thông tin (dòng D1a) | [Bước 27](#b27) |
+| 15 | Điều kiện trong tài liệu mà tệp cấu hình không biết (thêm 26/10). Nếu bước trích xuất chỉ ghi điều kiện có tên trong cấu hình, điều kiện lạ bị bỏ im lặng và giá trị bị coi như không điều kiện, dẫn tới Đúng nhầm, làm hỏng FAR | **Đã chốt 26/10:** phát hiện điều kiện theo kiểu mở (ghi mọi cụm, cụm lạ vào `dieu_kien_khac`), hiểu điều kiện theo kiểu đóng; giá trị kèm điều kiện lạ thì quảng cáo khớp nó ra D1a, không bao giờ ra Đúng. Luật chung cho nhiều giá trị ở cùng điều kiện lạ ("kém thuận lợi nhất") là công tắc, chọn ở Bước 33. Phân tích ở `luan_van/phan_tich_dieu_kien_ngoai_cau_hinh.md` | [Bước 8](#b08), [22](#b22), [27](#b27), [33](#b33) |
 | 15 | Tiêu chí kết luận giả thuyết: hai mức (theo phát biểu của đề cương, và có ý nghĩa thống kê), cách hiểu "đối chứng tốt nhất", tập dùng để kiểm | Như [T6.6](#t6-6); xin CBHD duyệt | [Bước 33](#b33), trước Mốc 3 |
 
 ---

@@ -1,0 +1,266 @@
+# Tệp cấu hình nhóm điện thoại (Bước 8). Căn cứ: data/cau_hinh/bao_phu_dieu_kien.md, mục 2.
+# Tập phát triển của nhóm: dt-apple-iphone17, dt-xiaomi-15t.
+nhom: dien_thoai
+ke_thua: chung.yaml
+
+thuoc_tinh:
+  thoi_luong_pin:
+    don_vi: gio
+    huong_thuan_loi: cao_hon_tot_hon
+    kieu_gia_tri_mac_dinh: toi_da           # như hãng công bố; bỏ "lên đến" vẫn khớp (điểm 2, T10)
+    dieu_kien_bat_buoc:
+      hoat_dong: che_do_hoat_dong
+      phien_ban: phien_ban
+    hieu_thong_thuong:
+      hoat_dong: kem_thuan_loi_nhat        # xác nhận ở Bước 10 (điểm 1, T10)
+      phien_ban: nhu_hang_cong_bo          # phiên bản nêu trong tên sản phẩm
+    pham_vi_ap_dung:
+      hoat_dong: khi hãng công bố riêng theo hoạt động
+      phien_ban: khi tài liệu tách số liệu theo phiên bản
+    can_cu: [dt-apple-iphone17#016, dt-xiaomi-15t#047]
+
+  sac_nhanh:                               # thời gian sạc tới mốc phần trăm
+    don_vi: phut
+    huong_thuan_loi: thap_hon_tot_hon
+    kieu_gia_tri_mac_dinh: toi_da           # như hãng công bố (điểm 2, T10)
+    dieu_kien_bat_buoc:
+      bo_tiep_hop: phu_kien
+      cach_sac: phu_kien
+      moc_phan_tram: dieu_kien_do
+    hieu_thong_thuong:
+      bo_tiep_hop: khong_mua_them           # iPhone 17, Xiaomi 15T chỉ kèm cáp
+      cach_sac: cap
+      moc_phan_tram: khong_co_mac_dinh
+    pham_vi_ap_dung:
+      bo_tiep_hop: khi hãng nêu bộ sạc
+      cach_sac: máy hỗ trợ sạc không dây
+    can_cu: [dt-apple-iphone17#016, dt-apple-iphone17#040, dt-xiaomi-15t#047, dt-xiaomi-15t#005, dt-xiaomi-15t#014]
+
+  cong_suat_sac:
+    don_vi: W
+    huong_thuan_loi: cao_hon_tot_hon
+    kieu_gia_tri_mac_dinh: toi_da           # năng lực tối đa; bỏ "lên đến" không tính Lệch
+    dieu_kien_bat_buoc:
+      bo_tiep_hop: phu_kien
+      cach_sac: che_do_hoat_dong
+    hieu_thong_thuong:
+      bo_tiep_hop: khong_mua_them
+      cach_sac: cap
+    pham_vi_ap_dung:
+      bo_tiep_hop: khi hãng nêu bộ sạc
+      cach_sac: máy công bố cả sạc có dây và không dây
+    can_cu: [dt-apple-iphone17#021, dt-xiaomi-15t#005]
+
+  do_sang:
+    don_vi: nit
+    huong_thuan_loi: cao_hon_tot_hon
+    kieu_gia_tri_mac_dinh: toi_da
+    dieu_kien_bat_buoc:
+      che_do_hien_thi: che_do_hoat_dong
+      dien_tich_do: dieu_kien_do
+    hieu_thong_thuong:
+      che_do_hien_thi: tieu_chuan           # xác nhận ở Bước 10
+      dien_tich_do: nhu_hang_cong_bo
+    pham_vi_ap_dung:
+      dien_tich_do: khi hãng nêu
+    # Cách gọi theo hãng, chỉ từ tập phát triển (điểm 12, T10). Chỉ áp khi tài liệu dùng chữ đó để phân biệt
+    # từ hai giá trị trở lên; chữ gắn với một giá trị duy nhất là kiểu giá trị toi_da (chung.yaml, tu_goi_muc_cao).
+    # Chữ trỏ tới nhiều chế độ thì D1a.
+    cach_goi_theo_hang:
+      Apple:
+        "tối đa": [tieu_chuan]
+        "đỉnh": [hdr, ngoai_troi]
+      Xiaomi:
+        "cực đại": [tu_tang_sang]
+    can_cu: [dt-apple-iphone17#005, dt-xiaomi-15t#004, dt-xiaomi-15t#037, dt-xiaomi-15t#038]
+
+  tan_so_quet:
+    don_vi: Hz
+    huong_thuan_loi: cao_hon_tot_hon
+    kieu_gia_tri_mac_dinh: toi_da           # "màn hình 120Hz" khớp "thích ứng lên đến 120Hz"
+    dieu_kien_bat_buoc:
+      kieu_tan_so: kieu_gia_tri
+    hieu_thong_thuong:
+      kieu_tan_so: toi_da
+    pham_vi_ap_dung: {}
+    can_cu: [dt-apple-iphone17#004, dt-xiaomi-15t#004, dt-xiaomi-15t#037]
+
+  zoom:
+    don_vi: x
+    huong_thuan_loi: cao_hon_tot_hon
+    kieu_gia_tri_mac_dinh: toi_da
+    dieu_kien_bat_buoc:
+      loai_zoom: che_do_hoat_dong
+      dai_luong: dieu_kien_do
+      che_do_camera: che_do_hoat_dong
+    hieu_thong_thuong:
+      loai_zoom: quang_hoc
+      dai_luong: do_phong_dai
+      che_do_camera: chup_anh
+    pham_vi_ap_dung:
+      dai_luong: khi hãng nêu cả độ phóng đại và phạm vi
+      che_do_camera: khi hãng tách số liệu chụp ảnh và quay video
+    can_cu: [dt-apple-iphone17#009, dt-apple-iphone17#012, dt-xiaomi-15t#007, dt-xiaomi-15t#006, dt-xiaomi-15t#027]
+
+  khang_nuoc:
+    don_vi: ma_ip
+    huong_thuan_loi: theo_nhanh_ip
+    kieu_gia_tri_mac_dinh: nhu_hang_cong_bo
+    dieu_kien_bat_buoc:
+      dieu_kien_thu: dieu_kien_do
+      loai_nuoc: dieu_kien_do
+      hoat_dong_bi_cam: dieu_kien_do
+    hieu_thong_thuong:
+      dieu_kien_thu: nhu_hang_cong_bo
+      loai_nuoc: nhu_hang_cong_bo
+      hoat_dong_bi_cam: nhu_hang_cong_bo
+    pham_vi_ap_dung:
+      loai_nuoc: khi hãng nêu; quảng cáo nêu nước biển hay hồ bơi là đổi điều kiện
+      hoat_dong_bi_cam: khi hãng nêu; quảng cáo gợi ý hoạt động bị cấm là Lệch
+    can_cu: [dt-apple-iphone17#007, dt-xiaomi-15t#012, dt-xiaomi-15t#035]
+
+  dung_luong_pin:
+    don_vi: mAh
+    huong_thuan_loi: cao_hon_tot_hon
+    kieu_gia_tri_mac_dinh: dien_hinh
+    dieu_kien_bat_buoc:
+      kieu_dung_luong: kieu_gia_tri
+      phien_ban: phien_ban
+    hieu_thong_thuong:
+      kieu_dung_luong: dien_hinh
+      phien_ban: nhu_hang_cong_bo
+    pham_vi_ap_dung:
+      phien_ban: khi tài liệu tách số liệu theo phiên bản
+    can_cu: [dt-xiaomi-15t#005, dt-xiaomi-15t#022, dt-xiaomi-15t#046]
+
+cach_dien_dat:
+  hoat_dong:
+    xem_video:
+      tu_tai_lieu: ["Thời gian xem video"]
+      hieu_biet_chung: ["xem video", "xem phim"]
+    xem_video_truc_tuyen:
+      tu_tai_lieu: ["xem video (trực tuyến)"]
+      hieu_biet_chung: ["xem video trực tuyến", "xem phim online", "streaming"]
+    su_dung_lien_tuc:
+      tu_tai_lieu: ["Sử dụng liên tục"]
+      hieu_biet_chung: []
+    nghe_nhac:
+      tu_tai_lieu: []
+      hieu_biet_chung: ["nghe nhạc"]
+  phien_ban:
+    ten_san_pham:
+      tu_tai_lieu: []
+      hieu_biet_chung: []                  # lấy theo bảng san_pham bên dưới
+  bo_tiep_hop:
+    co_bo_tiep_hop:
+      tu_tai_lieu: ["bộ tiếp hợp", "củ sạc", "Bộ sạc"]
+      hieu_biet_chung: ["cục sạc", "adapter"]
+  cach_sac:
+    cap:
+      tu_tai_lieu: ["cáp sạc USB-C"]
+      hieu_biet_chung: ["sạc có dây", "sạc dây"]
+    magsafe:
+      tu_tai_lieu: ["MagSafe"]
+      hieu_biet_chung: []
+    khong_day:
+      tu_tai_lieu: ["Sạc không dây", "Qi2"]
+      hieu_biet_chung: []
+  moc_phan_tram:
+    phan_tram:
+      tu_tai_lieu: ["Sạc lên đến 50%", "sạc đầy 100%"]
+      hieu_biet_chung: ["sạc đầy"]          # "sạc đầy" hiểu là 100%
+  che_do_hien_thi:
+    tieu_chuan:
+      tu_tai_lieu: ["(tiêu chuẩn)"]
+      hieu_biet_chung: ["bình thường"]
+    hdr:
+      tu_tai_lieu: ["(HDR)"]
+      hieu_biet_chung: ["nội dung HDR"]
+    ngoai_troi:
+      tu_tai_lieu: ["(ngoài trời)"]
+      hieu_biet_chung: ["dưới nắng", "ngoài nắng"]
+    tu_tang_sang:
+      tu_tai_lieu: ["Dưới ánh sáng mạnh", "tự động kích hoạt chế độ tăng mức sáng"]
+      hieu_biet_chung: []
+  dien_tich_do:
+    phan_dien_tich:
+      tu_tai_lieu: ["25% diện tích", "APL 25%"]
+      hieu_biet_chung: []
+  kieu_tan_so:
+    toi_da:
+      tu_tai_lieu: ["Lên đến 120Hz", "tối đa 120Hz"]
+      hieu_biet_chung: []
+    thich_ung:
+      tu_tai_lieu: ["tốc độ làm mới thích ứng"]
+      hieu_biet_chung: ["tần số quét thích ứng"]
+  loai_zoom:
+    quang_hoc:
+      tu_tai_lieu: ["quang học"]
+      hieu_biet_chung: ["optical"]
+    ky_thuat_so:
+      tu_tai_lieu: ["kỹ thuật số"]
+      hieu_biet_chung: ["digital", "zoom số"]
+  dai_luong:
+    do_phong_dai:
+      tu_tai_lieu: ["Độ phóng đại"]
+      hieu_biet_chung: []
+    pham_vi:
+      tu_tai_lieu: ["phạm vi thu phóng"]
+      hieu_biet_chung: ["dải zoom"]
+  che_do_camera:
+    chup_anh:
+      tu_tai_lieu: []
+      hieu_biet_chung: ["chụp ảnh", "khi chụp"]
+    quay_video:
+      tu_tai_lieu: ["Quay Video"]
+      hieu_biet_chung: ["khi quay"]
+  dieu_kien_thu:
+    do_sau_thoi_gian:
+      tu_tai_lieu: ["độ sâu tối đa 6 mét", "tối đa 30 phút", "độ sâu 3 mét"]
+      hieu_biet_chung: []
+  loai_nuoc:
+    nuoc_ngot:
+      tu_tai_lieu: ["nước ngọt tĩnh lặng"]
+      hieu_biet_chung: []
+    nuoc_khac:
+      tu_tai_lieu: ["nước muối", "nước clo", "nước áp suất cao"]
+      hieu_biet_chung: ["nước biển", "hồ bơi"]
+  hoat_dong_bi_cam:
+    di_bien_di_boi:
+      tu_tai_lieu: ["đi biển", "đi bơi"]
+      hieu_biet_chung: ["bơi lội", "lặn"]
+  kieu_dung_luong:
+    dien_hinh:
+      tu_tai_lieu: ["(thông thường)", "(typ)"]   # "thông thường" chỉ là cách gọi điển hình trong thuộc tính này
+      hieu_biet_chung: ["điển hình"]
+    dinh_muc:
+      tu_tai_lieu: []
+      hieu_biet_chung: ["định mức"]
+
+# Bảng bí danh (T5.4). Tên lấy từ data/mau_san_pham.csv.
+san_pham:
+  dt-apple-iphone17:
+    ten: iPhone 17
+    bi_danh: ["iPhone 17", "Apple iPhone 17"]
+    khong_nham_voi: ["iPhone 17 Pro", "iPhone 17 Pro Max", "iPhone 17e", "iPhone Air", "iPhone 16"]
+    phien_ban: Bản Việt Nam
+  dt-xiaomi-15t:
+    ten: Xiaomi 15T
+    bi_danh: ["Xiaomi 15T"]
+    khong_nham_voi: ["Xiaomi 15T Pro", "Xiaomi 14T"]
+    phien_ban: Bản Việt Nam
+  dt-oppo-findx8:
+    ten: OPPO Find X8
+    bi_danh: ["OPPO Find X8", "Find X8"]
+    khong_nham_voi: ["OPPO Find X8 Pro", "OPPO Find X8 Ultra"]
+    phien_ban: Bản Việt Nam
+  dt-samsung-galaxys25ultra:
+    ten: Galaxy S25 Ultra
+    bi_danh: ["Galaxy S25 Ultra", "Samsung Galaxy S25 Ultra", "S25 Ultra"]
+    khong_nham_voi: ["Galaxy S25", "Galaxy S25+"]
+    phien_ban: Bản Việt Nam
+  dt-xiaomi-redminote14proplus5g:
+    ten: Redmi Note 14 Pro+ 5G
+    bi_danh: ["Redmi Note 14 Pro+ 5G", "Redmi Note 14 Pro+", "Redmi Note 14 Pro Plus", "Xiaomi Redmi Note 14 Pro+"]
+    khong_nham_voi: ["Redmi Note 14 Pro 5G", "Redmi Note 14 Pro", "Redmi Note 14"]
+    phien_ban: Bản Việt Nam
