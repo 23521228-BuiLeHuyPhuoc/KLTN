@@ -323,13 +323,15 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Viết `data/huong_dan_gan_nhan.md` bản 1 theo [T4](#t4): quy tắc tách tuyên bố giữ ngữ cảnh ([T4.1](#t4-1)), định nghĩa bốn nhãn ([T4.2](#t4-2)), thứ tự quyết định D1–D6 ([T4.3](#t4-3)), cách ghi bằng chứng và lý do ([T4.4](#t4-4)), cách hiểu thông thường lấy từ tệp cấu hình của Bước 8 ([T4.5](#t4-5)).
-- [ ] Viết **ít nhất 24 ví dụ** bốn nhãn, bắt đầu từ 18 ví dụ ở [T4.6](#t4-6), chỉ dùng mẫu của tập phát triển (iPhone 17, Galaxy Buds3 Pro, Apple Watch SE 3, Xiaomi 15T). Mỗi nhãn và mỗi loại biến đổi có ít nhất 2 ví dụ; có đủ các trường hợp đề cương nêu: đúng, sai đối tượng, sai điều kiện, thiếu bằng chứng, xung đột bằng chứng.
-- [ ] Không dùng lại bộ 23 ví dụ soạn tháng 9 cho đề tài cũ (commit `ba88a48`, tệp `evidence/2026-10-08/examples.json`): bộ đó toàn AirPods (AirPods Pro 3 và AirPods 4 thuộc tập kiểm tra dự kiến), dùng ba nhãn và có thông số ngoài phạm vi. Dùng lại sẽ làm lộ tập kiểm tra vào hướng dẫn và vào câu lệnh của B2.
+- [x] Viết `data/huong_dan_gan_nhan.md` bản 1 theo [T4](#t4): quy tắc tách tuyên bố giữ ngữ cảnh ([T4.1](#t4-1)), định nghĩa bốn nhãn ([T4.2](#t4-2)), thứ tự quyết định D1–D6 ([T4.3](#t4-3)), cách ghi bằng chứng và lý do ([T4.4](#t4-4)), cách hiểu thông thường lấy từ tệp cấu hình của Bước 8 ([T4.5](#t4-5)).
+- [x] Viết **ít nhất 24 ví dụ** bốn nhãn, bắt đầu từ 18 ví dụ ở [T4.6](#t4-6), chỉ dùng mẫu của tập phát triển (iPhone 17, Galaxy Buds3 Pro, Apple Watch SE 3, Xiaomi 15T). Mỗi nhãn và mỗi loại biến đổi có ít nhất 2 ví dụ; có đủ các trường hợp đề cương nêu: đúng, sai đối tượng, sai điều kiện, thiếu bằng chứng, xung đột bằng chứng.
+- [x] Không dùng lại bộ 23 ví dụ soạn tháng 9 cho đề tài cũ (commit `ba88a48`, tệp `evidence/2026-10-08/examples.json`): bộ đó toàn AirPods (AirPods Pro 3 và AirPods 4 thuộc tập kiểm tra dự kiến), dùng ba nhãn và có thông số ngoài phạm vi. Dùng lại sẽ làm lộ tập kiểm tra vào hướng dẫn và vào câu lệnh của B2.
 
 **Làm ra:** `data/huong_dan_gan_nhan.md` (bản 1).
 
 **Xong khi:** có ít nhất 24 ví dụ, mỗi ví dụ có nhãn, dòng quyết định và lý do; mọi cách hiểu thông thường trong hướng dẫn trùng với tệp cấu hình. Hướng dẫn phân biệt ba trạng thái ở T5.7: không nêu điều kiện không tự động mang nhãn Lệch; nhãn chuẩn dựa trên bằng chứng và hướng dẫn, không đổi thành Chưa đủ thông tin chỉ vì hệ thống chưa hỗ trợ điều kiện. Các cách hiểu mặc định ảnh hưởng đến nhãn được kiểm tra ở Bước 10.
+
+**Đã thực hiện ngày 27/10/2026:** [huong_dan_gan_nhan.md](data/huong_dan_gan_nhan.md) bản 1, viết theo bộ luật Bước 8 ở commit `ab6146c`. 48 ví dụ, chỉ từ 4 mẫu phát triển: Đúng 15, Sai 5, Lệch 23, Chưa đủ thông tin 5; mỗi loại biến đổi có ít nhất 2 ví dụ (đổi phiên bản chỉ có ví dụ Đúng, vì tập phát triển không có trang tách giá trị theo phiên bản); đủ năm trường hợp của đề cương, cộng điều kiện dạng số, điều kiện cấu hình chưa biết (ghi `ngoai_cau_hinh`), bỏ "lên đến". Script kiểm: 74 câu trích đều là chuỗi con của `doan.jsonl`; bảng cách hiểu mặc định (41 cặp) và bảng hướng thuận lợi, kiểu giá trị (16 thuộc tính) trùng YAML; không có tên mẫu tập kiểm tra. So với T4.6: ví dụ 18 đổi nhãn (5 giờ trùng thời gian đàm thoại khi tắt chống ồn nên ra Lệch ở D4), ví dụ 16 đổi nhãn thành Lệch, chốt 27/10 (trang Xiaomi 15T chỉ có một con số độ sáng nên "cực đại" là kiểu giá trị, tuyên bố bỏ chế độ tự tăng sáng; mục 11.1 của hướng dẫn). Thêm quy ước ghi chú `mac_dinh`, `ngoai_cau_hinh`, `ngoai_sau_loai` và quy tắc chọn loại biến đổi khi khác nhiều điều kiện (tạm chốt, chốt ở Bước 27). Phát hiện cấu hình thiếu 5 cụm có ngay trong tập phát triển (mục 11.3 của hướng dẫn). Phiên thử độ bao phủ chưa xong; nếu phiên đó thêm luật thì đối chiếu lại mục 5, 6. Chi tiết trong [nhật ký](luan_van/nhat_ky.md).
 
 **Tra cứu:** [T4](#t4) (toàn bộ hướng dẫn gán nhãn), [T3.4](#t3-4) (định dạng nhãn).
 
@@ -1693,6 +1695,8 @@ Nguyên tắc chung theo đề cương: hiểu theo cách người mua thông th
 #### T4.6 Ví dụ (chỉ lấy từ mẫu dự kiến thuộc tập phát triển)
 
 Các con số lấy từ đề cương hoặc từ lần xem trang chính hãng tiếng Việt ngày 09/10/2026. **Kiểm lại từng con số trên bản chụp ở Bước 5 và Bước 6.**
+
+> **Cập nhật 27/10 (Bước 9):** bộ ví dụ chính thức là mục 9 của [huong_dan_gan_nhan.md](data/huong_dan_gan_nhan.md) (48 ví dụ); bảng dưới giữ làm lịch sử. Đối chiếu từng ví dụ ở mục 12 của hướng dẫn: ví dụ 16 và 18 đổi nhãn thành Lệch, lý do của ví dụ 8, 9, 14 đổi theo điểm 1 tạm chốt ở [T10](#t10).
 
 | # | Tuyên bố | Dòng | Nhãn | Lý do |
 |---|---|---|---|---|

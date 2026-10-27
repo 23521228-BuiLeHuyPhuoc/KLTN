@@ -32,6 +32,14 @@
 - `src/kiemchung/cau_hinh.py`: hàm `thoa_dieu_kien_so`, kiểm mọi điều kiện có `gia_tri_so` đều khai báo đơn vị và quan hệ, và ngược lại. 3 test mới; kiểm cấu hình 0 lỗi, 15 test cấu hình đạt. Thêm vào "Xong khi" của Bước 8.
 - Phiên thử độ bao phủ đề xuất OPPO Reno14, OPPO Enco Air5 Pro, Galaxy Watch Ultra2, đang chờ người thực hiện duyệt.
 
+## 27/10/2026 — Bước 9
+
+- Viết `data/huong_dan_gan_nhan.md` bản 1 theo bộ luật Bước 8 (commit `ab6146c`), sau khi đọc lại T4, T5, T10, bảng bao phủ, 4 tệp YAML, đoạn định nghĩa nhãn trong đề cương bản cuối và các đoạn nguồn liên quan của 4 mẫu phát triển. 48 ví dụ: Đúng 15, Sai 5, Lệch 23, Chưa đủ thông tin 5; mỗi dòng D1–D6, D1a, D1b có ví dụ. Script kiểm: 74 câu trích là chuỗi con của `doan.jsonl`; bảng mặc định (41 cặp), hướng thuận lợi và kiểu giá trị (16 thuộc tính) trùng YAML; không có tên mẫu tập kiểm tra.
+- Đối chiếu 18 ví dụ ở T4.6 với bộ luật mới. Ví dụ 18 ("nghe 5 giờ ở chế độ xuyên âm") đổi từ Chưa đủ thông tin thành Lệch: 5 giờ trùng thời gian đàm thoại khi tắt chống ồn, nên dừng ở D4 trước D6. Ví dụ D6 dùng 6,5 giờ. Rủi ro trùng số giữa hai hoạt động ghi ở mục 11.2 của hướng dẫn, đếm lại ở Bước 16.
+- Ví dụ 16 (Xiaomi 15T "độ sáng cực đại 3200 nit") đổi nhãn thành Lệch, thành V43. Sau khi làm rõ điểm 12 ngày 26/10, `cach_goi_theo_hang` chỉ áp khi tài liệu dùng chữ để phân biệt từ hai giá trị; trang Xiaomi 15T chỉ có một con số, nên "cực đại" là kiểu giá trị. Mình đã đề xuất giữ Đúng vì quảng cáo chép đúng chữ của hãng; người dùng chốt Lệch vì tuyên bố không nêu đủ điều kiện (chế độ tự tăng sáng). Cấu hình giữ nguyên.
+- Thêm cho người gán: cách xử lý điều kiện cấu hình chưa biết (mục 6.7; chế độ người dùng tự chọn mà hãng không ghi mặc định thì lấy kém thuận lợi nhất, tạm chốt); quy ước ghi chú `mac_dinh` (cho phân tích độ nhạy Bước 37), `ngoai_cau_hinh`, `ngoai_sau_loai`; quy tắc chọn loại biến đổi khi con số khác nhiều điều kiện (tạm chốt, chốt ở Bước 27 cùng `loai_bien_doi`).
+- Phát hiện cấu hình thiếu 5 cụm có ngay trong tập phát triển: "chênh lệch nhiệt độ ≤5K" (bảng bao phủ có, YAML không có; P sẽ ra D1a cho mọi tuyên bố kháng nước Xiaomi 15T), "toàn màn hình", "chỉ dùng mạng di động", và hai câu quy trình thử trong chú thích pin Buds3 Pro, Watch SE 3 nên vào `ngu_canh_khong_quyet_dinh`. Chưa sửa cấu hình, chờ người thực hiện quyết. Tập phát triển không có trang tách giá trị theo phiên bản nên đổi phiên bản chỉ có ví dụ Đúng.
+
 ## 25/10/2026 — Bước 7
 
 - Viết `src/kiemchung/chia_doan.py`, `scripts/chia_doan.py` và `tests/test_chia_doan.py`; 101 test của `test_chia_doan.py`, `test_chup_nguon.py`, `test_nhap_nguon_thu_cong.py` đạt. Ghi `doan.jsonl` cho 12 mẫu, tổng 1.215 đoạn, mã đoạn 3 chữ số (nhiều nhất là Watch8 với 596 đoạn). Tệp bằng chứng không đổi: mã băm 19 trang vẫn khớp `meta.json`.
