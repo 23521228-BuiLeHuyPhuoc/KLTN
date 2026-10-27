@@ -25,6 +25,13 @@
 - Nhãn Lệch khả thi một phần: chắc ở D4 khi tài liệu công bố nhiều giá trị theo điều kiện ghi rõ; mong manh ở cách hiểu mặc định, độ đồng thuận và số ca thật. Giả thuyết 1 (FAR) không phụ thuộc nhãn Lệch. Thêm điểm dừng ở Bước 16 (ít nhất 10 ca Lệch không thuộc loại "lên đến"; kappa riêng nhãn Lệch ít nhất 0,6 trên ít nhất 30 tuyên bố bộ thử; độ bao phủ ít nhất 80% trên 3 sản phẩm ngoài 12 mẫu) và phương án lùi (ba nhãn cộng cờ thiếu điều kiện); thêm dòng rủi ro ở T9.1.
 - `src/kiemchung/cau_hinh.py` kiểm thêm `dieu_kien_la` dẫn tới D1a và `tu_goi_muc_cao`; 2 test mới. Kiểm cấu hình 0 lỗi. Việc tiếp theo (phiên mới): thử độ bao phủ trên 3 sản phẩm ngoài 12 mẫu, rồi Bước 9.
 
+## 27/10/2026 — Bước 8 (điều kiện dạng số)
+
+- Người thực hiện hỏi lại về vai trò của trích xuất; làm rõ ba tầng: trích cụm điều kiện, chuẩn hóa về chiều và giá trị chuẩn (`cach_dien_dat`), so sánh để kết luận. Phát hiện bộ luật chỉ so được điều kiện dạng chữ ("bật" khác "tắt"); điều kiện là con số kèm quan hệ ("40W trở lên", "sâu tối đa 6 m") chưa có luật, nên củ 20W sẽ không bị coi là sai điều kiện. Tiêu chí "Xong khi" cũ cho qua chỗ thiếu này vì mẫu T5.7 chỉ có điều kiện dạng chữ.
+- Bổ sung: `chung.yaml` mục `dieu_kien_so` (ba quan hệ: tuyên bố ≥ tài liệu, ≤ tài liệu, bằng trong ngưỡng 1%; cụm "trở lên", "hoặc cao hơn", "độ sâu tối đa", "sâu tới" lấy từ tập phát triển). Khai báo 6 điều kiện dạng số: công suất bộ tiếp hợp (≥), số phút sạc (≥), mốc phần trăm (≤), độ sâu và thời gian ngâm (≤), phần diện tích đo (≤). Kháng nước của điện thoại và tai nghe tách "điều kiện thử" thành độ sâu, thời gian ngâm, loại nước.
+- `src/kiemchung/cau_hinh.py`: hàm `thoa_dieu_kien_so`, kiểm mọi điều kiện có `gia_tri_so` đều khai báo đơn vị và quan hệ, và ngược lại. 3 test mới; kiểm cấu hình 0 lỗi, 15 test cấu hình đạt. Thêm vào "Xong khi" của Bước 8.
+- Phiên thử độ bao phủ đề xuất OPPO Reno14, OPPO Enco Air5 Pro, Galaxy Watch Ultra2, đang chờ người thực hiện duyệt.
+
 ## 25/10/2026 — Bước 7
 
 - Viết `src/kiemchung/chia_doan.py`, `scripts/chia_doan.py` và `tests/test_chia_doan.py`; 101 test của `test_chia_doan.py`, `test_chup_nguon.py`, `test_nhap_nguon_thu_cong.py` đạt. Ghi `doan.jsonl` cho 12 mẫu, tổng 1.215 đoạn, mã đoạn 3 chữ số (nhiều nhất là Watch8 với 596 đoạn). Tệp bằng chứng không đổi: mã băm 19 trang vẫn khớp `meta.json`.

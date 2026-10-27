@@ -35,6 +35,25 @@ dieu_kien_la:
   # thì coi là lựa chọn của người dùng và áp kem_thuan_loi_nhat.
   luat_chung_cho_nhieu_gia_tri: tat
 
+# Điều kiện dạng số (thêm 27/10): điều kiện là một con số kèm quan hệ, không so được bằng chữ.
+# Mỗi điều kiện dạng số khai báo ở thuộc tính (dieu_kien_so: {don_vi, thoa_khi}); cach_dien_dat của nó có khóa gia_tri_so.
+# Cùng điều kiện khi giá trị điều kiện của tuyên bố thỏa thoa_khi so với giá trị điều kiện trong tài liệu,
+# sau khi chuẩn hóa đơn vị; không thỏa thì là khác điều kiện và xét tiếp D4–D6.
+dieu_kien_so:
+  quan_he_hop_le:
+    tuyen_bo_lon_hon_hoac_bang: tuyên bố >= tài liệu (tài liệu ghi mức tối thiểu, ví dụ bộ tiếp hợp 40W trở lên; sạc 15 phút)
+    tuyen_bo_nho_hon_hoac_bang: tuyên bố <= tài liệu (tài liệu ghi mức tối đa, ví dụ sâu tối đa 6 m; mốc 50%)
+    bang: bằng nhau trong ngưỡng làm tròn
+  nguong_bang: 0.01   # T10 điểm 8, chọn lại ở Bước 33
+  # Cụm trong tài liệu cho biết con số của điều kiện là mức tối thiểu hay tối đa.
+  cum_quan_he:
+    toi_thieu:
+      tu_tai_lieu: ["trở lên", "hoặc cao hơn"]
+      hieu_biet_chung: ["tối thiểu", "ít nhất"]
+    toi_da:
+      tu_tai_lieu: ["độ sâu tối đa", "tối đa 30 phút", "sâu tới"]
+      hieu_biet_chung: ["không quá"]
+
 # Chữ gọi mức cao (điểm 12, T10, làm rõ 26/10): dùng để phân biệt từ hai giá trị trở lên thì là chế độ
 # (tra cach_goi_theo_hang); gắn với một giá trị duy nhất thì là kiểu giá trị toi_da.
 tu_goi_muc_cao:

@@ -34,6 +34,8 @@ thuoc_tinh:
       bo_phan: tai_nghe
     pham_vi_ap_dung:
       bo_phan: tai nghe có hộp sạc
+    dieu_kien_so:                          # sạc lâu hơn mức hãng ghi thì vẫn đạt số giờ đó
+      so_phut_sac: {don_vi: phut, thoa_khi: tuyen_bo_lon_hon_hoac_bang}
     can_cu: hieu_biet_chung                # Buds3 Pro không công bố sạc nhanh
 
   khang_nuoc:
@@ -42,15 +44,22 @@ thuoc_tinh:
     kieu_gia_tri_mac_dinh: nhu_hang_cong_bo
     dieu_kien_bat_buoc:
       bo_phan: bo_phan
-      dieu_kien_thu: dieu_kien_do
+      do_sau: dieu_kien_do
+      thoi_gian_ngam: dieu_kien_do
+      loai_nuoc: dieu_kien_do
       hoat_dong_bi_cam: dieu_kien_do
     hieu_thong_thuong:
       bo_phan: tai_nghe
-      dieu_kien_thu: nhu_hang_cong_bo
+      do_sau: nhu_hang_cong_bo
+      thoi_gian_ngam: nhu_hang_cong_bo
+      loai_nuoc: nhu_hang_cong_bo
       hoat_dong_bi_cam: nhu_hang_cong_bo
     pham_vi_ap_dung:
       bo_phan: hộp sạc không kháng nước thì quảng cáo nói hộp sạc kháng nước là Sai
       hoat_dong_bi_cam: khi hãng nêu
+    dieu_kien_so:                          # Buds3 Pro: ngâm 1 m nước ngọt, tối đa 30 phút
+      do_sau: {don_vi: m, thoa_khi: tuyen_bo_nho_hon_hoac_bang}
+      thoi_gian_ngam: {don_vi: phut, thoa_khi: tuyen_bo_nho_hon_hoac_bang}
     can_cu: [tn-samsung-buds3pro#044, tn-samsung-buds3pro#038]
 
   dung_luong_pin:
@@ -97,10 +106,21 @@ cach_dien_dat:
     gia_tri_so:
       tu_tai_lieu: []
       hieu_biet_chung: ["sạc nhanh", "phút sạc"]
-  dieu_kien_thu:
-    nuoc_ngot_1m_30_phut:
-      tu_tai_lieu: ["1 mét nước ngọt"]
+  do_sau:
+    gia_tri_so:
+      tu_tai_lieu: ["1 mét"]
+      hieu_biet_chung: ["ngâm", "dưới nước"]
+  thoi_gian_ngam:
+    gia_tri_so:
+      tu_tai_lieu: ["tối đa 30 phút"]
       hieu_biet_chung: []
+  loai_nuoc:
+    nuoc_ngot:
+      tu_tai_lieu: ["nước ngọt"]
+      hieu_biet_chung: []
+    nuoc_khac:
+      tu_tai_lieu: []
+      hieu_biet_chung: ["nước biển", "nước clo", "hồ bơi"]
   hoat_dong_bi_cam:
     tam_bien_be_boi:
       tu_tai_lieu: ["tắm biển", "bể bơi"]

@@ -9,7 +9,8 @@ Các điều kiểm:
 - căn cứ (mã đoạn) chỉ lấy từ tập phát triển (T3.5 quy tắc 4);
 - mỗi cụm "tu_tai_lieu" có thật trong doan.jsonl của tập phát triển;
 - phần luật không nhắc mã mẫu tập kiểm tra; bảng bí danh có đủ mẫu của nhóm;
-- chung.yaml có luật chặn điều kiện lạ (dieu_kien_la dẫn tới D1a) và quy tắc chữ gọi mức cao.
+- chung.yaml có luật chặn điều kiện lạ (dieu_kien_la dẫn tới D1a) và quy tắc chữ gọi mức cao;
+- mỗi điều kiện dạng số (cach_dien_dat có gia_tri_so) khai báo đơn vị và quan hệ so sánh ở dieu_kien_so.
 """
 import csv
 import json
@@ -81,8 +82,9 @@ def kiem_chung(chung, van_ban):
     loi = kiem_cum("chung.kieu_gia_tri", {k: v for k, v in chung["kieu_gia_tri"].items()}, van_ban)
     loi += kiem_cum("chung.ngu_canh", {"ngu_canh": chung["ngu_canh_khong_quyet_dinh"]}, van_ban)
     loi += kiem_cum("chung.tu_goi_muc_cao", {"tu_goi_muc_cao": chung.get("tu_goi_muc_cao")}, van_ban)
+    loi += kiem_cum("chung.dieu_kien_so", (chung.get("dieu_kien_so") or {}).get("cum_quan_he"), van_ban)
     for khoa in ("loai_dieu_kien", "hieu_thong_thuong_dac_biet", "tu_khang_dinh", "chuan_hoa",
-                 "dieu_kien_la", "tu_goi_muc_cao"):
+                 "dieu_kien_la", "tu_goi_muc_cao", "dieu_kien_so"):
         if khoa not in chung:
             loi.append(f"chung: thiếu khóa {khoa}")
     if len(chung.get("loai_dieu_kien", [])) != 6:
@@ -90,6 +92,42 @@ def kiem_chung(chung, van_ban):
     if (chung.get("dieu_kien_la") or {}).get("nguyen_nhan_D1a") != "dieu_kien_la":
         loi.append("chung: dieu_kien_la phải dẫn tới D1a (điều kiện lạ không bao giờ ra Đúng)")
     return loi
+
+
+def kiem_dieu_kien_so(noi, tt, cach, chung):
+    """Điều kiện dạng số: mỗi điều kiện có cach_dien_dat chứa gia_tri_so phải khai báo trong dieu_kien_so
+    (đơn vị đã chuẩn hóa, quan hệ hợp lệ), và ngược lại."""
+    loi = []
+    quan_he = set((chung.get("dieu_kien_so") or {}).get("quan_he_hop_le") or {})
+    don_vi = set(chung["chuan_hoa"]["don_vi"])
+    so = tt.get("dieu_kien_so") or {}
+    dk = tt.get("dieu_kien_bat_buoc") or {}
+    for ten_dk in dk:
+        if "gia_tri_so" in (cach.get(ten_dk) or {}) and ten_dk not in so:
+            loi.append(f"{noi}.{ten_dk}: điều kiện dạng số chưa khai báo trong dieu_kien_so")
+    for ten_dk, kb in so.items():
+        if ten_dk not in dk:
+            loi.append(f"{noi}.{ten_dk}: dieu_kien_so khai báo điều kiện không bắt buộc")
+        if (kb or {}).get("don_vi") not in don_vi:
+            loi.append(f"{noi}.{ten_dk}: đơn vị '{(kb or {}).get('don_vi')}' chưa có trong chuan_hoa.don_vi")
+        if (kb or {}).get("thoa_khi") not in quan_he:
+            loi.append(f"{noi}.{ten_dk}: quan hệ '{(kb or {}).get('thoa_khi')}' không hợp lệ")
+        if "gia_tri_so" not in (cach.get(ten_dk) or {}):
+            loi.append(f"{noi}.{ten_dk}: cach_dien_dat thiếu gia_tri_so")
+    return loi
+
+
+def thoa_dieu_kien_so(thoa_khi, gia_tri_tuyen_bo, gia_tri_tai_lieu, nguong_bang=0.01):
+    """Giá trị điều kiện của tuyên bố có thỏa điều kiện trong tài liệu không (cùng đơn vị).
+    Ví dụ bộ tiếp hợp: tài liệu 40W trở lên, tuyên bố 20W thì không thỏa (khác điều kiện)."""
+    bang = abs(gia_tri_tuyen_bo - gia_tri_tai_lieu) <= nguong_bang * abs(gia_tri_tai_lieu)
+    if thoa_khi == "bang":
+        return bang
+    if thoa_khi == "tuyen_bo_lon_hon_hoac_bang":
+        return bang or gia_tri_tuyen_bo > gia_tri_tai_lieu
+    if thoa_khi == "tuyen_bo_nho_hon_hoac_bang":
+        return bang or gia_tri_tuyen_bo < gia_tri_tai_lieu
+    raise ValueError(f"quan hệ không hợp lệ: {thoa_khi}")
 
 
 def kiem_nhom(cau_hinh, van_ban, ma_phat_trien, mau):
@@ -122,6 +160,7 @@ def kiem_nhom(cau_hinh, van_ban, ma_phat_trien, mau):
         if can_cu != CAN_CU_KHONG_BANG_CHUNG:
             loi += [f"{noi}: căn cứ '{ma}' không thuộc tập phát triển" for ma in (can_cu or [])
                     if ma not in ma_phat_trien]
+        loi += kiem_dieu_kien_so(noi, tt, cach, chung)
         for hang, tu in (tt.get("cach_goi_theo_hang") or {}).items():
             for chu, che_do in tu.items():
                 loi += [f"{noi}: cách gọi '{chu}' của {hang} trỏ tới chế độ chưa khai báo '{c}'"

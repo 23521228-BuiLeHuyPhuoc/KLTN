@@ -34,6 +34,9 @@ thuoc_tinh:
     pham_vi_ap_dung:
       bo_tiep_hop: khi hãng nêu bộ sạc
       cach_sac: máy hỗ trợ sạc không dây
+    dieu_kien_so:                          # iPhone 17: bộ tiếp hợp 40W trở lên, mốc 50%; Xiaomi 15T: củ 67W hoặc cao hơn, mốc 100%
+      bo_tiep_hop: {don_vi: W, thoa_khi: tuyen_bo_lon_hon_hoac_bang}
+      moc_phan_tram: {don_vi: phan_tram, thoa_khi: tuyen_bo_nho_hon_hoac_bang}
     can_cu: [dt-apple-iphone17#016, dt-apple-iphone17#040, dt-xiaomi-15t#047, dt-xiaomi-15t#005, dt-xiaomi-15t#014]
 
   cong_suat_sac:
@@ -49,6 +52,8 @@ thuoc_tinh:
     pham_vi_ap_dung:
       bo_tiep_hop: khi hãng nêu bộ sạc
       cach_sac: máy công bố cả sạc có dây và không dây
+    dieu_kien_so:                          # iPhone 17: 25W không dây cần bộ tiếp hợp 30W trở lên
+      bo_tiep_hop: {don_vi: W, thoa_khi: tuyen_bo_lon_hon_hoac_bang}
     can_cu: [dt-apple-iphone17#021, dt-xiaomi-15t#005]
 
   do_sang:
@@ -72,6 +77,8 @@ thuoc_tinh:
         "đỉnh": [hdr, ngoai_troi]
       Xiaomi:
         "cực đại": [tu_tang_sang]
+    dieu_kien_so:                          # Xiaomi 15T: đo trên 25% diện tích; đo trên phần lớn hơn là điều kiện khắt khe hơn
+      dien_tich_do: {don_vi: phan_tram, thoa_khi: tuyen_bo_nho_hon_hoac_bang}
     can_cu: [dt-apple-iphone17#005, dt-xiaomi-15t#004, dt-xiaomi-15t#037, dt-xiaomi-15t#038]
 
   tan_so_quet:
@@ -107,16 +114,21 @@ thuoc_tinh:
     huong_thuan_loi: theo_nhanh_ip
     kieu_gia_tri_mac_dinh: nhu_hang_cong_bo
     dieu_kien_bat_buoc:
-      dieu_kien_thu: dieu_kien_do
+      do_sau: dieu_kien_do
+      thoi_gian_ngam: dieu_kien_do
       loai_nuoc: dieu_kien_do
       hoat_dong_bi_cam: dieu_kien_do
     hieu_thong_thuong:
-      dieu_kien_thu: nhu_hang_cong_bo
+      do_sau: nhu_hang_cong_bo
+      thoi_gian_ngam: nhu_hang_cong_bo
       loai_nuoc: nhu_hang_cong_bo
       hoat_dong_bi_cam: nhu_hang_cong_bo
     pham_vi_ap_dung:
       loai_nuoc: khi hãng nêu; quảng cáo nêu nước biển hay hồ bơi là đổi điều kiện
       hoat_dong_bi_cam: khi hãng nêu; quảng cáo gợi ý hoạt động bị cấm là Lệch
+    dieu_kien_so:                          # iPhone 17: sâu tối đa 6 m, tối đa 30 phút; Xiaomi 15T: 3 m, 30 phút
+      do_sau: {don_vi: m, thoa_khi: tuyen_bo_nho_hon_hoac_bang}
+      thoi_gian_ngam: {don_vi: phut, thoa_khi: tuyen_bo_nho_hon_hoac_bang}
     can_cu: [dt-apple-iphone17#007, dt-xiaomi-15t#012, dt-xiaomi-15t#035]
 
   dung_luong_pin:
@@ -152,7 +164,7 @@ cach_dien_dat:
       tu_tai_lieu: []
       hieu_biet_chung: []                  # lấy theo bảng san_pham bên dưới
   bo_tiep_hop:
-    co_bo_tiep_hop:
+    gia_tri_so:
       tu_tai_lieu: ["bộ tiếp hợp", "củ sạc", "Bộ sạc"]
       hieu_biet_chung: ["cục sạc", "adapter"]
   cach_sac:
@@ -166,7 +178,7 @@ cach_dien_dat:
       tu_tai_lieu: ["Sạc không dây", "Qi2"]
       hieu_biet_chung: []
   moc_phan_tram:
-    phan_tram:
+    gia_tri_so:
       tu_tai_lieu: ["Sạc lên đến 50%", "sạc đầy 100%"]
       hieu_biet_chung: ["sạc đầy"]          # "sạc đầy" hiểu là 100%
   che_do_hien_thi:
@@ -183,7 +195,7 @@ cach_dien_dat:
       tu_tai_lieu: ["Dưới ánh sáng mạnh", "tự động kích hoạt chế độ tăng mức sáng"]
       hieu_biet_chung: []
   dien_tich_do:
-    phan_dien_tich:
+    gia_tri_so:
       tu_tai_lieu: ["25% diện tích", "APL 25%"]
       hieu_biet_chung: []
   kieu_tan_so:
@@ -214,9 +226,13 @@ cach_dien_dat:
     quay_video:
       tu_tai_lieu: ["Quay Video"]
       hieu_biet_chung: ["khi quay"]
-  dieu_kien_thu:
-    do_sau_thoi_gian:
-      tu_tai_lieu: ["độ sâu tối đa 6 mét", "tối đa 30 phút", "độ sâu 3 mét"]
+  do_sau:
+    gia_tri_so:
+      tu_tai_lieu: ["độ sâu tối đa 6 mét", "độ sâu 3 mét", "sâu tới 3 mét"]
+      hieu_biet_chung: ["ngâm", "dưới nước"]
+  thoi_gian_ngam:
+    gia_tri_so:
+      tu_tai_lieu: ["tối đa 30 phút"]
       hieu_biet_chung: []
   loai_nuoc:
     nuoc_ngot:

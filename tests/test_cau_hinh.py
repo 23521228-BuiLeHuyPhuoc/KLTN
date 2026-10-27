@@ -50,6 +50,40 @@ def test_thieu_luat_chan_dieu_kien_la_bi_bao(tai_lieu):
     assert "chung: thiếu khóa dieu_kien_la" in ch.kiem_chung(chung, tai_lieu[0])
 
 
+def test_dieu_kien_dang_so_da_khai_bao():
+    dt = ch.doc_cau_hinh("dien_thoai")["thuoc_tinh"]
+    assert dt["sac_nhanh"]["dieu_kien_so"]["bo_tiep_hop"] == {"don_vi": "W", "thoa_khi": "tuyen_bo_lon_hon_hoac_bang"}
+    assert dt["sac_nhanh"]["dieu_kien_so"]["moc_phan_tram"]["thoa_khi"] == "tuyen_bo_nho_hon_hoac_bang"
+    assert set(dt["khang_nuoc"]["dieu_kien_so"]) == {"do_sau", "thoi_gian_ngam"}
+    dh = ch.doc_cau_hinh("dong_ho")["thuoc_tinh"]
+    assert set(dh["sac_nhanh"]["dieu_kien_so"]) == {"bo_tiep_hop", "moc_phan_tram", "so_phut_sac"}
+    tn = ch.doc_cau_hinh("tai_nghe")["thuoc_tinh"]
+    assert set(tn["khang_nuoc"]["dieu_kien_so"]) == {"do_sau", "thoi_gian_ngam"}
+
+
+def test_thoa_dieu_kien_so():
+    assert not ch.thoa_dieu_kien_so("tuyen_bo_lon_hon_hoac_bang", 20, 40)   # củ 20W, tài liệu 40W trở lên
+    assert ch.thoa_dieu_kien_so("tuyen_bo_lon_hon_hoac_bang", 65, 40)
+    assert ch.thoa_dieu_kien_so("tuyen_bo_nho_hon_hoac_bang", 3, 6)         # ngâm 3 m, tài liệu tối đa 6 m
+    assert not ch.thoa_dieu_kien_so("tuyen_bo_nho_hon_hoac_bang", 10, 6)
+    assert not ch.thoa_dieu_kien_so("tuyen_bo_nho_hon_hoac_bang", 80, 50)   # mốc 80%, tài liệu mốc 50%
+    assert ch.thoa_dieu_kien_so("bang", 30.2, 30)                           # trong ngưỡng 1%
+    with pytest.raises(ValueError):
+        ch.thoa_dieu_kien_so("khoang", 1, 1)
+
+
+def test_dieu_kien_so_sai_khai_bao_bi_bao(tai_lieu, mau):
+    dt = copy.deepcopy(ch.doc_cau_hinh("dien_thoai"))
+    so = dt["thuoc_tinh"]["sac_nhanh"]["dieu_kien_so"]
+    so["bo_tiep_hop"]["thoa_khi"] = "lon_hon"
+    so["moc_phan_tram"]["don_vi"] = "phan_nghin"
+    del dt["thuoc_tinh"]["khang_nuoc"]["dieu_kien_so"]["do_sau"]
+    loi = ch.kiem_nhom(dt, *tai_lieu, mau)
+    assert any("quan hệ 'lon_hon' không hợp lệ" in d for d in loi)
+    assert any("đơn vị 'phan_nghin'" in d for d in loi)
+    assert "dien_thoai.khang_nuoc.do_sau: điều kiện dạng số chưa khai báo trong dieu_kien_so" in loi
+
+
 def test_chuan_hoa_chu():
     assert ch.chuan_hoa_chu("Cáp sạc USB‑C  (1m)") == "cáp sạc usb-c (1m)"
 

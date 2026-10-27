@@ -42,6 +42,10 @@ thuoc_tinh:
       moc_phan_tram: dạng 1
       so_phut_sac: dạng 2
       hoat_dong: dạng 2
+    dieu_kien_so:                          # Watch SE 3: bộ tiếp hợp 20W, mốc 80%, sạc 15 phút / 8 phút
+      bo_tiep_hop: {don_vi: W, thoa_khi: tuyen_bo_lon_hon_hoac_bang}
+      moc_phan_tram: {don_vi: phan_tram, thoa_khi: tuyen_bo_nho_hon_hoac_bang}
+      so_phut_sac: {don_vi: phut, thoa_khi: tuyen_bo_lon_hon_hoac_bang}
     can_cu: [dh-apple-watchse3#009, dh-apple-watchse3#023]
 
   khang_nuoc:
@@ -95,7 +99,7 @@ cach_dien_dat:
       tu_tai_lieu: ["(GPS + Cellular)"]
       hieu_biet_chung: ["bản di động", "eSIM"]
   bo_tiep_hop:
-    co_bo_tiep_hop:
+    gia_tri_so:
       tu_tai_lieu: ["Bộ Tiếp Hợp Nguồn USB-C 20W"]
       hieu_biet_chung: ["cục sạc", "củ sạc"]
   cap_sac:
@@ -103,11 +107,11 @@ cach_dien_dat:
       tu_tai_lieu: ["Cáp Sạc Nhanh Từ Tính"]
       hieu_biet_chung: ["cáp đi kèm"]
   moc_phan_tram:
-    phan_tram:
+    gia_tri_so:
       tu_tai_lieu: ["Sạc lên đến 80%"]
       hieu_biet_chung: ["sạc đầy"]
   so_phut_sac:
-    phut:
+    gia_tri_so:
       tu_tai_lieu: ["Sạc 15 phút", "Sạc 8 phút"]
       hieu_biet_chung: []
   chuan_do_sau:

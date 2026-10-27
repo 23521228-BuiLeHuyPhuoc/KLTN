@@ -38,6 +38,19 @@
 - Cụm chỉ là câu rào chung (mục 5) không tính là điều kiện lạ.
 - Tùy chọn, chọn ở Bước 33 trên tập phát triển: nếu tài liệu có từ hai giá trị chỉ khác nhau ở cùng một điều kiện lạ, coi đó là lựa chọn của người dùng và áp "kém thuận lợi nhất" (quảng cáo trùng giá trị tốt hơn là Lệch; không cao hơn giá trị kém nhất là Đúng). Mặc định tắt.
 
+**Điều kiện dạng số** (thêm 27/10). Điều kiện dạng chữ so bằng giá trị chuẩn ("bật" khác "tắt"); điều kiện là một con số kèm quan hệ thì so bằng số, sau khi chuẩn hóa đơn vị. Tuyên bố cùng điều kiện với tài liệu khi giá trị điều kiện của tuyên bố thỏa quan hệ dưới đây; không thỏa thì là khác điều kiện, xét tiếp D4–D6.
+
+| Điều kiện | Đơn vị | Tài liệu ghi | Thỏa khi | Ví dụ |
+|---|---|---|---|---|
+| Công suất bộ tiếp hợp (`bo_tiep_hop`) | W | Mức tối thiểu ("40W trở lên", "67W hoặc cao hơn", bộ 20W của Watch) | Tuyên bố ≥ tài liệu | iPhone 17 "50% trong 20 phút với củ 20W": 20 < 40 nên khác điều kiện, ra Lệch |
+| Mốc phần trăm (`moc_phan_tram`) | % | Mốc đo ("50%", "100%", "80%") | Tuyên bố ≤ tài liệu | "sạc 30% trong 20 phút" vẫn khớp; "sạc 80% trong 20 phút" là khác điều kiện |
+| Số phút sạc (`so_phut_sac`) | phút | Thời gian sạc trước khi dùng ("sạc 15 phút") | Tuyên bố ≥ tài liệu | Watch SE 3 "sạc 10 phút dùng 8 giờ": 10 < 15 nên khác điều kiện |
+| Độ sâu ngâm (`do_sau`) | m | Mức tối đa ("độ sâu tối đa 6 mét", "1 mét") | Tuyên bố ≤ tài liệu | iPhone 17 "IP68, ngâm 10 m": vượt điều kiện thử, ra Lệch |
+| Thời gian ngâm (`thoi_gian_ngam`) | phút | Mức tối đa ("tối đa 30 phút") | Tuyên bố ≤ tài liệu | "ngâm 1 giờ" là khác điều kiện |
+| Phần diện tích đo (`dien_tich_do`) | % | Phần màn hình được đo ("25% diện tích") | Tuyên bố ≤ tài liệu | Xiaomi 15T "3200 nit trên toàn màn hình": khác điều kiện |
+
+"Bằng" dùng ngưỡng làm tròn 1% (T10 điểm 8, chọn lại ở Bước 33). Khai báo ở `dieu_kien_so` của từng thuộc tính và mục `dieu_kien_so` của `chung.yaml`; `src/kiemchung/cau_hinh.py` có hàm `thoa_dieu_kien_so` và kiểm mọi điều kiện dạng số đều có đơn vị và quan hệ.
+
 **Chọn con số để so khi quảng cáo không nêu điều kiện** (chốt 26/10). Dữ liệu ghi điều kiện của tuyên bố là "không nêu", không tự viết thêm. Con số để so được chọn theo tài liệu của mẫu:
 
 | Tài liệu của mẫu | Cách so | Ví dụ |
@@ -268,4 +281,5 @@ Có điều kiện nhưng không thuộc danh sách thuộc tính: dung lượng
 | Mới | Điểm dừng ở Bước 16 cho nhãn Lệch và phương án lùi (3 nhãn cộng cờ thiếu điều kiện) | Chốt 26/10, đã ghi vào kế hoạch |
 | Mới | Hai chốt chặn cho cách hiểu mặc định: khảo sát 20–30 người (Bước 10), phân tích độ nhạy (Bước 37) | Chốt 26/10, đã ghi vào kế hoạch |
 | Mới | Cấu trúc tệp: `chung.yaml` cộng 3 tệp nhóm | Chốt 26/10 |
+| Mới | Điều kiện dạng số (công suất bộ tiếp hợp, mốc phần trăm, số phút sạc, độ sâu, thời gian ngâm, phần diện tích đo) có đơn vị và quan hệ so sánh; kháng nước tách "điều kiện thử" thành độ sâu và thời gian ngâm | Chốt 27/10 |
 | Mới | Thử độ bao phủ trên 3 trang sản phẩm ngoài 12 mẫu, là một tiêu chí của điểm dừng Bước 16 | Chốt 26/10; làm ở phiên sau, trước Bước 9 |
