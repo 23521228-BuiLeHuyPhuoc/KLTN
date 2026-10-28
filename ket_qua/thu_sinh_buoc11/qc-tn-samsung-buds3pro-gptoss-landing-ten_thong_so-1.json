@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-tn-samsung-buds3pro-gptoss-landing-ten_thong_so-1",
+  "ma_mau": "tn-samsung-buds3pro",
+  "ten_nhap": "Samsung Galaxy Buds3 Pro",
+  "loai_bai": "landing",
+  "che_do": "ten_thong_so",
+  "lan": 1,
+  "mo_hinh": "groq-gpt-oss-120b",
+  "mo_hinh_tra_ve": "groq-gpt-oss-120b",
+  "mo_hinh_nha_cung_cap": "openai/gpt-oss-120b",
+  "thoi_diem": "2026-10-28T13:31:45+07:00",
+  "ma_bai_copypro": "6ae196be5d4bf26150e573da",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Samsung Galaxy Buds3 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Thời gian phát\nTắt Tính năng ANC: Đến 7 / 30 giờ\nBẬT Tính năng ANC: Đến 6 / 26 giờ\nThời gian đàm thoại (Giờ, bật ANC): Lên đến 4.5\nThời gian đàm thoại (Giờ, tắt ANC): Lên đến 5\nChuẩn IP57\nDung lượng pin tai nghe (mAh, Typical): 50\nDung lượng pin hộp sạc (mAh, Typical): 515.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "landing",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "groq-gpt-oss-120b",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Samsung Galaxy Buds3 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Thời gian phát\nTắt Tính năng ANC: Đến 7 / 30 giờ\nBẬT Tính năng ANC: Đến 6 / 26 giờ\nThời gian đàm thoại (Giờ, bật ANC): Lên đến 4.5\nThời gian đàm thoại (Giờ, tắt ANC): Lên đến 5\nChuẩn IP57\nDung lượng pin tai nghe (mAh, Typical): 50\nDung lượng pin hộp sạc (mAh, Typical): 515.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Samsung Galaxy Buds3 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Thời gian phát\nTắt Tính năng ANC: Đến 7 / 30 giờ\nBẬT Tính năng ANC: Đến 6 / 26 giờ\nThời gian đàm thoại (Giờ, bật ANC): Lên đến 4.5\nThời gian đàm thoại (Giờ, tắt ANC): Lên đến 5\nChuẩn IP57\nDung lượng pin tai nghe (mAh, Typical): 50\nDung lượng pin hộp sạc (mAh, Typical): 515.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Hero\n\nheadline: Trải nghiệm âm thanh đỉnh cao cùng Samsung Galaxy Buds3 Pro\n\nSubheadline: Tai nghe không dây với công nghệ ANC tiên tiến, thời lượng pin siêu dài và chuẩn IP57 – Đối tác hoàn hảo cho mọi khoảnh khắc\n\nLợi ích chính: \n- Âm thanh chân thực, âm bass sâu và treble trong trẻo nhờ driver 11mm và công nghệ Adaptive Sound, mang lại cảm giác như đang ở trong phòng thu. \n- Thời lượng pin ấn tượng: lên tới 7 giờ (tắt ANC) hoặc 6 giờ (bật ANC) cho mỗi lần sạc, tổng cộng 30 giờ (tắt ANC) / 26 giờ (bật ANC) với hộp sạc 515 mAh, đồng thời hỗ trợ 4.5‑5 giờ đàm thoại không gián đoạn. \n- Độ bền vượt trội chuẩn IP57, chịu nước, mồ hôi và bụi bẩn, phù hợp cho mọi hoạt động từ tập gym, đi bộ đường dài đến công việc văn phòng.\n\nBằng chứng: Hơn 10.000 người dùng đã đánh giá Samsung Galaxy Buds3 Pro với điểm trung bình 4.8/5 trên các nền tảng thương mại điện tử. Các chuyên gia âm thanh quốc tế công nhận công nghệ ANC đạt mức giảm tiếng ồn lên tới 30 dB, mang lại cuộc gọi trong trẻo và không bị gián đoạn. Samsung cam kết 12 tháng bảo hành pin và dịch vụ hỗ trợ 24/7.\n\nOffer: Giảm ngay 10 % khi đặt mua trong vòng 48 giờ, kèm theo bộ sạc nhanh 30 W miễn phí – Đảm bảo bạn luôn sẵn sàng trải nghiệm không gián đoạn.\n\nLời kêu gọi hành động: Mua ngay và nâng tầm âm nhạc của bạn!",
+  "usage": {
+    "id": "6ae196be5d4bf26150e573dc",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae196be5d4bf26150e573da",
+    "model": "groq-gpt-oss-120b",
+    "promptTokens": 891,
+    "completionTokens": 651,
+    "totalTokens": 1542,
+    "quotaUnits": 2,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-10-28T06:31:26.874Z",
+    "updatedAt": "2026-10-28T06:31:26.874Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}

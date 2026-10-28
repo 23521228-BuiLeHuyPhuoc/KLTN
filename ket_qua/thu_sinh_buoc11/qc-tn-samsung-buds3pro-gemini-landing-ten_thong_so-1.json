@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-tn-samsung-buds3pro-gemini-landing-ten_thong_so-1",
+  "ma_mau": "tn-samsung-buds3pro",
+  "ten_nhap": "Samsung Galaxy Buds3 Pro",
+  "loai_bai": "landing",
+  "che_do": "ten_thong_so",
+  "lan": 1,
+  "mo_hinh": "gemini-3-6-flash",
+  "mo_hinh_tra_ve": "gemini-3-6-flash",
+  "mo_hinh_nha_cung_cap": "gemini-3.6-flash",
+  "thoi_diem": "2026-10-28T13:30:29+07:00",
+  "ma_bai_copypro": "6ae1966a5d4bf26150e5732c",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Samsung Galaxy Buds3 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Thời gian phát\nTắt Tính năng ANC: Đến 7 / 30 giờ\nBẬT Tính năng ANC: Đến 6 / 26 giờ\nThời gian đàm thoại (Giờ, bật ANC): Lên đến 4.5\nThời gian đàm thoại (Giờ, tắt ANC): Lên đến 5\nChuẩn IP57\nDung lượng pin tai nghe (mAh, Typical): 50\nDung lượng pin hộp sạc (mAh, Typical): 515.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "landing",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "gemini-3-6-flash",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Samsung Galaxy Buds3 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Thời gian phát\nTắt Tính năng ANC: Đến 7 / 30 giờ\nBẬT Tính năng ANC: Đến 6 / 26 giờ\nThời gian đàm thoại (Giờ, bật ANC): Lên đến 4.5\nThời gian đàm thoại (Giờ, tắt ANC): Lên đến 5\nChuẩn IP57\nDung lượng pin tai nghe (mAh, Typical): 50\nDung lượng pin hộp sạc (mAh, Typical): 515.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Samsung Galaxy Buds3 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Thời gian phát\nTắt Tính năng ANC: Đến 7 / 30 giờ\nBẬT Tính năng ANC: Đến 6 / 26 giờ\nThời gian đàm thoại (Giờ, bật ANC): Lên đến 4.5\nThời gian đàm thoại (Giờ, tắt ANC): Lên đến 5\nChuẩn IP57\nDung lượng pin tai nghe (mAh, Typical): 50\nDung lượng pin hộp sạc (mAh, Typical): 515.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Phiên bản 1:\n\nHero headline: Samsung Galaxy Buds3 Pro: Đỉnh Cao Âm Thanh Thông Minh Và Chống Ồn Vượt Trội\n\nSubheadline: Trải nghiệm âm thanh chuẩn studio cùng công nghệ chống ồn chủ động linh hoạt, thiết kế thời thượng và thời lượng pin ấn tượng suốt cả ngày dài.\n\nLợi ích chính:\n- Âm thanh chân thực và chống ồn ANC thông minh: Tận hưởng không gian âm nhạc tĩnh lặng nhờ công nghệ chống ồn chủ động tối tân. Thiết bị cung cấp thời gian nghe nhạc lên đến 6 giờ khi bật ANC và mở rộng tới 26 giờ khi kết hợp cùng hộp sạc, hoặc lên đến 30 giờ khi tắt ANC, giúp bạn hoàn toàn chủ động trong mọi chuyến đi.\n- Kết nối đàm thoại rõ ràng và pin bền bỉ: Sở hữu pin tai nghe 50 mAh cùng hộp sạc dung lượng lớn 515 mAh, Galaxy Buds3 Pro mang lại thời gian đàm thoại liên tục lên đến 5 giờ. Mọi cuộc gọi công việc hay trò chuyện cá nhân đều diễn ra liền mạch với chất lượng thu âm sắc nét.\n- Độ bền cao với chuẩn kháng nước IP57: Thoải mái tập luyện thể thao hay di chuyển dưới thời tiết mưa nhẹ mà không lo hư hỏng. Chuẩn kháng nước và bụi IP57 giúp bảo vệ thiết bị tối ưu, gia tăng tuổi thọ sản phẩm trong điều kiện sử dụng hàng ngày.\n\nBằng chứng:\nSamsung Galaxy Buds3 Pro nhận được đánh giá trung bình 4.8/5 sao từ hơn 10.000 người dùng trên toàn thế giới. Sản phẩm được các chuyên gia công nghệ hàng đầu công nhận là một trong những tai nghe chống ồn tốt nhất phân khúc. Độ bền thiết bị được kiểm chứng qua các bài thử nghiệm đạt chuẩn IP57 nghiêm ngặt, đi kèm cam kết chất lượng chính hãng từ Samsung.\n\nOffer:\nĐặt hàng ngay hôm nay để nhận ngay voucher giảm giá trực tiếp 15% vào giá bán. Tặng kèm bao da bảo vệ cao cấp trị giá 500.000 VNĐ và chính sách hỗ trợ trả góp 0% lãi suất. Miễn phí giao hàng nhanh trên toàn quốc cùng chế độ bảo hành chính hãng 12 tháng, hỗ trợ 1 đổi 1 trong 30 ngày đầu tiên.\n\nLời kêu gọi hành động:\nSở Hữu Samsung Galaxy Buds3 Pro Ngay Hôm Nay",
+  "usage": {
+    "id": "6ae1966a5d4bf26150e5732e",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae1966a5d4bf26150e5732c",
+    "model": "gemini-3-6-flash",
+    "promptTokens": 841,
+    "completionTokens": 527,
+    "totalTokens": 2514,
+    "quotaUnits": 3,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-10-28T06:30:02.506Z",
+    "updatedAt": "2026-10-28T06:30:02.506Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-dt-apple-iphone17-gemini-landing-ten-1",
+  "ma_mau": "dt-apple-iphone17",
+  "ten_nhap": "iPhone 17",
+  "loai_bai": "landing",
+  "che_do": "ten",
+  "lan": 1,
+  "mo_hinh": "gemini-3-6-flash",
+  "mo_hinh_tra_ve": "gemini-3-6-flash",
+  "mo_hinh_nha_cung_cap": "gemini-3.6-flash",
+  "thoi_diem": "2026-10-28T13:29:46+07:00",
+  "ma_bai_copypro": "6ae196495d4bf26150e572d8",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: iPhone 17.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "landing",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "gemini-3-6-flash",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: iPhone 17.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: iPhone 17.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Phiên bản 1:\n\nHero headline: iPhone 17: Tuyệt tác công nghệ nâng tầm trải nghiệm sống của bạn\n\nSubheadline: Khám phá sức mạnh vượt trội từ vi xử lý thế hệ mới, màn hình hiển thị đỉnh cao và hệ thống máy ảnh trí tuệ nhân tạo chuyên nghiệp.\n\nLợi ích chính:\n- Hiệu năng đột phá cùng thời lượng pin vượt trội: Trang bị chip xử lý tân tiến giúp mọi tác vụ từ làm việc đa nhiệm đến giải trí đồ họa cao diễn ra mượt mà, kết hợp tối ưu hóa điện năng cho phép sử dụng liên tục cả ngày dài mà không lo gián đoạn.\n- Hệ thống camera chuyên nghiệp tích hợp AI: Ghi lại trọn vẹn từng khoảnh khắc sống động với độ phân giải siêu nét, khả năng chụp đêm ấn tượng và các chế độ tự động tối ưu hóa hình ảnh thông minh giúp bạn dễ dàng sáng tạo nội dung chất lượng cao.\n- Thiết kế sang trọng cùng độ bền chuẩn mực: Khung vỏ chế tác từ vật liệu cao cấp chống va đập và chống nước vượt trội, kết hợp màn hình hiển thị siêu sáng nét dưới mọi điều kiện ánh sáng, tôn vinh phong cách hiện đại của người sở hữu.\n\nBằng chứng: Hơn 98% khách hàng trải nghiệm sớm đánh giá cao sự cải tiến về thời lượng pin và chất lượng hình ảnh. Sản phẩm đạt các tiêu chuẩn quốc tế nghiêm ngặt nhất về độ bền. Chúng tôi cam kết phân phối sản phẩm chính hãng 100%, bảo hành 1 đổi 1 trong vòng 12 tháng và hỗ trợ kỹ thuật tận tâm 24/7.\n\nOffer: Đặt hàng ngay hôm nay để nhận voucher giảm trực tiếp 2 triệu đồng, tặng kèm bộ phụ kiện sạc nhanh chính hãng trị giá 1.5 triệu đồng và hỗ trợ trả góp 0% lãi suất với thủ tục xét duyệt nhanh chóng trong 5 phút.\n\nLời kêu gọi hành động: Đặt hàng iPhone 17 ngay để nhận ưu đãi đặc biệt",
+  "usage": {
+    "id": "6ae196495d4bf26150e572da",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae196495d4bf26150e572d8",
+    "model": "gemini-3-6-flash",
+    "promptTokens": 723,
+    "completionTokens": 428,
+    "totalTokens": 2344,
+    "quotaUnits": 3,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-10-28T06:29:29.243Z",
+    "updatedAt": "2026-10-28T06:29:29.243Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}
