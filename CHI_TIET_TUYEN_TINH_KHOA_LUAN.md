@@ -401,7 +401,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Sinh quảng cáo cho 2 mẫu thử: 2 mẫu × 2 LLM × 3 loại bài × 2 chế độ = **24 bài**. Mỗi tệp lưu câu lệnh, mô hình, tham số, đầu ra và thời điểm.
+- [x] Sinh quảng cáo cho 2 mẫu thử: 2 mẫu × 2 LLM × 3 loại bài × 2 chế độ = **24 bài**. Mỗi tệp lưu câu lệnh, mô hình, tham số, đầu ra và thời điểm. *(28/10: 24 bài ở `data/quang_cao/`, sinh bằng `scripts/sinh_bo_thu.py` qua CopyPro `a338a65`; câu lệnh lưu trùng câu lệnh ghép ở cả 24 bài, không bài nào fallback hay bị cắt. Lỗi tạm thời (mất kết nối MongoDB, Gemini quá tải) được thử lại tự động.)*
 - [ ] Tách tuyên bố **hoàn toàn bằng tay** theo [T4.1](#t4-1), không nhờ LLM gợi ý, vì tuyên bố tách tay là chuẩn để đánh giá bước tách tự động ở Bước 29. Lọc theo tệp cấu hình; gộp tuyên bố trùng trong cùng bài.
 - [ ] Mỗi tuyên bố ghi đường dẫn đến nguồn chính thức của đúng sản phẩm và phiên bản được quảng cáo.
 
@@ -1554,6 +1554,7 @@ Tên thư mục và tệp mã nguồn viết không dấu để tránh lỗi tr�
 | LLM sinh | `gemini-3.6-flash` (Google); `openai/gpt-oss-120b` (Groq) | Đề cương ghi "dự kiến"; mã mô hình tra ngày 11/10/2026 |
 | Loại bài | `description` (Mô tả sản phẩm), `social` (bài đăng mạng xã hội), `landing` (Landing page) | Đề cương; mã lấy từ CopyPro |
 | Chế độ | `ten`: chỉ nhập tên sản phẩm; `ten_thong_so`: nhập thêm đoạn thông số chính hãng vào ô "Thông tin bổ sung" | Đề cương |
+| Đoạn thông số (chế độ `ten_thong_so`) | Các đoạn trong `doan.jsonl` chứa giá trị của 16 thuộc tính, chép nguyên văn `noi_dung` như người dùng sao chép bảng thông số, nối bằng xuống dòng, không gồm chú thích. Với mẫu tập phát triển, đó là các đoạn tệp cấu hình dẫn làm căn cứ (`can_cu`); lưu ở `data/quang_cao/thong_so/<ma_mau>.txt` và danh sách mã đoạn ở `.json`. Mẫu tập kiểm tra chọn theo cùng quy tắc, ghi danh sách mã đoạn trước khi sinh | Chốt 28/10 (Bước 12); kế hoạch cũ không nêu |
 | Từ khóa | Để trống, để chế độ `ten` đúng là "chỉ nhập tên sản phẩm". Chỉ khi Bước 16 thấy quá ít tuyên bố mới điền tên các nhóm thông số, không kèm con số, cho mọi bài | Đề xuất; phương án rủi ro trong đề cương; điểm 13 ở [T10](#t10) |
 | Giọng văn, độ dài | `professional` (Chuyên nghiệp), `medium` | Chốt 28/10 (Bước 11) |
 | Các ô khác trên giao diện | Đối tượng mục tiêu để trống; thanh nhiệt độ giữ 0,7; giới hạn đầu ra 1.800 token (mặc định của độ dài vừa). Các giá trị này được ghi thẳng vào câu lệnh nên script phải dùng đúng như vậy | Mã nguồn CopyPro (`buildPrompt()` trong `Generator.tsx`) |

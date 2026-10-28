@@ -70,6 +70,13 @@
 - Kết nối từ máy tới MongoDB của CopyPro chập chờn: lần đầu backend không khởi động được (`ETIMEDOUT`), lần sinh thử thứ hai hỏng 2/6 bài giữa chừng. Bước 12 cần chạy lại các bài lỗi.
 - Chốt điểm 7 (1 phiên bản mỗi lần gọi) và 13 (để trống ô từ khóa, theo dõi số tuyên bố ở Bước 16) ở T10; chốt giọng và độ dài ở T3.3.
 
+## 28/10/2026 — Bước 12 (sinh bài)
+
+- Người thực hiện chốt giữ Gemini 3.6 Flash và GPT-OSS 120B.
+- Chốt đoạn thông số cho chế độ `ten_thong_so` (kế hoạch cũ không nêu): các đoạn chứa giá trị của 16 thuộc tính, nguyên văn `noi_dung`, không gồm chú thích; với mẫu tập phát triển là các đoạn `can_cu` của tệp cấu hình. iPhone 17: 8 đoạn, 2.384 ký tự; Galaxy Buds3 Pro: 3 đoạn, 1.281 ký tự. Lọc tự động theo "đoạn có con số" bị loại vì lẫn tỷ lệ vật liệu tái chế, điểm đánh giá và bảng so sánh với Buds3, Buds FE. Câu lệnh CopyPro tối đa 6.000 ký tự, khung câu lệnh khoảng 950 ký tự.
+- `scripts/sinh_bo_thu.py` sinh 24 bài (2 mẫu × 2 LLM × 3 loại × 2 chế độ) vào `data/quang_cao/`, bỏ qua bài đã có, thử lại tối đa 3 lần khi lỗi tạm thời. Lần đầu 21/24 (mất kết nối MongoDB nhiều lần, Gemini báo quá tải "high demand", một lần hết 90 giây chờ); chạy lại đủ 24. Câu lệnh lưu trùng ở 24/24, không bài fallback, không bài bị cắt; một bài landing của Gemini dùng 2.423 token (gồm suy luận), vượt giới hạn 1.800 cũ.
+- Chuẩn bị tách tay: `data/tuyen_bo/huong_dan_tach_tay.md`, `data/tuyen_bo/doc_bo_thu.md` (24 bài nguyên văn), `data/tuyen_bo/thu_nhap.csv` (bảng trống), `scripts/chuyen_tuyen_bo.py` (kiểm câu gốc có nguyên văn trong bài, thuộc tính có trong cấu hình, tuyên bố trùng; tự điền `url_nguon`). Việc tách do người thực hiện làm, không dùng AI.
+
 ## 25/10/2026 — Bước 7
 
 - Viết `src/kiemchung/chia_doan.py`, `scripts/chia_doan.py` và `tests/test_chia_doan.py`; 101 test của `test_chia_doan.py`, `test_chup_nguon.py`, `test_nhap_nguon_thu_cong.py` đạt. Ghi `doan.jsonl` cho 12 mẫu, tổng 1.215 đoạn, mã đoạn 3 chữ số (nhiều nhất là Watch8 với 596 đoạn). Tệp bằng chứng không đổi: mã băm 19 trang vẫn khớp `meta.json`.

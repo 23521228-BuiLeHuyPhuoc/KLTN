@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-tn-samsung-buds3pro-gemini-description-ten-1",
+  "ma_mau": "tn-samsung-buds3pro",
+  "ten_nhap": "Galaxy Buds3 Pro",
+  "loai_bai": "description",
+  "che_do": "ten",
+  "lan": 1,
+  "mo_hinh": "gemini-3-6-flash",
+  "mo_hinh_tra_ve": "gemini-3-6-flash",
+  "mo_hinh_nha_cung_cap": "gemini-3.6-flash",
+  "thoi_diem": "2026-10-28T14:47:50+07:00",
+  "ma_bai_copypro": "6ae1a89a5d4bf26150e579c7",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Mô tả sản phẩm với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Galaxy Buds3 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nMô tả ngắn: đoạn mở đầu giới thiệu sản phẩm/dịch vụ.\nLợi ích chính: 2-3 bullet.\nĐặc điểm nổi bật: 2-3 bullet.\nLời kêu gọi hành động: lời kêu gọi mua, đăng ký hoặc liên hệ.\nKhông dùng format email, SEO metadata hoặc caption mạng xã hội.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "description",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "gemini-3-6-flash",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Mô tả sản phẩm với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Galaxy Buds3 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nMô tả ngắn: đoạn mở đầu giới thiệu sản phẩm/dịch vụ.\nLợi ích chính: 2-3 bullet.\nĐặc điểm nổi bật: 2-3 bullet.\nLời kêu gọi hành động: lời kêu gọi mua, đăng ký hoặc liên hệ.\nKhông dùng format email, SEO metadata hoặc caption mạng xã hội.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Mô tả sản phẩm với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Galaxy Buds3 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nMô tả ngắn: đoạn mở đầu giới thiệu sản phẩm/dịch vụ.\nLợi ích chính: 2-3 bullet.\nĐặc điểm nổi bật: 2-3 bullet.\nLời kêu gọi hành động: lời kêu gọi mua, đăng ký hoặc liên hệ.\nKhông dùng format email, SEO metadata hoặc caption mạng xã hội.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Phiên bản 1:\n\nMô tả ngắn: Tai nghe không dây Galaxy Buds3 Pro mang đến trải nghiệm âm thanh đỉnh cao nhờ sự kết hợp hoàn hảo giữa thiết kế đột phá và công nghệ âm thanh thông minh. Đây là giải pháp vượt trội giúp nâng tầm công việc và giải trí hằng ngày của bạn.\n\nLợi ích chính:\n- Tận hưởng không gian âm thanh chân thực, sống động đỉnh cao.\n- Giảm thiểu tối đa tiếng ồn xung quanh để tập trung làm việc hiệu quả.\n- Đàm thoại luôn rõ ràng và mượt mà trong mọi điều kiện môi trường.\n\nĐặc điểm nổi bật:\n- Thiết kế Blade hoàn toàn mới sang trọng với hệ thống đèn hiển thị độc đáo.\n- Chống ồn chủ động ANC thông minh tích hợp trí tuệ nhân tạo Galaxy AI.\n- Truyền tải âm thanh chất lượng cao chuẩn Hi-Fi 24bit cực kỳ sắc nét.\n\nLời kêu gọi hành động: Sở hữu ngay Galaxy Buds3 Pro hôm nay để nhận nhiều ưu đãi hấp dẫn và nâng tầm trải nghiệm âm thanh của bạn!",
+  "usage": {
+    "id": "6ae1a89a5d4bf26150e579c9",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae1a89a5d4bf26150e579c7",
+    "model": "gemini-3-6-flash",
+    "promptTokens": 694,
+    "completionTokens": 232,
+    "totalTokens": 2104,
+    "quotaUnits": 3,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-10-28T07:47:38.792Z",
+    "updatedAt": "2026-10-28T07:47:38.792Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}

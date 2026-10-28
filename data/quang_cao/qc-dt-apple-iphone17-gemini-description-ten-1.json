@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-dt-apple-iphone17-gemini-description-ten-1",
+  "ma_mau": "dt-apple-iphone17",
+  "ten_nhap": "iPhone 17",
+  "loai_bai": "description",
+  "che_do": "ten",
+  "lan": 1,
+  "mo_hinh": "gemini-3-6-flash",
+  "mo_hinh_tra_ve": "gemini-3-6-flash",
+  "mo_hinh_nha_cung_cap": "gemini-3.6-flash",
+  "thoi_diem": "2026-10-28T14:55:51+07:00",
+  "ma_bai_copypro": "6ae1aa7b5d4bf26150e57c9b",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Mô tả sản phẩm với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: iPhone 17.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nMô tả ngắn: đoạn mở đầu giới thiệu sản phẩm/dịch vụ.\nLợi ích chính: 2-3 bullet.\nĐặc điểm nổi bật: 2-3 bullet.\nLời kêu gọi hành động: lời kêu gọi mua, đăng ký hoặc liên hệ.\nKhông dùng format email, SEO metadata hoặc caption mạng xã hội.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "description",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "gemini-3-6-flash",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Mô tả sản phẩm với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: iPhone 17.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nMô tả ngắn: đoạn mở đầu giới thiệu sản phẩm/dịch vụ.\nLợi ích chính: 2-3 bullet.\nĐặc điểm nổi bật: 2-3 bullet.\nLời kêu gọi hành động: lời kêu gọi mua, đăng ký hoặc liên hệ.\nKhông dùng format email, SEO metadata hoặc caption mạng xã hội.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Mô tả sản phẩm với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: iPhone 17.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nMô tả ngắn: đoạn mở đầu giới thiệu sản phẩm/dịch vụ.\nLợi ích chính: 2-3 bullet.\nĐặc điểm nổi bật: 2-3 bullet.\nLời kêu gọi hành động: lời kêu gọi mua, đăng ký hoặc liên hệ.\nKhông dùng format email, SEO metadata hoặc caption mạng xã hội.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Phiên bản 1:\n\nMô tả ngắn:\niPhone 17 đánh dấu bước tiến công nghệ mới, mang lại trải nghiệm di động đỉnh cao cho người dùng hiện đại. Sản phẩm kết hợp hoàn hảo giữa thiết kế sang trọng, hiệu năng vượt trội và hệ thống camera tiên tiến, đáp ứng trọn vẹn mọi nhu cầu làm việc lẫn giải trí hàng ngày.\n\nLợi ích chính:\n- Nâng cao hiệu suất làm việc và giải trí nhờ tốc độ xử lý mượt mà, không giật lag.\n- Tiết kiệm thời gian sạc và tối ưu năng lượng, đảm bảo kết nối liên tục suốt cả ngày dài.\n- Ghi lại những khoảnh khắc sống động với chất lượng hình ảnh sắc nét trong mọi điều kiện ánh sáng.\n\nĐặc điểm nổi bật:\n- Chip xử lý thế hệ mới sản xuất trên tiến trình tối tân, tối ưu hóa trí tuệ nhân tạo.\n- Màn hình hiển thị sắc nét với tần số quét cao, mang lại trải nghiệm thị giác tuyệt vời.\n- Thời lượng pin vượt trội cùng công nghệ sạc nhanh thông minh.\n\nLời kêu gọi hành động:\nĐặt mua ngay iPhone 17 hôm nay để nhận ưu đãi đặc quyền và trải nghiệm công nghệ hàng đầu.",
+  "usage": {
+    "id": "6ae1aa7b5d4bf26150e57c9d",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae1aa7b5d4bf26150e57c9b",
+    "model": "gemini-3-6-flash",
+    "promptTokens": 694,
+    "completionTokens": 265,
+    "totalTokens": 2194,
+    "quotaUnits": 3,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-10-28T07:55:39.836Z",
+    "updatedAt": "2026-10-28T07:55:39.836Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}

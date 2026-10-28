@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-tn-samsung-buds3pro-gptoss-social-ten-1",
+  "ma_mau": "tn-samsung-buds3pro",
+  "ten_nhap": "Galaxy Buds3 Pro",
+  "loai_bai": "social",
+  "che_do": "ten",
+  "lan": 1,
+  "mo_hinh": "groq-gpt-oss-120b",
+  "mo_hinh_tra_ve": "groq-gpt-oss-120b",
+  "mo_hinh_nha_cung_cap": "openai/gpt-oss-120b",
+  "thoi_diem": "2026-10-28T14:53:27+07:00",
+  "ma_bai_copypro": "6ae1a9ec5d4bf26150e57b90",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Social Media Post với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Galaxy Buds3 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHook: câu mở đầu kéo chú ý.\nCaption: nội dung chính dễ đọc trên mạng xã hội.\nLời kêu gọi hành động: hành động mong muốn.\nHashtags: 3-6 hashtag liên quan.\nKhông thêm Subject, Preview text, SEO title hoặc Meta description.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "social",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "groq-gpt-oss-120b",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Social Media Post với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Galaxy Buds3 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHook: câu mở đầu kéo chú ý.\nCaption: nội dung chính dễ đọc trên mạng xã hội.\nLời kêu gọi hành động: hành động mong muốn.\nHashtags: 3-6 hashtag liên quan.\nKhông thêm Subject, Preview text, SEO title hoặc Meta description.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Social Media Post với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Galaxy Buds3 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHook: câu mở đầu kéo chú ý.\nCaption: nội dung chính dễ đọc trên mạng xã hội.\nLời kêu gọi hành động: hành động mong muốn.\nHashtags: 3-6 hashtag liên quan.\nKhông thêm Subject, Preview text, SEO title hoặc Meta description.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Hook: Âm thanh đỉnh cao, thiết kế tinh tế – Galaxy Buds3 Pro đang chờ bạn khám phá!\n\nCaption: Trải nghiệm âm nhạc không giới hạn với công nghệ Adaptive Sound, tự động điều chỉnh âm lượng phù hợp môi trường xung quanh. Pin siêu bền lên tới 8 giờ nghe liên tục, kèm hộp sạc nhanh chỉ cần 5 phút cho 1 giờ sử dụng. Thiết kế siêu nhẹ, khít tai, giảm tiếng ồn chủ động, giúp bạn tập trung vào từng nốt nhạc hay cuộc gọi quan trọng. Được tích hợp trợ lý AI thông minh, chỉ cần nói “Hey Galaxy” là mọi thao tác đều trong tầm tay. Đừng để giới hạn công nghệ làm cản trở trải nghiệm của bạn.\n\nLời kêu gọi hành động: Đặt mua ngay hôm nay để nhận ưu đãi đặc biệt và nâng tầm âm thanh của bạn!\n\nHashtags: #GalaxyBuds3Pro #ÂmThanhCaoCấp #CôngNghệThôngMinh #ÂmNhạcKhôngGiớiHạn #TechLife",
+  "usage": {
+    "id": "6ae1a9ec5d4bf26150e57b92",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae1a9ec5d4bf26150e57b90",
+    "model": "groq-gpt-oss-120b",
+    "promptTokens": 703,
+    "completionTokens": 397,
+    "totalTokens": 1100,
+    "quotaUnits": 2,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-10-28T07:53:16.750Z",
+    "updatedAt": "2026-10-28T07:53:16.750Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}

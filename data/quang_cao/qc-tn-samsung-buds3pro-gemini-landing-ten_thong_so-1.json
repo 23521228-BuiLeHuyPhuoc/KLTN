@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-tn-samsung-buds3pro-gemini-landing-ten_thong_so-1",
+  "ma_mau": "tn-samsung-buds3pro",
+  "ten_nhap": "Galaxy Buds3 Pro",
+  "loai_bai": "landing",
+  "che_do": "ten_thong_so",
+  "lan": 1,
+  "mo_hinh": "gemini-3-6-flash",
+  "mo_hinh_tra_ve": "gemini-3-6-flash",
+  "mo_hinh_nha_cung_cap": "gemini-3.6-flash",
+  "thoi_diem": "2026-10-28T14:52:46+07:00",
+  "ma_bai_copypro": "6ae1a9bd5d4bf26150e57af4",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Galaxy Buds3 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Adaptive Noise Control\nTận hưởng tai nghe Galaxy Buds3 Pro nhưng vẫn dễ dàng tương tác với thể giới xung quanh. Nhờ Galaxy AI, Galaxy Buds3 Pro tự động nhận diện và ngăn ngừa tiếng ồn xung quanh. Sau đó, tối ưu trải nghiệm âm thanh của bạn bằng cách hiệu chỉnh chế độ ANC và Ambient để tương ứng với môi trường xung quanh. Nhờ thế, bạn có thể lắng nghe các bản nhạc yêu thích, mà không lo bị ngắt quãng. 1, 7, 8, 18, 40\nMột chiếc tai nghe Galaxy Buds3 Pro màu bạc có dòng chữ \"\nKết nối liên tục\nGiữ cho âm nhạc và âm thanh của bạn luôn tuôn chảy, bất cứ khi nào và bất cứ nơi nào bạn đi. 33, 34, 35, 36, 37\nThời gian phát\nTắt Tính năng ANC\nĐến\n7\n/\n30\ngiờ\nBẬT Tính năng ANC\nĐến\n6\n/\n26\ngiờ\nChuẩn IP57\nThời gian sử dụng (bật ANC)\nThời gian đàm thoại (Giờ, bật ANC)\nLên đến 4.5\nTổng thời gian đàm thoại (Giờ, bật ANC)\nLên đến 20\nThời gian phát nhạc (bật ANC)\nLên đến 6\nTổng thời gian phát nhạc (Giờ, bật ANC)\nLên đến 26\nThời lượng sử dụng (tắt ANC)\nThời gian đàm thoại (Giờ, tắt ANC)\nLên đến 5\nTổng thời gian đàm thoại (Giờ, tắt ANC)\nLên đến 22\nThời gian phát nhạc (Giờ, tắt ANC)\nLên đến 7\nTổng thời gian phát nhạc (Giờ, bật ANC)\nLên đến 30\nPin\nDung lượng pin tai nghe (mAh, Typical)\n50\nDung lượng pin hộp sạc (mAh, Typical)\n515\nDịch vụ và Ứng dụng\nBixby Voice Wake-up\nCó\nThông tin SAR.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "landing",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "gemini-3-6-flash",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Galaxy Buds3 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Adaptive Noise Control\nTận hưởng tai nghe Galaxy Buds3 Pro nhưng vẫn dễ dàng tương tác với thể giới xung quanh. Nhờ Galaxy AI, Galaxy Buds3 Pro tự động nhận diện và ngăn ngừa tiếng ồn xung quanh. Sau đó, tối ưu trải nghiệm âm thanh của bạn bằng cách hiệu chỉnh chế độ ANC và Ambient để tương ứng với môi trường xung quanh. Nhờ thế, bạn có thể lắng nghe các bản nhạc yêu thích, mà không lo bị ngắt quãng. 1, 7, 8, 18, 40\nMột chiếc tai nghe Galaxy Buds3 Pro màu bạc có dòng chữ \"\nKết nối liên tục\nGiữ cho âm nhạc và âm thanh của bạn luôn tuôn chảy, bất cứ khi nào và bất cứ nơi nào bạn đi. 33, 34, 35, 36, 37\nThời gian phát\nTắt Tính năng ANC\nĐến\n7\n/\n30\ngiờ\nBẬT Tính năng ANC\nĐến\n6\n/\n26\ngiờ\nChuẩn IP57\nThời gian sử dụng (bật ANC)\nThời gian đàm thoại (Giờ, bật ANC)\nLên đến 4.5\nTổng thời gian đàm thoại (Giờ, bật ANC)\nLên đến 20\nThời gian phát nhạc (bật ANC)\nLên đến 6\nTổng thời gian phát nhạc (Giờ, bật ANC)\nLên đến 26\nThời lượng sử dụng (tắt ANC)\nThời gian đàm thoại (Giờ, tắt ANC)\nLên đến 5\nTổng thời gian đàm thoại (Giờ, tắt ANC)\nLên đến 22\nThời gian phát nhạc (Giờ, tắt ANC)\nLên đến 7\nTổng thời gian phát nhạc (Giờ, bật ANC)\nLên đến 30\nPin\nDung lượng pin tai nghe (mAh, Typical)\n50\nDung lượng pin hộp sạc (mAh, Typical)\n515\nDịch vụ và Ứng dụng\nBixby Voice Wake-up\nCó\nThông tin SAR.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Galaxy Buds3 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Adaptive Noise Control\nTận hưởng tai nghe Galaxy Buds3 Pro nhưng vẫn dễ dàng tương tác với thể giới xung quanh. Nhờ Galaxy AI, Galaxy Buds3 Pro tự động nhận diện và ngăn ngừa tiếng ồn xung quanh. Sau đó, tối ưu trải nghiệm âm thanh của bạn bằng cách hiệu chỉnh chế độ ANC và Ambient để tương ứng với môi trường xung quanh. Nhờ thế, bạn có thể lắng nghe các bản nhạc yêu thích, mà không lo bị ngắt quãng. 1, 7, 8, 18, 40\nMột chiếc tai nghe Galaxy Buds3 Pro màu bạc có dòng chữ \"\nKết nối liên tục\nGiữ cho âm nhạc và âm thanh của bạn luôn tuôn chảy, bất cứ khi nào và bất cứ nơi nào bạn đi. 33, 34, 35, 36, 37\nThời gian phát\nTắt Tính năng ANC\nĐến\n7\n/\n30\ngiờ\nBẬT Tính năng ANC\nĐến\n6\n/\n26\ngiờ\nChuẩn IP57\nThời gian sử dụng (bật ANC)\nThời gian đàm thoại (Giờ, bật ANC)\nLên đến 4.5\nTổng thời gian đàm thoại (Giờ, bật ANC)\nLên đến 20\nThời gian phát nhạc (bật ANC)\nLên đến 6\nTổng thời gian phát nhạc (Giờ, bật ANC)\nLên đến 26\nThời lượng sử dụng (tắt ANC)\nThời gian đàm thoại (Giờ, tắt ANC)\nLên đến 5\nTổng thời gian đàm thoại (Giờ, tắt ANC)\nLên đến 22\nThời gian phát nhạc (Giờ, tắt ANC)\nLên đến 7\nTổng thời gian phát nhạc (Giờ, bật ANC)\nLên đến 30\nPin\nDung lượng pin tai nghe (mAh, Typical)\n50\nDung lượng pin hộp sạc (mAh, Typical)\n515\nDịch vụ và Ứng dụng\nBixby Voice Wake-up\nCó\nThông tin SAR.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Phiên bản 1\n\nHero headline: Tuyệt Tác Âm Thanh Thông Minh Galaxy Buds3 Pro\n\nSubheadline: Trải nghiệm âm thanh đỉnh cao cùng khả năng tối ưu tiếng ồn tự động vượt trội nhờ công nghệ Galaxy AI.\n\nLợi ích chính:\n- Khả năng chống ồn thông minh Adaptive Noise Control: Nhờ tích hợp Galaxy AI, tai nghe tự động nhận diện không gian xung quanh để hiệu chỉnh linh hoạt giữa chế độ chống ồn ANC và âm thanh xung quanh Ambient Mode. Bạn dễ dàng thưởng thức âm nhạc trọn vẹn mà không bỏ lỡ các tương tác quan trọng.\n- Kết nối âm nhạc liên tục với thời lượng pin lên đến 30 giờ: Thoải mái nghe nhạc suốt cả ngày dài với thời gian phát tối đa 7 giờ trên tai nghe và tổng cộng lên tới 30 giờ khi sử dụng cùng hộp sạc. Dù bật hay tắt ANC, thiết bị luôn đảm bảo nguồn năng lượng dồi dào cho mọi cuộc gọi và khoảnh khắc giải trí.\n- Độ bền vượt trội chuẩn IP57 cùng trợ lý Bixby tiện lợi: Thiết kế hiện đại chống bụi và kháng nước chuẩn IP57 giúp bạn an tâm luyện tập thể thao hay di chuyển dưới mưa. Tích hợp tính năng Bixby Voice Wake-up hỗ trợ điều khiển bằng giọng nói rảnh tay cực kỳ nhanh chóng.\n\nBằng chứng: Galaxy Buds3 Pro được trang bị dung lượng pin tai nghe 50 mAh và hộp sạc 515 mAh, cho thời gian đàm thoại lên tới 20 giờ và phát nhạc lên tới 26 giờ ở chế độ bật ANC. Sản phẩm đạt chuẩn độ bền IP57 khắt khe, nhận được vô số phản hồi tích cực từ cộng đồng yêu công nghệ về khả năng xử lý âm thanh thông minh của Galaxy AI.\n\nOffer: Đặt hàng Galaxy Buds3 Pro ngay trong hôm nay để nhận voucher giảm giá đặc biệt, hỗ trợ trả góp lãi suất 0 percent và miễn phí giao hàng tận nhà trên toàn quốc.\n\nLời kêu gọi hành động: Đặt mua Galaxy Buds3 Pro ngay để trải nghiệm âm thanh thế hệ mới.",
+  "usage": {
+    "id": "6ae1a9bd5d4bf26150e57af6",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae1a9bd5d4bf26150e57af4",
+    "model": "gemini-3-6-flash",
+    "promptTokens": 1192,
+    "completionTokens": 454,
+    "totalTokens": 3395,
+    "quotaUnits": 4,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-10-28T07:52:29.510Z",
+    "updatedAt": "2026-10-28T07:52:29.510Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}

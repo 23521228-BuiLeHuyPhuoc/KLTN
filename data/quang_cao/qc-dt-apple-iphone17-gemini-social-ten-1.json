@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-dt-apple-iphone17-gemini-social-ten-1",
+  "ma_mau": "dt-apple-iphone17",
+  "ten_nhap": "iPhone 17",
+  "loai_bai": "social",
+  "che_do": "ten",
+  "lan": 1,
+  "mo_hinh": "gemini-3-6-flash",
+  "mo_hinh_tra_ve": "gemini-3-6-flash",
+  "mo_hinh_nha_cung_cap": "gemini-3.6-flash",
+  "thoi_diem": "2026-10-28T14:40:15+07:00",
+  "ma_bai_copypro": "6ae1a6d15d4bf26150e5773d",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Social Media Post với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: iPhone 17.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHook: câu mở đầu kéo chú ý.\nCaption: nội dung chính dễ đọc trên mạng xã hội.\nLời kêu gọi hành động: hành động mong muốn.\nHashtags: 3-6 hashtag liên quan.\nKhông thêm Subject, Preview text, SEO title hoặc Meta description.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "social",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "gemini-3-6-flash",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Social Media Post với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: iPhone 17.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHook: câu mở đầu kéo chú ý.\nCaption: nội dung chính dễ đọc trên mạng xã hội.\nLời kêu gọi hành động: hành động mong muốn.\nHashtags: 3-6 hashtag liên quan.\nKhông thêm Subject, Preview text, SEO title hoặc Meta description.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Social Media Post với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: iPhone 17.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHook: câu mở đầu kéo chú ý.\nCaption: nội dung chính dễ đọc trên mạng xã hội.\nLời kêu gọi hành động: hành động mong muốn.\nHashtags: 3-6 hashtag liên quan.\nKhông thêm Subject, Preview text, SEO title hoặc Meta description.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Phiên bản 1:\n\nHook: Đón đầu kỷ nguyên di động mới cùng đỉnh cao công nghệ iPhone 17.\n\nCaption: iPhone 17 chính thức ra mắt, thiết lập chuẩn mực hoàn toàn mới cho trải nghiệm smartphone cao cấp. Sản phẩm sở hữu thiết kế tinh xảo, mỏng nhẹ nhưng bền bỉ vượt trội.\n\nMàn hình hiển thị siêu sắc nét kết hợp cùng tần số quét thông minh giúp mọi thao tác vuốt chạm trở nên mượt mà tuyệt đối.\n\nHiệu năng bứt phá từ vi xử lý thế hệ mới hỗ trợ xử lý đa nhiệm vượt trội và tiết kiệm điện năng tối ưu. Bên cạnh đó, hệ thống camera tiên tiến giúp bạn dễ dàng lưu giữ trọn vẹn mọi khoảnh khắc chuyên nghiệp.\n\nLời kêu gọi hành động: Đặt trước ngay hôm nay để nhận thêm bộ quà tặng đặc quyền và sở hữu iPhone 17 sớm nhất.\n\nHashtags: #iPhone17 #Apple #CongNghe #ToiUuHieuNang #CongNgheMoi",
+  "usage": {
+    "id": "6ae1a6d15d4bf26150e5773f",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae1a6d15d4bf26150e5773d",
+    "model": "gemini-3-6-flash",
+    "promptTokens": 661,
+    "completionTokens": 221,
+    "totalTokens": 2056,
+    "quotaUnits": 3,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-10-28T07:40:01.861Z",
+    "updatedAt": "2026-10-28T07:40:01.861Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}
