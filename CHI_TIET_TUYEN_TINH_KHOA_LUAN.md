@@ -345,16 +345,18 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Soạn phiếu (ví dụ bằng Google Forms) khoảng 8 tuyên bố không nêu điều kiện, chỉ lấy mẫu của tập phát triển, ví dụ "Apple Watch SE 3 pin 32 giờ", "iPhone 17 sạc 50% trong 20 phút", "Galaxy Buds3 Pro pin 7 giờ". Với mỗi tuyên bố, hỏi người đọc hiểu là trong điều kiện nào (chọn một phương án hoặc tự ghi).
-- [ ] Gửi cho 20–30 người (sửa 26/10, trước là 5–10: quá ít để nói "đa số người mua hiểu là..."), ưu tiên người không học công nghệ thông tin vì gần với người mua thông thường.
-- [ ] Phiếu phải có các câu kiểm cách hiểu đã tạm chốt ở Bước 8: "Galaxy Buds3 Pro pin 6 giờ" (nghe nhạc hay đàm thoại, bật hay tắt chống ồn), "Apple Watch SE 3 pin 18 giờ" (sử dụng bình thường hay tập luyện), và một câu bỏ "lên đến" (người đọc hiểu là thường đạt hay tối đa; đối chiếu với kết quả FTC 2012, nơi bỏ "up to" không làm cách hiểu khác đi có ý nghĩa thống kê).
-- [ ] Ghi tỷ lệ người hiểu giống cách hiểu thông thường trong tệp cấu hình. Câu nào quá nửa số người hiểu khác thì sửa tệp cấu hình, hướng dẫn gán nhãn và nhãn của các ví dụ liên quan (ví dụ 8, 9, 14 ở [T4.6](#t4-6)).
-- [ ] Chốt điểm 1 ở [T10](#t10).
-- [ ] Nếu trong ngày chưa đủ 5 câu trả lời thì vẫn sang Bước 11; tổng hợp khi đủ, nhưng phải xong trước Bước 13 (gán nhãn bộ thử).
+- [x] Soạn phiếu (ví dụ bằng Google Forms) khoảng 8 tuyên bố không nêu điều kiện, chỉ lấy mẫu của tập phát triển, ví dụ "Apple Watch SE 3 pin 32 giờ", "iPhone 17 sạc 50% trong 20 phút", "Galaxy Buds3 Pro pin 7 giờ". Với mỗi tuyên bố, hỏi người đọc hiểu là trong điều kiện nào (chọn một phương án hoặc tự ghi).
+- [x] Gửi cho 20–30 người (sửa 26/10, trước là 5–10: quá ít để nói "đa số người mua hiểu là..."), ưu tiên người không học công nghệ thông tin vì gần với người mua thông thường. *(Thu được 10 phiếu, 8 người học công nghệ thông tin; đạt mức 5–10 của đề cương, chưa đạt 20–30. Người thực hiện chốt không khảo sát thêm.)*
+- [x] Phiếu phải có các câu kiểm cách hiểu đã tạm chốt ở Bước 8: "Galaxy Buds3 Pro pin 6 giờ" (nghe nhạc hay đàm thoại, bật hay tắt chống ồn), "Apple Watch SE 3 pin 18 giờ" (sử dụng bình thường hay tập luyện), và một câu bỏ "lên đến" (người đọc hiểu là thường đạt hay tối đa; đối chiếu với kết quả FTC 2012, nơi bỏ "up to" không làm cách hiểu khác đi có ý nghĩa thống kê).
+- [x] Ghi tỷ lệ người hiểu giống cách hiểu thông thường trong tệp cấu hình. Câu nào quá nửa số người hiểu khác thì sửa tệp cấu hình, hướng dẫn gán nhãn và nhãn của các ví dụ liên quan (ví dụ 8, 9, 14 ở [T4.6](#t4-6)).
+- [x] Chốt điểm 1 ở [T10](#t10).
+- [x] Nếu trong ngày chưa đủ 20 câu trả lời (sửa 27/10, trước là 5, chưa đổi theo mục tiêu 20–30) thì vẫn sang Bước 11; tổng hợp khi đủ, nhưng phải xong trước Bước 13 (gán nhãn bộ thử). *(Không áp dụng: đã tổng hợp với 10 phiếu.)*
 
 **Làm ra:** `ket_qua/khao_sat_cach_hieu.md` (câu hỏi, số người, tỷ lệ đồng ý từng câu, các chỗ đã sửa).
 
 **Xong khi:** có kết quả khảo sát; tệp cấu hình và hướng dẫn đã sửa theo khảo sát.
+
+**Đã thực hiện ngày 27–28/10/2026:** [khao_sat_cach_hieu.md](ket_qua/khao_sat_cach_hieu.md). Phiếu 15 câu dùng câu quảng cáo do CopyPro tạo (18 bài Gemini 2.5 Flash, `ket_qua/khao_sat_quang_cao_goc.jsonl`), tạo form bằng `ket_qua/tao_google_form.gs`, cách chấm viết trước khi gửi. 10 phiếu, chấm bằng `scripts/tong_hop_khao_sat.py`. Sửa theo khảo sát: "xem video" không rõ loại coi như chưa nêu hoạt động (9/10; V03 thành Lệch); độ sáng điện thoại không có cách hiểu mặc định (7/10; V25, V26, V43 thành Chưa đủ thông tin). Giữ chế độ nguồn đồng hồ và zoom dù 6/10 hiểu khác, lệch khỏi tiêu chí đặt trước vì Q06 trái với Q11 trên cùng người trả lời, mẫu lệch về người học công nghệ thông tin và đổi thì tăng FAR; Bước 37 tính lại với mặc định thay thế. Quy tắc bỏ "lên đến" được ủng hộ (1/10). Ghi nhận cho Bước 11: 13/18 bài CopyPro bị cắt vì token suy luận tính vào giới hạn 1.800 token (mục 9 của tệp kết quả). Chi tiết trong [nhật ký](luan_van/nhat_ky.md).
 
 **Tra cứu:** [T4.5](#t4-5), [T10](#t10) (điểm 1).
 
@@ -956,7 +958,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 - [ ] Viết `danh_gia.py` theo [T6.4](#t6-4) và [T6.5](#t6-5): FAR, Precision, Recall, F1 từng nhãn, Macro-F1; Recall@k của BM25; Precision và Recall của tách tự động; thời gian và chi phí gọi LLM. Độ đúng trích xuất trên tập kiểm tra tính ở Bước 38, sau khi gán tay.
 - [ ] Tính KTC bằng bootstrap theo cụm quảng cáo; kiểm định McNemar có hiệu chỉnh Holm cho chênh lệch FAR giữa P và từng đối chứng.
 - [ ] Báo riêng theo [T6.7](#t6-7): tuyên bố thường và tập cặp tối thiểu; từng loại biến đổi, nhóm sản phẩm, hãng, LLM sinh quảng cáo, chế độ sinh.
-- [ ] Phân tích độ nhạy (thêm 26/10): tính lại chỉ số khi mọi tuyên bố có nhãn phụ thuộc cách hiểu mặc định (trường `mac_dinh` khác rỗng) được đổi thành Chưa đủ thông tin. Báo số nhãn thay đổi và P còn hơn các đối chứng hay không, để kết luận không chỉ dựa vào giả định của tệp cấu hình.
+- [ ] Phân tích độ nhạy (thêm 26/10): tính lại chỉ số khi mọi tuyên bố có nhãn phụ thuộc cách hiểu mặc định (trường `mac_dinh` khác rỗng) được đổi thành Chưa đủ thông tin. Báo số nhãn thay đổi và P còn hơn các đối chứng hay không, để kết luận không chỉ dựa vào giả định của tệp cấu hình. Thêm 28/10 (khảo sát Bước 10): tính lại riêng với hai mặc định thay thế mà khảo sát nghiêng về nhưng không được áp, chế độ nguồn đồng hồ là nguồn điện thấp và zoom là kỹ thuật số (`ket_qua/khao_sat_cach_hieu.md` mục 8).
 - [ ] Báo độ bao phủ của cấu hình (thêm 26/10): tỷ lệ giá trị trong bằng chứng có `dieu_kien_khac`, tỷ lệ tuyên bố ra Chưa đủ thông tin vì `dieu_kien_la`, chia theo hãng và nhóm; đối chiếu với dự đoán ghi trước ở `bao_phu_dieu_kien.md` mục 7. Báo riêng F1 nhãn Lệch theo loại (`bo_dieu_kien`, `doi_dieu_kien`, `doi_bo_phan`, `doi_kieu_gia_tri`...) và riêng cho tập cặp tối thiểu, vì tập này chỉ chứa các biến đổi cấu hình đã biết.
 - [ ] Xuất bảng ra CSV và vẽ hình theo [T6.9](#t6-9).
 
@@ -1696,7 +1698,7 @@ Nguyên tắc chung theo đề cương: hiểu theo cách người mua thông th
 
 Các con số lấy từ đề cương hoặc từ lần xem trang chính hãng tiếng Việt ngày 09/10/2026. **Kiểm lại từng con số trên bản chụp ở Bước 5 và Bước 6.**
 
-> **Cập nhật 27/10 (Bước 9):** bộ ví dụ chính thức là mục 9 của [huong_dan_gan_nhan.md](data/huong_dan_gan_nhan.md) (48 ví dụ); bảng dưới giữ làm lịch sử. Đối chiếu từng ví dụ ở mục 12 của hướng dẫn: ví dụ 16 và 18 đổi nhãn thành Lệch, lý do của ví dụ 8, 9, 14 đổi theo điểm 1 tạm chốt ở [T10](#t10).
+> **Cập nhật 27/10 (Bước 9):** bộ ví dụ chính thức là mục 9 của [huong_dan_gan_nhan.md](data/huong_dan_gan_nhan.md) (48 ví dụ); bảng dưới giữ làm lịch sử. Đối chiếu từng ví dụ ở mục 12 của hướng dẫn: ví dụ 16 và 18 đổi nhãn thành Lệch; sau khảo sát Bước 10 (28/10), ví dụ 3, 16, 17 thành Chưa đủ thông tin vì độ sáng điện thoại không còn cách hiểu mặc định; lý do của ví dụ 8, 9, 14 đổi theo điểm 1 tạm chốt ở [T10](#t10).
 
 | # | Tuyên bố | Dòng | Nhãn | Lý do |
 |---|---|---|---|---|
@@ -2222,7 +2224,7 @@ Riêng khi chậm vì gán nhãn (rủi ro "Gán nhãn chậm" trong đề cươ
 
 | # | Điểm cần chốt | Phương án đề xuất | Chốt ở |
 |---|---|---|---|
-| 1 | Cách hiểu thông thường khi tuyên bố không nêu chế độ người dùng tự chọn (chống ồn, tiết kiệm pin, hoạt động sử dụng) | Chế độ kém thuận lợi nhất trong các chế độ hãng công bố. **Tạm chốt 26/10 (Bước 8):** chống ồn hiểu là bật (Samsung ghi ANC bật mặc định); chế độ nguồn hiểu là thường; hoạt động: điện thoại lấy hoạt động kém thuận lợi nhất hãng công bố, tai nghe hiểu là nghe nhạc, đồng hồ hiểu là sử dụng bình thường | [Bước 10](#b10), bằng khảo sát |
+| 1 | Cách hiểu thông thường khi tuyên bố không nêu chế độ người dùng tự chọn (chống ồn, tiết kiệm pin, hoạt động sử dụng) | Chế độ kém thuận lợi nhất trong các chế độ hãng công bố. **Tạm chốt 26/10 (Bước 8):** chống ồn hiểu là bật (Samsung ghi ANC bật mặc định); chế độ nguồn hiểu là thường; hoạt động: điện thoại lấy hoạt động kém thuận lợi nhất hãng công bố, tai nghe hiểu là nghe nhạc, đồng hồ hiểu là sử dụng bình thường. **Đã chốt 28/10 (Bước 10, 10 phiếu):** giữ tạm chốt 26/10; chế độ nguồn đồng hồ giữ "thường" dù 6/10 người hiểu khác (trái với câu kiểm chéo, xem `ket_qua/khao_sat_cach_hieu.md` mục 8), tính lại ở Bước 37. Thêm hai sửa đổi: "xem video" không kèm "tải sẵn" hay "trực tuyến" coi như chưa nêu hoạt động; độ sáng điện thoại không có cách hiểu mặc định (D1a) | [Bước 10](#b10), bằng khảo sát |
 | 2 | Kiểu giá trị mặc định của từng thuộc tính khi tuyên bố không nêu | Dung lượng pin: điển hình; thời lượng pin, độ sáng: tối đa như hãng công bố. **Đã chốt 26/10:** giữ như đề xuất. Thời lượng pin, thời gian sạc, độ sáng, tần số quét, zoom, công suất sạc: tối đa như hãng công bố; quảng cáo bỏ "lên đến" vẫn khớp, lý do ghi thêm ghi chú. Dung lượng pin: điển hình. Sáng 26/10 từng chốt "bỏ lên đến là Lệch", chiều 26/10 đảo lại sau khi đọc báo cáo gốc FTC 2012: quảng cáo "up to 47%" và "47%" không khác nhau có ý nghĩa thống kê về cách người đọc hiểu (Q4b 48,2% so với 40,9%; Q5 43,0% so với 45,2%), nên chép con số mà bỏ "lên đến" không gây hiểu sai hơn tài liệu; khớp ví dụ đoạn 73 của đề cương. Xem `luan_van/phan_tich_dieu_kien_ngoai_cau_hinh.md` mục 8.1 | [Bước 8](#b08) |
 | 3 | Zoom quang học hay kỹ thuật số thuộc loại điều kiện nào (đề cương coi là điều kiện bắt buộc nhưng chưa xếp loại) | Chế độ hoạt động. **Đã chốt 26/10:** chế độ hoạt động; thêm độ phóng đại hay phạm vi thu phóng (điều kiện đo) và chụp ảnh hay quay video (chế độ hoạt động), vì iPhone 17 ghi phạm vi quang học 4x và kỹ thuật số 10x khi chụp, 6x khi quay | [Bước 8](#b08) |
 | 4 | Danh sách từ khẳng định chắc chắn cho dòng D2 | "luôn", "đảm bảo", "ít nhất", "mọi lúc"; bổ sung từ bộ thử. **Đã chốt 26/10:** thêm "bảo đảm" (biến thể chính tả); chỉ xét từ nằm trong câu trích của giá trị, vì tài liệu có "Màn hình Luôn Bật", "Luôn kết nối"; bỏ dạng phủ định ("không đảm bảo"); chưa thêm "tối thiểu" vì trùng "độ sáng tối thiểu" | [Bước 8](#b08), [16](#b16) |

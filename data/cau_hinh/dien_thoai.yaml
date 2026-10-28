@@ -64,7 +64,7 @@ thuoc_tinh:
       che_do_hien_thi: che_do_hoat_dong
       dien_tich_do: dieu_kien_do
     hieu_thong_thuong:
-      che_do_hien_thi: tieu_chuan           # xác nhận ở Bước 10
+      che_do_hien_thi: khong_co_mac_dinh    # khảo sát Bước 10, Q10 (28/10): 7/10 người không hiểu "3000 nit" là lúc dùng bình thường, không cách hiểu nào quá nửa
       dien_tich_do: nhu_hang_cong_bo
     pham_vi_ap_dung:
       dien_tich_do: khi hãng nêu
@@ -149,10 +149,16 @@ cach_dien_dat:
   hoat_dong:
     xem_video:
       tu_tai_lieu: ["Thời gian xem video"]
-      hieu_biet_chung: ["xem video", "xem phim"]
+      hieu_biet_chung: ["xem video tải sẵn", "xem video đã tải về", "xem video ngoại tuyến", "xem video offline"]
     xem_video_truc_tuyen:
       tu_tai_lieu: ["xem video (trực tuyến)"]
       hieu_biet_chung: ["xem video trực tuyến", "xem phim online", "streaming"]
+    # Khảo sát Bước 10, Q09 (28/10): 9/10 người hiểu "xem video" là xem trực tuyến hoặc không phân biệt.
+    # Cụm này không kèm "tải sẵn" hay "trực tuyến" thì coi như quảng cáo chưa nêu hoạt động, áp hieu_thong_thuong
+    # (kem_thuan_loi_nhat). So cụm dài nhất trước, để "xem video trực tuyến" không bị nhận là cụm này.
+    chua_ro_loai_video:
+      tu_tai_lieu: []
+      hieu_biet_chung: ["xem video", "xem phim"]
     su_dung_lien_tuc:
       tu_tai_lieu: ["Sử dụng liên tục"]
       hieu_biet_chung: []

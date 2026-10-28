@@ -8,7 +8,7 @@
 
 **Phạm vi ví dụ:** chỉ 4 mẫu tập phát triển: `dt-apple-iphone17`, `dt-xiaomi-15t`, `tn-samsung-buds3pro`, `dh-apple-watchse3`. Tệp này không chứa trang, con số hay tên mẫu của tập kiểm tra, vì tệp đi vào câu lệnh của B2.
 
-**Phần chưa chắc:** cách hiểu mặc định ở mục 5 còn chờ khảo sát Bước 10. Khảo sát cho kết quả khác thì sửa cấu hình, mục 5 và các ví dụ có ghi chú `mac_dinh`.
+**Phần chưa chắc:** cách hiểu mặc định ở mục 5 đã đối chiếu với khảo sát Bước 10 (10 người, 28/10/2026; mục 5.1). Mẫu nhỏ và lệch về người học công nghệ thông tin, nên các ví dụ có ghi chú `mac_dinh` được tính lại ở phân tích độ nhạy Bước 37.
 
 ## 1. Quy trình ngắn
 
@@ -76,18 +76,18 @@ Hai khái niệm dùng chung:
 
 ## 5. Cách hiểu mặc định khi tuyên bố không nêu điều kiện
 
-Nguyên tắc của đề cương: hiểu như người mua thông thường, **bộ phận chính, không mua thêm phụ kiện**. Bảng dưới chép đúng `hieu_thong_thuong` trong 3 tệp cấu hình; cột cuối là khóa trong YAML để đối chiếu. Dòng có dấu * chờ xác nhận ở Bước 10.
+Nguyên tắc của đề cương: hiểu như người mua thông thường, **bộ phận chính, không mua thêm phụ kiện**. Bảng dưới chép đúng `hieu_thong_thuong` trong 3 tệp cấu hình; cột cuối là khóa trong YAML để đối chiếu. Dòng có dấu * đã đối chiếu với khảo sát Bước 10 (mục 5.1).
 
 | Nhóm | Thuộc tính | Điều kiện | Không nêu thì hiểu là | Khóa cấu hình |
 |---|---|---|---|---|
-| Điện thoại | Thời lượng pin (`thoi_luong_pin`) | Hoạt động* | Hoạt động kém thuận lợi nhất trong các hoạt động hãng công bố (iPhone 17: xem video trực tuyến, 27 giờ) | `hoat_dong: kem_thuan_loi_nhat` |
+| Điện thoại | Thời lượng pin (`thoi_luong_pin`) | Hoạt động* | Hoạt động kém thuận lợi nhất trong các hoạt động hãng công bố (iPhone 17: xem video trực tuyến, 27 giờ). "Xem video" không kèm "tải sẵn" hay "trực tuyến" cũng tính là chưa nêu hoạt động | `hoat_dong: kem_thuan_loi_nhat` |
 | | | Phiên bản | Phiên bản nêu trong tên sản phẩm | `phien_ban: nhu_hang_cong_bo` |
 | Điện thoại | Sạc nhanh (`sac_nhanh`): thời gian sạc tới một mốc phần trăm | Bộ tiếp hợp | Không mua thêm: chỉ có đồ trong hộp. iPhone 17 và Xiaomi 15T chỉ kèm cáp, nên con số cần bộ sạc bán riêng không đạt | `bo_tiep_hop: khong_mua_them` |
 | | | Cách sạc | Sạc bằng cáp | `cach_sac: cap` |
 | | | Mốc phần trăm | Không có mặc định: không nêu thì D1a | `moc_phan_tram: khong_co_mac_dinh` |
 | Điện thoại | Công suất sạc (`cong_suat_sac`) | Bộ tiếp hợp | Không mua thêm | `bo_tiep_hop: khong_mua_them` |
 | | | Có dây hay không dây | Có dây | `cach_sac: cap` |
-| Điện thoại | Độ sáng (`do_sang`) | Chế độ hiển thị* | Chế độ tiêu chuẩn (thông thường) | `che_do_hien_thi: tieu_chuan` |
+| Điện thoại | Độ sáng (`do_sang`) | Chế độ hiển thị* | Không có mặc định: không nêu chế độ thì D1a | `che_do_hien_thi: khong_co_mac_dinh` |
 | | | Phần diện tích đo | Như hãng công bố cho chế độ đó | `dien_tich_do: nhu_hang_cong_bo` |
 | Điện thoại | Tần số quét (`tan_so_quet`) | Tối đa hay thích ứng | Mức tối đa: "màn hình 120Hz" khớp "thích ứng lên đến 120Hz" | `kieu_tan_so: toi_da` |
 | Điện thoại | Zoom (`zoom`) | Quang học hay kỹ thuật số | Quang học | `loai_zoom: quang_hoc` |
@@ -120,7 +120,23 @@ Ba ý của bảng hay bị hiểu nhầm:
 
 - **"Kém thuận lợi nhất"** chỉ dùng cho hoạt động của điện thoại: tuyên bố không nêu hoạt động phải đúng ở hoạt động kém nhất hãng công bố. Tai nghe và đồng hồ có mặc định riêng (nghe nhạc, chống ồn bật; sử dụng bình thường, chế độ thường).
 - **"Không mua thêm"** nghĩa là chỉ có đồ trong hộp. Con số cần bộ sạc bán riêng mà tuyên bố không nêu bộ sạc thì Lệch, dù tuyên bố chép đúng con số (V21, V23, V34).
-- **"Không có mặc định"** nghĩa là tuyên bố phải tự nêu điều kiện đó. Không nêu thì người gán cũng không đoán, gán Chưa đủ thông tin ở D1a (V46).
+- **"Không có mặc định"** nghĩa là tuyên bố phải tự nêu điều kiện đó. Không nêu thì người gán cũng không đoán, gán Chưa đủ thông tin ở D1a (V46; độ sáng điện thoại: V25).
+
+### 5.1 Đối chiếu với khảo sát Bước 10
+
+Khảo sát 10 người ngày 27–28/10/2026 (`ket_qua/khao_sat_cach_hieu.md`; 8 người học hoặc làm công nghệ thông tin). Quy tắc đặt trước: quá nửa người đọc hiểu khác cấu hình thì sửa.
+
+| Cách hiểu trong bảng trên | Hiểu khác | Quyết định |
+|---|---|---|
+| Điện thoại, hoạt động: kém thuận lợi nhất | 1/10 | Giữ |
+| "Xem video" là xem video tải sẵn (cách diễn đạt) | 9/10 | **Sửa**: coi như chưa nêu hoạt động (V03) |
+| Điện thoại, chế độ hiển thị: tiêu chuẩn | 7/10, không cách hiểu nào quá nửa | **Sửa**: không có mặc định (V25, V26, V43) |
+| Điện thoại, zoom: quang học | 6/10 | Giữ, lệch khỏi quy tắc đặt trước (lý do ở `khao_sat_cach_hieu.md` mục 8); tính lại ở Bước 37 |
+| Điện thoại và đồng hồ, bộ sạc: không mua thêm | 5/10 và 4/10 | Giữ |
+| Tai nghe: nghe nhạc; chống ồn bật; chỉ tai nghe | 4/10; 4/10 (cả khi đàm thoại); 4/10 | Giữ. 4/10 người tính cả hộp sạc: ghi vào giới hạn |
+| Đồng hồ: sử dụng bình thường | 1/10 | Giữ |
+| Đồng hồ, chế độ nguồn: thường | 6/10 với "18 giờ", 4/10 với "32 giờ" | Giữ, lệch khỏi quy tắc đặt trước; tính lại ở Bước 37 |
+| Bỏ "lên đến" vẫn khớp (mục 6.2) | 1/10 hiểu câu không có "lên đến" chắc chắn hơn | Giữ |
 
 ## 6. Các quy tắc so sánh
 
@@ -178,15 +194,16 @@ Ba ý của bảng hay bị hiểu nhầm:
 | Tài liệu của mẫu | Cách so | Ví dụ |
 |---|---|---|
 | Chỉ một con số cho thuộc tính (cùng bộ phận), không kèm cụm điều kiện nào trong toàn bộ tài liệu | So thẳng; lý do ghi "tài liệu không nêu điều kiện" | V12, Watch SE 3 "Độ sáng đỉnh 1000 nit" |
-| Nhiều con số, mỗi số ghi rõ điều kiện; hoặc một con số kèm điều kiện | So với con số ứng với cách hiểu mặc định | V32, V26 |
-| Không xác định được con số nào ứng với tuyên bố | Chưa đủ thông tin (D1a) | V47 |
+| Nhiều con số, mỗi số ghi rõ điều kiện; hoặc một con số kèm điều kiện | So với con số ứng với cách hiểu mặc định | V32, V24 |
+| Không xác định được con số nào ứng với tuyên bố, kể cả khi điều kiện không có cách hiểu mặc định | Chưa đủ thông tin (D1a) | V47, V25, V26 |
 | Con số kèm điều kiện mà cấu hình chưa biết | Người gán xử lý theo mục 6.7; hệ thống ra D1a | V08 |
 
 ### 6.5 Độ sáng: chữ "tối đa", "đỉnh", "cực đại"
 
 - Chữ dùng để **phân biệt từ hai giá trị trở lên** là chế độ hiển thị, đọc theo cách gọi của hãng:
   - Apple (iPhone 17): "tối đa" là chế độ tiêu chuẩn; "đỉnh" là HDR hoặc ngoài trời. Tuyên bố iPhone chỉ ghi "đỉnh" mà không nói chế độ thì D1a (V47).
-  - Xiaomi: "cực đại" là chế độ tự tăng sáng dưới ánh sáng mạnh, đo trên 25% diện tích. Trang Xiaomi 15T chỉ có một con số độ sáng, nên "cực đại" ở đây là kiểu giá trị tối đa, và tuyên bố "độ sáng cực đại 3200 nit" ra Lệch (V43, mục 11.1).
+  - Xiaomi: "cực đại" là chế độ tự tăng sáng dưới ánh sáng mạnh, đo trên 25% diện tích. Trang Xiaomi 15T chỉ có một con số độ sáng, nên "cực đại" ở đây là kiểu giá trị tối đa; tuyên bố "độ sáng cực đại 3200 nit" vì vậy không nêu chế độ (V43, mục 11.1).
+- **Tuyên bố không nêu chế độ** (không có chữ nào ở trên, hoặc chữ chỉ là kiểu giá trị): độ sáng điện thoại không có cách hiểu mặc định (khảo sát Bước 10), nên D1a (V25, V26, V43). Riêng tài liệu chỉ có một con số không kèm điều kiện thì vẫn so thẳng (mục 6.4, V12).
 - Chữ **gắn với một giá trị duy nhất** là kiểu giá trị tối đa, không phải chế độ, áp cho mọi hãng (Watch SE 3 "Độ sáng đỉnh 1000 nit", V12).
 - "Độ sáng tối thiểu" là đại lượng khác, ngoài phạm vi.
 
@@ -277,7 +294,7 @@ Mỗi tuyên bố một dòng trong `data/nhan/*.jsonl`:
 
 ## 9. Ví dụ
 
-48 ví dụ, chỉ từ 4 mẫu tập phát triển. Mọi câu trích đã kiểm là chuỗi con của `doan.jsonl` (sau khi gộp khoảng trắng) ở commit `ab6146c`. "P:" ghi đầu ra dự kiến của hệ thống khi khác nhãn chuẩn.
+48 ví dụ, chỉ từ 4 mẫu tập phát triển. Mọi câu trích đã kiểm là chuỗi con của `doan.jsonl` (sau khi gộp khoảng trắng) ở commit `ab6146c`. "P:" ghi đầu ra dự kiến của hệ thống khi khác nhãn chuẩn. Mục 9.5 gom 4 ví dụ đổi nhãn sau khảo sát Bước 10; số hiệu giữ nguyên để các tệp khác nhắc tới vẫn đúng.
 
 ### 9.1 Đúng
 
@@ -291,9 +308,7 @@ Mỗi tuyên bố một dòng trong `data/nhan/*.jsonl`:
 - Lý do: Củ 60W thỏa "40W trở lên" (60 ≥ 40) nên cùng điều kiện; 20 phút khớp (quảng cáo bỏ "lên đến").
 - Ghi chú: `mac_dinh=cach_sac`.
 
-**V03 · Đúng · D3 · bỏ "lên đến".** iPhone 17 xem video được 30 giờ.
-- Bằng chứng: `dt-apple-iphone17#016` “Thời gian xem video Lên đến 30 giờ”
-- Lý do: Cùng hoạt động xem video; 30 giờ khớp (quảng cáo bỏ "lên đến").
+*V03 đổi nhãn sau khảo sát Bước 10, xem mục 9.5.*
 
 **V04 · Đúng · D3.** iPhone 17 dùng pin được 27 giờ.
 - Bằng chứng: `dt-apple-iphone17#016` “Thời gian xem video (trực tuyến) Lên đến 27 giờ”
@@ -393,20 +408,12 @@ Mỗi tuyên bố một dòng trong `data/nhan/*.jsonl`:
 - Lý do: Không nêu hoạt động nên phải đúng ở hoạt động kém thuận lợi nhất là xem video trực tuyến (27 giờ); 30 giờ là số của hoạt động xem video không trực tuyến.
 - Ghi chú: `mac_dinh=hoat_dong`.
 
-**V25 · Lệch (`bo_dieu_kien`) · D4.** Màn hình iPhone 17 sáng 3000 nit.
-- Bằng chứng: `dt-apple-iphone17#005` “Độ sáng tối đa 1000 nit (tiêu chuẩn); độ sáng đỉnh 1600 nit (HDR); độ sáng đỉnh 3000 nit (ngoài trời)”
-- Lý do: Không nêu chế độ nên hiểu là chế độ tiêu chuẩn (1000 nit); 3000 nit chỉ đạt ngoài trời.
-- Ghi chú: `mac_dinh=che_do_hien_thi`.
+*V25, V26 đổi nhãn sau khảo sát Bước 10, xem mục 9.5.*
 
-**V26 · Lệch (`bo_dieu_kien`) · D4.** Màn hình Xiaomi 15T sáng 3200 nit.
+**V27 · Lệch (`doi_dieu_kien`) · D4 · điều kiện dạng số.** Dưới ánh sáng mạnh, Xiaomi 15T sáng 3200 nit trên toàn màn hình.
 - Bằng chứng: `dt-xiaomi-15t#004` “Độ sáng cực đại: 3200 nit trên 25% diện tích màn hình”; `dt-xiaomi-15t#038` “Dưới ánh sáng mạnh, màn hình sẽ tự động kích hoạt chế độ tăng mức sáng APL 25%”
-- Lý do: Không nêu chế độ nên hiểu là chế độ thông thường; 3200 nit chỉ đạt khi màn hình tự tăng sáng dưới ánh sáng mạnh, đo trên 25% diện tích. Tài liệu không công bố độ sáng ở chế độ thông thường.
-- Ghi chú: `mac_dinh=che_do_hien_thi`.
-
-**V27 · Lệch (`doi_dieu_kien`) · D4 · điều kiện dạng số.** Xiaomi 15T có độ sáng cực đại 3200 nit trên toàn màn hình.
-- Bằng chứng: `dt-xiaomi-15t#004` “Độ sáng cực đại: 3200 nit trên 25% diện tích màn hình”
-- Lý do: 3200 nit đo trên 25% diện tích; tuyên bố nói toàn màn hình (100%), vượt phần hãng đo (100 > 25), là điều kiện khác.
-- Ghi chú: `ngoai_cau_hinh=toàn màn hình`. Cấu hình chưa có cụm "toàn màn hình" cho phần diện tích đo.
+- Lý do: Tuyên bố nêu đúng chế độ tự tăng sáng dưới ánh sáng mạnh. 3200 nit đo trên 25% diện tích; tuyên bố nói toàn màn hình (100%), vượt phần hãng đo (100 > 25), là điều kiện khác.
+- Ghi chú: `ngoai_cau_hinh=toàn màn hình`. Cấu hình chưa có cụm "toàn màn hình" cho phần diện tích đo. Câu tuyên bố sửa ngày 28/10 (trước là "Xiaomi 15T có độ sáng cực đại 3200 nit trên toàn màn hình"): độ sáng điện thoại không còn cách hiểu mặc định, nên tuyên bố phải tự nêu chế độ thì mới còn là ví dụ về điều kiện dạng số.
 
 **V28 · Lệch (`bo_dieu_kien`) · D4.** iPhone 17 zoom 10x.
 - Bằng chứng: `dt-apple-iphone17#009` “Độ phóng đại quang học 2x”, “Độ thu phóng kỹ thuật số lên đến 10x”
@@ -478,10 +485,7 @@ Mỗi tuyên bố một dòng trong `data/nhan/*.jsonl`:
 - Lý do: Tài liệu không công bố thời lượng ở chế độ xuyên âm (Ambient), nhưng 5 giờ trùng thời gian đàm thoại khi tắt chống ồn. Theo định nghĩa, con số trùng giá trị ở một điều kiện khác là Lệch, kể cả khi điều kiện đó là hoạt động khác.
 - Ghi chú: `mac_dinh=bo_phan`; rủi ro trùng số ngẫu nhiên, xem mục 11.2.
 
-**V43 · Lệch (`bo_dieu_kien`) · D4 · trường hợp biên.** Xiaomi 15T có độ sáng cực đại 3200 nit.
-- Bằng chứng: `dt-xiaomi-15t#004` “Độ sáng cực đại: 3200 nit trên 25% diện tích màn hình”; `dt-xiaomi-15t#038` “Dưới ánh sáng mạnh, màn hình sẽ tự động kích hoạt chế độ tăng mức sáng APL 25%”
-- Lý do: Trang Xiaomi 15T chỉ có một con số độ sáng, nên chữ "cực đại" là kiểu giá trị tối đa, không phải tên chế độ. Tuyên bố không nêu chế độ nên hiểu là chế độ thông thường; 3200 nit chỉ đạt khi màn hình tự tăng sáng dưới ánh sáng mạnh. Chép đúng chữ của hãng nhưng bỏ điều kiện vẫn là Lệch. Chốt ngày 27/10, xem mục 11.1.
-- Ghi chú: `mac_dinh=che_do_hien_thi`.
+*V43 đổi nhãn sau khảo sát Bước 10, xem mục 9.5.*
 
 ### 9.4 Chưa đủ thông tin
 
@@ -506,22 +510,52 @@ Mỗi tuyên bố một dòng trong `data/nhan/*.jsonl`:
 - Bằng chứng: `tn-samsung-buds3pro#044` “Tổng thời gian phát nhạc (Giờ, bật ANC) Lên đến 26”, “Tổng thời gian phát nhạc (Giờ, bật ANC) Lên đến 30”; `tn-samsung-buds3pro#038` “BẬT Tính năng ANC Đến 6 / 26 giờ” và chú thích “Với tính năng bật/tắt ANC, tai nghe và hộp tai nghe cung cấp tối đa 30 giờ phát khi sạc đầy.”
 - Lý do: Tài liệu ghi hai giá trị cho tổng thời gian phát nhạc khi bật chống ồn: 26 giờ (khối "Thời gian phát", bảng thông số) và 30 giờ (dòng thứ hai trong bảng thông số, nằm dưới nhóm tắt ANC nhưng ghi "bật ANC"; chú thích cũng ghi tối đa 30 giờ cho cả bật và tắt). Đặt `tai_lieu_mau_thuan = true`. Tuyên bố ghi 26 giờ kèm hộp sạc khi bật chống ồn cũng ra D1b.
 
+### 9.5 Đổi nhãn sau khảo sát Bước 10 (28/10/2026)
+
+Khảo sát 10 người đọc (`ket_qua/khao_sat_cach_hieu.md`) sửa hai chỗ của cấu hình điện thoại: "xem video" không kèm "tải sẵn" hay "trực tuyến" coi như chưa nêu hoạt động (Q09, 9/10 người); độ sáng không còn cách hiểu mặc định khi tuyên bố không nêu chế độ (Q10, 7/10 người). Bốn ví dụ dưới đổi nhãn, giữ nguyên số hiệu.
+
+**V03 · Lệch (`bo_dieu_kien`) · D4 · bỏ "lên đến".** iPhone 17 xem video được 30 giờ.
+- Bằng chứng: `dt-apple-iphone17#016` “Thời gian xem video Lên đến 30 giờ”, “Thời gian xem video (trực tuyến) Lên đến 27 giờ”
+- Lý do: "Xem video" không nói tải sẵn hay trực tuyến, nên coi như chưa nêu loại hoạt động và lấy hoạt động kém thuận lợi nhất là xem video trực tuyến (27 giờ). 30 giờ là số của xem video tải sẵn. Thiếu "lên đến" không phải lý do của nhãn.
+- Ghi chú: `mac_dinh=hoat_dong`.
+- Trước khảo sát: Đúng (D3), vì cấu hình hiểu "xem video" là xem video tải sẵn, khớp nhãn "Thời gian xem video" của Apple.
+
+**V25 · Chưa đủ thông tin · D1a.** Màn hình iPhone 17 sáng 3000 nit.
+- Bằng chứng: `dt-apple-iphone17#005` “Độ sáng tối đa 1000 nit (tiêu chuẩn); độ sáng đỉnh 1600 nit (HDR); độ sáng đỉnh 3000 nit (ngoài trời)”
+- Lý do: Tuyên bố không nêu chế độ hiển thị, và độ sáng điện thoại không có cách hiểu mặc định, nên chưa xác định được điều kiện. Không chọn chế độ theo con số của tuyên bố.
+- Ghi chú: `mac_dinh=che_do_hien_thi` (nhãn dựa vào việc không có mặc định).
+- Trước khảo sát: Lệch (`bo_dieu_kien`, D4), hiểu là chế độ tiêu chuẩn (1000 nit).
+
+**V26 · Chưa đủ thông tin · D1a.** Màn hình Xiaomi 15T sáng 3200 nit.
+- Bằng chứng: `dt-xiaomi-15t#004` “Độ sáng cực đại: 3200 nit trên 25% diện tích màn hình”; `dt-xiaomi-15t#038` “Dưới ánh sáng mạnh, màn hình sẽ tự động kích hoạt chế độ tăng mức sáng APL 25%”
+- Lý do: Tài liệu chỉ công bố 3200 nit khi màn hình tự tăng sáng dưới ánh sáng mạnh, đo trên 25% diện tích. Tuyên bố không nêu chế độ, độ sáng điện thoại không có cách hiểu mặc định, nên chưa xác định được điều kiện.
+- Ghi chú: `mac_dinh=che_do_hien_thi`.
+- Trước khảo sát: Lệch (`bo_dieu_kien`, D4), hiểu là chế độ thông thường.
+
+**V43 · Chưa đủ thông tin · D1a · trường hợp biên.** Xiaomi 15T có độ sáng cực đại 3200 nit.
+- Bằng chứng: `dt-xiaomi-15t#004` “Độ sáng cực đại: 3200 nit trên 25% diện tích màn hình”; `dt-xiaomi-15t#038` “Dưới ánh sáng mạnh, màn hình sẽ tự động kích hoạt chế độ tăng mức sáng APL 25%”
+- Lý do: Trang Xiaomi 15T chỉ có một con số độ sáng, nên chữ "cực đại" là kiểu giá trị tối đa, không phải tên chế độ (mục 6.5). Tuyên bố vì vậy không nêu chế độ, và độ sáng điện thoại không có cách hiểu mặc định, nên chưa xác định được điều kiện. Chép đúng chữ của hãng không bù được điều kiện bị bỏ.
+- Ghi chú: `mac_dinh=che_do_hien_thi`.
+- Trước khảo sát: Lệch (`bo_dieu_kien`, D4), chốt ngày 27/10 (mục 11.1).
+
 ## 10. Bảng phủ ví dụ
 
 **Theo nhãn và dòng quyết định:**
 
 | Nhãn | Số ví dụ | Dòng |
 |---|---|---|
-| Đúng | 15 (V01–V15) | D3 |
+| Đúng | 14 (V01, V02, V04–V15) | D3 |
 | Sai | 5 (V16–V20) | D5 |
-| Lệch điều kiện | 23 (V21–V43) | D4: 20; D2: 3 (V38–V40) |
-| Chưa đủ thông tin | 5 (V44–V48) | D1 (V45), D1a (V46, V47), D1b (V48), D6 (V44) |
+| Lệch điều kiện | 21 (V03, V21–V24, V27–V42) | D4: 18; D2: 3 (V38–V40) |
+| Chưa đủ thông tin | 8 (V25, V26, V43–V48) | D1 (V45), D1a (V25, V26, V43, V46, V47), D1b (V48), D6 (V44) |
+
+Số trên là sau khảo sát Bước 10. Trước khảo sát: Đúng 15, Sai 5, Lệch 23, Chưa đủ thông tin 5 (mục 9.5).
 
 **Theo loại biến đổi** (mỗi loại ít nhất 2):
 
 | Loại | Ví dụ |
 |---|---|
-| `bo_dieu_kien` | V21, V23, V24, V25, V26, V28, V32, V33, V34, V43 |
+| `bo_dieu_kien` | V03, V21, V23, V24, V28, V32, V33, V34 |
 | `doi_dieu_kien` | V22, V27, V29, V30, V31, V41, V42 |
 | `doi_bo_phan` | V18 (Sai), V35, V36 |
 | `doi_phien_ban` | V14, V15 (cả hai Đúng: tập phát triển không có trang tách giá trị theo phiên bản, nên chưa có ví dụ Lệch đổi phiên bản) |
@@ -532,14 +566,15 @@ Mỗi tuyên bố một dòng trong `data/nhan/*.jsonl`:
 
 | Trường hợp | Ví dụ |
 |---|---|
-| Đúng | V01–V15 |
+| Đúng | V01, V02, V04–V15 |
 | Sai đối tượng | V17 (số của sản phẩm khác), V18 và V35, V36 (bộ phận khác) |
-| Sai điều kiện | V21–V34, V41–V43 |
+| Sai điều kiện | V03, V21–V24, V27–V34, V41, V42 |
 | Thiếu bằng chứng | V45 (không có thuộc tính), V44 (không có giá trị ở điều kiện) |
+| Điều kiện không có cách hiểu mặc định | V46 (mốc phần trăm), V25, V26, V43 (độ sáng điện thoại) |
 | Xung đột bằng chứng | V48 |
 | Điều kiện dạng số (≥ và ≤) | V02, V22 (bộ tiếp hợp); V06, V29 (độ sâu); V27 (phần diện tích); V20 (mốc 100%) |
 | Điều kiện cấu hình chưa biết | V08 (ở tài liệu), V41 (ở tuyên bố), V27 |
-| Bỏ "lên đến" | V02, V03, V04, V09 |
+| Bỏ "lên đến" | V02, V04, V09 (vẫn Đúng); V03 (Lệch vì lý do khác) |
 | Watch SE 3 "đỉnh 1000 nit" so thẳng | V12 |
 | Mặc định tai nghe: nghe nhạc, chống ồn bật | V10, V32, V38 |
 | Mặc định đồng hồ: sử dụng bình thường, chế độ thường | V33, V39 |
@@ -556,6 +591,8 @@ Tuyên bố chép gần nguyên văn dòng "Độ sáng cực đại: 3200 nit t
 - **Đọc theo cách gọi của hãng:** "cực đại" là tên Xiaomi dùng cho mức sáng của chế độ tự tăng sáng (`#004` cùng `#038`). Tuyên bố dùng đúng chữ đó nên nêu cùng chế độ; phần 25% diện tích không nêu thì hiểu như hãng công bố. Kết quả **Đúng**, như ví dụ 16 cũ.
 
 **Đã chốt ngày 27/10/2026: Lệch**, theo chữ của cấu hình (V43). Lý do: tuyên bố bỏ điều kiện mà con số cần, cụ thể là chế độ tự tăng sáng dưới ánh sáng mạnh. Dùng đúng chữ "cực đại" của hãng không bù được phần điều kiện bị bỏ, vì trên trang này chữ đó không gọi tên chế độ nào. Cấu hình giữ nguyên, nên V43 là kiểm thử hồi quy cho P như mọi ví dụ khác.
+
+**Cập nhật 28/10/2026 sau khảo sát Bước 10:** độ sáng điện thoại không còn cách hiểu mặc định, nên tuyên bố không nêu chế độ chưa xác định được điều kiện. V43 đổi từ Lệch thành **Chưa đủ thông tin** (D1a, mục 9.5). Lý do của quyết định ngày 27/10 vẫn đúng: tuyên bố thiếu điều kiện mà con số cần, và chữ "cực đại" không bù được. Chỉ khác là thiếu điều kiện giờ dẫn tới "chưa xác định được" thay vì "hiểu là chế độ thông thường". Cả hai nhãn đều không phải Đúng, nên FAR không đổi.
 
 ### 11.2 Trùng số ngẫu nhiên ở D4
 
@@ -579,7 +616,7 @@ Các cụm này lấy từ tập phát triển nên được phép bổ sung và
 |---|---|---|
 | 1 | V01 | Giữ |
 | 2 | V21 | Giữ nhãn; lý do nói rõ thiếu "lên đến" không phải lý do của nhãn |
-| 3 | V25 | Giữ |
+| 3 | V25 | Đổi sau khảo sát Bước 10 (28/10): Lệch thành Chưa đủ thông tin (D1a), vì độ sáng điện thoại không còn cách hiểu mặc định |
 | 4 | V05 | Giữ |
 | 5 | V19 | Giữ |
 | 6 | V09 | Giữ |
@@ -592,6 +629,6 @@ Các cụm này lấy từ tập phát triển nên được phép bổ sung và
 | 13 | V11 | Giữ |
 | 14 | V33 | Giữ nhãn; lý do nêu cả hoạt động mặc định "sử dụng bình thường" |
 | 15 | V39 | Giữ |
-| 16 | V43 | Đổi nhãn: Đúng thành Lệch, chốt 27/10. Sau khi làm rõ điểm 12, "cực đại" gắn một giá trị duy nhất là kiểu giá trị, không mang theo chế độ (mục 11.1) |
-| 17 | V26 | Giữ nhãn; lý do nêu chế độ tự tăng sáng dưới ánh sáng mạnh (`#038`) |
+| 16 | V43 | Đổi nhãn: Đúng thành Lệch, chốt 27/10. Sau khi làm rõ điểm 12, "cực đại" gắn một giá trị duy nhất là kiểu giá trị, không mang theo chế độ (mục 11.1). Sau khảo sát Bước 10 (28/10): Chưa đủ thông tin (D1a) |
+| 17 | V26 | Lý do nêu chế độ tự tăng sáng dưới ánh sáng mạnh (`#038`). Sau khảo sát Bước 10 (28/10): Lệch thành Chưa đủ thông tin (D1a) |
 | 18 | V44, V42 | Đổi: 5 giờ trùng thời gian đàm thoại khi tắt chống ồn nên theo D4 ra Lệch (V42). Ví dụ D6 dùng 6,5 giờ (V44). Cấu hình đã biết "xuyên âm", nên P không còn dừng ở D1a |
