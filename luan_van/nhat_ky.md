@@ -81,8 +81,9 @@
 
 - Người thực hiện tách tay trong Excel, lưu `data/tuyen_bo/thu_nhap (version 1).xlsb.csv` (giữ nguyên làm bản gốc): mỗi bài một dòng, cột câu gốc dán cả bài, tuyên bố và thuộc tính dạng gạch đầu dòng. 62 tuyên bố từ 20 bài; 4 bài chế độ `ten` không có tuyên bố. Trước đó người thực hiện xin một ví dụ định dạng; ví dụ lấy từ bài khảo sát Bước 10 (Gemini 2.5 Flash), không thuộc 24 bài, để không lẫn cách tách của AI vào đáp án chuẩn.
 - Chuyển sang mỗi tuyên bố một dòng (`data/tuyen_bo/thu_nhap.csv`). Câu gốc dò bằng script so con số kèm đơn vị và số từ trùng; lần dò đầu chỉ so con số nên khớp nhầm ("120Hz" với "120°", "30 giờ" với "30 phút"). Kiểm tay các dòng script không chắc: cả 62 câu gốc đúng. Không gợi ý thêm tuyên bố.
-- Ghi 11 chỗ trái quy tắc T4.1 cho người thực hiện quyết; người thực hiện đồng ý cho sửa: tách 5 dòng có 2 con số, gộp 2 dòng trùng trong cùng bài, đổi "sạc nhanh 30 W" sang `cong_suat_sac`, bỏ phần không phải thông số ở 1 dòng, 2 lỗi chính tả; chuẩn hóa tên ("Iphone", "Buds3Pro", "Bud3Pro"). Các dòng sửa ghi lý do ở `ghi_chu`.
-- `scripts/chuyen_tuyen_bo.py` kiểm và ghi `data/tuyen_bo/thu.jsonl`: 65 tuyên bố, 0 lỗi. Chế độ `ten` 15 tuyên bố, `ten_thong_so` 50: tín hiệu cho điểm 13 ở T10, xét ở Bước 16.
+- Ghi 11 chỗ trái quy tắc T4.1 cho người thực hiện quyết; người thực hiện đồng ý cho sửa: tách 5 dòng có 2 con số, gộp 2 dòng trùng trong cùng bài (một chỗ sau đó trả lại, xem dưới), đổi "sạc nhanh 30 W" sang `cong_suat_sac`, bỏ phần không phải thông số ở 1 dòng, 2 lỗi chính tả; chuẩn hóa tên ("Iphone", "Buds3Pro", "Bud3Pro"). Các dòng sửa ghi lý do ở `ghi_chu`.
+- `scripts/chuyen_tuyen_bo.py` kiểm và ghi `data/tuyen_bo/thu.jsonl`. Chế độ `ten` 15 tuyên bố, `ten_thong_so` 51: tín hiệu cho điểm 13 ở T10, xét ở Bước 16.
+- Người thực hiện phản đối một chỗ gộp: bài Buds3 Pro, Gemini, landing, chế độ `ten_thong_so` có "thời lượng pin lên đến 30 giờ" ở đầu câu như tiêu đề và "tổng cộng lên tới 30 giờ khi sử dụng cùng hộp sạc" ở cuối câu. Người đọc lướt chỉ thấy tiêu đề, nên đây là hai tuyên bố khác điều kiện; AI đã tự phán là một và gộp. Trả lại dòng đó (ghi chú "giữ theo người tách"). Rút kinh nghiệm: chỗ nào cần phán đoán thì hỏi người tách, không tự sửa. Còn 66 tuyên bố, 0 lỗi.
 
 ## 25/10/2026 — Bước 7
 

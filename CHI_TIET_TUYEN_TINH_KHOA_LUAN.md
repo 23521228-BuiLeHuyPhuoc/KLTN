@@ -402,14 +402,14 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 **Việc cần làm**
 
 - [x] Sinh quảng cáo cho 2 mẫu thử: 2 mẫu × 2 LLM × 3 loại bài × 2 chế độ = **24 bài**. Mỗi tệp lưu câu lệnh, mô hình, tham số, đầu ra và thời điểm. *(28/10: 24 bài ở `data/quang_cao/`, sinh bằng `scripts/sinh_bo_thu.py` qua CopyPro `a338a65`; câu lệnh lưu trùng câu lệnh ghép ở cả 24 bài, không bài nào fallback hay bị cắt. Lỗi tạm thời (mất kết nối MongoDB, Gemini quá tải) được thử lại tự động.)*
-- [x] Tách tuyên bố **hoàn toàn bằng tay** theo [T4.1](#t4-1), không nhờ LLM gợi ý, vì tuyên bố tách tay là chuẩn để đánh giá bước tách tự động ở Bước 29. Lọc theo tệp cấu hình; gộp tuyên bố trùng trong cùng bài. *(30/10: người thực hiện tách tay 62 tuyên bố; chuyển sang mỗi tuyên bố một dòng, câu gốc dò bằng script so con số và đơn vị rồi kiểm tay; sửa 11 chỗ theo quy tắc với sự đồng ý của người thực hiện: tách 5 dòng có 2 con số, gộp 2 dòng trùng, đổi 1 thuộc tính, bỏ phần không phải thông số ở 1 dòng, 2 lỗi chính tả; chuẩn hóa tên sản phẩm. Còn 65 tuyên bố.)*
+- [x] Tách tuyên bố **hoàn toàn bằng tay** theo [T4.1](#t4-1), không nhờ LLM gợi ý, vì tuyên bố tách tay là chuẩn để đánh giá bước tách tự động ở Bước 29. Lọc theo tệp cấu hình; gộp tuyên bố trùng trong cùng bài. *(30/10: người thực hiện tách tay 62 tuyên bố; chuyển sang mỗi tuyên bố một dòng, câu gốc dò bằng script so con số và đơn vị rồi kiểm tay; sửa 11 chỗ theo quy tắc với sự đồng ý của người thực hiện: tách 5 dòng có 2 con số, gộp 1 dòng trùng hệt, đổi 1 thuộc tính, bỏ phần không phải thông số ở 1 dòng, 2 lỗi chính tả; chuẩn hóa tên sản phẩm. Một chỗ gộp khác do AI tự phán đoán đã trả lại theo người tách. Còn 66 tuyên bố.)*
 - [x] Mỗi tuyên bố ghi đường dẫn đến nguồn chính thức của đúng sản phẩm và phiên bản được quảng cáo. *(Trường `url_nguon` lấy từ `mau_san_pham.csv` theo mã mẫu.)*
 
 **Làm ra:** `data/quang_cao/*.json`, `data/tuyen_bo/thu.jsonl`.
 
 **Xong khi:** có khoảng 60 tuyên bố có điều kiện ràng buộc, mỗi tuyên bố đủ ngữ cảnh.
 
-**Đã thực hiện ngày 28–30/10/2026:** 24 bài ở `data/quang_cao/`, 65 tuyên bố ở `data/tuyen_bo/thu.jsonl` (iPhone 17: 35, Galaxy Buds3 Pro: 30; Gemini 3.6 Flash: 30, GPT-OSS 120B: 35). Chế độ `ten` chỉ có 15 tuyên bố so với 50 của `ten_thong_so`, và 4/12 bài chế độ `ten` không có tuyên bố nào: tín hiệu cho điểm 13 ở [T10](#t10), xét ở Bước 16. Thuộc tính: thời lượng pin 26, kháng nước 11, sạc nhanh 8, tần số quét 7, độ sáng 5, dung lượng pin 4, công suất sạc 2, zoom 2. Chi tiết trong [nhật ký](luan_van/nhat_ky.md).
+**Đã thực hiện ngày 28–30/10/2026:** 24 bài ở `data/quang_cao/`, 66 tuyên bố ở `data/tuyen_bo/thu.jsonl` (iPhone 17: 35, Galaxy Buds3 Pro: 31; Gemini 3.6 Flash: 31, GPT-OSS 120B: 35). Chế độ `ten` chỉ có 15 tuyên bố so với 51 của `ten_thong_so`, và 4/12 bài chế độ `ten` không có tuyên bố nào: tín hiệu cho điểm 13 ở [T10](#t10), xét ở Bước 16. Thuộc tính: thời lượng pin 27, kháng nước 11, sạc nhanh 8, tần số quét 7, độ sáng 5, dung lượng pin 4, công suất sạc 2, zoom 2. Chi tiết trong [nhật ký](luan_van/nhat_ky.md).
 
 **Tra cứu:** [T3.2](#t3-2) (mã bài, mã tuyên bố), [T3.4](#t3-4) (định dạng), [T4.1](#t4-1) (tách tuyên bố).
 
