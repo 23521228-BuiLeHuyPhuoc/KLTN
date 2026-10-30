@@ -77,6 +77,13 @@
 - `scripts/sinh_bo_thu.py` sinh 24 bài (2 mẫu × 2 LLM × 3 loại × 2 chế độ) vào `data/quang_cao/`, bỏ qua bài đã có, thử lại tối đa 3 lần khi lỗi tạm thời. Lần đầu 21/24 (mất kết nối MongoDB nhiều lần, Gemini báo quá tải "high demand", một lần hết 90 giây chờ); chạy lại đủ 24. Câu lệnh lưu trùng ở 24/24, không bài fallback, không bài bị cắt; một bài landing của Gemini dùng 2.423 token (gồm suy luận), vượt giới hạn 1.800 cũ.
 - Chuẩn bị tách tay: `data/tuyen_bo/huong_dan_tach_tay.md`, `data/tuyen_bo/doc_bo_thu.md` (24 bài nguyên văn), `data/tuyen_bo/thu_nhap.csv` (bảng trống), `scripts/chuyen_tuyen_bo.py` (kiểm câu gốc có nguyên văn trong bài, thuộc tính có trong cấu hình, tuyên bố trùng; tự điền `url_nguon`). Việc tách do người thực hiện làm, không dùng AI.
 
+## 30/10/2026 — Bước 12 (tách tuyên bố)
+
+- Người thực hiện tách tay trong Excel, lưu `data/tuyen_bo/thu_nhap (version 1).xlsb.csv` (giữ nguyên làm bản gốc): mỗi bài một dòng, cột câu gốc dán cả bài, tuyên bố và thuộc tính dạng gạch đầu dòng. 62 tuyên bố từ 20 bài; 4 bài chế độ `ten` không có tuyên bố. Trước đó người thực hiện xin một ví dụ định dạng; ví dụ lấy từ bài khảo sát Bước 10 (Gemini 2.5 Flash), không thuộc 24 bài, để không lẫn cách tách của AI vào đáp án chuẩn.
+- Chuyển sang mỗi tuyên bố một dòng (`data/tuyen_bo/thu_nhap.csv`). Câu gốc dò bằng script so con số kèm đơn vị và số từ trùng; lần dò đầu chỉ so con số nên khớp nhầm ("120Hz" với "120°", "30 giờ" với "30 phút"). Kiểm tay các dòng script không chắc: cả 62 câu gốc đúng. Không gợi ý thêm tuyên bố.
+- Ghi 11 chỗ trái quy tắc T4.1 cho người thực hiện quyết; người thực hiện đồng ý cho sửa: tách 5 dòng có 2 con số, gộp 2 dòng trùng trong cùng bài, đổi "sạc nhanh 30 W" sang `cong_suat_sac`, bỏ phần không phải thông số ở 1 dòng, 2 lỗi chính tả; chuẩn hóa tên ("Iphone", "Buds3Pro", "Bud3Pro"). Các dòng sửa ghi lý do ở `ghi_chu`.
+- `scripts/chuyen_tuyen_bo.py` kiểm và ghi `data/tuyen_bo/thu.jsonl`: 65 tuyên bố, 0 lỗi. Chế độ `ten` 15 tuyên bố, `ten_thong_so` 50: tín hiệu cho điểm 13 ở T10, xét ở Bước 16.
+
 ## 25/10/2026 — Bước 7
 
 - Viết `src/kiemchung/chia_doan.py`, `scripts/chia_doan.py` và `tests/test_chia_doan.py`; 101 test của `test_chia_doan.py`, `test_chup_nguon.py`, `test_nhap_nguon_thu_cong.py` đạt. Ghi `doan.jsonl` cho 12 mẫu, tổng 1.215 đoạn, mã đoạn 3 chữ số (nhiều nhất là Watch8 với 596 đoạn). Tệp bằng chứng không đổi: mã băm 19 trang vẫn khớp `meta.json`.
