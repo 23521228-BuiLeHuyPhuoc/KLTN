@@ -29,8 +29,8 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 - [ ] [Bước 10](#b10) · 23/10 · Khảo sát cách hiểu của 5–10 người đọc
 - [ ] [Bước 11](#b11) · 24/10 – 25/10 · Làm công cụ sinh quảng cáo qua CopyPro
 - [ ] [Bước 12](#b12) · 26/10 · Sinh quảng cáo và tách tuyên bố của bộ thử
-- [ ] [Bước 13](#b13) · 27/10 · Gán nhãn bộ thử, đo thời gian gán
-- [ ] [Bước 14](#b14) · 28/10 · Làm mô-đun truy hồi BM25, đo Recall@k
+- [x] [Bước 13](#b13) · 27/10 · Gán nhãn bộ thử, đo thời gian gán
+- [x] [Bước 14](#b14) · 28/10 · Làm mô-đun truy hồi BM25, đo Recall@k
 - [ ] [Bước 15](#b15) · 29/10 · Cài đặt đối chứng B0
 - [ ] [Bước 16](#b16) · 30/10 – 31/10 · Phân tích bộ thử, chốt hướng dẫn và quy mô
 - 🏁 [**Mốc 2** · 31/10 · Xong bộ thử](#m2)
@@ -281,6 +281,8 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Đã thực hiện ngày 25/10/2026:** `src/kiemchung/chia_doan.py` (luật tách ghi ở docstring), `scripts/chia_doan.py`, `tests/test_chia_doan.py`; 12 mẫu có `doan.jsonl`, tổng 1.245 đoạn (PDF Watch8 trích lại bằng `pdftotext`, xem nhật ký). Luật tách thiết kế trên 4 mẫu phát triển; với tập kiểm tra chỉ sửa phần đọc định dạng. Lần kiểm 1 ([kiem_doan_buoc7.md](data/kiem_doan_buoc7.md)) không đạt: 2/20 đoạn mất chú thích, kèm lỗi lệch số chú thích Samsung. Sau khi sửa, lần kiểm 2 với 20 đoạn mới ([kiem_doan_buoc7_lan2.md](data/kiem_doan_buoc7_lan2.md)) đạt 20/20. Chú thích không được đoạn nào dẫn tới: 0 ở 11 mẫu, 3 ở Xiaomi 15T (trang không có ký hiệu). Chi tiết và rủi ro cho Bước 8 trong [nhật ký](luan_van/nhat_ky.md).
 
+**Sửa ngày 31/10/2026 (trong Bước 13):** `noi_dung` bỏ ký hiệu chú thích của trang hãng ("Thấp8", "20 phút6", "IP68**"), văn bản cũ giữ ở trường mới `noi_dung_goc`; mã đoạn, `chu_thich` và số đoạn không đổi, 190/1.245 đoạn đổi chữ. Ký hiệu `chia_doan` không tự nhận ra thì bỏ bằng bảng ghi tay `KY_HIEU_BO_THEM` (21 mục). Danh sách từng chỗ xóa: [kiem_bo_so_chu_thich.md](data/kiem_bo_so_chu_thich.md).
+
 **Tra cứu:** [T3.2](#t3-2) (mã đoạn).
 
 <a id="b08"></a>
@@ -423,10 +425,10 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Kiểm khảo sát ở Bước 10 đã tổng hợp xong và tệp cấu hình đã sửa theo khảo sát.
-- [ ] Gán nhãn từng tuyên bố theo hướng dẫn: nhãn, mã đoạn bằng chứng, câu trích, lý do, loại biến đổi (nếu là Lệch điều kiện), **số giây đã gán**.
-- [ ] Chỗ nào hướng dẫn chưa rõ thì ghi vào danh sách "câu hỏi nhãn" để giải quyết ở Bước 16.
-- [ ] Điều kiện không xếp được vào sáu loại thì ghi vào trường `ghi_chu` (điểm 10 ở [T10](#t10)).
+- [x] Kiểm khảo sát ở Bước 10 đã tổng hợp xong và tệp cấu hình đã sửa theo khảo sát. *(30/10: đã tổng hợp và sửa ngày 28/10, commit `0cf63c0`; `ket_qua/khao_sat_cach_hieu.md` mục 7–8.)*
+- [x] Gán nhãn từng tuyên bố theo hướng dẫn: nhãn, mã đoạn bằng chứng, câu trích, lý do, loại biến đổi (nếu là Lệch điều kiện), **số giây đã gán**. *(01/11: 66/66 nhãn ở `data/nhan/thu.jsonl` (lượt 1, người thực hiện gán trên `data/nhan/cong_cu_gan_nhan.html`); `scripts/kiem_nhan.py` không lỗi, 1 nhắc. 24 Đúng, 15 Lệch, 4 Sai, 23 Chưa đủ thông tin. Thời gian: tổng 4 giờ 47 phút, trung bình 261 giây, trung vị 110 giây; phần iPhone (gán trước) trung bình 369 giây, phần Buds3 Pro 140 giây. Hai tuyên bố cùng 2.118 giây, nghi đồng hồ chạy khi rời máy; bỏ hai tuyên bố này thì trung bình 203 giây. Trung bình vượt ngưỡng 3 phút ở bảng rủi ro; chốt quy mô ở Bước 16. Giữ nguyên nhãn lượt 1 làm kết quả thử hướng dẫn bản 1, không sửa theo nhận xét của Claude; Bước 16 gán lại theo bản 2.)*
+- [x] Chỗ nào hướng dẫn chưa rõ thì ghi vào danh sách "câu hỏi nhãn" để giải quyết ở Bước 16. *(01/11: `data/nhan/cau_hoi_nhan.md`, 22 câu hỏi, 11 chỗ nhãn khác quy tắc rõ của hướng dẫn, 3 nhóm vấn đề. Theo yêu cầu của người thực hiện, Claude đọc 66 nhãn và soạn từ lý do của người gán; chỉ nêu chỗ chưa rõ và điều đã tạm chọn, không nêu nhãn đúng.)*
+- [x] Điều kiện không xếp được vào sáu loại thì ghi vào trường `ghi_chu` (điểm 10 ở [T10](#t10)). *(Không nhãn nào dùng `ngoai_sau_loai`; các cụm chưa có cách đọc nằm ở câu hỏi nhãn, phần C nhóm 3.)*
 
 **Làm ra:** `data/nhan/thu.jsonl`, danh sách "câu hỏi nhãn".
 
@@ -444,10 +446,10 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Cài BM25 theo [T5.2](#t5-2), chỉ tìm trong `doan.jsonl` của mẫu được chọn.
-- [ ] Thử hai cách tách từ: theo âm tiết, và theo từ (`pyvi` hoặc `underthesea`).
-- [ ] Đo Recall@k với k ∈ {1, 3, 5, 8} trên bộ thử, lấy đoạn bằng chứng đã gán ở Bước 13 làm chuẩn.
-- [ ] Viết kiểm thử: không bao giờ trả về đoạn của mẫu khác.
+- [x] Cài BM25 theo [T5.2](#t5-2), chỉ tìm trong `doan.jsonl` của mẫu được chọn. *(01/11: `src/kiemchung/truy_hoi.py`, BM25Okapi của `rank-bm25` với tham số mặc định; văn bản mỗi đoạn là `noi_dung` cộng `chu_thich`; đọc vào hay trả ra đoạn không thuộc mẫu thì báo lỗi.)*
+- [x] Thử hai cách tách từ: theo âm tiết, và theo từ (`pyvi` hoặc `underthesea`). *(Âm tiết và `pyvi`; cả hai tách chữ số khỏi chữ cái (`515mAh` → `515`, `mah`) vì quảng cáo viết liền còn tài liệu viết tách.)*
+- [x] Đo Recall@k với k ∈ {1, 3, 5, 8} trên bộ thử, lấy đoạn bằng chứng đã gán ở Bước 13 làm chuẩn. *(`scripts/do_recall.py` → `ket_qua/recall_buoc14.md`. Mẫu số 56: 8 nhãn D1 không có bằng chứng, loại `tb-00009`, `tb-00010` vì bằng chứng lưu lệch. k = 1/3/5/8: âm tiết 83,9/98,2/100/100%, từ 87,5/98,2/100/100%. Số tạm, tính lại sau khi gán lại ở Bước 16.)*
+- [x] Viết kiểm thử: không bao giờ trả về đoạn của mẫu khác. *(`tests/test_truy_hoi.py`; toàn bộ 420 test đạt.)*
 
 **Làm ra:** `src/kiemchung/truy_hoi.py`, bảng Recall@k trên bộ thử.
 
@@ -1581,13 +1583,14 @@ Tuyên bố (`data/tuyen_bo/*.jsonl`, mỗi dòng một tuyên bố):
 Nhãn (`data/nhan/*.jsonl`):
 
 ```json
-{"id": "tb-00042", "nhan": "LECH", "loai": "doi_dieu_kien",
+{"id": "tb-00042", "nhan": "LECH", "dong_d": "D4", "loai": "doi_dieu_kien",
  "bang_chung": ["tn-samsung-buds3pro#014"], "trich": "Thời gian phát nhạc (Giờ, tắt ANC) Lên đến 7",
  "ly_do": "7 giờ chỉ đạt khi tắt chống ồn; tuyên bố ghi bật chống ồn",
  "nguoi_gan": "phuoc", "luot": 1, "giay": 95, "tai_lieu_mau_thuan": false, "ghi_chu": ""}
 ```
 
 - **Mã nhãn:** `DUNG`, `SAI`, `LECH`, `CHUA_DU`.
+- **Dòng quyết định** (`dong_d`, thêm ngày 31/10/2026 ở Bước 13): dòng D người gán dừng lại ([T4](#t4), D1–D6); nhãn phải khớp dòng (D1, D1a, D1b, D6: Chưa đủ thông tin; D2, D4: Lệch; D3: Đúng; D5: Sai). Trang gán nhãn suy nhãn từ dòng D, `scripts/kiem_nhan.py` kiểm khớp.
 - **Mã loại biến đổi** (dùng chung cho nhãn Lệch điều kiện và cho tập cặp tối thiểu): `bo_dieu_kien`, `doi_dieu_kien`, `doi_bo_phan`, `doi_phien_ban`, `doi_kieu_gia_tri`, `doi_gia_tri` (loại cuối thường cho nhãn Sai).
 
 <a id="t3-5"></a>
