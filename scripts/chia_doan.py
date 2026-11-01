@@ -4,6 +4,10 @@ Mỗi mẫu ghi data/nguon/<ma_mau>/doan.jsonl (trang chính trước, bo_sung s
 bảng tóm tắt, và lấy 20 đoạn ngẫu nhiên (seed cố định) ghi vào data/kiem_doan_buoc7_lan2.md để kiểm bằng mắt
 (data/kiem_doan_buoc7.md là kết quả lần 1, giữ nguyên, script không ghi vào đó).
 Chỉ đọc page.txt/page.html (không sửa tệp bằng chứng), chỉ thêm doan.jsonl.
+
+Mỗi đoạn có hai trường văn bản: noi_dung đã bỏ ký hiệu chú thích của trang hãng (số dính chữ 'Thấp8', nhóm số cuối
+dòng, dấu * làm ký hiệu; ký hiệu bị bỏ sót thì bỏ thêm bằng bảng ghi tay KY_HIEU_BO_THEM) và noi_dung_goc là văn bản trước
+khi bỏ. Báo cáo các chỗ đã bỏ: scripts/kiem_bo_so_chu_thich.py.
 """
 import argparse
 import csv
@@ -19,6 +23,7 @@ from kiemchung import chia_doan as cd  # noqa: E402
 CSV_PATH = ROOT / "data/mau_san_pham.csv"
 OUT_ROOT = ROOT / "data/nguon"
 KIEM_PATH = ROOT / "data/kiem_doan_buoc7_lan2.md"
+TRUONG_JSONL = ("id", "ma_mau", "trang", "muc", "noi_dung", "noi_dung_goc", "chu_thich", "dong")
 TEP_PDF = "page_pdftotext.txt"  # PDF: dùng bản pdftotext nếu có (pypdf tách âm tiết và số), xem trich_pdf_pdftotext.py
 SEED_KIEM = 20261025
 SO_DOAN_KIEM = 20
@@ -75,7 +80,8 @@ def so_chu_so_ma(so_doan_lon_nhat):
 
 
 def ghi_jsonl(path, dong):
-    noi_dung = "".join(json.dumps(d, ensure_ascii=False) + "\n" for d in dong)
+    """Ghi các trường của TRUONG_JSONL (danh_ma_doan còn trả ky_hieu_bo, chỉ là nhật ký để báo cáo)."""
+    noi_dung = "".join(json.dumps({k: d[k] for k in TRUONG_JSONL}, ensure_ascii=False) + "\n" for d in dong)
     Path(path).write_text(noi_dung, encoding="utf-8", newline="\n")
 
 

@@ -18,8 +18,21 @@ nhận không xét thứ tự nếu có trong danh sách chú thích, trừ tên
 ('AV1'); số dính vào chữ số khác ('thứ 210', 'Wi-Fi 617, 18') chỉ nhận khi đúng là số chú thích kế tiếp;
 chú thích đứng lẻ giữa trang mà không ký hiệu nào dẫn tới thì gắn vào đoạn phía trên.
 
+Sửa lần 3 (31/10/2026, trước khi người gán nhãn đọc tài liệu): ký hiệu chú thích đã nhận ra (số dính chữ
+'Thấp8', nhóm số cuối dòng ' 1, 4, 5', dấu * và ** làm ký hiệu hoặc mở chú thích nối liền) bị bỏ khỏi
+noi_dung để không bị đọc nhầm thành số liệu ('20 phút6' -> '20 phút'); noi_dung_goc giữ nguyên văn bản
+trước khi bỏ. Chỉ bỏ đúng các khoảng chuan_bi_manh() đã dùng để gắn chú thích, không có bộ nhận diện
+riêng: số không được nhận ra ('IP68', 'Buds3', 'A2305', '5.000mAh') vẫn ở lại. Bỏ xong, hai bên chữ vẫn
+cách nhau đúng một khoảng trắng như cũ (xem bo_ky_hieu_chu_thich). Hai loại dấu * được nhận ra (để gắn chú
+thích) nhưng không bỏ: dấu mà trang không có dòng chú thích nào bắt đầu bằng đúng chuỗi đó ('5* product' của một
+lời đánh giá) và dấu đứng riêng giữa hai khoảng trắng ('Chú thích * biểu tượng', nhãn đọc màn hình).
+Nhận diện của chuan_bi_manh vẫn bỏ sót một số ký hiệu thật ('30 phút6' nhắc lại giữa dòng, 'AI10', số dính chữ ở
+trang S25 Ultra); các chỗ đó bỏ bằng bảng ghi tay KY_HIEU_BO_THEM, và dấu '5*' của một lời đánh giá giữ lại bằng
+KY_HIEU_GIU_LAI (xem ap_dung_bang_ghi_tay; hai bảng chỉ đổi noi_dung, không đổi chu_thich). Luật tách đoạn không đổi: mọi trường khác của đoạn (id, muc, chu_thich, dong) giống hệt trước khi bỏ ký hiệu, nên muc của
+tiêu đề có số cách chữ hoặc sau ')' ('Định nghĩa lại âm thanh nguyên bản 1') vẫn còn số như cũ.
+
 Ba phần: (1) đọc chú thích (số, dấu *, chú thích nối liền trong dòng), (2) tách đoạn theo mục,
-(3) gắn tên mục và chú thích vào từng đoạn.
+(3) gắn tên mục và chú thích vào từng đoạn, bỏ ký hiệu khỏi noi_dung.
 """
 from dataclasses import dataclass, replace
 import html
@@ -51,6 +64,9 @@ NHOM_CACH = re.compile(r"(?<=\s)(\d{1,2}(?:,\s+\d{1,2})+)\s*$")  # 'mới 1, 4, 
 NHOM_SAU_CAU = re.compile(r"(?<=[.!?…”’]\s)(\d{1,2}(?:,?\s*\d{1,2})*)\s*$")
 NHOM_DINH_CAU = re.compile(r"(?<=[^\W\d_][.!?…])(\d{1,2}(?:,\d{1,2})*)$")  # 'giải trí.4,32'
 SO_DINH_CHU = re.compile(r"(?:(?<=[^\W\d_])|(?<=[)%])|(?<=[^\W\d_][.,;:]))(\d{1,2})(?!\w|[.,]\d)")
+SO_NGUYEN = re.compile(r"\d+")
+DAU_CAU_DONG = ".,;:!?)"          # dấu câu không đứng sau khoảng trắng khi bỏ ký hiệu đứng giữa
+DAU_CAU_DONG_TRUOC = ".,;:!?)%”’\"]®™"  # ký tự kết thúc một cụm mà chữ sau nó phải cách ra
 DAU_SAO = re.compile(r"\*+")
 # Nhãn mới bắt đầu ngay sau chỗ dính: 'Gam màu:' (từ thường, tối đa 6 từ rồi dấu ':') hoặc 'GPU:', 'LTE FDD:' (chữ hoa).
 CO_NHAN_THUONG = re.compile(r"[^\s:|]+(?:\s+[^\s:|]+){0,5}:")
@@ -69,6 +85,22 @@ class Dong:
     chu: str | None    # None: dòng phân trang PDF
 
 
+KY_HIEU_SO = "so"                      # số chú thích: 'Thấp8', ' 1, 4, 5'
+KY_HIEU_SAO = "sao"                    # dấu * làm ký hiệu: 'IP68**', '24 tháng.*'
+KY_HIEU_SAO_NOI_LIEN = "sao_noi_lien"  # dấu * mở chú thích nối liền: '194g*' (nội dung chú thích đã bóc đi)
+KY_HIEU_GHI_TAY = "ghi_tay"            # số chú thích bỏ thêm theo bảng KY_HIEU_BO_THEM (nhận diện của chuan_bi_manh bỏ sót)
+
+
+@dataclass(frozen=True)
+class KhoangBo:
+    """Một cụm ký hiệu chú thích nằm trong chữ, sẽ bị bỏ khỏi noi_dung (noi_dung_goc vẫn giữ)."""
+    a: int             # vị trí bắt đầu: trong chu của mảnh, hoặc trong noi_dung_goc của đoạn
+    b: int             # vị trí kết thúc (không gồm)
+    loai: str          # KY_HIEU_SO, KY_HIEU_SAO, KY_HIEU_SAO_NOI_LIEN hoặc KY_HIEU_GHI_TAY
+    so: tuple = ()     # các số chú thích trong cụm ('14, 15' là hai số)
+    thieu: tuple = ()  # trong đó số mà trang không có nội dung chú thích tương ứng
+
+
 @dataclass(frozen=True)
 class Manh:
     """Một dòng, hoặc một mảnh của dòng dồn; đơn vị để gom thành đoạn."""
@@ -80,6 +112,7 @@ class Manh:
     ky_hieu: tuple = ()       # số chú thích xuất hiện ở đây
     dau_sao: tuple = ()       # chuỗi * dùng làm ký hiệu
     chu_thich_dong: tuple = ()  # chú thích nối liền trong dòng (đã bóc ra khỏi chu)
+    bo: tuple = ()            # KhoangBo (tính trong chu) của mọi ký hiệu ở đây, để bỏ khỏi noi_dung
 
 
 # --- Đọc dòng ---
@@ -307,8 +340,29 @@ def bo_ky_hieu_cuoi(chu):
     return re.sub(r"(?<=[^\W\d_])\d{1,2}$", "", t)
 
 
+def khoang_nhom_cuoi(chu, bat_dau, so_lon_nhat):
+    """[(a, b, [số])] của nhóm số ký hiệu ở cuối dòng bắt đầu từ vị trí bat_dau (xem nhom_so_cuoi).
+
+    Mỗi khoảng là một cụm số liền nhau ('1, 4, 5', '40, 41, 42 43, 44'). Số lớn hơn so_lon_nhat không phải
+    ký hiệu (chuan_bi_manh bỏ qua chúng) nên cắt cụm ra, để không bỏ nhầm.
+    """
+    ket_qua = []
+    cum = None
+    for m in SO_NGUYEN.finditer(chu, bat_dau):
+        k = int(m.group())
+        if k > so_lon_nhat:
+            cum = None
+        elif cum is not None and not chu[cum[1]:m.start()].strip(", "):
+            cum[1] = m.end()
+            cum[2].append(k)
+        else:
+            cum = [m.start(), m.end(), [k]]
+            ket_qua.append(cum)
+    return [tuple(c) for c in ket_qua]
+
+
 def ung_vien_so_dinh_chu(chu):
-    """[(số, ở cuối dòng, vị trí)] của các số đứng cuối từ và dính liền chữ cái ('Điện5', 'MIMO8')."""
+    """[(số, ở cuối dòng, vị trí, vị trí kết thúc)] của các số đứng cuối từ và dính liền chữ cái ('Điện5', 'MIMO8')."""
     ket_qua = []
     for m in SO_DINH_CHU.finditer(chu):
         s = m.start(1)
@@ -316,7 +370,7 @@ def ung_vien_so_dinh_chu(chu):
             if not (chu[s - 1].isupper() and s >= 2 and chu[s - 2].isdigit()):
                 continue
         o_cuoi_dong = not chu[m.end(1):].strip(" .,;:)")
-        ket_qua.append((int(m.group(1)), o_cuoi_dong, s))
+        ket_qua.append((int(m.group(1)), o_cuoi_dong, s, m.end(1)))
     return ket_qua
 
 
@@ -328,7 +382,7 @@ def so_chu_thich_dinh_chu(chu):
     sau số ('25W6', đơn vị rồi ký hiệu). Mã như 'IP68' hay 'Qi2' còn lọt qua hàm này; chuan_bi_manh() loại
     chúng bằng thứ tự xuất hiện của số chú thích.
     """
-    return [(k, o_cuoi) for k, o_cuoi, _ in ung_vien_so_dinh_chu(chu)]
+    return [(k, o_cuoi) for k, o_cuoi, _, _ in ung_vien_so_dinh_chu(chu)]
 
 
 def so_chu_thich_cach_chu(chu):
@@ -353,35 +407,48 @@ def la_ma_tieu_chuan(chu, vi_tri):
     return chu_truoc.isupper() and 2 <= len(chu_truoc) <= 3
 
 
-def so_ke_tiep_cuoi_dong(chu, ky_vong, bang):
-    """[(số, vị trí)] của ký hiệu dính vào một chữ số khác ở cuối dòng và chính là số chú thích kế tiếp.
+def khoang_ke_tiep_cuoi_dong(chu, ky_vong, bang):
+    """(a, b, [số]) của ký hiệu dính vào một chữ số khác ở cuối dòng và chính là số chú thích kế tiếp, hoặc None.
 
     'thế hệ thứ 210' (số 2 rồi ký hiệu 10), 'Wi-Fi 617, 18' (số 6 rồi ký hiệu 17, 18). Chỉ nhận số có 3
     chữ số mà hai chữ số cuối đúng bằng số chú thích kế tiếp (từ 10) có trong bang, nên số liệu
-    thường hiếm khi bị nhận nhầm.
+    thường hiếm khi bị nhận nhầm. [a, b) là phần ký hiệu ('10', '17, 18'), không gồm chữ số của số liệu.
     """
     m = re.search(r"(?<=\s)(\d{3})((?:,\s*\d{1,2})*)$", chu)
     if m and ky_vong >= 10 and int(m.group(1)[-2:]) == ky_vong and ky_vong in bang:
         dem = [ky_vong] + [int(x) for x in re.findall(r"\d+", m.group(2))]
         if dem == list(range(ky_vong, ky_vong + len(dem))) and all(k in bang for k in dem):
-            return [(k, m.end(1)) for k in dem]
-    return []
+            return m.end(1) - 2, m.end(), dem
+    return None
 
 
-def so_chu_thich_don_cach_chu(chu):
-    """Một số cách chữ ở cuối dòng: 'Sẵn sàng cho mọi cuộc chơi 1' (Samsung).
+def so_ke_tiep_cuoi_dong(chu, ky_vong, bang):
+    """[(số, vị trí)] của ký hiệu dính vào một chữ số khác ở cuối dòng và là số chú thích kế tiếp
+    (xem khoang_ke_tiep_cuoi_dong); vị trí là chỗ kết thúc số liệu đứng trước."""
+    kq = khoang_ke_tiep_cuoi_dong(chu, ky_vong, bang)
+    return [(k, kq[0] + 2) for k in kq[2]] if kq else []
+
+
+def khoang_don_cach_chu(chu):
+    """(a, b, số) của một số cách chữ ở cuối dòng: 'Sẵn sàng cho mọi cuộc chơi 1' (Samsung), hoặc None.
 
     Chỉ nhận khi phần chữ trước đủ dài (>= 20 ký tự) và từ ngay trước số viết thường hoặc kết thúc
     bằng dấu câu; nhờ vậy giá trị ('Lên đến 20'), tên máy ('Samsung 68', 'Watch8 Classic 44') không bị nhận.
     """
     m = re.search(r"(?<=\s)(\d{1,2})\s*$", chu)
     if not m:
-        return []
+        return None
     truoc = chu[:m.start()].rstrip()
     tu_truoc = truoc.split()[-1] if truoc.split() else ""
     if len(truoc) < 20 or not tu_truoc or not (tu_truoc[0].islower() or tu_truoc[-1] in ".!?)”"):
-        return []
-    return [int(m.group(1))]
+        return None
+    return m.start(1), m.end(1), int(m.group(1))
+
+
+def so_chu_thich_don_cach_chu(chu):
+    """[số] của một số cách chữ ở cuối dòng (xem khoang_don_cach_chu): [] nếu không có."""
+    kq = khoang_don_cach_chu(chu)
+    return [kq[2]] if kq else []
 
 
 # --- Phần 2: tách đoạn ---
@@ -487,6 +554,11 @@ def tach_nhan(chu):
     return [chu[a:b] for a, b in chia_dong(chu)]
 
 
+def sao_dung_rieng(chu, a, b):
+    """Dấu * ở chu[a:b] đứng giữa hai khoảng trắng (hoặc đầu/cuối dòng): không dính vào chữ nào nên không phải ký hiệu."""
+    return (a == 0 or chu[a - 1].isspace()) and (b >= len(chu) or chu[b].isspace())
+
+
 def chuan_bi_manh(dong, bang, loai):
     """Biến các dòng giữ lại thành mảnh, gom ký hiệu chú thích.
 
@@ -508,6 +580,7 @@ def chuan_bi_manh(dong, bang, loai):
 
     co_so = bool(bang)
     so_lon_nhat = max(bang, default=0)
+    sao_co_chu_thich = {khoa for _, khoa, _ in dung_rieng}  # '*', '**' mà trang có dòng chú thích bắt đầu bằng đúng chuỗi đó
     kieu_cach = co_so and sum(
         1 for _, _, chu, _, _ in thong_tin
         if len(so_chu_thich_cach_chu(chu)) >= 2 and any(k in bang for k in so_chu_thich_cach_chu(chu))
@@ -515,15 +588,25 @@ def chuan_bi_manh(dong, bang, loai):
     manh, cao_nhat, da_thay = [], 0, set()
     for i, so, chu, ky_sao, noi_lien in thong_tin:
         so_ky_hieu = []  # [(số, vị trí trong dòng)]
+        # Mọi ký hiệu trong dòng, để bỏ khỏi noi_dung. Dấu * mà trang không có chú thích bắt đầu bằng nó ('5* product' của
+        # một lời đánh giá) hoặc đứng riêng giữa hai khoảng trắng ('Chú thích * biểu tượng', nhãn đọc màn hình) không bỏ.
+        bo = [KhoangBo(v, v + len(r), KY_HIEU_SAO) for r, v in ky_sao
+              if r in sao_co_chu_thich and not sao_dung_rieng(chu, v, v + len(r))]
+        bo += [KhoangBo(v - len(r) + 1, v + 1, KY_HIEU_SAO_NOI_LIEN) for r, _, v in noi_lien]
         nhom = nhom_so_cuoi(chu) if co_so else None
         if nhom:  # nhóm số ở cuối dòng: nhận mọi số có trong danh sách, không xét thứ tự
             so_ky_hieu += [(k, len(chu)) for k in nhom[1] if k <= so_lon_nhat]
+            bo += [KhoangBo(a, b, KY_HIEU_SO, tuple(ks), tuple(k for k in ks if k not in bang))
+                   for a, b, ks in khoang_nhom_cuoi(chu, nhom[0], so_lon_nhat)]
             for k, _ in so_ky_hieu:
                 da_thay.add(k)
                 if 0 < k - cao_nhat <= KHOANG_NHAY_SO:
                     cao_nhat = k
         elif kieu_cach:
-            so_ky_hieu += [(k, len(chu)) for k in so_chu_thich_don_cach_chu(chu) if k in bang]
+            don = khoang_don_cach_chu(chu)
+            if don and don[2] in bang:
+                so_ky_hieu.append((don[2], len(chu)))
+                bo.append(KhoangBo(don[0], don[1], KY_HIEU_SO, (don[2],)))
         if co_so and not kieu_cach:
             if chu.isdigit() and len(chu) <= 2 and manh and int(chu) == cao_nhat + 1:
                 # số chú thích đứng riêng một dòng sau tiêu đề ('Sử dụng hóa chất thông minh hơn' / '24')
@@ -534,7 +617,7 @@ def chuan_bi_manh(dong, bang, loai):
                     thong_ke["khong_tim_duoc"].append(chu)
                 manh[-1] = replace(manh[-1], ky_hieu=manh[-1].ky_hieu + (int(chu),))
                 continue
-            for k, o_cuoi, vi_tri in ung_vien_so_dinh_chu(chu):
+            for k, o_cuoi, vi_tri, het in ung_vien_so_dinh_chu(chu):
                 if k > so_lon_nhat or (nhom and vi_tri >= nhom[0]):
                     continue  # lớn hơn mọi số chú thích đang có ('Reno16'), hoặc đã nằm trong nhóm số cuối dòng
                 moi = 0 < k - cao_nhat <= KHOANG_NHAY_SO
@@ -544,26 +627,36 @@ def chuan_bi_manh(dong, bang, loai):
                                     and not la_ma_tieu_chuan(chu, vi_tri))
                 if moi or cuoi_dong_hop_le:
                     so_ky_hieu.append((k, vi_tri))
+                    bo.append(KhoangBo(vi_tri, het, KY_HIEU_SO, (k,), () if k in bang else (k,)))
                     da_thay.add(k)
                     if moi:
                         cao_nhat = max(cao_nhat, k)
             if not so_ky_hieu and cao_nhat >= 1:
-                for k, vi_tri in so_ke_tiep_cuoi_dong(chu, cao_nhat + 1, bang):
-                    so_ky_hieu.append((k, vi_tri))
-                    da_thay.add(k)
-                    cao_nhat = max(cao_nhat, k)
+                ke_tiep = khoang_ke_tiep_cuoi_dong(chu, cao_nhat + 1, bang)
+                if ke_tiep:
+                    for k in ke_tiep[2]:
+                        so_ky_hieu.append((k, ke_tiep[0] + 2))
+                        da_thay.add(k)
+                        cao_nhat = max(cao_nhat, k)
+                    bo.append(KhoangBo(ke_tiep[0], ke_tiep[1], KY_HIEU_SO, tuple(ke_tiep[2])))
         thong_ke["ky_hieu"] += len(so_ky_hieu) + len(ky_sao)
         thong_ke["khong_tim_duoc"] += [str(k) for k, _ in so_ky_hieu if k not in bang]
         khoang = chia_dong(chu) or [(0, len(chu))]
         dac = len(khoang) > 1 or bool(noi_lien)
+        da_chia = 0
         for p, (a, b) in enumerate(khoang):
             # ký hiệu thuộc mảnh nào: mảnh đầu nhận cả chỗ trước nó, mảnh cuối nhận cả chỗ sau nó
             dau = a if p else -1
             cuoi = khoang[p + 1][0] if p + 1 < len(khoang) else len(chu) + 1
+            cua_manh = tuple(replace(x, a=x.a - a, b=x.b - a) for x in bo if a <= x.a and x.b <= b)
+            da_chia += len(cua_manh)
             manh.append(Manh(i, so, chu[a:b], p > 0, dac,
                              tuple(k for k, v in so_ky_hieu if dau <= v < cuoi),
                              tuple(r for r, v in ky_sao if dau <= v < cuoi),
-                             tuple(t for _, t, v in noi_lien if dau <= v < cuoi)))
+                             tuple(t for _, t, v in noi_lien if dau <= v < cuoi), cua_manh))
+        # Mọi ký hiệu đã nhận ra phải bị bỏ khỏi đúng một mảnh; lệch ở đây là lỗi chứ không lặng lẽ bỏ sót.
+        if da_chia != len(bo) or sum(len(x.so) for x in bo) != len(so_ky_hieu):
+            raise ValueError(f"dòng {so}: ký hiệu chú thích không khớp với khoảng cần bỏ: {chu!r}")
     return manh, thong_ke, dung_rieng
 
 
@@ -611,16 +704,144 @@ def gom_theo_ngat(manh):
 
 # --- Phần 3: gắn tên mục và chú thích ---
 
-def noi_dung_doan(muc, manh):
-    """Các dòng nối bằng xuống dòng (mảnh cùng dòng nối bằng khoảng trắng); mở đầu bằng tên mục."""
-    phan = []
-    for m in manh:
-        if phan and m.noi_truoc:
-            phan[-1] += " " + m.chu
+def ghep_noi_dung_goc(muc, manh):
+    """(noi_dung_goc, [KhoangBo]) của một đoạn: các dòng nối bằng xuống dòng (mảnh cùng dòng nối bằng
+    khoảng trắng); mở đầu bằng tên mục. Khoảng bỏ tính theo vị trí trong noi_dung_goc."""
+    chu, bo = "", []
+    for i, m in enumerate(manh):
+        chu += "" if i == 0 else " " if m.noi_truoc else "\n"
+        bo += [replace(x, a=x.a + len(chu), b=x.b + len(chu)) for x in m.bo]
+        chu += m.chu
+    if muc and not chu.startswith(muc):
+        chu = muc + "\n" + chu
+        bo = [replace(x, a=x.a + len(muc) + 1, b=x.b + len(muc) + 1) for x in bo]
+    return chu, bo
+
+
+def bo_ky_hieu_chu_thich(chu, khoang):
+    """(văn bản đã bỏ ký hiệu, [nhật ký]): bỏ các khoảng KhoangBo khỏi chu, giữ hai bên cách nhau như cũ.
+
+    Cụm ký hiệu nằm giữa hai từ ('20 phút6 với') thì chữ hai bên giữ nguyên, vẫn một khoảng trắng ('20 phút
+    với'). Cụm ở cuối dòng sau một khoảng trắng ('năng lượng! 7') thì bỏ luôn khoảng trắng đó. Chỉ khi ký hiệu dính
+    giữa hai chữ không có khoảng trắng ('Thấp8Mới') mới chèn một khoảng trắng để hai từ không dính nhau, và khi ký
+    hiệu kẹp giữa một khoảng trắng và dấu câu thì bỏ khoảng trắng thừa.
+    Nhật ký có một dict cho mỗi khoảng: vi_tri (trong chu), vi_tri_moi (chỗ đó trong văn bản mới), chu (đoạn đã
+    bỏ), loai, so, thieu, xu_ly ('' nếu không phải chỉnh khoảng trắng; 'chen_cach', 'bo_cach_truoc', 'bo_cach_sau' nếu có).
+    """
+    khoang = sorted(khoang, key=lambda x: (x.a, x.b))
+    nhom = []  # các khoảng chạm hoặc chồng nhau là một chỗ bỏ
+    for x in khoang:
+        if nhom and x.a <= nhom[-1][-1].b:
+            nhom[-1].append(x)
         else:
-            phan.append(m.chu)
-    chu = "\n".join(phan)
-    return muc + "\n" + chu if muc and not chu.startswith(muc) else chu
+            nhom.append([x])
+    ra, cuoi, nhat_ky = "", 0, []
+    for cum in nhom:
+        a, b = cum[0].a, max(x.b for x in cum)
+        ra += chu[cuoi:a]
+        truoc, sau = ra[-1:], chu[b:b + 1]
+        xu_ly = ""
+        if sau in ("", "\n"):
+            if truoc == " ":
+                ra, xu_ly = ra[:-1], "bo_cach_truoc"
+        elif truoc == " " and sau == " ":
+            b, xu_ly = b + 1, "bo_cach_sau"
+        elif truoc == " " and sau in DAU_CAU_DONG:
+            ra, xu_ly = ra[:-1], "bo_cach_truoc"
+        elif sau.isalnum() and (truoc.isalnum() or truoc in DAU_CAU_DONG_TRUOC):
+            ra, xu_ly = ra + " ", "chen_cach"
+        cuoi = b
+        for j, x in enumerate(cum):
+            nhat_ky.append({"vi_tri": x.a, "vi_tri_moi": len(ra), "chu": chu[x.a:x.b], "loai": x.loai, "so": list(x.so),
+                            "thieu": list(x.thieu), "xu_ly": xu_ly if j == 0 else ""})
+    return ra + chu[cuoi:], nhat_ky
+
+
+# --- Bảng ghi tay: ký hiệu chuan_bi_manh bỏ sót, và dấu * nhận nhầm ---
+
+# Số chú thích thật mà nhận diện của chuan_bi_manh bỏ sót (số nhắc lại giữa dòng, 'AI10' bị coi là tên chuẩn như 'AV1',
+# số dính chữ ở trang dùng kiểu số cách chữ, số cách chữ sau tiêu đề viết hoa). Mỗi mục: (mã đoạn, ngữ cảnh, ký hiệu);
+# ngữ cảnh là chuỗi trong noi_dung_goc của đoạn và chứa ký hiệu đúng một lần; mọi chỗ ngữ cảnh xuất hiện trong đoạn đều
+# bỏ ký hiệu (chỗ chuan_bi_manh đã bỏ rồi thì thôi). Mỗi mục đã đối chiếu với thẻ <sup> của page.html (chữ đứng trước và số
+# hiển thị đều khớp). Bảng chỉ bỏ chữ khỏi noi_dung: chu_thich và cách gắn chú thích không đổi. Mục không tìm thấy ngữ
+# cảnh, hoặc đã được bỏ hết, là lỗi (ValueError) để bảng không lệch khỏi văn bản mà không ai biết.
+KY_HIEU_BO_THEM = (
+    ("dt-apple-iphone17#016", "30 phút6", "6"),  # '20 phút6' ở dòng trên đã được nhận; số 6 nhắc lại giữa dòng thì không
+    ("dt-xiaomi-15t#035", "Gold Collection 5", "5"),  # số cách chữ sau tiêu đề: 'Bộ sưu tập Gold Collection <sup>5</sup>'
+    ("dt-xiaomi-15t#041", "Nhận dạng giọng nói AI10", "10"),  # 'AI' bị coi là tên chuẩn như 'AV1' nên số nhắc lại không nhận
+    ("dt-xiaomi-15t#041", "Phiên dịch AI10", "10"),
+    ("dt-xiaomi-15t#041", "Tìm kiếm AI10", "10"),
+    ("dt-xiaomi-15t#041", "Hình nền động AI10", "10"),
+    ("dt-xiaomi-15t#041", "Viết AI10", "10"),
+    ("dh-apple-watchse3#004", "Siri AI1", "1"),  # như trên; 'Apple Intelligence1' ở trên đã được nhận
+    ("dh-samsung-galaxywatch8#015", "ngày của bạn1", "1"),
+    # S25 Ultra: trang dùng kiểu số cách chữ nên chuan_bi_manh bỏ qua số dính chữ; số 33 và 34 không có trong bảng chú thích
+    # của trang (bảng dừng ở 32) nhưng <sup> có và cùng kiểu với 5, 7, 8 đã nhận cùng đoạn.
+    ("dt-samsung-galaxys25ultra#034", "ra lệnh là xong1", "1"),
+    ("dt-samsung-galaxys25ultra#034", "tiên tiến nhất2,3", "2,3"),
+    ("dt-samsung-galaxys25ultra#035", "pin vượt trội4", "4"),
+    ("dt-samsung-galaxys25ultra#036", "của chúng tôi6", "6"),
+    ("dt-samsung-galaxys25ultra#037", "218 g 33", "33"),
+    ("dt-samsung-galaxys25ultra#037", "227 g 33", "33"),
+    ("dt-samsung-galaxys25ultra#038", "của Samsung34", "34"),
+    ("dt-samsung-galaxys25ultra#039", "ra lệnh là xong1", "1"),
+    ("dt-samsung-galaxys25ultra#111", "tiên tiến nhất3", "3"),
+    ("dt-samsung-galaxys25ultra#114", "Ultra Wide3", "3"),
+    ("dt-samsung-galaxys25ultra#128", "31 giờ 4,35", "4,35"),  # <sup>4</sup>,<sup>35</sup>, không phải số thập phân
+    ("dt-samsung-galaxys25ultra#129", "22 giờ 4,35", "4,35"),
+)
+
+# Ký hiệu chuan_bi_manh đã nhận nhưng không phải ký hiệu chú thích: cùng cấu trúc với KY_HIEU_BO_THEM, giữ lại trong noi_dung.
+# Mục không có ký hiệu nào đã được nhận ở đúng chỗ đó là lỗi (ValueError).
+KY_HIEU_GIU_LAI = (
+    ("dh-samsung-galaxywatch8#129", "5* product", "*"),  # lời đánh giá 'a 5* product': điểm 5 sao, không phải chú thích
+)
+
+KY_HIEU_BO_THEM_HOP_LE = re.compile(r"\d{1,2}(?:,\d{1,2})*")
+
+
+def vi_tri_ky_hieu_trong_ngu_canh(ma_doan, goc, ngu_canh, ky_hieu):
+    """[(a, b)] của ky_hieu ở mọi chỗ ngu_canh xuất hiện trong goc. ValueError nếu ngữ cảnh không chứa ký hiệu đúng một
+    lần hoặc không có trong goc (mục của bảng ghi tay đã lệch khỏi văn bản)."""
+    if not ky_hieu or ngu_canh.count(ky_hieu) != 1:
+        raise ValueError(f"{ma_doan}: ngữ cảnh {ngu_canh!r} phải chứa ký hiệu {ky_hieu!r} đúng một lần")
+    lech = ngu_canh.index(ky_hieu)
+    cho = [m.start() + lech for m in re.finditer(re.escape(ngu_canh), goc)]
+    if not cho:
+        raise ValueError(f"{ma_doan}: không thấy ngữ cảnh {ngu_canh!r} trong noi_dung_goc")
+    return [(p, p + len(ky_hieu)) for p in cho]
+
+
+def ap_dung_bang_ghi_tay(ma_doan, goc, noi_dung, nhat_ky, bo_them=KY_HIEU_BO_THEM, giu_lai=KY_HIEU_GIU_LAI):
+    """(noi_dung, nhật ký) của đoạn ma_doan sau khi áp hai bảng ghi tay lên kết quả của chuan_bi_manh.
+
+    Bỏ ký hiệu của bo_them (nhật ký ghi loại KY_HIEU_GHI_TAY) và giữ lại ký hiệu của giu_lai, rồi bỏ lại từ noi_dung_goc
+    để khoảng trắng hai bên vẫn đúng. Đoạn không có mục nào trong hai bảng thì trả nguyên noi_dung và nhat_ky.
+    ValueError nếu một mục không khớp văn bản: không tìm thấy ngữ cảnh, ký hiệu không phải số, ký hiệu đã được bỏ rồi
+    (mục thừa), hoặc mục giu_lai không có ký hiệu nào đã bị bỏ ở chỗ đó.
+    """
+    them = [(c, k) for m, c, k in bo_them if m == ma_doan]
+    giu = [(c, k) for m, c, k in giu_lai if m == ma_doan]
+    if not them and not giu:
+        return noi_dung, nhat_ky
+    khoang = [KhoangBo(x["vi_tri"], x["vi_tri"] + len(x["chu"]), x["loai"], tuple(x["so"]), tuple(x["thieu"]))
+              for x in nhat_ky]
+    for ngu_canh, ky_hieu in giu:
+        cho = vi_tri_ky_hieu_trong_ngu_canh(ma_doan, goc, ngu_canh, ky_hieu)
+        bo_di = [x for x in khoang if (x.a, x.b) in cho]
+        if not bo_di:
+            raise ValueError(f"{ma_doan}: không có ký hiệu nào đã bị bỏ tại {ngu_canh!r} để giữ lại")
+        khoang = [x for x in khoang if x not in bo_di]
+    for ngu_canh, ky_hieu in them:
+        if not KY_HIEU_BO_THEM_HOP_LE.fullmatch(ky_hieu):
+            raise ValueError(f"{ma_doan}: ký hiệu {ky_hieu!r} phải là số chú thích (số, dấu phẩy)")
+        moi = [(a, b) for a, b in vi_tri_ky_hieu_trong_ngu_canh(ma_doan, goc, ngu_canh, ky_hieu)
+               if not any(x.a < b and a < x.b for x in khoang)]
+        if not moi:
+            raise ValueError(f"{ma_doan}: ký hiệu {ky_hieu!r} ở {ngu_canh!r} đã được bỏ rồi, xóa mục này khỏi bảng")
+        so = tuple(int(k) for k in SO_NGUYEN.findall(ky_hieu))
+        khoang += [KhoangBo(a, b, KY_HIEU_GHI_TAY, so) for a, b in moi]
+    return bo_ky_hieu_chu_thich(goc, khoang)
 
 
 def dung_doan(doan_tho, chu_thich_so, dung_rieng, dong, thong_ke):
@@ -644,10 +865,12 @@ def dung_doan(doan_tho, chu_thich_so, dung_rieng, dong, thong_ke):
                 sao_da_dung.add(khoa)
             elif khoa not in sao_theo_khoa:
                 thong_ke["khong_tim_duoc"].append(khoa)
-        ket_qua.append({"muc": d["muc"], "noi_dung": noi_dung_doan(d["muc"], manh),
+        goc, bo = ghep_noi_dung_goc(d["muc"], manh)
+        noi_dung, nhat_ky = bo_ky_hieu_chu_thich(goc, bo)
+        ket_qua.append({"muc": d["muc"], "noi_dung": noi_dung, "noi_dung_goc": goc,
                         "chu_thich": list(dict.fromkeys(chu_thich)),
                         "dong": [min(m.so for m in manh), max(m.so for m in manh)],
-                        "_dau": manh[0].chi_so})
+                        "ky_hieu_bo": nhat_ky, "_dau": manh[0].chi_so})
     # Chú thích cả dòng bắt đầu bằng *: gắn vào đoạn đứng ngay trước nếu không dẫn theo ký hiệu.
     for chi_so, khoa, noi in dung_rieng:
         if khoa in sao_da_dung:
@@ -656,8 +879,8 @@ def dung_doan(doan_tho, chu_thich_so, dung_rieng, dong, thong_ke):
         if truoc:
             truoc[-1]["chu_thich"].append(noi)
         else:
-            ket_qua.append({"muc": "Chú thích", "noi_dung": "Chú thích\n" + noi, "chu_thich": [],
-                            "dong": [dong[chi_so].so] * 2, "_dau": chi_so})
+            ket_qua.append({"muc": "Chú thích", "noi_dung": "Chú thích\n" + noi, "noi_dung_goc": "Chú thích\n" + noi,
+                            "chu_thich": [], "dong": [dong[chi_so].so] * 2, "ky_hieu_bo": [], "_dau": chi_so})
     # Chú thích có số mà chưa đoạn nào dẫn tới: đứng lẻ giữa trang (không nằm trong khối chú thích) thì chú
     # thích cho phần ngay phía trên nó; còn lại giữ thành đoạn riêng để vẫn tìm được.
     dong_chu_thich = {i for v in chu_thich_so.values() for i in v["dong"]}
@@ -670,8 +893,9 @@ def dung_doan(doan_tho, chu_thich_so, dung_rieng, dong, thong_ke):
                 thong_ke["gan_theo_vi_tri"].append(so)
                 continue
             thong_ke["khong_duoc_dan"].append(so)
-            ket_qua.append({"muc": "Chú thích", "noi_dung": f"Chú thích {so}\n{thong_tin['chu']}", "chu_thich": [],
-                            "dong": [dong[chi_so[0]].so, dong[chi_so[-1]].so], "_dau": chi_so[0]})
+            chu = f"Chú thích {so}\n{thong_tin['chu']}"
+            ket_qua.append({"muc": "Chú thích", "noi_dung": chu, "noi_dung_goc": chu, "chu_thich": [],
+                            "dong": [dong[chi_so[0]].so, dong[chi_so[-1]].so], "ky_hieu_bo": [], "_dau": chi_so[0]})
     ket_qua.sort(key=lambda d: d["_dau"])
     for d in ket_qua:
         del d["_dau"]
@@ -679,7 +903,10 @@ def dung_doan(doan_tho, chu_thich_so, dung_rieng, dong, thong_ke):
 
 
 def chia_doan_day_du(van_ban, bang_chu_thich=None):
-    """Trả (list đoạn, thống kê). Đoạn: {muc, noi_dung, chu_thich, dong}.
+    """Trả (list đoạn, thống kê). Đoạn: {muc, noi_dung, noi_dung_goc, chu_thich, dong, ky_hieu_bo}.
+
+    noi_dung_goc là văn bản trước khi bỏ ký hiệu chú thích; noi_dung đã bỏ chúng (xem bo_ky_hieu_chu_thich);
+    ky_hieu_bo là nhật ký các chỗ đã bỏ (danh_ma_doan không ghi nó vào doan.jsonl).
 
     bang_chu_thich: {số: nội dung} lấy từ doc_chu_thich_html(); không có thì chỉ nhận chú thích có số
     ghi sẵn trong văn bản ('5. ...') và chú thích dấu *. Tài liệu PDF (có dòng '=== Trang N ===')
@@ -719,16 +946,25 @@ def chia_doan(van_ban, bang_chu_thich=None):
     return chia_doan_day_du(van_ban, bang_chu_thich)[0]
 
 
-def danh_ma_doan(ma_mau, doan_theo_trang, so_chu_so=3):
+def danh_ma_doan(ma_mau, doan_theo_trang, so_chu_so=3, bo_them=KY_HIEU_BO_THEM, giu_lai=KY_HIEU_GIU_LAI):
     """Gán id '<ma_mau>#<số>' liên tục qua các trang của một mẫu (url trước, bo_sung sau).
 
-    doan_theo_trang: [(trang, list đoạn)]. Trả list dict đủ trường theo thứ tự id.
+    doan_theo_trang: [(trang, list đoạn)]. Trả list dict đủ trường theo thứ tự id, kèm ky_hieu_bo (nhật ký bỏ ký hiệu,
+    không ghi vào doan.jsonl). Áp hai bảng ghi tay bo_them và giu_lai lên noi_dung (xem ap_dung_bang_ghi_tay) vì mã đoạn
+    chỉ có ở đây; mục của bảng cho một mã đoạn của mẫu này mà mẫu không có đoạn đó là lỗi (ValueError).
     """
     ket_qua, so = [], 0
     for trang, doan in doan_theo_trang:
         for d in doan:
             so += 1
-            ket_qua.append({"id": f"{ma_mau}#{so:0{so_chu_so}d}", "ma_mau": ma_mau, "trang": trang,
-                            "muc": d["muc"], "noi_dung": d["noi_dung"], "chu_thich": d["chu_thich"],
-                            "dong": d["dong"]})
+            ma_doan = f"{ma_mau}#{so:0{so_chu_so}d}"
+            noi_dung, nhat_ky = ap_dung_bang_ghi_tay(ma_doan, d["noi_dung_goc"], d["noi_dung"], d["ky_hieu_bo"],
+                                                     bo_them, giu_lai)
+            ket_qua.append({"id": ma_doan, "ma_mau": ma_mau, "trang": trang,
+                            "muc": d["muc"], "noi_dung": noi_dung, "noi_dung_goc": d["noi_dung_goc"],
+                            "chu_thich": d["chu_thich"], "dong": d["dong"], "ky_hieu_bo": nhat_ky})
+    co_ma = {d["id"] for d in ket_qua}
+    for ma_doan, ngu_canh, _ in (*bo_them, *giu_lai):
+        if ma_doan.startswith(ma_mau + "#") and ma_doan not in co_ma:
+            raise ValueError(f"{ma_doan}: bảng ghi tay có mục ({ngu_canh!r}) cho một mã đoạn không tồn tại")
     return ket_qua

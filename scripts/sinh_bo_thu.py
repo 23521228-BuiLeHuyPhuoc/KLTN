@@ -5,6 +5,10 @@ noi_dung (như người dùng sao chép bảng thông số), nối bằng xuốn
 triển), các đoạn này là các đoạn tệp cấu hình dẫn làm căn cứ (can_cu). Văn bản và danh sách mã đoạn ghi ở
 data/quang_cao/thong_so/<ma_mau>.txt và .json.
 
+"noi_dung" ở đây là noi_dung_goc của doan.jsonl: văn bản trước khi bỏ số chú thích của trang hãng (31/10/2026), tức đúng
+chữ người dùng sao chép được ('20 phút6'). 24 bài đã sinh dùng văn bản này; đọc noi_dung đã bỏ số chú thích thì chạy lại
+sẽ ghi đè thong_so/*.txt bằng văn bản khác với văn bản đã đưa cho LLM.
+
 Bài đã có thì bỏ qua. Lỗi tạm thời của CopyPro (mất kết nối CSDL, HTTP 5xx) thì thử lại tối đa 3 lần.
 
 Chạy (CopyPro đang chạy ở máy):
@@ -39,7 +43,7 @@ def doan_thong_so(ma_mau):
     with open(GOC / "data" / "nguon" / ma_mau / "doan.jsonl", encoding="utf-8") as f:
         for dong in f:
             d = json.loads(dong)
-            doan[d["id"]] = d["noi_dung"]
+            doan[d["id"]] = d.get("noi_dung_goc", d["noi_dung"])  # văn bản chưa bỏ số chú thích, xem docstring đầu tệp
     return ma_doan, "\n".join(doan[c] for c in ma_doan)
 
 

@@ -1,5 +1,7 @@
+import difflib
 import importlib.util
 import json
+import re
 import unicodedata
 from pathlib import Path
 
@@ -22,9 +24,10 @@ def doc_that(ma_mau, trang="url"):
     return cd.chia_doan(van_ban, cd.doc_chu_thich_html(ma_html))
 
 
-def doan_chua(doan, mau):
+def doan_chua(doan, mau, truong="noi_dung"):
+    """Đoạn đầu tiên có `mau` trong trường truong; ký hiệu chú thích ('Wide3') chỉ còn trong noi_dung_goc."""
     mau = cd.GACH_DAC_BIET.sub("-", mau)  # đoạn đã chuẩn hóa ('Wi‑Fi' -> 'Wi-Fi')
-    ket_qua = [d for d in doan if mau in d["noi_dung"]]
+    ket_qua = [d for d in doan if mau in d[truong]]
     assert ket_qua, f"không đoạn nào chứa {mau!r}"
     return ket_qua[0]
 
@@ -237,15 +240,15 @@ def test_s25_so_dinh_chu_cuoi_dong_khong_theo_thu_tu():
         "Galaxy Watch7",  # tên máy cuối dòng: không phải ký hiệu
         *S25_CHU_THICH.values()])
     doan = cd.chia_doan(van_ban, S25_CHU_THICH)
-    wide = doan_chua(doan, "Ultra Wide3")
-    assert S25_CHU_THICH[3] in wide["chu_thich"]
+    wide = doan_chua(doan, "Ultra Wide3", "noi_dung_goc")
+    assert S25_CHU_THICH[3] in wide["chu_thich"] and wide["noi_dung"].endswith("là Ultra Wide")  # ký hiệu 3 bị bỏ khỏi noi_dung
     # chú thích 1, 3, 4 đều có ký hiệu dẫn tới; chỉ chú thích 2 (không ai nhắc) thành đoạn riêng
     assert [d["noi_dung"].split("\n")[0] for d in doan if d["muc"] == "Chú thích"] == ["Chú thích 2"]
 
 
 def test_that_s25_ultra_wide3():
     doan = doc_that("dt-samsung-galaxys25ultra", "bo_sung")
-    wide = doan_chua(doan, "thậm chí là Ultra Wide3")
+    wide = doan_chua(doan, "thậm chí là Ultra Wide3", "noi_dung_goc")
     assert any(c.startswith("So sánh với các sản phẩm trước đó") for c in wide["chu_thich"])
 
 
@@ -262,7 +265,7 @@ def test_noi_long_thu_tu_khong_bat_nham_so_lieu_va_ten_ma():
     doan = cd.chia_doan("\n".join(["Chỉ cần nhấn và ra lệnh là xong3", *dong_vi_du, *chu_thich.values()]), chu_thich)
     for dong in dong_vi_du:
         d = doan_chua(doan, dong)
-        assert chu_thich[3] not in d["chu_thich"] or "xong3" in d["noi_dung"]
+        assert chu_thich[3] not in d["chu_thich"] or "xong3" in d["noi_dung_goc"]
         assert not [c for c in d["chu_thich"] if c != chu_thich[3]], (dong, d["chu_thich"])
     assert cd.so_ke_tiep_cuoi_dong("Chip Apple Ultra Wideband thế hệ thứ 210", 10, chu_thich | {10: "x"}) == [(10, 40)]
     assert cd.so_ke_tiep_cuoi_dong("Galaxy S24 Ultra 512", 7, chu_thich) == []  # 12 không phải số kế tiếp (7)
@@ -297,7 +300,9 @@ def test_that_chu_thich_khong_duoc_dan_tren_tap_phat_trien():
         _, thong_ke = cd.chia_doan_day_du(van_ban, bang)
         assert thong_ke["khong_duoc_dan"] == con_lai, ma_mau
     doan = doc_that("dt-apple-iphone17")
-    assert any("Ultra Wideband chỉ khả dụng" in c for c in doan_chua(doan, "thế hệ thứ 210")["chu_thich"])
+    thu_2 = doan_chua(doan, "thế hệ thứ 210", "noi_dung_goc")
+    assert any("Ultra Wideband chỉ khả dụng" in c for c in thu_2["chu_thich"])
+    assert "thế hệ thứ 2\n" in thu_2["noi_dung"]  # số 2 của 'thế hệ thứ 2' ở lại, ký hiệu 10 bị bỏ
     assert not any(c.startswith("Dung lượng khả dụng") for c in doan_chua(doan, "HEVC, H.264 và AV1")["chu_thich"])
     buds = doc_that("tn-samsung-buds3pro")  # Samsung đánh số hiển thị 56-59 cho mã 58-61 trong thẻ
     nhanh = doan_chua(buds, "bảng cài đặt nhanh khi ứng dụng đang phát nội dung")
@@ -355,11 +360,13 @@ def test_lam_sach_chuan_hoa_nfc_gach_noi_va_ky_tu_an():
 # --- Mã đoạn ---
 
 def test_danh_ma_doan_lien_tuc_giua_cac_trang():
-    d = {"muc": "Pin", "noi_dung": "Pin\nLên đến 7 giờ", "chu_thich": [], "dong": [1, 2]}
+    d = {"muc": "Pin", "noi_dung": "Pin\nLên đến 7 giờ", "noi_dung_goc": "Pin\nLên đến 7 giờ1", "chu_thich": [], "dong": [1, 2],
+         "ky_hieu_bo": []}
     ket_qua = cd.danh_ma_doan("tn-samsung-buds3pro", [("url", [d, d]), ("bo_sung", [d])])
     assert [x["id"] for x in ket_qua] == ["tn-samsung-buds3pro#001", "tn-samsung-buds3pro#002", "tn-samsung-buds3pro#003"]
     assert [x["trang"] for x in ket_qua] == ["url", "url", "bo_sung"]
-    assert set(ket_qua[0]) == {"id", "ma_mau", "trang", "muc", "noi_dung", "chu_thich", "dong"}
+    assert set(ket_qua[0]) == {"id", "ma_mau", "trang", "muc", "noi_dung", "noi_dung_goc", "chu_thich", "dong", "ky_hieu_bo"}
+    assert ket_qua[0]["noi_dung_goc"] == "Pin\nLên đến 7 giờ1"  # ky_hieu_bo chỉ là nhật ký, không ghi vào doan.jsonl
     assert cd.danh_ma_doan("m", [("url", [d])], 4)[0]["id"] == "m#0001"
     assert script.so_chu_so_ma(999) == 3 and script.so_chu_so_ma(1000) == 4
 
@@ -410,9 +417,9 @@ def test_that_moi_doan_bat_dau_bang_ten_muc_va_dong_hop_le(ma_mau, trang):
     doan = doc_that(ma_mau, trang)
     assert doan
     for d in doan:
-        assert d["noi_dung"].startswith(d["muc"])
+        assert d["noi_dung_goc"].startswith(d["muc"])  # muc giữ nguyên, có thể còn ký hiệu cuối ('Định nghĩa lại âm thanh nguyên bản 1')
         assert 1 <= d["dong"][0] <= d["dong"][1] <= so_dong
-        assert len(d["noi_dung"]) <= cd.CAP_CUNG
+        assert len(d["noi_dung_goc"]) <= cd.CAP_CUNG and len(d["noi_dung"]) <= len(d["noi_dung_goc"])
 
 
 # --- Script: ghi tệp, thống kê, mẫu kiểm ---
@@ -428,7 +435,8 @@ def test_chia_mot_mau_va_ghi_jsonl_on_dinh(tmp_path):
     tho = dich.read_bytes()
     assert b"\r" not in tho and tho.endswith(b"\n") and "Tắt Tính năng ANC".encode() in tho  # LF, không escape \uXXXX
     doc_lai = [json.loads(dong) for dong in tho.decode("utf-8").splitlines()]
-    assert doc_lai == doan and doc_lai[0]["id"] == "tn-samsung-buds3pro#001"
+    assert doc_lai == [{k: d[k] for k in script.TRUONG_JSONL} for d in doan] and doc_lai[0]["id"] == "tn-samsung-buds3pro#001"
+    assert "ky_hieu_bo" not in doc_lai[0]  # nhật ký chỉ để báo cáo, không ghi vào doan.jsonl
     script.ghi_jsonl(tmp_path / "lan2.jsonl", cd.danh_ma_doan(row["ma_mau"], script.chia_mot_mau(row)[0]))
     assert (tmp_path / "lan2.jsonl").read_bytes() == tho  # chạy lại ra đúng từng byte
 
@@ -448,3 +456,272 @@ def test_lay_mau_kiem_co_dinh_seed_va_uu_tien_chu_so():
     assert mau == script.lay_mau_kiem(doan, 20, 5)[0] != script.lay_mau_kiem(doan, 20, 6)[0]
     assert {d["ma_mau"] for d in mau} == {"m0", "m1", "m2"} and all(any(c.isdigit() for c in d["noi_dung"]) for d in mau)
     assert "Seed: 5" in script.viet_kiem_md(mau, so_co_so, 60, 5)
+
+
+# --- Bỏ ký hiệu chú thích khỏi noi_dung, giữ noi_dung_goc (31/10/2026) ---
+
+def khoang(chu, ky_hieu, loai=cd.KY_HIEU_SO, so=()):
+    """KhoangBo bao đúng `ky_hieu` đầu tiên tìm thấy trong chu."""
+    a = chu.index(ky_hieu)
+    return cd.KhoangBo(a, a + len(ky_hieu), loai, tuple(so))
+
+
+def test_bo_ky_hieu_giua_hai_tu_van_con_mot_khoang_trang():
+    chu = "Sạc lên đến 50% trong 20 phút6 với bộ tiếp hợp 40W trở lên"
+    moi, nhat_ky = cd.bo_ky_hieu_chu_thich(chu, [khoang(chu, "6", so=[6])])
+    assert moi == "Sạc lên đến 50% trong 20 phút với bộ tiếp hợp 40W trở lên"
+    a = chu.index("6")
+    assert nhat_ky == [{"vi_tri": a, "vi_tri_moi": a, "chu": "6", "loai": "so", "so": [6], "thieu": [], "xu_ly": ""}]
+    chu = "Lên đến 32 giờ ở Chế Độ Nguồn Điện Thấp8"  # dính cuối chữ ở cuối dòng
+    assert cd.bo_ky_hieu_chu_thich(chu, [khoang(chu, "8", so=[8])])[0] == "Lên đến 32 giờ ở Chế Độ Nguồn Điện Thấp"
+    chu = "Rộng: 7,5 mm\nLên đến 30 giờ1\nMàu"  # ký hiệu cuối một dòng giữa đoạn: dòng sau giữ nguyên
+    assert cd.bo_ky_hieu_chu_thich(chu, [khoang(chu, "1", so=[1])])[0] == "Rộng: 7,5 mm\nLên đến 30 giờ\nMàu"
+
+
+def test_bo_ky_hieu_cuoi_dong_sau_khoang_trang_bo_luon_khoang_trang_do():
+    chu = "tự tin trải nghiệm ngày dài đầy năng lượng! 7\n5630mAh"
+    moi, nhat_ky = cd.bo_ky_hieu_chu_thich(chu, [khoang(chu, "7", so=[7])])
+    assert moi == "tự tin trải nghiệm ngày dài đầy năng lượng!\n5630mAh" and nhat_ky[0]["xu_ly"] == "bo_cach_truoc"
+    chu = "thiết kế đệm đẹp mắt. 40, 41, 42 43, 44"  # cả cụm nhiều số là một chỗ bỏ
+    cum = cd.KhoangBo(chu.index("40"), len(chu), cd.KY_HIEU_SO, (40, 41, 42, 43, 44))
+    assert cd.bo_ky_hieu_chu_thich(chu, [cum])[0] == "thiết kế đệm đẹp mắt."
+    chu = "ghi lại chính xác.4,32"  # dính ngay sau dấu chấm
+    assert cd.bo_ky_hieu_chu_thich(chu, [khoang(chu, "4,32", so=[4, 32])])[0] == "ghi lại chính xác."
+
+
+def test_bo_ky_hieu_dinh_chu_sau_thi_chen_mot_khoang_trang_va_ghi_lai():
+    chu = "tức thì 2.560Hz**Gam màu: DCI-P3"
+    moi, nhat_ky = cd.bo_ky_hieu_chu_thich(chu, [khoang(chu, "**", cd.KY_HIEU_SAO_NOI_LIEN)])
+    assert moi == "tức thì 2.560Hz Gam màu: DCI-P3" and nhat_ky[0]["xu_ly"] == "chen_cach"
+    assert moi[:nhat_ky[0]["vi_tri_moi"]] == "tức thì 2.560Hz "
+    chu = "Gemini***Hệ thống"  # ba dấu liền nhau là một chỗ bỏ, chỉ chèn một khoảng trắng
+    a = chu.index("*")
+    moi, nhat_ky = cd.bo_ky_hieu_chu_thich(chu, [cd.KhoangBo(a + i, a + i + 1, cd.KY_HIEU_SAO_NOI_LIEN) for i in range(3)])
+    assert moi == "Gemini Hệ thống" and [x["xu_ly"] for x in nhat_ky] == ["chen_cach", "", ""]
+    chu = "Trọng lượng: 194g*"  # cuối chuỗi: không có gì để chèn
+    assert cd.bo_ky_hieu_chu_thich(chu, [khoang(chu, "*", cd.KY_HIEU_SAO_NOI_LIEN)])[0] == "Trọng lượng: 194g"
+
+
+def test_bo_ky_hieu_giua_hai_khoang_trang_va_truoc_dau_cau():
+    chu = "pin 8 giờ"
+    moi, nhat_ky = cd.bo_ky_hieu_chu_thich(chu, [khoang(chu, "8", so=[8])])
+    assert moi == "pin giờ" and nhat_ky[0]["xu_ly"] == "bo_cach_sau"
+    chu = "ra lệnh là xong 6."
+    assert cd.bo_ky_hieu_chu_thich(chu, [khoang(chu, "6", so=[6])])[0] == "ra lệnh là xong."
+    assert cd.bo_ky_hieu_chu_thich("không có ký hiệu", []) == ("không có ký hiệu", [])
+
+
+BO_CHU_THICH = {
+    1: "Dung lượng khả dụng nhỏ hơn và có thể thay đổi do nhiều yếu tố.",
+    4: "Tất cả các xác nhận về thời lượng pin phụ thuộc vào cấu hình mạng.",
+    6: "Sạc 50% đo với bộ tiếp hợp 40W trở lên được bán riêng.",
+    8: "Chế Độ Nguồn Điện Thấp bao gồm cả theo dõi giấc ngủ.",
+}
+BO_VAN_BAN = "\n".join([
+    "Dung Lượng Lưu Trữ1", "256GB", "512GB",
+    "Pin Và Nguồn Điện4", "", "Thời gian xem video", "Lên đến 30 giờ", "",
+    "Sạc lên đến 50% trong 20 phút6 với bộ tiếp hợp 40W trở lên (được bán riêng) sử dụng cáp sạc USB‑C",
+    "Lên đến 32 giờ ở Chế Độ Nguồn Điện Thấp8",
+    "Kết Nối", "Đạt mức IP68 (chống nước ở độ sâu tối đa 6 mét)", "Chip Apple A2305", "Pin 5.000mAh", "Galaxy Buds3 Pro",
+    *BO_CHU_THICH.values(),
+])
+
+
+def test_bo_so_chu_thich_khoi_noi_dung_va_giu_ma_va_so_lieu():
+    doan = cd.chia_doan(BO_VAN_BAN, BO_CHU_THICH)
+    sac = doan_chua(doan, "Sạc lên đến 50% trong 20 phút với bộ tiếp hợp 40W")
+    assert "20 phút6 với" in sac["noi_dung_goc"] and "phút6" not in sac["noi_dung"]
+    assert sac["noi_dung"].endswith("Chế Độ Nguồn Điện Thấp") and sac["noi_dung_goc"].endswith("Chế Độ Nguồn Điện Thấp8")
+    assert "USB-C" in sac["noi_dung"] and BO_CHU_THICH[6] in sac["chu_thich"] and BO_CHU_THICH[8] in sac["chu_thich"]
+    luu_tru = doan_chua(doan, "Dung Lượng Lưu Trữ\n256GB")  # tiêu đề cũng bỏ số: 'Lưu Trữ1' -> 'Lưu Trữ'
+    assert luu_tru["noi_dung_goc"].startswith("Dung Lượng Lưu Trữ1\n") and BO_CHU_THICH[1] in luu_tru["chu_thich"]
+    # Tên mã và số liệu không phải ký hiệu nên còn nguyên ở cả hai trường.
+    ket_noi = doan_chua(doan, "Đạt mức IP68 (chống nước ở độ sâu tối đa 6 mét)")
+    for chu in ["IP68", "6 mét", "Chip Apple A2305", "Pin 5.000mAh", "Galaxy Buds3 Pro"]:
+        assert chu in ket_noi["noi_dung"] and chu in ket_noi["noi_dung_goc"], chu
+    # Chỉ khác nhau ở ký hiệu: bỏ chúng khỏi noi_dung_goc (theo nhật ký) ra đúng noi_dung.
+    for d in doan:
+        con_lai, dau = [], 0
+        for x in sorted(d["ky_hieu_bo"], key=lambda x: x["vi_tri"]):
+            assert d["noi_dung_goc"][x["vi_tri"]:x["vi_tri"] + len(x["chu"])] == x["chu"]
+            con_lai.append(d["noi_dung_goc"][dau:x["vi_tri"]])
+            dau = x["vi_tri"] + len(x["chu"])
+        con_lai.append(d["noi_dung_goc"][dau:])
+        assert "".join("".join(con_lai).split()) == "".join(d["noi_dung"].split())
+    so_bo = sorted(k for d in doan for x in d["ky_hieu_bo"] for k in x["so"])
+    assert so_bo == [1, 4, 6, 8]  # đúng bốn ký hiệu, không bỏ nhầm 68, 3, 2305, 5.000
+
+
+def test_dau_sao_khong_co_chu_thich_hoac_dung_rieng_khong_bi_bo():
+    van_ban = "\n".join(["Chống nước", "Đạt chuẩn IP68* hàng đầu", "Chú thích * biểu tượng", "Đánh giá 5* cho sản phẩm",
+                         "*Thử nghiệm trong phòng thí nghiệm."])
+    doan = cd.chia_doan(van_ban)
+    chu = "\n".join(d["noi_dung"] for d in doan)
+    assert "IP68 hàng đầu" in chu  # có dòng chú thích bắt đầu bằng '*' nên '*' sau IP68 là ký hiệu
+    assert "Chú thích * biểu tượng" in chu  # đứng riêng giữa hai khoảng trắng: nhãn đọc màn hình, không phải ký hiệu
+    assert "IP68* hàng đầu" in "\n".join(d["noi_dung_goc"] for d in doan)
+    khong_chu_thich = cd.chia_doan("Đánh giá 5* cho sản phẩm\nMàu sắc")  # trang không có chú thích '*': giữ nguyên
+    assert "5* cho" in khong_chu_thich[0]["noi_dung"] and khong_chu_thich[0]["ky_hieu_bo"] == []
+
+
+def test_ky_hieu_da_nhan_ra_ma_khong_co_khoang_bo_la_loi_chu_khong_bo_sot(monkeypatch):
+    van_ban = "\n".join(["Kết nối liên tục", "Thiết kế ấn tượng hoàn toàn mới 1, 4, 5", "Một.", "Hai.", "Ba.", "Bốn.", "Năm."])
+    chu_thich = {1: "Một.", 2: "Hai.", 3: "Ba.", 4: "Bốn.", 5: "Năm."}
+    doan = cd.chia_doan(van_ban, chu_thich)
+    assert doan[0]["noi_dung"] == "Kết nối liên tục\nThiết kế ấn tượng hoàn toàn mới"  # nhóm số cuối dòng bỏ cả cụm
+    # Nếu ký hiệu đã nhận ra mà không có khoảng để bỏ thì phải báo lỗi, không lặng lẽ để lại trong noi_dung.
+    monkeypatch.setattr(cd, "khoang_nhom_cuoi", lambda chu, bat_dau, so_lon_nhat: [])
+    with pytest.raises(ValueError, match="không khớp với khoảng cần bỏ"):
+        cd.chia_doan(van_ban, chu_thich)
+
+
+# --- doan.jsonl thật: có noi_dung_goc, và chỉ khác noi_dung ở ký hiệu chú thích ---
+
+MA_MAU_THAT = sorted(p.parent.name for p in NGUON.glob("*/doan.jsonl"))
+SO_DOAN_THAT = 1245  # tổng số đoạn của 12 mẫu (Bước 7), không đổi khi bỏ ký hiệu
+
+
+def doc_doan_that(ma_mau):
+    return [json.loads(d) for d in (NGUON / ma_mau / "doan.jsonl").read_text(encoding="utf-8").splitlines()]
+
+
+def test_that_doan_jsonl_co_du_12_mau_va_so_doan_khong_doi():
+    assert len(MA_MAU_THAT) == 12
+    assert sum(len(doc_doan_that(ma)) for ma in MA_MAU_THAT) == SO_DOAN_THAT
+
+
+@pytest.mark.parametrize("ma_mau", MA_MAU_THAT)
+def test_that_doan_jsonl_khop_ban_sinh_lai_tung_byte(ma_mau, tmp_path):
+    row = {r["ma_mau"]: r for r in script.doc_mau()}[ma_mau]
+    script.ghi_jsonl(tmp_path / "doan.jsonl", cd.danh_ma_doan(ma_mau, script.chia_mot_mau(row)[0]))
+    assert (tmp_path / "doan.jsonl").read_bytes() == (NGUON / ma_mau / "doan.jsonl").read_bytes()
+
+
+def test_that_noi_dung_goc_chi_khac_noi_dung_o_ky_hieu_chu_thich():
+    so_doi = 0
+    for ma_mau in MA_MAU_THAT:
+        for d in doc_doan_that(ma_mau):
+            assert isinstance(d["noi_dung_goc"], str) and d["noi_dung_goc"], d["id"]
+            goc, nd = d["noi_dung_goc"], d["noi_dung"]
+            if goc == nd:
+                continue
+            so_doi += 1
+            for tag, i1, i2, j1, j2 in difflib.SequenceMatcher(None, goc, nd, autojunk=False).get_opcodes():
+                if tag != "equal":
+                    # chỗ khác chỉ là số, dấu phẩy, dấu * (và khoảng trắng đi kèm); chỗ chèn chỉ là một khoảng trắng
+                    assert re.fullmatch(r"[\d,\s*]+", goc[i1:i2]) and nd[j1:j2] in ("", " "), (d["id"], goc[i1:i2], nd[j1:j2])
+    assert so_doi == 190  # 184 đoạn đổi nhờ nhận diện, thêm 6 đoạn nhờ bảng ghi tay
+
+
+def test_that_cac_ca_ky_hieu_va_cac_ca_khong_phai_ky_hieu():
+    iphone = doc_doan_that("dt-apple-iphone17")
+    sac = next(d for d in iphone if "Sạc lên đến 50% trong 20 phút" in d["noi_dung_goc"])
+    assert "Sạc lên đến 50% trong 20 phút với bộ tiếp hợp 40W trở lên" in sac["noi_dung"]
+    assert "Sạc lên đến 50% trong 20 phút6 với bộ tiếp hợp 40W trở lên" in sac["noi_dung_goc"]
+    watch = next(d for d in doc_doan_that("dh-apple-watchse3") if "Chế Độ Nguồn Điện Thấp8" in d["noi_dung_goc"])
+    assert "Lên đến 32 giờ ở Chế Độ Nguồn Điện Thấp\n" in watch["noi_dung"]
+    xiaomi = "\n".join(d["noi_dung"] for d in doc_doan_that("dt-xiaomi-15t"))
+    assert "50 phút sạc đầy 100%\n" in xiaomi and "IP68" in xiaomi
+    ap = "\n".join(d["noi_dung"] for d in iphone)
+    for chu in ["IP68", "A19", "Qi2", "USB-C", "iOS 27"]:
+        assert chu in ap, chu
+    samsung = "\n".join(d["noi_dung"] for d in doc_doan_that("tn-samsung-buds3pro"))
+    assert "Galaxy Buds3 Pro" in samsung and "IP57" in samsung  # tên mã giữ số
+
+
+# --- Bảng ghi tay: bỏ thêm ký hiệu bị sót, giữ lại '5*' (31/10/2026) ---
+
+GHI_TAY_CHU_THICH = {1: "Dung lượng khả dụng nhỏ hơn.", 4: "Xác nhận về pin phụ thuộc cấu hình mạng.",
+                     6: "Sạc 50% đo với bộ tiếp hợp 40W trở lên.", 8: "Chế Độ Nguồn Điện Thấp gồm theo dõi giấc ngủ."}
+GHI_TAY_VAN_BAN = "\n".join([
+    "Dung Lượng Lưu Trữ1", "256GB",
+    "Pin Và Nguồn Điện4", "Thời gian xem video", "Lên đến 30 giờ",
+    "Sạc lên đến 50% trong 20 phút6 với bộ tiếp hợp 40W trở lên",
+    "Sạc MagSafe lên đến 50% trong 30 phút6 với bộ tiếp hợp 30W trở lên",  # số 6 nhắc lại giữa dòng: chuan_bi_manh bỏ sót
+    "Sạc lại sau 30 phút6 với bộ tiếp hợp 30W trở lên",
+    "Lên đến 32 giờ ở Chế Độ Nguồn Điện Thấp8",
+    *GHI_TAY_CHU_THICH.values(),
+])
+
+
+def doan_ghi_tay(bo_them=(), giu_lai=()):
+    """Đoạn thô của GHI_TAY_VAN_BAN rồi qua danh_ma_doan với hai bảng đã cho."""
+    tho = cd.chia_doan(GHI_TAY_VAN_BAN, GHI_TAY_CHU_THICH)
+    return tho, cd.danh_ma_doan("m", [("url", tho)], bo_them=bo_them, giu_lai=giu_lai)
+
+
+def test_bang_ghi_tay_bo_ky_hieu_bi_sot_va_khong_doi_chu_thich():
+    tho, truoc = doan_ghi_tay()
+    assert "30 phút6 với bộ tiếp hợp 30W" in truoc[0]["noi_dung"]  # chuan_bi_manh chỉ nhận '20 phút6' đầu tiên
+    _, sau = doan_ghi_tay(bo_them=(("m#001", "30 phút6", "6"),))
+    d, d0 = sau[0], truoc[0]
+    assert d["noi_dung"].count("30 phút với bộ tiếp hợp 30W") == 2 and "phút6" not in d["noi_dung"]  # mọi chỗ của ngữ cảnh
+    assert d["noi_dung_goc"] == d0["noi_dung_goc"] and d["chu_thich"] == d0["chu_thich"]  # chỉ noi_dung đổi
+    assert [x["chu"] for x in d["ky_hieu_bo"] if x["loai"] == cd.KY_HIEU_GHI_TAY] == ["6", "6"]
+    assert [x["so"] for x in d["ky_hieu_bo"] if x["loai"] == cd.KY_HIEU_GHI_TAY] == [[6], [6]]
+    assert {k: d[k] for k in d if k not in ("noi_dung", "ky_hieu_bo")} == {k: d0[k] for k in d0 if k not in ("noi_dung", "ky_hieu_bo")}
+    # Ký hiệu đã nhận từ trước vẫn như cũ; chỗ bỏ thêm không làm đổi các chỗ đó.
+    def khoa(nhat_ky):
+        return [(x["vi_tri"], x["chu"], x["loai"], x["so"]) for x in nhat_ky]
+    assert khoa(x for x in d["ky_hieu_bo"] if x["loai"] != cd.KY_HIEU_GHI_TAY) == khoa(d0["ky_hieu_bo"])
+    assert "20 phút với" in d["noi_dung"] and "Thấp\n" in d["noi_dung"] + "\n"
+    # Ký hiệu nhiều số, cuối dòng: bỏ cả cụm và khoảng trắng đứng trước.
+    chu = cd.danh_ma_doan("m", [("url", [{"muc": "", "noi_dung": "Pin\nPhát lại 31 giờ 4,35\nMàu", "chu_thich": [],
+                                          "noi_dung_goc": "Pin\nPhát lại 31 giờ 4,35\nMàu", "dong": [1, 3], "ky_hieu_bo": []}])],
+                          bo_them=(("m#001", "31 giờ 4,35", "4,35"),))[0]
+    assert chu["noi_dung"] == "Pin\nPhát lại 31 giờ\nMàu" and chu["ky_hieu_bo"][0]["so"] == [4, 35]
+
+
+@pytest.mark.parametrize("muc, mong", [
+    (("m#001", "ngoài đoạn 6", "6"), "không thấy ngữ cảnh"),
+    (("m#001", "20 phút6 với 30 phút6", "6"), "đúng một lần"),  # ngữ cảnh chứa ký hiệu hai lần
+    (("m#001", "30 phút", "6"), "đúng một lần"),  # ngữ cảnh không chứa ký hiệu
+    (("m#001", "Pin Và Nguồn Điện", "Đ"), "phải là số chú thích"),  # không bỏ chữ
+    (("m#001", "Thời gian xem video", "video"), "phải là số chú thích"),
+    (("m#001", "20 phút6", "6"), "đã được bỏ rồi"),  # chuan_bi_manh đã bỏ chỗ này: mục thừa
+    (("m#009", "30 phút6", "6"), "mã đoạn không tồn tại"),
+])
+def test_bang_ghi_tay_bao_loi_khi_muc_khong_khop_van_ban(muc, mong):
+    with pytest.raises(ValueError, match=mong):
+        doan_ghi_tay(bo_them=(muc,))
+
+
+def test_bang_ghi_tay_mau_khac_khong_bi_anh_huong_va_muc_trung_la_loi():
+    assert doan_ghi_tay(bo_them=(("khac#001", "30 phút6", "6"),))[1][0]["noi_dung"] == doan_ghi_tay()[1][0]["noi_dung"]
+    with pytest.raises(ValueError, match="đã được bỏ rồi"):  # hai mục cùng ngữ cảnh: mục sau thừa
+        doan_ghi_tay(bo_them=(("m#001", "30 phút6", "6"), ("m#001", "30 phút6 với bộ", "6")))
+
+
+def test_bang_giu_lai_giu_5_sao_trong_danh_gia_con_sao_chu_thich_thi_bo():
+    van_ban = "\n".join(["Chống nước", "Đạt chuẩn IP68* hàng đầu", "Đánh giá 5* cho sản phẩm", "*Thử nghiệm trong phòng thí nghiệm."])
+    tho = cd.chia_doan(van_ban)
+    mac_dinh = cd.danh_ma_doan("m", [("url", tho)])[0]
+    assert "IP68 hàng đầu" in mac_dinh["noi_dung"] and "5 cho" in mac_dinh["noi_dung"]  # chuan_bi_manh nhận cả hai dấu *
+    d = cd.danh_ma_doan("m", [("url", tho)], giu_lai=(("m#001", "5* cho", "*"),))[0]
+    assert "5* cho" in d["noi_dung"] and "IP68 hàng đầu" in d["noi_dung"]  # chỉ giữ '5*'
+    assert d["noi_dung_goc"] == mac_dinh["noi_dung_goc"] and d["chu_thich"] == mac_dinh["chu_thich"]
+    assert [x["chu"] for x in d["ky_hieu_bo"]] == ["*"] and "IP68" in d["noi_dung_goc"]
+    with pytest.raises(ValueError, match="không có ký hiệu nào đã bị bỏ"):  # không có dấu * nào đã bị bỏ ở đó
+        cd.danh_ma_doan("m", [("url", tho)], giu_lai=(("m#001", "Chống nước", "C"),))
+    with pytest.raises(ValueError, match="không thấy ngữ cảnh"):
+        cd.danh_ma_doan("m", [("url", tho)], giu_lai=(("m#001", "5* khác", "*"),))
+
+
+def test_that_bang_ghi_tay_dang_dung_khop_doan_jsonl():
+    theo_mau = {}
+    for ma_doan, ngu_canh, ky in cd.KY_HIEU_BO_THEM:
+        ma_mau = ma_doan.split("#")[0]
+        theo_mau[ma_mau] = theo_mau.get(ma_mau, 0) + 1
+        d = next(x for x in doc_doan_that(ma_mau) if x["id"] == ma_doan)
+        assert ngu_canh in d["noi_dung_goc"] and ngu_canh not in d["noi_dung"], (ma_doan, ngu_canh)
+        assert ngu_canh.replace(ky, "").strip() in d["noi_dung"], (ma_doan, ngu_canh)
+    assert theo_mau == {"dt-apple-iphone17": 1, "dt-xiaomi-15t": 6, "dh-apple-watchse3": 1,
+                        "dt-samsung-galaxys25ultra": 12, "dh-samsung-galaxywatch8": 1}
+    iphone = {d["id"]: d for d in doc_doan_that("dt-apple-iphone17")}
+    assert "30 phút với bộ tiếp hợp 30W" in iphone["dt-apple-iphone17#016"]["noi_dung"]
+    xiaomi = {d["id"]: d for d in doc_doan_that("dt-xiaomi-15t")}
+    assert "AI10" not in xiaomi["dt-xiaomi-15t#041"]["noi_dung"] and xiaomi["dt-xiaomi-15t#041"]["noi_dung_goc"].count("AI10") == 14  # 13 chỗ bỏ bằng bảng, 1 chỗ chuan_bi_manh đã nhận
+    # '5*' trong lời đánh giá: giữ ở cả hai trường, nhưng chu_thich của đoạn vẫn như trước (bảng không đổi cách gắn chú thích).
+    watch = {d["id"]: d for d in doc_doan_that("dh-samsung-galaxywatch8")}["dh-samsung-galaxywatch8#129"]
+    assert "5* product" in watch["noi_dung"] and "5* product" in watch["noi_dung_goc"]
+    assert cd.KY_HIEU_GIU_LAI == (("dh-samsung-galaxywatch8#129", "5* product", "*"),)
