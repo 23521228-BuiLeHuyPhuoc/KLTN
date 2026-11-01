@@ -247,13 +247,15 @@ D1a và D1b không có trong chuỗi D của đề cương nhưng lấy từ ch�
 Mỗi tuyên bố một dòng trong `data/nhan/*.jsonl`:
 
 ```json
-{"id": "tb-00042", "nhan": "LECH", "loai": "doi_dieu_kien",
+{"id": "tb-00042", "nhan": "LECH", "dong_d": "D4", "loai": "doi_dieu_kien",
  "bang_chung": ["tn-samsung-buds3pro#044"], "trich": "Thời gian phát nhạc (Giờ, tắt ANC) Lên đến 7",
  "ly_do": "7 giờ chỉ đạt khi tắt chống ồn; tuyên bố ghi bật chống ồn.",
  "nguoi_gan": "phuoc", "luot": 1, "giay": 95, "tai_lieu_mau_thuan": false, "ghi_chu": ""}
 ```
 
-**Bằng chứng và câu trích.** Ghi mã đoạn `<ma_mau>#<số>` và chép **nguyên văn** từ `noi_dung` hoặc `chu_thich` của đoạn, kể cả số chú thích dính vào chữ ("20 phút6", "Chế Độ Nguồn Điện Thấp8"). Hệ thống chỉ chuẩn hóa khoảng trắng và dấu câu khi kiểm câu trích. Nhãn Lệch ghi đoạn chứa giá trị trùng; nhãn Sai ghi đoạn chứa giá trị ở cùng điều kiện; D1 để trống.
+`dong_d`: dòng D đã dừng ở mục 7; nhãn phải khớp với dòng (D1, D1a, D1b, D6: Chưa đủ thông tin; D2, D4: Lệch; D3: Đúng; D5: Sai).
+
+**Bằng chứng và câu trích.** Ghi mã đoạn `<ma_mau>#<số>` và chép **nguyên văn** từ `noi_dung` hoặc `chu_thich` của đoạn. Số chú thích của trang hãng đã được bỏ khỏi `noi_dung` (bản gốc ở `noi_dung_goc`), nên câu trích chép theo chữ hiển thị. Hệ thống chỉ chuẩn hóa khoảng trắng và dấu câu khi kiểm câu trích. Nhãn Lệch ghi đoạn chứa giá trị trùng; nhãn Sai ghi đoạn chứa giá trị ở cùng điều kiện; D1 để trống.
 
 **Loại biến đổi** (`loai`):
 
@@ -294,17 +296,17 @@ Mỗi tuyên bố một dòng trong `data/nhan/*.jsonl`:
 
 ## 9. Ví dụ
 
-48 ví dụ, chỉ từ 4 mẫu tập phát triển. Mọi câu trích đã kiểm là chuỗi con của `doan.jsonl` (sau khi gộp khoảng trắng) ở commit `ab6146c`. "P:" ghi đầu ra dự kiến của hệ thống khi khác nhãn chuẩn. Mục 9.5 gom 4 ví dụ đổi nhãn sau khảo sát Bước 10; số hiệu giữ nguyên để các tệp khác nhắc tới vẫn đúng.
+48 ví dụ, chỉ từ 4 mẫu tập phát triển. Mọi câu trích đã kiểm là chuỗi con của `noi_dung` hoặc `chu_thich` trong `doan.jsonl` đã bỏ số chú thích (sau khi gộp khoảng trắng; kiểm ngày 31/10/2026). "P:" ghi đầu ra dự kiến của hệ thống khi khác nhãn chuẩn. Mục 9.5 gom 4 ví dụ đổi nhãn sau khảo sát Bước 10; số hiệu giữ nguyên để các tệp khác nhắc tới vẫn đúng.
 
 ### 9.1 Đúng
 
 **V01 · Đúng · D3.** iPhone 17 sạc nhanh lên đến 50% trong 20 phút với bộ sạc 40W trở lên.
-- Bằng chứng: `dt-apple-iphone17#016` “Sạc lên đến 50% trong 20 phút6 với bộ tiếp hợp 40W trở lên (được bán riêng) sử dụng cáp sạc USB-C”
+- Bằng chứng: `dt-apple-iphone17#016` “Sạc lên đến 50% trong 20 phút với bộ tiếp hợp 40W trở lên (được bán riêng) sử dụng cáp sạc USB-C”
 - Lý do: Khớp với tài liệu: mốc 50%, 20 phút, bộ sạc 40W đạt đúng mức tối thiểu; không nêu cách sạc nên hiểu là sạc bằng cáp, như tài liệu.
 - Ghi chú: `mac_dinh=cach_sac`.
 
 **V02 · Đúng · D3 · điều kiện dạng số.** iPhone 17 sạc 50% trong 20 phút với củ sạc 60W.
-- Bằng chứng: `dt-apple-iphone17#016` “Sạc lên đến 50% trong 20 phút6 với bộ tiếp hợp 40W trở lên (được bán riêng) sử dụng cáp sạc USB-C”
+- Bằng chứng: `dt-apple-iphone17#016` “Sạc lên đến 50% trong 20 phút với bộ tiếp hợp 40W trở lên (được bán riêng) sử dụng cáp sạc USB-C”
 - Lý do: Củ 60W thỏa "40W trở lên" (60 ≥ 40) nên cùng điều kiện; 20 phút khớp (quảng cáo bỏ "lên đến").
 - Ghi chú: `mac_dinh=cach_sac`.
 
@@ -324,11 +326,11 @@ Mỗi tuyên bố một dòng trong `data/nhan/*.jsonl`:
 - Lý do: 4 mét không quá 6 mét, 30 phút không quá 30 phút, nên cùng điều kiện thử; mã IP68 bằng nhau.
 
 **V07 · Đúng · D3 · kém thuận lợi hơn.** Xiaomi 15T dùng liên tục được 13 giờ.
-- Bằng chứng: `dt-xiaomi-15t#047` “Tối đa 13,19 giờ Sử dụng liên tục14”
+- Bằng chứng: `dt-xiaomi-15t#047` “Tối đa 13,19 giờ Sử dụng liên tục”
 - Lý do: Cùng hoạt động sử dụng liên tục; 13 giờ thấp hơn 13,19 giờ, tức kém thuận lợi hơn, vẫn khớp.
 
 **V08 · Đúng · D3 · điều kiện lạ trong tài liệu.** Xiaomi 15T đạt chuẩn chống nước IP68.
-- Bằng chứng: `dt-xiaomi-15t#012` “IP68**” và chú thích “ngâm trong nước ngọt tĩnh lặng ở độ sâu 3 mét; tối đa 30 phút; với mức chênh lệch nhiệt độ giữa nước và sản phẩm là từ 5K trở xuống”
+- Bằng chứng: `dt-xiaomi-15t#012` “IP68” và chú thích “ngâm trong nước ngọt tĩnh lặng ở độ sâu 3 mét; tối đa 30 phút; với mức chênh lệch nhiệt độ giữa nước và sản phẩm là từ 5K trở xuống”
 - Lý do: Không nêu điều kiện thử nên hiểu như hãng công bố; mã IP68 bằng nhau.
 - Ghi chú: `ngoai_cau_hinh=chênh lệch nhiệt độ ≤5K`. Người gán xếp cụm này vào điều kiện đo của bài thử, hiểu như hãng công bố. Bảng bao phủ có ghi điều kiện nhiệt độ (mục 2.7) nhưng `dien_thoai.yaml` chưa có cụm này.
 - P: D1a (`dieu_kien_la`) nếu bước trích xuất ghi cụm nhiệt độ vào `dieu_kien_khac`.
@@ -344,7 +346,7 @@ Mỗi tuyên bố một dòng trong `data/nhan/*.jsonl`:
 - Ghi chú: `mac_dinh=che_do_chong_on,bo_phan`.
 
 **V11 · Đúng · D3.** Apple Watch SE 3 dùng đến 32 giờ ở chế độ nguồn điện thấp.
-- Bằng chứng: `dh-apple-watchse3#008` “Lên đến 32 giờ ở Chế Độ Nguồn Điện Thấp8”
+- Bằng chứng: `dh-apple-watchse3#008` “Lên đến 32 giờ ở Chế Độ Nguồn Điện Thấp”
 - Lý do: Cùng chế độ nguồn điện thấp; 32 giờ khớp. Ví dụ của đề cương.
 
 **V12 · Đúng · D3 · so thẳng.** Apple Watch SE 3 có độ sáng 1000 nit.
@@ -352,16 +354,16 @@ Mỗi tuyên bố một dòng trong `data/nhan/*.jsonl`:
 - Lý do: Tài liệu chỉ có một con số độ sáng và không kèm điều kiện nào; "đỉnh" gắn với một giá trị duy nhất nên là kiểu giá trị tối đa. So thẳng: khớp; tài liệu không nêu điều kiện.
 
 **V13 · Đúng · D3.** Apple Watch SE 3 chống nước 5ATM, đeo được khi bơi lội trong bể bơi.
-- Bằng chứng: `dh-apple-watchse3#016` “Chống nước ở độ sâu 50m (chống nước khi bơi)14” và chú thích “có khả năng chống nước ở độ sâu 50 mét theo tiêu chuẩn ISO 22810:2010”, “bơi lội trong bể bơi hoặc dưới biển”
+- Bằng chứng: `dh-apple-watchse3#016` “Chống nước ở độ sâu 50m (chống nước khi bơi)” và chú thích “có khả năng chống nước ở độ sâu 50 mét theo tiêu chuẩn ISO 22810:2010”, “bơi lội trong bể bơi hoặc dưới biển”
 - Lý do: Theo ISO 22810, 5ATM quy về 50 m, bằng mức hãng công bố; bơi trong bể bơi là hoạt động hãng cho phép.
 
 **V14 · Đúng · D3 · biến thể `doi_phien_ban`.** Apple Watch SE 3 bản GPS + Cellular dùng được 18 giờ.
-- Bằng chứng: `dh-apple-watchse3#008` “Pin dùng cả ngày, lên đến 18 giờ khi sử dụng bình thường8” và chú thích “mức sử dụng Apple Watch SE 3 (GPS + Cellular) bao gồm tổng cộng 4 giờ kết nối mạng di động và 14 giờ kết nối với iPhone qua Bluetooth trong chu kỳ 18 giờ”
+- Bằng chứng: `dh-apple-watchse3#008` “Pin dùng cả ngày, lên đến 18 giờ khi sử dụng bình thường” và chú thích “mức sử dụng Apple Watch SE 3 (GPS + Cellular) bao gồm tổng cộng 4 giờ kết nối mạng di động và 14 giờ kết nối với iPhone qua Bluetooth trong chu kỳ 18 giờ”
 - Lý do: Tài liệu không tách thời lượng pin theo phiên bản, và chú thích cho thấy bản GPS + Cellular cũng đạt 18 giờ khi sử dụng bình thường. Đổi phiên bản ở đây không đổi giá trị, nên vẫn Đúng.
 - Ghi chú: `mac_dinh=che_do_nguon,hoat_dong`.
 
 **V15 · Đúng · D3 · biến thể `doi_phien_ban`.** Apple Watch SE 3 bản 40mm dùng được 18 giờ khi sử dụng bình thường.
-- Bằng chứng: `dh-apple-watchse3#008` “Pin dùng cả ngày, lên đến 18 giờ khi sử dụng bình thường8”; `dh-apple-watchse3#002` “Dài: 40mm”
+- Bằng chứng: `dh-apple-watchse3#008` “Pin dùng cả ngày, lên đến 18 giờ khi sử dụng bình thường”; `dh-apple-watchse3#002` “Dài: 40mm”
 - Lý do: Trang có cỡ vỏ 40mm và 44mm nhưng chỉ tách khối lượng và màn hình, không tách thời lượng pin; điều kiện cỡ vỏ không áp dụng cho thuộc tính này, nên 18 giờ khớp.
 - Ghi chú: `mac_dinh=che_do_nguon`.
 
@@ -384,18 +386,18 @@ Mỗi tuyên bố một dòng trong `data/nhan/*.jsonl`:
 - Lý do: Tài liệu ghi 3000 nit ở chế độ ngoài trời; tuyên bố ghi 4000 nit, thuận lợi hơn và không trùng giá trị nào.
 
 **V20 · Sai (`doi_gia_tri`) · D5 · thấp hơn tốt hơn.** Xiaomi 15T sạc đầy 100% chỉ trong 40 phút với củ sạc 67W.
-- Bằng chứng: `dt-xiaomi-15t#047` “50 phút sạc đầy 100%14” và chú thích “Máy được khuyến cáo sử dụng củ sạc Xiaomi 67W hoặc cao hơn.”
+- Bằng chứng: `dt-xiaomi-15t#047` “50 phút sạc đầy 100%” và chú thích “Máy được khuyến cáo sử dụng củ sạc Xiaomi 67W hoặc cao hơn.”
 - Lý do: Cùng điều kiện (củ 67W thỏa "67W hoặc cao hơn", mốc 100%); tài liệu ghi 50 phút, tuyên bố ghi 40 phút. Với thời gian sạc, thấp hơn là thuận lợi hơn, nên 40 phút mâu thuẫn với tài liệu.
 
 ### 9.3 Lệch điều kiện
 
 **V21 · Lệch (`bo_dieu_kien`) · D4.** iPhone 17 sạc 50% chỉ trong 20 phút.
-- Bằng chứng: `dt-apple-iphone17#016` “Sạc lên đến 50% trong 20 phút6 với bộ tiếp hợp 40W trở lên (được bán riêng) sử dụng cáp sạc USB-C”; `dt-apple-iphone17#040` “Trong Hộp Sản Phẩm iPhone với iOS 27 Cáp Sạc USB-C (1m)”
+- Bằng chứng: `dt-apple-iphone17#016` “Sạc lên đến 50% trong 20 phút với bộ tiếp hợp 40W trở lên (được bán riêng) sử dụng cáp sạc USB-C”; `dt-apple-iphone17#040` “Trong Hộp Sản Phẩm iPhone với iOS 27 Cáp Sạc USB-C (1m)”
 - Lý do: 20 phút chỉ đạt với bộ tiếp hợp 40W trở lên, được bán riêng; tuyên bố không nêu bộ sạc nên hiểu là chỉ có đồ trong hộp (cáp, không có củ sạc). Thiếu chữ "lên đến" không phải lý do của nhãn. Ví dụ của đề cương.
 - Ghi chú: `mac_dinh=bo_tiep_hop`.
 
 **V22 · Lệch (`doi_dieu_kien`) · D4 · điều kiện dạng số.** iPhone 17 sạc 50% trong 20 phút với củ sạc 20W.
-- Bằng chứng: `dt-apple-iphone17#016` “Sạc lên đến 50% trong 20 phút6 với bộ tiếp hợp 40W trở lên (được bán riêng) sử dụng cáp sạc USB-C”
+- Bằng chứng: `dt-apple-iphone17#016` “Sạc lên đến 50% trong 20 phút với bộ tiếp hợp 40W trở lên (được bán riêng) sử dụng cáp sạc USB-C”
 - Lý do: 20 phút chỉ đạt với bộ tiếp hợp 40W trở lên; tuyên bố nêu củ 20W, thấp hơn mức tối thiểu (20 < 40), là điều kiện khác.
 
 **V23 · Lệch (`bo_dieu_kien`) · D4.** Xiaomi 15T hỗ trợ sạc nhanh HyperCharge 67W.
@@ -425,7 +427,7 @@ Mỗi tuyên bố một dòng trong `data/nhan/*.jsonl`:
 - Lý do: IP68 của iPhone 17 chỉ thử đến độ sâu tối đa 6 mét; tuyên bố nêu 10 mét, vượt điều kiện thử (10 > 6).
 
 **V30 · Lệch (`doi_dieu_kien`) · D4.** Apple Watch SE 3 chống nước 50 m, đeo được khi lặn với bình dưỡng khí.
-- Bằng chứng: `dh-apple-watchse3#016` “Chống nước ở độ sâu 50m (chống nước khi bơi)14” và chú thích “Khuyến nghị không sử dụng Apple Watch SE 3 cho hoạt động lặn với bình dưỡng khí”
+- Bằng chứng: `dh-apple-watchse3#016` “Chống nước ở độ sâu 50m (chống nước khi bơi)” và chú thích “Khuyến nghị không sử dụng Apple Watch SE 3 cho hoạt động lặn với bình dưỡng khí”
 - Lý do: Mức 50 m áp dụng cho hoạt động dưới nước nông như bơi; hãng khuyến nghị không dùng khi lặn với bình dưỡng khí, nhưng tuyên bố gán mức này cho đúng hoạt động đó.
 
 **V31 · Lệch (`doi_dieu_kien`) · D4.** Galaxy Buds3 Pro nghe nhạc 7 giờ khi bật chống ồn.
@@ -439,12 +441,12 @@ Mỗi tuyên bố một dòng trong `data/nhan/*.jsonl`:
 - Ghi chú: `mac_dinh=che_do_chong_on,hoat_dong,bo_phan`.
 
 **V33 · Lệch (`bo_dieu_kien`) · D4.** Apple Watch SE 3 pin 32 giờ.
-- Bằng chứng: `dh-apple-watchse3#008` “Pin dùng cả ngày, lên đến 18 giờ khi sử dụng bình thường8”, “Lên đến 32 giờ ở Chế Độ Nguồn Điện Thấp8”
+- Bằng chứng: `dh-apple-watchse3#008` “Pin dùng cả ngày, lên đến 18 giờ khi sử dụng bình thường”, “Lên đến 32 giờ ở Chế Độ Nguồn Điện Thấp”
 - Lý do: Không nêu chế độ nên hiểu là chế độ thường, sử dụng bình thường (18 giờ); 32 giờ chỉ đạt ở chế độ nguồn điện thấp.
 - Ghi chú: `mac_dinh=che_do_nguon,hoat_dong`.
 
 **V34 · Lệch (`bo_dieu_kien`) · D4 · phụ kiện chỉ ghi trong chú thích.** Apple Watch SE 3 sạc 80% trong khoảng 45 phút.
-- Bằng chứng: `dh-apple-watchse3#009` “Sạc lên đến 80% trong khoảng 45 phút10” và chú thích “Bộ Tiếp Hợp Nguồn USB-C 20W của Apple (Phiên bản A2305)”; `dh-apple-watchse3#023` “Trong Hộp Sản Phẩm Apple Watch SE 3 Dây đeo Cáp Sạc Nhanh Từ Tính Có Đầu Nối USB-C (1m) Của Apple Watch”
+- Bằng chứng: `dh-apple-watchse3#009` “Sạc lên đến 80% trong khoảng 45 phút” và chú thích “Bộ Tiếp Hợp Nguồn USB-C 20W của Apple (Phiên bản A2305)”; `dh-apple-watchse3#023` “Trong Hộp Sản Phẩm Apple Watch SE 3 Dây đeo Cáp Sạc Nhanh Từ Tính Có Đầu Nối USB-C (1m) Của Apple Watch”
 - Lý do: Hãng đo 45 phút với bộ tiếp hợp 20W, không có trong hộp (hộp chỉ có cáp); tuyên bố không nêu bộ sạc nên hiểu là không mua thêm. Bộ tiếp hợp chỉ nằm trong chú thích nhưng vẫn là điều kiện bắt buộc.
 - Ghi chú: `mac_dinh=bo_tiep_hop,cap_sac`.
 
@@ -466,7 +468,7 @@ Mỗi tuyên bố một dòng trong `data/nhan/*.jsonl`:
 - Ghi chú: `mac_dinh=che_do_chong_on,hoat_dong,bo_phan`.
 
 **V39 · Lệch (`doi_kieu_gia_tri`) · D2.** Apple Watch SE 3 luôn dùng đủ 18 giờ mỗi ngày.
-- Bằng chứng: `dh-apple-watchse3#008` “Pin dùng cả ngày, lên đến 18 giờ khi sử dụng bình thường8”
+- Bằng chứng: `dh-apple-watchse3#008` “Pin dùng cả ngày, lên đến 18 giờ khi sử dụng bình thường”
 - Lý do: Tài liệu ghi mức tối đa "lên đến 18 giờ"; tuyên bố viết thành mức chắc chắn đạt.
 - Ghi chú: `mac_dinh=che_do_nguon,hoat_dong`.
 
@@ -499,7 +501,7 @@ Mỗi tuyên bố một dòng trong `data/nhan/*.jsonl`:
 - Lý do: Tài liệu của Galaxy Buds3 Pro không có thông số sạc nhanh.
 
 **V46 · Chưa đủ thông tin · D1a.** iPhone 17 sạc nhanh chỉ trong 20 phút với bộ sạc 40W.
-- Bằng chứng: `dt-apple-iphone17#016` “Sạc lên đến 50% trong 20 phút6 với bộ tiếp hợp 40W trở lên (được bán riêng) sử dụng cáp sạc USB-C”
+- Bằng chứng: `dt-apple-iphone17#016` “Sạc lên đến 50% trong 20 phút với bộ tiếp hợp 40W trở lên (được bán riêng) sử dụng cáp sạc USB-C”
 - Lý do: Chưa xác định được điều kiện của tuyên bố: tuyên bố không nói sạc tới bao nhiêu phần trăm, và mốc phần trăm không có cách hiểu mặc định. Người gán không đoán mốc từ con số 20 phút.
 
 **V47 · Chưa đủ thông tin · D1a.** iPhone 17 có độ sáng đỉnh 3000 nit.
