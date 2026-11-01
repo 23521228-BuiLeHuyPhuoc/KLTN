@@ -102,6 +102,15 @@
 - Ranh giới giữ nguyên và đã nói với người thực hiện: trang chỉ bắt mâu thuẫn giữa các ô người gán điền, không đọc câu tuyên bố để gợi ý nhãn, vì nhãn chuẩn là đáp án chấm hệ thống P. Nhãn đã gán trước đó chưa có `dong_d` nên phải mở lại chọn dòng; số giây của các tuyên bố này sẽ gồm cả lần xem lại.
 - Thêm khung "Ca đặc biệt" (bảng `CA_DAC_BIET` trong `tao_cong_cu_gan_nhan.py`, 15 mục): tóm tắt bằng lời các quy tắc riêng và ca đã chốt của hướng dẫn (mục 4, 5.1, 6.2–6.6, 11; V03, V18, V21, V28, V35, V36, V40, V42, V45, V47, V48...), lọc theo mẫu và thuộc tính ghi sẵn trên tuyên bố. Có một mục "chưa có quy tắc" cho cụm kiểu "với mọi điều kiện ánh sáng", nhắc ghi câu hỏi nhãn. Bảng viết tay nên phải sửa theo khi hướng dẫn đổi. 358 test đạt.
 
+## 01/11/2026 — Bước 15
+
+- Agent `coder` viết `src/kiemchung/doi_chung/b0.py`, `src/kiemchung/danh_gia.py` (FAR, Recall nhãn Đúng, bảng nhầm lẫn; P và B1–B3 dùng lại), `scripts/chay_b0.py`, `tests/test_b0.py`; không gọi LLM thật khi viết, chạy thử bằng LLM giả. Mình đọc lại câu lệnh và phần ghép đoạn; 489 test đạt. Cài `google-genai`, `groq`, `python-dotenv` theo `requirements-lock.txt` (trước đó chưa có trong `.venv`). Người thực hiện đặt khóa mới vào `.env`.
+- Thiết lập tạm (chốt ở Bước 33): câu lệnh đúng nguyên văn T12.1, top-5 đoạn BM25 tách âm tiết, nhiệt độ 0, `max_output_tokens` 4096, chế độ JSON, nghỉ 20 giây giữa hai lần gọi. Mỗi đoạn đưa vào dạng `[mã đoạn] văn bản`.
+- GPT-OSS 120B (Groq): chạy đủ 66 tuyên bố, 0 LOI. Trên 64 tuyên bố (loại `tb-00009`, `tb-00010` như Bước 14): FAR 80,5% (33/41), Recall nhãn Đúng 95,7% (22/23). Theo nhãn chuẩn, bị gán Đúng: Lệch 13/14, Chưa đủ thông tin 18/23, Sai 2/4.
+- Ví dụ đúng kiểu lỗi đề tài nhắm tới: `tb-00040` ("phát tối đa 7 giờ khi nghe nhạc suốt cả ngày trên tai nghe", nhãn Lệch). Lý do của B0 tự ghi "7 giờ khi tắt ANC" nhưng vẫn kết luận Supported.
+- Gemini 3.6 Flash: Google trả lỗi 503 liên tục; chạy lại có nghỉ 90 giây rồi 3 phút, qua 17 lần chỉ tới tuyên bố 21/66, kẹt ở `tb-00022`. Người thực hiện cho biết đã chạm hạn mức. Dừng, chốt Bước 15 bằng GPT-OSS (đủ điều kiện "chạy hết bộ thử, có FAR sơ bộ"); 21 câu trả lời đã gọi nằm trong bộ nhớ đệm. Kế hoạch đã ghi Gemini 3.6 Flash là bản thế hệ trước (rủi ro T9.1): cần tính tới khi chọn LLM ở Bước 33.
+- Đọc số cho đúng: nhãn chuẩn là lượt 1 (khoảng 35 tuyên bố khác quy tắc rõ của hướng dẫn, xem Bước 13), mô hình, k và cách tách là tạm. FAR cao chủ yếu đến từ Lệch và Chưa đủ thông tin bị gán Đúng; tính lại sau Bước 16.
+
 ## 01/11/2026 — Bước 14
 
 - Cài `rank-bm25==0.2.2`, `pyvi==0.1.1` vào `.venv` theo `requirements-lock.txt` (có trong `requirements.txt` nhưng trước đó chưa cài). Agent `coder` viết `src/kiemchung/truy_hoi.py`, `scripts/do_recall.py`, `tests/test_truy_hoi.py` theo yêu cầu của mình; mình đọc lại mô-đun và chạy lại test: 420 test đạt (thêm 62).

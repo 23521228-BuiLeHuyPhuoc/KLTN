@@ -31,7 +31,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 - [ ] [Bước 12](#b12) · 26/10 · Sinh quảng cáo và tách tuyên bố của bộ thử
 - [x] [Bước 13](#b13) · 27/10 · Gán nhãn bộ thử, đo thời gian gán
 - [x] [Bước 14](#b14) · 28/10 · Làm mô-đun truy hồi BM25, đo Recall@k
-- [ ] [Bước 15](#b15) · 29/10 · Cài đặt đối chứng B0
+- [x] [Bước 15](#b15) · 29/10 · Cài đặt đối chứng B0
 - [ ] [Bước 16](#b16) · 30/10 – 31/10 · Phân tích bộ thử, chốt hướng dẫn và quy mô
 - 🏁 [**Mốc 2** · 31/10 · Xong bộ thử](#m2)
 
@@ -467,9 +467,9 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Cài B0 theo khung câu lệnh T12.1 ở [T12](#t12): LLM đọc tuyên bố và top-k đoạn, gán Supported, Refuted hoặc NEI.
-- [ ] Ánh xạ nhãn: Supported → Đúng, Refuted → Sai, NEI → Chưa đủ thông tin.
-- [ ] Chạy hết bộ thử với nhiệt độ 0, qua bộ nhớ đệm của `llm.py`.
+- [x] Cài B0 theo khung câu lệnh T12.1 ở [T12](#t12): LLM đọc tuyên bố và top-k đoạn, gán Supported, Refuted hoặc NEI. *(01/11: `src/kiemchung/doi_chung/b0.py`, câu lệnh đúng nguyên văn T12.1, top-5 đoạn BM25 tách âm tiết (lựa chọn tạm), chế độ JSON; FAR và Recall nhãn Đúng ở `src/kiemchung/danh_gia.py`; chạy bằng `scripts/chay_b0.py`.)*
+- [x] Ánh xạ nhãn: Supported → Đúng, Refuted → Sai, NEI → Chưa đủ thông tin. *(Nhãn không đọc được ghi `LOI`, không đoán.)*
+- [x] Chạy hết bộ thử với nhiệt độ 0, qua bộ nhớ đệm của `llm.py`. *(GPT-OSS 120B qua Groq: 66/66 tuyên bố, 0 LOI. Trên 64 tuyên bố (loại `tb-00009`, `tb-00010` vì nhãn lượt 1 lưu lệch): FAR 80,5% (33/41), Recall nhãn Đúng 95,7% (22/23); Lệch bị gán Đúng 13/14. Kết quả ở `ket_qua/b0_buoc15.md`, `ket_qua/b0_thu/`. Gemini 3.6 Flash dừng ở 21/66 vì Google trả lỗi 503 liên tục (người thực hiện cho biết đã chạm hạn mức); phần đã gọi nằm trong bộ nhớ đệm. Số sơ bộ: nhãn lượt 1, mô hình và k tạm.)*
 
 **Làm ra:** `src/kiemchung/doi_chung/b0.py`, đầu ra của B0 trên bộ thử.
 
