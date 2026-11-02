@@ -92,9 +92,14 @@ cach_dien_dat:
     hop_sac:
       tu_tai_lieu: ["hộp sạc"]
       hieu_biet_chung: ["case"]
+    # Bước 16, QĐ2 ý 6: "tổng", "tổng cộng", "kèm / cùng / kết hợp hộp sạc" là kèm hộp sạc. "Hộp sạc" đứng riêng làm chủ ngữ
+    # ("hộp sạc cho thêm …") là bộ phận hop_sac; ngữ cảnh đó không biểu diễn được bằng cụm, người gán đọc ở mục 6.8.
+    # chi_thuoc_tinh (Bước 16, rà soát 02/11): cụm chỉ là điều kiện của các thuộc tính liệt kê; mục 6.8 ý 6 chỉ nói cho thời lượng pin.
+    # "có kèm hộp sạc 515 mAh" (dung lượng pin) hay "kèm hộp sạc" ở kháng nước không phải bộ phận "tổng kèm hộp sạc".
     kem_hop_sac:
+      chi_thuoc_tinh: [thoi_luong_pin]
       tu_tai_lieu: ["Tổng thời gian", "tai nghe và hộp tai nghe"]
-      hieu_biet_chung: ["kèm hộp sạc", "tính cả hộp sạc", "cùng hộp sạc"]
+      hieu_biet_chung: ["kèm hộp sạc", "tính cả hộp sạc", "cùng hộp sạc", "tổng cộng", "kết hợp hộp sạc"]
   hoat_dong:
     nghe_nhac:
       tu_tai_lieu: ["phát nhạc", "Thời gian phát"]
@@ -102,6 +107,12 @@ cach_dien_dat:
     dam_thoai:
       tu_tai_lieu: ["đàm thoại"]
       hieu_biet_chung: ["gọi điện", "nghe gọi", "thời gian thoại"]
+    # Hướng dẫn mục 6.8 ý 3 và QĐ12 (Bước 16, 02/11): phía tuyên bố, cụm chỉ sự liên tục hay mức dùng chung không nêu hoạt động cụ
+    # thể; coi như chưa nêu, áp hieu_thong_thuong (nghe_nhac). Như dien_thoai.yaml.
+    chua_ro_hoat_dong:
+      phia: tuyen_bo
+      tu_tai_lieu: []
+      hieu_biet_chung: ["sử dụng liên tục", "dùng liên tục", "liên tục", "sử dụng", "dùng"]
   so_phut_sac:
     gia_tri_so:
       tu_tai_lieu: []

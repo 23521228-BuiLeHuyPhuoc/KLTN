@@ -10,6 +10,10 @@ Các điều kiểm:
 - mỗi cụm "tu_tai_lieu" có thật trong doan.jsonl của tập phát triển;
 - phần luật không nhắc mã mẫu tập kiểm tra; bảng bí danh có đủ mẫu của nhóm;
 - chung.yaml có luật chặn điều kiện lạ (dieu_kien_la dẫn tới D1a) và quy tắc chữ gọi mức cao;
+- chung.yaml có nhóm mức sàn của từ khẳng định (tu_khang_dinh.tu_muc_san) và danh sách cụm phủ nhiều giá trị (cum_phu.mau);
+- khóa tùy chọn "phia" của một giá trị trong cach_dien_dat (giá trị chỉ đọc ở một phía) chỉ nhận tai_lieu hoặc tuyen_bo;
+- khóa tùy chọn "chi_thuoc_tinh" của một giá trị (cụm chỉ là điều kiện của các thuộc tính liệt kê) là danh sách thuộc tính của
+  nhóm có điều kiện đó trong dieu_kien_bat_buoc;
 - mỗi điều kiện dạng số (cach_dien_dat có gia_tri_so) khai báo đơn vị và quan hệ so sánh ở dieu_kien_so.
 """
 import csv
@@ -26,6 +30,7 @@ NHOM = ("dien_thoai", "tai_nghe", "dong_ho")
 KHOA_BAT_BUOC = ("don_vi", "huong_thuan_loi", "kieu_gia_tri_mac_dinh", "dieu_kien_bat_buoc",
                  "hieu_thong_thuong", "can_cu")
 CAN_CU_KHONG_BANG_CHUNG = "hieu_biet_chung"
+PHIA_HOP_LE = ("tai_lieu", "tuyen_bo")
 
 
 def doc_yaml(duong_dan):
@@ -91,6 +96,12 @@ def kiem_chung(chung, van_ban):
         loi.append("chung: loai_dieu_kien phải có đúng sáu loại")
     if (chung.get("dieu_kien_la") or {}).get("nguyen_nhan_D1a") != "dieu_kien_la":
         loi.append("chung: dieu_kien_la phải dẫn tới D1a (điều kiện lạ không bao giờ ra Đúng)")
+    tu_kd = chung.get("tu_khang_dinh") or {}
+    if not tu_kd.get("tu_muc_san"):
+        loi.append("chung: tu_khang_dinh thiếu tu_muc_san (nhóm mức sàn: hơn / trên / không dưới / trở lên đứng liền con số)")
+    cum_phu = chung.get("cum_phu") or {}
+    if not cum_phu.get("mau"):
+        loi.append("chung: thiếu cum_phu.mau (danh sách cụm phủ nhiều giá trị)")
     return loi
 
 
@@ -168,6 +179,19 @@ def kiem_nhom(cau_hinh, van_ban, ma_phat_trien, mau):
 
     for ten_dk, muc in cach.items():
         loi += kiem_cum(f"{nhom}.cach_dien_dat.{ten_dk}", muc, van_ban)
+        loi += [f"{nhom}.cach_dien_dat.{ten_dk}.{gt}: phia '{kb['phia']}' phải là {' hoặc '.join(PHIA_HOP_LE)}"
+                for gt, kb in (muc or {}).items() if isinstance(kb, dict) and "phia" in kb and kb["phia"] not in PHIA_HOP_LE]
+        for gt, kb in (muc or {}).items():
+            if not isinstance(kb, dict) or "chi_thuoc_tinh" not in kb:
+                continue
+            ds = kb["chi_thuoc_tinh"]
+            if not isinstance(ds, list) or not ds:
+                loi.append(f"{nhom}.cach_dien_dat.{ten_dk}.{gt}: chi_thuoc_tinh phải là danh sách thuộc tính khác rỗng")
+                continue
+            for tt in ds:
+                dk_tt = ((cau_hinh.get("thuoc_tinh") or {}).get(tt) or {}).get("dieu_kien_bat_buoc") or {}
+                if ten_dk not in dk_tt:
+                    loi.append(f"{nhom}.cach_dien_dat.{ten_dk}.{gt}: chi_thuoc_tinh '{tt}' không phải thuộc tính có điều kiện {ten_dk}")
 
     kiem_tra = {r["ma_mau"] for r in mau if r["tap"] == "kiemtra"}
     phan_luat = yaml.safe_dump({"thuoc_tinh": cau_hinh.get("thuoc_tinh"), "cach_dien_dat": cach},

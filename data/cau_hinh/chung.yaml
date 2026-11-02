@@ -3,8 +3,10 @@
 # và hiểu biết chung (T3.5 quy tắc 4, T5.7). Mỗi cụm diễn đạt ghi rõ nguồn:
 #   tu_tai_lieu: có trong doan.jsonl của tập phát triển (scripts/kiem_cau_hinh.py kiểm)
 #   hieu_biet_chung: cách nói thường gặp, chưa có trong tài liệu tập phát triển
-phien_ban: 1
-ngay: 2026-10-26
+# Bước 16 (02/11/2026, hướng dẫn gán nhãn bản 2) thêm: tu_khang_dinh.tu_muc_san (QĐ4), cum_phu (QĐ3); cụm mới của QĐ2 ở các tệp nhóm.
+# Phụ lục mục 13 của data/huong_dan_gan_nhan.md sinh từ các tệp YAML bằng scripts/sinh_phu_luc_cum.py.
+phien_ban: 2
+ngay: 2026-11-02
 
 loai_dieu_kien: [che_do_hoat_dong, bo_phan, phu_kien, dieu_kien_do, phien_ban, kieu_gia_tri]
 trang_thai_dieu_kien: [khong_ap_dung, khong_neu, chua_xac_dinh]
@@ -80,12 +82,27 @@ kieu_gia_tri:
 # như hãng công bố; quảng cáo bỏ "lên đến" vẫn khớp, chỉ ghi chú trong lý do.
 ghi_chu_bo_len_den: quảng cáo bỏ "lên đến"
 
-# Từ khẳng định chắc chắn cho dòng D2 (điểm 4, T10).
+# Từ khẳng định cho dòng D2 (điểm 4, T10). Chỉ tính khi gắn với con số của tuyên bố (hướng dẫn mục 6.2).
 tu_khang_dinh:
   tu: ["luôn", "đảm bảo", "bảo đảm", "ít nhất", "mọi lúc"]
+  # Nhóm mức sàn (Bước 16, QĐ4): hứa một mức sàn như "ít nhất". Cách nói thường gặp (hieu_biet_chung), chưa có số liệu người đọc.
+  # Chỉ tính khi cụm đứng liền con số của giá trị tuyên bố. "với bộ sạc 40W trở lên" là điều kiện dạng số (dieu_kien_so.cum_quan_he),
+  # "trên tai nghe", "trên 25% diện tích" không đứng liền con số của giá trị: đều không tính. Chép đúng dạng <số> của mục 6.2.
+  tu_muc_san: ["hơn <số>", "trên <số>", "không dưới <số>", "<số> trở lên"]
   pham_vi: cau_trich_gia_tri   # chỉ xét trong câu trích của trường giá trị
   bo_qua_khi_co: ["không đảm bảo", "không được đảm bảo", "không bảo đảm", "không phải lúc nào", "không luôn"]
-  ghi_chu: chưa thêm "tối thiểu" vì trùng "độ sáng tối thiểu"; bổ sung từ bộ thử ở Bước 16
+  ghi_chu: chưa thêm "tối thiểu" vì trùng "độ sáng tối thiểu"; Bước 16 đã rà từ khẳng định của bộ thử và chỉ thêm nhóm mức sàn
+
+# Cụm phủ nhiều giá trị của một điều kiện (Bước 16, QĐ3; hướng dẫn mục 6.8). Gắn với con số thì tuyên bố phải đúng ở từng giá trị
+# được phủ: điều kiện của tuyên bố là giá trị kém thuận lợi nhất trong các giá trị được phủ mà tài liệu công bố. Đây là điều kiện
+# nêu rõ nên Lệch thì loại doi_dieu_kien. Không phải từ khẳng định (không xét ở D2), trừ khi tuyên bố có thêm từ khẳng định gắn con số.
+# Kháng nước: "mọi hoạt động" phủ cả hoạt động hãng khuyến cáo không dùng (hoat_dong_bi_cam, hoat_dong_cho_phep).
+# Mẫu chép đúng như mục 6.8: X là chữ chỉ điều kiện đi sau, A và B là hai giá trị được phủ. Cách nói thường gặp (hieu_biet_chung).
+cum_phu:
+  dieu_kien_cua_tuyen_bo: kem_thuan_loi_nhat   # trong các giá trị được phủ mà tài liệu công bố
+  loai_khi_lech: doi_dieu_kien
+  la_tu_khang_dinh: false
+  mau: ["mọi điều kiện X", "mọi chế độ", "mọi hoạt động", "bất kể X", "dù A hay B", "cho cả A và B"]
 
 chuan_hoa:
   don_vi:

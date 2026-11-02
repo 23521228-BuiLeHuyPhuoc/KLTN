@@ -130,3 +130,51 @@ def test_cach_goi_theo_hang_tro_toi_che_do_chua_khai_bao_bi_bao(tai_lieu, mau):
     dt["thuoc_tinh"]["do_sang"]["cach_goi_theo_hang"]["Apple"]["đỉnh"].append("sieu_sang")
     loi = ch.kiem_nhom(dt, *tai_lieu, mau)
     assert any("chế độ chưa khai báo 'sieu_sang'" in d for d in loi)
+
+
+def test_thieu_nhom_muc_san_hoac_cum_phu_bi_bao(tai_lieu):
+    chung = copy.deepcopy(ch.doc_yaml(ch.THU_MUC / "chung.yaml"))
+    assert chung["tu_khang_dinh"]["tu_muc_san"] and chung["cum_phu"]["mau"]
+    del chung["tu_khang_dinh"]["tu_muc_san"]
+    del chung["cum_phu"]
+    loi = ch.kiem_chung(chung, tai_lieu[0])
+    assert any("thiếu tu_muc_san" in d for d in loi)
+    assert any("thiếu cum_phu.mau" in d for d in loi)
+
+
+def test_phia_cua_gia_tri_chi_nhan_tai_lieu_hoac_tuyen_bo(tai_lieu, mau):
+    dt = copy.deepcopy(ch.doc_cau_hinh("dien_thoai"))
+    hoat_dong = dt["cach_dien_dat"]["hoat_dong"]
+    # "Sử dụng liên tục": tên bài đo ở phía tài liệu; "liên tục" ở phía tuyên bố là chưa nêu hoạt động (hướng dẫn mục 6.8, ý 3).
+    assert hoat_dong["su_dung_lien_tuc"]["phia"] == "tai_lieu" and hoat_dong["chua_ro_hoat_dong"]["phia"] == "tuyen_bo"
+    assert "liên tục" in hoat_dong["chua_ro_hoat_dong"]["hieu_biet_chung"]
+    assert ch.kiem_nhom(dt, *tai_lieu, mau) == []
+    hoat_dong["su_dung_lien_tuc"]["phia"] = "ca_hai"
+    loi = ch.kiem_nhom(dt, *tai_lieu, mau)
+    assert any("hoat_dong.su_dung_lien_tuc: phia 'ca_hai' phải là tai_lieu hoặc tuyen_bo" in d for d in loi)
+
+
+def test_chi_thuoc_tinh_gioi_han_cum_kem_hop_sac(tai_lieu, mau):
+    tn = copy.deepcopy(ch.doc_cau_hinh("tai_nghe"))
+    bo_phan = tn["cach_dien_dat"]["bo_phan"]
+    # Mục 6.8 ý 6: "kèm hộp sạc", "tổng cộng"... là bộ phận kèm hộp sạc chỉ với thời lượng pin (rà soát 02/11).
+    assert bo_phan["kem_hop_sac"]["chi_thuoc_tinh"] == ["thoi_luong_pin"]
+    assert ch.kiem_nhom(tn, *tai_lieu, mau) == []
+    bo_phan["kem_hop_sac"]["chi_thuoc_tinh"] = ["khong_co"]
+    assert any("chi_thuoc_tinh 'khong_co'" in d for d in ch.kiem_nhom(tn, *tai_lieu, mau))
+    bo_phan["kem_hop_sac"]["chi_thuoc_tinh"] = []
+    assert any("chi_thuoc_tinh phải là danh sách" in d for d in ch.kiem_nhom(tn, *tai_lieu, mau))
+
+
+def test_su_dung_dung_dung_rieng_la_chua_ro_hoat_dong_moi_nhom():
+    # QĐ12 (02/11): "sử dụng", "dùng" đứng riêng và "liên tục" là chưa nêu hoạt động, ở mọi nhóm có điều kiện hoạt động.
+    for nhom in ch.NHOM:
+        hd = ch.doc_cau_hinh(nhom)["cach_dien_dat"]["hoat_dong"]["chua_ro_hoat_dong"]
+        assert hd["phia"] == "tuyen_bo"
+        assert {"liên tục", "sử dụng", "dùng"} <= set(hd["hieu_biet_chung"]), nhom
+
+
+def test_anh_sang_manh_khong_con_o_che_do_ngoai_troi():
+    # QĐ14 (02/11): "ánh sáng mạnh" chưa được duyệt và trùng "Dưới ánh sáng mạnh" của Xiaomi (tu_tang_sang).
+    ngoai_troi = ch.doc_cau_hinh("dien_thoai")["cach_dien_dat"]["che_do_hien_thi"]["ngoai_troi"]
+    assert "ánh sáng mạnh" not in ngoai_troi["hieu_biet_chung"]

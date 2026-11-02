@@ -156,12 +156,24 @@ cach_dien_dat:
     # Khảo sát Bước 10, Q09 (28/10): 9/10 người hiểu "xem video" là xem trực tuyến hoặc không phân biệt.
     # Cụm này không kèm "tải sẵn" hay "trực tuyến" thì coi như quảng cáo chưa nêu hoạt động, áp hieu_thong_thuong
     # (kem_thuan_loi_nhat). So cụm dài nhất trước, để "xem video trực tuyến" không bị nhận là cụm này.
+    # QĐ15 (02/11): tuyên bố chép đúng nhãn của tài liệu ("xem video" trùng "Thời gian xem video") thì xét luật chép đúng
+    # nhãn (hướng dẫn mục 6.8) trước cụm này; cụm này chỉ dùng khi luật đó không áp.
     chua_ro_loai_video:
       tu_tai_lieu: []
       hieu_biet_chung: ["xem video", "xem phim"]
+    # Khóa tùy chọn phia (Bước 16, QĐ2 ý 3): giá trị chỉ đọc ở một phía, tai_lieu hoặc tuyen_bo; không ghi là đọc cả hai phía.
+    # "Sử dụng liên tục" là tên một bài đo ở phía tài liệu (Xiaomi 15T, #047). Phía tuyên bố, "liên tục" chỉ cách đo (dùng không ngắt),
+    # không nêu hoạt động cụ thể: xem chua_ro_hoat_dong.
     su_dung_lien_tuc:
+      phia: tai_lieu
       tu_tai_lieu: ["Sử dụng liên tục"]
       hieu_biet_chung: []
+    # Phía tuyên bố (hướng dẫn mục 6.8, ý 3): coi như quảng cáo chưa nêu hoạt động, áp hieu_thong_thuong (kem_thuan_loi_nhat), như
+    # chua_ro_loai_video. Không đọc ở phía tài liệu: "liên tục" ở đó là chữ thường ("Chế độ Chụp Liên Tục", "Liên tục theo dõi").
+    chua_ro_hoat_dong:
+      phia: tuyen_bo
+      tu_tai_lieu: []
+      hieu_biet_chung: ["sử dụng liên tục", "dùng liên tục", "liên tục", "sử dụng", "dùng"]   # QĐ12 (02/11): "sử dụng", "dùng" đứng riêng
     nghe_nhac:
       tu_tai_lieu: []
       hieu_biet_chung: ["nghe nhạc"]
@@ -194,9 +206,13 @@ cach_dien_dat:
     hdr:
       tu_tai_lieu: ["(HDR)"]
       hieu_biet_chung: ["nội dung HDR"]
+    # Bước 16, QĐ2 ý 2: cụm tả hoàn cảnh của chế độ sáng cao ngoài trời (ánh nắng) là nêu chế độ này. "ánh sáng mạnh" đã bỏ khỏi đây
+    # (QĐ14, 02/11): cụm này do session cha tự thêm, chưa được duyệt, và trùng "Dưới ánh sáng mạnh" của Xiaomi (tu_tang_sang). Suy theo nghĩa
+    # (hieu_biet_chung): trang Apple không tả hoàn cảnh kích hoạt. Xiaomi gọi chế độ sáng cao bằng tên khác (tu_tang_sang, "Dưới ánh
+    # sáng mạnh"); ghép hai chế độ thành một là đề xuất cho Bước 27, chưa làm.
     ngoai_troi:
       tu_tai_lieu: ["(ngoài trời)"]
-      hieu_biet_chung: ["dưới nắng", "ngoài nắng"]
+      hieu_biet_chung: ["dưới nắng", "ngoài nắng", "ánh nắng", "dưới ánh nắng"]
     tu_tang_sang:
       tu_tai_lieu: ["Dưới ánh sáng mạnh", "tự động kích hoạt chế độ tăng mức sáng"]
       hieu_biet_chung: []
@@ -212,9 +228,11 @@ cach_dien_dat:
       tu_tai_lieu: ["tốc độ làm mới thích ứng"]
       hieu_biet_chung: ["tần số quét thích ứng"]
   loai_zoom:
+    # Bước 16, QĐ2 ý 1, 2: Apple ghi "Telephoto 2x chất lượng quang học" (dt-apple-iphone17#009), nên "telephoto" là zoom quang học.
+    # Cụm có chỗ hở (số lần phóng đại) không biểu diễn được, nên tách: dạng đầy đủ ở tu_tai_lieu, chữ "telephoto" ở hieu_biet_chung.
     quang_hoc:
-      tu_tai_lieu: ["quang học"]
-      hieu_biet_chung: ["optical"]
+      tu_tai_lieu: ["quang học", "Telephoto 2x chất lượng quang học"]
+      hieu_biet_chung: ["optical", "telephoto"]
     ky_thuat_so:
       tu_tai_lieu: ["kỹ thuật số"]
       hieu_biet_chung: ["digital", "zoom số"]
