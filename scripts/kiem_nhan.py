@@ -28,6 +28,9 @@ noi_dung_goc cũng được chấp nhận.
 
 Chạy:
     .venv/Scripts/python.exe scripts/kiem_nhan.py data/nhan/thu_luot2.jsonl [data/tuyen_bo/thu.jsonl] [--luot 2]
+    .venv/Scripts/python.exe scripts/kiem_nhan.py data/nhan/thu_luot3.jsonl --luot 3 --chon data/nhan/chon_luot3.txt
+--chon <tệp mã> (mỗi dòng một mã, # là chú thích) chỉ kiểm các tuyên bố trong tệp: không báo "thiếu nhãn" cho tuyên bố ngoài
+tập, nhãn của tuyên bố ngoài tập bị bỏ qua (không kiểm, không đếm); mã trong tệp mà không có trong tệp tuyên bố là lỗi.
 Lượt 1 (nhãn theo hướng dẫn bản 1) kiểm bằng luật bản 2 sẽ báo nhiều lỗi mới; đó là để biết luật mới bắt gì, không phải
 lý do sửa nhãn lượt 1.
 """
@@ -372,12 +375,25 @@ def doc_tuyen_bo(duong=TEP_TUYEN_BO):
     return {d["id"]: d for _, d, _ in doc_jsonl(duong) if d}
 
 
-def kiem_tep(duong_nhan, duong_tuyen_bo=TEP_TUYEN_BO, thu_muc_nguon=THU_MUC_NGUON, khong_co=None, quy_tac=None, luot=None):
+def kiem_tep(duong_nhan, duong_tuyen_bo=TEP_TUYEN_BO, thu_muc_nguon=THU_MUC_NGUON, khong_co=None, quy_tac=None, luot=None,
+             chon=None):
     """(danh sách lỗi, các dòng nhãn đọc được, số tuyên bố) của tệp nhãn so với tệp tuyên bố. khong_co, quy_tac, luot: xem
-    kiem_mot_dong. luot=None thì mọi dòng nhãn phải cùng một lượt (tệp xuất từ công cụ chỉ có một lượt)."""
+    kiem_mot_dong. luot=None thì mọi dòng nhãn phải cùng một lượt (tệp xuất từ công cụ chỉ có một lượt).
+
+    chon: danh sách mã tuyên bố; nếu có thì chỉ kiểm các tuyên bố này (số tuyên bố trả về là số mã trong chon): không báo
+    thiếu nhãn cho tuyên bố ngoài tập, dòng nhãn của tuyên bố ngoài tập bị bỏ qua. Mã của chon không có trong tệp tuyên bố
+    là lỗi."""
     tuyen_bo = doc_tuyen_bo(duong_tuyen_bo)
     loi, dong_nhan, da_co = [], [], {}
     doan_theo_mau = {}
+    ngoai_tap = set()  # id có trong tệp tuyên bố nhưng ngoài chon: dòng nhãn của chúng bị bỏ qua
+    if chon is not None:
+        chon = list(dict.fromkeys(chon))
+        la = [m for m in chon if m not in tuyen_bo]
+        if la:
+            loi.append("--chon: mã không có trong tệp tuyên bố: " + ", ".join(la))
+        ngoai_tap = set(tuyen_bo) - set(chon)
+        tuyen_bo = {m: tuyen_bo[m] for m in chon if m in tuyen_bo}
     for so, nh, loi_doc in doc_jsonl(duong_nhan):
         if loi_doc:
             loi.append(f"dòng {so}: {loi_doc}")
@@ -386,6 +402,8 @@ def kiem_tep(duong_nhan, duong_tuyen_bo=TEP_TUYEN_BO, thu_muc_nguon=THU_MUC_NGUO
             loi.append(f"dòng {so}: mỗi dòng phải là một đối tượng JSON")
             continue
         ma = nh.get("id")
+        if isinstance(ma, str) and ma in ngoai_tap:
+            continue
         if not isinstance(ma, str) or ma not in tuyen_bo:
             loi.append(f"dòng {so}: id {ma!r} không có trong tệp tuyên bố")
             continue
@@ -454,11 +472,16 @@ def main():
                     help="mặc định data/tuyen_bo/thu.jsonl")
     ap.add_argument("--luot", type=int, default=None,
                     help="lượt gán mong đợi; bỏ trống thì đọc từ các bản ghi (mọi dòng phải cùng một lượt)")
+    ap.add_argument("--chon", type=Path, default=None,
+                    help="tệp mã tuyên bố (mỗi dòng một mã, # là chú thích): chỉ kiểm các tuyên bố này")
     args = ap.parse_args()
     for duong in (args.tep_nhan, args.tep_tuyen_bo):
         if not duong.exists():
             sys.exit(f"không thấy tệp {duong}")
-    loi, dong_nhan, so_tuyen_bo = kiem_tep(args.tep_nhan, args.tep_tuyen_bo, luot=args.luot)
+    chon = tc.doc_tep_ma(args.chon) if args.chon else None
+    loi, dong_nhan, so_tuyen_bo = kiem_tep(args.tep_nhan, args.tep_tuyen_bo, luot=args.luot, chon=chon)
+    if chon is not None:
+        print(f"Chỉ kiểm {len(chon)} tuyên bố trong {args.chon.name}.\n")
     print("\n".join(tom_tat(dong_nhan, so_tuyen_bo)))
     nhac = nhac_tep(dong_nhan, doc_tuyen_bo(args.tep_tuyen_bo))
     if nhac:

@@ -1032,3 +1032,180 @@ def test_khung_cum_loc_theo_chi_thuoc_tinh():
     assert all(g["chi_thuoc_tinh"] == [] for g in tn["bo_phan"]["gia_tri"] if g["gia_tri"] != "kem_hop_sac")
     src = Path(tc.__file__).read_text(encoding="utf-8")
     assert "!gt.chi_thuoc_tinh.includes(tb.thuoc_tinh)) continue;" in src
+
+
+# ---------- Trang lượt 3: --luot, --chon, --ra ----------
+
+def ma_tuyen_bo_that():
+    if not tc.TEP_TUYEN_BO.exists():
+        pytest.skip("không có data/tuyen_bo/thu.jsonl")
+    return [t["id"] for t in tc.doc_jsonl(tc.TEP_TUYEN_BO)]
+
+
+def test_cau_hinh_luot_2_giu_nguyen_va_luot_khac_co_hau_to():
+    assert tc.cau_hinh_luot(2) == {"khoa_nhan": "gan_nhan_thu_v2", "khoa_giao_dien": "gan_nhan_giao_dien_v2",
+                                   "tep_nhan": "thu_luot2.jsonl", "tep_hoi": "cau_hoi_nhan_luot2.md"}
+    assert (tc.cau_hinh_luot(2)["khoa_nhan"], tc.cau_hinh_luot(2)["khoa_giao_dien"]) == (tc.KHOA_NHAN, tc.KHOA_GIAO_DIEN)
+    assert (tc.cau_hinh_luot(2)["tep_nhan"], tc.cau_hinh_luot(2)["tep_hoi"]) == (tc.TEN_TEP_NHAN, tc.TEN_TEP_HOI)
+    assert tc.cau_hinh_luot() == tc.cau_hinh_luot(2)
+    assert tc.cau_hinh_luot(3) == {"khoa_nhan": "gan_nhan_thu_v2_luot3", "khoa_giao_dien": "gan_nhan_giao_dien_v2_luot3",
+                                   "tep_nhan": "thu_luot3.jsonl", "tep_hoi": "cau_hoi_nhan_luot3.md"}
+
+
+@pytest.mark.parametrize("luot", [1, 0, -3, 2.0, "3", None, True])
+def test_cau_hinh_luot_khong_hop_le_thoat(luot):
+    assert "--luot phải là số nguyên từ 2" in thoat(tc.cau_hinh_luot, luot)
+
+
+def test_doc_tep_ma_bo_chu_thich_dong_trong_va_giu_thu_tu(tmp_path):
+    tep = tmp_path / "chon.txt"
+    tep.write_text("# chú thích\n\ntb-00005\n  tb-00002  \n# tb-00009\r\ntb-00001\n", encoding="utf-8")
+    assert tc.doc_tep_ma(tep) == ["tb-00005", "tb-00002", "tb-00001"]
+    tep.write_text("﻿# bom\ntb-00001\n", encoding="utf-8")
+    assert tc.doc_tep_ma(tep) == ["tb-00001"]
+
+
+def test_doc_tep_ma_loi(tmp_path):
+    tep = tmp_path / "chon.txt"
+    tep.write_text("tb-00001\ntb-00002\ntb-00001\n", encoding="utf-8")
+    assert "mã lặp: tb-00001" in thoat(tc.doc_tep_ma, tep)
+    tep.write_text("# chỉ có chú thích\n\n", encoding="utf-8")
+    assert "không có mã tuyên bố nào" in thoat(tc.doc_tep_ma, tep)
+    assert "thiếu tệp chọn" in thoat(tc.doc_tep_ma, tmp_path / "khong_co.txt")
+
+
+def test_chon_va_xao_chi_phu_thuoc_tap_ma_va_seed():
+    tb = [{"id": f"tb-{i:05d}"} for i in range(1, 41)]
+    ma = [f"tb-{i:05d}" for i in range(3, 33)]
+    mot = tc.chon_va_xao(tb, ma)
+    assert sorted(t["id"] for t in mot) == ma and [t["id"] for t in mot] != ma  # đủ 30, thứ tự đã xáo
+    assert [t["id"] for t in tc.chon_va_xao(tb, ma)] == [t["id"] for t in mot]  # tất định
+    assert [t["id"] for t in tc.chon_va_xao(tb, list(reversed(ma)))] == [t["id"] for t in mot]  # không theo thứ tự trong tệp chọn
+    assert [t["id"] for t in tc.chon_va_xao(tb, ma, seed=1)] != [t["id"] for t in mot]
+    assert tc.SEED_XAO == 20261102
+    assert "tb-99999" in thoat(tc.chon_va_xao, tb, ma + ["tb-99999"])
+
+
+def test_duong_ra_mac_dinh():
+    assert tc.duong_ra_mac_dinh(2, False) == tc.TEP_RA
+    assert tc.duong_ra_mac_dinh(3, True) == tc.TEP_RA.with_name("cong_cu_gan_nhan_luot3.html")
+    assert tc.duong_ra_mac_dinh(3, False) == tc.TEP_RA.with_name("cong_cu_gan_nhan_luot3.html")
+    assert "phải có --ra" in thoat(tc.duong_ra_mac_dinh, 2, True)  # không ghi đè trang lượt 2 đầy đủ bằng trang một phần
+
+
+@pytest.fixture(scope="module")
+def trang_luot3():
+    ma = ma_tuyen_bo_that()[1::2]  # tập chọn của riêng test, không dùng data/nhan/chon_luot3.txt
+    try:
+        du_lieu = tc.nap_du_lieu(3, ma)
+    except SystemExit as e:
+        pytest.skip(f"thiếu dữ liệu để dựng trang: {e}")
+    return tc.dung_html(du_lieu), du_lieu, ma
+
+
+def test_trang_luot3_chi_co_tuyen_bo_da_chon_va_thu_tu_da_xao(trang_luot3):
+    html, du_lieu, ma = trang_luot3
+    thu_tu = [t["id"] for t in du_lieu["tuyen_bo"]]
+    assert sorted(thu_tu) == sorted(ma) and thu_tu != sorted(ma)
+    assert thu_tu == [t["id"] for t in tc.chon_va_xao(tc.doc_jsonl(tc.TEP_TUYEN_BO), ma)]
+    # Bài quảng cáo và đoạn tài liệu chỉ của các tuyên bố đã chọn.
+    assert set(du_lieu["bai"]) == {t["ma_qc"] for t in du_lieu["tuyen_bo"]}
+    assert set(du_lieu["doan"]) == {t["ma_mau"] for t in du_lieu["tuyen_bo"]}
+    m = re.search(r'<script id="du-lieu" type="application/json">(.*?)</script>', html, flags=re.S)
+    assert [t["id"] for t in json.loads(m.group(1))["tuyen_bo"]] == thu_tu
+
+
+def test_trang_luot3_khoa_luu_tieu_de_va_tep_tai_ve(trang_luot3):
+    html, du_lieu, _ = trang_luot3
+    js = re.search(r"<script>\n(.*?)</script>", html, flags=re.S).group(1)
+    assert du_lieu["trang"] == {"luot": 3, "khoa_nhan": "gan_nhan_thu_v2_luot3", "khoa_giao_dien": "gan_nhan_giao_dien_v2_luot3",
+                                "tep_nhan": "thu_luot3.jsonl", "tep_hoi": "cau_hoi_nhan_luot3.md", "nghi_ms": 180000}
+    assert du_lieu["trang"]["khoa_nhan"] != tc.KHOA_NHAN and du_lieu["trang"]["khoa_giao_dien"] != tc.KHOA_GIAO_DIEN
+    assert "<title>Công cụ gán nhãn chuẩn - bộ thử, lượt 3</title>" in html and "Bước 16 · lượt 3" in html
+    assert "Tải nhãn (thu_luot3.jsonl)" in html and "Tải câu hỏi nhãn (cau_hoi_nhan_luot3.md)" in html
+    assert "Nhập lại thu_luot3.jsonl đã xuất" in html
+    assert "Tải nhãn (thu_luot2.jsonl)" not in html and "Nhập lại thu_luot2.jsonl" not in html
+    # Khóa lưu và lượt đều lấy từ dữ liệu nhúng, không chép cứng trong mã JavaScript.
+    assert "luot: LUOT," in js and "tachTheoLuot(moi, LUOT)" in js and "localStorage.getItem(KHOA)" in js
+    assert "gan_nhan_thu_v2" not in js and "luot: 2," not in js and "luot: 3," not in js
+    for cho in ("__LUOT__", "__TEP_NHAN__", "__TEP_HOI__", "__GAN_MU__", "__DU_LIEU__"):
+        assert cho not in html, cho
+    assert "Lượt 3 gán mù với các lượt trước: không mở nhãn lượt 1, nhãn lượt 2 (kể cả nhãn do Claude gán)" in html
+    assert "Lượt 2 gán mù với lượt trước" not in html
+
+
+def test_trang_luot2_mac_dinh_giu_nguyen_chu_va_khoa(trang):
+    html, du_lieu = trang
+    assert du_lieu["trang"] == {"luot": 2, "khoa_nhan": "gan_nhan_thu_v2", "khoa_giao_dien": "gan_nhan_giao_dien_v2",
+                                "tep_nhan": "thu_luot2.jsonl", "tep_hoi": "cau_hoi_nhan_luot2.md", "nghi_ms": 180000}
+    assert "Lượt 2 gán mù với lượt trước: không mở nhãn lượt 1 và các ghi chép về nhãn lượt 1.</p>" in html
+    assert "_luot3" not in html and "Lượt 3 gán mù" not in html
+
+
+def test_trang_luot3_khong_nhung_nhan_nao(trang_luot3):
+    html, du_lieu, _ = trang_luot3
+    huong_dan = tc.doc_huong_dan()
+    kiem, co_tep = 0, 0
+    for ten in ("thu_luot2.jsonl", "thu_luot2_claude.jsonl", "thu_luot1.jsonl", "thu.jsonl"):
+        tep = ROOT / "data/nhan" / ten
+        if not tep.exists():
+            continue
+        co_tep += 1
+        for nh in tc.doc_jsonl(tep):
+            chu = nh.get("ly_do")
+            if isinstance(chu, str) and chu.strip():
+                kiem += 1
+                # Câu lý do nằm trên trang chỉ khi nó cũng là chữ của chính hướng dẫn (ví dụ V45 của hướng dẫn).
+                assert chu not in html or chu in huong_dan, (ten, nh["id"])
+    if not co_tep:
+        pytest.skip("không có tệp nhãn nào trong data/nhan")
+    assert kiem > 0
+    # Không có bản ghi nhãn nào (khóa "nhan" với giá trị là mã nhãn) trong dữ liệu nhúng.
+    assert not re.search(r'"nhan":"(DUNG|SAI|LECH|CHUA_DU)"', html)
+    assert not re.search(r'"(nguoi_gan|tai_lieu_mau_thuan)":', html)
+    # Dữ liệu nhúng chỉ có các khối biết trước; mỗi tuyên bố chỉ có các trường của tuyên bố, không có trường nhãn nào.
+    assert set(du_lieu) == {"tuyen_bo", "bai", "doan", "huong_dan", "quy_tac", "trang", "ca_dac_biet"}
+    assert all(set(t) == set(tc.TRUONG_TUYEN_BO) for t in du_lieu["tuyen_bo"])
+    for t in du_lieu["tuyen_bo"]:
+        assert not re.search(r"\b(DUNG|SAI|LECH|CHUA_DU)\b", t["ghi_chu"]), t["id"]
+
+
+def test_cu_phap_javascript_trang_luot3_hop_le(trang_luot3, tmp_path):
+    node = shutil.which("node")
+    if not node:
+        pytest.skip("không có node")
+    html, _, _ = trang_luot3
+    js = re.search(r"<script>\n(.*?)</script>", html, flags=re.S).group(1)
+    tep = tmp_path / "cong_cu_luot3.js"
+    tep.write_text(js, encoding="utf-8")
+    kq = subprocess.run([node, "--check", str(tep)], capture_output=True, text=True, encoding="utf-8")
+    assert kq.returncode == 0, kq.stderr
+
+
+def test_nap_du_lieu_ma_la_thoat():
+    ma = ma_tuyen_bo_that()
+    assert "tb-99999" in thoat(tc.nap_du_lieu, 3, ma[:2] + ["tb-99999"])
+    assert "--luot phải là số nguyên từ 2" in thoat(tc.nap_du_lieu, 1, ma[:2])
+
+
+def test_lenh_sinh_trang_luot3_ra_tep_chi_dinh(tmp_path):
+    ma = ma_tuyen_bo_that()[:3]
+    chon = tmp_path / "chon.txt"
+    chon.write_text("# thử\n" + "\n".join(reversed(ma)) + "\n", encoding="utf-8")
+    ra = tmp_path / "con" / "trang3.html"
+    try:
+        tc.main(["--luot", "3", "--chon", str(chon), "--ra", str(ra)])
+    except SystemExit as e:
+        pytest.skip(f"thiếu dữ liệu để dựng trang: {e}")
+    html = ra.read_text(encoding="utf-8")
+    nhung = json.loads(re.search(r'<script id="du-lieu" type="application/json">(.*?)</script>', html, flags=re.S).group(1))
+    assert sorted(t["id"] for t in nhung["tuyen_bo"]) == sorted(ma) and nhung["trang"]["luot"] == 3
+    assert "\r" not in html and "<title>Công cụ gán nhãn chuẩn - bộ thử, lượt 3</title>" in html
+
+
+def test_lenh_tu_choi_luot_2_mot_phan_khong_co_ra_va_luot_1(tmp_path):
+    chon = tmp_path / "chon.txt"
+    chon.write_text("tb-00001\n", encoding="utf-8")
+    assert "phải có --ra" in thoat(tc.main, ["--luot", "2", "--chon", str(chon)])
+    assert "--luot phải là số nguyên từ 2" in thoat(tc.main, ["--luot", "1", "--ra", str(tmp_path / "x.html")])
+    assert not (tmp_path / "x.html").exists()

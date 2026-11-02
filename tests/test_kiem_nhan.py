@@ -533,6 +533,81 @@ def test_lenh_thoat_ma_0_khi_hop_le(tmp_path):
     assert "Không có lỗi." in kq.stdout
 
 
+# ---------- --chon: chỉ kiểm các tuyên bố trong tập (lượt 3) ----------
+
+def chay_chon(mt, dong, chon, luot=None):
+    ghi_jsonl(mt["nhan"], dong)
+    return kn.kiem_tep(mt["nhan"], mt["tb"], mt["nguon"], luot=luot, chon=chon)
+
+
+def test_chon_chi_kiem_tuyen_bo_trong_tap_va_khong_bao_thieu_nhan_ngoai_tap(mt):
+    dong = bo_dung()
+    loi, dong_nhan, so_tb = chay_chon(mt, [dong[0], dong[2]], ["tb-00001", "tb-00003"])
+    assert loi == [] and so_tb == 2 and [nh["id"] for nh in dong_nhan] == ["tb-00001", "tb-00003"]
+    loi, _, so_tb = chay(mt, [dong[0], dong[2]])  # không có chon: cả 4 tuyên bố đều phải có nhãn
+    assert so_tb == 4 and "thiếu nhãn cho tb-00002" in "\n".join(loi) and "thiếu nhãn cho tb-00004" in "\n".join(loi)
+    # Thiếu nhãn của tuyên bố trong tập vẫn báo, ngoài tập thì không.
+    loi, _, _ = chay_chon(mt, [dong[0]], ["tb-00001", "tb-00003"])
+    assert loi == ["thiếu nhãn cho tb-00003"]
+
+
+def test_chon_bo_qua_nhan_ngoai_tap_ke_ca_nhan_hong(mt):
+    dong = bo_dung()
+    hong = dict(dong[1], nhan="TOT", luot=7)  # tb-00002 ngoài tập: không kiểm, không đếm, không làm lệch kiểm lượt
+    loi, dong_nhan, so_tb = chay_chon(mt, [dong[0], hong, dong[2]], ["tb-00001", "tb-00003"])
+    assert loi == [] and so_tb == 2 and [nh["id"] for nh in dong_nhan] == ["tb-00001", "tb-00003"]
+    trong = dict(dong[2], nhan="TOT", loai=None)  # tb-00003 trong tập: vẫn báo lỗi
+    loi, _, _ = chay_chon(mt, [dong[0], hong, trong], ["tb-00001", "tb-00003"])
+    assert len(loi) == 1 and loi[0].startswith("dòng 3 (tb-00003): nhan 'TOT' không thuộc")
+
+
+def test_chon_ma_la_va_ma_lap(mt):
+    dong = bo_dung()
+    loi, _, so_tb = chay_chon(mt, [dong[0]], ["tb-00001", "tb-99999"])
+    assert loi == ["--chon: mã không có trong tệp tuyên bố: tb-99999"] and so_tb == 1
+    loi, dong_nhan, so_tb = chay_chon(mt, [dong[0]], ["tb-00001", "tb-00001"])
+    assert loi == [] and so_tb == 1 and len(dong_nhan) == 1
+    loi, _, _ = chay_chon(mt, [dong[0], nhan("tb-99999")], ["tb-00001"])  # id không có trong tệp tuyên bố vẫn là lỗi
+    assert len(loi) == 1 and "tb-99999" in loi[0] and "không có trong tệp tuyên bố" in loi[0]
+
+
+def test_chon_luot_chi_xet_dong_trong_tap(mt):
+    dong = [dict(nh, luot=3) for nh in bo_dung()]
+    ngoai = dict(dong[3], luot=2)
+    loi, _, _ = chay_chon(mt, dong[:3] + [ngoai], ["tb-00001", "tb-00002", "tb-00003"], luot=3)
+    assert loi == []
+    loi, _, _ = chay_chon(mt, dong[:3], ["tb-00001", "tb-00002", "tb-00003"], luot=2)
+    assert len(loi) == 3 and all("luot là 3, khác lượt 2 đang kiểm" in e for e in loi)
+    loi, _, _ = chay_chon(mt, [dong[0], dict(dong[1], luot=2), dong[2]], ["tb-00001", "tb-00002", "tb-00003"])
+    assert loi == ["các dòng nhãn thuộc nhiều lượt khác nhau (luot: 2, 3); một tệp chỉ chứa một lượt, hoặc truyền --luot"]
+
+
+def test_lenh_chon(tmp_path):
+    doan_that = ROOT / "data/nguon/dt-apple-iphone17/doan.jsonl"
+    if not doan_that.exists():
+        pytest.skip("không có data/nguon/dt-apple-iphone17/doan.jsonl")
+    d = json.loads(doan_that.read_text(encoding="utf-8").splitlines()[1])
+    tb = ghi_jsonl(tmp_path / "thu.jsonl", [{"id": f"tb-0000{i}", "ma_mau": "dt-apple-iphone17"} for i in (1, 2)])
+    n = ghi_jsonl(tmp_path / "nhan.jsonl", [nhan("tb-00001", bang_chung=[d["id"]], trich=d["noi_dung"][:20], luot=3)])
+    chon = tmp_path / "chon.txt"
+    chon.write_text("# tập thử\ntb-00001\n", encoding="utf-8")
+
+    def lenh(*them):
+        return subprocess.run([sys.executable, str(ROOT / "scripts/kiem_nhan.py"), str(n), str(tb), *them],
+                              capture_output=True, text=True, encoding="utf-8", cwd=tmp_path,
+                              env={**os.environ, "PYTHONIOENCODING": "utf-8"})
+
+    kq = lenh("--luot", "3", "--chon", str(chon))
+    assert kq.returncode == 0, kq.stdout
+    assert "Chỉ kiểm 1 tuyên bố trong chon.txt." in kq.stdout and "Đọc được 1 nhãn cho 1 tuyên bố." in kq.stdout
+    assert "Không có lỗi." in kq.stdout
+    kq = lenh("--luot", "3")  # không --chon: tb-00002 thiếu nhãn
+    assert kq.returncode == 1 and "thiếu nhãn cho tb-00002" in kq.stdout
+    thieu = tmp_path / "khong_co.txt"
+    kq = lenh("--chon", str(thieu))
+    assert kq.returncode != 0 and "thiếu tệp chọn" in kq.stderr
+
+
 # ---------- Bước 16: luật của hướng dẫn bản 2 (S14, S15, S17-S21) ----------
 
 # Bản rút gọn của các bảng đọc từ hướng dẫn (quy_tac_huong_dan() đọc bản thật), cho tuyên bố dt-test / do_sang.
