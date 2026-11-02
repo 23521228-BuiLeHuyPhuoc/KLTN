@@ -469,7 +469,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 - [x] Cài B0 theo khung câu lệnh T12.1 ở [T12](#t12): LLM đọc tuyên bố và top-k đoạn, gán Supported, Refuted hoặc NEI. *(01/11: `src/kiemchung/doi_chung/b0.py`, câu lệnh đúng nguyên văn T12.1, top-5 đoạn BM25 tách âm tiết (lựa chọn tạm), chế độ JSON; FAR và Recall nhãn Đúng ở `src/kiemchung/danh_gia.py`; chạy bằng `scripts/chay_b0.py`.)*
 - [x] Ánh xạ nhãn: Supported → Đúng, Refuted → Sai, NEI → Chưa đủ thông tin. *(Nhãn không đọc được ghi `LOI`, không đoán.)*
-- [x] Chạy hết bộ thử với nhiệt độ 0, qua bộ nhớ đệm của `llm.py`. *(GPT-OSS 120B qua Groq: 66/66 tuyên bố, 0 LOI. Trên 64 tuyên bố (loại `tb-00009`, `tb-00010` vì nhãn lượt 1 lưu lệch): FAR 80,5% (33/41), Recall nhãn Đúng 95,7% (22/23); Lệch bị gán Đúng 13/14. Kết quả ở `ket_qua/b0_buoc15.md`, `ket_qua/b0_thu/`. Gemini 3.6 Flash dừng ở 21/66 vì Google trả lỗi 503 liên tục (người thực hiện cho biết đã chạm hạn mức); phần đã gọi nằm trong bộ nhớ đệm. Số sơ bộ: nhãn lượt 1, mô hình và k tạm.)*
+- [x] Chạy hết bộ thử với nhiệt độ 0, qua bộ nhớ đệm của `llm.py`. *(GPT-OSS 120B qua Groq: 66/66 tuyên bố, 0 LOI. Trên 64 tuyên bố (loại `tb-00009`, `tb-00010` vì nhãn lượt 1 lưu lệch): FAR 80,5% (33/41), Recall nhãn Đúng 95,7% (22/23); Lệch bị gán Đúng 13/14. Kết quả ở `ket_qua/b0_buoc15.md`, `ket_qua/b0_thu/`. Gemini 3.6 Flash dừng ở 21/66 vì chạm hạn mức: log có 51 lỗi 429 và 11 lỗi 503 qua 19 lần chạy (sửa 02/11; bản đầu ghi nhầm là lỗi 503); phần đã gọi nằm trong bộ nhớ đệm. Số sơ bộ: nhãn lượt 1, mô hình và k tạm.)*
 
 **Làm ra:** `src/kiemchung/doi_chung/b0.py`, đầu ra của B0 trên bộ thử.
 
@@ -488,10 +488,10 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 **Việc cần làm**
 
 - [ ] Tính phân bố nhãn, số tuyên bố có điều kiện trên mỗi bài, số phút gán mỗi tuyên bố.
-- [ ] Xem B0 sai ở đâu, nhất là bao nhiêu tuyên bố Lệch điều kiện bị B0 gán Supported.
-- [ ] Giải quyết các "câu hỏi nhãn" của Bước 13; sửa thành hướng dẫn bản 2; gán lại bộ thử theo bản 2.
+- [x] Xem B0 sai ở đâu, nhất là bao nhiêu tuyên bố Lệch điều kiện bị B0 gán Supported. *(02/11: theo nhãn lượt 2, `ket_qua/b0_luot2.md`: FAR 75,0% (24/32), Recall nhãn Đúng 97,1% (33/34); Lệch bị gán Supported 15/18, Chưa đủ 5/8, Sai 4/6. Hai ca Sai bị gán Supported vì B0 đọc số 8,5 giờ của Buds FE trong bảng so sánh không ghi tên mẫu (`tb-00055`, `tb-00062`). Số sơ bộ: mô hình, k, cách tách tạm.)*
+- [x] Giải quyết các "câu hỏi nhãn" của Bước 13; sửa thành hướng dẫn bản 2; gán lại bộ thử theo bản 2. *(01–02/11: hướng dẫn bản 2 theo QĐ1–QĐ8, rà soát rồi QĐ9–QĐ15 (`luan_van/buoc16_de_xuat_huong_dan_ban2.md`, nhật ký). Lượt 2: theo lựa chọn của người thực hiện, Claude gán trước (`data/nhan/thu_luot2_claude.jsonl`), người thực hiện duyệt (`data/nhan/thu_luot2.jsonl`); khóa luận phải ghi nhãn chuẩn của bộ thử là "Claude gán, người duyệt". Lượt 2: Đúng 34, Lệch 18, Sai 6, Chưa đủ 8.)*
 - [ ] Chốt quy mô: số bài cần sinh cho mỗi mẫu để tổng đạt 250–300 tuyên bố, tính cả bộ thử. Nếu trung bình dưới 2 tuyên bố có điều kiện mỗi bài thì áp dụng phương án ở [T9.1](#t9-1): tăng số bài; nếu vẫn thiếu thì điền tên các nhóm thông số (không kèm con số) vào ô từ khóa cho **mọi** bài và sinh lại 24 bài của bộ thử, để bộ thử và bộ chính cùng thiết lập (điểm 13 ở [T10](#t10)).
-- [ ] Bổ sung danh sách từ khẳng định từ bộ thử (điểm 4 ở T10).
+- [x] Bổ sung danh sách từ khẳng định từ bộ thử (điểm 4 ở T10). *(01/11: hướng dẫn bản 2 mục 6.2 thêm nhóm mức sàn "hơn / trên / không dưới / trở lên + số" (QĐ4), `chung.yaml` có `tu_khang_dinh.tu_muc_san`.)*
 - [ ] **Điểm dừng cho nhãn Lệch điều kiện** (thêm 26/10, xem `luan_van/phan_tich_dieu_kien_ngoai_cau_hinh.md` mục 7). Đạt cả ba thì giữ bốn nhãn:
   - bộ thử có ít nhất 10 tuyên bố Lệch không thuộc loại "lên đến"; không đủ thì tăng bài sinh theo [T9.1](#t9-1), vẫn thiếu thì đánh giá nhãn Lệch chủ yếu trên tập cặp tối thiểu và ghi rõ giới hạn;
   - nhờ một người thứ hai gán độc lập ít nhất 30 tuyên bố của bộ thử, gồm mọi tuyên bố Lệch; kappa của riêng nhãn Lệch đạt ít nhất 0,6; không đạt thì sửa hướng dẫn rồi gán lại;
