@@ -315,3 +315,10 @@ def test_bao_cao_co_ghi_chu_ly_do_va_hang():
     # Chỉ t3 có hạng 9 (> 8) ở cách âm tiết; t1 hạng 1, t2 bị loại.
     assert "| t3 | dt-a | a#1 | 9 | 1 | Tuyên bố \\| số 3 |" in chu
     assert "| t1 | dt-a | a#1 |" not in chu
+
+
+def test_do_recall_ghi_chu_theo_tep_nhan():
+    # Rà soát 02/11 (lỗi 5): lượt 1 giữ đúng chữ của lần đo Bước 14; lượt khác ghi tệp, lượt và người gán thật.
+    assert do_recall.ghi_chu_theo_nhan([{"luot": 1, "nguoi_gan": "phuoc"}], "data/nhan/thu.jsonl") == do_recall.GHI_CHU
+    chu = do_recall.ghi_chu_theo_nhan([{"luot": 2, "nguoi_gan": "claude"}, {"luot": 2, "nguoi_gan": "phuoc"}], "x.jsonl")
+    assert chu == "Số tạm: bằng chứng chuẩn lấy từ x.jsonl (lượt 2, người gán claude, phuoc)."

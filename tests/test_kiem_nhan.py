@@ -2,6 +2,7 @@ import importlib.util
 import json
 import os
 from pathlib import Path
+import re
 import subprocess
 import sys
 import unicodedata
@@ -155,6 +156,10 @@ def bo_theo_dong(dong_d):
         kw.update(bang_chung=[], trich="")
     if dong_d == "D1b":
         kw["tai_lieu_mau_thuan"] = True
+    if dong_d == "D1a":
+        kw["ghi_chu"] = "chua_xac_dinh=đỉnh"  # D1a phải ghi nguyên nhân (hướng dẫn mục 8)
+    if dong_d == "D2":
+        kw["ghi_chu"] = "khang_dinh=luôn"  # D2 phải ghi từ khẳng định
     return nhan("tb-00001", **kw)
 
 
@@ -230,7 +235,7 @@ def test_loi_4_d1b_khi_va_chi_khi_tai_lieu_mau_thuan(mt):
     loi = chay(mt, [nhan("tb-00001", nhan="CHUA_DU", loai=None, dong_d="D1b", tai_lieu_mau_thuan=False)] + bo_dung()[1:])[0]
     assert len(loi) == 1 and "Dòng D1b là tài liệu ghi hai số khác nhau" in loi[0] and "tai_lieu_mau_thuan" in loi[0], loi
     for d, kw in (("D3", {"nhan": "DUNG", "loai": None}), ("D4", {"nhan": "LECH", "loai": "doi_dieu_kien"}),
-                  ("D5", {}), ("D1a", {"nhan": "CHUA_DU", "loai": None}),
+                  ("D5", {}), ("D1a", {"nhan": "CHUA_DU", "loai": None, "ghi_chu": "chua_xac_dinh=x"}),
                   ("D1", {"nhan": "CHUA_DU", "loai": None, "bang_chung": [], "trich": ""})):
         loi = chay(mt, [nhan("tb-00001", dong_d=d, tai_lieu_mau_thuan=True, **kw)] + bo_dung()[1:])[0]
         assert len(loi) == 1 and f"mà dòng là {d}: chỉ dòng D1b mới có" in loi[0], (d, loi)
@@ -247,11 +252,12 @@ def test_tai_lieu_mau_thuan_khong_con_bao_hai_lan_va_nhan_sai_chi_bao_loi_nhan(m
 
 def test_loi_5_d2_thi_loai_la_doi_kieu_gia_tri(mt):
     mau = "Dòng D2 là lệch kiểu giá trị, nên loại phải là doi_kieu_gia_tri (đang là 'doi_dieu_kien')."
-    loi = chay(mt, [nhan("tb-00001", nhan="LECH", dong_d="D2", loai="doi_dieu_kien")] + bo_dung()[1:])[0]
+    kd = {"ghi_chu": "khang_dinh=luôn"}  # D2 phải ghi từ khẳng định; ở đây chỉ thử loại
+    loi = chay(mt, [nhan("tb-00001", nhan="LECH", dong_d="D2", loai="doi_dieu_kien", **kd)] + bo_dung()[1:])[0]
     assert loi == [f"dòng 1 (tb-00001): {mau}"], loi
-    assert chay(mt, [nhan("tb-00001", nhan="LECH", dong_d="D2", loai="doi_kieu_gia_tri")] + bo_dung()[1:])[0] == []
+    assert chay(mt, [nhan("tb-00001", nhan="LECH", dong_d="D2", loai="doi_kieu_gia_tri", **kd)] + bo_dung()[1:])[0] == []
     # Loại trống: đã có lỗi "nhan LECH cần loai", không báo thêm lần hai.
-    loi = chay(mt, [nhan("tb-00001", nhan="LECH", dong_d="D2", loai=None)] + bo_dung()[1:])[0]
+    loi = chay(mt, [nhan("tb-00001", nhan="LECH", dong_d="D2", loai=None, **kd)] + bo_dung()[1:])[0]
     assert len(loi) == 1 and "nhan LECH cần loai" in loi[0], loi
     # D4 cũng cho doi_kieu_gia_tri (tuyên bố ghi rõ kiểu giá trị khác, hướng dẫn V37), không bị ép loại.
     assert chay(mt, [nhan("tb-00001", nhan="LECH", dong_d="D4", loai="doi_kieu_gia_tri")] + bo_dung()[1:])[0] == []
@@ -271,29 +277,33 @@ def chay_voi(mt, dong):
 def test_loi_6_mac_dinh_cua_dieu_kien_khong_co_mac_dinh(mt):
     chu = ("Ghi chú có mac_dinh=che_do_hien_thi, mà “Chế độ hiển thị” không có mặc định: tuyên bố không nói điều kiện "
            "này thì dừng ở D1a, nhãn Chưa đủ thông tin.")
-    for d, kw in (("D3", {}), ("D4", {"nhan": "LECH", "loai": "doi_dieu_kien"}), ("D6", {"nhan": "CHUA_DU", "loai": None}),
-                  ("D1", {"nhan": "CHUA_DU", "loai": None, "bang_chung": [], "trich": ""})):
+    for d, kw in (("D3", {}), ("D4", {"nhan": "LECH", "loai": "doi_dieu_kien"}), ("D6", {"nhan": "CHUA_DU", "loai": None})):
         loi = chay_voi(mt, [mac_dinh("che_do_hien_thi", dong_d=d, **kw)] + bo_dung()[1:])
         assert loi == [f"dòng 1 (tb-00001): {chu}"], (d, loi)
+    # D1 dừng trước khi xét điều kiện nên không ghi mac_dinh: không phải lỗi "phải dừng ở D1a", chỉ nhắc (S19).
+    d1 = mac_dinh("che_do_hien_thi", dong_d="D1", nhan="CHUA_DU", loai=None, bang_chung=[], trich="")
+    assert chay_voi(mt, [d1] + bo_dung()[1:]) == [] and kn.nhac_mot_dong(d1) == [kn.NHAC["d1_co_mac_dinh"]]
     # Đúng dòng D1a thì cho phép (hướng dẫn V25); khóa khác thì không bị; nhiều khóa thì chỉ khóa không có mặc định bị báo.
     dung = nhan("tb-00001", nhan="CHUA_DU", dong_d="D1a", loai=None, ghi_chu="mac_dinh=che_do_hien_thi")
     assert chay_voi(mt, [dung] + bo_dung()[1:]) == []
-    assert chay_voi(mt, [mac_dinh("dien_tich_do", dong_d="D3")] + bo_dung()[1:]) == []
-    loi = chay_voi(mt, [mac_dinh("dien_tich_do, che_do_hien_thi", dong_d="D3")] + bo_dung()[1:])
+    assert chay_voi(mt, [mac_dinh("ngoai_bang", dong_d="D3")] + bo_dung()[1:]) == []
+    loi = chay_voi(mt, [mac_dinh("ngoai_bang, che_do_hien_thi", dong_d="D3")] + bo_dung()[1:])
     assert len(loi) == 1 and "mac_dinh=che_do_hien_thi" in loi[0]
     # mac_dinh nằm giữa các mục ghi chú khác.
-    loi = chay_voi(mt, [nhan("tb-00001", nhan="DUNG", loai=None, ghi_chu="ngoai_cau_hinh=x; mac_dinh=a,che_do_hien_thi")]
+    loi = chay_voi(mt, [nhan("tb-00001", nhan="DUNG", loai=None, ghi_chu="ngoai_cau_hinh=x; mac_dinh=ngoai_bang,che_do_hien_thi")]
                    + bo_dung()[1:])
     assert len(loi) == 1 and "mac_dinh=che_do_hien_thi" in loi[0]
 
 
 def test_loi_6_chi_xet_dung_nhom_va_thuoc_tinh_cua_tuyen_bo():
     # Cùng khóa nhưng tuyên bố thuộc nhóm khác, hoặc thuộc tính khác: không phải điều kiện "không có mặc định" ở đó.
+    # (Bảng khóa ghi được rút gọn cho phép che_do_hien_thi ở cả ba, để chỉ xét luật "không có mặc định".)
+    qt = {"khoa_ghi_duoc": {k: ["che_do_hien_thi"] for k in (("tn", "do_sang"), ("dt", "thoi_luong_pin"), ("dt", "do_sang"))}}
     for ma_mau, thuoc_tinh in (("tn-test", "do_sang"), ("dt-test", "thoi_luong_pin")):
         tb = {"ma_mau": ma_mau, "thuoc_tinh": thuoc_tinh}
-        assert kn.kiem_mot_dong(mac_dinh("che_do_hien_thi", dong_d="D3"), tb, None, KHONG_CO) == []
+        assert kn.kiem_mot_dong(mac_dinh("che_do_hien_thi", dong_d="D3"), tb, None, KHONG_CO, qt) == []
     tb = {"ma_mau": "dt-test", "thuoc_tinh": "do_sang"}
-    assert len(kn.kiem_mot_dong(mac_dinh("che_do_hien_thi", dong_d="D3"), tb, None, KHONG_CO)) == 1
+    assert len(kn.kiem_mot_dong(mac_dinh("che_do_hien_thi", dong_d="D3"), tb, None, KHONG_CO, qt)) == 1
     # Tuyên bố không có thuoc_tinh (tệp tuyên bố rút gọn): bỏ qua, không đọc hướng dẫn.
     assert kn.kiem_mot_dong(mac_dinh("che_do_hien_thi", dong_d="D3"), {"ma_mau": "dt-test"}, None) == []
 
@@ -521,3 +531,251 @@ def test_lenh_thoat_ma_0_khi_hop_le(tmp_path):
     kq = chay_lenh({"nhan": n, "tb": tb})
     assert kq.returncode == 0, kq.stdout
     assert "Không có lỗi." in kq.stdout
+
+
+# ---------- Bước 16: luật của hướng dẫn bản 2 (S14, S15, S17-S21) ----------
+
+# Bản rút gọn của các bảng đọc từ hướng dẫn (quy_tac_huong_dan() đọc bản thật), cho tuyên bố dt-test / do_sang.
+QUY_TAC = {
+    "co_mac_dinh": {("dt", "do_sang"): {"dien_tich_do": {"dieu_kien": "Phần diện tích đo", "hieu": "Như hãng công bố cho chế độ đó"}}},
+    # Bản rút gọn: các test dùng bảng này nhắm luật khác, nên mọi khóa xuất hiện trong ghi chú của chúng đều ghi được.
+    "khoa_ghi_duoc": {("dt", "do_sang"): ["che_do_hien_thi", "dien_tich_do", "che_do_nguon", "a"], ("dt", "thoi_luong_pin"): ["hoat_dong"]},
+    "tu_hop_le": ["luôn", "đảm bảo", "bảo đảm", "ít nhất", "mọi lúc", "hơn", "trên", "không dưới", "trở lên"],
+    "ds_tu": "luôn, đảm bảo, bảo đảm, ít nhất, mọi lúc, hơn, trên, không dưới, trở lên",
+    "don_vi": {("dt", "do_sang"): {"don_vi": "nit", "re": re.compile(kn.tc.mau_don_vi("nit", "thử"))}},
+}
+
+
+def chay_qt(mt, dong, luot=None):
+    """Lỗi khi kiểm với bản rút gọn của KHONG_CO và QUY_TAC."""
+    ghi_jsonl(mt["nhan"], dong)
+    return kn.kiem_tep(mt["nhan"], mt["tb"], mt["nguon"], KHONG_CO, QUY_TAC, luot)[0]
+
+
+def d2(ghi_chu, **kw):
+    return nhan("tb-00001", nhan="LECH", dong_d="D2", loai="doi_kieu_gia_tri", ghi_chu=ghi_chu, **kw)
+
+
+def d1a(ghi_chu, **kw):
+    return nhan("tb-00001", nhan="CHUA_DU", dong_d="D1a", loai=None, ghi_chu=ghi_chu, **kw)
+
+
+@pytest.mark.parametrize("ly_do, ma", [
+    ("Khớp với tài liệu: “dt-apple-iphone17#016”.", "dt-apple-iphone17#016"),
+    ('Khớp với tài liệu: "tn-samsung-buds3pro#038".', "tn-samsung-buds3pro#038"),
+    ("Tài liệu ghi “Lên đến 30 giờ” và “dh-apple-watchse3#008”; 7 giờ chỉ đạt khi tắt chống ồn. Nguồn: “dt-x-y#1”.", "dh-apple-watchse3#008"),
+    ("Nguồn: “Thời gian xem video lên đến 30 giờ (dt-apple-iphone17#016)”.", "dt-apple-iphone17#016"),
+])
+def test_s14_ly_do_chep_ma_doan_vao_cho_cau_trich(mt, ly_do, ma):
+    loi = chay_qt(mt, [nhan("tb-00001", ly_do=ly_do)] + bo_dung()[1:])
+    assert loi == ["dòng 1 (tb-00001): " + kn.THONG_BAO["ly_do_ma_doan"].format(ma=ma)], loi
+    assert "Lý do chép mã đoạn thay cho câu trích" in loi[0]
+
+
+@pytest.mark.parametrize("ly_do", [
+    "Khớp với tài liệu: “Màn hình 1000 nit”.",
+    "Mã đoạn dt-apple-iphone17#016 nằm ngoài ngoặc kép.",   # chỉ bắt mã đoạn trong ngoặc kép (S14)
+    "Khớp “giá trị #1” và “tập dev-1”.",                     # có dấu # nhưng không phải <ma_mau>#<số>
+    "Không có ngoặc kép nào.",
+])
+def test_s14_ly_do_khong_chep_ma_doan(mt, ly_do):
+    assert chay_qt(mt, [nhan("tb-00001", ly_do=ly_do)] + bo_dung()[1:]) == []
+
+
+def test_s14_tren_nhan_luot_1_that():
+    nhan_1, tb = ROOT / "data/nhan/thu_luot1.jsonl", ROOT / "data/tuyen_bo/thu.jsonl"
+    if not (nhan_1.exists() and tb.exists() and kn.tc.TEP_HUONG_DAN.exists()):
+        pytest.skip("không có nhãn lượt 1")
+    loi, dong_nhan, so_tb = kn.kiem_tep(nhan_1, tb)
+    assert so_tb == len(dong_nhan) == 66
+    # Lượt 1 viết theo hướng dẫn bản 1: 31 lý do chép mã đoạn vào chỗ câu trích (B11 trong cau_hoi_nhan_luot1.md).
+    assert sum("Lý do chép mã đoạn thay cho câu trích" in e for e in loi) == 31
+
+
+def test_s15_nhac_cau_trich_khong_co_don_vi(mt):
+    tb = {"id": "tb-00001", "ma_mau": "dt-test", "thuoc_tinh": "do_sang"}
+    mau = ("Câu trích không có đơn vị của thuộc tính do_sang (nit): kiểm lại xem bằng chứng có đúng thuộc tính của tuyên bố không.")
+    assert kn.NHAC["trich_thieu_don_vi"].format(thuoc_tinh="do_sang", don_vi="nit") == mau
+    ok = nhan("tb-00001", trich="Màn hình 1000 nit")
+    assert kn.nhac_mot_dong(ok, tb, QUY_TAC) == []
+    assert kn.nhac_mot_dong(dict(ok, trich="Màn hình 1000 NITS"), tb, QUY_TAC) == []     # hoa thường, nits
+    assert kn.nhac_mot_dong(dict(ok, trich="độ sáng 3.000 cd/m²"), tb, QUY_TAC) == []
+    lech = dict(ok, trich="Công nghệ ProMotion thích ứng lên đến 120Hz")                    # lưu lệch sang tuyên bố kế bên
+    assert kn.nhac_mot_dong(lech, tb, QUY_TAC) == [mau]
+    assert kn.nhac_mot_dong(dict(ok, trich="Màn hình 1000 | Lên đến 120Hz"), tb, QUY_TAC) == [mau]
+    assert kn.nhac_mot_dong(dict(ok, trich="Luminit 5"), tb, QUY_TAC) == [mau]         # "nit" nằm giữa chữ thì không tính
+    assert kn.nhac_mot_dong(dict(ok, trich="   "), tb, QUY_TAC) == []                      # trống: D1, không có gì để kiểm
+    assert kn.nhac_mot_dong(lech, None, QUY_TAC) == [] and kn.nhac_mot_dong(lech) == []   # không biết thuộc tính thì thôi
+    assert kn.nhac_mot_dong(lech, {"ma_mau": "dt-test", "thuoc_tinh": "zoom"}, QUY_TAC) == []   # thuộc tính chưa có đơn vị
+    # Chỉ nhắc, không phải lỗi, và kiem_tep không đổi; nhac_tep gắn mã tuyên bố.
+    ghi_jsonl(mt["nhan"], [nhan("tb-00001", bang_chung=["dt-test#001"], trich="Lên đến 30 giờ")] + bo_dung()[1:])
+    loi, dong_nhan, _ = kn.kiem_tep(mt["nhan"], mt["tb"], mt["nguon"], KHONG_CO, QUY_TAC)
+    assert loi == []
+    tuyen_bo = kn.doc_tuyen_bo(mt["tb"])
+    nhac = kn.nhac_tep(dong_nhan, tuyen_bo, QUY_TAC)
+    assert nhac[0] == f"tb-00001: {mau}"
+
+
+def test_s15_don_vi_doc_tu_huong_dan_that():
+    if not kn.tc.TEP_HUONG_DAN.exists():
+        pytest.skip("không có data/huong_dan_gan_nhan.md")
+    tb = {"id": "tb-00001", "ma_mau": "dt-apple-iphone17", "thuoc_tinh": "do_sang"}
+    assert kn.nhac_mot_dong(nhan("tb-00001", trich="Độ sáng tối đa 1000 nit (tiêu chuẩn)"), tb) == []
+    nhac = kn.nhac_mot_dong(nhan("tb-00001", trich="Công nghệ ProMotion thích ứng lên đến 120Hz"), tb)
+    assert nhac == [kn.NHAC["trich_thieu_don_vi"].format(thuoc_tinh="do_sang", don_vi="nit")]
+    tb = {"id": "tb-00002", "ma_mau": "dt-apple-iphone17", "thuoc_tinh": "khang_nuoc"}
+    assert kn.nhac_mot_dong(nhan("tb-00002", trich="Đạt mức IP68 (chống nước ở độ sâu tối đa 6 mét)"), tb) == []
+    assert len(kn.nhac_mot_dong(nhan("tb-00002", trich="Độ sáng đỉnh 3000 nit"), tb)) == 1
+
+
+def test_s17_d2_phai_ghi_khang_dinh_co_trong_muc_6_2(mt):
+    thieu = kn.THONG_BAO["d2_thieu_khang_dinh"].format(ds=QUY_TAC["ds_tu"])
+    assert thieu == ("Dòng D2 phải ghi từ khẳng định vào ghi chú: khang_dinh=<từ>, với <từ> là một trong: "
+                     "luôn, đảm bảo, bảo đảm, ít nhất, mọi lúc, hơn, trên, không dưới, trở lên.")
+    for ghi_chu in ("", "mac_dinh=dien_tich_do", "khang_dinh=", "ngoai_cau_hinh=x; khang_dinh="):
+        assert chay_qt(mt, [d2(ghi_chu)] + bo_dung()[1:]) == [f"dòng 1 (tb-00001): {thieu}"], ghi_chu
+    la = chay_qt(mt, [d2("khang_dinh=rất")] + bo_dung()[1:])
+    assert la == ["dòng 1 (tb-00001): " + kn.THONG_BAO["d2_khang_dinh_la"].format(tu="rất", ds=QUY_TAC["ds_tu"])]
+    assert "“rất” không có trong danh sách từ khẳng định ở mục 6.2" in la[0]
+    # Từ hợp lệ: đúng chữ ở mục 6.2 (hoa thường, khoảng trắng không quan trọng); mức sàn ghi từ, không ghi cả "hơn 16 giờ".
+    for ghi_chu in ("khang_dinh=luôn", "khang_dinh=Luôn", "khang_dinh=hơn; mac_dinh=che_do_nguon", "khang_dinh=ít  nhất",
+                    "mac_dinh=a; khang_dinh=trở lên", "khang_dinh=luôn, đảm bảo"):
+        assert chay_qt(mt, [d2(ghi_chu)] + bo_dung()[1:]) == [], ghi_chu
+    loi = chay_qt(mt, [d2("khang_dinh=hơn 16 giờ")] + bo_dung()[1:])
+    assert len(loi) == 1 and "khang_dinh=hơn 16 giờ" in loi[0]
+    loi = chay_qt(mt, [d2("khang_dinh=luôn, rất, rất")] + bo_dung()[1:])  # từ lạ lặp lại chỉ báo một lần
+    assert len(loi) == 1 and "khang_dinh=rất" in loi[0]
+    # Chỉ D2 bị buộc; dòng khác không cần khang_dinh.
+    assert chay_qt(mt, [nhan("tb-00001", nhan="LECH", dong_d="D4", loai="doi_dieu_kien")] + bo_dung()[1:]) == []
+
+
+def test_s17_d2_doc_tu_huong_dan_that():
+    if not kn.tc.TEP_HUONG_DAN.exists():
+        pytest.skip("không có data/huong_dan_gan_nhan.md")
+    tb = {"ma_mau": "dt-apple-iphone17", "thuoc_tinh": "tan_so_quet"}
+    d = d2("khang_dinh=luôn")
+    assert kn.kiem_mot_dong(d, tb, None) == []
+    assert kn.kiem_mot_dong(d2("khang_dinh=hơn"), tb, None) == []    # V50: khang_dinh=hơn
+    assert len(kn.kiem_mot_dong(d2(""), tb, None)) == 1 and len(kn.kiem_mot_dong(d2("khang_dinh=tối thiểu"), tb, None)) == 1
+
+
+def test_s18_d1a_phai_ghi_nguyen_nhan(mt):
+    thieu = kn.THONG_BAO["d1a_thieu_nguyen_nhan"].format(ds="che_do_hien_thi")
+    assert thieu == ("Dòng D1a phải ghi nguyên nhân vào ghi chú: mac_dinh=<khóa “Không có mặc định” của thuộc tính này: "
+                     "che_do_hien_thi> hoặc chua_xac_dinh=<cụm>.")
+    assert chay_qt(mt, [d1a("")] + bo_dung()[1:]) == [f"dòng 1 (tb-00001): {thieu}"]
+    # Đủ nguyên nhân: khóa "không có mặc định" (kể cả kèm khóa có mặc định, V46), hoặc chua_xac_dinh (V47).
+    for ghi_chu in ("mac_dinh=che_do_hien_thi", "mac_dinh=dien_tich_do,che_do_hien_thi", "chua_xac_dinh=đỉnh",
+                    "mac_dinh=dien_tich_do; chua_xac_dinh=toàn màn hình", "mac_dinh=che_do_hien_thi; chua_xac_dinh=đỉnh"):
+        assert chay_qt(mt, [d1a(ghi_chu)] + bo_dung()[1:]) == [], ghi_chu
+    # Chỉ ghi khóa có cách hiểu mặc định thì sai: dùng mặc định rồi dò tiếp (chiều ngược của mac_dinh_khong_co).
+    loi = chay_qt(mt, [d1a("mac_dinh=dien_tich_do")] + bo_dung()[1:])
+    assert loi == [f"dòng 1 (tb-00001): {thieu}",
+                   "dòng 1 (tb-00001): Ghi chú có mac_dinh=dien_tich_do, mà “Phần diện tích đo” có cách hiểu mặc định “Như hãng công bố "
+                   "cho chế độ đó”: dùng mặc định rồi dò tiếp, không dừng ở D1a vì khóa này."]
+    # chua_xac_dinh trống hoặc mac_dinh trống không tính là nguyên nhân; khóa lạ cũng không.
+    for ghi_chu in ("chua_xac_dinh=", "chua_xac_dinh=  ; mac_dinh=", "mac_dinh=khoa_la", "ngoai_cau_hinh=x"):
+        loi = chay_qt(mt, [d1a(ghi_chu)] + bo_dung()[1:])
+        # khoa_la còn bị báo riêng là khóa không ghi được (rà soát 02/11).
+        assert len(loi) == (2 if "khoa_la" in ghi_chu else 1) and "phải ghi nguyên nhân" in loi[-1], (ghi_chu, loi)
+
+
+def test_s18_d1a_thuoc_tinh_khong_co_khoa_khong_co_mac_dinh(mt):
+    # Thuộc tính không có khóa "Không có mặc định": chỉ chua_xac_dinh mới là nguyên nhân.
+    tb = {"ma_mau": "dt-test", "thuoc_tinh": "thoi_luong_pin"}
+    loi = kn.kiem_mot_dong(d1a("mac_dinh=hoat_dong"), tb, None, KHONG_CO, QUY_TAC)
+    assert len(loi) == 1 and "(thuộc tính này không có khóa nào)" in loi[0], loi
+    assert kn.kiem_mot_dong(d1a("chua_xac_dinh=liên tục"), tb, None, KHONG_CO, QUY_TAC) == []
+    # Tuyên bố không có thuoc_tinh (tệp tuyên bố rút gọn): không biết khóa nào, bỏ qua, không đọc hướng dẫn.
+    assert kn.kiem_mot_dong(d1a(""), {"ma_mau": "dt-test"}, None) == []
+
+
+def test_s18_d1a_doc_tu_huong_dan_that():
+    if not kn.tc.TEP_HUONG_DAN.exists():
+        pytest.skip("không có data/huong_dan_gan_nhan.md")
+    tb = {"ma_mau": "dt-apple-iphone17", "thuoc_tinh": "sac_nhanh"}
+    assert len(kn.kiem_mot_dong(d1a(""), tb, None)) == 1
+    assert kn.kiem_mot_dong(d1a("mac_dinh=moc_phan_tram,cach_sac"), tb, None) == []         # V46
+    loi = kn.kiem_mot_dong(d1a("mac_dinh=cach_sac"), tb, None)
+    assert len(loi) == 2 and "mac_dinh=cach_sac" in loi[1] and "Sạc bằng cáp" in loi[1]
+
+
+def test_s19_d1_co_mac_dinh_chi_nhac(mt):
+    d1 = nhan("tb-00001", nhan="CHUA_DU", dong_d="D1", loai=None, bang_chung=[], trich="", ghi_chu="mac_dinh=hoat_dong")
+    assert kn.NHAC["d1_co_mac_dinh"] == "Dòng D1 dừng trước khi xét điều kiện, nên không cần ghi mac_dinh=… (mục 8)."
+    assert kn.nhac_mot_dong(d1) == [kn.NHAC["d1_co_mac_dinh"]]
+    assert kn.nhac_mot_dong(dict(d1, ghi_chu="")) == [] and kn.nhac_mot_dong(dict(d1, ghi_chu="mac_dinh=")) == []
+    assert kn.nhac_mot_dong(dict(d1, dong_d="D6", bang_chung=["dt-test#001"], trich="Màn hình 1000 nit")) == []
+    assert chay_qt(mt, [d1] + bo_dung()[1:]) == []     # chỉ nhắc, không phải lỗi
+    # kể cả khóa "không có mặc định": ở D1 không báo lỗi "phải dừng ở D1a".
+    assert chay_qt(mt, [dict(d1, ghi_chu="mac_dinh=che_do_hien_thi")] + bo_dung()[1:]) == []
+
+
+def test_s20_luot_mac_dinh_doc_tu_ban_ghi_va_tham_so_luot(mt):
+    dong = [dict(nh, luot=2) for nh in bo_dung()]
+    ghi_jsonl(mt["nhan"], dong)
+    loi, dong_nhan, _ = kn.kiem_tep(mt["nhan"], mt["tb"], mt["nguon"], KHONG_CO, QUY_TAC)
+    assert loi == [] and "Lượt gán (luot): 2" in "\n".join(kn.tom_tat(dong_nhan, 4))
+    assert kn.kiem_tep(mt["nhan"], mt["tb"], mt["nguon"], KHONG_CO, QUY_TAC, 2)[0] == []
+    loi = kn.kiem_tep(mt["nhan"], mt["tb"], mt["nguon"], KHONG_CO, QUY_TAC, 1)[0]
+    assert len(loi) == 4 and all("luot là 2, khác lượt 1 đang kiểm" in e for e in loi), loi
+    # Không truyền lượt mà tệp trộn hai lượt: một lỗi nêu các lượt.
+    ghi_jsonl(mt["nhan"], [dict(dong[0], luot=1)] + dong[1:])
+    loi = kn.kiem_tep(mt["nhan"], mt["tb"], mt["nguon"], KHONG_CO, QUY_TAC)[0]
+    assert loi == ["các dòng nhãn thuộc nhiều lượt khác nhau (luot: 1, 2); một tệp chỉ chứa một lượt, hoặc truyền --luot"], loi
+    assert "Lượt gán (luot): 1, 2" in "\n".join(kn.tom_tat([dict(dong[0], luot=1), dong[1]], 4))
+
+
+def test_s20_lenh_luot(tmp_path):
+    doan_that = ROOT / "data/nguon/dt-apple-iphone17/doan.jsonl"
+    if not doan_that.exists():
+        pytest.skip("không có data/nguon/dt-apple-iphone17/doan.jsonl")
+    d = json.loads(doan_that.read_text(encoding="utf-8").splitlines()[1])
+    tb = ghi_jsonl(tmp_path / "thu.jsonl", [{"id": "tb-00001", "ma_mau": "dt-apple-iphone17"}])
+    n = ghi_jsonl(tmp_path / "nhan.jsonl", [nhan("tb-00001", bang_chung=[d["id"]], trich=d["noi_dung"][:20], luot=2)])
+
+    def lenh(*them):
+        return subprocess.run([sys.executable, str(ROOT / "scripts/kiem_nhan.py"), str(n), str(tb), *them], capture_output=True,
+                              text=True, encoding="utf-8", cwd=tmp_path, env={**os.environ, "PYTHONIOENCODING": "utf-8"})
+    kq = lenh()
+    assert kq.returncode == 0 and "Lượt gán (luot): 2" in kq.stdout, kq.stdout
+    assert lenh("--luot", "2").returncode == 0
+    kq = lenh("--luot", "1")
+    assert kq.returncode == 1 and "luot là 2, khác lượt 1 đang kiểm" in kq.stdout
+
+
+def test_s21_giay_nghi_tuy_chon(mt):
+    dong = bo_dung()
+    assert "giay_nghi" in kn.TRUONG_TUY_CHON and "giay_nghi" not in kn.TRUONG   # không bắt buộc: lượt 1 không có trường này
+    assert chay(mt, dong)[0] == []
+    for gia_tri in (0, 7, 420):
+        assert chay(mt, [dict(dong[0], giay_nghi=gia_tri)] + dong[1:])[0] == [], gia_tri
+    for gia_tri in (-1, 2.5, "7", True, None):
+        loi = chay(mt, [dict(dong[0], giay_nghi=gia_tri)] + dong[1:])[0]
+        assert len(loi) == 1 and "giay_nghi phải là số nguyên không âm" in loi[0], (gia_tri, loi)
+    loi = chay(mt, [dict(dong[0], giay_la=3)] + dong[1:])[0]
+    assert len(loi) == 1 and "trường lạ: giay_la" in loi[0]
+    _, dong_nhan, so_tb = chay(mt, [dict(dong[0], giay_nghi=300), dict(dong[1], giay_nghi=0)] + dong[2:])
+    chu = "\n".join(kn.tom_tat(dong_nhan, so_tb))
+    assert "Đồng hồ đứng vì không thao tác (giay_nghi, không nằm trong giay): tổng 300 giây (5 phút 0 giây) ở 1 tuyên bố" in chu
+    assert "giay_nghi" not in "\n".join(kn.tom_tat(bo_dung(), 4))   # không có trường thì không in dòng này
+
+
+def test_mac_dinh_chi_nhan_khoa_ghi_duoc_cua_thuoc_tinh():
+    # Rà soát 02/11 (lỗi 3): khóa của mac_dinh= phải là khóa bảng mục 5 của nhóm và thuộc tính, trừ "như hãng công bố";
+    # ngoai_bang (mục 6.7 ý 4, QĐ10) ghi được ở mọi thuộc tính; D1 không bị báo (chỉ nhắc S19).
+    if not kn.tc.TEP_HUONG_DAN.exists():
+        pytest.skip("không có data/huong_dan_gan_nhan.md")
+    tb = {"ma_mau": "dt-apple-iphone17", "thuoc_tinh": "sac_nhanh"}
+    ok = nhan("tb-00001", nhan="LECH", dong_d="D4", loai="bo_dieu_kien", ghi_chu="mac_dinh=bo_tiep_hop,cach_sac")
+    assert kn.kiem_mot_dong(ok, tb, None) == []
+    for khoa in ("bo_tiep_hop, ngoai_bang", "ngoai_bang"):
+        assert kn.kiem_mot_dong(nhan("tb-00001", nhan="DUNG", loai=None, ghi_chu=f"mac_dinh={khoa}"), tb, None) == [], khoa
+    for khoa in ("bo_tiep_hp", "che_do_hien_thi", "hoat_dong"):  # gõ sai; khóa của thuộc tính khác
+        loi = kn.kiem_mot_dong(nhan("tb-00001", nhan="DUNG", loai=None, ghi_chu=f"mac_dinh={khoa}"), tb, None)
+        assert len(loi) == 1 and f"mac_dinh={khoa}" in loi[0] and "không phải khóa ghi được" in loi[0], khoa
+    tb = {"ma_mau": "dt-apple-iphone17", "thuoc_tinh": "do_sang"}  # dien_tich_do: "như hãng công bố", không ghi
+    loi = kn.kiem_mot_dong(nhan("tb-00001", nhan="DUNG", loai=None, ghi_chu="mac_dinh=dien_tich_do"), tb, None)
+    assert len(loi) == 1 and "như hãng công bố" in loi[0]
+    d1 = nhan("tb-00001", nhan="CHUA_DU", dong_d="D1", loai=None, bang_chung=[], trich="", ghi_chu="mac_dinh=xyz")
+    assert kn.kiem_mot_dong(d1, tb, None) == []

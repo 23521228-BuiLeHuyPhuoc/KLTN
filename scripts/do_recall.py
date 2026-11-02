@@ -1,12 +1,13 @@
 """Bước 14: đo Recall@k (k = 1, 3, 5, 8) của truy hồi BM25 trên bộ thử, cho hai cách tách (âm tiết, từ).
 
 Truy vấn là tuyên bố trong data/tuyen_bo/thu.jsonl, tìm trong doan.jsonl của đúng mẫu của tuyên bố; chuẩn là
-bang_chung trong data/nhan/thu.jsonl. Theo T6.4, tuyên bố trúng ở k nếu có ít nhất một đoạn bằng chứng nằm trong
+bang_chung trong tệp nhãn (--nhan, mặc định data/nhan/thu.jsonl là lượt 1). Theo T6.4, tuyên bố trúng ở k nếu có ít nhất một đoạn bằng chứng nằm trong
 top-k; mẫu số là các tuyên bố có bằng chứng, trừ danh sách --bo. Ghi ket_qua/recall_buoc14.md (chỉ có số liệu, không
 nhận xét). Chỉ đọc dữ liệu, không gọi LLM.
 
-Chạy:
-    .venv/Scripts/python.exe scripts/do_recall.py [--bo tb-00009,tb-00010]
+Chạy (lượt 1, đúng như lần đo của Bước 14):
+    .venv/Scripts/python.exe scripts/do_recall.py --nhan data/nhan/thu.jsonl --bo tb-00009,tb-00010
+Lượt khác: --nhan <tệp nhãn>; --bo mặc định rỗng (rà soát 02/11: không còn đọc cứng nhãn lượt 1 và danh sách loại).
 """
 import argparse
 import json
@@ -20,10 +21,19 @@ from kiemchung import cau_hinh, truy_hoi as th  # noqa: E402
 TEP_TUYEN_BO = ROOT / "data/tuyen_bo/thu.jsonl"
 TEP_NHAN = ROOT / "data/nhan/thu.jsonl"
 TEP_RA = ROOT / "ket_qua/recall_buoc14.md"
-BO_MAC_DINH = "tb-00009,tb-00010"
+BO_LUOT_1 = "tb-00009,tb-00010"  # danh sách loại của lần đo Bước 14 (nhãn lượt 1); không còn là mặc định
 LY_DO_MAC_DINH = "bằng chứng lưu lệch sang tuyên bố kế bên (nhãn lượt 1)"
 TEN_CACH = {"am_tiet": "Âm tiết", "tu": "Từ (pyvi)"}
 GHI_CHU = "Số tạm: bằng chứng chuẩn lấy từ nhãn lượt 1 của Bước 13; tính lại sau khi gán lại ở Bước 16."
+
+
+def ghi_chu_theo_nhan(dong_nhan, tep):
+    """Dòng chú thích đầu báo cáo theo tệp nhãn thật: lượt 1 giữ đúng chữ của lần đo Bước 14 (GHI_CHU)."""
+    luot = sorted({str(nh.get("luot")) for nh in dong_nhan})
+    if luot == ["1"]:
+        return GHI_CHU
+    nguoi = ", ".join(sorted({str(nh.get("nguoi_gan")) for nh in dong_nhan}))
+    return f"Số tạm: bằng chứng chuẩn lấy từ {tep} (lượt {', '.join(luot)}, người gán {nguoi})."
 
 
 def doc_jsonl(duong):
@@ -52,7 +62,7 @@ def xep_hang_tat_ca(tuyen_bo, cach):
     return {tb["id"]: [ma for ma, _ in th.truy_hoi(tb["ma_mau"], tb["tuyen_bo"], None, cach)] for tb in tuyen_bo}
 
 
-def tao_bao_cao(tuyen_bo, bang_chung, xep_hang, bo, ly_do, ten_mau):
+def tao_bao_cao(tuyen_bo, bang_chung, xep_hang, bo, ly_do, ten_mau, ghi_chu=GHI_CHU):
     """Danh sách dòng markdown của báo cáo.
 
     xep_hang: {cách tách: {mã tuyên bố: [mã đoạn xếp giảm dần]}}; bo: các mã tuyên bố loại khỏi mẫu số;
@@ -63,7 +73,7 @@ def tao_bao_cao(tuyen_bo, bang_chung, xep_hang, bo, ly_do, ten_mau):
     khong_bang_chung = [ma for ma, bc in bang_chung.items() if not bc]
     bi_loai = [ma for ma in bo if bang_chung[ma]]
     dau_k = [f"k={k}" for k in th.KS]
-    dong = ["# Recall@k của truy hồi BM25 trên bộ thử (Bước 14)", "", GHI_CHU, "",
+    dong = ["# Recall@k của truy hồi BM25 trên bộ thử (Bước 14)", "", ghi_chu, "",
             f"Bộ thử có {len(tuyen_bo)} tuyên bố, {len(khong_bang_chung)} không có bằng chứng (không tính), "
             f"{len(bi_loai)} bị loại; mẫu số {len(mau_so)}. Tuyên bố trúng ở k khi có ít nhất một đoạn bằng chứng "
             "nằm trong top-k.", ""]
@@ -104,13 +114,16 @@ def tao_bao_cao(tuyen_bo, bang_chung, xep_hang, bo, ly_do, ten_mau):
 def main():
     sys.stdout.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser(description="Đo Recall@k của BM25 trên bộ thử (Bước 14).")
-    ap.add_argument("--bo", default=BO_MAC_DINH, help=f"mã tuyên bố loại khỏi mẫu số, cách nhau dấu phẩy (mặc định {BO_MAC_DINH})")
+    ap.add_argument("--nhan", type=Path, default=TEP_NHAN, help=f"tệp nhãn chuẩn (mặc định {TEP_NHAN.relative_to(ROOT)}, lượt 1)")
+    ap.add_argument("--bo", default="", help=f"mã tuyên bố loại khỏi mẫu số, cách nhau dấu phẩy (mặc định không loại; lần đo "
+                                             f"Bước 14 dùng {BO_LUOT_1})")
     ap.add_argument("--ly-do", default=LY_DO_MAC_DINH, help="lý do loại, in vào báo cáo")
     ap.add_argument("--ra", type=Path, default=TEP_RA, help=f"tệp báo cáo (mặc định {TEP_RA.relative_to(ROOT)})")
     args = ap.parse_args()
 
     tuyen_bo = doc_jsonl(TEP_TUYEN_BO)
-    bang_chung = {nh["id"]: nh["bang_chung"] for nh in doc_jsonl(TEP_NHAN)}
+    dong_nhan = doc_jsonl(args.nhan)
+    bang_chung = {nh["id"]: nh["bang_chung"] for nh in dong_nhan}
     if set(bang_chung) != {tb["id"] for tb in tuyen_bo}:
         sys.exit("tệp nhãn và tệp tuyên bố không cùng tập mã tuyên bố")
     bo = [ma.strip() for ma in args.bo.split(",") if ma.strip()]
@@ -125,7 +138,11 @@ def main():
             if th.hang_bang_chung(xep_hang[cach][ma], bang_chung[ma]) is None:
                 sys.exit(f"{ma}: bằng chứng {bang_chung[ma]} không có trong doan.jsonl của mẫu")
     ten_mau = {r["ma_mau"]: f"{r['ten']} ({r['ma_mau']})" for r in cau_hinh.doc_mau()}
-    dong = tao_bao_cao(tuyen_bo, bang_chung, xep_hang, bo, args.ly_do, ten_mau)
+    try:
+        ten_tep = args.nhan.resolve().relative_to(ROOT).as_posix()
+    except ValueError:
+        ten_tep = str(args.nhan)
+    dong = tao_bao_cao(tuyen_bo, bang_chung, xep_hang, bo, args.ly_do, ten_mau, ghi_chu_theo_nhan(dong_nhan, ten_tep))
     args.ra.parent.mkdir(parents=True, exist_ok=True)
     args.ra.write_text("\n".join(dong) + "\n", encoding="utf-8")
     print("\n".join(dong))

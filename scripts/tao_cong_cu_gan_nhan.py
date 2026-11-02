@@ -1,4 +1,4 @@
-"""Bước 13: sinh công cụ gán nhãn chuẩn data/nhan/cong_cu_gan_nhan.html cho 66 tuyên bố của bộ thử.
+"""Bước 13, 16: sinh công cụ gán nhãn chuẩn data/nhan/cong_cu_gan_nhan.html cho 66 tuyên bố của bộ thử.
 
 Một tệp HTML tự chứa (CSS, JavaScript viết thẳng, không tải gì từ mạng), mở trực tiếp bằng trình duyệt
 (file://). Dữ liệu nhúng vào tệp dưới dạng JSON: tuyên bố (data/tuyen_bo/thu.jsonl), bài quảng cáo của các
@@ -7,29 +7,41 @@ tuyên bố đó (data/quang_cao/<ma_qc>.json), toàn bộ đoạn tài liệu c
 trước khi bỏ ở noi_dung_goc chỉ dùng để kiểm câu trích) và nội dung hướng dẫn gán nhãn
 (data/huong_dan_gan_nhan.md, đọc lúc sinh trang: sửa hướng dẫn rồi chạy lại script là trang cập nhật).
 
+Bản này là trang của lượt 2 (Bước 16, hướng dẫn bản 2, luan_van/buoc16_de_xuat_huong_dan_ban2.md mục 6, S1-S25):
+khóa lưu gan_nhan_thu_v2, bản ghi xuất ra có luot = 2, tệp tải về thu_luot2.jsonl và cau_hoi_nhan_luot2.md. Lượt 1 giữ
+nguyên ở data/nhan/thu.jsonl và thu_luot1.jsonl; nút "Nhập lại" từ chối bản ghi luot khác 2.
+
 Ranh giới của công cụ (giữ khi sửa):
 - Được hiện: nội dung hướng dẫn giống nhau cho mọi tuyên bố (cách làm, bảng D1-D6 kèm câu hỏi, ví dụ và mẫu câu, quy
   tắc hay dùng, toàn văn hướng dẫn), hoặc nội dung lọc theo nhóm sản phẩm (tiền tố ma_mau) và thuộc tính đã ghi sẵn
-  trên tuyên bố (khung "Khi tuyên bố không nói điều kiện" từ mục 5 và 5.1, hướng thuận lợi ở mục 6.1).
+  trên tuyên bố (khung "Bước 3" từ mục 5 và 5.1, khung "Cụm điều kiện đã biết" từ phụ lục mục 13, hướng thuận lợi ở
+  mục 6.1, tên thuộc tính ở câu hỏi D1).
 - Không được: gợi ý nhãn, tự đánh giá D1-D6 cho một tuyên bố, đoán loại biến đổi, chọn bằng chứng, lọc hay sắp xếp
   đoạn tài liệu theo tuyên bố (cột phải hiện mọi đoạn của mẫu). Người gán tự đọc, tự chọn dòng D ("Dừng ở đây").
+- Không hiện ghi_chu của tuyên bố (ghi chú tách như tach_sua=…, ghi chú bỏ phần, gộp): khi gán chỉ đọc chữ của tuyên bố (hướng
+  dẫn mục 1, bước 0). Trường ghi_chu vẫn nằm trong dữ liệu nhúng (TRUONG_TUYEN_BO), chỉ không hiện ra.
 - Nhãn và loại chỉ được suy ra từ dòng D người gán đã chọn (NHAN_THEO_DONG, LOAI_THEO_DONG), không từ nội dung tuyên bố.
 - Bắt lỗi chỉ theo kiểu "các ô người gán điền mâu thuẫn nhau hoặc trái quy tắc", dựa vào thông tin đã có sẵn trên
   tuyên bố (nhóm từ tiền tố ma_mau, thuộc tính) và các ô người gán điền (dòng D, nhãn, loại, bằng chứng, câu trích,
-  ghi chú, tick tài liệu mâu thuẫn). Không đọc nội dung tuyên bố (tuyen_bo, cau_goc) để suy ra nhãn: không dò cụm
-  điều kiện trong câu tuyên bố, không đoán dòng D.
-Các quy tắc kiểm trên trang (dòng D, loại biến đổi theo nhãn, tài liệu mâu thuẫn, chỗ {…} chưa thay, bằng chứng, câu
-trích, mac_dinh trong ghi chú) là bản JavaScript của scripts/kiem_nhan.py; sửa một bên thì sửa bên kia. Bảng dòng D, thông
-báo lỗi và lời nhắc nằm ở đây (THONG_BAO, NHAC) và được nhúng vào trang, còn kiem_nhan.py import lại, nên hai bên cùng chữ.
+  lý do, ghi chú, tick tài liệu mâu thuẫn). Không đọc nội dung tuyên bố (tuyen_bo, cau_goc) để suy ra nhãn: không dò cụm
+  điều kiện trong câu tuyên bố, không đoán dòng D. Gợi ý "đoạn khác cũng có chữ này" (S16) chỉ dùng chuỗi người gán
+  đã bôi đen.
+Các quy tắc kiểm trên trang là bản JavaScript của scripts/kiem_nhan.py; sửa một bên thì sửa bên kia (tests/test_tao_cong_cu_gan_nhan.py
+chạy khối LUAT_KIEM của trang trong node và so với kiem_nhan.py). Quy tắc: dòng D, loại biến đổi theo nhãn, tài liệu mâu thuẫn,
+chỗ {…} chưa thay, bằng chứng, câu trích, mac_dinh trong ghi chú (mac_dinh của điều kiện "không có mặc định" chỉ ở D1a; D1a phải
+ghi nguyên nhân: mac_dinh=<khóa không có mặc định> hoặc chua_xac_dinh=<cụm>; D2 phải ghi khang_dinh=<từ ở mục 6.2>), lý do không
+chép mã đoạn vào chỗ câu trích. Lời nhắc (không chặn lưu): bo_dieu_kien thiếu mac_dinh, D1 mà ghi mac_dinh, câu trích không có đơn vị
+của thuộc tính (mục 6.1). Bảng dòng D, thông báo lỗi và lời nhắc nằm ở đây (THONG_BAO, NHAC) và được nhúng vào trang, còn
+kiem_nhan.py import lại, nên hai bên cùng chữ.
 
-Nhãn đã gán nằm trong localStorage của trình duyệt (khóa gan_nhan_thu_v1), không nằm trong tệp HTML, nên sinh lại
+Nhãn đã gán nằm trong localStorage của trình duyệt (khóa gan_nhan_thu_v2), không nằm trong tệp HTML, nên sinh lại
 trang không mất nhãn. Trạng thái mở/đóng các khung hướng dẫn và danh sách tuyên bố đang bị cảnh báo "không qua quy
-tắc mới" nằm ở khóa riêng gan_nhan_giao_dien_v1. Bản ghi nhãn có thêm trường dong_d; bản ghi cũ chưa có dong_d vẫn nạp
-được nhưng bị bỏ dấu "đã gán" cho tới khi người gán chọn dòng D và lưu lại.
+tắc mới" nằm ở khóa riêng gan_nhan_giao_dien_v2. Đồng hồ dừng đếm khi không có thao tác quá 3 phút; số giây bị bỏ ghi riêng
+(trường giay_nghi của bản ghi xuất ra, tùy chọn).
 
 Chạy: .venv/Scripts/python.exe scripts/tao_cong_cu_gan_nhan.py
-Kết quả: nút "Tải nhãn (thu.jsonl)" trong công cụ tải tệp để chép vào data/nhan/thu.jsonl, rồi kiểm bằng
-    .venv/Scripts/python.exe scripts/kiem_nhan.py data/nhan/thu.jsonl
+Kết quả: nút "Tải nhãn (thu_luot2.jsonl)" trong công cụ tải tệp để chép vào data/nhan/thu_luot2.jsonl, rồi kiểm bằng
+    .venv/Scripts/python.exe scripts/kiem_nhan.py data/nhan/thu_luot2.jsonl
 """
 import html
 import json
@@ -50,6 +62,13 @@ TRUONG_TUYEN_BO = ("id", "ma_qc", "ma_mau", "cau_goc", "tuyen_bo", "thuoc_tinh",
 # Nhóm sản phẩm suy từ tiền tố của ma_mau (dt-apple-iphone17 -> dt); tên nhóm như cột "Nhóm" trong hướng dẫn.
 NHOM_THEO_TIEN_TO = {"dt": "Điện thoại", "tn": "Tai nghe", "dh": "Đồng hồ"}
 MA_NHAN = ("DUNG", "SAI", "LECH", "CHUA_DU")
+# Lượt gán của trang này (hướng dẫn mục 8, QT11): lượt 2 theo hướng dẫn bản 2. Khóa lưu riêng với lượt 1 (gan_nhan_thu_v1).
+LUOT = 2
+KHOA_NHAN = "gan_nhan_thu_v2"
+KHOA_GIAO_DIEN = "gan_nhan_giao_dien_v2"
+TEN_TEP_NHAN = f"thu_luot{LUOT}.jsonl"
+TEN_TEP_HOI = f"cau_hoi_nhan_luot{LUOT}.md"
+NGHI_GIAY = 180  # S21: không thao tác quá chừng này giây thì đồng hồ dừng đếm
 MA_LOAI = ("bo_dieu_kien", "doi_dieu_kien", "doi_bo_phan", "doi_phien_ban", "doi_kieu_gia_tri", "doi_gia_tri")
 
 # Dòng D (hướng dẫn mục 7) và nhãn suy ra từ dòng người gán dừng ở. Bấm "Dừng ở đây" thì nhãn tự đặt theo bảng này;
@@ -64,41 +83,50 @@ TEN_NHAN_TRONG_HUONG_DAN = {"CHUA_DU": "Chưa đủ thông tin", "LECH": "Lệch
 # Chữ hiện trên trang cho từng dòng D (giống nhau cho mọi tuyên bố). vi_du: (mã ví dụ trong hướng dẫn, "" nếu giả định; chữ).
 DONG_D_HIEN_THI = {
     "D1": {
-        "cau_hoi": "Tài liệu có nói gì về thông số này của đúng sản phẩm không? Không có thì dừng.",
+        # {thuoc_tinh} do trang thay bằng tên thuộc tính ghi sẵn trên tuyên bố (tên lấy từ bảng mục 5 của hướng dẫn).
+        "cau_hoi": "Tài liệu của đúng sản phẩm có con số nào cho thuộc tính {thuoc_tinh} không, ở bất kỳ điều kiện hay bộ "
+                   "phận nào? Không có số nào thì dừng. Có số nhưng ở điều kiện khác thì dò tiếp.",
         "nhan": "Chưa đủ thông tin (bằng chứng để trống)",
         "vi_du": ("", "Tai nghe B nghe nhạc 8 giờ. Hãng chỉ ghi Bluetooth, trọng lượng, chống nước; không có con số giờ "
                       "pin nào, kể cả trong chú thích. Không có gì để so nên dừng ở D1, bằng chứng để trống."),
     },
     "D1a": {
-        "cau_hoi": "Có biết tuyên bố đang nói ở điều kiện nào không? Tuyên bố nêu rõ thì biết. Không nêu thì xem khung "
-                   "“Khi tuyên bố không nói điều kiện” bên dưới: dòng đó ghi “Không có mặc định” thì không biết, dừng.",
+        "cau_hoi": "Có biết tuyên bố đang nói ở điều kiện nào không? Điều kiện nêu rõ, hoặc có cách hiểu mặc định ở khung "
+                   "Bước 3 phía trên, là đã biết, không dừng ở đây. Chỉ dừng khi: (1) điều kiện ghi “Không có mặc "
+                   "định” mà tuyên bố không nêu; (2) chữ của tuyên bố trỏ tới nhiều chế độ; (3) cụm điều kiện không "
+                   "giải được (mục 6.7, 6.8). Ghi nguyên nhân vào ghi chú.",
         "nhan": "Chưa đủ thông tin",
         "vi_du": ("V26", "Màn hình Xiaomi 15T sáng 3200 nit. Hãng ghi 3200 nit khi màn hình tự tăng sáng dưới ánh sáng "
                          "mạnh. Tuyên bố không nói chế độ nào, và độ sáng điện thoại “Không có mặc định”, nên không biết "
-                         "so với số nào. Dừng ở D1a dù con số khớp."),
+                         "so với số nào. Dừng ở D1a dù con số khớp. Ghi chú mac_dinh=che_do_hien_thi."),
     },
     "D1b": {
-        "cau_hoi": "Ở điều kiện đó, tài liệu có ghi hai số khác nhau không? Có thì dừng.",
+        "cau_hoi": "Ở điều kiện vừa xác định (nêu rõ và mặc định), tài liệu có ghi hai số khác nhau không? Có thì dừng, "
+                   "dù số của tuyên bố trùng một số hay khác cả hai. Ngoại lệ: số của tuyên bố khớp cả hai (bằng hoặc kém "
+                   "hơn cả hai) thì dò tiếp, ghi mau_thuan_khop_ca_hai=<số 1>/<số 2>.",
         "nhan": "Chưa đủ thông tin, tick “Tài liệu mâu thuẫn”",
         "vi_du": ("", "Đồng hồ C dùng 20 giờ khi sử dụng bình thường. Mục Pin ghi “lên đến 20 giờ khi sử dụng bình "
                       "thường”, bảng thông số ghi “lên đến 24 giờ khi sử dụng bình thường”. Cùng điều kiện mà hai chỗ "
                       "ghi hai số, dừng ở D1b kể cả khi số của tuyên bố trùng một trong hai."),
     },
     "D2": {
-        "cau_hoi": "Tuyên bố có chữ “luôn”, “đảm bảo”, “bảo đảm”, “ít nhất”, “mọi lúc” biến mức “lên đến” của hãng thành "
-                   "mức chắc chắn không? Có thì dừng.",
+        # {tu_khang_dinh} do bang_dong_d thay bằng danh sách đọc từ mục 6.2 của hướng dẫn, không chép tay.
+        "cau_hoi": "Tuyên bố có từ khẳng định gắn ngay với con số không ({tu_khang_dinh})? Từ ở vế nói việc khác và tên "
+                   "tính năng không tính. Chỉ thiếu chữ “lên đến” thì không phải D2. Có thì dừng.",
         "nhan": "Lệch, loại doi_kieu_gia_tri",
         "vi_du": ("V39", "Apple Watch SE 3 luôn dùng đủ 18 giờ mỗi ngày. Hãng ghi “lên đến 18 giờ khi sử dụng bình "
-                         "thường”. Hãng hứa tối đa, tuyên bố hứa lúc nào cũng đủ. Bỏ chữ “luôn” thì câu này Đúng ở D3."),
+                         "thường”. Hãng hứa tối đa, tuyên bố hứa lúc nào cũng đủ. Bỏ chữ “luôn” thì câu này Đúng ở D3. Ghi chú khang_dinh=luôn."),
     },
     "D3": {
-        "cau_hoi": "Ở đúng điều kiện đó, số của tuyên bố bằng hoặc kém hơn số của hãng không? Có thì dừng.",
+        "cau_hoi": "Ở đúng điều kiện đã xác định ở Bước 3 (gồm mặc định), số của tuyên bố bằng hoặc kém hơn số của hãng "
+                   "không? Có thì dừng.",
         "nhan": "Đúng",
         "vi_du": ("V11", "Apple Watch SE 3 dùng đến 32 giờ ở chế độ nguồn điện thấp. Hãng ghi “lên đến 32 giờ ở Chế Độ "
                          "Nguồn Điện Thấp”. Cùng chế độ, 32 bằng 32. Nói 30 giờ cũng Đúng, vì kém hơn số của hãng."),
     },
     "D4": {
-        "cau_hoi": "Số của tuyên bố có trùng số hãng ghi cho một điều kiện khác không? Có thì dừng.",
+        "cau_hoi": "Số của tuyên bố có trùng số hãng ghi cho một điều kiện khác không? Có thì dừng. Gồm cả khi tuyên bố "
+                   "không nêu điều kiện và cách hiểu mặc định khác điều kiện của con số (loại bo_dieu_kien).",
         "nhan": "Lệch",
         "vi_du": ("V33", "Apple Watch SE 3 pin 32 giờ. Hãng ghi 18 giờ khi sử dụng bình thường, 32 giờ ở chế độ nguồn "
                          "điện thấp. Tuyên bố không nêu chế độ, đồng hồ có cách hiểu mặc định là chế độ thường (18 giờ), "
@@ -110,13 +138,14 @@ DONG_D_HIEN_THI = {
         "nhan": "Sai",
         "ghi_chu_nho": "Đẹp hơn: pin, độ sáng, tần số quét, zoom, công suất sạc, dung lượng pin, số giờ nghe sau khi sạc "
                        "thì số lớn hơn là đẹp hơn; thời gian sạc (phút) thì số nhỏ hơn là đẹp hơn; kháng nước so theo "
-                       "mục 6.6.",
+                       "mục 6.6. Mã IP khác nhánh không khớp; không trùng mã nào thì Sai.",
         "vi_du": ("V20", "Xiaomi 15T sạc đầy 100% chỉ trong 40 phút với củ sạc 67W. Hãng ghi 50 phút sạc đầy 100%, cần "
                          "củ 67W trở lên. Cùng điều kiện mà tuyên bố nói nhanh hơn, và 40 phút không có ở đâu trong tài "
                          "liệu. Loại doi_gia_tri."),
     },
     "D6": {
-        "cau_hoi": "Không rơi vào dòng nào ở trên.",
+        "cau_hoi": "Tài liệu có số cho thuộc tính, nhưng không có số ở điều kiện này; số của tuyên bố không trùng số nào "
+                   "và không đẹp hơn mọi số.",
         "nhan": "Chưa đủ thông tin",
         "vi_du": ("V44", "Galaxy Buds3 Pro nghe nhạc 6,5 giờ ở chế độ xuyên âm. Hãng ghi 7 giờ khi tắt chống ồn, 6 giờ "
                          "khi bật, không có số cho chế độ xuyên âm. 6,5 không trùng số nào (không phải D4) và không cao "
@@ -141,10 +170,54 @@ THONG_BAO = {
     "d2_sai_loai": "Dòng D2 là lệch kiểu giá trị, nên loại phải là doi_kieu_gia_tri (đang là {loai}).",
     "mac_dinh_khong_co": "Ghi chú có mac_dinh={khoa}, mà “{dieu_kien}” không có mặc định: tuyên bố không nói điều kiện "
                          "này thì dừng ở D1a, nhãn Chưa đủ thông tin.",
+    "d1a_thieu_nguyen_nhan": "Dòng D1a phải ghi nguyên nhân vào ghi chú: mac_dinh=<khóa “Không có mặc định” của thuộc tính "
+                             "này: {ds}> hoặc chua_xac_dinh=<cụm>.",
+    "d1a_mac_dinh_co_mac_dinh": "Ghi chú có mac_dinh={khoa}, mà “{dieu_kien}” có cách hiểu mặc định “{hieu}”: dùng mặc "
+                                "định rồi dò tiếp, không dừng ở D1a vì khóa này.",
+    "d2_thieu_khang_dinh": "Dòng D2 phải ghi từ khẳng định vào ghi chú: khang_dinh=<từ>, với <từ> là một trong: {ds}.",
+    "mac_dinh_khoa_la": "Ghi chú có mac_dinh={khoa}, mà “{khoa}” không phải khóa ghi được của thuộc tính này ở bảng mục 5 "
+                        "(ghi được: {ds}; hoặc ngoai_bang khi nhãn dựa vào mục 6.7 ý 4). Khóa “như hãng công bố” không ghi.",
+    "d2_khang_dinh_la": "Ghi chú có khang_dinh={tu}, mà “{tu}” không có trong danh sách từ khẳng định ở mục 6.2: {ds}.",
+    "ly_do_ma_doan": "Lý do chép mã đoạn thay cho câu trích: “{ma}”. Chỗ câu trích là câu nguyên văn từ tài liệu; mã đoạn "
+                     "đã nằm ở bằng chứng.",
 }
 NHAC = {
     "bo_dieu_kien_thieu_mac_dinh": "Loại bo_dieu_kien nghĩa là tuyên bố bỏ điều kiện và bạn đã dùng cách hiểu mặc định; "
                                    "thường cần ghi mac_dinh=… (mục 8).",
+    "d1_co_mac_dinh": "Dòng D1 dừng trước khi xét điều kiện, nên không cần ghi mac_dinh=… (mục 8).",
+    "trich_thieu_don_vi": "Câu trích không có đơn vị của thuộc tính {thuoc_tinh} ({don_vi}): kiểm lại xem bằng chứng có "
+                          "đúng thuộc tính của tuyên bố không.",
+}
+
+# Mã ghi chú (hướng dẫn mục 8) mà luật kiểm đọc: mục "ten=a,b" (mac_dinh, khang_dinh) hoặc "ten=cụm" (chua_xac_dinh).
+# Cùng biểu thức với JavaScript của trang (RE_MUC) và scripts/kiem_nhan.py.
+MUC_MAC_DINH = "mac_dinh"
+MUC_KHANG_DINH = "khang_dinh"
+MUC_CHUA_XAC_DINH = "chua_xac_dinh"
+# Mã đoạn <ma_mau>#<số> nằm trong ngoặc kép của lý do (S14): chỗ ngoặc kép phải là câu trích nguyên văn (mục 8, QT10).
+RE_NGOAC_KEP = r'[“"]([^“”"]*)[”"]'
+RE_MA_DOAN = r"[a-z]{2}-[a-z0-9-]+#\d+"
+# Biểu thức nhận một đơn vị trong câu trích (đã NFC, gộp khoảng trắng, hạ chữ thường): đơn vị đứng độc lập, tức trước
+# nó không phải chữ cái và sau nó không phải chữ cái (số thì được, "50m", "20 phút"). Dùng chung cho trang (RegExp) và Python.
+CHU_CAI = "A-Za-zÀ-ỹ"
+
+# Cột "Đơn vị" của bảng mục 6.1 -> các dạng viết trong tài liệu (S15). Dạng viết là mảnh biểu thức chính quy, đã hạ chữ thường.
+# Giờ, phút, nit, W, mAh, Hz, x, m theo bảng chuẩn hóa đơn vị trong chung.yaml (chuan_hoa.don_vi) và mục 6.1; mã IP,
+# ISO 22810 (m, ATM, WR) theo mục 6.6. Ô "Đơn vị" lạ thì thoát (bang_huong_loi), để người sửa hướng dẫn thêm vào đây.
+_GIO = ("giờ", "tiếng", "h")
+_PHUT = ("phút", "min")
+DON_VI_BIEU_DIEN = {
+    "giờ": _GIO,
+    "phút": _PHUT,
+    "W": ("w",),
+    "nit": ("nit", "nits", "cd/m²"),
+    "Hz": ("hz",),
+    "x": ("x",),
+    "mã IP": ("ip[x0-9]",),
+    "mAh": ("mah",),
+    "giờ nghe được": _GIO,
+    "phút (dạng 1), giờ (dạng 2)": _PHUT + _GIO,
+    "m (ISO 22810)": ("m", "mét", "atm", "wr"),
 }
 
 # Cách dịch mã hướng thuận lợi và kiểu giá trị (mục 6.1) sang lời; mã gốc giữ trong ngoặc nhỏ.
@@ -640,8 +713,8 @@ def _ghep_khao_sat(hang, khao_sat):
 def bang_mac_dinh(md):
     """Các hàng bảng mục 5 (cách hiểu mặc định), ô Nhóm và Thuộc tính trống thì kế thừa hàng trên.
 
-    Mỗi hàng có dieu_kien (chữ thuần, bỏ dấu *), co_sao, khoa [{khoa, gia_tri}] và khao_sat (hàng có dấu * ghép với
-    bảng 5.1, xem GHEP_KHAO_SAT)."""
+    Mỗi hàng có dieu_kien (chữ thuần, bỏ dấu *), hieu (chữ thuần của cột "Không nêu thì hiểu là"), co_sao, khoa
+    [{khoa, gia_tri}] và khao_sat (hàng có dấu * ghép với bảng 5.1, xem GHEP_KHAO_SAT)."""
     hang = tim_bang(md, "5", ("Nhóm", "Thuộc tính", "Điều kiện", "Không nêu thì hiểu là", "Khóa cấu hình"))
     ra = []
     for k, (nhom, thuoc_tinh, h) in enumerate(_hang_ke_thua(hang, "mục 5"), 1):
@@ -649,6 +722,7 @@ def bang_mac_dinh(md):
         ra.append({"nhom": nhom, "thuoc_tinh": thuoc_tinh, "dieu_kien": dieu_kien.rstrip("*").strip(),
                    "co_sao": dieu_kien.endswith("*"), "dieu_kien_html": chuyen_inline(h["Điều kiện"]),
                    "hieu_html": chuyen_inline(h["Không nêu thì hiểu là"]),
+                   "hieu": van_ban_thuan(h["Không nêu thì hiểu là"]).strip(),
                    "khoa": _khoa_cau_hinh(h["Khóa cấu hình"], f"mục 5, dòng {k}")})
     _ghep_khao_sat(ra, bang_khao_sat(md))
     for h in ra:
@@ -670,6 +744,82 @@ def khoa_khong_co_mac_dinh(hang_mac_dinh):
     return ra
 
 
+def khoa_co_mac_dinh(hang_mac_dinh):
+    """{(tiền tố nhóm, thuộc tính): {khóa cấu hình: {dieu_kien, hieu}}} của các khóa CÓ cách hiểu mặc định (kể cả "như hãng
+    công bố") ở bảng mục 5. Dùng cho quy tắc D1a: ghi chú chỉ có khóa loại này thì không đủ nguyên nhân dừng ở D1a."""
+    ra = {}
+    for h in hang_mac_dinh:
+        for k in h["khoa"]:
+            if k["gia_tri"] != KHONG_CO_MAC_DINH:
+                ra.setdefault((h["nhom"], h["thuoc_tinh"]), {})[k["khoa"]] = {"dieu_kien": h["dieu_kien"], "hieu": h["hieu"]}
+    return ra
+
+
+KHOA_NGOAI_BANG = "ngoai_bang"  # mac_dinh=ngoai_bang: nhãn dựa vào mục 6.7 ý 4 (QĐ10, 02/11), điều kiện ngoài bảng mục 5
+
+
+def khoa_ghi_duoc(hang_mac_dinh):
+    """{(tiền tố nhóm, thuộc tính): [khóa]} các khóa được ghi vào mac_dinh= theo mục 8: khóa của bảng mục 5 cho nhóm và thuộc
+    tính đó, trừ khóa "như hãng công bố" (kể cả khóa "không có mặc định"). Cộng thêm KHOA_NGOAI_BANG ở mọi thuộc tính."""
+    ra = {}
+    for h in hang_mac_dinh:
+        for k in h["khoa"]:
+            if k["gia_tri"] != "nhu_hang_cong_bo":
+                ds = ra.setdefault((h["nhom"], h["thuoc_tinh"]), [])
+                if k["khoa"] not in ds:
+                    ds.append(k["khoa"])
+    return ra
+
+
+def ten_thuoc_tinh(md):
+    """{"<tiền tố nhóm>|<mã thuộc tính>": tên tiếng Việt} từ ô Thuộc tính của bảng mục 5 (ví dụ "Thời lượng pin
+    (`thoi_luong_pin`)" -> "Thời lượng pin"). Dùng cho câu hỏi D1: tên thuộc tính ghi sẵn trên tuyên bố."""
+    hang = tim_bang(md, "5", ("Nhóm", "Thuộc tính", "Điều kiện", "Không nêu thì hiểu là", "Khóa cấu hình"))
+    ra = {}
+    for nhom, thuoc_tinh, h in _hang_ke_thua(hang, "mục 5"):
+        o = h["Thuộc tính"].strip()
+        if not o:
+            continue
+        m = re.match(r"^(.*?)\s*\(\s*`[A-Za-z0-9_]+`\s*\)", o)
+        ten = van_ban_thuan(m.group(1)).strip() if m else ""
+        if not ten:
+            loi_huong_dan(f"mục 5: ô Thuộc tính '{o[:60]}' phải có dạng 'Tên (`ma_thuoc_tinh`)'")
+        ra[f"{nhom}|{thuoc_tinh}"] = ten
+    return ra
+
+
+_RE_TRONG_NGOAC = re.compile(r'["“]([^"“”]+)["”]')
+
+
+def tu_khang_dinh(md):
+    """Từ khẳng định đọc từ mục 6.2 của hướng dẫn (không chép tay): {"chac_chan": ["luôn", ...], "muc_san": ["hơn <số>",
+    ...], "tu_hop_le": [...]}. tu_hop_le là các từ được ghi vào khang_dinh=<từ>: nhóm chắc chắn nguyên chữ, nhóm mức sàn bỏ
+    chỗ <số> ("hơn <số>" -> "hơn", "<số> trở lên" -> "trở lên")."""
+    dong = noi_dung_muc(md, "6.2")
+    ra = {}
+    for khoa, nhan in (("chac_chan", "Nhóm chắc chắn:"), ("muc_san", "Nhóm mức sàn:")):
+        van = next((d.split(nhan, 1)[1] for d in dong if nhan in d), None)
+        if van is None:
+            loi_huong_dan(f"mục 6.2: không thấy dòng '{nhan}'")
+        ra[khoa] = [unicodedata.normalize("NFC", x).strip() for x in _RE_TRONG_NGOAC.findall(van.strip().split(". ")[0])]
+        if not ra[khoa]:
+            loi_huong_dan(f"mục 6.2: dòng '{nhan}' không có từ nào trong dấu nháy kép")
+    tu = list(ra["chac_chan"])
+    for cum in ra["muc_san"]:
+        tu.append(cum.replace("<số>", "").strip())
+    ra["tu_hop_le"] = list(dict.fromkeys(t for t in tu if t))
+    return ra
+
+
+def mau_don_vi(don_vi, noi):
+    """Biểu thức chính quy (chuỗi dùng chung cho Python và JavaScript, áp lên chuỗi đã hạ chữ thường) nhận đơn vị của cột
+    "Đơn vị" mục 6.1 trong câu trích. Ô lạ thì thoát."""
+    if don_vi not in DON_VI_BIEU_DIEN:
+        loi_huong_dan(f"{noi}: đơn vị '{don_vi}' chưa có cách nhận trong câu trích (DON_VI_BIEU_DIEN trong "
+                      f"scripts/{Path(__file__).name}; các đơn vị đã biết: {', '.join(DON_VI_BIEU_DIEN)})")
+    return f"(?:^|[^{CHU_CAI}])(?:{'|'.join(DON_VI_BIEU_DIEN[don_vi])})(?![{CHU_CAI}])"
+
+
 def _ma_huong_loi(o, bang_loi, noi):
     ma = _ma_trong_backtick(o)
     if ma not in bang_loi:
@@ -679,25 +829,92 @@ def _ma_huong_loi(o, bang_loi, noi):
 
 
 def bang_huong_loi(md):
-    """Các hàng bảng mục 6.1 (hướng thuận lợi, kiểu giá trị mặc định), kèm mã và lời dịch của từng ô."""
+    """Các hàng bảng mục 6.1 (đơn vị, hướng thuận lợi, kiểu giá trị mặc định), kèm mã và lời dịch của từng ô; don_vi_mau
+    là biểu thức nhận đơn vị trong câu trích (mau_don_vi)."""
     hang = tim_bang(md, "6.1", ("Nhóm", "Thuộc tính", "Đơn vị", "Hướng thuận lợi", "Kiểu giá trị mặc định"))
     ra = []
     for k, (nhom, thuoc_tinh, h) in enumerate(_hang_ke_thua(hang, "mục 6.1"), 1):
         huong = _ma_huong_loi(h["Hướng thuận lợi"], LOI_HUONG_THUAN_LOI, f"mục 6.1, dòng {k}")
         kieu = _ma_huong_loi(h["Kiểu giá trị mặc định"], LOI_KIEU_GIA_TRI, f"mục 6.1, dòng {k}")
-        ra.append({"nhom": nhom, "thuoc_tinh": thuoc_tinh, "huong_html": chuyen_inline(h["Hướng thuận lợi"]),
+        don_vi = van_ban_thuan(h["Đơn vị"]).strip()
+        ra.append({"nhom": nhom, "thuoc_tinh": thuoc_tinh, "don_vi": don_vi,
+                   "don_vi_mau": mau_don_vi(don_vi, f"mục 6.1, dòng {k}"),
+                   "huong_html": chuyen_inline(h["Hướng thuận lợi"]),
                    "kieu_html": chuyen_inline(h["Kiểu giá trị mặc định"]), "huong_ma": huong,
                    "huong_loi": LOI_HUONG_THUAN_LOI[huong], "kieu_ma": kieu, "kieu_loi": LOI_KIEU_GIA_TRI[kieu]})
     return ra
+
+
+_RE_CHU_TRONG_NHAY = re.compile(r'"([^"]+)"')
+# Mục "Nhóm cụm" của bảng 13.1 -> khóa trong chung.yaml. Hàng nào của 13.1 hiện ở khung "Cụm điều kiện đã biết" thì
+# cum_ap_dung (JavaScript) quyết định theo thuộc tính đang gán.
+KHOA_CUM_CHUNG = ("kieu_gia_tri", "tu_goi_muc_cao", "cum_quan_he", "ngu_canh_khong_quyet_dinh")
+PHU_LUC_NHOM = {"13.2": "dt", "13.3": "tn", "13.4": "dh"}
+
+
+def _cac_cum(o):
+    """Các cụm trong dấu nháy kép của một ô phụ lục; "–" hoặc ô trống là không có cụm."""
+    return [unicodedata.normalize("NFC", x).strip() for x in _RE_CHU_TRONG_NHAY.findall(o)]
+
+
+def bang_cum(md):
+    """Phụ lục mục 13 (cụm diễn đạt trong cấu hình, sinh từ YAML): {"chung": [...], "nhom": {"dt": [...], "tn": [...],
+    "dh": [...]}}. chung: [{khoa, dong: [{muc_con, tu_tai_lieu, hieu_biet_chung}]}] từ bảng 13.1. nhom: [{khoa (mã điều
+    kiện), gia_tri: [{gia_tri, tu_tai_lieu, hieu_biet_chung}]}] từ bảng 13.2 (điện thoại), 13.3 (tai nghe), 13.4 (đồng hồ);
+    ô Điều kiện trống thì kế thừa hàng trên."""
+    cot_cum = ("Chữ trong tài liệu (`tu_tai_lieu`)", "Cách nói thường gặp (`hieu_biet_chung`)")
+    chung, thu_tu = {}, []
+    for h in tim_bang(md, "13.1", ("Nhóm cụm", "Mục con") + cot_cum):
+        if h["Nhóm cụm"].strip():
+            khoa = _ma_trong_backtick(h["Nhóm cụm"])
+            if khoa not in KHOA_CUM_CHUNG:
+                loi_huong_dan(f"mục 13.1: nhóm cụm '{h['Nhóm cụm'][:60]}' có mã '{khoa}', ngoài {', '.join(KHOA_CUM_CHUNG)}")
+            chung[khoa] = []
+            thu_tu.append(khoa)
+        if not thu_tu:
+            loi_huong_dan("mục 13.1: dòng đầu của bảng chưa có ô Nhóm cụm")
+        chung[thu_tu[-1]].append({"muc_con": van_ban_thuan(h["Mục con"]).strip(),
+                                  "tu_tai_lieu": _cac_cum(h[cot_cum[0]]), "hieu_biet_chung": _cac_cum(h[cot_cum[1]])})
+    thieu = [k for k in KHOA_CUM_CHUNG if k not in chung]
+    if thieu:
+        loi_huong_dan(f"mục 13.1: thiếu nhóm cụm {', '.join(thieu)}")
+    nhom = {}
+    for muc, tien_to in PHU_LUC_NHOM.items():
+        ra, dieu_kien = [], None
+        for h in tim_bang(md, muc, ("Điều kiện", "Giá trị") + cot_cum):
+            if h["Điều kiện"].strip():
+                ma = _ma_trong_backtick(h["Điều kiện"])
+                if not ma:
+                    loi_huong_dan(f"mục {muc}: ô Điều kiện phải có mã trong dấu backtick: {h['Điều kiện'][:60]}")
+                dieu_kien = {"khoa": ma, "gia_tri": []}
+                ra.append(dieu_kien)
+            if dieu_kien is None:
+                loi_huong_dan(f"mục {muc}: dòng đầu của bảng chưa có ô Điều kiện")
+            gia_tri = _ma_trong_backtick(h["Giá trị"])
+            if not gia_tri:
+                loi_huong_dan(f"mục {muc}: ô Giá trị phải có mã trong dấu backtick: {h['Giá trị'][:60]}")
+            # "(chỉ `thoi_luong_pin`)" sau mã giá trị: khóa chi_thuoc_tinh của YAML (cụm chỉ là điều kiện của các thuộc tính đó)
+            chi = re.search(r"\(chỉ ((?:`[A-Za-z0-9_]+`(?:, )?)+)\)", h["Giá trị"])
+            dieu_kien["gia_tri"].append({"gia_tri": gia_tri, "tu_tai_lieu": _cac_cum(h[cot_cum[0]]),
+                                         "hieu_biet_chung": _cac_cum(h[cot_cum[1]]),
+                                         "chi_thuoc_tinh": re.findall(r"`([A-Za-z0-9_]+)`", chi.group(1)) if chi else []})
+        nhom[tien_to] = ra
+    return {"chung": [{"khoa": k, "dong": chung[k]} for k in KHOA_CUM_CHUNG], "nhom": nhom}
 
 
 def dung_huong_dan(md):
     """Phần hướng dẫn nhúng vào trang: toàn văn đã chuyển HTML cùng các bảng đã tách."""
     html_day_du, tieu_de = _chuyen(md)
     muc_luc = "".join(f'<a href="#{ma}">{esc(chu)}</a>' for cap, ma, chu in tieu_de if cap == 2)
+    tu_kd = tu_khang_dinh(md)
+    ds_tu = ", ".join(f"“{x}”" for x in tu_kd["chac_chan"] + tu_kd["muc_san"])
+    dong_d = bang_dong_d(md)
+    for d in dong_d:  # chỗ giữ chỗ của câu hỏi D2: danh sách từ lấy từ mục 6.2 (chỗ {thuoc_tinh} của D1 để trang thay)
+        d["cau_hoi"] = d["cau_hoi"].replace("{tu_khang_dinh}", ds_tu)
     return {"html": html_day_du, "muc_luc_html": f'<nav class="muc-luc">{muc_luc}</nav>',
-            "nhom": NHOM_THEO_TIEN_TO, "nhan": bang_nhan(md), "loai": bang_loai(md), "dong_d": bang_dong_d(md),
-            "mac_dinh": bang_mac_dinh(md), "huong_loi": bang_huong_loi(md)}
+            "nhom": NHOM_THEO_TIEN_TO, "nhan": bang_nhan(md), "loai": bang_loai(md), "dong_d": dong_d,
+            "mac_dinh": bang_mac_dinh(md), "huong_loi": bang_huong_loi(md), "tu_khang_dinh": tu_kd,
+            "ten_thuoc_tinh": ten_thuoc_tinh(md), "cum": bang_cum(md)}
 
 
 # ---------- Dữ liệu và HTML ----------
@@ -730,69 +947,112 @@ def nap_du_lieu():
     if thieu:
         sys.exit("thiếu tệp dữ liệu:\n  " + "\n  ".join(thieu))
     return {"tuyen_bo": tuyen_bo, "bai": bai, "doan": doan, "huong_dan": dung_huong_dan(doc_huong_dan()),
-            "quy_tac": {"thong_bao": THONG_BAO, "nhac": NHAC}, "ca_dac_biet": CA_DAC_BIET}
+            "quy_tac": {"thong_bao": THONG_BAO, "nhac": NHAC, "re_ngoac_kep": RE_NGOAC_KEP, "re_ma_doan": RE_MA_DOAN},
+            "trang": {"luot": LUOT, "khoa_nhan": KHOA_NHAN, "khoa_giao_dien": KHOA_GIAO_DIEN, "tep_nhan": TEN_TEP_NHAN,
+                      "tep_hoi": TEN_TEP_HOI, "nghi_ms": NGHI_GIAY * 1000},
+            "ca_dac_biet": CA_DAC_BIET}
 
 
-# Khung "Ca đặc biệt": quy tắc riêng và ca đã chốt của hướng dẫn, tóm lại bằng lời. Mỗi mục lọc theo ma_mau
-# (hoặc nhom = tiền tố ma_mau) và thuoc_tinh ghi sẵn trên tuyên bố, không đọc câu tuyên bố. Sửa hướng dẫn thì
-# sửa cả bảng này; cột nguon trỏ về mục và ví dụ gốc.
+# Khung "Ca đặc biệt": quy tắc riêng và ca đã chốt của hướng dẫn bản 2, tóm lại bằng lời. Mỗi mục lọc theo ma_mau
+# (hoặc nhom = tiền tố ma_mau) và thuoc_tinh (có thể bỏ trống: áp cho mọi thuộc tính của nhóm) ghi sẵn trên tuyên bố,
+# không đọc câu tuyên bố. Chỉ chép luật của hướng dẫn, không chép câu của bộ thử (tests/test_tao_cong_cu_gan_nhan.py kiểm
+# không câu tuyên bố nào nằm trong đây). Sửa hướng dẫn thì sửa cả bảng này; cột nguon trỏ về mục và ví dụ gốc.
+def _moi_nhom(muc):
+    """Một mục chung áp cho cả ba nhóm sản phẩm."""
+    return [dict(muc, nhom=nhom) for nhom in NHOM_THEO_TIEN_TO]
+
+
 CA_DAC_BIET = [
     {"ma_mau": "dt-apple-iphone17", "thuoc_tinh": "do_sang", "tieu_de": "Chữ “tối đa” và “đỉnh” trên trang Apple",
      "noi_dung": "Apple dùng “tối đa” cho chế độ tiêu chuẩn (1000 nit), còn “đỉnh” cho hai chế độ: HDR (1600 nit) "
                  "và ngoài trời (3000 nit). Tuyên bố chỉ ghi “đỉnh” mà không nói chế độ nào thì chưa xác định được "
-                 "điều kiện: D1a. Không chọn chế độ theo con số của tuyên bố.",
-     "nguon": "mục 6.5, V05, V47"},
-    {"nhom": "dt", "thuoc_tinh": "do_sang", "tieu_de": "Cụm chung chung về ánh sáng: chưa có quy tắc",
-     "noi_dung": "Hướng dẫn chưa nói cụm kiểu “với mọi điều kiện ánh sáng”, “bất kể điều kiện ánh sáng” có tính là "
-                 "nêu chế độ hiển thị hay không. Bạn tự chọn cách hiểu hợp lý nhất, dò D1–D6 theo cách hiểu đó, rồi "
-                 "ghi vào ô Câu hỏi nhãn để chốt ở Bước 16.",
-     "nguon": "chưa có trong hướng dẫn"},
+                 "điều kiện: D1a, ghi chua_xac_dinh=đỉnh. Không chọn chế độ theo con số của tuyên bố. Tuyên bố có cả "
+                 "chữ chỉ chế độ rõ (“ngoài trời”, “HDR”, “dưới nắng”) và chữ mức cao (“tối đa”, “đỉnh”): chữ chỉ chế "
+                 "độ quyết định, chữ mức cao là kiểu giá trị tối đa.",
+     "nguon": "mục 6.5, 6.8 ý 4, V05, V47"},
+    {"nhom": "dt", "thuoc_tinh": "do_sang", "tieu_de": "Chế độ hiển thị: nêu bằng tên hãng hoặc bằng hoàn cảnh",
+     "noi_dung": "Độ sáng điện thoại không có cách hiểu mặc định: tuyên bố không nêu chế độ thì D1a, ghi "
+                 "mac_dinh=che_do_hien_thi (trừ khi tài liệu chỉ có một con số không kèm điều kiện nào: so thẳng, mục "
+                 "6.4). Chế độ nêu bằng tên hãng dùng hoặc bằng hoàn cảnh của chế độ ấy: “dưới nắng”, “ánh nắng”, “ánh "
+                 "sáng mạnh” tả hoàn cảnh của chế độ sáng cao ngoài trời (mục 6.8 ý 2), ghi ngoai_cau_hinh=<cụm> nếu "
+                 "phụ lục chưa có cụm đó. Phần diện tích đo không nêu thì hiểu như hãng công bố.",
+     "nguon": "mục 6.4, 6.5, 6.8, V25, V26, V51"},
     {"ma_mau": "dt-apple-iphone17", "thuoc_tinh": "thoi_luong_pin",
-     "tieu_de": "“Xem video” không nói tải sẵn hay trực tuyến",
-     "noi_dung": "Coi như tuyên bố chưa nêu hoạt động, nên lấy hoạt động kém thuận lợi nhất hãng công bố: xem video "
-                 "trực tuyến, 27 giờ. Quy tắc đổi sau khảo sát: 9/10 người không hiểu “xem video” là xem video tải sẵn.",
-     "nguon": "mục 5, 5.1, V03"},
+     "tieu_de": "Tuyên bố chép đúng nhãn “Thời gian xem video” của tài liệu",
+     "noi_dung": "Luật chép đúng nhãn (mục 6.8, QĐ15): tuyên bố gọi hoạt động bằng đúng nhãn “Thời gian xem video” và "
+                 "không thiếu chữ điều kiện nào của nhãn (như “trực tuyến”) thì cùng điều kiện với dòng đó, so số ở D3–D5, "
+                 "ghi chep_nhan=…. Không trùng chữ nhãn nào (chỉ nói “pin … giờ”) thì vẫn là chưa nêu hoạt động: lấy hoạt "
+                 "động kém thuận lợi nhất hãng công bố (xem video trực tuyến). Không chọn dòng vì con số trùng.",
+     "nguon": "mục 5, 5.1, 6.8, V03, V24"},
+    {"nhom": "dt", "thuoc_tinh": "thoi_luong_pin", "tieu_de": "“Liên tục”, “sử dụng liên tục”, “dùng liên tục”",
+     "noi_dung": "Cụm chỉ sự liên tục hay mức dùng chung, không nêu hoạt động cụ thể: coi như chưa nêu hoạt động, dùng "
+                 "cách hiểu mặc định (hoạt động kém thuận lợi nhất hãng công bố). Cụm này không phải từ khẳng định. "
+                 "“Sử dụng liên tục” của Xiaomi 15T là tên bài đo ở phía tài liệu, không phải hoạt động mà tuyên bố nêu.",
+     "nguon": "mục 6.2, 6.8 ý 3, V07"},
     {"nhom": "dt", "thuoc_tinh": "zoom", "tieu_de": "Zoom không nói quang học hay kỹ thuật số",
      "noi_dung": "Hiểu là zoom quang học, tính theo độ phóng đại, khi chụp ảnh. Ví dụ “iPhone 17 zoom 10x” so với 2x "
                  "quang học; 10x là thu phóng kỹ thuật số nên Lệch ở D4. Khảo sát có 6/10 người hiểu khác; hướng dẫn "
                  "vẫn giữ (lệch khỏi quy tắc đặt trước), Bước 37 tính lại với cách hiểu kỹ thuật số.",
      "nguon": "mục 5.1, V28"},
-    {"nhom": "dt", "thuoc_tinh": "sac_nhanh", "tieu_de": "Sạc nhanh không nói bộ sạc hoặc mốc phần trăm",
+    {"nhom": "dt", "thuoc_tinh": "sac_nhanh", "tieu_de": "Sạc nhanh: bộ sạc và mốc phần trăm",
      "noi_dung": "Không nói bộ sạc: hiểu là chỉ dùng đồ có trong hộp, không mua thêm củ sạc (iPhone 17 chỉ kèm cáp). "
                  "Con số cần bộ sạc bán riêng mà tuyên bố không nêu bộ sạc thì Lệch (bo_dieu_kien), dù chép đúng con "
-                 "số; ghi mac_dinh=bo_tiep_hop. Không nói sạc tới bao nhiêu phần trăm: D1a. Khảo sát: 5/10 người hiểu "
-                 "khác về bộ sạc, chưa quá nửa nên giữ.",
-     "nguon": "mục 5, 5.1, V21, V46"},
-    {"nhom": "dt", "thuoc_tinh": "cong_suat_sac", "tieu_de": "Công suất sạc không nói bộ sạc",
-     "noi_dung": "Như sạc nhanh: hiểu là không mua thêm củ sạc, sạc có dây. Công suất chỉ đạt với củ sạc bán riêng mà "
-                 "tuyên bố không nêu thì Lệch (bo_dieu_kien), ghi mac_dinh=bo_tiep_hop. Khảo sát: 5/10 người hiểu "
-                 "khác, chưa quá nửa nên giữ.",
-     "nguon": "mục 5, 5.1, V23"},
+                 "số; ghi mac_dinh mọi khóa tuyên bố không nêu (bo_tiep_hop, cach_sac). Tuyên bố nêu bộ sạc hay công "
+                 "suất bộ sạc thì so theo điều kiện dạng số (mục 6.3), không cần nói “bán riêng”: đủ mức tối thiểu "
+                 "thì cùng điều kiện, thiếu thì Lệch (doi_dieu_kien). Con số W đi cùng cách sạc hay cổng sạc là công "
+                 "suất bộ tiếp hợp (mục 6.8 ý 5). Không nói sạc tới bao nhiêu phần trăm: D1a. Khảo sát: 5/10 người "
+                 "hiểu khác về bộ sạc, chưa quá nửa nên giữ.",
+     "nguon": "mục 5, 5.1, 6.3, 6.8 ý 5, V01, V21, V22, V46"},
+    {"nhom": "dt", "thuoc_tinh": "cong_suat_sac", "tieu_de": "Công suất sạc: bộ sạc, và con số của điều kiện",
+     "noi_dung": "Như sạc nhanh: không nói bộ sạc thì hiểu là không mua thêm củ sạc, sạc có dây. Công suất chỉ đạt với "
+                 "củ sạc bán riêng mà tuyên bố không nêu thì Lệch (bo_dieu_kien), ghi mac_dinh mọi khóa tuyên bố không "
+                 "nêu. Con số W mà tài liệu chỉ dùng làm mức tối thiểu của bộ tiếp hợp (“… W trở lên”) không phải công "
+                 "suất sạc: không khớp ở D3, D4. Tuyên bố lấy con số đó làm công suất thì dò D1–D6 với các giá trị thật "
+                 "của thuộc tính, ghi nham_vai=<cụm>. Khảo sát: 5/10 người hiểu khác về bộ sạc, chưa quá nửa nên giữ.",
+     "nguon": "mục 5, 5.1, 6.9, V23"},
     {"nhom": "dt", "thuoc_tinh": "tan_so_quet", "tieu_de": "Tần số quét và chữ “luôn”",
      "noi_dung": "“Màn hình 120Hz” khớp “thích ứng lên đến 120Hz”, vì không nói thì hiểu là mức tối đa. Nhưng “luôn "
-                 "chạy ở 120Hz” biến mức tối đa thành chắc chắn: Lệch ở D2. Chữ “Luôn” trong tên tính năng “Màn hình "
-                 "Luôn Bật” không tính.",
+                 "chạy ở 120Hz” biến mức tối đa thành chắc chắn: Lệch ở D2, ghi khang_dinh=luôn. Chữ “Luôn” trong tên "
+                 "tính năng “Màn hình Luôn Bật”, và chữ “luôn” ở vế nói việc khác (kết nối, thông tin), không gắn với "
+                 "con số nên không tính.",
      "nguon": "mục 5, 6.2, V40"},
-    {"nhom": "dt", "thuoc_tinh": "khang_nuoc", "tieu_de": "Kháng nước có nói độ sâu, thời gian",
-     "noi_dung": "Không nói độ sâu, thời gian ngâm thì hiểu như hãng công bố. Có nói thì so bằng số: không vượt mức "
-                 "hãng thử (iPhone 17: tối đa 6 mét, tối đa 30 phút) là cùng điều kiện; vượt là điều kiện khác. Mã IP "
-                 "so theo mục 6.6.",
-     "nguon": "mục 6.3, 6.6, V06, V29"},
+    {"nhom": "dt", "thuoc_tinh": "khang_nuoc", "tieu_de": "Kháng nước: độ sâu, thời gian, mã IP",
+     "noi_dung": "Không nói độ sâu, thời gian ngâm thì hiểu như hãng công bố. Có nói thì so bằng số với mức hãng thử "
+                 "(mục 6.3): không vượt là cùng điều kiện; vượt là điều kiện khác. “Tối đa” của độ sâu, thời gian "
+                 "ngâm là giới hạn của bài thử, không phải kiểu giá trị. Mã IP so theo nhánh (mục 6.6): khác nhánh "
+                 "không khớp ở D3; trùng mã của bộ phận hay điều kiện khác thì D4; không trùng mã nào thì D5, "
+                 "doi_gia_tri.",
+     "nguon": "mục 6.2, 6.3, 6.6, V06, V29"},
     {"ma_mau": "tn-samsung-buds3pro", "thuoc_tinh": "thoi_luong_pin",
      "tieu_de": "Hai số cho tổng thời gian phát nhạc khi bật chống ồn",
      "noi_dung": "Bảng thông số ghi “Tổng thời gian phát nhạc (Giờ, bật ANC)” hai lần, 26 và 30 giờ; chú thích còn "
-                 "ghi tối đa 30 giờ cho cả bật và tắt ANC. Tuyên bố về tổng thời gian kèm hộp sạc khi bật chống ồn "
-                 "thì D1b: Chưa đủ thông tin, tick “Tài liệu mâu thuẫn”, kể cả khi số của tuyên bố trùng một trong hai.",
-     "nguon": "mục 4, V48"},
+                 "ghi tối đa 30 giờ cho cả bật và tắt ANC. Chỉ khi điều kiện của tuyên bố (nêu rõ hoặc mặc định) là "
+                 "kèm hộp sạc và bật chống ồn thì D1b: Chưa đủ thông tin, tick “Tài liệu mâu thuẫn”, kể cả khi số của "
+                 "tuyên bố trùng một trong hai. Ngoại lệ (QĐ13): số của tuyên bố khớp cả hai (bằng hoặc thấp hơn cả "
+                 "hai) thì dò tiếp D2–D3, ghi mau_thuan_khop_ca_hai. Tuyên bố không nêu bộ phận thì là tai nghe, "
+                 "không so với số Tổng.",
+     "nguon": "mục 4, 7 (D1b), V48"},
     {"ma_mau": "tn-samsung-buds3pro", "thuoc_tinh": "thoi_luong_pin",
      "tieu_de": "Không nói chống ồn, hoạt động, bộ phận",
      "noi_dung": "Hiểu là chống ồn bật (Samsung ghi ANC bật theo mặc định), nghe nhạc, chỉ tính tai nghe, không tính "
-                 "hộp sạc. Khảo sát: mỗi điểm có 4/10 người hiểu khác (4/10 người tính cả hộp sạc), chưa quá nửa nên giữ.",
+                 "hộp sạc; ghi mac_dinh mọi khóa tuyên bố không nêu. Khảo sát: mỗi điểm có 4/10 người hiểu khác (4/10 "
+                 "người tính cả hộp sạc), chưa quá nửa nên giữ.",
      "nguon": "mục 5, 5.1, V10, V32"},
     {"ma_mau": "tn-samsung-buds3pro", "thuoc_tinh": "thoi_luong_pin",
+     "tieu_de": "Chữ chỉ bộ phận: kèm hộp sạc hay hộp sạc",
+     "noi_dung": "“Tổng”, “tổng cộng”, “kèm / cùng / kết hợp hộp sạc” là kèm hộp sạc. “Hộp sạc” đứng riêng làm chủ "
+                 "ngữ (“hộp sạc cho thêm …”) là bộ phận hộp sạc.",
+     "nguon": "mục 6.8 ý 6"},
+    {"ma_mau": "tn-samsung-buds3pro", "thuoc_tinh": "thoi_luong_pin", "tieu_de": "Không tạo giá trị mới bằng phép tính",
+     "noi_dung": "Chỉ so với con số hãng công bố. Không lấy tổng trừ phần tai nghe để ra phần riêng của hộp sạc, không "
+                 "cộng, trừ, nhân các số. Tuyên bố về phần mà hãng không công bố số riêng thì dò D4–D6 như thường: "
+                 "không trùng số nào thì D6.",
+     "nguon": "mục 6.9"},
+    {"ma_mau": "tn-samsung-buds3pro", "thuoc_tinh": "thoi_luong_pin",
      "tieu_de": "Con số trùng số của một hoạt động khác",
-     "noi_dung": "D4 tính mọi điều kiện khác của cùng thuộc tính, kể cả hoạt động khác. Ví dụ “nghe nhạc 5 giờ ở chế "
-                 "độ xuyên âm” trùng thời gian đàm thoại khi tắt chống ồn (5 giờ) nên Lệch.",
+     "noi_dung": "D4 tính mọi điều kiện khác của cùng thuộc tính, kể cả hoạt động khác: con số trùng thời gian của một "
+                 "hoạt động khác (đàm thoại) thì Lệch. Sau khi gán lượt 2 sẽ đếm các ca này; quá 1/4 số Lệch D4 thì "
+                 "xét lại ở Bước 27.",
      "nguon": "mục 11.2, V42"},
     {"ma_mau": "tn-samsung-buds3pro", "thuoc_tinh": "thoi_luong_pin", "tieu_de": "Chú thích về cách hãng đo",
      "noi_dung": "Chú thích “ghép nối … với điện thoại thông minh Galaxy … với các cài đặt mặc định” chỉ là cách hãng "
@@ -801,7 +1061,8 @@ CA_DAC_BIET = [
     {"ma_mau": "tn-samsung-buds3pro", "thuoc_tinh": "khang_nuoc", "tieu_de": "Hộp sạc không kháng nước",
      "noi_dung": "IP57 chỉ áp dụng cho tai nghe; Samsung ghi hộp sạc không kháng nước. Tuyên bố gán IP57 cho hộp sạc "
                  "thì Lệch (doi_bo_phan); chỉ nói hộp sạc kháng nước mà không nêu mã thì Sai (doi_bo_phan). Tuyên bố "
-                 "không nói bộ phận thì hiểu là tai nghe.",
+                 "không nói bộ phận thì hiểu là tai nghe. Mã IP khác nhánh với mã của tai nghe: không khớp; không "
+                 "trùng mã nào thì Sai (mục 6.6).",
      "nguon": "mục 5, 6.6, V18, V35"},
     {"ma_mau": "tn-samsung-buds3pro", "thuoc_tinh": "dung_luong_pin", "tieu_de": "Pin tai nghe và pin hộp sạc",
      "noi_dung": "Tai nghe 50 mAh, hộp sạc 515 mAh (mức điển hình). Gán 515 mAh cho tai nghe thì Lệch (doi_bo_phan). "
@@ -809,9 +1070,29 @@ CA_DAC_BIET = [
      "nguon": "mục 5, V36"},
     {"ma_mau": "tn-samsung-buds3pro", "thuoc_tinh": "sac_nhanh", "tieu_de": "Sạc nhanh của Buds3 Pro",
      "noi_dung": "Tài liệu Buds3 Pro không có thông số sạc nhanh, nên tuyên bố sạc nhanh dừng ở D1, bằng chứng để "
-                 "trống. Số phút sạc của tai nghe cũng không có mặc định.",
-     "nguon": "mục 5, V45"},
-]
+                 "trống, không ghi mac_dinh. Số phút sạc của tai nghe cũng không có mặc định.",
+     "nguon": "mục 5, 7 (D1), V45"},
+] + _moi_nhom({
+    "tieu_de": "Cụm phủ nhiều giá trị: “mọi điều kiện …”, “mọi chế độ”, “mọi hoạt động”, “bất kể …”, “dù A hay B”, "
+               "“cho cả A và B”",
+    "noi_dung": "Cụm phủ gắn với con số nghĩa là tuyên bố phải đúng ở từng giá trị được phủ. Điều kiện của tuyên bố là "
+                "giá trị kém thuận lợi nhất trong các giá trị được phủ mà tài liệu công bố; đây là điều kiện nêu rõ, "
+                "nên Lệch thì loại doi_dieu_kien. Cụm phủ không phải từ khẳng định, trừ khi có thêm từ khẳng định gắn "
+                "với con số. Kháng nước: “mọi hoạt động” phủ cả hoạt động hãng khuyến cáo không dùng.",
+    "nguon": "mục 6.2, 6.6, 6.8, V49"}) + _moi_nhom({
+    "tieu_de": "Cụm điều kiện chưa có trong phụ lục: đọc theo nghĩa với người mua",
+    "noi_dung": "Cụm tả đúng một điều kiện tài liệu công bố, bằng tên hãng dùng hoặc bằng hoàn cảnh của điều kiện ấy, "
+                "thì là nêu điều kiện đó; ghi ngoai_cau_hinh=<cụm>. Cụm chung chung, không trỏ được tới điều kiện nào "
+                "tài liệu công bố, thì coi như chưa nêu: dùng cách hiểu mặc định. Cụm ở tài liệu mà không xếp được vào "
+                "sáu loại: ngoai_sau_loai=<cụm>. Cụm ở tuyên bố vẫn không xếp được: D1a, ghi chua_xac_dinh=<cụm>. "
+                "Cấu hình chưa biết cụm không phải lý do D1a cho nhãn chuẩn.",
+    "nguon": "mục 6.7, 6.8, V08, V51"}) + _moi_nhom({
+    "tieu_de": "Con số của điều kiện không phải giá trị của thuộc tính",
+    "noi_dung": "Con số tài liệu dùng làm điều kiện (mức tối thiểu của bộ tiếp hợp, mốc phần trăm, số phút sạc, độ sâu, "
+                "thời gian ngâm, phần diện tích đo) không phải giá trị công bố: không dùng để khớp ở D3 hay D4. "
+                "Tuyên bố lấy con số đó làm giá trị thì dò D1–D6 với các giá trị thật của thuộc tính, và ghi "
+                "nham_vai=<cụm>.",
+    "nguon": "mục 6.3, 6.9"})
 
 
 def json_nhung(du_lieu):
@@ -820,7 +1101,10 @@ def json_nhung(du_lieu):
 
 
 def dung_html(du_lieu):
-    return MAU_HTML.replace("__DU_LIEU__", json_nhung(du_lieu))
+    """Điền chữ phụ thuộc lượt (tiêu đề, tên tệp tải về) trước, nhúng dữ liệu JSON sau cùng."""
+    t = du_lieu["trang"]
+    mau = MAU_HTML.replace("__LUOT__", str(t["luot"])).replace("__TEP_NHAN__", t["tep_nhan"]).replace("__TEP_HOI__", t["tep_hoi"])
+    return mau.replace("__DU_LIEU__", json_nhung(du_lieu))
 
 
 # Mẫu HTML. Chuỗi thô (r"""), nên các \u00a0, \n... bên trong là của JavaScript. Không dùng ba dấu nháy kép trong đây.
@@ -829,7 +1113,7 @@ MAU_HTML = r"""<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Công cụ gán nhãn chuẩn - bộ thử</title>
+<title>Công cụ gán nhãn chuẩn - bộ thử, lượt __LUOT__</title>
 <style>
 :root {
   --nen: #f4f5f7; --khung: #ffffff; --chu: #1c2026; --phu: #5a6370; --vien: #d3d8df;
@@ -898,7 +1182,6 @@ label.kiem input { width: auto; }
 .chi-tiet { display: grid; grid-template-columns: max-content 1fr; gap: 2px 10px; margin: 0; font-size: 13px; }
 .chi-tiet dt { color: var(--phu); }
 .chi-tiet dd { margin: 0; overflow-wrap: anywhere; }
-.ghi-chu-tb { margin: 8px 0 0; font-size: 13px; padding: 5px 8px; background: var(--nhan-nen); border-radius: 6px; }
 
 .bai { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 42vh; overflow: auto; position: relative; padding: 6px 8px;
        border: 1px solid var(--vien); border-radius: 6px; font-size: 14px; }
@@ -1002,10 +1285,10 @@ details.hd[open] > summary { border-bottom: 1px solid var(--vien); border-radius
 <body>
 <header id="dau">
   <div class="dau-hang">
-    <h1>Công cụ gán nhãn chuẩn - bộ thử (Bước 13)</h1>
+    <h1>Công cụ gán nhãn chuẩn - bộ thử (Bước 16 · lượt __LUOT__)</h1>
     <button id="btn-hd" type="button" class="nho" aria-controls="huong-dan" aria-expanded="false">Mở hướng dẫn đầy đủ</button>
   </div>
-  <p class="nhac">Các khung hướng dẫn lấy từ <code>data/huong_dan_gan_nhan.md</code> lúc sinh trang. Công cụ chỉ hiện tài liệu, hướng dẫn và ghi lại dòng D bạn chọn (nhãn tự điền theo dòng), không đọc tuyên bố để gợi ý nhãn; trang chỉ báo khi các ô bạn điền mâu thuẫn nhau.</p>
+  <p class="nhac">Các khung hướng dẫn lấy từ <code>data/huong_dan_gan_nhan.md</code> (bản 2) lúc sinh trang. Công cụ chỉ hiện tài liệu, hướng dẫn và ghi lại dòng D bạn chọn (nhãn tự điền theo dòng), không đọc tuyên bố để gợi ý nhãn; trang chỉ báo khi các ô bạn điền mâu thuẫn nhau hoặc trái quy tắc. Lượt __LUOT__ gán mù với lượt trước: không mở nhãn lượt 1 và các ghi chép về nhãn lượt 1.</p>
   <p id="canh-bao" role="alert" hidden></p>
   <div id="canh-bao-lai" role="alert" hidden></div>
 </header>
@@ -1017,9 +1300,9 @@ details.hd[open] > summary { border-bottom: 1px solid var(--vien); border-radius
       <input id="nguoi-gan" type="text" autocomplete="off">
       <p id="tien-do"></p>
       <div class="nut-cot">
-        <button id="btn-tai-nhan" type="button">Tải nhãn (thu.jsonl)</button>
-        <button id="btn-tai-hoi" type="button">Tải câu hỏi nhãn (cau_hoi_nhan.md)</button>
-        <button id="btn-nhap" type="button">Nhập lại thu.jsonl đã xuất</button>
+        <button id="btn-tai-nhan" type="button">Tải nhãn (__TEP_NHAN__)</button>
+        <button id="btn-tai-hoi" type="button">Tải câu hỏi nhãn (__TEP_HOI__)</button>
+        <button id="btn-nhap" type="button">Nhập lại __TEP_NHAN__ đã xuất</button>
         <input id="tep-nhap" type="file" accept=".jsonl,.json,.md,.txt" multiple hidden>
       </div>
       <p class="phu">Tự lưu trong trình duyệt này; vẫn nên tải tệp nhãn thường xuyên.</p>
@@ -1037,12 +1320,16 @@ details.hd[open] > summary { border-bottom: 1px solid var(--vien); border-radius
       <p id="trang-thai-dh" class="phu"></p>
       <p id="the-tb" class="tuyen-bo"></p>
       <dl id="the-chi-tiet" class="chi-tiet"></dl>
-      <p id="the-ghi-chu" class="ghi-chu-tb" hidden></p>
     </div>
 
     <div class="khung">
-      <h2>Bài quảng cáo <span id="bai-ten" class="phu"></span></h2>
-      <div id="bai" class="bai"></div>
+      <details class="hd" id="kh-bai">
+        <summary>Bài quảng cáo (chỉ để kiểm tách, đóng sẵn) <span id="bai-ten" class="phu"></span></summary>
+        <div class="hd-nd">
+          <p>Gán theo chữ của tuyên bố. Câu tô vàng chỉ để kiểm tách. Thấy tuyên bố thiếu điều kiện thì ghi <code>tach=…</code> vào ô Câu hỏi nhãn, vẫn gán theo tuyên bố.</p>
+          <div id="bai" class="bai"></div>
+        </div>
+      </details>
     </div>
 
     <form id="form" class="khung" autocomplete="off">
@@ -1050,13 +1337,30 @@ details.hd[open] > summary { border-bottom: 1px solid var(--vien); border-radius
         <summary>Cách làm một tuyên bố</summary>
         <div class="hd-nd">
           <ol>
-            <li>Đọc tuyên bố ở thẻ trên và câu tô vàng trong bài quảng cáo.</li>
+            <li>Đọc tuyên bố ở thẻ trên. Gán theo chữ của tuyên bố; bài quảng cáo (đóng sẵn) chỉ để kiểm tách.</li>
             <li>Ở cột phải, gõ con số hoặc từ khóa vào ô tìm. Đọc đoạn, bấm "Thêm làm bằng chứng".</li>
-            <li>Bôi đen câu cần trích trong đoạn, bấm "Lấy đoạn đang bôi đen".</li>
+            <li>Bôi đen câu cần trích trong đoạn, bấm "Lấy đoạn đang bôi đen". Đoạn khác có cùng chữ thì trang hỏi có thêm không: ghi mọi đoạn có cùng con số ở cùng điều kiện.</li>
+            <li>Xác định điều kiện của tuyên bố (khung “Bước 3”): điều kiện nêu rõ thì giữ nguyên, điều kiện không nêu thì lấy cách hiểu mặc định. Không chọn điều kiện theo con số của tuyên bố.</li>
             <li>Dò bảng D1–D6 từ trên xuống, bấm “Dừng ở đây” ở dòng đầu tiên đúng với tuyên bố. Nhãn tự điền theo dòng; Lệch hoặc Sai thì chọn thêm loại.</li>
-            <li>Viết lý do: bấm "Chèn mẫu câu" ở dòng vừa dừng, rồi thay các chỗ {…}. Nhãn dựa vào cách hiểu mặc định thì ghi mac_dinh=… vào ghi chú.</li>
+            <li>Viết lý do: bấm "Chèn mẫu câu" ở dòng vừa dừng, rồi thay các chỗ {…}. Ghi chú: mac_dinh=… cho mọi khóa tuyên bố không nêu (từ D1a tới D6); D2 thì khang_dinh=…; D1a thì nguyên nhân.</li>
             <li>Bấm "Lưu và sang tuyên bố sau". Còn thiếu gì thì trang báo đỏ.</li>
           </ol>
+        </div>
+      </details>
+
+      <details class="hd" id="kh-mac-dinh" open>
+        <summary>Bước 3 · Điều kiện của tuyên bố: nêu rõ, hoặc cách hiểu mặc định (dùng ở mọi dòng D)</summary>
+        <div class="hd-nd">
+          <p>Quảng cáo hay bỏ bớt điều kiện. Bảng dưới cho biết làm gì với từng điều kiện bị bỏ. Không chọn điều kiện theo con số của tuyên bố: con số trùng giá trị ở điều kiện khác là việc của D4. Dòng có cách hiểu: coi như tuyên bố đã nói điều kiện đó, rồi dò tiếp từ D1b tới D6 (không dừng ở D1a vì điều kiện này). Dòng “Không có mặc định”: không biết tuyên bố nói điều kiện nào, dừng ở D1a, nhãn Chưa đủ thông tin. Các cách hiểu này chốt ở Bước 8 theo nguyên tắc “hiểu như người mua thông thường, bộ phận chính, không mua thêm phụ kiện”, rồi kiểm lại bằng khảo sát 10 người ở Bước 10.</p>
+          <div id="md-nd"></div>
+        </div>
+      </details>
+
+      <details class="hd" id="kh-cum">
+        <summary>Cụm điều kiện đã biết của sản phẩm và thuộc tính này (phụ lục mục 13)</summary>
+        <div class="hd-nd">
+          <p class="phu-nho">Cụm có ở đây thì là điều kiện đó (mục 6.8, ý 1). Cụm chưa có thì đọc theo nghĩa với người mua và ghi ngoai_cau_hinh=…; thiếu cụm ở đây không phải lý do dừng ở D1a. Chỉ hiện các điều kiện của đúng nhóm và thuộc tính đang gán; đây không phải gợi ý nhãn.</p>
+          <div id="cum-nd"></div>
         </div>
       </details>
 
@@ -1065,14 +1369,6 @@ details.hd[open] > summary { border-bottom: 1px solid var(--vien); border-radius
         <div class="hd-nd">
           <p id="d-trang-thai"></p>
           <div id="d-ds"></div>
-        </div>
-      </details>
-
-      <details class="hd" id="kh-mac-dinh" open>
-        <summary>Khi tuyên bố không nói điều kiện (dùng ở D1a)</summary>
-        <div class="hd-nd">
-          <p>Quảng cáo hay bỏ bớt điều kiện. Bảng dưới cho biết làm gì với từng điều kiện bị bỏ. Dòng có cách hiểu: coi như tuyên bố đã nói điều kiện đó, rồi dò tiếp. Dòng “Không có mặc định”: không biết tuyên bố nói điều kiện nào, dừng ở D1a, nhãn Chưa đủ thông tin. Các cách hiểu này chốt ở Bước 8 theo nguyên tắc “hiểu như người mua thông thường, bộ phận chính, không mua thêm phụ kiện”, rồi kiểm lại bằng khảo sát 10 người ở Bước 10.</p>
-          <div id="md-nd"></div>
         </div>
       </details>
 
@@ -1090,7 +1386,9 @@ details.hd[open] > summary { border-bottom: 1px solid var(--vien); border-radius
           <ul>
             <li>Khớp là bằng con số của hãng (lệch không quá 1%) hoặc kém thuận lợi hơn, ví dụ pin ít giờ hơn, sạc lâu hơn (mục 3, 6.1).</li>
             <li>Bỏ chữ "lên đến" vẫn khớp, không đổi nhãn (mục 6.2).</li>
-            <li>"Luôn", "đảm bảo", "bảo đảm", "ít nhất", "mọi lúc" gắn với một mức không cao hơn mức "lên đến" thì Lệch ở D2. Tên tính năng như "Màn hình Luôn Bật" không tính (mục 6.2).</li>
+            <li>Từ khẳng định (danh sách ở dòng D2, đọc từ mục 6.2) gắn ngay với con số, cho một mức không cao hơn mức "lên đến", thì Lệch ở D2 và ghi khang_dinh=… Tên tính năng như "Màn hình Luôn Bật" và từ ở vế nói việc khác không tính (mục 6.2).</li>
+            <li>Cách hiểu mặc định dùng ở mọi dòng D, không chỉ ở D1a (mục 5, 7).</li>
+            <li>Không chọn điều kiện theo con số của tuyên bố: xác định điều kiện trước, rồi mới so con số (mục 1, bước 3).</li>
             <li>Chú thích của đoạn cũng là bằng chứng. Trong bảng so sánh chỉ dùng cột của đúng sản phẩm (mục 4).</li>
             <li>Không dùng hiểu biết riêng hay trang ngoài kho tài liệu (mục 4).</li>
             <li>Không tự sửa chỗ hãng ghi nhầm. Tài liệu ghi hai số khác nhau cho cùng điều kiện thì Chưa đủ ở D1b và tick "Tài liệu mâu thuẫn" (mục 4).</li>
@@ -1103,8 +1401,8 @@ details.hd[open] > summary { border-bottom: 1px solid var(--vien); border-radius
       <div id="nut-nhan" role="group" aria-label="Nhãn tự điền theo dòng D">
         <div class="nhan-o" data-nhan="DUNG">DUNG<small>Đúng: Cùng điều kiện, con số khớp</small></div>
         <div class="nhan-o" data-nhan="SAI">SAI<small>Sai: Số mâu thuẫn ở cùng điều kiện, hoặc đẹp hơn mọi số của hãng</small></div>
-        <div class="nhan-o" data-nhan="LECH">LECH<small>Lệch điều kiện: Số có thật nhưng ở điều kiện khác, hoặc biến "lên đến" thành chắc chắn</small></div>
-        <div class="nhan-o" data-nhan="CHUA_DU">CHUA_DU<small>Chưa đủ thông tin: Không có số, không xác định được điều kiện, hoặc tài liệu mâu thuẫn</small></div>
+        <div class="nhan-o" data-nhan="LECH">LECH<small>Lệch điều kiện: Số có thật nhưng ở điều kiện khác, hoặc có từ khẳng định ("luôn", "ít nhất"...) gắn với mức "lên đến". Chỉ thiếu chữ "lên đến" thì không phải Lệch</small></div>
+        <div class="nhan-o" data-nhan="CHUA_DU">CHUA_DU<small>Chưa đủ thông tin: không có số nào cho thuộc tính (D1), không xác định được điều kiện (D1a), tài liệu mâu thuẫn (D1b), hoặc không có số ở điều kiện này (D6)</small></div>
       </div>
 
       <div id="o-loai" hidden>
@@ -1117,7 +1415,7 @@ details.hd[open] > summary { border-bottom: 1px solid var(--vien); border-radius
             <li>Quảng cáo có <b>nói ra</b> điều kiện không? Không nói gì → <code>bo_dieu_kien</code>. Có nói nhưng nói sai → sang câu 2.</li>
             <li>Nói sai cái gì?
               <ul>
-                <li>Chế độ, phụ kiện, cách đo → <code>doi_dieu_kien</code>. Kể cả nói con số điều kiện không đủ: củ sạc 20W trong khi tài liệu cần 40W trở lên (V22).</li>
+                <li>Chế độ, phụ kiện, cách đo → <code>doi_dieu_kien</code>. Kể cả nói con số điều kiện không đủ: củ sạc 20W trong khi tài liệu cần 40W trở lên (V22); và cụm phủ nhiều giá trị ("mọi chế độ", "dù A hay B") mà số chỉ đúng ở một giá trị được phủ (V49).</li>
                 <li>Bộ phận → <code>doi_bo_phan</code>. Ví dụ "Hộp sạc Buds3 Pro đạt IP57", trong khi IP57 là của tai nghe (V35).</li>
                 <li>Phiên bản → <code>doi_phien_ban</code>. Con số của phiên bản này bị gắn cho phiên bản khác.</li>
                 <li>Kiểu con số → <code>doi_kieu_gia_tri</code>. "Lên đến 6 giờ" thành "luôn đủ 6 giờ" (V38); dung lượng điển hình thành định mức (V37).</li>
@@ -1130,7 +1428,7 @@ details.hd[open] > summary { border-bottom: 1px solid var(--vien); border-radius
             <li>"Buds3 Pro nghe nhạc 7 giờ khi bật chống ồn": có nói, nhưng nói sai → <code>doi_dieu_kien</code> (V31).</li>
           </ul>
           <p class="phu-nho">Sai nhiều chỗ cùng lúc: chỗ quảng cáo nói ra được ưu tiên hơn chỗ im lặng. Nói ra nhiều chỗ thì ưu tiên bộ phận, rồi phiên bản, rồi kiểu con số, rồi các điều kiện còn lại. Con số trùng nhiều chỗ trong tài liệu: so với chỗ khác quảng cáo ít điều kiện nhất.</p>
-          <p class="phu-nho">Chọn <code>bo_dieu_kien</code> thì ô ghi chú thường cần <code>mac_dinh=...</code>: bấm nút ở khung "Khi tuyên bố không nói điều kiện".</p>
+          <p class="phu-nho">Chọn <code>bo_dieu_kien</code> thì ô ghi chú thường cần <code>mac_dinh=...</code>: bấm nút ở khung "Bước 3".</p>
         </div>
         <div id="goi-y-sai" class="goi-y-loai" hidden>
           Gần như luôn chọn <code>doi_gia_tri</code>: con số sai. Chỉ chọn <code>doi_bo_phan</code> hoặc <code>doi_phien_ban</code> khi quảng cáo nói về bộ phận hoặc phiên bản khác, và không trùng con số nào của tài liệu. Ví dụ "Hộp sạc Buds3 Pro cũng kháng nước", trong khi hộp sạc không kháng nước (V18).
@@ -1138,7 +1436,7 @@ details.hd[open] > summary { border-bottom: 1px solid var(--vien); border-radius
       </div>
 
       <label>Bằng chứng (bang_chung) - thêm từ cột phải</label>
-      <p class="phu">Lệch: đoạn chứa con số trùng. Sai: đoạn chứa con số ở cùng điều kiện. Chưa đủ ở D1: để trống.</p>
+      <p class="phu">Ghi mọi đoạn có cùng con số ở cùng điều kiện, không chỉ một đoạn (mục 8). Lệch: mọi đoạn chứa con số trùng. Sai: mọi đoạn chứa con số ở cùng điều kiện. Đúng: mọi đoạn chứa giá trị khớp. Chưa đủ ở D1a, D1b, D6: các đoạn chứa những con số mà lý do dựa vào. D1: để trống.</p>
       <ul id="bang-chung"></ul>
 
       <label for="trich">Câu trích (trich)</label>
@@ -1148,20 +1446,21 @@ details.hd[open] > summary { border-bottom: 1px solid var(--vien); border-radius
         <button id="btn-lay" type="button">Lấy đoạn đang bôi đen</button>
       </div>
       <p id="nhac-trich" class="phu" hidden></p>
+      <div id="goi-y-doan" class="goi-y-loai" hidden></div>
 
       <label for="ly-do">Lý do (ly_do)</label>
-      <p class="phu">Một câu, nói rõ điều kiện nào bị bỏ hoặc bị đổi. Dùng nút "Chèn mẫu câu" ở bảng D1–D6.</p>
+      <p class="phu">Một câu, nói rõ điều kiện nào bị bỏ hoặc bị đổi. Dùng nút "Chèn mẫu câu" ở bảng D1–D6. Chỗ “câu trích” là câu nguyên văn từ tài liệu, đặt trong ngoặc kép; đừng ghi mã đoạn vào đó (mã đoạn đã nằm ở bằng chứng).</p>
       <textarea id="ly-do" rows="3"></textarea>
 
       <label for="ghi-chu">Ghi chú (ghi_chu)</label>
-      <p class="phu">mac_dinh=… khi nhãn dựa vào cách hiểu mặc định (bấm nút ở khung “Khi tuyên bố không nói điều kiện”). ngoai_cau_hinh=… khi gặp điều kiện hướng dẫn chưa có. Nhiều mục cách nhau "; ".</p>
+      <p class="phu">Nhiều mục cách nhau "; " (mục 8). mac_dinh=… mọi khóa tuyên bố không nêu, từ D1a tới D6, không ghi ở D1 (bấm nút ở khung “Bước 3”). khang_dinh=… từ khẳng định, bắt buộc ở D2. chua_xac_dinh=… cụm làm D1a (chữ trỏ nhiều chế độ, cụm không giải được); D1a phải ghi nguyên nhân bằng chua_xac_dinh hoặc mac_dinh của khóa “Không có mặc định”. chep_nhan=… tuyên bố chép đúng nhãn của tài liệu (mục 6.8), khi đó không ghi mac_dinh cho điều kiện đó. nham_vai=… con số điều kiện bị dùng làm giá trị. ngoai_cau_hinh=… điều kiện hướng dẫn chưa có, người gán tự xác định. ngoai_sau_loai=… điều kiện không xếp được vào sáu loại.</p>
       <textarea id="ghi-chu" rows="2"></textarea>
 
       <label class="kiem"><input id="mau-thuan" type="checkbox"> Tài liệu mâu thuẫn (tai_lieu_mau_thuan)</label>
       <p class="phu">Tự tick khi bấm “Dừng ở đây” ở D1b (tài liệu ghi hai số khác nhau cho cùng điều kiện, nhãn Chưa đủ) và tự bỏ tick khi chuyển sang dòng khác. Chỉ dòng D1b mới được tick.</p>
 
       <label for="cau-hoi">Câu hỏi nhãn (tùy chọn) - chỗ hướng dẫn chưa rõ</label>
-      <p class="phu">Bàn ở Bước 16.</p>
+      <p class="phu">Chỗ hướng dẫn chưa rõ: ghi vào đây, đừng tự đặt quy tắc. Tuyên bố còn thiếu điều kiện so với bài quảng cáo: ghi <code>tach=…</code> (thiếu gì) và vẫn gán theo tuyên bố (mục 1, bước 0).</p>
       <textarea id="cau-hoi" rows="2"></textarea>
 
       <div id="loi" role="alert" hidden></div>
@@ -1204,8 +1503,11 @@ const $ = (id) => document.getElementById(id);
 const DL = JSON.parse($('du-lieu').textContent);
 const TB = DL.tuyen_bo;
 const HD = DL.huong_dan;
-const KHOA = 'gan_nhan_thu_v1';
-const KHOA_GD = 'gan_nhan_giao_dien_v1';
+const TRANG = DL.trang; // lượt, khóa lưu, tên tệp tải về: chữ lấy từ scripts/tao_cong_cu_gan_nhan.py
+const LUOT = TRANG.luot;
+const KHOA = TRANG.khoa_nhan;
+const KHOA_GD = TRANG.khoa_giao_dien;
+const NGHI_MS = TRANG.nghi_ms; // không thao tác quá chừng này thì đồng hồ dừng đếm
 const MA_NHAN = ['DUNG', 'SAI', 'LECH', 'CHUA_DU'];
 // Loại biến đổi theo nhãn (hướng dẫn mục 8): LECH luôn có loại; SAI chỉ ghi doi_gia_tri, hoặc doi_bo_phan / doi_phien_ban
 // khi gán nhầm bộ phận, phiên bản mà không trùng số nào; DUNG và CHUA_DU để trống.
@@ -1228,23 +1530,116 @@ function tieuDeLoai(m) { return GIAI_THICH_LOAI[m] ? 'Hướng dẫn mục 8: ' 
 const MA_DONG = HD.dong_d.map((d) => d.ma);
 const DONG_MAP = {};
 for (const d of HD.dong_d) DONG_MAP[d.ma] = d;
+/* >>> LUAT_KIEM: luật kiểm không đụng DOM, bản JavaScript của scripts/kiem_nhan.py (test chạy riêng khối này trong node) */
 const TBAO = DL.quy_tac.thong_bao; // thông báo lỗi, cùng chữ với scripts/kiem_nhan.py
 const NHAC = DL.quy_tac.nhac;
 const dien = (mau, v) => mau.replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m));
-// Điều kiện "không có mặc định" theo nhóm (tiền tố ma_mau) và thuộc tính: { 'dt|do_sang': { che_do_hien_thi: 'Chế độ hiển thị' } }.
-const KHONG_CO = {};
-for (const h of HD.mac_dinh) {
-  for (const k of h.khoa) {
-    if (k.gia_tri !== 'khong_co_mac_dinh') continue;
-    const kn = h.nhom + '|' + h.thuoc_tinh;
-    (KHONG_CO[kn] = KHONG_CO[kn] || {})[k.khoa] = h.dieu_kien;
-  }
-}
 const RE_GIU_CHO = /\{[^{}]*\}/g;
 // Cùng tập khoảng trắng với scripts/kiem_nhan.py, để công cụ và script kiểm chuẩn hóa như nhau.
 const KT = /[\t\n\v\f\r \u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000\ufeff]+/g;
 const KT1 = /[\t\n\v\f\r \u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000\ufeff]/;
 const chuanHoa = (s) => String(s).normalize('NFC').replace(KT, ' ').trim();
+// Mã đoạn <ma_mau>#<số> trong ngoặc kép của lý do (S14): chuỗi biểu thức lấy từ Python, cùng với kiem_nhan.py.
+const RE_NGOAC_KEP = new RegExp(DL.quy_tac.re_ngoac_kep, 'g');
+const RE_MA_DOAN = new RegExp(DL.quy_tac.re_ma_doan);
+// Điều kiện theo nhóm (tiền tố ma_mau) và thuộc tính: { 'dt|do_sang': { che_do_hien_thi: 'Chế độ hiển thị' } } cho điều kiện
+// "không có mặc định"; { 'dt|sac_nhanh': { cach_sac: { dieu_kien, hieu } } } cho điều kiện có cách hiểu mặc định.
+const KHONG_CO = {};
+const CO_MAC_DINH = {};
+const KHOA_GHI_DUOC = {}; // khóa được ghi vào mac_dinh= (mục 8): khóa bảng mục 5 trừ "như hãng công bố"; cộng ngoai_bang (QĐ10)
+for (const h of HD.mac_dinh) {
+  const kn = h.nhom + '|' + h.thuoc_tinh;
+  for (const k of h.khoa) {
+    if (k.gia_tri === 'khong_co_mac_dinh') (KHONG_CO[kn] = KHONG_CO[kn] || {})[k.khoa] = h.dieu_kien;
+    else (CO_MAC_DINH[kn] = CO_MAC_DINH[kn] || {})[k.khoa] = { dieu_kien: h.dieu_kien, hieu: h.hieu };
+    if (k.gia_tri !== 'nhu_hang_cong_bo') {
+      const ds = (KHOA_GHI_DUOC[kn] = KHOA_GHI_DUOC[kn] || []);
+      if (!ds.includes(k.khoa)) ds.push(k.khoa);
+    }
+  }
+}
+const KHOA_NGOAI_BANG = 'ngoai_bang';
+// Từ khẳng định hợp lệ cho khang_dinh=<từ> (S17): đọc từ mục 6.2 của hướng dẫn lúc sinh trang.
+const TU_HOP_LE = HD.tu_khang_dinh.tu_hop_le.map((t) => chuanHoa(t).toLowerCase());
+const DS_TU_KHANG_DINH = HD.tu_khang_dinh.tu_hop_le.join(', ');
+// Đơn vị của thuộc tính (cột Đơn vị mục 6.1) và biểu thức nhận nó trong câu trích đã hạ chữ thường (S15).
+const DON_VI = {};
+for (const h of HD.huong_loi) DON_VI[h.nhom + '|' + h.thuoc_tinh] = { don_vi: h.don_vi, re: new RegExp(h.don_vi_mau) };
+// Mục "ten=giá trị" của ô ghi chú (các mục cách nhau "; "); cùng biểu thức với scripts/kiem_nhan.py.
+function giaTriMuc(v, ten) {
+  const m = new RegExp('(^|;\\s*)' + ten + '=([^;]*)').exec(v);
+  return m ? m[2] : null;
+}
+function layMuc(v, ten) {
+  const g = giaTriMuc(v, ten);
+  return g === null ? [] : g.split(',').map((x) => x.trim()).filter(Boolean);
+}
+const layMacDinh = (v) => layMuc(v, 'mac_dinh');
+function layChuaXacDinh(v) {
+  const g = giaTriMuc(v, 'chua_xac_dinh');
+  return g === null ? '' : g.trim();
+}
+function maDoanTrongNgoac(lyDo) {
+  for (const m of String(lyDo).matchAll(RE_NGOAC_KEP)) {
+    const x = RE_MA_DOAN.exec(m[1]);
+    if (x) return x[0];
+  }
+  return '';
+}
+// Luật về ô ghi chú, lý do và câu trích của một bản ghi r (dong_d, nhan, loai, ghi_chu, ly_do, trich) với nhomTt = 'dt|do_sang'.
+// Trả về { loi: [...] (chặn lưu), nhac: [...] (chỉ nhắc) }. Chỉ dùng các ô người gán điền và nhóm, thuộc tính ghi sẵn.
+function luatKiem(r, nhomTt) {
+  const loi = [], nhac = [];
+  const d = r.dong_d, gc = r.ghi_chu || '';
+  const khongCo = KHONG_CO[nhomTt] || {}, coMacDinh = CO_MAC_DINH[nhomTt] || {};
+  const khoa = Array.from(new Set(layMacDinh(gc)));
+  if (d !== 'D1') { // khóa của mac_dinh= phải là khóa ghi được của thuộc tính (mục 8; D1 không ghi mac_dinh, chỉ nhắc)
+    const ghiDuoc = KHOA_GHI_DUOC[nhomTt] || [];
+    for (const k of khoa) {
+      if (k !== KHOA_NGOAI_BANG && !ghiDuoc.includes(k)) loi.push(dien(TBAO.mac_dinh_khoa_la, { khoa: k, ds: ghiDuoc.join(', ') || '(không có)' }));
+    }
+  }
+  if (d && d !== 'D1a' && d !== 'D1') { // mac_dinh=<khóa> của điều kiện "không có mặc định" thì phải dừng ở D1a (D1 không ghi mac_dinh)
+    for (const k of khoa) if (khongCo[k]) loi.push(dien(TBAO.mac_dinh_khong_co, { khoa: k, dieu_kien: khongCo[k] }));
+  }
+  if (d === 'D1a' && !khoa.some((k) => khongCo[k]) && !layChuaXacDinh(gc)) { // D1a phải ghi nguyên nhân (S18)
+    loi.push(dien(TBAO.d1a_thieu_nguyen_nhan, { ds: Object.keys(khongCo).join(', ') || '(thuộc tính này không có khóa nào)' }));
+    for (const k of khoa) {
+      if (coMacDinh[k]) loi.push(dien(TBAO.d1a_mac_dinh_co_mac_dinh, { khoa: k, dieu_kien: coMacDinh[k].dieu_kien, hieu: coMacDinh[k].hieu }));
+    }
+  }
+  if (d === 'D2') { // D2 phải ghi từ khẳng định có trong mục 6.2 (S17)
+    const tu = Array.from(new Set(layMuc(gc, 'khang_dinh')));
+    if (!tu.length) loi.push(dien(TBAO.d2_thieu_khang_dinh, { ds: DS_TU_KHANG_DINH }));
+    for (const t of tu) if (!TU_HOP_LE.includes(chuanHoa(t).toLowerCase())) loi.push(dien(TBAO.d2_khang_dinh_la, { tu: t, ds: DS_TU_KHANG_DINH }));
+  }
+  const ma = maDoanTrongNgoac(r.ly_do || ''); // lý do chép mã đoạn vào chỗ câu trích (S14)
+  if (ma) loi.push(dien(TBAO.ly_do_ma_doan, { ma: ma }));
+  if (r.nhan === 'LECH' && r.loai === 'bo_dieu_kien' && !khoa.length) nhac.push(NHAC.bo_dieu_kien_thieu_mac_dinh);
+  if (d === 'D1' && khoa.length) nhac.push(NHAC.d1_co_mac_dinh); // S19
+  const dv = DON_VI[nhomTt]; // S15: câu trích phải có đơn vị của thuộc tính
+  const trich = (r.trich || '').trim();
+  if (dv && trich && !dv.re.test(chuanHoa(trich).toLowerCase())) {
+    nhac.push(dien(NHAC.trich_thieu_don_vi, { thuoc_tinh: nhomTt.split('|')[1], don_vi: dv.don_vi }));
+  }
+  return { loi: loi, nhac: nhac };
+}
+// S16: các đoạn trong ds ({id, noi_dung, chu_thich}) chưa nằm trong daCo mà cũng chứa đúng chuỗi t (chuỗi người gán vừa bôi đen).
+function doanCungChu(ds, daCo, t) {
+  if (!t) return [];
+  return ds.filter((d) => !daCo.includes(d.id)
+    && (chuanHoa(d.noi_dung).includes(t) || (d.chu_thich || []).some((c) => chuanHoa(c).includes(t)))).map((d) => d.id);
+}
+// S20: "Nhập lại" chỉ nhận bản ghi đúng lượt của trang; bản ghi lượt khác (hoặc không có luot) bị từ chối.
+function tachTheoLuot(moi, luot) {
+  const dung = moi.filter((o) => o && o.luot === luot);
+  const khac = moi.filter((o) => !(o && o.luot === luot));
+  return { dung: dung, khac: khac.length, luot_khac: Array.from(new Set(khac.map((o) => (o && o.luot !== undefined ? o.luot : 'không có')))) };
+}
+// S21: không thao tác quá nghiMs thì thời gian trôi qua (dt) cộng vào ms_nghi thay vì ms.
+const quaNghi = (bayGio, hoatDongCuoi, nghiMs) => bayGio - hoatDongCuoi > nghiMs;
+function congGio(r, dt, nghi) { if (nghi) r.ms_nghi += dt; else r.ms += dt; }
+/* <<< LUAT_KIEM */
 
 const DOAN_MAP = {};
 for (const m of Object.keys(DL.doan)) {
@@ -1270,8 +1665,15 @@ let chuaLuuGio = false;
 const khongQua = new Set(); // mã tuyên bố đã lưu nhưng không qua quy tắc khi nạp lại trang
 
 function banGhiMoi() {
+  // ms: thời gian đã đếm; ms_nghi: thời gian đồng hồ đứng vì không thao tác quá NGHI_MS (ghi riêng, không cộng vào ms).
   return { nhan: '', dong_d: '', loai: '', bang_chung: [], trich: '', ly_do: '', ghi_chu: '', tai_lieu_mau_thuan: false,
-           cau_hoi: '', ms: 0, da_gan: false, dung: false, nguoi_gan: '' };
+           cau_hoi: '', ms: 0, ms_nghi: 0, da_gan: false, dung: false, nguoi_gan: '', nd_goc: '' };
+}
+// Nội dung nhãn của bản ghi (không tính số giây, câu hỏi, người gán). nd_goc giữ nội dung lúc nhập tệp hay lần lưu trước:
+// "Lưu và sang" chỉ đổi người gán khi nội dung khác nd_goc, để bản ghi nhập từ tệp mà người duyệt không sửa giữ người gán cũ.
+function noiDungNhan(r) {
+  return JSON.stringify([r.nhan, r.dong_d, r.loai, r.bang_chung, r.trich.trim(), r.ly_do.trim(), !!r.tai_lieu_mau_thuan,
+                         r.ghi_chu.trim()]);
 }
 function lamSach(x) {
   const r = banGhiMoi();
@@ -1282,7 +1684,8 @@ function lamSach(x) {
   r.trich = chuoi(x.trich); r.ly_do = chuoi(x.ly_do); r.ghi_chu = chuoi(x.ghi_chu); r.cau_hoi = chuoi(x.cau_hoi);
   r.tai_lieu_mau_thuan = x.tai_lieu_mau_thuan === true;
   r.ms = Number.isFinite(x.ms) && x.ms > 0 ? x.ms : 0;
-  r.da_gan = x.da_gan === true; r.dung = x.dung === true; r.nguoi_gan = chuoi(x.nguoi_gan);
+  r.ms_nghi = Number.isFinite(x.ms_nghi) && x.ms_nghi > 0 ? x.ms_nghi : 0;
+  r.da_gan = x.da_gan === true; r.dung = x.dung === true; r.nguoi_gan = chuoi(x.nguoi_gan); r.nd_goc = chuoi(x.nd_goc);
   return r;
 }
 function bg(i) {
@@ -1316,7 +1719,7 @@ function nap() {
     let d;
     try { d = JSON.parse(t); } catch (e) {
       try { localStorage.setItem(KHOA + '_hong', t); } catch (e2) { /* bỏ qua */ }
-      canhBaoNap = 'Dữ liệu cũ trong trình duyệt bị hỏng nên không đọc được (đã chép sang khóa ' + KHOA + '_hong). Bắt đầu lại từ trống; nếu có tệp thu.jsonl đã xuất thì bấm "Nhập lại".';
+      canhBaoNap = 'Dữ liệu cũ trong trình duyệt bị hỏng nên không đọc được (đã chép sang khóa ' + KHOA + '_hong). Bắt đầu lại từ trống; nếu có tệp ' + TRANG.tep_nhan + ' đã xuất thì bấm "Nhập lại".';
       return;
     }
     if (typeof d.nguoi_gan === 'string' && d.nguoi_gan.trim()) state.nguoi_gan = d.nguoi_gan;
@@ -1361,9 +1764,14 @@ function capNhatBannerLai() {
 /* ---------- Đồng hồ ---------- */
 
 let last = Date.now();
-function dangDem() {
+let hoatDongCuoi = Date.now(); // lần thao tác gần nhất (phím, chuột, cuộn, chạm)
+// Đồng hồ chỉ chạy khi: không tạm dừng, trang hiện và được chọn, tuyên bố chưa lưu, và có thao tác trong NGHI_MS gần đây.
+// Không thao tác quá NGHI_MS thì thời gian trôi qua không cộng vào ms mà cộng vào ms_nghi (xuất ra là giay_nghi).
+function canDem() {
   return !state.tamDung && document.visibilityState === 'visible' && document.hasFocus() && !bg(state.idx).dung;
 }
+function dangNghi() { return quaNghi(Date.now(), hoatDongCuoi, NGHI_MS); }
+function dangDem() { return canDem() && !dangNghi(); }
 function mmss(giay) {
   const p = Math.floor(giay / 60), s = giay % 60;
   return String(p).padStart(2, '0') + ':' + String(s).padStart(2, '0');
@@ -1378,8 +1786,10 @@ function capNhatDongHo() {
     if (state.tamDung) tt = 'Đã tạm dừng (bấm "Tiếp tục").';
     else if (r.dung) tt = 'Đã lưu nên đồng hồ dừng; sửa lại nhãn thì đếm tiếp.';
     else if (document.visibilityState !== 'visible') tt = 'Trang đang ẩn nên đồng hồ dừng.';
-    else tt = 'Cửa sổ chưa được chọn nên đồng hồ dừng (bấm vào trang để đếm tiếp).';
+    else if (!document.hasFocus()) tt = 'Cửa sổ chưa được chọn nên đồng hồ dừng (bấm vào trang để đếm tiếp).';
+    else tt = 'Không thao tác quá ' + Math.round(NGHI_MS / 60000) + ' phút nên đồng hồ dừng (thao tác lại để đếm tiếp).';
   }
+  if (r.ms_nghi > 0) tt += ' Đã bỏ ' + Math.round(r.ms_nghi / 1000) + ' giây lúc không thao tác.';
   $('trang-thai-dh').textContent = tt;
   $('btn-tam-dung').textContent = state.tamDung ? 'Tiếp tục' : 'Tạm dừng';
 }
@@ -1387,7 +1797,10 @@ function tick() {
   const now = Date.now();
   const dt = Math.min(Math.max(now - last, 0), 1000); // trần 1 giây: trình duyệt hãm bộ đếm khi trang ẩn
   last = now;
-  if (dt > 0 && dangDem()) { bg(state.idx).ms += dt; chuaLuuGio = true; }
+  if (dt > 0 && canDem()) {
+    congGio(bg(state.idx), dt, dangNghi());
+    chuaLuuGio = true;
+  }
   capNhatDongHo();
   if (chuaLuuGio && now - lanLuu > 5000) luu();
 }
@@ -1445,17 +1858,21 @@ function dungThe() {
   dl.textContent = '';
   [['Thuộc tính', tb.thuoc_tinh], ['Mã bài', tb.ma_qc], ['LLM', tb.llm_sinh], ['Chế độ', tb.che_do], ['Loại bài', tb.loai_bai]]
     .forEach(([k, v]) => { dl.append(el('dt', '', k), el('dd', '', v)); });
-  const gc = $('the-ghi-chu');
-  gc.hidden = !tb.ghi_chu;
-  gc.textContent = tb.ghi_chu ? 'Ghi chú của tuyên bố: ' + tb.ghi_chu : '';
+  // Không hiện ghi chú của tuyên bố (tach_sua=…): khi gán chỉ đọc chữ của tuyên bố (hướng dẫn mục 1, bước 0). Dữ liệu vẫn nhúng.
 }
 
 // Tô sáng cau_goc trong bài. So sau khi NFC và gộp khoảng trắng; bản đồ ban[k] = vị trí trong bài gốc của ký tự thứ k.
+let markDau = null; // mark đầu tiên của câu gốc trong bài đang hiện
+function cuonBai() { // khung bài đóng sẵn nên chỉ cuộn được khi đã mở
+  const box = $('bai');
+  if ($('kh-bai').open) box.scrollTop = markDau ? Math.max(0, markDau.offsetTop - box.clientHeight / 3) : 0;
+}
 function dungBai() {
   const tb = TB[state.idx];
   const bai = DL.bai[tb.ma_qc];
   const box = $('bai');
   box.textContent = '';
+  markDau = null;
   $('bai-ten').textContent = bai && bai.ten_nhap ? '(sản phẩm nhập: ' + bai.ten_nhap + ')' : '';
   if (!bai) { box.textContent = '(không có bài ' + tb.ma_qc + ')'; return; }
   const goc = bai.noi_dung.normalize('NFC');
@@ -1484,7 +1901,8 @@ function dungBai() {
     vt = b;
   }
   box.append(document.createTextNode(goc.slice(vt)));
-  box.scrollTop = dau ? Math.max(0, dau.offsetTop - box.clientHeight / 3) : 0;
+  markDau = dau;
+  cuonBai();
 }
 
 /* ---------- Khung hướng dẫn trong biểu mẫu ---------- */
@@ -1495,7 +1913,9 @@ function dungKhungD() {
   goc.textContent = '';
   for (const d of HD.dong_d) {
     const nd = el('div', 'd-nd');
-    nd.append(el('div', 'd-cau-hoi', d.cau_hoi), el('div', 'd-nhan', '→ Nhãn: ' + d.nhan_hien_thi));
+    const ch = el('div', 'd-cau-hoi', d.cau_hoi);
+    ch.dataset.mau = d.cau_hoi; // D1 có chỗ {thuoc_tinh}: capNhatKhungD điền tên thuộc tính của tuyên bố đang mở
+    nd.append(ch, el('div', 'd-nhan', '→ Nhãn: ' + d.nhan_hien_thi));
     if (d.ghi_chu_nho) nd.append(el('div', 'd-luu-y', d.ghi_chu_nho));
     const kt = el('div', 'd-luu-y'); kt.innerHTML = 'Kiểm tra (hướng dẫn): ' + d.kiem_tra_html;
     nd.append(kt);
@@ -1535,9 +1955,15 @@ function bamViDu(ma) {
   nut.setAttribute('aria-expanded', vi.hidden ? 'false' : 'true');
 }
 // Tô dòng D người gán đã chọn cho tuyên bố đang mở và ghi trạng thái ở đầu bảng.
+function tenThuocTinh(tb) { // tên thuộc tính ghi sẵn trên tuyên bố, lấy từ bảng mục 5; không có thì mã thuộc tính
+  return HD.ten_thuoc_tinh[tb.ma_mau.split('-')[0] + '|' + tb.thuoc_tinh] || tb.thuoc_tinh;
+}
 function capNhatKhungD() {
   const r = bg(state.idx);
+  const ten = tenThuocTinh(TB[state.idx]);
   document.querySelectorAll('#d-ds .d-hang').forEach((h) => {
+    const ch = h.querySelector('.d-cau-hoi');
+    ch.textContent = dien(ch.dataset.mau, { thuoc_tinh: '“' + ten + '”' });
     const on = h.dataset.dong === r.dong_d;
     h.classList.toggle('chon', on);
     const b = h.querySelector('button[data-dung]');
@@ -1582,11 +2008,7 @@ function chenMau(ma) {
   else o.setSelectionRange(o.value.length, o.value.length);
 }
 
-const RE_MAC_DINH = /(^|;\s*)mac_dinh=([^;]*)/;
-function layMacDinh(v) {
-  const m = RE_MAC_DINH.exec(v);
-  return m ? m[2].split(',').map((x) => x.trim()).filter(Boolean) : [];
-}
+const RE_MAC_DINH = /(^|;\s*)mac_dinh=([^;]*)/; // layMacDinh nằm ở khối LUAT_KIEM
 // Thêm khóa vào mục mac_dinh của ô Ghi chú (chưa có mục thì thêm mục, nối bằng "; "); đi qua sự kiện input.
 function themMacDinh(khoa) {
   const o = $('ghi-chu');
@@ -1679,6 +2101,54 @@ function dungMacDinh() {
   capNhatNutMacDinh();
 }
 
+// Khung "Cụm điều kiện đã biết" (S23): phụ lục mục 13 lọc theo nhóm và theo các điều kiện của bảng mục 5 cho thuộc tính ghi sẵn
+// trên tuyên bố đang mở. Không đọc câu tuyên bố.
+function dungCumDieuKien() {
+  const tb = TB[state.idx];
+  const nhom = tb.ma_mau.split('-')[0];
+  const goc = $('cum-nd');
+  goc.textContent = '';
+  goc.append(el('p', 'phu-nho', (HD.nhom[nhom] || nhom) + ' · ' + tb.thuoc_tinh));
+  const hang = HD.mac_dinh.filter((h) => h.nhom === nhom && h.thuoc_tinh === tb.thuoc_tinh);
+  const tenDk = {};
+  for (const h of hang) for (const k of h.khoa) if (!(k.khoa in tenDk)) tenDk[k.khoa] = h.dieu_kien;
+  const phuLuc = HD.cum.nhom[nhom] || [];
+  const dkSo = new Set(); // điều kiện dạng số của thuộc tính này (giá trị gia_tri_so trong phụ lục)
+  for (const dk of phuLuc) {
+    if (!(dk.khoa in tenDk)) continue;
+    const kq = el('div', 'md-hang');
+    kq.append(el('strong', '', tenDk[dk.khoa]), el('span', 'phu-nho', ' (' + dk.khoa + ')'));
+    for (const gt of dk.gia_tri) {
+      if (gt.chi_thuoc_tinh && gt.chi_thuoc_tinh.length && !gt.chi_thuoc_tinh.includes(tb.thuoc_tinh)) continue; // chi_thuoc_tinh
+      if (gt.gia_tri === 'gia_tri_so') dkSo.add(dk.khoa);
+      kq.append(dongCum(gt.gia_tri, gt.tu_tai_lieu, gt.hieu_biet_chung));
+    }
+    goc.append(kq);
+  }
+  const thieu = Object.keys(tenDk).filter((k) => !phuLuc.some((dk) => dk.khoa === k));
+  if (thieu.length) goc.append(el('p', 'phu-nho', 'Phụ lục chưa có cụm cho: ' + thieu.join(', ') + '.'));
+  // Phần dùng chung (bảng 13.1): kiểu giá trị luôn hiện; chữ gọi mức cao chỉ với thuộc tính có chế độ hiển thị (độ sáng);
+  // quan hệ của điều kiện dạng số chỉ khi thuộc tính có điều kiện dạng số.
+  const hienChung = { kieu_gia_tri: true, tu_goi_muc_cao: 'che_do_hien_thi' in tenDk, cum_quan_he: dkSo.size > 0 };
+  for (const c of HD.cum.chung) {
+    if (!hienChung[c.khoa]) continue;
+    const kq = el('div', 'md-hang');
+    kq.append(el('strong', '', TEN_CUM_CHUNG[c.khoa]), el('span', 'phu-nho', ' (dùng chung, ' + c.khoa + ')'));
+    for (const d of c.dong) kq.append(dongCum(d.muc_con, d.tu_tai_lieu, d.hieu_biet_chung));
+    goc.append(kq);
+  }
+}
+const TEN_CUM_CHUNG = { kieu_gia_tri: 'Kiểu giá trị', tu_goi_muc_cao: 'Chữ gọi mức cao', cum_quan_he: 'Quan hệ của điều kiện dạng số' };
+function dongCum(ten, taiLieu, thuongGap) {
+  const d = el('div', 'md-ghi');
+  const ds = (xs) => xs.map((x) => '“' + x + '”').join(', ');
+  const phan = [];
+  if (taiLieu.length) phan.push('trong tài liệu ' + ds(taiLieu));
+  if (thuongGap.length) phan.push('cách nói thường gặp ' + ds(thuongGap));
+  d.append(el('code', '', ten || '–'), ' ' + (phan.length ? phan.join('; ') : '(theo tên sản phẩm hoặc con số trong tài liệu)'));
+  return d;
+}
+
 /* ---------- Khung phủ: toàn văn hướng dẫn ---------- */
 
 function dungHuongDan() {
@@ -1702,7 +2172,7 @@ function dongHuongDan() {
 /* ---------- Trạng thái mở/đóng các khung (khóa riêng, không ảnh hưởng nhãn) ---------- */
 
 // Khóa giao diện: trạng thái các khung details và danh sách mã tuyên bố đang bị cảnh báo "không qua quy tắc mới"
-// (để dải vàng còn nhắc ở các lần nạp sau cho tới khi người gán lưu lại). Không đụng khóa nhãn gan_nhan_thu_v1.
+// (để dải vàng còn nhắc ở các lần nạp sau cho tới khi người gán lưu lại). Không đụng khóa nhãn (KHOA).
 function luuGiaoDien() {
   try {
     const o = {};
@@ -1808,6 +2278,7 @@ function napForm() {
 
 // Kiểm một tuyên bố để tính là "đã gán". nguoi: tên người gán dùng để kiểm. Chỉ bắt chỗ các ô người gán điền mâu thuẫn
 // nhau hoặc trái quy tắc (bản của scripts/kiem_nhan.py): không đọc nội dung tuyên bố để đoán nhãn hay dòng D.
+const nhomTt = (tb) => tb.ma_mau.split('-')[0] + '|' + tb.thuoc_tinh; // chỉ nhóm và thuộc tính ghi sẵn
 function kiem(i, nguoi) {
   const tb = TB[i], r = bg(i), e = [];
   const d = r.dong_d;
@@ -1835,13 +2306,9 @@ function kiem(i, nguoi) {
     }
     if (DONG_MAP[d].tu_tick && !r.tai_lieu_mau_thuan) e.push(TBAO.d1b_thieu_tick);
     else if (!DONG_MAP[d].tu_tick && r.tai_lieu_mau_thuan) e.push(dien(TBAO.tick_khong_phai_d1b, { dong_d: d }));
-    if (d !== 'D1a') { // ghi chú mac_dinh=<khóa> của điều kiện "không có mặc định" thì phải dừng ở D1a
-      const khongCo = KHONG_CO[tb.ma_mau.split('-')[0] + '|' + tb.thuoc_tinh] || {};
-      for (const k of new Set(layMacDinh(r.ghi_chu))) {
-        if (khongCo[k]) e.push(dien(TBAO.mac_dinh_khong_co, { khoa: k, dieu_kien: khongCo[k] }));
-      }
-    }
   }
+  // Ghi chú (mac_dinh, chua_xac_dinh, khang_dinh) và lý do (mã đoạn): luật chung với scripts/kiem_nhan.py, khối LUAT_KIEM.
+  luatKiem(r, nhomTt(tb)).loi.forEach((x) => e.push(x));
   const mau = DOAN_MAP[tb.ma_mau] || {};
   for (const m of r.bang_chung) if (!mau[m]) e.push('Mã bằng chứng ' + m + ' không có trong tài liệu của mẫu ' + tb.ma_mau + '.');
   const dung = r.bang_chung.filter((m) => mau[m]).map((m) => mau[m]);
@@ -1876,11 +2343,9 @@ function kiem(i, nguoi) {
   return e;
 }
 
-// Lời nhắc (khung vàng, không chặn lưu) của tuyên bố i; bản của nhac_mot_dong trong scripts/kiem_nhan.py.
+// Lời nhắc (khung vàng, không chặn lưu) của tuyên bố i; bản của nhac_mot_dong trong scripts/kiem_nhan.py (khối LUAT_KIEM).
 function nhacCuaTuyenBo(i) {
-  const r = bg(i), n = [];
-  if (r.nhan === 'LECH' && r.loai === 'bo_dieu_kien' && !layMacDinh(r.ghi_chu).length) n.push(NHAC.bo_dieu_kien_thieu_mac_dinh);
-  return n;
+  return luatKiem(bg(i), nhomTt(TB[i])).nhac;
 }
 function capNhatNhac() {
   const n = nhacCuaTuyenBo(state.idx), o = $('nhac');
@@ -1971,6 +2436,24 @@ function layBoiDen() {
   bg(state.idx).trich = o.value;
   hienTin('nhac-trich', '');
   suaDoi(false);
+  hienGoiYDoan(doanCoChu(chuanHoa(t)));
+}
+// S16: các đoạn khác của mẫu (chưa là bằng chứng) cũng có đúng chuỗi người gán vừa bôi đen. Chỉ dùng chuỗi bôi đen và đoạn
+// của mẫu; không đọc tuyên bố.
+function doanCoChu(t) {
+  return doanCungChu(DL.doan[TB[state.idx].ma_mau] || [], bg(state.idx).bang_chung, t);
+}
+function hienGoiYDoan(ds) {
+  const o = $('goi-y-doan');
+  o.textContent = '';
+  o.hidden = !ds.length;
+  for (const id of ds) {
+    const d = el('div');
+    const b = el('button', 'nho', 'Thêm làm bằng chứng');
+    b.type = 'button'; b.dataset.them = id;
+    d.append('Đoạn ', el('code', '', id), ' cũng có chữ này · ', b);
+    o.append(d);
+  }
 }
 
 /* ---------- Mở, lưu, chuyển tuyên bố ---------- */
@@ -1980,7 +2463,8 @@ function mo(i) {
   tick();
   state.idx = i; last = Date.now();
   bg(i);
-  dungThe(); dungBai(); napForm(); dungMacDinh(); dungCaDacBiet(); dungDoan();
+  dungThe(); dungBai(); napForm(); dungMacDinh(); dungCumDieuKien(); dungCaDacBiet(); dungDoan(); hienGoiYDoan([]);
+  hoatDongCuoi = Date.now();
   capNhatDanhSach(); capNhatDongHo(); luu();
 }
 function luuVaSang() {
@@ -1988,9 +2472,10 @@ function luuVaSang() {
   const loi = kiem(i, state.nguoi_gan);
   if (loi.length) { hienLoi(loi); hienTin('tin', ''); return; }
   tick();
-  r.nguoi_gan = state.nguoi_gan.trim();
   r.trich = r.trich.trim(); r.ly_do = r.ly_do.trim(); r.ghi_chu = r.ghi_chu.trim();
   if (!coLoai(r.nhan)) r.loai = '';
+  if (!(r.nguoi_gan && r.nd_goc && r.nd_goc === noiDungNhan(r))) r.nguoi_gan = state.nguoi_gan.trim(); // có sửa thì đổi người gán
+  r.nd_goc = noiDungNhan(r);
   r.da_gan = true; r.dung = true;
   if (khongQua.delete(TB[i].id)) luuGiaoDien();
   hienLoi([]);
@@ -2013,8 +2498,9 @@ function banGhiXuat(i) {
   const tb = TB[i], r = bg(i);
   return {
     id: tb.id, nhan: r.nhan, dong_d: r.dong_d, loai: coLoai(r.nhan) ? r.loai : null, bang_chung: r.bang_chung.slice(),
-    trich: r.trich.trim(), ly_do: r.ly_do.trim(), nguoi_gan: (r.nguoi_gan || state.nguoi_gan).trim(), luot: 1,
-    giay: Math.max(1, Math.round(r.ms / 1000)), tai_lieu_mau_thuan: !!r.tai_lieu_mau_thuan, ghi_chu: r.ghi_chu.trim()
+    trich: r.trich.trim(), ly_do: r.ly_do.trim(), nguoi_gan: (r.nguoi_gan || state.nguoi_gan).trim(), luot: LUOT,
+    giay: Math.max(1, Math.round(r.ms / 1000)), tai_lieu_mau_thuan: !!r.tai_lieu_mau_thuan, ghi_chu: r.ghi_chu.trim(),
+    giay_nghi: Math.round(r.ms_nghi / 1000) // số giây đồng hồ đứng vì không thao tác quá NGHI_MS (không nằm trong giay)
   };
 }
 function taiNhan() {
@@ -2023,7 +2509,7 @@ function taiNhan() {
   if (!ds.length) { alert('Chưa có tuyên bố nào được gán (bấm "Lưu và sang tuyên bố sau" ở từng tuyên bố).'); return; }
   const con = TB.length - ds.length;
   if (con > 0 && !confirm('Còn ' + con + ' tuyên bố chưa gán, sẽ không có trong tệp. Vẫn tải ' + ds.length + ' nhãn đã gán?')) return;
-  taiXuong('thu.jsonl', ds.map((i) => JSON.stringify(banGhiXuat(i))).join('\n') + '\n', 'application/x-ndjson');
+  taiXuong(TRANG.tep_nhan, ds.map((i) => JSON.stringify(banGhiXuat(i))).join('\n') + '\n', 'application/x-ndjson');
 }
 function taiCauHoi() {
   const dong = [];
@@ -2032,10 +2518,10 @@ function taiCauHoi() {
     if (q) dong.push('- ' + tb.id + ' (' + tb.ma_qc + '): ' + q);
   });
   if (!dong.length) { alert('Chưa có câu hỏi nhãn nào.'); return; }
-  taiXuong('cau_hoi_nhan.md', '# Câu hỏi nhãn (bộ thử)\n\n' + dong.join('\n') + '\n', 'text/markdown');
+  taiXuong(TRANG.tep_hoi, '# Câu hỏi nhãn (bộ thử, lượt ' + LUOT + ')\n\n' + dong.join('\n') + '\n', 'text/markdown');
 }
 async function nhapTep(files) {
-  const nhan = [], hoi = [], loi = [];
+  const moi = [], hoi = [], loi = [];
   for (const f of files) {
     const t = (await f.text()).replace(/^\ufeff/, '');
     t.split(/\r?\n/).forEach((dong, k) => {
@@ -2043,8 +2529,14 @@ async function nhapTep(files) {
       const m = dong.match(/^- (tb-\d+) \([^)]*\): (.*)$/);
       if (m) { hoi.push([m[1], m[2]]); return; }
       if (dong.trim()[0] !== '{') return; // dòng tiêu đề .md và các dòng khác
-      try { nhan.push(JSON.parse(dong)); } catch (e) { loi.push(f.name + ' dòng ' + (k + 1) + ': không phải JSON hợp lệ'); }
+      try { moi.push(JSON.parse(dong)); } catch (e) { loi.push(f.name + ' dòng ' + (k + 1) + ': không phải JSON hợp lệ'); }
     });
+  }
+  // Trang này chỉ nhận bản ghi của lượt hiện tại: bản ghi lượt khác (luot: 1) bị từ chối, không ghi đè nhãn đang gán.
+  const { dung: nhan, khac, luot_khac: luotKhac } = tachTheoLuot(moi, LUOT);
+  if (khac) {
+    loi.push('Từ chối ' + khac + ' bản ghi không phải lượt ' + LUOT + ' (luot: ' + luotKhac.join(', ') + '). Trang này chỉ nhận lượt '
+      + LUOT + '; nhãn lượt khác để ở tệp riêng, không nhập vào đây.');
   }
   if (!nhan.length && !hoi.length) { alert('Không đọc được nhãn hay câu hỏi nào từ tệp đã chọn.' + (loi.length ? '\n' + loi.join('\n') : '')); return; }
   if (!confirm('Nhập ' + nhan.length + ' nhãn và ' + hoi.length + ' câu hỏi từ tệp? Nhãn hiện có của các tuyên bố trùng mã sẽ bị ghi đè (cả số giây).')) return;
@@ -2062,6 +2554,8 @@ async function nhapTep(files) {
     r.tai_lieu_mau_thuan = o.tai_lieu_mau_thuan === true;
     r.nguoi_gan = chuoi(o.nguoi_gan);
     r.ms = Number.isFinite(o.giay) && o.giay > 0 ? Math.round(o.giay) * 1000 : 0;
+    r.ms_nghi = Number.isFinite(o.giay_nghi) && o.giay_nghi > 0 ? Math.round(o.giay_nghi) * 1000 : 0;
+    r.nd_goc = noiDungNhan(r); // nội dung lúc nhập: "Lưu và sang" không sửa gì thì giữ người gán của tệp
     khongQua.delete(o.id);
     const e = kiem(i, r.nguoi_gan);
     r.da_gan = e.length === 0; r.dung = r.da_gan;
@@ -2135,6 +2629,20 @@ $('doan').addEventListener('click', (e) => {
   if (!r.bang_chung.includes(b.dataset.id)) r.bang_chung.push(b.dataset.id);
   dungBangChung(); capNhatNutDoan(); suaDoi(false);
 });
+$('goi-y-doan').addEventListener('click', (e) => {
+  const b = e.target.closest('button[data-them]');
+  if (!b) return;
+  const r = bg(state.idx);
+  if (!r.bang_chung.includes(b.dataset.them)) r.bang_chung.push(b.dataset.them);
+  b.parentElement.remove();
+  if (!$('goi-y-doan').children.length) $('goi-y-doan').hidden = true;
+  dungBangChung(); capNhatNutDoan(); suaDoi(false);
+});
+$('kh-bai').addEventListener('toggle', cuonBai);
+// Mọi thao tác (phím, chuột, cuộn, chạm) làm mới mốc "có thao tác" của đồng hồ; không đọc nội dung thao tác.
+for (const ten of ['keydown', 'mousedown', 'mousemove', 'wheel', 'touchstart', 'scroll']) {
+  document.addEventListener(ten, () => { hoatDongCuoi = Date.now(); }, { capture: true, passive: true });
+}
 $('tim').addEventListener('input', loc);
 $('btn-lay').addEventListener('mousedown', (e) => e.preventDefault()); // giữ vùng đang bôi đen
 $('btn-lay').addEventListener('click', layBoiDen);

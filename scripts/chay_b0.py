@@ -2,7 +2,7 @@
 
 Với mỗi mô hình và mỗi tuyên bố trong data/tuyen_bo/thu.jsonl: truy hồi top-k đoạn của đúng mẫu, ghép câu lệnh
 T12.1, gọi LLM (nhiệt độ 0, qua bộ nhớ đệm của llm.py), ánh xạ Supported/Refuted/NEI -> DUNG/SAI/CHUA_DU. Nhãn chuẩn
-là nhãn trong data/nhan/thu.jsonl. Ghi:
+là nhãn trong tệp --nhan (mặc định data/nhan/thu.jsonl, lượt 1). Ghi:
     ket_qua/b0_thu/<tên mô hình>.jsonl   mỗi tuyên bố một dòng, đủ cả tuyên bố bị loại khỏi chỉ số
     ket_qua/b0_buoc15.md                 báo cáo số liệu, không nhận xét
 Chạy với --gia thì dùng LLM giả (không gọi mạng, không cần khóa) và ghi vào b0_thu_gia/ và b0_buoc15_gia.md, báo cáo
@@ -14,7 +14,8 @@ cùng lệnh để tiếp tục. Khóa API đọc từ biến môi trường GEM
 
 Chạy:
     .venv/Scripts/python.exe -X utf8 scripts/chay_b0.py [--mo-hinh MA ...] [--k 5] [--cach-tach am_tiet]
-        [--bo tb-00009,tb-00010] [--gia]
+        [--nhan data/nhan/thu.jsonl] [--bo tb-00009,tb-00010] [--gia]
+Lần chạy Bước 15 dùng nhãn lượt 1 và --bo tb-00009,tb-00010; --bo mặc định rỗng (rà soát 02/11).
 """
 import argparse
 import hashlib
@@ -39,12 +40,22 @@ except ImportError:  # chưa cài python-dotenv: --gia và test vẫn chạy; ch
 TEP_TUYEN_BO = ROOT / "data/tuyen_bo/thu.jsonl"
 TEP_NHAN = ROOT / "data/nhan/thu.jsonl"
 THU_MUC_RA = ROOT / "ket_qua"
-BO_MAC_DINH = "tb-00009,tb-00010"
+BO_LUOT_1 = "tb-00009,tb-00010"  # danh sách loại của lần chạy Bước 15 (nhãn lượt 1); không còn là mặc định
 LY_DO_MAC_DINH = "nhãn lượt 1 lưu lệch sang tuyên bố kế bên"
 NGHI_MAC_DINH = 20  # giây giữa hai lần gọi thật, như interval_s của data/thu_llm/models.json (hạn mức tầng miễn phí)
 TIMEOUT_MAC_DINH = 90  # giây; mô hình suy luận trả chậm hơn 30 giây của thu_llm (CopyPro cũng chờ 90 giây)
 SO_LAN_THU_LAI = 2
 GHI_CHU = "Số sơ bộ: nhãn chuẩn là nhãn lượt 1 của Bước 13; mô hình, k và cách tách là lựa chọn tạm, chốt ở Bước 33."
+
+
+def ghi_chu_theo_nhan(dong_nhan, tep):
+    """Dòng chú thích đầu báo cáo theo tệp nhãn thật: lượt 1 giữ đúng chữ của lần chạy Bước 15 (GHI_CHU)."""
+    luot = sorted({str(nh.get("luot")) for nh in dong_nhan})
+    if luot == ["1"]:
+        return GHI_CHU
+    nguoi = ", ".join(sorted({str(nh.get("nguoi_gan")) for nh in dong_nhan}))
+    return (f"Số sơ bộ: nhãn chuẩn lấy từ {tep} (lượt {', '.join(luot)}, người gán {nguoi}); mô hình, k và cách tách là "
+            "lựa chọn tạm, chốt ở Bước 33.")
 CANH_BAO_GIA = ("**CHẠY GIẢ (--gia): LLM giả, không gọi mô hình thật. Số liệu dưới đây chỉ để thử script, không phải "
                 "kết quả của B0.**")
 
@@ -89,7 +100,7 @@ def dem_nhan(nhan):
     return ", ".join(f"{n} {sum(1 for x in nhan if x == n)}" for n in dg.NHAN_CHUAN)
 
 
-def tao_bao_cao(tuyen_bo, chuan, ban_ghi, thiet_lap, bo, ly_do, gia):
+def tao_bao_cao(tuyen_bo, chuan, ban_ghi, thiet_lap, bo, ly_do, gia, ghi_chu=GHI_CHU):
     """Danh sách dòng markdown của báo cáo (chỉ số liệu, không nhận xét).
 
     ban_ghi: {mã mô hình: [bản ghi của b0.kiem_chung_b0, mỗi tuyên bố một bản]}; thiet_lap: {"k", "cach_tach",
@@ -99,7 +110,7 @@ def tao_bao_cao(tuyen_bo, chuan, ban_ghi, thiet_lap, bo, ly_do, gia):
     trong_mau = [ma for ma in chuan if ma not in da_loai]
     ma_trong_mau = set(trong_mau)
     dong = [CANH_BAO_GIA, ""] if gia else []
-    dong += [GHI_CHU, "", "# Đối chứng B0 trên bộ thử (Bước 15)", "", "## Thiết lập", ""]
+    dong += [ghi_chu, "", "# Đối chứng B0 trên bộ thử (Bước 15)", "", "## Thiết lập", ""]
     dong += [
         f"- Bộ thử: {len(chuan)} tuyên bố ({dem_nhan(chuan.values())}); mẫu tính chỉ số: {len(trong_mau)} tuyên bố "
         f"({dem_nhan(chuan[ma] for ma in trong_mau)}).",
@@ -156,8 +167,9 @@ def main(argv=None):
                     help=f"mã mô hình (mặc định {' '.join(b0.MO_HINH_MAC_DINH)}; có {', '.join(b0.NHA_CUNG_CAP)})")
     ap.add_argument("--k", type=int, default=5, help="số đoạn đưa vào câu lệnh (mặc định 5)")
     ap.add_argument("--cach-tach", choices=th.CACH_TACH, default="am_tiet", help="cách tách của BM25 (mặc định am_tiet)")
-    ap.add_argument("--bo", default=BO_MAC_DINH,
-                    help=f"mã tuyên bố loại khỏi chỉ số, cách nhau dấu phẩy (mặc định {BO_MAC_DINH})")
+    ap.add_argument("--nhan", type=Path, default=TEP_NHAN, help=f"tệp nhãn chuẩn (mặc định {TEP_NHAN.relative_to(ROOT)}, lượt 1)")
+    ap.add_argument("--bo", default="", help=f"mã tuyên bố loại khỏi chỉ số, cách nhau dấu phẩy (mặc định không loại; lần "
+                                             f"chạy Bước 15 dùng {BO_LUOT_1})")
     ap.add_argument("--ly-do", default=LY_DO_MAC_DINH, help="lý do loại, in vào báo cáo")
     ap.add_argument("--gia", action="store_true", help="dùng LLM giả để chạy thử, ghi vào b0_thu_gia/, b0_buoc15_gia.md")
     ap.add_argument("--thu-muc-ra", type=Path, default=THU_MUC_RA,
@@ -180,7 +192,12 @@ def main(argv=None):
         ap.error("--k phải từ 1 trở lên")
 
     tuyen_bo = doc_jsonl(TEP_TUYEN_BO)
-    chuan = {nh["id"]: nh["nhan"] for nh in doc_jsonl(TEP_NHAN)}
+    dong_nhan = doc_jsonl(args.nhan)
+    chuan = {nh["id"]: nh["nhan"] for nh in dong_nhan}
+    try:
+        ten_tep_nhan = args.nhan.resolve().relative_to(ROOT).as_posix()
+    except ValueError:
+        ten_tep_nhan = str(args.nhan)
     if set(chuan) != {tb["id"] for tb in tuyen_bo}:
         sys.exit("tệp nhãn và tệp tuyên bố không cùng tập mã tuyên bố")
     bo = [ma.strip() for ma in args.bo.split(",") if ma.strip()]
@@ -228,7 +245,8 @@ def main(argv=None):
         ket_qua[mh] = ban_ghi
 
     thiet_lap = {"k": args.k, "cach_tach": args.cach_tach, "max_token_ra": args.max_token_ra}
-    dong = tao_bao_cao(tuyen_bo, chuan, ket_qua, thiet_lap, bo, args.ly_do, args.gia)
+    dong = tao_bao_cao(tuyen_bo, chuan, ket_qua, thiet_lap, bo, args.ly_do, args.gia,
+                       ghi_chu_theo_nhan(dong_nhan, ten_tep_nhan))
     ghi_tep(tep_bao_cao, "\n".join(dong) + "\n")
     print("\n".join(dong))
     print(f"\nĐã ghi {tep_bao_cao} và {len(da_ghi)} tệp trong {thu_muc_kq}")

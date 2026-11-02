@@ -393,7 +393,8 @@ def dem_goi_gia(monkeypatch, loi_theo_mo_hinh=None):
 
 def test_script_chay_gia_het_66_tuyen_bo_ca_hai_mo_hinh(tmp_path, monkeypatch, capsys):
     dem = dem_goi_gia(monkeypatch)
-    assert chay_b0.main(["--gia", "--thu-muc-ra", str(tmp_path)]) == 0
+    # Tham số của lần chạy Bước 15 (--bo không còn mặc định từ rà soát 02/11).
+    assert chay_b0.main(["--gia", "--thu-muc-ra", str(tmp_path), "--bo", chay_b0.BO_LUOT_1]) == 0
     tuyen_bo = chay_b0.doc_jsonl(chay_b0.TEP_TUYEN_BO)
     chuan = {nh["id"]: nh["nhan"] for nh in chay_b0.doc_jsonl(chay_b0.TEP_NHAN)}
     assert len(tuyen_bo) == 66
@@ -479,3 +480,16 @@ def test_script_tu_choi_mo_hinh_la_va_ma_bo_la(tmp_path, capsys):
     with pytest.raises(SystemExit):
         chay_b0.main(["--gia", "--thu-muc-ra", str(tmp_path), "--bo", "tb-99999"])
     assert not list(tmp_path.iterdir())
+
+
+def test_nhan_va_bo_khong_con_doc_cung_luot_1(tmp_path, monkeypatch):
+    # Rà soát 02/11 (lỗi 5): --bo mặc định rỗng; --nhan chọn tệp nhãn; dòng chú thích theo lượt của tệp.
+    dem_goi_gia(monkeypatch)
+    nhan = [dict(json.loads(d), luot=2, nguoi_gan="claude")
+            for d in chay_b0.TEP_NHAN.read_text(encoding="utf-8").splitlines() if d.strip()]
+    tep = tmp_path / "nhan_luot2.jsonl"
+    tep.write_text("".join(json.dumps(x, ensure_ascii=False) + chr(10) for x in nhan), encoding="utf-8")
+    assert chay_b0.main(["--gia", "--thu-muc-ra", str(tmp_path), "--nhan", str(tep), "--mo-hinh", "gemini-3.6-flash"]) == 0
+    bao_cao = (tmp_path / "b0_buoc15_gia.md").read_text(encoding="utf-8")
+    assert "lượt 2, người gán claude" in bao_cao and chay_b0.GHI_CHU not in bao_cao
+    assert "mẫu tính chỉ số: 66 tuyên bố" in bao_cao

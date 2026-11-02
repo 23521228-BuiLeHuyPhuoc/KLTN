@@ -46,8 +46,9 @@ class LLMError(RuntimeError):
     """Safe error without upstream exception text, URLs, headers or credentials."""
 
     def __init__(self, code: str, *, retryable: bool = False,
-                 status_code: int | None = None):
+                 status_code: int | None = None, retry_after: float | None = None):
         self.code, self.retryable, self.status_code = code, retryable, status_code
+        self.retry_after = retry_after  # seconds from a Retry-After header (429), if the provider sent one
         super().__init__(code)
 
 
@@ -104,6 +105,31 @@ def request_hash(request: dict[str, Any]) -> str:
     return hashlib.sha256(canonical_json(request).encode("utf-8")).hexdigest()
 
 
+RATE_LIMIT_BASE_S = 20  # 429 without Retry-After: wait 20 s, then 40 s (quota windows are per minute)
+RETRY_WAIT_CAP_S = 120
+
+
+def _retry_after(exc: Exception) -> float | None:
+    """Retry-After (seconds) from the upstream response headers, if present and numeric; never raises."""
+    try:
+        headers = getattr(getattr(exc, "response", None), "headers", None)
+        value = headers.get("retry-after") if headers is not None else None
+        return min(max(float(value), 0.0), RETRY_WAIT_CAP_S) if value is not None else None
+    except (TypeError, ValueError, AttributeError):
+        return None
+
+
+def retry_delay(error: LLMError, attempt: int) -> float:
+    """Seconds to wait before the next attempt. 429 (rate limit or quota) waits for Retry-After or 20 s, 40 s...;
+    other retryable errors keep the short 1 s, 2 s, 4 s backoff. (Bước 16 review, 02/11/2026: the old 1-2 s retries
+    on 429 only burnt quota.)"""
+    if error.status_code == 429:
+        if error.retry_after is not None:
+            return error.retry_after
+        return min(RATE_LIMIT_BASE_S * 2 ** (attempt - 1), RETRY_WAIT_CAP_S)
+    return min(2 ** (attempt - 1), 4)
+
+
 def _safe_error(exc: Exception) -> LLMError:
     if isinstance(exc, LLMError):
         return exc
@@ -115,7 +141,9 @@ def _safe_error(exc: Exception) -> LLMError:
         return LLMError("model_not_found_or_unavailable", status_code=status)
     if status == 400:
         return LLMError("invalid_request_check_api_key_model_parameters", status_code=status)
-    if status in {408, 409, 429, 500, 502, 503, 504}:
+    if status == 429:
+        return LLMError("temporary_api_error", retryable=True, status_code=status, retry_after=_retry_after(exc))
+    if status in {408, 409, 500, 502, 503, 504}:
         return LLMError("temporary_api_error", retryable=True, status_code=status)
     if isinstance(exc, (TimeoutError, ConnectionError)) or type(exc).__name__ in {
         "APITimeoutError", "APIConnectionError", "ConnectError", "ReadTimeout",
@@ -271,7 +299,7 @@ class LLMClient:
                           retryable=error.retryable, usage=result.usage if result else None)
                 if not error.retryable or attempt > self.max_retries:
                     raise error from None
-                time.sleep(min(2 ** (attempt - 1), 4))
+                time.sleep(retry_delay(error, attempt))
                 continue
             result.request_hash, result.mode = digest, self.mode
             result.elapsed_ms = round((time.perf_counter() - started) * 1000, 3)
