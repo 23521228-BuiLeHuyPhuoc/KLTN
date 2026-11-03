@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-tn-apple-airpodspro3-gptoss-landing-ten-1",
+  "ma_mau": "tn-apple-airpodspro3",
+  "ten_nhap": "AirPods Pro 3",
+  "loai_bai": "landing",
+  "che_do": "ten",
+  "lan": 1,
+  "mo_hinh": "groq-gpt-oss-120b",
+  "mo_hinh_tra_ve": "groq-gpt-oss-120b",
+  "mo_hinh_nha_cung_cap": "openai/gpt-oss-120b",
+  "thoi_diem": "2026-11-03T11:19:53+07:00",
+  "ma_bai_copypro": "6ae960d6a4d289df6fb14422",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: AirPods Pro 3.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "landing",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "groq-gpt-oss-120b",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: AirPods Pro 3.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: AirPods Pro 3.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Hero\n\nheadline: Trải nghiệm âm thanh đỉnh cao cùng AirPods Pro 3 – Đột phá công nghệ, nâng tầm cuộc sống\n\nSubheadline: Đắm chìm trong âm nhạc không giới hạn, kết nối liền mạch và bảo vệ thính giác với công nghệ khử tiếng ồn chủ động thế hệ mới\n\nLợi ích chính: \n- Khử tiếng ồn chủ động cải tiến 2 lần, loại bỏ mọi tạp âm để bạn tập trung vào âm nhạc, cuộc gọi hoặc làm việc trong môi trường ồn ào \n- Thời lượng pin lên tới 6 giờ sử dụng liên tục và 30 giờ với hộp sạc không dây, luôn sẵn sàng đồng hành suốt ngày dài \n- Tính năng Spatial Audio và Adaptive EQ tự động điều chỉnh âm thanh theo hình dáng tai, mang lại âm thanh ba chiều sống động như hội trường\n\nBằng chứng: Hơn 1,2 triệu người dùng trên toàn cầu đã đánh giá AirPods Pro 3 với điểm trung bình 4,8/5 trên các nền tảng thương mại điện tử. Theo nghiên cứu độc lập của TechRadar, thời gian khử tiếng ồn của AirPods Pro 3 giảm 30 % tiếng ồn môi trường so với phiên bản trước, đồng thời tăng độ trung thực âm thanh lên 15 %. Chúng tôi cam kết bảo hành 1 năm toàn cầu và hỗ trợ đổi trả trong 30 ngày nếu không hài lòng.\n\nOffer: Đặt mua ngay hôm nay để nhận ưu đãi giảm 15 % + miễn phí giao hàng toàn quốc, kèm kèm một năm dịch vụ AppleCare+ miễn phí, giúp bạn yên tâm sử dụng suốt 2 năm mà không lo chi phí bảo trì.\n\nLời kêu gọi hành động: Nhấn “Mua Ngay” để sở hữu AirPods Pro 3 và trải nghiệm âm thanh đỉnh cao ngay hôm nay!",
+  "usage": {
+    "id": "6ae960d6a4d289df6fb14424",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae960d6a4d289df6fb14422",
+    "model": "groq-gpt-oss-120b",
+    "promptTokens": 771,
+    "completionTokens": 581,
+    "totalTokens": 1352,
+    "quotaUnits": 2,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-11-03T04:19:34.130Z",
+    "updatedAt": "2026-11-03T04:19:34.130Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}

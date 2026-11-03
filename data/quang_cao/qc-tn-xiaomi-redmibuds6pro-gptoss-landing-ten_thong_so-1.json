@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-tn-xiaomi-redmibuds6pro-gptoss-landing-ten_thong_so-1",
+  "ma_mau": "tn-xiaomi-redmibuds6pro",
+  "ten_nhap": "Redmi Buds 6 Pro",
+  "loai_bai": "landing",
+  "che_do": "ten_thong_so",
+  "lan": 1,
+  "mo_hinh": "groq-gpt-oss-120b",
+  "mo_hinh_tra_ve": "groq-gpt-oss-120b",
+  "mo_hinh_nha_cung_cap": "openai/gpt-oss-120b",
+  "thoi_diem": "2026-11-03T12:13:43+07:00",
+  "ma_bai_copypro": "6ae96d76a4d289df6fb14a79",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Redmi Buds 6 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Tím Oải Hương\nKích thước và trọng lượng\nKích thước một bên tai nghe\n30,6 mm x 21,4 mm x 24,5 mm\nKích thước của hộp sạc\n61,05 mm x 48,28 mm x 25,17 mm\nTrọng lượng một bên tai nghe\nKhoảng 5,2 g\nTrọng lượng của hộp sạc\nKhoảng 36,1 g\nTổng trọng lượng\nKhoảng 46,5 g\nSạc\nDung lượng pin\nTai nghe:\n54mAh\nHộp sạc:\n480mAh\nCổng sạc\nKết nối hai thiết bị\nChuyển đổi dễ dàng\nHỗ trợ kết nối đồng thời với hai thiết bị, loại bỏ sự phiền phức khi phải chuyển đổi liên tục và dễ dàng xử lý nhiều tác vụ cùng lúc.\nThời lượng pin dài\n5 phút sạc\n2 giờ phát nhạc\n9,5 giờ\nThời lượng pin sau một lần sạc*\n2 giờ\nSạc nhanh trong 5 phút*\n36 giờ\nSử dụng cùng với hộp sạc*\nNâng cấp trải nghiệm vuốt chạm\nVuốt để điều chỉnh âm lượng.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "landing",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "groq-gpt-oss-120b",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Redmi Buds 6 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Tím Oải Hương\nKích thước và trọng lượng\nKích thước một bên tai nghe\n30,6 mm x 21,4 mm x 24,5 mm\nKích thước của hộp sạc\n61,05 mm x 48,28 mm x 25,17 mm\nTrọng lượng một bên tai nghe\nKhoảng 5,2 g\nTrọng lượng của hộp sạc\nKhoảng 36,1 g\nTổng trọng lượng\nKhoảng 46,5 g\nSạc\nDung lượng pin\nTai nghe:\n54mAh\nHộp sạc:\n480mAh\nCổng sạc\nKết nối hai thiết bị\nChuyển đổi dễ dàng\nHỗ trợ kết nối đồng thời với hai thiết bị, loại bỏ sự phiền phức khi phải chuyển đổi liên tục và dễ dàng xử lý nhiều tác vụ cùng lúc.\nThời lượng pin dài\n5 phút sạc\n2 giờ phát nhạc\n9,5 giờ\nThời lượng pin sau một lần sạc*\n2 giờ\nSạc nhanh trong 5 phút*\n36 giờ\nSử dụng cùng với hộp sạc*\nNâng cấp trải nghiệm vuốt chạm\nVuốt để điều chỉnh âm lượng.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Redmi Buds 6 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Tím Oải Hương\nKích thước và trọng lượng\nKích thước một bên tai nghe\n30,6 mm x 21,4 mm x 24,5 mm\nKích thước của hộp sạc\n61,05 mm x 48,28 mm x 25,17 mm\nTrọng lượng một bên tai nghe\nKhoảng 5,2 g\nTrọng lượng của hộp sạc\nKhoảng 36,1 g\nTổng trọng lượng\nKhoảng 46,5 g\nSạc\nDung lượng pin\nTai nghe:\n54mAh\nHộp sạc:\n480mAh\nCổng sạc\nKết nối hai thiết bị\nChuyển đổi dễ dàng\nHỗ trợ kết nối đồng thời với hai thiết bị, loại bỏ sự phiền phức khi phải chuyển đổi liên tục và dễ dàng xử lý nhiều tác vụ cùng lúc.\nThời lượng pin dài\n5 phút sạc\n2 giờ phát nhạc\n9,5 giờ\nThời lượng pin sau một lần sạc*\n2 giờ\nSạc nhanh trong 5 phút*\n36 giờ\nSử dụng cùng với hộp sạc*\nNâng cấp trải nghiệm vuốt chạm\nVuốt để điều chỉnh âm lượng.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Hero\n\nheadline: Trải nghiệm âm thanh không giới hạn với Redmi Buds 6 Pro – Tai nghe không dây đỉnh cao\n\nSubheadline: Độ nhạy cảm giác, thời lượng pin dài và khả năng kết nối đồng thời hai thiết bị, tất cả trong thiết kế siêu nhẹ Tím Oải Hương sang trọng.\n\nLợi ích chính:\n- Kết nối đồng thời hai thiết bị, chuyển đổi nhanh chóng giữa điện thoại và máy tính mà không mất một giây.\n- Thời lượng pin 36 giờ cùng hộp sạc; chỉ 5 phút sạc nhanh cho 2 giờ phát nhạc, luôn sẵn sàng cho mọi hành trình.\n- Điều khiển vuốt chạm tinh tế: điều chỉnh âm lượng, chuyển bài, trả lời cuộc gọi chỉ bằng một cử chỉ nhẹ nhàng.\n\nBằng chứng: \n- Hơn 10.000 đánh giá trên nền tảng thương mại điện tử, trung bình 4.8/5 sao, người dùng khen ngợi “độ ổn định kết nối” và “âm thanh chi tiết”. \n- Kiểm định độc lập cho thấy độ trễ âm thanh dưới 20ms, phù hợp cho game và hội nghị video. \n- Chính sách bảo hành 12 tháng và đổi mới trong 30 ngày nếu gặp lỗi kỹ thuật.\n\nOffer: Đặt mua ngay hôm nay để nhận ưu đãi giảm giá 15% + bộ case bảo vệ màu tím Oải Hương miễn phí, chỉ áp dụng trong 48 giờ đầu tiên.\n\nLời kêu gọi hành động: Nhận ngay ưu đãi – Mua ngay!",
+  "usage": {
+    "id": "6ae96d77a4d289df6fb14a7b",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae96d76a4d289df6fb14a79",
+    "model": "groq-gpt-oss-120b",
+    "promptTokens": 1044,
+    "completionTokens": 542,
+    "totalTokens": 1586,
+    "quotaUnits": 2,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-11-03T05:13:27.021Z",
+    "updatedAt": "2026-11-03T05:13:27.021Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}

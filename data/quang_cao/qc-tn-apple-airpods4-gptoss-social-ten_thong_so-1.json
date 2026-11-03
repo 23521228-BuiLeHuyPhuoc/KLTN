@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-tn-apple-airpods4-gptoss-social-ten_thong_so-1",
+  "ma_mau": "tn-apple-airpods4",
+  "ten_nhap": "AirPods 4",
+  "loai_bai": "social",
+  "che_do": "ten_thong_so",
+  "lan": 1,
+  "mo_hinh": "groq-gpt-oss-120b",
+  "mo_hinh_tra_ve": "groq-gpt-oss-120b",
+  "mo_hinh_nha_cung_cap": "openai/gpt-oss-120b",
+  "thoi_diem": "2026-11-03T11:43:45+07:00",
+  "ma_bai_copypro": "6ae96672a4d289df6fb14725",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Social Media Post với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: AirPods 4.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Điều Khiển\nChống bụi, chống mồ hôi và chống nước (IP54)\nKích Thước Và Trọng Lượng8\nAirPods 4 (Mỗi Bên)\nCao: 30,2 mm\nRộng: 18,3 mm\nDày: 18,1 mm\nTrọng Lượng: 4,3 gram\nHộp Sạc (USB-C)\nCao: 46,2 mm\nRộng: 50,1 mm\nDày: 21,2 mm\nTrọng Lượng: 32,3 gram\nHộp Sạc\nTương thích với đầu nối USB-C\nPin\nAirPods 4\nThời gian nghe lên đến 5 giờ với một lần sạc9\nAirPods 4 với Hộp Sạc (USB-C)\nThời gian nghe lên đến 30 giờ10\n5 phút để trong hộp sạc có thể tăng thời gian nghe khoảng 1 giờ11.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHook: câu mở đầu kéo chú ý.\nCaption: nội dung chính dễ đọc trên mạng xã hội.\nLời kêu gọi hành động: hành động mong muốn.\nHashtags: 3-6 hashtag liên quan.\nKhông thêm Subject, Preview text, SEO title hoặc Meta description.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "social",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "groq-gpt-oss-120b",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Social Media Post với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: AirPods 4.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Điều Khiển\nChống bụi, chống mồ hôi và chống nước (IP54)\nKích Thước Và Trọng Lượng8\nAirPods 4 (Mỗi Bên)\nCao: 30,2 mm\nRộng: 18,3 mm\nDày: 18,1 mm\nTrọng Lượng: 4,3 gram\nHộp Sạc (USB-C)\nCao: 46,2 mm\nRộng: 50,1 mm\nDày: 21,2 mm\nTrọng Lượng: 32,3 gram\nHộp Sạc\nTương thích với đầu nối USB-C\nPin\nAirPods 4\nThời gian nghe lên đến 5 giờ với một lần sạc9\nAirPods 4 với Hộp Sạc (USB-C)\nThời gian nghe lên đến 30 giờ10\n5 phút để trong hộp sạc có thể tăng thời gian nghe khoảng 1 giờ11.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHook: câu mở đầu kéo chú ý.\nCaption: nội dung chính dễ đọc trên mạng xã hội.\nLời kêu gọi hành động: hành động mong muốn.\nHashtags: 3-6 hashtag liên quan.\nKhông thêm Subject, Preview text, SEO title hoặc Meta description.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Social Media Post với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: AirPods 4.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Điều Khiển\nChống bụi, chống mồ hôi và chống nước (IP54)\nKích Thước Và Trọng Lượng8\nAirPods 4 (Mỗi Bên)\nCao: 30,2 mm\nRộng: 18,3 mm\nDày: 18,1 mm\nTrọng Lượng: 4,3 gram\nHộp Sạc (USB-C)\nCao: 46,2 mm\nRộng: 50,1 mm\nDày: 21,2 mm\nTrọng Lượng: 32,3 gram\nHộp Sạc\nTương thích với đầu nối USB-C\nPin\nAirPods 4\nThời gian nghe lên đến 5 giờ với một lần sạc9\nAirPods 4 với Hộp Sạc (USB-C)\nThời gian nghe lên đến 30 giờ10\n5 phút để trong hộp sạc có thể tăng thời gian nghe khoảng 1 giờ11.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHook: câu mở đầu kéo chú ý.\nCaption: nội dung chính dễ đọc trên mạng xã hội.\nLời kêu gọi hành động: hành động mong muốn.\nHashtags: 3-6 hashtag liên quan.\nKhông thêm Subject, Preview text, SEO title hoặc Meta description.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Hook: Đắm chìm trong âm thanh đỉnh cao, không lo về mồ hôi hay bụi bám!\n\nCaption: AirPods 4 mang công nghệ Điều Khiển thông minh, cho phép bạn thay đổi bài hát, trả lời cuộc gọi chỉ bằng một chạm. Với chuẩn IP54, chúng chống bụi, chống mồ hôi và chống nước, lý tưởng cho mọi hoạt động ngoài trời. Kích thước siêu nhẹ – mỗi tai nghe chỉ 4,3 g, dễ dàng lắp vừa trong tai mà không gây áp lực. Hộp sạc USB‑C siêu gọn, chỉ 32,3 g, cung cấp tới 30 giờ nghe nhạc liên tục; chỉ cần 5 phút sạc, bạn sẽ có thêm 1 giờ âm nhạc. Thời gian nghe lên đến 5 giờ cho mỗi lần sạc, đáp ứng mọi nhu cầu giải trí và công việc.\n\nLời kêu gọi hành động: Đặt mua AirPods 4 ngay hôm nay để trải nghiệm âm thanh không giới hạn!\n\nHashtags: #AirPods4 #CôngNghệÂmThanh #IP54 #USB_C #ÂmNhạcKhôngGiớiHạn",
+  "usage": {
+    "id": "6ae96672a4d289df6fb14727",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae96672a4d289df6fb14725",
+    "model": "groq-gpt-oss-120b",
+    "promptTokens": 917,
+    "completionTokens": 441,
+    "totalTokens": 1358,
+    "quotaUnits": 2,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-11-03T04:43:30.624Z",
+    "updatedAt": "2026-11-03T04:43:30.624Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}

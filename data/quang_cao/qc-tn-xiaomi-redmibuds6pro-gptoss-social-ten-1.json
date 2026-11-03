@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-tn-xiaomi-redmibuds6pro-gptoss-social-ten-1",
+  "ma_mau": "tn-xiaomi-redmibuds6pro",
+  "ten_nhap": "Redmi Buds 6 Pro",
+  "loai_bai": "social",
+  "che_do": "ten",
+  "lan": 1,
+  "mo_hinh": "groq-gpt-oss-120b",
+  "mo_hinh_tra_ve": "groq-gpt-oss-120b",
+  "mo_hinh_nha_cung_cap": "openai/gpt-oss-120b",
+  "thoi_diem": "2026-11-03T12:12:47+07:00",
+  "ma_bai_copypro": "6ae96d41a4d289df6fb149dd",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Social Media Post với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Redmi Buds 6 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHook: câu mở đầu kéo chú ý.\nCaption: nội dung chính dễ đọc trên mạng xã hội.\nLời kêu gọi hành động: hành động mong muốn.\nHashtags: 3-6 hashtag liên quan.\nKhông thêm Subject, Preview text, SEO title hoặc Meta description.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "social",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "groq-gpt-oss-120b",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Social Media Post với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Redmi Buds 6 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHook: câu mở đầu kéo chú ý.\nCaption: nội dung chính dễ đọc trên mạng xã hội.\nLời kêu gọi hành động: hành động mong muốn.\nHashtags: 3-6 hashtag liên quan.\nKhông thêm Subject, Preview text, SEO title hoặc Meta description.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Social Media Post với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Redmi Buds 6 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHook: câu mở đầu kéo chú ý.\nCaption: nội dung chính dễ đọc trên mạng xã hội.\nLời kêu gọi hành động: hành động mong muốn.\nHashtags: 3-6 hashtag liên quan.\nKhông thêm Subject, Preview text, SEO title hoặc Meta description.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Hook: Âm thanh đỉnh cao, chỉ trong tầm tay – khám phá Redmi Buds 6 Pro ngay hôm nay!\n\nCaption: \nRedmi Buds 6 Pro mang đến trải nghiệm âm thanh siêu chi tiết với công nghệ Hi‑Res Audio, đồng thời tích hợp chip AI giảm tiếng ồn chủ động, giúp bạn tập trung vào từng nốt nhạc hay cuộc gọi. \nPin siêu bền lên tới 8 giờ liên tục, kèm hộp sạc nhanh cho 24 giờ sử dụng không gián đoạn. \nThiết kế gọn nhẹ, vừa tai, không gây mỏi dù dài ngày làm việc hay giải trí. \nKết nối Bluetooth 5.3 ổn định, chuyển đổi nhanh giữa thiết bị Android và iOS. \nĐừng bỏ lỡ cơ hội sở hữu tai nghe thông minh, tiện lợi cho mọi khoảnh khắc.\n\nLời kêu gọi hành động: Đặt mua ngay trên website hoặc đến cửa hàng gần nhất để trải nghiệm âm thanh đỉnh cao cùng Redmi Buds 6 Pro!\n\nHashtags: #RedmiBuds6Pro #ÂmThanhCaoCấp #CôngNghệThôngMinh #TaiNgheKhôngDây #TrảiNghiệmÂmNhạc",
+  "usage": {
+    "id": "6ae96d42a4d289df6fb149df",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae96d41a4d289df6fb149dd",
+    "model": "groq-gpt-oss-120b",
+    "promptTokens": 704,
+    "completionTokens": 400,
+    "totalTokens": 1104,
+    "quotaUnits": 2,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-11-03T05:12:34.064Z",
+    "updatedAt": "2026-11-03T05:12:34.064Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}

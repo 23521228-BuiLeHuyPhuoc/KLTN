@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-tn-xiaomi-redmibuds6pro-gemini-landing-ten-1",
+  "ma_mau": "tn-xiaomi-redmibuds6pro",
+  "ten_nhap": "Redmi Buds 6 Pro",
+  "loai_bai": "landing",
+  "che_do": "ten",
+  "lan": 1,
+  "mo_hinh": "gemini-3-6-flash",
+  "mo_hinh_tra_ve": "gemini-3-6-flash",
+  "mo_hinh_nha_cung_cap": "gemini-3.6-flash",
+  "thoi_diem": "2026-11-03T15:18:29+07:00",
+  "ma_bai_copypro": "6ae998c1a4d289df6fb15261",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Redmi Buds 6 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "landing",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "gemini-3-6-flash",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Redmi Buds 6 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Redmi Buds 6 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Phiên bản 1:\n\nHero headline: Redmi Buds 6 Pro: Đỉnh Cao Âm Thanh Hi-Res Và Chống Ồn Chủ Động Vượt Trội\n\nSubheadline: Trải nghiệm không gian âm nhạc chân thực, đàm thoại sắc nét và thời lượng pin bền bỉ suốt ngày dài cùng dòng tai nghe không dây cao cấp thế hệ mới.\n\nLợi ích chính:\n- Công nghệ chống ồn chủ động thông minh: Tự động tối ưu hóa mức độ triệt tiêu tiếng ồn theo môi trường xung quanh, giúp bạn duy trì sự tập trung tối đa cho công việc và giải trí.\n- Chất âm Hi-Res chân thực với màng loa kép: Hệ thống âm thanh tân tiến mang lại dải âm bass sâu lắng, âm mid rõ ràng và âm treble trong trẻo, tái hiện chi tiết từng nốt nhạc.\n- Kết nối mượt mà và thời lượng pin vượt trội: Tổng thời gian sử dụng lên tới 36 giờ cùng hộp sạc, hỗ trợ công nghệ sạc nhanh tiện lợi và kết nối Bluetooth chuẩn mới không độ trễ.\n\nBằng chứng: Hơn 50.000 sản phẩm đã được giao đến tay khách hàng ngay trong tháng đầu tiên ra mắt. Đạt 98% phản hồi tích cực từ cộng đồng yêu công nghệ về chất lượng âm thanh vượt phân khúc. Cam kết 100% hàng chính hãng Xiaomi với chính sách bảo hành 12 tháng 1 đổi 1 trên toàn quốc.\n\nOffer: Đặt hàng ngay hôm nay để nhận ngay voucher giảm trực tiếp 200.000 đồng, tặng kèm bao da bảo vệ thời trang trị giá 150.000 đồng và miễn phí giao hàng tận nơi trên toàn quốc. Số lượng quà tặng có hạn chỉ dành cho 100 khách hàng nhanh tay nhất.\n\nLời kêu gọi hành động: Mua Ngay Để Nhận Ưu Đãi Đặc Biệt",
+  "usage": {
+    "id": "6ae998c1a4d289df6fb15263",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae998c1a4d289df6fb15261",
+    "model": "gemini-3-6-flash",
+    "promptTokens": 724,
+    "completionTokens": 414,
+    "totalTokens": 2633,
+    "quotaUnits": 3,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-11-03T08:18:09.685Z",
+    "updatedAt": "2026-11-03T08:18:09.685Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}

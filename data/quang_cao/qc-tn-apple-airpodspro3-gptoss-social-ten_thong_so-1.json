@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-tn-apple-airpodspro3-gptoss-social-ten_thong_so-1",
+  "ma_mau": "tn-apple-airpodspro3",
+  "ten_nhap": "AirPods Pro 3",
+  "loai_bai": "social",
+  "che_do": "ten_thong_so",
+  "lan": 1,
+  "mo_hinh": "groq-gpt-oss-120b",
+  "mo_hinh_tra_ve": "groq-gpt-oss-120b",
+  "mo_hinh_nha_cung_cap": "openai/gpt-oss-120b",
+  "thoi_diem": "2026-11-03T11:20:31+07:00",
+  "ma_bai_copypro": "6ae96101a4d289df6fb1448a",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Social Media Post với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: AirPods Pro 3.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Tương Tác Siri4\nChống Bụi,\nChống Mồ Hôi\nVà Chống Nước10\nChống bụi, chống mồ hôi và chống nước (IP57):\nAirPods Pro và hộp sạc\nKích Thước\nVà Trọng Lượng (Mỗi Bên)11\n19,2 mm\n30,9 mm\nCao:\n30,9 mm\nRộng: 19,2 mm\nDày: 27,0 mm\nTrọng lượng: 5,55 gram\n62,2 mm\n47,2 mm\n21,8 mm\nCao:\n47,2 mm\nRộng: 62,2 mm\nDày: 21,8 mm\nTrọng lượng: 43,99 gram\nHộp Sạc\nTương thích với bộ sạc MagSafe, bộ sạc Apple Watch,\nbộ sạc chuẩn Qi hoặc đầu nối USB-C\nĐi kèm với loa để sử dụng với ứng dụng Tìm12\nPin\nAirPods Pro 3\nThời gian nghe lên đến 8 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn (lên đến 7,5 giờ khi bật Âm Thanh Không Gian và Theo Dõi Chuyển Động Đầu)13\nThời gian nghe lên đến 6,5 giờ với một lần sạc khi bật cảm biến nhịp tim trong khi tập luyện14\nThời gian nghe lên đến 10 giờ với một lần sạc cho người dùng tính năng Thiết Bị Trợ Thính15\nAirPods Pro 3 với Hộp Sạc MagSafe (USB-C)16\nThời gian nghe lên đến 24 giờ khi bật tính năng Chủ Động Khử Tiếng Ồn17\n5 phút để trong hộp sạc có thể tăng thời gian nghe khoảng 1 giờ18.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHook: câu mở đầu kéo chú ý.\nCaption: nội dung chính dễ đọc trên mạng xã hội.\nLời kêu gọi hành động: hành động mong muốn.\nHashtags: 3-6 hashtag liên quan.\nKhông thêm Subject, Preview text, SEO title hoặc Meta description.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "social",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "groq-gpt-oss-120b",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Social Media Post với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: AirPods Pro 3.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Tương Tác Siri4\nChống Bụi,\nChống Mồ Hôi\nVà Chống Nước10\nChống bụi, chống mồ hôi và chống nước (IP57):\nAirPods Pro và hộp sạc\nKích Thước\nVà Trọng Lượng (Mỗi Bên)11\n19,2 mm\n30,9 mm\nCao:\n30,9 mm\nRộng: 19,2 mm\nDày: 27,0 mm\nTrọng lượng: 5,55 gram\n62,2 mm\n47,2 mm\n21,8 mm\nCao:\n47,2 mm\nRộng: 62,2 mm\nDày: 21,8 mm\nTrọng lượng: 43,99 gram\nHộp Sạc\nTương thích với bộ sạc MagSafe, bộ sạc Apple Watch,\nbộ sạc chuẩn Qi hoặc đầu nối USB-C\nĐi kèm với loa để sử dụng với ứng dụng Tìm12\nPin\nAirPods Pro 3\nThời gian nghe lên đến 8 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn (lên đến 7,5 giờ khi bật Âm Thanh Không Gian và Theo Dõi Chuyển Động Đầu)13\nThời gian nghe lên đến 6,5 giờ với một lần sạc khi bật cảm biến nhịp tim trong khi tập luyện14\nThời gian nghe lên đến 10 giờ với một lần sạc cho người dùng tính năng Thiết Bị Trợ Thính15\nAirPods Pro 3 với Hộp Sạc MagSafe (USB-C)16\nThời gian nghe lên đến 24 giờ khi bật tính năng Chủ Động Khử Tiếng Ồn17\n5 phút để trong hộp sạc có thể tăng thời gian nghe khoảng 1 giờ18.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHook: câu mở đầu kéo chú ý.\nCaption: nội dung chính dễ đọc trên mạng xã hội.\nLời kêu gọi hành động: hành động mong muốn.\nHashtags: 3-6 hashtag liên quan.\nKhông thêm Subject, Preview text, SEO title hoặc Meta description.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Social Media Post với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: AirPods Pro 3.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Tương Tác Siri4\nChống Bụi,\nChống Mồ Hôi\nVà Chống Nước10\nChống bụi, chống mồ hôi và chống nước (IP57):\nAirPods Pro và hộp sạc\nKích Thước\nVà Trọng Lượng (Mỗi Bên)11\n19,2 mm\n30,9 mm\nCao:\n30,9 mm\nRộng: 19,2 mm\nDày: 27,0 mm\nTrọng lượng: 5,55 gram\n62,2 mm\n47,2 mm\n21,8 mm\nCao:\n47,2 mm\nRộng: 62,2 mm\nDày: 21,8 mm\nTrọng lượng: 43,99 gram\nHộp Sạc\nTương thích với bộ sạc MagSafe, bộ sạc Apple Watch,\nbộ sạc chuẩn Qi hoặc đầu nối USB-C\nĐi kèm với loa để sử dụng với ứng dụng Tìm12\nPin\nAirPods Pro 3\nThời gian nghe lên đến 8 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn (lên đến 7,5 giờ khi bật Âm Thanh Không Gian và Theo Dõi Chuyển Động Đầu)13\nThời gian nghe lên đến 6,5 giờ với một lần sạc khi bật cảm biến nhịp tim trong khi tập luyện14\nThời gian nghe lên đến 10 giờ với một lần sạc cho người dùng tính năng Thiết Bị Trợ Thính15\nAirPods Pro 3 với Hộp Sạc MagSafe (USB-C)16\nThời gian nghe lên đến 24 giờ khi bật tính năng Chủ Động Khử Tiếng Ồn17\n5 phút để trong hộp sạc có thể tăng thời gian nghe khoảng 1 giờ18.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHook: câu mở đầu kéo chú ý.\nCaption: nội dung chính dễ đọc trên mạng xã hội.\nLời kêu gọi hành động: hành động mong muốn.\nHashtags: 3-6 hashtag liên quan.\nKhông thêm Subject, Preview text, SEO title hoặc Meta description.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Hook: Bạn đã sẵn sàng nâng tầm trải nghiệm âm nhạc với AirPods Pro 3 chưa?\n\nCaption: AirPods Pro 3 mang lại âm thanh đỉnh cao cùng tính năng Chủ Động Khử Tiếng Ồn, cho tới 8 giờ nghe liên tục. \n- Chống bụi, mồ hôi và nước chuẩn IP57, đồng hành cùng mọi hoạt động thể thao. \n- Tương tác Siri4 nhanh gọn, chỉ cần một lời lệnh. \n- Hộp sạc MagSafe hỗ trợ Qi, USB‑C, cho 24 giờ năng lượng chỉ với một lần sạc. \n- Chỉ 5 phút sạc, bạn có thêm 1 giờ nghe nhạc.\n\nLời kêu gọi hành động: Đặt mua ngay hôm nay để trải nghiệm công nghệ âm thanh tiên tiến!\n\nHashtags: #AirPodsPro3 #CôngNghệÂmThanh #Siri4 #ChốngNước #MagSafe",
+  "usage": {
+    "id": "6ae96101a4d289df6fb1448c",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae96101a4d289df6fb1448a",
+    "model": "groq-gpt-oss-120b",
+    "promptTokens": 1116,
+    "completionTokens": 757,
+    "totalTokens": 1873,
+    "quotaUnits": 2,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-11-03T04:20:17.677Z",
+    "updatedAt": "2026-11-03T04:20:17.677Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}

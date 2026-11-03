@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-dh-samsung-galaxywatch8-gemini-landing-ten_thong_so-1",
+  "ma_mau": "dh-samsung-galaxywatch8",
+  "ten_nhap": "Galaxy Watch8",
+  "loai_bai": "landing",
+  "che_do": "ten_thong_so",
+  "lan": 1,
+  "mo_hinh": "gemini-3-6-flash",
+  "mo_hinh_tra_ve": "gemini-3-6-flash",
+  "mo_hinh_nha_cung_cap": "gemini-3.6-flash",
+  "thoi_diem": "2026-11-03T15:20:24+07:00",
+  "ma_bai_copypro": "6ae99928a4d289df6fb15331",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Galaxy Watch8.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Luôn sáng rõ. Ngay cả dưới ánh sáng mặt trời\nLuôn cập nhật thông tin cả ngày lẫn đêm với độ sáng lên tới 3.000 nits, mang đến cho bạn những chi tiết cực kỳ rõ nét trên màn hình, ngay cả dưới nắng chói. Dù là bạn đang xem số liệu khi chạy bộ buổi sáng hay xem tin nhắn mới khi đang đi bộ buổi chiều, màn hình có độ sáng cao của Galaxy Watch8 đảm bảo những thông tin quan trọng của bạn luôn sắc nét, sống động và dễ đọc. 3\npause\nview more\nGalaxy Watch8 có những màu sắc và kích thước nào?\nDung lượng pin Galaxy Watch8 là bao nhiêu?\nThời gian dùng pin Galaxy Watch8 thay đổi tùy thuộc vào mức sử dụng. Model 40 mm có pin 325 mAh và model 44 mm có pin 435 mAh. Cả hai đều có thời gian sử dụng lên tới 30 giờ ở chế độ Always On Display (AOD).\nThông báo về việc sử dụng\n• Thiết bị này có tính năng kháng nước và bụi bẩn, đáp ứng các tiêu chuẩn quốc tế sau đây. – Chứng nhận cấp độ kháng nước 5ATM: Đã được thử nghiệm bằng cách thả chìm thiết bị ở độ sâu 50 m trong nước thường trong 10 phút, để yên và không có bất kỳ chuyển động nào để đáp ứng các yêu cầu của ISO 22810:2010. – Chứng nhận cấp độ kháng nước IPX8: Đã được thử nghiệm bằng cách thả chìm thiết bị ở độ sâu 1,5 m trong nước thường trong 30 phút, để yên và không có bất kỳ chuyển động nào để đáp ứng các yêu cầu của IEC 60529. – Chứng nhận cấp độ kháng bụi IP6X: Đã được thử nghiệm để đáp ứng các yêu cầu của IEC 60529..\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "landing",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "gemini-3-6-flash",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Galaxy Watch8.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Luôn sáng rõ. Ngay cả dưới ánh sáng mặt trời\nLuôn cập nhật thông tin cả ngày lẫn đêm với độ sáng lên tới 3.000 nits, mang đến cho bạn những chi tiết cực kỳ rõ nét trên màn hình, ngay cả dưới nắng chói. Dù là bạn đang xem số liệu khi chạy bộ buổi sáng hay xem tin nhắn mới khi đang đi bộ buổi chiều, màn hình có độ sáng cao của Galaxy Watch8 đảm bảo những thông tin quan trọng của bạn luôn sắc nét, sống động và dễ đọc. 3\npause\nview more\nGalaxy Watch8 có những màu sắc và kích thước nào?\nDung lượng pin Galaxy Watch8 là bao nhiêu?\nThời gian dùng pin Galaxy Watch8 thay đổi tùy thuộc vào mức sử dụng. Model 40 mm có pin 325 mAh và model 44 mm có pin 435 mAh. Cả hai đều có thời gian sử dụng lên tới 30 giờ ở chế độ Always On Display (AOD).\nThông báo về việc sử dụng\n• Thiết bị này có tính năng kháng nước và bụi bẩn, đáp ứng các tiêu chuẩn quốc tế sau đây. – Chứng nhận cấp độ kháng nước 5ATM: Đã được thử nghiệm bằng cách thả chìm thiết bị ở độ sâu 50 m trong nước thường trong 10 phút, để yên và không có bất kỳ chuyển động nào để đáp ứng các yêu cầu của ISO 22810:2010. – Chứng nhận cấp độ kháng nước IPX8: Đã được thử nghiệm bằng cách thả chìm thiết bị ở độ sâu 1,5 m trong nước thường trong 30 phút, để yên và không có bất kỳ chuyển động nào để đáp ứng các yêu cầu của IEC 60529. – Chứng nhận cấp độ kháng bụi IP6X: Đã được thử nghiệm để đáp ứng các yêu cầu của IEC 60529..\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Galaxy Watch8.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Luôn sáng rõ. Ngay cả dưới ánh sáng mặt trời\nLuôn cập nhật thông tin cả ngày lẫn đêm với độ sáng lên tới 3.000 nits, mang đến cho bạn những chi tiết cực kỳ rõ nét trên màn hình, ngay cả dưới nắng chói. Dù là bạn đang xem số liệu khi chạy bộ buổi sáng hay xem tin nhắn mới khi đang đi bộ buổi chiều, màn hình có độ sáng cao của Galaxy Watch8 đảm bảo những thông tin quan trọng của bạn luôn sắc nét, sống động và dễ đọc. 3\npause\nview more\nGalaxy Watch8 có những màu sắc và kích thước nào?\nDung lượng pin Galaxy Watch8 là bao nhiêu?\nThời gian dùng pin Galaxy Watch8 thay đổi tùy thuộc vào mức sử dụng. Model 40 mm có pin 325 mAh và model 44 mm có pin 435 mAh. Cả hai đều có thời gian sử dụng lên tới 30 giờ ở chế độ Always On Display (AOD).\nThông báo về việc sử dụng\n• Thiết bị này có tính năng kháng nước và bụi bẩn, đáp ứng các tiêu chuẩn quốc tế sau đây. – Chứng nhận cấp độ kháng nước 5ATM: Đã được thử nghiệm bằng cách thả chìm thiết bị ở độ sâu 50 m trong nước thường trong 10 phút, để yên và không có bất kỳ chuyển động nào để đáp ứng các yêu cầu của ISO 22810:2010. – Chứng nhận cấp độ kháng nước IPX8: Đã được thử nghiệm bằng cách thả chìm thiết bị ở độ sâu 1,5 m trong nước thường trong 30 phút, để yên và không có bất kỳ chuyển động nào để đáp ứng các yêu cầu của IEC 60529. – Chứng nhận cấp độ kháng bụi IP6X: Đã được thử nghiệm để đáp ứng các yêu cầu của IEC 60529..\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Phiên bản 1:\n\nHero headline: Galaxy Watch8: Tuyệt Phẩm Đồng Hồ Thông Minh Cho Cuộc Sống Hiện Đại\n\nSubheadline: Trải nghiệm hiển thị vượt giới hạn cùng khả năng đồng hành bền bỉ suốt ngày đêm, giúp bạn chủ động theo dõi sức khỏe và kết nối mọi lúc mọi nơi.\n\nLợi ích chính:\n- Màn hình cực sáng 3.000 nits hiển thị sắc nét mọi lúc: Dù bạn đang chạy bộ dưới ánh nắng mặt trời chói chang buổi sáng hay đi bộ lúc chiều muộn, màn hình độ sáng cao đảm bảo mọi chi tiết, chỉ số vận động và thông báo quan trọng luôn sống động, rõ ràng và cực kỳ dễ đọc.\n- Thời lượng pin tối ưu cùng hai tùy chọn kích thước linh hoạt: Tự do lựa chọn phiên bản 40 mm với dung lượng pin 325 mAh hoặc 44 mm với dung lượng 435 mAh. Cả hai phiên bản đều mang lại thời gian sử dụng bền bỉ lên tới 30 giờ ngay cả khi bật chế độ Màn hình luôn bật (Always On Display).\n- Độ bền chuẩn quốc tế, kháng nước và kháng bụi vượt trội: An tâm đồng hành trong mọi hoạt động thể thao nhờ chứng nhận kháng nước 5ATM đạt chuẩn ISO 22810:2010 ở độ sâu tới 50 m, chuẩn kháng nước IPX8 và chuẩn kháng bụi IP6X cao cấp theo tiêu chuẩn IEC 60529.\n\nBằng chứng:\nGalaxy Watch8 được kiểm định nghiêm ngặt theo các tiêu chuẩn kỹ thuật quốc tế hàng đầu như ISO 22810:2010 và IEC 60529. Hàng nghìn người dùng trên toàn thế giới đánh giá cao khả năng hiển thị rõ nét vượt trội dưới ánh nắng trực tiếp và sự tin cậy tuyệt đối của thiết bị khi luyện tập trong môi trường khắc nghiệt.\n\nOffer:\nĐặt mua Galaxy Watch8 ngay hôm nay để nhận ưu đãi giảm giá trực tiếp 10%, tặng kèm dây đeo thể thao cao cấp và hỗ trợ trả góp lãi suất 0%. Ưu đãi có giới hạn dành cho 100 khách hàng đầu tiên.\n\nLời kêu gọi hành động:\nSở Hữu Galaxy Watch8 Ngay Hôm Nay",
+  "usage": {
+    "id": "6ae99928a4d289df6fb15333",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae99928a4d289df6fb15331",
+    "model": "gemini-3-6-flash",
+    "promptTokens": 1139,
+    "completionTokens": 494,
+    "totalTokens": 2944,
+    "quotaUnits": 3,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-11-03T08:19:52.855Z",
+    "updatedAt": "2026-11-03T08:19:52.855Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}

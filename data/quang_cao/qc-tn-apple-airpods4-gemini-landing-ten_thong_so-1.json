@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-tn-apple-airpods4-gemini-landing-ten_thong_so-1",
+  "ma_mau": "tn-apple-airpods4",
+  "ten_nhap": "AirPods 4",
+  "loai_bai": "landing",
+  "che_do": "ten_thong_so",
+  "lan": 1,
+  "mo_hinh": "gemini-3-6-flash",
+  "mo_hinh_tra_ve": "gemini-3-6-flash",
+  "mo_hinh_nha_cung_cap": "gemini-3.6-flash",
+  "thoi_diem": "2026-11-03T11:42:51+07:00",
+  "ma_bai_copypro": "6ae96630a4d289df6fb14689",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: AirPods 4.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Điều Khiển\nChống bụi, chống mồ hôi và chống nước (IP54)\nKích Thước Và Trọng Lượng8\nAirPods 4 (Mỗi Bên)\nCao: 30,2 mm\nRộng: 18,3 mm\nDày: 18,1 mm\nTrọng Lượng: 4,3 gram\nHộp Sạc (USB-C)\nCao: 46,2 mm\nRộng: 50,1 mm\nDày: 21,2 mm\nTrọng Lượng: 32,3 gram\nHộp Sạc\nTương thích với đầu nối USB-C\nPin\nAirPods 4\nThời gian nghe lên đến 5 giờ với một lần sạc9\nAirPods 4 với Hộp Sạc (USB-C)\nThời gian nghe lên đến 30 giờ10\n5 phút để trong hộp sạc có thể tăng thời gian nghe khoảng 1 giờ11.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "landing",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "gemini-3-6-flash",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: AirPods 4.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Điều Khiển\nChống bụi, chống mồ hôi và chống nước (IP54)\nKích Thước Và Trọng Lượng8\nAirPods 4 (Mỗi Bên)\nCao: 30,2 mm\nRộng: 18,3 mm\nDày: 18,1 mm\nTrọng Lượng: 4,3 gram\nHộp Sạc (USB-C)\nCao: 46,2 mm\nRộng: 50,1 mm\nDày: 21,2 mm\nTrọng Lượng: 32,3 gram\nHộp Sạc\nTương thích với đầu nối USB-C\nPin\nAirPods 4\nThời gian nghe lên đến 5 giờ với một lần sạc9\nAirPods 4 với Hộp Sạc (USB-C)\nThời gian nghe lên đến 30 giờ10\n5 phút để trong hộp sạc có thể tăng thời gian nghe khoảng 1 giờ11.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: AirPods 4.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Điều Khiển\nChống bụi, chống mồ hôi và chống nước (IP54)\nKích Thước Và Trọng Lượng8\nAirPods 4 (Mỗi Bên)\nCao: 30,2 mm\nRộng: 18,3 mm\nDày: 18,1 mm\nTrọng Lượng: 4,3 gram\nHộp Sạc (USB-C)\nCao: 46,2 mm\nRộng: 50,1 mm\nDày: 21,2 mm\nTrọng Lượng: 32,3 gram\nHộp Sạc\nTương thích với đầu nối USB-C\nPin\nAirPods 4\nThời gian nghe lên đến 5 giờ với một lần sạc9\nAirPods 4 với Hộp Sạc (USB-C)\nThời gian nghe lên đến 30 giờ10\n5 phút để trong hộp sạc có thể tăng thời gian nghe khoảng 1 giờ11.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Phiên bản 1:\n\nHero headline: Trải nghiệm âm thanh đột phá cùng AirPods 4 thế hệ mới\n\nSubheadline: Thiết kế công phu, thời lượng pin ấn tượng lên đến 30 giờ cùng chuẩn kháng nước IP54 đáp ứng hoàn hảo mọi nhu cầu kết nối và giải trí mỗi ngày.\n\nLợi ích chính:\n- Thiết kế siêu gọn nhẹ và bền bỉ: Mỗi bên tai nghe chỉ nặng 4,3 gram với kích thước tối ưu, mang lại cảm giác đeo êm ái suốt ngày dài. Khả năng chống bụi, chống mồ hôi và chống nước đạt chuẩn IP54 giúp bạn hoàn toàn yên tâm sử dụng khi tập luyện thể thao hay di chuyển trong mọi điều kiện thời tiết.\n- Năng lượng bền bỉ suốt ngày dài: Tận hưởng âm nhạc liên tục lên đến 5 giờ chỉ với một lần sạc đầy. Khi kết hợp cùng hộp sạc USB-C nhỏ gọn nặng 32,3 gram, tổng thời gian nghe được mở rộng lên tới 30 giờ. Đặc biệt, tính năng sạc nhanh cho phép bạn có ngay 1 giờ sử dụng chỉ sau 5 phút đặt trong hộp sạc.\n- Kết nối hiện đại và điều khiển linh hoạt: Hộp sạc sử dụng chuẩn USB-C tiên tiến, giúp đồng bộ cáp sạc dễ dàng với các thiết bị công nghệ hiện nay. Hệ thống cảm ứng điều khiển mượt mà cho phép thực hiện các thao tác chuyển bài, dừng phát hay nhận cuộc gọi một cách chính xác và thuận tiện.\n\nBằng chứng: Đã có hàng triệu khách hàng toàn cầu hài lòng với chất lượng âm thanh và sự tiện lợi của dòng tai nghe không dây Apple. AirPods 4 tiếp tục nâng cao tiêu chuẩn trải nghiệm người dùng với các thông số kỹ thuật được kiểm định nghiêm ngặt về độ bền IP54 cùng hiệu suất pin thực tế vượt trội.\n\nOffer: Đặt mua AirPods 4 chính hãng ngay hôm nay để nhận đặc quyền miễn phí giao hàng tận nơi trên toàn quốc, hỗ trợ trả góp 0% lãi suất và bảo hành chính hãng 12 tháng tại các trung tâm ủy quyền.\n\nLời kêu gọi hành động: Mua AirPods 4 ngay bây giờ",
+  "usage": {
+    "id": "6ae96630a4d289df6fb1468b",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae96630a4d289df6fb14689",
+    "model": "gemini-3-6-flash",
+    "promptTokens": 946,
+    "completionTokens": 469,
+    "totalTokens": 2679,
+    "quotaUnits": 3,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-11-03T04:42:24.996Z",
+    "updatedAt": "2026-11-03T04:42:24.996Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}

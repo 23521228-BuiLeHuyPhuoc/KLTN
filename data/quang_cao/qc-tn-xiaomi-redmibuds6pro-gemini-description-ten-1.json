@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-tn-xiaomi-redmibuds6pro-gemini-description-ten-1",
+  "ma_mau": "tn-xiaomi-redmibuds6pro",
+  "ten_nhap": "Redmi Buds 6 Pro",
+  "loai_bai": "description",
+  "che_do": "ten",
+  "lan": 1,
+  "mo_hinh": "gemini-3-6-flash",
+  "mo_hinh_tra_ve": "gemini-3-6-flash",
+  "mo_hinh_nha_cung_cap": "gemini-3.6-flash",
+  "thoi_diem": "2026-11-03T15:17:56+07:00",
+  "ma_bai_copypro": "6ae998a5a4d289df6fb1522d",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Mô tả sản phẩm với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Redmi Buds 6 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nMô tả ngắn: đoạn mở đầu giới thiệu sản phẩm/dịch vụ.\nLợi ích chính: 2-3 bullet.\nĐặc điểm nổi bật: 2-3 bullet.\nLời kêu gọi hành động: lời kêu gọi mua, đăng ký hoặc liên hệ.\nKhông dùng format email, SEO metadata hoặc caption mạng xã hội.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "description",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "gemini-3-6-flash",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Mô tả sản phẩm với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Redmi Buds 6 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nMô tả ngắn: đoạn mở đầu giới thiệu sản phẩm/dịch vụ.\nLợi ích chính: 2-3 bullet.\nĐặc điểm nổi bật: 2-3 bullet.\nLời kêu gọi hành động: lời kêu gọi mua, đăng ký hoặc liên hệ.\nKhông dùng format email, SEO metadata hoặc caption mạng xã hội.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Mô tả sản phẩm với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Redmi Buds 6 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nMô tả ngắn: đoạn mở đầu giới thiệu sản phẩm/dịch vụ.\nLợi ích chính: 2-3 bullet.\nĐặc điểm nổi bật: 2-3 bullet.\nLời kêu gọi hành động: lời kêu gọi mua, đăng ký hoặc liên hệ.\nKhông dùng format email, SEO metadata hoặc caption mạng xã hội.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Phiên bản 1:\n\nMô tả ngắn:\nTai nghe không dây Redmi Buds 6 Pro là giải pháp âm thanh toàn diện, mang đến trải nghiệm nghe nhạc đỉnh cao và đàm thoại sắc nét cho người dùng công nghệ hiện đại.\n\nLợi ích chính:\n- Tận hưởng không gian âm thanh riêng tư và trọn vẹn nhờ khả năng loại bỏ tạp âm hiệu quả trong nhiều môi trường khác nhau.\n- Thoải mái sử dụng suốt cả ngày dài mà không lo gián đoạn công việc hay giải trí nhờ thời lượng pin vượt trội.\n- Nâng cao chất lượng cuộc gọi với âm thanh trong trẻo, giúp quá trình giao tiếp trực tuyến luôn mượt mà và chuyên nghiệp.\n\nĐặc điểm nổi bật:\n- Công nghệ chống ồn chủ động ANC cải tiến kết hợp hệ thống micro khử tiếng ồn tích hợp trí tuệ nhân tạo.\n- Thời gian phát nhạc liên tục lên đến 36 giờ khi dùng kèm hộp sạc, hỗ trợ công nghệ sạc nhanh tiện lợi.\n- Thiết kế bo tròn tinh tế, chuẩn kháng nước IP54 giúp bảo vệ thiết bị an toàn trước mồ hôi và mưa nhẹ.\n\nLời kêu gọi hành động:\nHãy nâng tầm trải nghiệm âm thanh của bạn ngay hôm nay bằng cách đặt mua Redmi Buds 6 Pro tại hệ thống cửa hàng gần nhất hoặc liên hệ hotline để nhận ưu đãi hấp dẫn.",
+  "usage": {
+    "id": "6ae998a5a4d289df6fb1522f",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae998a5a4d289df6fb1522d",
+    "model": "gemini-3-6-flash",
+    "promptTokens": 695,
+    "completionTokens": 296,
+    "totalTokens": 2310,
+    "quotaUnits": 3,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-11-03T08:17:41.351Z",
+    "updatedAt": "2026-11-03T08:17:41.351Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}

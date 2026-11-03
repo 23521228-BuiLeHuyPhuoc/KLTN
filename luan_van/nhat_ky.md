@@ -102,6 +102,21 @@
 - Ranh giới giữ nguyên và đã nói với người thực hiện: trang chỉ bắt mâu thuẫn giữa các ô người gán điền, không đọc câu tuyên bố để gợi ý nhãn, vì nhãn chuẩn là đáp án chấm hệ thống P. Nhãn đã gán trước đó chưa có `dong_d` nên phải mở lại chọn dòng; số giây của các tuyên bố này sẽ gồm cả lần xem lại.
 - Thêm khung "Ca đặc biệt" (bảng `CA_DAC_BIET` trong `tao_cong_cu_gan_nhan.py`, 15 mục): tóm tắt bằng lời các quy tắc riêng và ca đã chốt của hướng dẫn (mục 4, 5.1, 6.2–6.6, 11; V03, V18, V21, V28, V35, V36, V40, V42, V45, V47, V48...), lọc theo mẫu và thuộc tính ghi sẵn trên tuyên bố. Có một mục "chưa có quy tắc" cho cụm kiểu "với mọi điều kiện ánh sáng", nhắc ghi câu hỏi nhãn. Bảng viết tay nên phải sửa theo khi hướng dẫn đổi. 358 test đạt.
 
+## 03/11/2026 — Bước 18
+
+- Codex Astra viết `scripts/sinh_chinh.py` và `tests/test_sinh_chinh.py`; sandbox của Codex không chạy được Python nên mình tự chạy test. Sonnet chọn đoạn thông số cho 8 mẫu tập kiểm tra (`data/quang_cao/thong_so/chon_doan_kiemtra.json`); mẫu tập phát triển lấy theo căn cứ trong cấu hình. Thông số tối đa 5.000 ký tự: backend nhận prompt tối đa 6.000 ký tự, phần khung đo được không quá 976. Mức 4.800 lúc đầu quá chặt với Xiaomi 15T (4.961 ký tự).
+- Thiết kế theo quy mô Bước 16: 10 mẫu × 8 bài = 80 bài. Mỗi bộ (mẫu, LLM, chế độ) bỏ một loại bài `LOAI_BAI[(i + 2m + d) % 3]`; mỗi loại bài 26–27 bài, cả 10 mẫu gộp lại đủ 12 tổ hợp LLM × loại bài × chế độ. Câu lệnh và tham số giống bộ thử (gọi lại `sinh_quang_cao` của Bước 11).
+- Sinh từ 10:34 đến 16:36. Gặp ba loại lỗi: MongoDB của CopyPro mất kết nối (ETIMEDOUT), Gemini quá tải (503), Gemini gói miễn phí hết 20 lượt mỗi ngày (429). Mình thêm `thoi_gian_cho`: lỗi hạn mức chờ theo `CHO_THU_LAI`, mất kết nối chỉ chờ 20 giây. Lượt chạy chính sinh thêm 61 bài (4 bài có từ lượt đầu), 15 bài Gemini lỗi vì hết hạn mức; lượt bù sau 15:00, khi hạn mức reset, sinh đủ 15 bài, 0 lỗi.
+- Kiểm 80/80 bài: prompt CopyPro lưu trùng prompt gửi, mô hình trả về đúng mô hình chọn, không dùng mô hình dự phòng, chế độ `ten_thong_so` có thông số trong prompt và `ten` thì không. Độ dài: social 609–1.008 ký tự, description 810–1.213, landing 989–1.892; tổng 176.379 token. Hai bài gpt-oss có `completionTokens` vượt trần 1.800 (2.375 và 1.832) vì số này tính cả token suy luận; đọc đuôi cả hai bài và 40 bài Gemini đều trọn đến lời kêu gọi hoặc hashtag.
+
+## 03/11/2026 — Bước 17
+
+- Người thực hiện yêu cầu: việc khó Opus làm, việc khác giao Sonnet và Codex Astra, Opus duyệt lại. Mình lập bảng hạn chế từ đề cương bản cuối và `ghi_chu_tai_lieu.md`; Codex Astra viết Chương 1, Sonnet viết Chương 2 và ghép bảng vào mục 2.7.
+- `luan_van/chuong_1.md`: mục 1.1–1.9, khoảng 3.333 chữ. Khi duyệt, mình bỏ một câu Codex thêm khẳng định quy tắc bỏ "lên đến" vì quy tắc này chưa chốt. Ví dụ của đề cương "nghe nhạc 6 giờ khi bật chống ồn" giữ nhãn Đúng theo quy tắc hiện hành.
+- `luan_van/chuong_2.md`: mục 2.1–2.8, khoảng 4.918 chữ không tính trích dẫn, 149 trích dẫn kèm số trang. Bảng 2.1 có 11 dòng, 4 cột (Nghiên cứu, Hạn chế, Cách đề tài xử lý, Nơi đo). Khi duyệt, mình sửa một cụm lặp ở mục 2.7.
+- Đưa lên Google Doc làm nơi viết chính: tab "Báo cáo khóa luận" theo Phụ lục 2 của Khoa (A4, lề trên 3 cm, dưới 3,5 cm, trái 3,5 cm, phải 2 cm; Times New Roman 13, giãn dòng 1,5; bìa chính, bìa phụ, khung các phần; Chương 1–2 và Bảng 2.1), tab "Hình thức trình bày (Khoa)" chép quy định. Mục lục và số trang phải chèn tay vì API không làm được.
+- Còn mở, chờ người thực hiện: quy tắc bỏ "lên đến" (chốt trước Bước 20; đổi thì sửa ví dụ ở mục 1.3); có đưa FTC 2012 và Luật Quảng cáo vào danh mục không; mục IEEE đầy đủ cho BS1–BS5; tách tài liệu tiếng Việt, tiếng Anh và xếp theo alphabet; tên chương theo cách gọi của Khoa (MỞ ĐẦU, TỔNG QUAN...); tên ngành trên bìa.
+
 ## 02/11/2026 — Bước 16 (thống kê, chốt quy mô, kế hoạch theo bản 2, người gán thứ hai)
 
 - Để tiết kiệm hạn mức, việc dễ giao Sonnet, việc vừa giao Codex Astra (`codex exec` trên máy); Opus kiểm lại sau mỗi việc (người thực hiện yêu cầu).

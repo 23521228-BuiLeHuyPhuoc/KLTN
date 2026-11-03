@@ -1,0 +1,119 @@
+USB OTG
+Hỗ trợ
+Hiển thị
+Kích Thước
+6.59" inch (đường chéo)
+Tỷ lệ màn hình
+94.30%
+Độ phân giải
+FHD+ (2780 x 1256 Pixels)
+Tần số quét
+Tối đa: 120Hz
+Tần số lấy mẫu cảm ứng
+Tối đa: 240Hz
+Mặc định: 120Hz
+Dải màu
+Chế độ tự động: 100% DCI-P3
+Chế độ nâng cấp: 100% DCI-P3
+Chế độ sống động: 100% DCI-P3
+Độ sâu màu
+1.07 tỷ màu (10-bit)
+Mật độ điểm ảnh
+460 PPI
+Độ sáng
+Độ sáng bình thường: 800nits
+HBM: 1600nits
+Độ sáng tối đa: 4500nits (Typical, 1%APL )
+Video
+Sau
+4K Video@30/60fps
+1080P Video@ 30/60fps
+720P Video@30fps
+Slo-mo Video: 1080P@240fps, 720P@240fps/480fps
+Cinematic: 4K@30fps
+Time-lapse: 4K@30fps, 1080P@30fps
+Dual-view video: 1080P@30fps
+Support EIS/OIS video
+Optical zoom: Up to 3X
+Digital Zoom: Up to 18X
+Trước
+4K Video@30/60fps
+1080P Video@30/60fps
+720P Video@30fps
+Hỗ trợ EIS/OIS
+Vi xử lý
+SoC
+MediaTek Dimensity 9400
+CPU
+8 nhân
+GPU
+Immortalis G925 MC12
+Pin
+Giá trị định mức: 5630mAh/21.79Wh
+Giá trị tiêu chuẩn: 5490mAh/21.25Wh
+Sạc Nhanh
+80W SUPERVOOCTM2.0,SUPERVOOCTM,VOOC4.0, PD(9V/1.3A), EU: PPS(11V/5A),
+Non-EU: PPS(11V/3A)
+Sạc không dây AirVOOC 50W
+Sinh Trắc Học
+Vân Tay
+Hỗ trợ
+Dung Lượng Pin Bền Bỉ
+Viên pin OPPO Silicon-carbon 5.630mAh có thể hỗ trợ phát trực tuyến xuyên suốt 21 giờ liên tục, cùng khả năng sạc siêu nhanh qua sạc có dây SuperVOOCTM 80W hoặc sạc không dây AirVOOCTM 50W. 1
+Thời thượng. Mạnh Mẽ. Mượt Mà.
+T
+h
+ờ
+i
+t
+h
+ư
+ợ
+n
+g
+M
+ạ
+n
+h
+M
+ẽ
+M
+ư
+ợ
+t
+M
+à
+Bộ Ba Camera HyperTone
+Đẹp Kinh Ngạc Bất Kể Khoảng Cách
+Hãy sẵn sàng cho những bức ảnh rực rỡ hơn, rõ nét hơn, ánh sáng và đổ bóng tự nhiên hơn áp dụng trên toàn bộ dải zoom từ 0.6x đến 120x. Dù là ảnh chụp góc cận hay khoảnh khắc hoàng hôn độc nhất, giờ đây bạn có thể tự do toả sáng cùng tác phẩm của mình.
+Camera Tele Tiềm Vọng
+3x 50MP 1/1.95" f/2.6 OIS
+Cảm biến lớn 1/1.95″
+Khẩu độ f/2.6
+Chống rung OIS
+Tiêu cự 73mm.
+Camera siêu rộng 50MP
+Cảm biến 1/2.75″
+Khẩu độ f/2.0
+Tiêu cự 15mm.
+Camera chính 50MP
+Cảm biến 1/1.56″
+Khẩu độ f/1.8
+Chống rung OIS
+Tiêu cự 24mm.
+Pin Silicon-carbon OPPO
+Khai mở sức mạnh và hiệu năng vô song với công nghệ vận dụng silicon-carbon cho điện cực dương, tối ưu đáng kể mật độ năng lượng. Trên tay bạn giờ đây là một Find X8 không chỉ sở hữu dung lượng pin khổng lồ, mà còn có thể chịu nhiệt độ thấp đến ngạc nhiên. Lo gì hết pin, tự tin trải nghiệm ngày dài đầy năng lượng! 7
+5630mAh
+Dung lượng tiêu chuẩn
+12%
+Dung lượng cải thiện8
+6.5h
+Quay phim liên tục ở chế độ Dolby Vision9
+5.1h
+-20℃ Quay phim liên tục ở chế độ Dolby Vision9
+Tự Do Vô Lo
+Trang bị kính Corning® Gorilla® Glass 7i cường lực cao, kết hợp với khả năng kháng nước và bụi IP68 & IP69, tạo nên một chiếc điện thoại bền bỉ để bạn thoải mái sử dụng trong cuộc sống hàng ngày. Thuật toán Cảm Ứng Kháng Nước nâng cao kiểm soát cảm ứng chính xác ngay cả khi tay bạn và màn hình bị ướt.11
+IP68
+IP69
+Cảm Ứng Kháng Nước
+Màn Hình ProXDR 120Hz

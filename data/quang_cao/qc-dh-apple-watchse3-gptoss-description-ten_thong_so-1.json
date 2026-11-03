@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-dh-apple-watchse3-gptoss-description-ten_thong_so-1",
+  "ma_mau": "dh-apple-watchse3",
+  "ten_nhap": "Apple Watch SE 3",
+  "loai_bai": "description",
+  "che_do": "ten_thong_so",
+  "lan": 1,
+  "mo_hinh": "groq-gpt-oss-120b",
+  "mo_hinh_tra_ve": "groq-gpt-oss-120b",
+  "mo_hinh_nha_cung_cap": "openai/gpt-oss-120b",
+  "thoi_diem": "2026-11-03T10:53:12+07:00",
+  "ma_bai_copypro": "6ae95a9aa4d289df6fb13c0a",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Mô tả sản phẩm với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Apple Watch SE 3.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Chất Liệu Và Màu\nVỏ nhôm\nĐêm Xanh Thẳm, Ánh Sao\nKích Thước Và Trọng Lượng\nDài: 44mm\nRộng: 38mm\nDày: 10,7mm\n368x448 pixel\nDiện tích màn hình 977mm vuông\nTrọng Lượng (GPS): 32,9 gram\nTrọng Lượng (GPS + Cellular): 33 gram\nVừa với cổ tay cỡ 140–245mm\nDài: 40mm\nRộng: 34mm\nDày: 10,7mm\n324x394 pixel\nDiện tích màn hình 759mm vuông\nTrọng Lượng (GPS): 26,3 gram\nTrọng Lượng (GPS + Cellular): 26,4 gram\nVừa với cổ tay cỡ 130–200mm\nPhần Cứng Và Nút\nDigital Crown\nMàn hình Retina Luôn Bật với OLED và LTPO\nKính cường lực Ion-X ở mặt trước với khả năng chống nứt gấp 4 lần7\nĐộ sáng đỉnh 1000 nit\nĐộ sáng tối thiểu 2 nit\nMật độ 326 pixel mỗi inch\nÂm Thanh\nLoa\nMicrô\nPhát nhạc\nNguồn Điện Và Thời Lượng Pin\nPin dùng cả ngày, lên đến 18 giờ khi sử dụng bình thường8\nLên đến 32 giờ ở Chế Độ Nguồn Điện Thấp8\nLên đến 7 giờ khi tập luyện ngoài trời9\nTích hợp pin sạc lithium-ion\nKhả năng sạc nhanh10\nSạc lên đến 80% trong khoảng 45 phút10\nSạc 15 phút cho thời gian sử dụng bình thường lên đến 8 giờ11\nSạc 8 phút cho thời gian theo dõi giấc ngủ lên đến 8 giờ11\nTìm hiểu thêm\nPhát Hiện Va Chạm13\nGiám sát tiếng ồn\nQuay Về\nKiểm Tra\nĐộ Bền\nChống nước ở độ sâu 50m (chống nước khi bơi)14\nKết Nối\nTất cả các phiên bản\nHỗ trợ mạng Wi-Fi 2,4GHz\nWi-Fi 4 (802.11n)\nBluetooth 5.3\nGPS L1 (GLONASS, Galileo, QZSS và BeiDou)\nApple Pay15\nGymKit\nPhiên bản A3326 và A3328\nHỗ trợ RedCap cho LTE16\nFDD-LTE (Băng tần 1, 2, 3, 4, 5, 7, 8, 12, 13, 14, 17, 18, 19, 20, 25, 26, 28, 66, 71)\nTDD-LTE (Băng tần 38, 39, 40, 41)\nKhả Năng Tương Thích\niPhone 11 trở lên, bao gồm iPhone SE (thế hệ thứ 2 trở lên), sử dụng iOS 27 trở lên\nTrong Hộp Sản Phẩm\nApple Watch SE 3\nDây đeo\nCáp Sạc Nhanh Từ Tính Có Đầu Nối USB-C (1m) Của Apple Watch.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nMô tả ngắn: đoạn mở đầu giới thiệu sản phẩm/dịch vụ.\nLợi ích chính: 2-3 bullet.\nĐặc điểm nổi bật: 2-3 bullet.\nLời kêu gọi hành động: lời kêu gọi mua, đăng ký hoặc liên hệ.\nKhông dùng format email, SEO metadata hoặc caption mạng xã hội.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "description",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "groq-gpt-oss-120b",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Mô tả sản phẩm với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Apple Watch SE 3.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Chất Liệu Và Màu\nVỏ nhôm\nĐêm Xanh Thẳm, Ánh Sao\nKích Thước Và Trọng Lượng\nDài: 44mm\nRộng: 38mm\nDày: 10,7mm\n368x448 pixel\nDiện tích màn hình 977mm vuông\nTrọng Lượng (GPS): 32,9 gram\nTrọng Lượng (GPS + Cellular): 33 gram\nVừa với cổ tay cỡ 140–245mm\nDài: 40mm\nRộng: 34mm\nDày: 10,7mm\n324x394 pixel\nDiện tích màn hình 759mm vuông\nTrọng Lượng (GPS): 26,3 gram\nTrọng Lượng (GPS + Cellular): 26,4 gram\nVừa với cổ tay cỡ 130–200mm\nPhần Cứng Và Nút\nDigital Crown\nMàn hình Retina Luôn Bật với OLED và LTPO\nKính cường lực Ion-X ở mặt trước với khả năng chống nứt gấp 4 lần7\nĐộ sáng đỉnh 1000 nit\nĐộ sáng tối thiểu 2 nit\nMật độ 326 pixel mỗi inch\nÂm Thanh\nLoa\nMicrô\nPhát nhạc\nNguồn Điện Và Thời Lượng Pin\nPin dùng cả ngày, lên đến 18 giờ khi sử dụng bình thường8\nLên đến 32 giờ ở Chế Độ Nguồn Điện Thấp8\nLên đến 7 giờ khi tập luyện ngoài trời9\nTích hợp pin sạc lithium-ion\nKhả năng sạc nhanh10\nSạc lên đến 80% trong khoảng 45 phút10\nSạc 15 phút cho thời gian sử dụng bình thường lên đến 8 giờ11\nSạc 8 phút cho thời gian theo dõi giấc ngủ lên đến 8 giờ11\nTìm hiểu thêm\nPhát Hiện Va Chạm13\nGiám sát tiếng ồn\nQuay Về\nKiểm Tra\nĐộ Bền\nChống nước ở độ sâu 50m (chống nước khi bơi)14\nKết Nối\nTất cả các phiên bản\nHỗ trợ mạng Wi-Fi 2,4GHz\nWi-Fi 4 (802.11n)\nBluetooth 5.3\nGPS L1 (GLONASS, Galileo, QZSS và BeiDou)\nApple Pay15\nGymKit\nPhiên bản A3326 và A3328\nHỗ trợ RedCap cho LTE16\nFDD-LTE (Băng tần 1, 2, 3, 4, 5, 7, 8, 12, 13, 14, 17, 18, 19, 20, 25, 26, 28, 66, 71)\nTDD-LTE (Băng tần 38, 39, 40, 41)\nKhả Năng Tương Thích\niPhone 11 trở lên, bao gồm iPhone SE (thế hệ thứ 2 trở lên), sử dụng iOS 27 trở lên\nTrong Hộp Sản Phẩm\nApple Watch SE 3\nDây đeo\nCáp Sạc Nhanh Từ Tính Có Đầu Nối USB-C (1m) Của Apple Watch.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nMô tả ngắn: đoạn mở đầu giới thiệu sản phẩm/dịch vụ.\nLợi ích chính: 2-3 bullet.\nĐặc điểm nổi bật: 2-3 bullet.\nLời kêu gọi hành động: lời kêu gọi mua, đăng ký hoặc liên hệ.\nKhông dùng format email, SEO metadata hoặc caption mạng xã hội.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Mô tả sản phẩm với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Apple Watch SE 3.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Chất Liệu Và Màu\nVỏ nhôm\nĐêm Xanh Thẳm, Ánh Sao\nKích Thước Và Trọng Lượng\nDài: 44mm\nRộng: 38mm\nDày: 10,7mm\n368x448 pixel\nDiện tích màn hình 977mm vuông\nTrọng Lượng (GPS): 32,9 gram\nTrọng Lượng (GPS + Cellular): 33 gram\nVừa với cổ tay cỡ 140–245mm\nDài: 40mm\nRộng: 34mm\nDày: 10,7mm\n324x394 pixel\nDiện tích màn hình 759mm vuông\nTrọng Lượng (GPS): 26,3 gram\nTrọng Lượng (GPS + Cellular): 26,4 gram\nVừa với cổ tay cỡ 130–200mm\nPhần Cứng Và Nút\nDigital Crown\nMàn hình Retina Luôn Bật với OLED và LTPO\nKính cường lực Ion-X ở mặt trước với khả năng chống nứt gấp 4 lần7\nĐộ sáng đỉnh 1000 nit\nĐộ sáng tối thiểu 2 nit\nMật độ 326 pixel mỗi inch\nÂm Thanh\nLoa\nMicrô\nPhát nhạc\nNguồn Điện Và Thời Lượng Pin\nPin dùng cả ngày, lên đến 18 giờ khi sử dụng bình thường8\nLên đến 32 giờ ở Chế Độ Nguồn Điện Thấp8\nLên đến 7 giờ khi tập luyện ngoài trời9\nTích hợp pin sạc lithium-ion\nKhả năng sạc nhanh10\nSạc lên đến 80% trong khoảng 45 phút10\nSạc 15 phút cho thời gian sử dụng bình thường lên đến 8 giờ11\nSạc 8 phút cho thời gian theo dõi giấc ngủ lên đến 8 giờ11\nTìm hiểu thêm\nPhát Hiện Va Chạm13\nGiám sát tiếng ồn\nQuay Về\nKiểm Tra\nĐộ Bền\nChống nước ở độ sâu 50m (chống nước khi bơi)14\nKết Nối\nTất cả các phiên bản\nHỗ trợ mạng Wi-Fi 2,4GHz\nWi-Fi 4 (802.11n)\nBluetooth 5.3\nGPS L1 (GLONASS, Galileo, QZSS và BeiDou)\nApple Pay15\nGymKit\nPhiên bản A3326 và A3328\nHỗ trợ RedCap cho LTE16\nFDD-LTE (Băng tần 1, 2, 3, 4, 5, 7, 8, 12, 13, 14, 17, 18, 19, 20, 25, 26, 28, 66, 71)\nTDD-LTE (Băng tần 38, 39, 40, 41)\nKhả Năng Tương Thích\niPhone 11 trở lên, bao gồm iPhone SE (thế hệ thứ 2 trở lên), sử dụng iOS 27 trở lên\nTrong Hộp Sản Phẩm\nApple Watch SE 3\nDây đeo\nCáp Sạc Nhanh Từ Tính Có Đầu Nối USB-C (1m) Của Apple Watch.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nMô tả ngắn: đoạn mở đầu giới thiệu sản phẩm/dịch vụ.\nLợi ích chính: 2-3 bullet.\nĐặc điểm nổi bật: 2-3 bullet.\nLời kêu gọi hành động: lời kêu gọi mua, đăng ký hoặc liên hệ.\nKhông dùng format email, SEO metadata hoặc caption mạng xã hội.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Phiên bản 1:\n\nMô tả ngắn: Apple Watch SE 3 là chiếc đồng hồ thông minh thế hệ mới, kết hợp thiết kế vỏ nhôm sang trọng màu Đêm Xanh Thẳm, Ánh Sao cùng màn hình Retina OLED luôn bật, mang đến trải nghiệm mượt mà và phong cách cho mọi người dùng.\n\nLợi ích chính:\n- Theo dõi sức khỏe 24/7, nhận cảnh báo va chạm và tiếng ồn ngay tức thì.\n- Pin bền cả ngày, sạc nhanh 45 phút lên 80% giúp bạn luôn sẵn sàng.\n- Kết nối liền mạch với iPhone 11 trở lên, hỗ trợ Apple Pay và GPS đa băng tần.\n\nĐặc điểm nổi bật:\n- Màn hình 44 mm, độ sáng 1000 nit, kính Ion‑X chịu va đập gấp 4 lần.\n- Khả năng chống nước 50 m, loa và micrô tích hợp cho gọi và phát nhạc.\n- Hỗ trợ Wi‑Fi 2.4 GHz, Bluetooth 5.3 và mạng LTE RedCap cho kết nối không gián đoạn.\n\nLời kêu gọi hành động: Đặt mua Apple Watch SE 3 ngay hôm nay để trải nghiệm công nghệ tiên tiến và nâng tầm phong cách, hoặc liên hệ hotline để được tư vấn chi tiết!",
+  "usage": {
+    "id": "6ae95a9aa4d289df6fb13c0c",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae95a9aa4d289df6fb13c0a",
+    "model": "groq-gpt-oss-120b",
+    "promptTokens": 1487,
+    "completionTokens": 548,
+    "totalTokens": 2035,
+    "quotaUnits": 3,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-11-03T03:52:58.282Z",
+    "updatedAt": "2026-11-03T03:52:58.282Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}

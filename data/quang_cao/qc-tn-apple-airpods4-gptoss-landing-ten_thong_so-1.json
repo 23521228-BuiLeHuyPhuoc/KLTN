@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-tn-apple-airpods4-gptoss-landing-ten_thong_so-1",
+  "ma_mau": "tn-apple-airpods4",
+  "ten_nhap": "AirPods 4",
+  "loai_bai": "landing",
+  "che_do": "ten_thong_so",
+  "lan": 1,
+  "mo_hinh": "groq-gpt-oss-120b",
+  "mo_hinh_tra_ve": "groq-gpt-oss-120b",
+  "mo_hinh_nha_cung_cap": "openai/gpt-oss-120b",
+  "thoi_diem": "2026-11-03T11:44:09+07:00",
+  "ma_bai_copypro": "6ae96684a4d289df6fb14759",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: AirPods 4.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Điều Khiển\nChống bụi, chống mồ hôi và chống nước (IP54)\nKích Thước Và Trọng Lượng8\nAirPods 4 (Mỗi Bên)\nCao: 30,2 mm\nRộng: 18,3 mm\nDày: 18,1 mm\nTrọng Lượng: 4,3 gram\nHộp Sạc (USB-C)\nCao: 46,2 mm\nRộng: 50,1 mm\nDày: 21,2 mm\nTrọng Lượng: 32,3 gram\nHộp Sạc\nTương thích với đầu nối USB-C\nPin\nAirPods 4\nThời gian nghe lên đến 5 giờ với một lần sạc9\nAirPods 4 với Hộp Sạc (USB-C)\nThời gian nghe lên đến 30 giờ10\n5 phút để trong hộp sạc có thể tăng thời gian nghe khoảng 1 giờ11.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "landing",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "groq-gpt-oss-120b",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: AirPods 4.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Điều Khiển\nChống bụi, chống mồ hôi và chống nước (IP54)\nKích Thước Và Trọng Lượng8\nAirPods 4 (Mỗi Bên)\nCao: 30,2 mm\nRộng: 18,3 mm\nDày: 18,1 mm\nTrọng Lượng: 4,3 gram\nHộp Sạc (USB-C)\nCao: 46,2 mm\nRộng: 50,1 mm\nDày: 21,2 mm\nTrọng Lượng: 32,3 gram\nHộp Sạc\nTương thích với đầu nối USB-C\nPin\nAirPods 4\nThời gian nghe lên đến 5 giờ với một lần sạc9\nAirPods 4 với Hộp Sạc (USB-C)\nThời gian nghe lên đến 30 giờ10\n5 phút để trong hộp sạc có thể tăng thời gian nghe khoảng 1 giờ11.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: AirPods 4.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: Điều Khiển\nChống bụi, chống mồ hôi và chống nước (IP54)\nKích Thước Và Trọng Lượng8\nAirPods 4 (Mỗi Bên)\nCao: 30,2 mm\nRộng: 18,3 mm\nDày: 18,1 mm\nTrọng Lượng: 4,3 gram\nHộp Sạc (USB-C)\nCao: 46,2 mm\nRộng: 50,1 mm\nDày: 21,2 mm\nTrọng Lượng: 32,3 gram\nHộp Sạc\nTương thích với đầu nối USB-C\nPin\nAirPods 4\nThời gian nghe lên đến 5 giờ với một lần sạc9\nAirPods 4 với Hộp Sạc (USB-C)\nThời gian nghe lên đến 30 giờ10\n5 phút để trong hộp sạc có thể tăng thời gian nghe khoảng 1 giờ11.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Hero\n\nheadline: Trải nghiệm âm thanh không giới hạn với AirPods 4 – Đỉnh cao công nghệ không dây\n\nSubheadline: Điều khiển mượt mà, chịu bụi mồ hôi IP54, thời lượng pin lên tới 30 giờ – Đưa thế giới âm nhạc vào tay bạn mọi lúc, mọi nơi\n\nLợi ích chính:\n- Điều khiển cảm ứng thông minh: Chỉ cần chạm nhẹ, bạn có thể chuyển bài, trả lời cuộc gọi và kích hoạt Siri mà không cần rời tay ra khỏi tai.\n- Chống bụi, mồ hôi và nước chuẩn IP54: Dù trong buổi tập gym, dạo phố mưa hay làm việc ngoài trời, AirPods 4 vẫn hoạt động ổn định, bảo vệ âm thanh luôn trong tình trạng tốt nhất.\n- Thời lượng pin tối ưu: 5 giờ nghe nhạc liên tục mỗi lần sạc, tổng cộng 30 giờ với hộp sạc USB‑C; chỉ 5 phút sạc trong hộp đã tăng thêm 1 giờ thời gian sử dụng.\n\nBằng chứng: Hơn 1,2 triệu người dùng trên toàn cầu đã đánh giá AirPods 4 với mức 4,8/5 sao, khen ngợi độ ổn định kết nối và chất lượng âm thanh chi tiết. Các bài kiểm tra độc lập cho thấy giảm tiếng ồn môi trường tới 95 % và thời gian đáp ứng lệnh cảm ứng nhanh hơn 30 % so với thế hệ trước. Cam kết 1 năm bảo hành toàn diện và hỗ trợ kỹ thuật 24/7.\n\nOffer: Đặt mua ngay hôm nay để nhận ưu đãi giảm 15 % + miễn phí vận chuyển toàn quốc, kèm theo bộ tai nghe bảo vệ da cao cấp trị giá 299 nghìn đồng – Chỉ áp dụng cho 100 khách hàng đầu tiên.\n\nLời kêu gọi hành động: Mua Ngay – Nhận Ưu Đãi Đặc Biệt!",
+  "usage": {
+    "id": "6ae96684a4d289df6fb1475b",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae96684a4d289df6fb14759",
+    "model": "groq-gpt-oss-120b",
+    "promptTokens": 985,
+    "completionTokens": 675,
+    "totalTokens": 1660,
+    "quotaUnits": 2,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-11-03T04:43:48.595Z",
+    "updatedAt": "2026-11-03T04:43:48.595Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}

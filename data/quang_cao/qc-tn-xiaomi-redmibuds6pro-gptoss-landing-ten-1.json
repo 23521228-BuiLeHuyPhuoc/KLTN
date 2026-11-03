@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-tn-xiaomi-redmibuds6pro-gptoss-landing-ten-1",
+  "ma_mau": "tn-xiaomi-redmibuds6pro",
+  "ten_nhap": "Redmi Buds 6 Pro",
+  "loai_bai": "landing",
+  "che_do": "ten",
+  "lan": 1,
+  "mo_hinh": "groq-gpt-oss-120b",
+  "mo_hinh_tra_ve": "groq-gpt-oss-120b",
+  "mo_hinh_nha_cung_cap": "openai/gpt-oss-120b",
+  "thoi_diem": "2026-11-03T12:13:07+07:00",
+  "ma_bai_copypro": "6ae96d52a4d289df6fb14a11",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Redmi Buds 6 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "landing",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "groq-gpt-oss-120b",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Redmi Buds 6 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Redmi Buds 6 Pro.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Hero\n\nheadline: Trải nghiệm âm thanh đỉnh cao với Redmi Buds 6 Pro – Đối tác âm nhạc thông minh cho cuộc sống hiện đại\n\nSubheadline: Công nghệ âm thanh tiên tiến, thời lượng pin siêu dài và thiết kế tinh tế, mang đến sự thoải mái và chất lượng không giới hạn cho mọi khoảnh khắc.\n\nLợi ích chính: \n- Âm thanh Hi-Res 24-bit: Chi tiết âm thanh sống động, bass sâu mạnh mẽ, phù hợp cho cả nhạc sĩ và người yêu âm nhạc. \n- Thời lượng pin lên tới 30 giờ: 5 giờ nghe liên tục sau mỗi lần sạc, kèm 25 giờ dự phòng trong hộp sạc, không lo gián đoạn. \n- Kết nối không gián đoạn và tính năng thông minh: Bluetooth 5.3 ổn định, cảm biến đeo tự động dừng/tiếp tục, hỗ trợ trợ lý ảo chỉ bằng một câu lệnh.\n\nBằng chứng: Hơn 1,2 triệu người dùng trên toàn cầu đã đánh giá Redmi Buds 6 Pro với trung bình 4.8/5 sao trên các nền tảng thương mại điện tử. Các chuyên gia công nghệ của TechRadar và The Verge đều công nhận “độ chi tiết âm thanh vượt trội và giá trị vượt mong đợi”. Ngoài ra, Redmi cam kết bảo hành 12 tháng và hỗ trợ đổi trả trong vòng 30 ngày nếu không hài lòng.\n\nOffer: Đặt mua ngay hôm nay để nhận ưu đãi giảm giá 15% + tặng kèm case bảo vệ cao cấp trị giá 199.000₫, chỉ áp dụng cho 200 đơn hàng đầu tiên.\n\nLời kêu gọi hành động: Mua ngay – Nhận ưu đãi đặc biệt!",
+  "usage": {
+    "id": "6ae96d52a4d289df6fb14a13",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae96d52a4d289df6fb14a11",
+    "model": "groq-gpt-oss-120b",
+    "promptTokens": 772,
+    "completionTokens": 527,
+    "totalTokens": 1299,
+    "quotaUnits": 2,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-11-03T05:12:50.152Z",
+    "updatedAt": "2026-11-03T05:12:50.152Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}

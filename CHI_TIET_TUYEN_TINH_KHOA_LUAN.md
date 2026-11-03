@@ -37,8 +37,8 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Tháng 11/2026**
 
-- [ ] [Bước 17](#b17) · 01/11 – 02/11 · Viết nháp Chương 1 và Chương 2
-- [ ] [Bước 18](#b18) · 03/11 · Sinh quảng cáo cho 10 mẫu còn lại
+- [x] [Bước 17](#b17) · 01/11 – 02/11 · Viết nháp Chương 1 và Chương 2
+- [x] [Bước 18](#b18) · 03/11 · Sinh quảng cáo cho 10 mẫu còn lại
 - [ ] [Bước 19](#b19) · 04/11 · Tách tuyên bố của tập phát triển
 - [ ] [Bước 20](#b20) · 05/11 – 06/11 · Gán nhãn tập phát triển
 - [ ] [Bước 21](#b21) · 07/11 · Chuẩn hóa sản phẩm, giá trị, đơn vị, kiểu giá trị
@@ -529,9 +529,9 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Viết nháp Chương 1 (Tổng quan) theo dàn ý ở [T8.1](#t8-1), lấy nội dung từ mục 1–4 của đề cương.
-- [ ] Viết nháp Chương 2 (Cơ sở lý thuyết và nghiên cứu liên quan) từ ghi chú của Bước 3.
-- [ ] Lập bảng "hạn chế của nghiên cứu → cách đề tài xử lý", mở rộng từ Bảng 1 của đề cương.
+- [x] Viết nháp Chương 1 (Tổng quan) theo dàn ý ở [T8.1](#t8-1), lấy nội dung từ mục 1–4 của đề cương. *(03/11: `luan_van/chuong_1.md`, mục 1.1–1.9, khoảng 3.333 chữ. Ví dụ "nghe nhạc 6 giờ khi bật chống ồn" giữ nhãn Đúng theo đề cương và quy tắc hiện hành; phải sửa nếu người thực hiện đổi quy tắc bỏ "lên đến". FTC 2012 và Luật Quảng cáo chưa đưa vào vì chưa có trong danh mục tài liệu.)*
+- [x] Viết nháp Chương 2 (Cơ sở lý thuyết và nghiên cứu liên quan) từ ghi chú của Bước 3. *(03/11: `luan_van/chuong_2.md`, mục 2.1–2.8, khoảng 4.918 chữ không tính trích dẫn; 149 trích dẫn kèm số trang, không còn chỗ thiếu số trang. Tài liệu bổ sung BS1–BS5 còn thiếu mục IEEE đầy đủ.)*
+- [x] Lập bảng "hạn chế của nghiên cứu → cách đề tài xử lý", mở rộng từ Bảng 1 của đề cương. *(Bảng 2.1 ở mục 2.7: 11 dòng, 4 cột Nghiên cứu, Hạn chế, Cách đề tài xử lý, Nơi đo.)*
 
 **Làm ra:** `luan_van/chuong_1.md`, `luan_van/chuong_2.md`.
 
@@ -549,8 +549,8 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Sinh cho 10 mẫu còn lại theo thiết lập của Bước 11: 10 × 2 × 3 × 2 = **120 bài**, điều chỉnh theo quy mô đã chốt ở Bước 16.
-- [ ] Không đổi câu lệnh và thiết lập so với bộ thử. Nếu cần thêm tuyên bố thì tăng số lần sinh, không sửa câu lệnh.
+- [x] Sinh cho 10 mẫu còn lại theo thiết lập của Bước 11: 10 × 2 × 3 × 2 = **120 bài**, điều chỉnh theo quy mô đã chốt ở Bước 16. *(03/11: `scripts/sinh_chinh.py` sinh **80 bài**, 8 bài mỗi mẫu theo quy mô Bước 16. Mỗi cặp LLM × chế độ bỏ loại bài `LOAI_BAI[(i + 2m + d) % 3]`, nên mỗi mẫu có 8/12 tổ hợp, cả 10 mẫu gộp lại đủ 12 tổ hợp, mỗi loại bài 26–27 bài. Thông số cho `ten_thong_so` ghi ở `data/quang_cao/thong_so/`: mẫu tập phát triển lấy theo căn cứ trong cấu hình, mẫu tập kiểm tra theo `chon_doan_kiemtra.json`; tối đa 5.000 ký tự, dài nhất là Xiaomi 15T với 4.961 ký tự.)*
+- [x] Không đổi câu lệnh và thiết lập so với bộ thử. Nếu cần thêm tuyên bố thì tăng số lần sinh, không sửa câu lệnh. *(Gọi lại `sinh_quang_cao` của Bước 11, không sửa câu lệnh. Kiểm 80/80 bài: prompt CopyPro lưu trùng prompt gửi, đúng mô hình, không dùng mô hình dự phòng, không bài nào bị cắt.)*
 
 **Làm ra:** `data/quang_cao/*.json`.
 

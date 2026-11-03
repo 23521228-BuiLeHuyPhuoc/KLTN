@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-dt-xiaomi-redminote14proplus5g-gptoss-landing-ten-1",
+  "ma_mau": "dt-xiaomi-redminote14proplus5g",
+  "ten_nhap": "Redmi Note 14 Pro+ 5G",
+  "loai_bai": "landing",
+  "che_do": "ten",
+  "lan": 1,
+  "mo_hinh": "groq-gpt-oss-120b",
+  "mo_hinh_tra_ve": "groq-gpt-oss-120b",
+  "mo_hinh_nha_cung_cap": "openai/gpt-oss-120b",
+  "thoi_diem": "2026-11-03T11:13:47+07:00",
+  "ma_bai_copypro": "6ae95f6ba4d289df6fb14238",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Redmi Note 14 Pro+ 5G.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "landing",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "groq-gpt-oss-120b",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Redmi Note 14 Pro+ 5G.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Landing page với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Redmi Note 14 Pro+ 5G.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHero headline: tiêu đề chính của hero section.\nSubheadline: câu phụ làm rõ giá trị.\nLợi ích chính: 3 bullet.\nBằng chứng: review, số liệu, cam kết hoặc social proof.\nOffer: ưu đãi hoặc lý do hành động ngay.\nLời kêu gọi hành động: nút hoặc lời kêu gọi hành động chính.\nKhông viết thành email, SEO metadata hoặc một caption social ngắn.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Hero\n\nheadline: Redmi Note 14 Pro+ 5G – Đột phá công nghệ trong tầm tay\n\nSubheadline: Trải nghiệm tốc độ 5G, camera siêu nét và pin bền bỉ, mọi khoảnh khắc đều trở nên hoàn hảo\n\nLợi ích chính: \n- Hiệu năng mạnh mẽ với chip Snapdragon 7 Gen 2, đa nhiệm mượt mà không lag \n- Camera 108MP AI nâng cấp, chụp ảnh ban ngày và thiếu sáng đều đạt chuẩn chuyên nghiệp \n- Pin 5000mAh hỗ trợ sạc nhanh 67W, dùng cả ngày mà không lo sạc\n\nBằng chứng: \n- Đánh giá 4.8/5 trên các trang thương mại điện tử, hơn 10.000 lượt mua trong 2 tuần đầu ra mắt \n- Kiểm nghiệm tốc độ tải dữ liệu: 5G đạt tốc độ trung bình 1.2Gbps, nhanh gấp 5 lần so với 4G \n- Cam kết bảo hành 12 tháng chính hãng, đổi mới trong 30 ngày nếu phát sinh lỗi phần cứng\n\nOffer: Đặt trước ngay hôm nay, nhận ngay ưu đãi giảm 1.500.000₫ + 2 năm bảo hành mở rộng, quà tặng tai nghe không dây Bluetooth 5.0 trị giá 1.200.000₫\n\nLời kêu gọi hành động: Nhấn “Mua Ngay” để sở hữu Redmi Note 14 Pro+ 5G với ưu đãi đặc biệt, chỉ trong vài cú click!",
+  "usage": {
+    "id": "6ae95f6ba4d289df6fb1423a",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae95f6ba4d289df6fb14238",
+    "model": "groq-gpt-oss-120b",
+    "promptTokens": 775,
+    "completionTokens": 459,
+    "totalTokens": 1234,
+    "quotaUnits": 2,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-11-03T04:13:31.579Z",
+    "updatedAt": "2026-11-03T04:13:31.579Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-tn-apple-airpods4-gemini-social-ten-1",
+  "ma_mau": "tn-apple-airpods4",
+  "ten_nhap": "AirPods 4",
+  "loai_bai": "social",
+  "che_do": "ten",
+  "lan": 1,
+  "mo_hinh": "gemini-3-6-flash",
+  "mo_hinh_tra_ve": "gemini-3-6-flash",
+  "mo_hinh_nha_cung_cap": "gemini-3.6-flash",
+  "thoi_diem": "2026-11-03T11:20:55+07:00",
+  "ma_bai_copypro": "6ae96117a4d289df6fb144be",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Social Media Post với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: AirPods 4.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHook: câu mở đầu kéo chú ý.\nCaption: nội dung chính dễ đọc trên mạng xã hội.\nLời kêu gọi hành động: hành động mong muốn.\nHashtags: 3-6 hashtag liên quan.\nKhông thêm Subject, Preview text, SEO title hoặc Meta description.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "social",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "gemini-3-6-flash",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Social Media Post với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: AirPods 4.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHook: câu mở đầu kéo chú ý.\nCaption: nội dung chính dễ đọc trên mạng xã hội.\nLời kêu gọi hành động: hành động mong muốn.\nHashtags: 3-6 hashtag liên quan.\nKhông thêm Subject, Preview text, SEO title hoặc Meta description.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Social Media Post với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: AirPods 4.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHook: câu mở đầu kéo chú ý.\nCaption: nội dung chính dễ đọc trên mạng xã hội.\nLời kêu gọi hành động: hành động mong muốn.\nHashtags: 3-6 hashtag liên quan.\nKhông thêm Subject, Preview text, SEO title hoặc Meta description.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Phiên bản 1:\n\nHook: Nâng tầm trải nghiệm âm thanh hàng ngày của bạn cùng AirPods 4 hoàn toàn mới.\n\nCaption: Apple chính thức ra mắt AirPods 4 với thiết kế cải tiến vượt bậc, mang lại cảm giác đeo thoải mái và bám tốt suốt cả ngày dài.\n\nĐược trang bị chip H2 mạnh mẽ, thiết bị mang đến chất lượng âm thanh sống động cùng khả năng xử lý cuộc gọi rõ ràng trong mọi không gian.\n\nNhững ưu điểm nổi bật của AirPods 4 bao gồm:\n\n- Kiến trúc âm thanh mới giúp tối ưu hóa dải trầm và dải cao.\n\n- Âm thanh vòm cá nhân hóa tương tác theo chuyển động đầu.\n\n- Thời lượng pin bền bỉ đi kèm hộp sạc USB-C nhỏ gọn.\n\n- Khả năng chống bụi, mồ hôi và nước đạt chuẩn IP54.\n\nLời kêu gọi hành động: Trải nghiệm ngay AirPods 4 tại hệ thống cửa hàng chính hãng hoặc đặt mua ngay hôm nay để nhận ưu đãi hấp dẫn!\n\nHashtags: #AirPods4 #Apple #TaiNgheKhongDay #CongNghe #TraiNghiemAmThanh",
+  "usage": {
+    "id": "6ae96117a4d289df6fb144c0",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae96117a4d289df6fb144be",
+    "model": "gemini-3-6-flash",
+    "promptTokens": 660,
+    "completionTokens": 252,
+    "totalTokens": 1933,
+    "quotaUnits": 2,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-11-03T04:20:39.851Z",
+    "updatedAt": "2026-11-03T04:20:39.851Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}

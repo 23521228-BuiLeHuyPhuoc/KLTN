@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-dh-xiaomi-watchs4-gptoss-social-ten_thong_so-1",
+  "ma_mau": "dh-xiaomi-watchs4",
+  "ten_nhap": "Xiaomi Watch S4",
+  "loai_bai": "social",
+  "che_do": "ten_thong_so",
+  "lan": 1,
+  "mo_hinh": "groq-gpt-oss-120b",
+  "mo_hinh_tra_ve": "groq-gpt-oss-120b",
+  "mo_hinh_nha_cung_cap": "openai/gpt-oss-120b",
+  "thoi_diem": "2026-11-03T13:10:07+07:00",
+  "ma_bai_copypro": "6ae97aaba4d289df6fb1507b",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Social Media Post với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Xiaomi Watch S4.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: GPS | Galileo | Glonass | BeiDou | QZSS\nPin\nThời gian sử dụng thông thường: 15 ngày\nDung lượng: 486mAh\nMàn hình\nĐộ phân giải: 466 x 466 pixel, 326 PPI\nMàn hình AMOLED 1,43\"\nTốc độ làm mới 60Hz\nĐộ sáng: HBM 1.500 nit\nThông số kỹ thuật\nGNSS tích hợp: Có hỗ trợ\nKhả năng chống nước: 5ATM\nLoa: Có hỗ trợ\nMicrô: 2 micrô\nGọi qua Bluetooth: Có hỗ trợ\nKết nối không dây: Bluetooth® 5.3\nHệ điều hành Xiaomi HyperOS 2\nKhả năng tương thích: Hỗ trợ điện thoại thông minh chạy Android 8.0 trở lên hoặc iOS 14.0 trở lên.\nMàn hình rực rỡ\nĐộ rõ nét vượt trội\nMàn hình AMOLED 1,43 inch lớn cho hình ảnh rõ nét và mịn màng, độ sáng cao đến 1.500 nit ở chế độ HBM.\n326\nPPI\n60Hz*\nTốc độ làm mới\n1.500 nit*\nĐộ sáng HBM*\n2.200 nit*\nĐộ sáng cực đại*\nĐiều khiển cảm ứng chống ẩm\nThuật toán mới tránh thao tác ngoài ý muốn do giọt nước gây ra.\nThời lượng pin lên đến 15 ngày\nThời lượng pin 15 ngày* đảm bảo thời gian sử dụng trên 2 tuần, vì vậy bạn không cần phải mang theo bộ sạc đồng hồ cho các chuyến đi ngắn ngày.\nSạc 5 phút, dùng 2 ngày\nTranh thủ sạc đồng hồ trong khi tắm hoặc đánh răng.\nThiết kế vượt thời gian\nBạc\nĐen.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHook: câu mở đầu kéo chú ý.\nCaption: nội dung chính dễ đọc trên mạng xã hội.\nLời kêu gọi hành động: hành động mong muốn.\nHashtags: 3-6 hashtag liên quan.\nKhông thêm Subject, Preview text, SEO title hoặc Meta description.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "social",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "groq-gpt-oss-120b",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Social Media Post với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Xiaomi Watch S4.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: GPS | Galileo | Glonass | BeiDou | QZSS\nPin\nThời gian sử dụng thông thường: 15 ngày\nDung lượng: 486mAh\nMàn hình\nĐộ phân giải: 466 x 466 pixel, 326 PPI\nMàn hình AMOLED 1,43\"\nTốc độ làm mới 60Hz\nĐộ sáng: HBM 1.500 nit\nThông số kỹ thuật\nGNSS tích hợp: Có hỗ trợ\nKhả năng chống nước: 5ATM\nLoa: Có hỗ trợ\nMicrô: 2 micrô\nGọi qua Bluetooth: Có hỗ trợ\nKết nối không dây: Bluetooth® 5.3\nHệ điều hành Xiaomi HyperOS 2\nKhả năng tương thích: Hỗ trợ điện thoại thông minh chạy Android 8.0 trở lên hoặc iOS 14.0 trở lên.\nMàn hình rực rỡ\nĐộ rõ nét vượt trội\nMàn hình AMOLED 1,43 inch lớn cho hình ảnh rõ nét và mịn màng, độ sáng cao đến 1.500 nit ở chế độ HBM.\n326\nPPI\n60Hz*\nTốc độ làm mới\n1.500 nit*\nĐộ sáng HBM*\n2.200 nit*\nĐộ sáng cực đại*\nĐiều khiển cảm ứng chống ẩm\nThuật toán mới tránh thao tác ngoài ý muốn do giọt nước gây ra.\nThời lượng pin lên đến 15 ngày\nThời lượng pin 15 ngày* đảm bảo thời gian sử dụng trên 2 tuần, vì vậy bạn không cần phải mang theo bộ sạc đồng hồ cho các chuyến đi ngắn ngày.\nSạc 5 phút, dùng 2 ngày\nTranh thủ sạc đồng hồ trong khi tắm hoặc đánh răng.\nThiết kế vượt thời gian\nBạc\nĐen.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHook: câu mở đầu kéo chú ý.\nCaption: nội dung chính dễ đọc trên mạng xã hội.\nLời kêu gọi hành động: hành động mong muốn.\nHashtags: 3-6 hashtag liên quan.\nKhông thêm Subject, Preview text, SEO title hoặc Meta description.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Social Media Post với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Xiaomi Watch S4.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nThông tin bổ sung: GPS | Galileo | Glonass | BeiDou | QZSS\nPin\nThời gian sử dụng thông thường: 15 ngày\nDung lượng: 486mAh\nMàn hình\nĐộ phân giải: 466 x 466 pixel, 326 PPI\nMàn hình AMOLED 1,43\"\nTốc độ làm mới 60Hz\nĐộ sáng: HBM 1.500 nit\nThông số kỹ thuật\nGNSS tích hợp: Có hỗ trợ\nKhả năng chống nước: 5ATM\nLoa: Có hỗ trợ\nMicrô: 2 micrô\nGọi qua Bluetooth: Có hỗ trợ\nKết nối không dây: Bluetooth® 5.3\nHệ điều hành Xiaomi HyperOS 2\nKhả năng tương thích: Hỗ trợ điện thoại thông minh chạy Android 8.0 trở lên hoặc iOS 14.0 trở lên.\nMàn hình rực rỡ\nĐộ rõ nét vượt trội\nMàn hình AMOLED 1,43 inch lớn cho hình ảnh rõ nét và mịn màng, độ sáng cao đến 1.500 nit ở chế độ HBM.\n326\nPPI\n60Hz*\nTốc độ làm mới\n1.500 nit*\nĐộ sáng HBM*\n2.200 nit*\nĐộ sáng cực đại*\nĐiều khiển cảm ứng chống ẩm\nThuật toán mới tránh thao tác ngoài ý muốn do giọt nước gây ra.\nThời lượng pin lên đến 15 ngày\nThời lượng pin 15 ngày* đảm bảo thời gian sử dụng trên 2 tuần, vì vậy bạn không cần phải mang theo bộ sạc đồng hồ cho các chuyến đi ngắn ngày.\nSạc 5 phút, dùng 2 ngày\nTranh thủ sạc đồng hồ trong khi tắm hoặc đánh răng.\nThiết kế vượt thời gian\nBạc\nĐen.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHook: câu mở đầu kéo chú ý.\nCaption: nội dung chính dễ đọc trên mạng xã hội.\nLời kêu gọi hành động: hành động mong muốn.\nHashtags: 3-6 hashtag liên quan.\nKhông thêm Subject, Preview text, SEO title hoặc Meta description.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Hook: Đánh thức mọi khoảnh khắc với Xiaomi Watch S4 – đồng hồ thông minh đỉnh cao cho cuộc sống năng động!\n\nCaption: \nBạn sẽ được trải nghiệm màn hình AMOLED 1,43” siêu rực rỡ, độ phân giải 466 × 466 pixel, 326 PPI và độ sáng lên tới 1.500 nit (HBM) – hình ảnh sắc nét ngay cả dưới ánh nắng gay gắt. \nGNSS tích hợp GPS, Galileo, Glonass, BeiDou, QZSS giúp định vị chính xác mọi hành trình. \nPin 486 mAh cho thời lượng sử dụng lên tới 15 ngày; chỉ cần sạc 5 phút là đủ dùng 2 ngày, không lo hết pin khi di chuyển. \nKhả năng chống nước 5ATM, loa, micrô, Bluetooth 5.3 và hệ điều hành HyperOS 2 mang lại kết nối liền mạch với Android 8.0+ hoặc iOS 14.0+. \nThiết kế sang trọng màu bạc, đen, phù hợp mọi phong cách.\n\nLời kêu gọi hành động: Truy cập ngay website hoặc cửa hàng gần nhất để sở hữu Xiaomi Watch S4 và trải nghiệm công nghệ đỉnh cao!\n\nHashtags: #XiaomiWatchS4 #SmartWatch #CôngNghệ #ThờiTrang #ĐịnhVịChínhXác #PinLâuNgày",
+  "usage": {
+    "id": "6ae97aaba4d289df6fb1507d",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae97aaba4d289df6fb1507b",
+    "model": "groq-gpt-oss-120b",
+    "promptTokens": 1105,
+    "completionTokens": 543,
+    "totalTokens": 1648,
+    "quotaUnits": 2,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-11-03T06:09:47.592Z",
+    "updatedAt": "2026-11-03T06:09:47.592Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}

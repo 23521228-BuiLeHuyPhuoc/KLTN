@@ -1,0 +1,231 @@
+{
+  "dt-oppo-findx8": [
+    {
+      "id": "dt-oppo-findx8#003",
+      "thuoc_tinh": [
+        "tan_so_quet",
+        "do_sang"
+      ],
+      "ly_do": "nêu tần số quét tối đa 120Hz; độ sáng bình thường 800 nit, HBM 1600 nit, tối đa 4500 nit"
+    },
+    {
+      "id": "dt-oppo-findx8#006",
+      "thuoc_tinh": [
+        "zoom",
+        "dung_luong_pin"
+      ],
+      "ly_do": "nêu zoom quang học tối đa 3X, zoom kỹ thuật số tối đa 18X khi quay video; pin định mức 5630mAh, tiêu chuẩn 5490mAh"
+    },
+    {
+      "id": "dt-oppo-findx8#007",
+      "thuoc_tinh": [
+        "cong_suat_sac"
+      ],
+      "ly_do": "nêu sạc nhanh 80W SUPERVOOC và sạc không dây AirVOOC 50W"
+    },
+    {
+      "id": "dt-oppo-findx8#023",
+      "thuoc_tinh": [
+        "thoi_luong_pin",
+        "dung_luong_pin",
+        "cong_suat_sac"
+      ],
+      "ly_do": "nêu pin 5.630mAh phát trực tuyến liên tục 21 giờ; sạc có dây 80W, không dây 50W"
+    },
+    {
+      "id": "dt-oppo-findx8#028",
+      "thuoc_tinh": [
+        "zoom"
+      ],
+      "ly_do": "nêu dải zoom 0.6x đến 120x và camera tele tiềm vọng 3x"
+    },
+    {
+      "id": "dt-oppo-findx8#054",
+      "thuoc_tinh": [
+        "dung_luong_pin",
+        "thoi_luong_pin"
+      ],
+      "ly_do": "nêu pin 5630mAh; quay phim Dolby Vision liên tục 6,5 giờ, 5,1 giờ ở -20 độ C"
+    },
+    {
+      "id": "dt-oppo-findx8#060",
+      "thuoc_tinh": [
+        "khang_nuoc"
+      ],
+      "ly_do": "nêu kháng nước và bụi IP68 và IP69"
+    }
+  ],
+  "dt-samsung-galaxys25ultra": [
+    {
+      "id": "dt-samsung-galaxys25ultra#005",
+      "thuoc_tinh": [
+        "tan_so_quet"
+      ],
+      "ly_do": "nêu tần số làm tươi màn hình chính 120 Hz"
+    },
+    {
+      "id": "dt-samsung-galaxys25ultra#007",
+      "thuoc_tinh": [
+        "zoom"
+      ],
+      "ly_do": "nêu zoom quang học 3x và 5x, chất lượng quang học 2x và 10x, zoom kỹ thuật số lên đến 100x"
+    },
+    {
+      "id": "dt-samsung-galaxys25ultra#013",
+      "thuoc_tinh": [
+        "thoi_luong_pin",
+        "dung_luong_pin"
+      ],
+      "ly_do": "nêu thời gian phát lại video lên tới 31 giờ; dung lượng pin 5000 mAh (Typical)"
+    },
+    {
+      "id": "dt-samsung-galaxys25ultra#155",
+      "thuoc_tinh": [
+        "khang_nuoc"
+      ],
+      "ly_do": "nêu IP68, chịu nước ở độ sâu tối đa 1.5 mét trong tối đa 30 phút"
+    }
+  ],
+  "dt-xiaomi-redminote14proplus5g": [
+    {
+      "id": "dt-xiaomi-redminote14proplus5g#003",
+      "thuoc_tinh": [
+        "tan_so_quet",
+        "do_sang"
+      ],
+      "ly_do": "nêu tốc độ làm mới lên đến 120Hz; độ sáng cực đại 3000 nit"
+    },
+    {
+      "id": "dt-xiaomi-redminote14proplus5g#006",
+      "thuoc_tinh": [
+        "dung_luong_pin",
+        "cong_suat_sac"
+      ],
+      "ly_do": "nêu pin 5110mAh (điển hình); sạc nhanh HyperCharge 120W, củ sạc 120W đi kèm"
+    },
+    {
+      "id": "dt-xiaomi-redminote14proplus5g#021",
+      "thuoc_tinh": [
+        "zoom"
+      ],
+      "ly_do": "nêu thu phóng quang học 2X và 4X"
+    },
+    {
+      "id": "dt-xiaomi-redminote14proplus5g#035",
+      "thuoc_tinh": [
+        "khang_nuoc"
+      ],
+      "ly_do": "nêu IP68, ngâm tối đa 1,5 mét nước trong tối đa 30 phút"
+    },
+    {
+      "id": "dt-xiaomi-redminote14proplus5g#059",
+      "thuoc_tinh": [
+        "thoi_luong_pin",
+        "dung_luong_pin",
+        "cong_suat_sac"
+      ],
+      "ly_do": "nêu sạc HyperCharge 120W, pin 5110mAh; 19,5 giờ mạng xã hội, 9 giờ xem video trực tuyến, 15 giờ điều hướng"
+    }
+  ],
+  "tn-apple-airpodspro3": [
+    {
+      "id": "tn-apple-airpodspro3#006",
+      "thuoc_tinh": [
+        "khang_nuoc"
+      ],
+      "ly_do": "nêu chống bụi, chống mồ hôi và chống nước IP57 cho AirPods Pro và hộp sạc"
+    },
+    {
+      "id": "tn-apple-airpodspro3#007",
+      "thuoc_tinh": [
+        "thoi_luong_pin"
+      ],
+      "ly_do": "nêu thời gian nghe lên đến 8 giờ khi bật chống ồn (7,5 giờ khi bật âm thanh không gian), 6,5 giờ khi bật cảm biến nhịp tim, 10 giờ cho thiết bị trợ thính"
+    },
+    {
+      "id": "tn-apple-airpodspro3#008",
+      "thuoc_tinh": [
+        "thoi_luong_pin",
+        "sac_nhanh"
+      ],
+      "ly_do": "nêu thời gian nghe lên đến 24 giờ với hộp sạc khi bật chống ồn; 5 phút trong hộp sạc tăng khoảng 1 giờ nghe"
+    }
+  ],
+  "tn-apple-airpods4": [
+    {
+      "id": "tn-apple-airpods4#005",
+      "thuoc_tinh": [
+        "khang_nuoc"
+      ],
+      "ly_do": "nêu chống bụi, chống mồ hôi và chống nước IP54"
+    },
+    {
+      "id": "tn-apple-airpods4#006",
+      "thuoc_tinh": [
+        "thoi_luong_pin",
+        "sac_nhanh"
+      ],
+      "ly_do": "nêu thời gian nghe lên đến 5 giờ (tai nghe), 30 giờ (với hộp sạc); 5 phút trong hộp sạc tăng khoảng 1 giờ nghe"
+    }
+  ],
+  "tn-xiaomi-redmibuds6pro": [
+    {
+      "id": "tn-xiaomi-redmibuds6pro#002",
+      "thuoc_tinh": [
+        "dung_luong_pin"
+      ],
+      "ly_do": "nêu dung lượng pin tai nghe 54mAh, hộp sạc 480mAh"
+    },
+    {
+      "id": "tn-xiaomi-redmibuds6pro#025",
+      "thuoc_tinh": [
+        "thoi_luong_pin",
+        "sac_nhanh"
+      ],
+      "ly_do": "nêu 9,5 giờ sau một lần sạc, 36 giờ cùng hộp sạc; sạc nhanh 5 phút cho 2 giờ phát nhạc"
+    }
+  ],
+  "dh-samsung-galaxywatch8": [
+    {
+      "id": "dh-samsung-galaxywatch8#014",
+      "thuoc_tinh": [
+        "do_sang"
+      ],
+      "ly_do": "nêu độ sáng lên tới 3.000 nits"
+    },
+    {
+      "id": "dh-samsung-galaxywatch8#113",
+      "thuoc_tinh": [
+        "thoi_luong_pin"
+      ],
+      "ly_do": "nêu pin 325 mAh (40 mm) và 435 mAh (44 mm), thời gian sử dụng lên tới 30 giờ ở chế độ AOD"
+    },
+    {
+      "id": "dh-samsung-galaxywatch8#595",
+      "thuoc_tinh": [
+        "khang_nuoc"
+      ],
+      "ly_do": "nêu 5ATM (50 m, 10 phút), IPX8 (1,5 m, 30 phút), kháng bụi IP6X"
+    }
+  ],
+  "dh-xiaomi-watchs4": [
+    {
+      "id": "dh-xiaomi-watchs4#005",
+      "thuoc_tinh": [
+        "thoi_luong_pin",
+        "do_sang",
+        "khang_nuoc"
+      ],
+      "ly_do": "nêu thời gian sử dụng thông thường 15 ngày; độ sáng HBM 1.500 nit; chống nước 5ATM"
+    },
+    {
+      "id": "dh-xiaomi-watchs4#015",
+      "thuoc_tinh": [
+        "do_sang",
+        "thoi_luong_pin",
+        "sac_nhanh"
+      ],
+      "ly_do": "nêu độ sáng HBM 1.500 nit, cực đại 2.200 nit; pin lên đến 15 ngày; sạc 5 phút dùng 2 ngày"
+    }
+  ]
+}

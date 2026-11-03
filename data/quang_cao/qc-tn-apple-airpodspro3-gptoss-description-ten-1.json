@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-tn-apple-airpodspro3-gptoss-description-ten-1",
+  "ma_mau": "tn-apple-airpodspro3",
+  "ten_nhap": "AirPods Pro 3",
+  "loai_bai": "description",
+  "che_do": "ten",
+  "lan": 1,
+  "mo_hinh": "groq-gpt-oss-120b",
+  "mo_hinh_tra_ve": "groq-gpt-oss-120b",
+  "mo_hinh_nha_cung_cap": "openai/gpt-oss-120b",
+  "thoi_diem": "2026-11-03T11:19:31+07:00",
+  "ma_bai_copypro": "6ae960c4a4d289df6fb143ee",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Mô tả sản phẩm với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: AirPods Pro 3.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nMô tả ngắn: đoạn mở đầu giới thiệu sản phẩm/dịch vụ.\nLợi ích chính: 2-3 bullet.\nĐặc điểm nổi bật: 2-3 bullet.\nLời kêu gọi hành động: lời kêu gọi mua, đăng ký hoặc liên hệ.\nKhông dùng format email, SEO metadata hoặc caption mạng xã hội.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "description",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "groq-gpt-oss-120b",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Mô tả sản phẩm với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: AirPods Pro 3.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nMô tả ngắn: đoạn mở đầu giới thiệu sản phẩm/dịch vụ.\nLợi ích chính: 2-3 bullet.\nĐặc điểm nổi bật: 2-3 bullet.\nLời kêu gọi hành động: lời kêu gọi mua, đăng ký hoặc liên hệ.\nKhông dùng format email, SEO metadata hoặc caption mạng xã hội.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Mô tả sản phẩm với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: AirPods Pro 3.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nMô tả ngắn: đoạn mở đầu giới thiệu sản phẩm/dịch vụ.\nLợi ích chính: 2-3 bullet.\nĐặc điểm nổi bật: 2-3 bullet.\nLời kêu gọi hành động: lời kêu gọi mua, đăng ký hoặc liên hệ.\nKhông dùng format email, SEO metadata hoặc caption mạng xã hội.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Mô tả ngắn: \nAirPods Pro 3 là tai nghe không dây thế hệ mới, kết hợp công nghệ âm thanh chủ động và thiết kế tối ưu cho mọi hoạt động hàng ngày. Với khả năng khử tiếng ồn chủ động cải tiến và thời lượng pin lên tới 6 giờ liên tục, AirPods Pro 3 mang lại trải nghiệm âm nhạc và gọi điện thoại hoàn hảo, không gián đoạn.\n\nLợi ích chính: \n- Giảm tiếng ồn xung quanh lên tới 30 dB, giúp bạn tập trung vào công việc hoặc giải trí. \n- Thời lượng pin dài hơn 30 % so với phiên bản trước, đáp ứng nhu cầu di chuyển suốt ngày dài.\n\nĐặc điểm nổi bật: \n- Chip H2 mạnh mẽ, tối ưu hiệu suất âm thanh và giảm độ trễ khi chơi game. \n- Thiết kế vừa vặn, chống nước IPX4, phù hợp với mọi môi trường.\n\nLời kêu gọi hành động: \nĐặt mua AirPods Pro 3 ngay hôm nay để trải nghiệm âm thanh đỉnh cao và nâng tầm phong cách công nghệ của bạn! Liên hệ chúng tôi để được tư vấn và hỗ trợ nhanh chóng.",
+  "usage": {
+    "id": "6ae960c4a4d289df6fb143f0",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae960c4a4d289df6fb143ee",
+    "model": "groq-gpt-oss-120b",
+    "promptTokens": 748,
+    "completionTokens": 436,
+    "totalTokens": 1184,
+    "quotaUnits": 2,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-11-03T04:19:16.787Z",
+    "updatedAt": "2026-11-03T04:19:16.787Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}

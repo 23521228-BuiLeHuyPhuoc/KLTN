@@ -1,0 +1,51 @@
+{
+  "ma_qc": "qc-dt-xiaomi-15t-gptoss-social-ten-1",
+  "ma_mau": "dt-xiaomi-15t",
+  "ten_nhap": "Xiaomi 15T",
+  "loai_bai": "social",
+  "che_do": "ten",
+  "lan": 1,
+  "mo_hinh": "groq-gpt-oss-120b",
+  "mo_hinh_tra_ve": "groq-gpt-oss-120b",
+  "mo_hinh_nha_cung_cap": "openai/gpt-oss-120b",
+  "thoi_diem": "2026-11-03T10:46:58+07:00",
+  "ma_bai_copypro": "6ae95929a4d289df6fb139e4",
+  "phien_ban_copypro": "a338a65",
+  "tai_gui": {
+    "prompt": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Social Media Post với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Xiaomi 15T.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHook: câu mở đầu kéo chú ý.\nCaption: nội dung chính dễ đọc trên mạng xã hội.\nLời kêu gọi hành động: hành động mong muốn.\nHashtags: 3-6 hashtag liên quan.\nKhông thêm Subject, Preview text, SEO title hoặc Meta description.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+    "type": "social",
+    "industry": "technology",
+    "tone": "professional",
+    "language": "vi",
+    "model": "groq-gpt-oss-120b",
+    "modelMode": "base",
+    "length": "medium",
+    "variations": 1,
+    "maxOutputTokens": 1800,
+    "templateId": null,
+    "projectId": null
+  },
+  "cau_lenh": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Social Media Post với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Xiaomi 15T.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHook: câu mở đầu kéo chú ý.\nCaption: nội dung chính dễ đọc trên mạng xã hội.\nLời kêu gọi hành động: hành động mong muốn.\nHashtags: 3-6 hashtag liên quan.\nKhông thêm Subject, Preview text, SEO title hoặc Meta description.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_copypro_luu": "Bạn là chuyên gia copywriting cho ngành Công nghệ.\nHãy viết Social Media Post với tone Chuyên nghiệp.\nSản phẩm/dịch vụ: Xiaomi 15T.\nTừ khóa chính: chưa được cung cấp, ưu tiên lợi ích rõ ràng và lời kêu gọi hành động mạnh.\nĐối tượng mục tiêu: khách hàng tiềm năng phổ thông.\nĐộ dài mong muốn: vừa đủ chi tiết.\nGiới hạn output tối đa: 1800 tokens.\nTạo đúng 1 phiên bản riêng biệt.\nĐịnh dạng bắt buộc:\nPhiên bản 1: ...\nMỗi phiên bản phải tự đứng độc lập, không gom chung thành một đoạn lớn.\nFormat riêng theo loại nội dung:\nHook: câu mở đầu kéo chú ý.\nCaption: nội dung chính dễ đọc trên mạng xã hội.\nLời kêu gọi hành động: hành động mong muốn.\nHashtags: 3-6 hashtag liên quan.\nKhông thêm Subject, Preview text, SEO title hoặc Meta description.\nDùng tiếng Việt tự nhiên, đầy đủ dấu, có lời kêu gọi hành động rõ ràng.\nTemperature tham khảo: 0.7.",
+  "prompt_trung": true,
+  "noi_dung": "Hook: Bạn đã sẵn sàng nâng tầm trải nghiệm công nghệ với chiếc smartphone đỉnh cao?\n\nCaption: Xiaomi 15T mang đến sức mạnh vượt trội nhờ chipset Snapdragon 8 Gen 3, cho tốc độ xử lý mượt mà trong mọi tác vụ. Camera 200 MP chụp chi tiết tuyệt vời, kết hợp AI tối ưu để mỗi bức ảnh đều là kiệt tác. Màn hình AMOLED 6.7 inch với tần số làm mới 120 Hz hiển thị sắc nét, màu sắc sống động. Công nghệ sạc nhanh 120 W chỉ trong 15 phút, bạn luôn luôn sẵn sàng. MIUI 15 tối ưu hoá trải nghiệm người dùng, bảo mật và tiện ích thông minh. Đó là chiếc điện thoại dành cho người tiêu dùng phổ thông muốn sở hữu công nghệ hàng đầu mà không phải trả giá cao.\n\nLời kêu gọi hành động: Đặt mua Xiaomi 15T ngay hôm nay để trải nghiệm sức mạnh đỉnh cao – click vào link để nhận ưu đãi đặc biệt!\n\nHashtags: #Xiaomi15T #CôngNghệCaoCấp #Smartphone #Camera200MP #SạcNhanh #MIUI15",
+  "usage": {
+    "id": "6ae95929a4d289df6fb139e6",
+    "userId": "6a0d233c6031def6341c8192",
+    "contentId": "6ae95929a4d289df6fb139e4",
+    "model": "groq-gpt-oss-120b",
+    "promptTokens": 702,
+    "completionTokens": 623,
+    "totalTokens": 1325,
+    "quotaUnits": 2,
+    "action": "generate",
+    "status": "success",
+    "createdAt": "2026-11-03T03:46:49.296Z",
+    "updatedAt": "2026-11-03T03:46:49.296Z"
+  },
+  "fallback": false,
+  "tham_so_backend": {
+    "temperature": 0.75,
+    "top_p": 0.9
+  }
+}
