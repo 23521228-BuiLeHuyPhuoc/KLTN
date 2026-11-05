@@ -529,9 +529,9 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [x] Viết nháp Chương 1 (Tổng quan) theo dàn ý ở [T8.1](#t8-1), lấy nội dung từ mục 1–4 của đề cương. *(03/11: `luan_van/chuong_1.md`, mục 1.1–1.9, khoảng 3.333 chữ. Ví dụ "nghe nhạc 6 giờ khi bật chống ồn" giữ nhãn Đúng theo đề cương và quy tắc hiện hành; phải sửa nếu người thực hiện đổi quy tắc bỏ "lên đến". FTC 2012 và Luật Quảng cáo chưa đưa vào vì chưa có trong danh mục tài liệu.)*
-- [x] Viết nháp Chương 2 (Cơ sở lý thuyết và nghiên cứu liên quan) từ ghi chú của Bước 3. *(03/11: `luan_van/chuong_2.md`, mục 2.1–2.8, khoảng 4.918 chữ không tính trích dẫn; 149 trích dẫn kèm số trang, không còn chỗ thiếu số trang. Tài liệu bổ sung BS1–BS5 còn thiếu mục IEEE đầy đủ.)*
-- [x] Lập bảng "hạn chế của nghiên cứu → cách đề tài xử lý", mở rộng từ Bảng 1 của đề cương. *(Bảng 2.1 ở mục 2.7: 11 dòng, 4 cột Nghiên cứu, Hạn chế, Cách đề tài xử lý, Nơi đo.)*
+- [x] Viết nháp Chương 1 (Tổng quan) theo dàn ý ở [T8.1](#t8-1), lấy nội dung từ mục 1–4 của đề cương. *(05/11, Opus viết lại: `luan_van/chuong_1.md`, đổi tên thành Mở đầu theo Phụ lục 2 của Khoa, mục 1.1–1.9, khoảng 4.000 chữ. Có FTC [21] và Luật Quảng cáo [22]; [22] còn phải kiểm trên Công báo. Ví dụ Bảng 1.1 đúng với cả hai cách chốt quy tắc "lên đến".)*
+- [x] Viết nháp Chương 2 (Cơ sở lý thuyết và nghiên cứu liên quan) từ ghi chú của Bước 3. *(05/11, Opus viết lại: `luan_van/chuong_2.md`, mục 2.1–2.10, khoảng 5.300 chữ; thêm công thức BM25 và mục độ đo. Mọi số liệu đã đối chiếu với trang PDF. Danh mục ở `luan_van/tai_lieu_tham_khao.md`, [1]–[25].)*
+- [x] Lập bảng "hạn chế của nghiên cứu → cách đề tài xử lý", mở rộng từ Bảng 1 của đề cương. *(Bảng 2.1 ở mục 2.9: 11 dòng, 4 cột Nghiên cứu, Hạn chế, Cách đề tài xử lý, Nơi đo.)*
 
 **Làm ra:** `luan_van/chuong_1.md`, `luan_van/chuong_2.md`.
 
@@ -2285,8 +2285,8 @@ Tạo nhánh từ `main` mới nhất khi bắt đầu Bước 11 và gộp `mai
 
 | Chương | Nội dung chính | Ứng với | Số trang | Viết ở bước |
 |---|---|---|---|---|
-| 1. Tổng quan | Bối cảnh, CopyPro, vấn đề, câu hỏi nghiên cứu, mục tiêu MT1–MT4, phạm vi, đối tượng, tính mới, đóng góp, bố cục | Mục 1–4 của đề cương | 8–10 | [17](#b17) |
-| 2. Cơ sở lý thuyết và nghiên cứu liên quan | Kiểm chứng tự động, BM25, tuyên bố số liệu, ảo giác của LLM, kiểm chứng tiếng Việt, kiểm chứng quảng cáo; bảng hạn chế → cách đề tài xử lý | Bảng 1 của đề cương | 12–15 | [17](#b17) |
+| 1. Mở đầu | Bối cảnh, CopyPro, vấn đề, câu hỏi nghiên cứu, mục tiêu MT1–MT4, phạm vi, đối tượng, tính mới, đóng góp, bố cục | Mục 1–4 của đề cương | 8–10 | [17](#b17) |
+| 2. Tổng quan và cơ sở lý thuyết | Kiểm chứng tự động, BM25, tuyên bố số liệu, ảo giác của LLM, kiểm chứng tiếng Việt, kiểm chứng quảng cáo; bảng hạn chế → cách đề tài xử lý | Bảng 1 của đề cương | 12–15 | [17](#b17) |
 | 3. Phương pháp đề xuất | Phát biểu bài toán, nhãn, bộ thông số, tách tuyên bố, trích xuất có neo nguồn, chuẩn hóa, A–D, tệp cấu hình, sinh lý do, ví dụ xuyên suốt | ND2, MT2 | 12–15 | [35](#b35) |
 | 4. Dữ liệu và thực nghiệm | Xây dựng dữ liệu, hướng dẫn nhãn, độ tin cậy nhãn, thiết lập, đối chứng, kết quả, phân tích thành phần, phân tích lỗi, thảo luận, mối đe dọa đến tính hợp lệ | ND1, ND3, MT1, MT3 | 15–20 | [39](#b39), [42](#b42) |
 | 5. Tích hợp vào CopyPro | Kiến trúc, API, giao diện, thời gian, kết quả đầu–cuối | ND4, MT4 | 6–8 | [42](#b42) |
