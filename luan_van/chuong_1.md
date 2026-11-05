@@ -1,101 +1,142 @@
-# Chương 1. Tổng quan
+# Chương 1. Mở đầu
 
-## 1.1. Bối cảnh
+## 1.1. Bối cảnh và lí do chọn đề tài
 
-Kiểm chứng thông số kỹ thuật là yêu cầu đặt ra khi sử dụng mô hình ngôn ngữ lớn (large language model, LLM) để viết quảng cáo sản phẩm. Nghiên cứu của Jiang và cộng sự cho thấy nội dung mô tả sản phẩm được LLM bổ sung có thể chứa thông tin không được dữ liệu đầu vào hỗ trợ, thuộc vấn đề ảo giác (hallucination) xét theo mức trung thành với nguồn [1, tr. 1–3]. Trong khóa luận này, căn cứ kiểm chứng là tài liệu chính hãng của sản phẩm được quảng cáo.
+Mô hình ngôn ngữ lớn (large language model, LLM) ngày càng được dùng để viết quảng cáo, nhưng nội dung do LLM viết có thể không khớp với nguồn. Hiện tượng này được gọi là ảo giác (hallucination). Trên sàn thương mại điện tử, Jiang và cộng sự ghi nhận LLM thêm vào mô tả sản phẩm những giá trị không có trong dữ liệu gốc của sản phẩm [1, tr. 1–3]. Người mua dựa vào các giá trị đó để quyết định, nên quảng cáo cần được kiểm tra trước khi đăng.
 
-Thông số kỹ thuật có điều kiện ràng buộc đòi hỏi xem xét đồng thời giá trị và hoàn cảnh áp dụng. Một tuyên bố (claim) có thể giữ nguyên con số nhưng bỏ điều kiện ràng buộc (constraint), khiến ý nghĩa khác với công bố ban đầu. Ví dụ trong đề cương, iPhone 17 được mô tả là “sạc lên đến 50% trong 20 phút với bộ tiếp hợp 40W trở lên”. Câu quảng cáo “sạc 50% chỉ trong 20 phút” giữ đúng con số nhưng bỏ điều kiện về bộ tiếp hợp, khiến người mua có thể hiểu rằng bộ sạc thông thường cũng đạt tốc độ này. Đây là tình huống minh họa cho nhu cầu kiểm tra điều kiện đi kèm con số, không chỉ bản thân con số.
+Với thông số kỹ thuật, có một loại lỗi khó phát hiện hơn sai con số: con số vẫn đúng nhưng bị tách khỏi điều kiện đi kèm. Nhiều thông số chỉ đúng trong một hoàn cảnh nhất định, và khóa luận gọi đó là thông số có điều kiện ràng buộc. Ví dụ, trang thông số của iPhone 17 ghi “Sạc lên đến 50% trong 20 phút với bộ tiếp hợp 40W trở lên (được bán riêng)” [23]. Câu quảng cáo “sạc 50% chỉ trong 20 phút” giữ nguyên hai con số nhưng bỏ điều kiện về bộ tiếp hợp, nên người đọc có thể nghĩ bộ sạc nào cũng đạt tốc độ này. Nếu chỉ so con số, câu quảng cáo trên vẫn khớp với tài liệu.
 
-Các hướng kiểm chứng tự động cung cấp cơ sở để tổ chức bài toán này. FEVER sử dụng tuyên bố được xây dựng từ Wikipedia cùng ba nhãn được hỗ trợ, bị bác bỏ và chưa đủ thông tin [2, tr. 1, 3–4]. AVeriTeC sử dụng tuyên bố thực tế và bổ sung nhãn Conflicting Evidence/Cherry-picking, bao gồm cả xung đột bằng chứng lẫn lược bỏ ngữ cảnh gây hiểu nhầm [3, tr. 1, 3–4]. Sự phân biệt giữa giá trị và điều kiện trong khóa luận được đặt trong hướng nghiên cứu kiểm chứng có xét đến ngữ cảnh này.
+Cách người đọc tiếp nhận quảng cáo cho thấy phần chữ đi kèm con số có thể bị bỏ qua. Trong báo cáo gửi Ủy ban Thương mại Liên bang Hoa Kỳ (Federal Trade Commission, FTC) năm 2012, Hastak và Murphy cho người tham gia xem quảng cáo cửa sổ tiết kiệm năng lượng ghi mức tiết kiệm “up to 47%” (lên đến 47%). Có 36% người xem trả lời rằng quảng cáo nói tiết kiệm 47% mà không nhắc đến giới hạn “lên đến”, trong khi chỉ 21,9% nhắc đúng mức “lên đến 47%” [21, tr. 7]. Kết quả này thuộc một loại sản phẩm khác và một thị trường khác, nên không suy rộng trực tiếp sang người mua Việt Nam. Khóa luận đo riêng cách hiểu của người đọc tiếng Việt bằng một khảo sát nhỏ, trình bày ở Chương 4.
 
-Các nghiên cứu tiếng Việt đã tạo cơ sở về dữ liệu và hệ thống kiểm chứng. ViFactCheck xây dựng dữ liệu từ tin tức thuộc nhiều chủ đề, còn ViNumFCR tập trung vào tuyên bố chứa số liệu và suy luận liên quan [5, tr. 3–5], [6, tr. 3–5]. SemViQA kết hợp truy hồi và phân loại theo ba nhãn trên dữ liệu tiếng Việt [7, tr. 4–7]. Đối với khóa luận, vấn đề cần khảo sát riêng là khả năng phân biệt sai giá trị với việc sử dụng giá trị ở điều kiện không phù hợp trong quảng cáo.
+Ở Việt Nam, pháp luật cũng đã đặt ra yêu cầu kiểm tra tài liệu trước khi quảng cáo. Luật số 75/2025/QH15 sửa đổi, bổ sung một số điều của Luật Quảng cáo, có hiệu lực từ ngày 01/01/2026, yêu cầu người có ảnh hưởng khi chuyển tải quảng cáo phải kiểm tra tài liệu liên quan đến sản phẩm (Điều 15a, khoản 3) [22]. Quy định này không nói riêng về nội dung do LLM tạo, và khóa luận không đưa ra kết luận pháp lý. Tuy vậy, quy định cho thấy việc đối chiếu quảng cáo với tài liệu sản phẩm là một yêu cầu có thật, không chỉ là mong muốn về mặt kỹ thuật.
 
-## 1.2. CopyPro và nhu cầu kiểm chứng
+Đề tài xuất phát từ nhu cầu cụ thể của CopyPro, website tạo quảng cáo bằng LLM mà tác giả đã phát triển trong đồ án chuyên ngành. CopyPro gọi giao diện lập trình ứng dụng (application programming interface, API) của nhiều LLM để viết quảng cáo từ thông tin người dùng nhập. Website đã có chức năng chấm điểm chất lượng nội dung và so khớp với Common Crawl để kiểm tra đạo văn, nhưng chưa kiểm tra thông số trong bài có khớp với tài liệu chính hãng hay không.
 
-CopyPro là môi trường ứng dụng của đề tài, được phát triển từ đồ án chuyên ngành trước đó. Website sử dụng giao diện lập trình ứng dụng (application programming interface, API) của nhiều LLM để tạo quảng cáo từ thông tin người dùng nhập. Theo mô tả trong đề cương, CopyPro đã có chức năng chấm điểm chất lượng nội dung và so khớp với Common Crawl để kiểm tra đạo văn, nhưng chưa kiểm tra thông số trong quảng cáo với tài liệu chính hãng.
+Bước kiểm tra này cần thiết ngay cả khi người dùng đã đưa đủ thông số cho LLM. Khi viết lại cho ngắn gọn và hấp dẫn, LLM có thể giữ con số nhưng bỏ hoặc đổi điều kiện. Vì vậy, đề tài kiểm chứng quảng cáo sau khi đã tạo và xét hai chế độ nhập, ứng với hai nguồn lỗi khác nhau. Ở chế độ chỉ nhập tên sản phẩm, LLM phải tự nhớ thông số nên có thể nhớ sai hoặc tự đặt ra con số. Ở chế độ nhập thêm đoạn thông số chính hãng, LLM đã có số liệu đúng trong yêu cầu, nên lỗi nếu có sẽ phát sinh ở bước viết lại.
 
-Bước kiểm chứng sau khi sinh nội dung nhằm phát hiện sai lệch phát sinh trong quá trình diễn đạt lại. Ngay cả khi người dùng cung cấp thông số, yêu cầu viết ngắn gọn hoặc hấp dẫn vẫn đặt ra khả năng điều kiện bị bỏ hoặc đổi. Vì vậy, đề tài xét hai chế độ tạo quảng cáo: chỉ nhập tên sản phẩm và nhập thêm đoạn thông số chính hãng. Việc so sánh hai chế độ giúp khảo sát nhu cầu kiểm chứng khi lượng thông tin đầu vào khác nhau.
+Các hệ thống kiểm chứng đã khảo sát chưa xử lý trực tiếp loại lỗi này. Chúng chủ yếu xét mức khớp nội dung giữa tuyên bố và bằng chứng, chưa biểu diễn tường minh các điều kiện đi kèm thông số (mục 2.9). Trong khi đó, thông số kỹ thuật có một đặc điểm thuận lợi: hãng đã ghi điều kiện trong tài liệu, nên có thể liệt kê trước các loại điều kiện rồi so từng loại giữa quảng cáo và tài liệu. Đây là lí do khóa luận chọn đề tài “Phương pháp kiểm chứng tuyên bố về thông số kỹ thuật có điều kiện ràng buộc trong quảng cáo”.
 
-Kết quả kiểm chứng cần gắn với từng tuyên bố để người dùng có căn cứ chỉnh sửa. Tính năng dự kiến cho phép chọn mẫu sản phẩm, xem nhãn, đoạn nguồn và lý do ngay tại trang kết quả tạo quảng cáo. Thông tin này được đặt cạnh điểm chất lượng và kết quả kiểm tra đạo văn, đồng thời lưu cùng nội dung đã tạo. Vai trò của tính năng là hỗ trợ phát hiện thông số sai hoặc lệch điều kiện trước khi đăng.
+## 1.2. Vấn đề nghiên cứu
 
-## 1.3. Vấn đề nghiên cứu
+Bài toán của khóa luận là kiểm chứng từng tuyên bố về thông số có điều kiện ràng buộc trong một bài quảng cáo, dùng tài liệu chính hãng của đúng sản phẩm làm bằng chứng. Đầu vào gồm bài quảng cáo q do LLM tạo, mẫu sản phẩm s do người dùng chọn và kho tài liệu chính hãng D(s) của mẫu đó. Tuyên bố (claim) c là một phát biểu trong q nêu giá trị của một thuộc tính nằm trong danh sách thuộc tính có điều kiện ràng buộc của nhóm sản phẩm, tức các thuộc tính mà hãng thường công bố kèm điều kiện. Với mỗi tuyên bố c, hệ thống trả về nhãn y(c), đoạn nguồn e(c) trích từ D(s) và lý do r(c).
 
-Bài toán nghiên cứu là kiểm chứng tuyên bố thông số có điều kiện ràng buộc bằng tài liệu văn bản của đúng sản phẩm. Đầu vào gồm bài quảng cáo q do LLM tạo, mẫu sản phẩm s do người dùng chọn và kho tài liệu chính hãng D(s). Với mỗi tuyên bố c thuộc danh sách thuộc tính có điều kiện của nhóm sản phẩm, hệ thống trả về nhãn y(c), đoạn nguồn e(c) trích từ D(s) và lý do r(c). Các ký hiệu này được sử dụng nhất quán khi trình bày phương pháp.
+Quảng cáo thường không nêu hết điều kiện, nên bài toán cần một quy ước cho phần không được nêu. Điều kiện mà tuyên bố không nêu được hiểu theo cách hiểu thông thường (ordinary interpretation), ghi trong tệp cấu hình của nhóm sản phẩm. Ví dụ, quảng cáo tai nghe chỉ ghi thời lượng pin mà không nói của bộ phận nào thì được hiểu là pin của tai nghe, không tính thêm hộp sạc. Quảng cáo không nhắc đến phụ kiện thì được hiểu là người dùng không mua thêm phụ kiện, chẳng hạn bộ sạc rời. Các cách hiểu này được ghi sẵn trong tệp cấu hình để mọi tuyên bố đều được đối chiếu theo cùng một căn cứ.
 
-Điều kiện không xuất hiện trong tuyên bố được xử lý theo cách hiểu thông thường (ordinary interpretation) ghi trong tệp cấu hình của nhóm sản phẩm. Ví dụ về quy ước trong đề cương là xét bộ phận chính hoặc không giả định người dùng mua thêm phụ kiện. Quy ước cần được khai báo để việc đối chiếu có căn cứ thống nhất. Giá trị được xem là khớp khi bằng giá trị công bố sau chuẩn hóa hoặc kém thuận lợi hơn, chẳng hạn thời lượng pin thấp hơn; điều kiện và kiểu giá trị vẫn phải được kiểm tra.
+Con số trong tuyên bố được xem là khớp trong hai trường hợp: bằng con số hãng công bố sau khi đưa về cùng cách ghi và đơn vị, hoặc kém thuận lợi hơn con số đó. Kém thuận lợi nghĩa là kém hấp dẫn hơn với người mua. Ví dụ, hãng công bố pin 6 giờ mà quảng cáo ghi 5 giờ thì vẫn khớp, vì người mua không bị hiểu nhầm theo hướng có lợi cho người bán. Tuy nhiên, khớp con số chưa đủ để kết luận tuyên bố đúng. Tuyên bố còn phải nêu đúng điều kiện và không đổi kiểu giá trị, ví dụ không biến mức “lên đến” thành mức chắc chắn đạt.
 
-Hệ nhãn của đề tài phân biệt bốn kết quả kiểm chứng. Nhãn Đúng (Supported) áp dụng khi tài liệu có thông số cùng sản phẩm, thuộc tính và điều kiện, giá trị khớp, kiểu giá trị không bị đổi. Nhãn Sai (Refuted) áp dụng khi giá trị mâu thuẫn ở điều kiện của tuyên bố hoặc thuận lợi hơn mọi giá trị công bố, đồng thời không trùng giá trị nào ở điều kiện khác. Nhãn Lệch điều kiện (Misleading) áp dụng khi giá trị trùng công bố ở điều kiện khác, hoặc mức “lên đến” bị biến thành mức chắc chắn đạt. Nhãn Chưa đủ thông tin (Not Enough Info, NEI) áp dụng khi kho tài liệu thiếu thông số tương ứng, thiếu giá trị ở điều kiện cần xét hoặc ghi mâu thuẫn.
+Mỗi tuyên bố nhận một trong bốn nhãn sau.
 
-Ví dụ Galaxy Buds3 Pro trong đề cương thể hiện vai trò của điều kiện hoạt động. Tài liệu được đề cương dẫn lại công bố thời lượng phát nhạc lên đến 6 giờ khi bật chống ồn và 7 giờ khi tắt chống ồn. Theo cách gán nhãn minh họa của đề cương, “nghe nhạc 6 giờ khi bật chống ồn” là Đúng; “nghe nhạc 7 giờ khi bật chống ồn” là Lệch điều kiện; “nghe nhạc 8 giờ” là Sai. Tuyên bố về chế độ không có giá trị công bố thuộc Chưa đủ thông tin.
+**Đúng (Supported):** tài liệu có thông số cùng sản phẩm, thuộc tính và điều kiện với tuyên bố, giá trị khớp và kiểu giá trị không bị đổi.
 
-Khó khăn chính nằm ở việc giữ đủ quan hệ giữa con số và điều kiện. Điều kiện có thể nằm trong chú thích cách xa thông số, khiến bằng chứng truy hồi thiếu thành phần cần thiết. Một con số cũng có thể phù hợp với chế độ này nhưng không phù hợp với chế độ khác. Ngoài ra, bước trích xuất bằng LLM có thể bỏ hoặc thêm điều kiện. Những khó khăn này đòi hỏi kiểm tra căn cứ của thông tin trích xuất trước khi kết luận.
+**Sai (Refuted):** tài liệu có thông số cùng sản phẩm và thuộc tính, nhưng giá trị của tuyên bố mâu thuẫn với giá trị công bố ở điều kiện của tuyên bố hoặc thuận lợi hơn mọi giá trị được công bố, đồng thời không trùng giá trị nào ở điều kiện khác.
 
-Khoảng trống được xác định trong phạm vi các tài liệu đã khảo sát đến ngày 15/10/2026. FEVER, AVeriTeC và hướng phát hiện nửa sự thật của Tang và cộng sự chưa cung cấp đúng tổ hợp quảng cáo tiếng Việt, thông số có điều kiện và quy tắc đối chiếu bốn nhãn mà đề tài đặt ra [2, tr. 3–4], [3, tr. 3–4, 7–8], [4, tr. 5–6]. TRACER sử dụng bằng chứng có sẵn để phân tích phần bị lược và tác động lên ý định hàm ẩn [4, tr. 5–6]. Khóa luận khảo sát trường hợp có thể khai báo trước các loại điều kiện từ tài liệu sản phẩm để đối chiếu tường minh.
+**Lệch điều kiện (Misleading):** giá trị trong tuyên bố trùng giá trị được công bố ở một điều kiện khác với điều kiện mà tuyên bố nêu hoặc được hiểu thông thường, hoặc tuyên bố biến mức tối đa “lên đến” thành mức chắc chắn đạt.
 
-## 1.4. Câu hỏi nghiên cứu
+**Chưa đủ thông tin (Not Enough Info, NEI):** kho tài liệu không có thông số cùng sản phẩm và thuộc tính, không công bố giá trị ở điều kiện mà tuyên bố nêu, hoặc ghi mâu thuẫn.
 
-Câu hỏi nghiên cứu thứ nhất, ký hiệu CH1, xét khả năng giảm chấp nhận nhầm: đối chiếu tường minh điều kiện ràng buộc có làm giảm tỷ lệ tuyên bố sai hoặc lệch điều kiện bị chấp nhận là Đúng so với các cách kiểm chứng hiện có, mà không bỏ sót nhiều tuyên bố đúng hay không? Chỉ số chính là tỷ lệ chấp nhận nhầm (false acceptance rate, FAR), được tính bằng tỷ lệ dự đoán Đúng trong các tuyên bố có nhãn chuẩn khác Đúng, cùng độ bao phủ (recall) của nhãn Đúng.
+Bảng 1.1 minh họa bốn nhãn trên tai nghe Galaxy Buds3 Pro. Trang của hãng ghi thời gian phát nhạc lên đến 6 giờ khi bật chống ồn và lên đến 7 giờ khi tắt chống ồn [24]. Nếu chỉ so con số, tuyên bố ở hàng thứ ba của bảng sẽ được chấp nhận vì con số 7 giờ có trong tài liệu, dù mức này chỉ đạt được khi tắt chống ồn.
 
-Câu hỏi nghiên cứu thứ hai, ký hiệu CH2, xét vai trò của cách quyết định nhãn: quy tắc tường minh trên dữ liệu đã neo nguồn có phát hiện Lệch điều kiện tốt hơn cách để LLM tự gán nhãn hay không? Neo nguồn (source anchoring) yêu cầu thông tin trích xuất đi kèm đoạn gốc để kiểm tra. Bộ quyết định (decision module) là thành phần áp dụng quy tắc đối chiếu để gán nhãn. Chỉ số F1 của nhãn Lệch điều kiện được dùng để đánh giá câu hỏi này.
+**Bảng 1.1.** Ví dụ bốn nhãn với tuyên bố về thời lượng pin của Galaxy Buds3 Pro
 
-Câu hỏi nghiên cứu thứ ba, ký hiệu CH3, xét đóng góp của neo nguồn và đối chiếu điều kiện. Phương pháp đề xuất, ký hiệu P, được so sánh với P−NN bỏ neo nguồn và kiểm tra đầy đủ, cùng P−ĐK bỏ đối chiếu điều kiện và chỉ so giá trị. Giả thuyết trong đề cương kỳ vọng P có FAR thấp hơn và F1 của nhãn Lệch điều kiện cao hơn P−NN. Các kỳ vọng này cần được kiểm tra bằng thực nghiệm, kể cả khi kết quả không xác nhận giả thuyết.
+| Tuyên bố | Nhãn | Lý do |
+|---|---|---|
+| Nghe nhạc lên đến 6 giờ khi bật chống ồn | Đúng | Cùng điều kiện, cùng giá trị, giữ nguyên kiểu giá trị |
+| Đảm bảo nghe nhạc 6 giờ khi bật chống ồn | Lệch điều kiện | Mức tối đa bị viết thành mức chắc chắn đạt |
+| Nghe nhạc lên đến 7 giờ khi bật chống ồn | Lệch điều kiện | 7 giờ chỉ đạt khi tắt chống ồn |
+| Nghe nhạc lên đến 8 giờ | Sai | Thuận lợi hơn mọi giá trị công bố cho tai nghe và không trùng giá trị nào |
+| Nghe nhạc lên đến 6,5 giờ ở chế độ xuyên âm | Chưa đủ thông tin | Trang không công bố thời lượng ở chế độ xuyên âm |
 
-## 1.5. Mục tiêu
+Bài toán khó ở ba điểm. Thứ nhất, điều kiện thường nằm ở chú thích tách khỏi con số, nên đoạn bằng chứng truy hồi được có thể thiếu điều kiện. Thứ hai, cùng một con số có thể đúng ở điều kiện này nhưng gây hiểu nhầm ở điều kiện khác, nên không thể kết luận chỉ từ con số. Thứ ba, LLM có thể bỏ hoặc tự thêm điều kiện khi trích xuất thông tin từ văn bản. Ngoài ra, trong các tài liệu đã khảo sát chưa có bộ dữ liệu tiếng Việt cho loại tuyên bố này.
 
-Mục tiêu tổng quát là đề xuất và đánh giá phương pháp kiểm chứng thông số có điều kiện trong quảng cáo tiếng Việt do LLM tạo, đồng thời tích hợp vào CopyPro. Bốn mục tiêu cụ thể được ký hiệu MT1–MT4, tương ứng với dữ liệu, phương pháp, thực nghiệm và ứng dụng.
+## 1.3. Câu hỏi nghiên cứu và giả thuyết
 
-MT1 là xây dựng dữ liệu kiểm chứng cho ba nhóm thiết bị được chọn. Công việc gồm thu thập quảng cáo và tài liệu chính hãng tương ứng, tách tuyên bố thông số có điều kiện, gán bốn nhãn kèm đoạn nguồn và lý do. Tập cặp tối thiểu (minimal pairs) được tạo theo từng loại biến đổi để khảo sát riêng tác động của việc bỏ hoặc đổi điều kiện.
+Khóa luận đề xuất phương pháp kiểm chứng P gồm hai thành phần chính. Thành phần thứ nhất là trích xuất có neo nguồn (source anchoring): mỗi giá trị và điều kiện do LLM trích ra đều kèm câu gốc trong bằng chứng để mã nguồn kiểm tra lại. Thành phần thứ hai là bộ quyết định (decision module): mã Python đối chiếu điều kiện của tuyên bố với điều kiện của từng thông số trong tài liệu rồi gán nhãn theo quy tắc, thay vì để LLM tự kết luận.
 
-MT2 là đề xuất và cài đặt phương pháp P. Phương pháp gồm trích xuất bộ thông số có neo nguồn và bộ quyết định bốn nhãn dựa trên đối chiếu điều kiện. Các bước chuẩn hóa và kiểm tra câu trích chuẩn bị dữ liệu cho bộ quyết định; mỗi quy tắc cần có kiểm thử riêng. Nội dung chi tiết của các quy tắc được trình bày ở Chương 3.
+P được so sánh với bốn phương pháp đối chứng và hai bản bỏ thành phần. B0 để LLM đọc bằng chứng rồi gán ba nhãn Supported, Refuted và NEI. B1 cho LLM nhận cùng bộ thông số đã trích như P rồi tự gán bốn nhãn. B2 để LLM đọc bằng chứng và gán bốn nhãn theo hướng dẫn có định nghĩa và ví dụ nhãn Lệch điều kiện. B3 dùng mô hình ba nhãn tiếng Việt của SemViQA [7]. P−ĐK là P bỏ đối chiếu điều kiện, chỉ so giá trị. P−NN là P bỏ neo nguồn và các bước kiểm tra đi kèm. Mọi phương pháp dùng cùng tuyên bố và cùng k đoạn bằng chứng xếp hạng cao nhất.
 
-MT3 là đánh giá P với các phương pháp đối chứng B0–B3 và hai bản bỏ thành phần. B0 để LLM gán ba nhãn; B1 để LLM gán bốn nhãn trên cùng bộ thông số đã trích; B2 để LLM đọc bằng chứng và gán bốn nhãn theo hướng dẫn. B3 dự kiến sử dụng mô hình ba nhãn của SemViQA, có đặc tả trong nghiên cứu gốc [7, tr. 4–5]. Việc so sánh nhằm xác định mức giảm chấp nhận nhầm và khả năng phát hiện Lệch điều kiện.
+Khóa luận trả lời ba câu hỏi nghiên cứu, mỗi câu có một giả thuyết đo được. Chỉ số chính là tỷ lệ chấp nhận nhầm (false acceptance rate, FAR), tức tỷ lệ tuyên bố bị gán Đúng trong số các tuyên bố có nhãn chuẩn khác Đúng. Các độ đo được định nghĩa ở mục 2.8.
 
-MT4 là tích hợp tính năng “Kiểm chứng thông số” vào CopyPro. Người dùng cần xem được nhãn, đoạn nguồn và lý do của từng tuyên bố sau khi tạo quảng cáo. Mục tiêu ứng dụng gắn kết quả nghiên cứu với quy trình sử dụng website và bao gồm kiểm tra chức năng, thời gian kiểm chứng một bài quảng cáo.
+**Câu hỏi 1.** Đối chiếu tường minh điều kiện ràng buộc có làm giảm tỷ lệ tuyên bố sai hoặc lệch điều kiện bị chấp nhận là Đúng so với các cách kiểm chứng hiện có, mà không bỏ sót nhiều tuyên bố đúng hay không? Giả thuyết 1: FAR của P thấp hơn B0–B3, và Recall của nhãn Đúng không thấp hơn quá 5 điểm phần trăm so với đối chứng tốt nhất.
 
-## 1.6. Đối tượng và phạm vi
+**Câu hỏi 2.** Quyết định nhãn bằng quy tắc tường minh trên dữ liệu đã neo nguồn có phát hiện tuyên bố Lệch điều kiện tốt hơn cách để LLM tự gán nhãn hay không? Giả thuyết 2: F1 của nhãn Lệch điều kiện của P cao hơn B1 và B2.
 
-Đối tượng nghiên cứu là các phương pháp kiểm chứng tuyên bố quảng cáo do LLM tạo bằng bằng chứng văn bản. Trọng tâm là phát hiện thông số không phù hợp với tài liệu của sản phẩm hoặc phiên bản được quảng cáo và thông số được áp dụng sai điều kiện. Dữ liệu nghiên cứu gồm tuyên bố tiếng Việt cùng trang thông số chính hãng tương ứng.
+**Câu hỏi 3.** Neo nguồn và đối chiếu điều kiện đóng góp thế nào vào kết quả? Giả thuyết 3: P tốt hơn P−NN về FAR và F1 của nhãn Lệch điều kiện. Đóng góp của đối chiếu điều kiện được đo bằng cách so P với P−ĐK.
 
-Phạm vi thực nghiệm chính gồm điện thoại thông minh, tai nghe không dây và đồng hồ thông minh. Khóa luận sử dụng 12 mẫu sản phẩm của bốn hãng (Apple, Samsung, Xiaomi, OPPO), gồm 5 điện thoại, 4 tai nghe và 3 đồng hồ, đang bán chính hãng tại Việt Nam. Sáu nhóm thông số được xét là thời lượng pin, dung lượng pin, sạc nhanh, kháng nước và bụi, màn hình gồm độ sáng và tần số quét, cùng zoom camera.
+Mô hình, câu lệnh và giá trị k được chọn trên tập phát triển (development set) rồi khóa trước khi chạy tập kiểm tra (test set). Kết quả được báo cáo cả khi không đạt giả thuyết.
 
-Danh mục điều kiện gồm sáu loại được khai báo theo nhóm sản phẩm. Các loại này là chế độ hoạt động, bộ phận, phụ kiện, điều kiện đo, phiên bản sản phẩm và kiểu giá trị. Việc phân loại giúp xác định phần cần đối chiếu giữa tuyên bố và công bố của hãng. Danh mục thuộc tính và điều kiện bắt buộc được đặt trong tệp cấu hình, tách khỏi quy tắc quyết định.
+## 1.4. Mục tiêu
 
-Tiêu chí chọn nhóm sản phẩm gắn với khả năng thu thập bằng chứng và so sánh thực nghiệm. Nhóm phù hợp phải có trang thông số chính thức bằng tiếng Việt và số liệu đo được công bố kèm điều kiện. Các nhóm đưa vào thực nghiệm còn cần có những nhóm thông số chung và sản phẩm của cùng các hãng để nguồn bằng chứng đồng nhất. Tài liệu được sử dụng giới hạn ở văn bản chính hãng của đúng mẫu đã chọn; Chưa đủ thông tin chỉ phản ánh giới hạn của kho tài liệu đã thu thập.
+Mục tiêu tổng quát của khóa luận là đề xuất, đánh giá phương pháp kiểm chứng thông số có điều kiện ràng buộc trong quảng cáo tiếng Việt do LLM tạo và đưa phương pháp đó vào CopyPro. Mục tiêu này được chia thành bốn mục tiêu cụ thể.
 
-Quảng cáo được tạo bằng CopyPro trong ngành Công nghệ theo thiết kế của đề cương. Dữ liệu dự kiến sử dụng hai LLM thuộc hai họ mô hình và ba loại nội dung: mô tả sản phẩm, bài đăng mạng xã hội, trang đích (landing page). Mỗi loại được xét ở hai chế độ đầu vào đã nêu tại mục 1.2. Quy mô dự kiến là khoảng 250–300 tuyên bố và 100–120 biến thể cặp tối thiểu; các con số này biểu thị kế hoạch nghiên cứu.
+**MT1. Xây dựng dữ liệu kiểm chứng.** Thu thập quảng cáo do LLM tạo về điện thoại thông minh, tai nghe không dây, đồng hồ thông minh và tài liệu chính hãng của đúng sản phẩm được quảng cáo. Tách các tuyên bố về thông số có điều kiện ràng buộc, gán bốn nhãn kèm đoạn nguồn và lý do, rồi tạo tập cặp tối thiểu (minimal pairs) theo từng loại lệch điều kiện.
 
-Việc phân chia dữ liệu nhằm tách quá trình lựa chọn cấu hình khỏi đánh giá cuối. Tập phát triển (development set) được dùng để chọn mô hình, câu lệnh và cấu hình; tập kiểm tra (test set) được sử dụng sau khi các lựa chọn đã khóa. Dữ liệu được chia theo mẫu sản phẩm để hạn chế rò rỉ giữa hai tập. Chương này chưa sử dụng số liệu kết quả để khẳng định hiệu quả của phương pháp.
+**MT2. Đề xuất và cài đặt phương pháp P.** Xây dựng bước trích xuất bộ thông số có neo nguồn và bộ quyết định bốn nhãn dựa trên đối chiếu điều kiện. Mỗi quy tắc của bộ quyết định có kiểm thử riêng.
 
-Phần không thuộc phạm vi gồm thông số không kèm điều kiện, tuyên bố cảm tính, so sánh với sản phẩm khác, giá và khuyến mãi. Đề tài không đo hiệu năng thực tế, không đưa kết luận pháp lý, không đánh giá quảng cáo do người viết và không tự nhận diện sản phẩm; người dùng chọn mẫu khi kiểm chứng. Máy tính xách tay, tivi và đồ gia dụng không thuộc thực nghiệm chính vì cần thêm thuộc tính và điều kiện riêng. Thử trên máy tính bảng cùng đối chứng LLM mạnh hơn B4 chỉ là phần mở rộng khi tiến độ cho phép.
+**MT3. Đánh giá có đối chứng.** So sánh P với B0–B3 và hai bản bỏ thành phần trên cùng tuyên bố và cùng bằng chứng, nhằm xác định P có giảm chấp nhận nhầm và phát hiện tốt hơn tuyên bố Lệch điều kiện hay không.
+
+**MT4. Tích hợp vào CopyPro.** Thêm tính năng “Kiểm chứng thông số” để người dùng xem nhãn, đoạn nguồn và lý do của từng tuyên bố ngay sau khi tạo quảng cáo, đồng thời đo thời gian kiểm chứng một bài.
+
+## 1.5. Đối tượng nghiên cứu
+
+Đối tượng nghiên cứu là các phương pháp kiểm chứng tuyên bố quảng cáo do LLM tạo bằng bằng chứng văn bản. Trọng tâm là phát hiện thông số không phù hợp với tài liệu của sản phẩm hoặc phiên bản được quảng cáo, và thông số được áp dụng sai điều kiện. Dữ liệu nghiên cứu là các tuyên bố về thông số có điều kiện ràng buộc trong quảng cáo tiếng Việt, cùng trang thông số chính hãng tương ứng.
+
+## 1.6. Phạm vi nghiên cứu
+
+Thực nghiệm giới hạn ở ba nhóm sản phẩm với 12 mẫu của bốn hãng Apple, Samsung, Xiaomi và OPPO, đang bán chính hãng tại Việt Nam. Nhóm điện thoại gồm iPhone 17, Xiaomi 15T, OPPO Find X8, Galaxy S25 Ultra và Redmi Note 14 Pro+ 5G. Nhóm tai nghe gồm Galaxy Buds3 Pro, AirPods Pro 3, AirPods 4 và Redmi Buds 6 Pro. Nhóm đồng hồ gồm Apple Watch SE 3, Galaxy Watch8 và Xiaomi Watch S4. Dữ liệu được chia theo mẫu để tránh rò rỉ thông tin: iPhone 17, Xiaomi 15T, Galaxy Buds3 Pro và Apple Watch SE 3 thuộc tập phát triển, tám mẫu còn lại thuộc tập kiểm tra.
+
+Đề tài tập trung vào sáu nhóm thông số thường được công bố kèm điều kiện: thời lượng pin, dung lượng pin, sạc nhanh, kháng nước và bụi, màn hình (độ sáng, tần số quét) và zoom camera. Điều kiện ràng buộc được xét gồm sáu loại:
+
+- Chế độ hoạt động, ví dụ bật hoặc tắt chống ồn, chế độ tiết kiệm pin.
+- Bộ phận, ví dụ tai nghe hay hộp sạc.
+- Phụ kiện, ví dụ bộ sạc có công suất nhất định.
+- Điều kiện đo, ví dụ độ sâu và thời gian ngâm nước, phần diện tích màn hình được đo.
+- Phiên bản sản phẩm.
+- Kiểu giá trị, ví dụ “lên đến”, “tối đa”, “điển hình”, “định mức”.
+
+Quảng cáo do CopyPro tạo ở ngành Công nghệ bằng hai LLM thuộc hai họ mô hình khác nhau là Gemini 3.6 Flash và GPT-OSS 120B qua Groq. Mỗi mẫu có ba loại bài (mô tả sản phẩm, bài đăng mạng xã hội, trang đích) ở hai chế độ nhập đã nêu ở mục 1.1. Hai mẫu làm thử có đủ 12 tổ hợp, tức 24 bài. Mười mẫu còn lại có 8 bài mỗi mẫu, chia đều theo LLM và chế độ, xoay vòng loại bài giữa các mẫu, tức 80 bài. Từ 104 bài này, đề tài dự kiến thu được khoảng 250–300 tuyên bố và tạo thêm 100–120 biến thể cặp tối thiểu.
+
+Hai chế độ nhập là hai đầu của lượng thông tin đưa cho LLM, nên chưa phủ hết cách nhập trong thực tế. Người dùng còn có thể chỉ nhập vài từ khóa, chép thông số từ trang bán lẻ hoặc tự tóm tắt có sai sót. Đoạn thông số trong thực nghiệm được chọn sẵn từ tài liệu của hãng, nên sạch hơn dữ liệu người dùng thật nhập vào. Các kết quả theo chế độ vì vậy chỉ có giá trị trong hai thiết lập này.
+
+Ba nhóm sản phẩm được chọn theo bốn tiêu chí. Hãng có trang thông số chính thức bằng tiếng Việt; thông số là số liệu đo được và công bố kèm điều kiện; các nhóm có chung những nhóm thông số như pin và kháng nước để so sánh được với nhau; các nhóm có sản phẩm của cùng các hãng để nguồn bằng chứng đồng nhất. Quảng cáo mỹ phẩm, ẩm thực hay du lịch chủ yếu nêu cảm nhận, giá và ưu đãi nên khó có bằng chứng văn bản chuẩn.
+
+Hệ thống chỉ dùng tài liệu văn bản của đúng sản phẩm làm bằng chứng, và người dùng tự chọn mẫu khi kiểm chứng. Nhãn Chưa đủ thông tin nghĩa là không tìm thấy thông tin trong kho tài liệu đã thu thập, không có nghĩa tuyên bố sai.
+
+Các nội dung sau không thuộc phạm vi: tuyên bố về thông số không kèm điều kiện (khối lượng, kích thước, phiên bản Bluetooth), tuyên bố cảm tính, so sánh với sản phẩm khác, giá và khuyến mãi; đo hiệu năng thực tế của thiết bị; kết luận pháp lý; đánh giá trên quảng cáo do người viết. Máy tính xách tay, tivi và đồ gia dụng không được đưa vào thực nghiệm vì cần định nghĩa thêm nhiều thuộc tính và điều kiện riêng, vượt quá khối lượng gán nhãn của một người. Nếu đúng tiến độ, khóa luận thử thêm khả năng mở rộng trên máy tính bảng và một đối chứng dùng LLM mạnh hơn (B4).
 
 ## 1.7. Tính mới
 
-Tính mới được đặt ở bài toán và phép kết luận có đối chiếu điều kiện. Trong phạm vi khảo sát, các hướng kiểm chứng quảng cáo, mô tả sản phẩm và câu do LLM sinh chưa tách riêng sai giá trị với lệch điều kiện theo thiết kế của đề tài [12, tr. 3–6], [1, tr. 3–5], [11, tr. 1–2]. Khóa luận tập trung vào tuyên bố thông số trong quảng cáo tiếng Việt và đánh giá riêng nhãn Lệch điều kiện, thay vì khẳng định tính mới cho toàn bộ hoạt động kiểm chứng bằng LLM.
+Tính mới của khóa luận nằm ở loại tuyên bố được xét và ở cách kết luận, không nằm ở việc kết hợp các công cụ. Truy hồi bằng BM25, trích xuất bằng LLM, kiểm chứng qua mã nguồn và cặp tương phản đều đã có tiền lệ (Chương 2). Các nhận định dưới đây giới hạn trong những tài liệu đã khảo sát đến ngày 15/10/2026.
 
-Phép kết luận của P so điều kiện trong tuyên bố với từng điều kiện hãng công bố cho cùng thông số. Giá trị trùng ở điều kiện khác hoặc mức tối đa bị chuyển thành mức chắc chắn đạt là căn cứ gán Lệch điều kiện. B1 nhận cùng thông số có cấu trúc và B2 nhận cùng hệ bốn nhãn, nhưng đều để LLM kết luận. Các đối chứng này phục vụ kiểm tra đóng góp của bộ quyết định; bước trích xuất chỉ chuẩn bị đầu vào.
+Thứ nhất, khóa luận xét riêng tuyên bố về thông số có điều kiện ràng buộc trong quảng cáo tiếng Việt do LLM tạo, một loại tuyên bố mà các nghiên cứu đã khảo sát chưa xét riêng.
 
-Sáu loại điều kiện là thiết kế áp dụng cho miền thông số sản phẩm. MeasEval cung cấp cơ sở tham khảo về biểu diễn số đo cùng đơn vị, đối tượng, thuộc tính và ngữ cảnh bổ nghĩa [14, tr. 2–3]. Khóa luận cụ thể hóa cơ sở đó thành danh mục điều kiện và quy tắc đối chiếu của mình. Hiệu quả của thiết kế cần được chứng minh qua thực nghiệm và phân tích thành phần.
+Thứ hai, nhãn Lệch điều kiện được kết luận bằng phép đối chiếu điều kiện. P so điều kiện của tuyên bố với từng điều kiện mà hãng công bố cho cùng thông số, rồi gán Lệch điều kiện khi con số của tuyên bố trùng giá trị công bố ở một điều kiện khác, hoặc khi mức “lên đến” bị viết thành mức chắc chắn đạt. Các cách hiện có để LLM tự đọc bằng chứng rồi phán đoán [3, tr. 3–4], hoặc căn chỉnh bằng chứng có sẵn với phát biểu rồi suy ra ý định và phần thông tin bị lược bỏ [4, tr. 5–6]. Bước trích xuất của P chỉ chuẩn bị đầu vào: đối chứng B1 nhận cùng bộ thông số đã trích, B2 dùng cùng bốn nhãn, nhưng cả hai đều để LLM gán nhãn.
+
+Thứ ba, sáu loại điều kiện được dùng làm danh mục để so từng loại. Lược đồ gán nhãn MeasEval quy định một số đo cần đi kèm những thông tin nào để được hiểu đúng [14, tr. 2–3], và khóa luận tham khảo nguyên tắc này. Danh mục sáu loại điều kiện và các quy tắc quyết định là thiết kế riêng cho thông số sản phẩm.
+
+So với các hướng hiện có, P được kỳ vọng cải thiện ở ba điểm, và cả ba đều là giả thuyết cần đo. So với kiểm chứng ba nhãn [2], [5], [7], tuyên bố đúng con số nhưng sai điều kiện có nhãn riêng thay vì phải xếp vào một trong ba nhãn, nên FAR được kỳ vọng giảm. So với cách để LLM gán bốn nhãn bằng câu lệnh, nhãn được quyết định bằng quy tắc nên giải thích và kiểm thử được. So với các cách kiểm tra quảng cáo và văn bản do LLM tạo, P tách được sai giá trị với lệch điều kiện: Nguyen và cộng sự so khớp theo độ tương đồng [12, tr. 4–5], Jiang và cộng sự lọc bằng độ tương đồng rồi để LLM xác nhận [1, tr. 3–5], còn MiniCheck phân loại từng câu theo hai nhãn [11, tr. 2].
 
 ## 1.8. Đóng góp
 
-Đóng góp phương pháp dự kiến là P với trích xuất có neo nguồn và bộ quyết định bốn nhãn. Mã nguồn và kiểm thử từng quy tắc tạo căn cứ xem xét cách đi từ bằng chứng đến kết luận. Lý do được tạo từ dấu vết quyết định, giúp xác định điều kiện bị thiếu hoặc bị đổi trong từng trường hợp.
+Khóa luận dự kiến có năm đóng góp.
 
-Đóng góp dữ liệu dự kiến là bộ tuyên bố tiếng Việt có nhãn, đoạn nguồn, lý do và tập cặp tối thiểu. Ý tưởng kiểm tra tương phản được tham khảo từ VitaminC, nghiên cứu sử dụng các phiên bản bằng chứng để khảo sát thay đổi nhãn [15, tr. 3–4]. Đề tài giữ nguồn chính hãng cố định và biến đổi tuyên bố; nhãn của biến thể phải được kiểm tra lại. Dữ liệu cũng phục vụ thống kê lỗi bỏ hoặc đổi điều kiện theo hai chế độ sinh quảng cáo.
-
-Đóng góp đánh giá và ứng dụng gồm kết quả so sánh có đối chứng và tính năng trên CopyPro. Các phương pháp được đánh giá trên cùng tuyên bố và bằng chứng để xem xét lợi ích của P cùng giới hạn của từng thành phần. Kết quả cần báo cáo cả trường hợp không cải thiện. Tính năng tích hợp cung cấp nhãn, nguồn và lý do cho người viết quảng cáo, nối kết phần thực nghiệm với nhu cầu sử dụng.
+- Phương pháp P gồm trích xuất có neo nguồn và bộ quyết định bốn nhãn, được cài đặt thành mã nguồn với kiểm thử cho từng quy tắc.
+- Bộ dữ liệu tiếng Việt gồm các tuyên bố về thông số có điều kiện ràng buộc, gán bốn nhãn kèm đoạn nguồn và lý do, cùng tập cặp tối thiểu để đo riêng từng loại lệch điều kiện.
+- Số liệu cho biết LLM bỏ hoặc đổi điều kiện thường đến mức nào khi viết quảng cáo, so giữa hai chế độ nhập.
+- Kết quả đánh giá có đối chứng với bốn cách kiểm chứng hiện có và hai bản bỏ thành phần, trên cùng tuyên bố và cùng bằng chứng.
+- Tính năng “Kiểm chứng thông số” trong CopyPro, giúp người viết phát hiện và sửa tuyên bố sai hoặc lệch điều kiện trước khi đăng.
 
 ## 1.9. Bố cục khóa luận
 
-Khóa luận gồm sáu chương theo đề cương triển khai. Chương 1 trình bày bối cảnh, vấn đề, câu hỏi, mục tiêu, phạm vi và đóng góp dự kiến. Chương 2 trình bày cơ sở lý thuyết và nghiên cứu liên quan về kiểm chứng tự động, truy hồi BM25, tuyên bố số liệu, ảo giác, kiểm chứng tiếng Việt và quảng cáo.
+Khóa luận gồm sáu chương. Chương 1 trình bày lí do chọn đề tài, vấn đề nghiên cứu, câu hỏi, mục tiêu, đối tượng, phạm vi và đóng góp. Chương 2 tổng quan các nghiên cứu liên quan và cơ sở lý thuyết. Chương 3 trình bày phương pháp đề xuất. Chương 4 trình bày dữ liệu, thực nghiệm, kết quả và các mối đe dọa đến tính hợp lệ. Chương 5 trình bày việc tích hợp vào CopyPro. Chương 6 kết luận và nêu hướng phát triển. Phụ lục gồm hướng dẫn gán nhãn, câu lệnh, tệp cấu hình và danh sách kiểm thử.
 
-Các chương tiếp theo trình bày phương pháp và đánh giá. Chương 3 mô tả bài toán, hệ nhãn, biểu diễn thông số, trích xuất, chuẩn hóa, quy tắc quyết định và sinh lý do. Chương 4 trình bày xây dựng dữ liệu, độ tin cậy nhãn, thiết lập, đối chứng, kết quả, phân tích lỗi và mối đe dọa đến tính hợp lệ. Chương 5 trình bày tích hợp CopyPro, kiến trúc, API, giao diện, thời gian và kết quả đầu–cuối. Chương 6 tổng kết theo MT1–MT4, nêu giới hạn và hướng phát triển. Phụ lục cung cấp hướng dẫn gán nhãn, câu lệnh, tệp cấu hình và danh sách kiểm thử.
+Số trang trong trích dẫn, ví dụ [2, tr. 3], là thứ tự trang trong tệp PDF của tài liệu, tính cả trang bìa nếu có, không phải số trang in ở chân trang.
 
 ## Ghi chú cho người duyệt
 
-- Vị trí cần số trang: không có chỗ thiếu số trang trong các nhận định nghiên cứu được sử dụng. Số trang trong trích dẫn là thứ tự trang PDF theo `luan_van/ghi_chu_tai_lieu.md`, không phải trang in của kỷ yếu. Giữ nguyên định danh tài liệu theo danh mục [1]–[16]; chương này chỉ dẫn những tài liệu thực sự sử dụng.
-- Mục 1.1 và 1.3: hai ví dụ sản phẩm đã đối chiếu với tài liệu hãng đã lưu: iPhone 17 ở đoạn `dt-apple-iphone17#016` (“Sạc lên đến 50% trong 20 phút với bộ tiếp hợp 40W trở lên (được bán riêng)”), Galaxy Buds3 Pro ở đoạn `#038` và `#044` (6 giờ khi bật chống ồn, 7 giờ khi tắt). Khi viết bản nộp có thể dẫn mã đoạn hoặc đường dẫn trang hãng.
-- Mục 1.3: giữ nguyên nhãn Đúng cho câu “nghe nhạc 6 giờ khi bật chống ồn” theo ví dụ đề cương (tài liệu ghi “lên đến 6 giờ”). Việc bỏ chữ “lên đến” có bị coi là Lệch điều kiện hay không đang chờ người thực hiện quyết (quy tắc hiện hành: không Lệch). Nếu đổi quy tắc thì phải sửa ví dụ này và định nghĩa nhãn ở mục 1.3 cho khớp.
-- Các chỗ diễn giải lại: mục 1.1 giới hạn ảo giác theo mức hỗ trợ của nguồn; mục 1.3 giới hạn khoảng trống ở khảo sát đến 15/10/2026 và mô tả TRACER sử dụng bằng chứng có sẵn; mục 1.4, 1.7 và 1.8 trình bày lợi ích của P là giả thuyết hoặc đóng góp dự kiến; mục 1.7 xác định sáu loại điều kiện là thiết kế của đề tài tham khảo MeasEval; mục 1.8 phân biệt biến đổi tuyên bố của đề tài với biến đổi bằng chứng trong VitaminC. Các diễn giải tuân theo mục 2 của ghi chú tài liệu.
-- Mục 1.5: không khẳng định đã có trọng số SemViQA công khai; ghi chú tài liệu yêu cầu kiểm tra thêm trước khi triển khai B3. Mục 1.6 giữ quy mô ở trạng thái dự kiến và không khẳng định dữ liệu đã hoàn tất.
-- Bối cảnh được rút gọn, chưa đưa nghiên cứu FTC và viện dẫn Luật Quảng cáo vào nội dung chính: FTC chưa có số trong danh mục [1]–[16], còn viện dẫn luật chưa được ghi chú kiểm tra với văn bản chính thức. Cần người duyệt quyết định việc bổ sung nguồn; không tự đánh lại số tài liệu.
-- Số chữ ước tính của nội dung chính: 3.333, tính bằng các đơn vị tách bởi khoảng trắng, gồm tiêu đề và trích dẫn, không gồm mục ghi chú này. Số trang A4 cần kiểm tra khi dàn trang theo mẫu của Khoa.
+Mục này không đưa lên Google Doc.
+
+- Viết lại toàn bộ ngày 05/11/2026 (Opus), thay bản do Codex Astra viết ngày 03/11/2026.
+- Đổi tên chương từ "Tổng quan" thành "Mở đầu" để khớp Phụ lục 2 của Khoa (MỞ ĐẦU rồi TỔNG QUAN). Kế hoạch T8.1 vẫn ghi tên cũ.
+- Các ví dụ ở Bảng 1.1 đều giữ chữ "lên đến" trong tuyên bố, nên không phụ thuộc vào quyết định còn mở về việc bỏ chữ "lên đến". Hàng "Đảm bảo..." theo dòng D2 của hướng dẫn. Hàng 6,5 giờ theo ví dụ V44.
+- [22] mới đối chiếu qua bài báo lsvn.vn trích nguyên văn, chưa đối chiếu được văn bản trên Công báo. Phải kiểm trước khi nộp.
+- Số liệu trích dẫn được đối chiếu tự động với văn bản PDF ngày 05/11/2026.
