@@ -568,7 +568,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Tách hoàn toàn bằng tay như Bước 12 cho 2 mẫu còn lại của tập phát triển (Apple Watch SE 3, Xiaomi 15T); lọc theo tệp cấu hình; gộp tuyên bố trùng trong cùng bài.
+- [ ] Tách hoàn toàn bằng tay như Bước 12 cho 2 mẫu còn lại của tập phát triển (Apple Watch SE 3, Xiaomi 15T); lọc theo tệp cấu hình; gộp tuyên bố trùng trong cùng bài. *(08/11: đã chuẩn bị, chờ người thực hiện tách tay. `data/tuyen_bo/doc_phat_trien.md` in nguyên văn 16 bài (8 bài mỗi mẫu), `data/tuyen_bo/chinh_nhap.csv` chỉ có dòng tiêu đề; hướng dẫn tách tay thêm cột đồng hồ. `scripts/chuyen_tuyen_bo.py ... --tiep-sau data/tuyen_bo/thu.jsonl` đánh mã từ `tb-00067` và chặn bài của mẫu bộ thử; `scripts/ra_tach.py` nhận tệp tuyên bố làm đối số, có `--ma-mau`.)*
 - [ ] Nếu nhiều hơn quy mô đã chốt thì lấy mẫu phân tầng theo nhóm sản phẩm × LLM × chế độ.
 
 **Làm ra:** `data/tuyen_bo/chinh.jsonl` (phần tập phát triển).

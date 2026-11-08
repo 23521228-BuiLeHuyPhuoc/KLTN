@@ -255,3 +255,64 @@ def test_kem_hop_sac_chi_cho_thoi_luong_pin():
     assert "bo_phan=kem_hop_sac" not in dict(rt.nhom_cum("tn", "dung_luong_pin", True))
     assert "bo_phan=kem_hop_sac" not in dict(rt.nhom_cum("tn", "khang_nuoc", True))
     assert "bo_phan=kem_hop_sac" in dict(rt.nhom_cum("tn", None, False))
+
+
+# ---------- Tệp tuyên bố khác thu.jsonl ----------
+
+def viet_jsonl(tep, dong):
+    tep.write_text("".join(json.dumps(d, ensure_ascii=False) + "\n" for d in dong), encoding="utf-8")
+
+
+def test_ra_mac_dinh_theo_stem_tep_tuyen_bo(tmp_path):
+    assert rt.tep_ra_mac_dinh(Path("data/tuyen_bo/thu.jsonl")) == Path("data/tuyen_bo/ra_tach_thu.md")
+    assert rt.tep_ra_mac_dinh(tmp_path / "chinh.jsonl") == tmp_path / "ra_tach_chinh.md"
+    tep = tmp_path / "chinh.jsonl"
+    viet_jsonl(tep, [tb("dt-apple-iphone17", "tan_so_quet", "Luôn 120Hz", "120Hz")])
+    rt.main(["--tuyen-bo", str(tep)])   # quên --ra: ghi ra_tach_chinh.md cạnh tệp, không đụng báo cáo bộ thử
+    assert (tmp_path / "ra_tach_chinh.md").exists() and not (tmp_path / "ra_tach_thu.md").exists()
+
+
+def test_doi_so_vi_tri_va_xung_dot_voi_tuyen_bo(tmp_path):
+    tep = tmp_path / "chinh.jsonl"
+    viet_jsonl(tep, [tb("dt-apple-iphone17", "tan_so_quet", "Luôn 120Hz", "120Hz")])
+    rt.main([str(tep)])
+    assert (tmp_path / "ra_tach_chinh.md").exists()
+    rt.main([str(tep), "--tuyen-bo", str(tep), "--ra", str(tmp_path / "ra.md")])   # cùng tệp thì không sao
+    assert (tmp_path / "ra.md").exists()
+    khac = tmp_path / "khac.jsonl"
+    viet_jsonl(khac, [tb("dt-apple-iphone17", "tan_so_quet", "Luôn 120Hz", "120Hz")])
+    with pytest.raises(SystemExit) as e:
+        rt.main([str(tep), "--tuyen-bo", str(khac)])
+    assert e.value.code != 0
+
+
+def test_loc_ma_mau(tmp_path, capsys):
+    tep = tmp_path / "chinh.jsonl"
+    viet_jsonl(tep, [tb("dt-apple-iphone17", "tan_so_quet", "Luôn 120Hz", "120Hz", "tb-00067"),
+                     tb("dh-apple-watchse3", "thoi_luong_pin", "32 giờ ở mọi chế độ", "32 giờ", "tb-00068"),
+                     tb("dh-apple-watchse3", "khang_nuoc", "50 m", "50 m", "tb-00069")])
+    ra = tmp_path / "ra.md"
+    rt.main([str(tep), "--ra", str(ra), "--ma-mau", "dh-apple-watchse3"])
+    chu = ra.read_text(encoding="utf-8")
+    assert "tb-00067" not in chu and "tb-00068" in chu and "tb-00069" in chu
+    assert "Đã lọc theo mẫu: dh-apple-watchse3." in chu and "1 / 2 tuyên bố có cụm được liệt kê." in chu
+    assert "1 / 2 tuyên bố" in capsys.readouterr().out
+    with pytest.raises(SystemExit):   # mẫu không có tuyên bố nào
+        rt.main([str(tep), "--ra", str(ra), "--ma-mau", "tn-khong-co"])
+
+
+def test_tieu_de_ghi_dung_tep_dau_vao(tmp_path):
+    tep = tmp_path / "chinh.jsonl"
+    viet_jsonl(tep, [tb("dt-apple-iphone17", "tan_so_quet", "Luôn 120Hz", "120Hz")])
+    ra = tmp_path / "ra.md"
+    rt.main([str(tep), "--ra", str(ra)])
+    chu = ra.read_text(encoding="utf-8")
+    assert chu.startswith("# Rà tách chinh.jsonl:") and "bộ thử" not in chu.splitlines()[0]
+    assert f"từ `{tep.resolve().as_posix()}`" in chu   # ngoài repo: đường dẫn đầy đủ
+    # Tệp trong repo: đường dẫn tương đối, dấu /; thu.jsonl vẫn gọi là bộ thử.
+    assert rt.duong_dan_hien_thi(ROOT / "data" / "tuyen_bo" / "chinh.jsonl") == "data/tuyen_bo/chinh.jsonl"
+    thu = tmp_path / "thu.jsonl"
+    viet_jsonl(thu, [tb("dt-apple-iphone17", "tan_so_quet", "Luôn 120Hz", "120Hz")])
+    rt.main([str(thu), "--ra", str(ra)])
+    assert ra.read_text(encoding="utf-8").startswith("# Rà tách bộ thử:")
+    assert "từ `data/tuyen_bo/thu.jsonl`" in rt.dung_bao_cao([], {}, True, ROOT / "data/tuyen_bo/thu.jsonl")
