@@ -761,7 +761,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Ghép `p.py`: BM25 → trích xuất có neo nguồn → chuẩn hóa → A–D → lý do.
+- [x] Ghép `p.py`: BM25 → trích xuất có neo nguồn → chuẩn hóa → A–D → lý do. *(08/11: `src/kiemchung/p.py` (`kiem_chung`, `kiem_chung_ban_ghi`), `scripts/chay_p.py` chạy P trên tệp kết quả trích xuất, không đọc nhãn; 10 test.)*
 - [ ] Chạy hết tập phát triển, cả tuyên bố thường và biến thể cặp tối thiểu.
 - [ ] Gán tay giá trị đúng của từng trường cho **50 tuyên bố** tập phát triển; tính độ đúng của từng trường.
 - [ ] Xem lỗi của P trên tập phát triển. Lỗi do mã cài sai so với hướng dẫn thì sửa mã. Không sửa hướng dẫn gán nhãn nữa vì tập kiểm tra đã gán theo bản 2; tệp cấu hình chỉ được bổ sung cách diễn đạt thấy trong tập phát triển, trước khi khóa ở Bước 33.
@@ -825,8 +825,8 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 - [ ] **P−ĐK:** bỏ bước B; mọi thông số cùng sản phẩm và thuộc tính coi như cùng điều kiện, nên chỉ so giá trị. Bản này phải **tắt cả D1a và D1b**: nếu không, các giá trị khác nhau ở những điều kiện khác nhau (6 và 7 giờ) bị coi là "tài liệu mâu thuẫn" và mọi tuyên bố ra Chưa đủ thông tin ([T5.9](#t5-9)).
 - [ ] **P−NN:** bỏ khâu (b) neo nguồn và khâu (c) kiểm tra đầy đủ ở [T5.3](#t5-3); dùng nguyên đầu ra của LLM.
-- [ ] Hai bản là hai cờ cấu hình trong `p.py`, không sao chép mã.
-- [ ] Thêm kiểm thử: với P−ĐK, tuyên bố "Galaxy Buds3 Pro nghe nhạc 7 giờ khi bật chống ồn" phải ra Đúng (vì 7 giờ có trong tài liệu). Đây đúng là lỗi mà P khắc phục.
+- [x] Hai bản là hai cờ cấu hình trong `p.py`, không sao chép mã. *(cờ `bo_doi_chieu`, `bo_neo_nguon`; `scripts/chay_p.py --bo-doi-chieu`; P−NN dùng tệp trích xuất chạy với `--khong-neo-nguon --khong-kiem-day-du`, cùng bộ nhớ đệm LLM.)*
+- [x] Thêm kiểm thử: với P−ĐK, tuyên bố "Galaxy Buds3 Pro nghe nhạc 7 giờ khi bật chống ồn" phải ra Đúng (vì 7 giờ có trong tài liệu). Đây đúng là lỗi mà P khắc phục. *(`tests/test_quyet_dinh.py`, `tests/test_p.py`, ví dụ V31.)*
 - [ ] Chạy hai bản trên tập phát triển.
 
 **Làm ra:** cờ `--bo-doi-chieu` và `--bo-neo-nguon` trong `p.py`; đầu ra của hai bản trên tập phát triển.
