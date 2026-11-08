@@ -118,7 +118,7 @@ Chuẩn hóa để so chuỗi con (hàm `chuan_so_khop`): NFC, chữ thường, 
 | `ma_doan` | thuộc top-k đã đưa vào câu lệnh | bỏ cả mục, lý do `doan_ngoai_top_k` |
 | mọi `trich` | là chuỗi con của nguồn sau chuẩn hóa | bỏ trường đó, lý do `trich_khong_co_trong_nguon` |
 | `gia_tri` (số) | `doc_so(chu)` đọc được; trong `trich` có con số bằng nó (`bang_nhau`); nếu `don_vi` khác null thì `chuan_don_vi(don_vi)` đọc được và trong `trich` con số đó đi với đơn vị cùng khóa, hoặc đứng trong dạng "a / b <đơn vị>" | bỏ `gia_tri`, lý do `so_khong_khop` hoặc `don_vi_khong_khop` |
-| `gia_tri` (mã) | IP: `tach_ip(chu)` bằng `tach_ip(trich)`; ISO 22810: `doc_iso_22810` hai bên bằng nhau; phủ định: `chu` là "không" và `trich` có "không" cùng "kháng nước" hoặc "chống nước" | bỏ `gia_tri`, lý do `ma_khong_khop` |
+| `gia_tri` (mã) | IP: `tach_ip(chu)` bằng `tach_ip(trich)`; ISO 22810: `doc_iso_22810` hai bên bằng nhau; phủ định: `chu` là "không" và `trich` có "không" cùng "kháng nước" hoặc "chống nước"; khẳng định không kèm mã (V18 "hộp sạc cũng kháng nước"): `chu` là "có" hoặc rỗng, `trich` có "kháng nước" hoặc "chống nước" mà không có "không" đứng trước | bỏ `gia_tri`, lý do `ma_khong_khop` |
 | `dieu_kien[i]` | `loai` thuộc sáu loại; `trich` có trong nguồn; `cum` là chuỗi con của `trich` | bỏ điều kiện đó, lý do tương ứng |
 | `san_pham` | `trich` có trong nguồn; `chu` là chuỗi con của `trich` | bỏ `san_pham` |
 | `thuoc_tinh` (tuyên bố) | thuộc danh sách thuộc tính của nhóm | `null`, lý do `thuoc_tinh_ngoai_nhom` |
@@ -170,7 +170,7 @@ Mỗi mục (tuyên bố hoặc tài liệu) sau ba khâu:
  "nguon_dieu_kien": {"che_do_chong_on": "llm", "hoat_dong": "llm", "bo_phan": "bo_sung"}}
 ```
 
-- `gia_tri`: số thực sau `doc_so`; mã IP là `{"bui": …, "nuoc": …}`; ISO 22810 là số mét với `don_vi` `m`; phủ định là chuỗi `"khong"`. `don_vi` là khóa của `chuan_hoa.don_vi`.
+- `gia_tri`: số thực sau `doc_so`; mã IP là `{"bui": …, "nuoc": …}`; ISO 22810 là số mét với `don_vi` `m`; phủ định là chuỗi `"khong"`, khẳng định không kèm mã là `"co"` (bổ sung 08/11 trong lúc cài). `don_vi` là khóa của `chuan_hoa.don_vi`.
 - Bảy trường của T5.1: sản phẩm (`san_pham_ma`), phiên bản (`dieu_kien.phien_ban`), bộ phận (`dieu_kien.bo_phan`), thuộc tính, giá trị, đơn vị, điều kiện cùng kiểu giá trị (phần còn lại của `dieu_kien` và `kieu_gia_tri`). Hàm `bay_truong(muc)` trả đúng dạng T5.1 để in và để đo độ đúng ở Bước 28.
 - `mac_dinh` không ghi ở bước này: cách hiểu mặc định là việc của bước B trong bộ quyết định (Bước 27), vì cần biết tài liệu có những điều kiện nào.
 
