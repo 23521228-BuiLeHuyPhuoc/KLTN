@@ -102,6 +102,13 @@
 - Ranh giới giữ nguyên và đã nói với người thực hiện: trang chỉ bắt mâu thuẫn giữa các ô người gán điền, không đọc câu tuyên bố để gợi ý nhãn, vì nhãn chuẩn là đáp án chấm hệ thống P. Nhãn đã gán trước đó chưa có `dong_d` nên phải mở lại chọn dòng; số giây của các tuyên bố này sẽ gồm cả lần xem lại.
 - Thêm khung "Ca đặc biệt" (bảng `CA_DAC_BIET` trong `tao_cong_cu_gan_nhan.py`, 15 mục): tóm tắt bằng lời các quy tắc riêng và ca đã chốt của hướng dẫn (mục 4, 5.1, 6.2–6.6, 11; V03, V18, V21, V28, V35, V36, V40, V42, V45, V47, V48...), lọc theo mẫu và thuộc tính ghi sẵn trên tuyên bố. Có một mục "chưa có quy tắc" cho cụm kiểu "với mọi điều kiện ánh sáng", nhắc ghi câu hỏi nhãn. Bảng viết tay nên phải sửa theo khi hướng dẫn đổi. 358 test đạt.
 
+## 08/11/2026 — Bước 28.1, 31, 34, 35, 40 (làm sớm phần không cần nhãn)
+
+- `src/kiemchung/p.py`, `scripts/chay_p.py`: P đầu-cuối, cờ P−ĐK (`bo_doi_chieu`) và P−NN (`bo_neo_nguon`), không đọc nhãn. `src/kiemchung/api.py` (FastAPI, `GET /mau-san-pham`, `POST /kiem-chung`), `Dockerfile`; test kiểm kết quả API trùng với gọi tách tự động rồi `p.kiem_chung`. Chưa build Docker (máy chưa có), chưa thử với LLM thật.
+- Bước 35 viết sớm: `luan_van/chuong_3.md` (Opus) và Hình 3.1 (`luan_van/hinh/hinh_3_1.png`, `scripts/ve_hinh_3_1.py`; `.venv` thiếu matplotlib nên chạy bằng Python hệ thống). Chưa đưa lên Google Doc.
+- Bước 40 làm sớm trong repo CopyPro, nhánh `kiem-chung-thong-so`: gộp `main` (xung đột do `7d7d16b` sửa tiếp các dòng mà commit trùng nội dung của nhánh đã sửa; lấy bản của `main`), rồi backend, giao diện, test (commit `0db3bbc`, chưa push, chờ người thực hiện đồng ý). `yarn test` 51 test qua.
+- Chạy thật: Gemini `gemini-3.6-flash` hết hạn mức ngày của tầng miễn phí sau khoảng 14 lần gọi trích xuất (mỗi lần khoảng 10 nghìn token; 503 rồi 429); chuyển sang `openai/gpt-oss-120b` qua Groq cho trích xuất bộ thử, cũng bị giới hạn tốc độ nên chạy có vòng thử lại. Codex Astra báo mô hình `gpt-6-astra` không hỗ trợ tài khoản ChatGPT; việc code chuyển sang Sonnet.
+
 ## 08/11/2026 — Bước 29, 30 (code tách tự động, B1, B2)
 
 - Opus viết câu lệnh lần thử 1 của tách tự động, B1, B2 (`luan_van/buoc29_30_thiet_ke_cau_lenh.md`): B1 và B2 đưa nguyên văn mục 3–7 của hướng dẫn bản 2 (bỏ 5.1), cắt bằng script; B2 có bốn ví dụ V09, V16, V24, V46 đọc từ mục 9; B1 chỉ nhận bộ thông số của P (không có chữ tuyên bố, không có đoạn) để khác biệt với P chỉ nằm ở người ra quyết định. Tách tự động chép quy tắc của hướng dẫn tách tay.
