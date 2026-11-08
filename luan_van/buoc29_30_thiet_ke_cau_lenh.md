@@ -69,7 +69,7 @@ CÁCH ĐỌC BỘ THÔNG SỐ
 - "kieu_gia_tri": khong_neu (không nêu), toi_da, dien_hinh, dinh_muc, thich_ung, khang_dinh (có từ khẳng định gắn với con số); "cum_kieu" là chữ đó.
 - "dieu_kien_khac": cụm điều kiện chưa có trong cấu hình, kèm loại và câu trích.
 - "ngu_canh": cụm chỉ là ngữ cảnh, không làm đổi nhãn.
-- "gia_tri" của kháng nước là mã IP {"bui": ..., "nuoc": ...}, số mét theo ISO 22810, hoặc "khong" (không kháng nước).
+- "gia_tri" của kháng nước là mã IP {"bui": ..., "nuoc": ...}, số mét theo ISO 22810, "khong" (không kháng nước) hoặc "co" (có kháng nước, không nêu mã).
 
 Trả về đúng một đối tượng JSON, không thêm chữ nào khác: {"nhan": "<một trong bốn nhãn>", "ly_do": "<lý do ngắn>"}
 

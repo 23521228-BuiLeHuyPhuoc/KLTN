@@ -102,6 +102,12 @@
 - Ranh giới giữ nguyên và đã nói với người thực hiện: trang chỉ bắt mâu thuẫn giữa các ô người gán điền, không đọc câu tuyên bố để gợi ý nhãn, vì nhãn chuẩn là đáp án chấm hệ thống P. Nhãn đã gán trước đó chưa có `dong_d` nên phải mở lại chọn dòng; số giây của các tuyên bố này sẽ gồm cả lần xem lại.
 - Thêm khung "Ca đặc biệt" (bảng `CA_DAC_BIET` trong `tao_cong_cu_gan_nhan.py`, 15 mục): tóm tắt bằng lời các quy tắc riêng và ca đã chốt của hướng dẫn (mục 4, 5.1, 6.2–6.6, 11; V03, V18, V21, V28, V35, V36, V40, V42, V45, V47, V48...), lọc theo mẫu và thuộc tính ghi sẵn trên tuyên bố. Có một mục "chưa có quy tắc" cho cụm kiểu "với mọi điều kiện ánh sáng", nhắc ghi câu hỏi nhãn. Bảng viết tay nên phải sửa theo khi hướng dẫn đổi. 358 test đạt.
 
+## 08/11/2026 — Bước 29, 30 (code tách tự động, B1, B2)
+
+- Opus viết câu lệnh lần thử 1 của tách tự động, B1, B2 (`luan_van/buoc29_30_thiet_ke_cau_lenh.md`): B1 và B2 đưa nguyên văn mục 3–7 của hướng dẫn bản 2 (bỏ 5.1), cắt bằng script; B2 có bốn ví dụ V09, V16, V24, V46 đọc từ mục 9; B1 chỉ nhận bộ thông số của P (không có chữ tuyên bố, không có đoạn) để khác biệt với P chỉ nằm ở người ra quyết định. Tách tự động chép quy tắc của hướng dẫn tách tay.
+- Codex Astra cài `src/kiemchung/doi_chung/{huong_dan,chung,b1,b2}.py`, `src/kiemchung/tach_tuyen_bo.py`, `scripts/chay_doi_chung.py`, `scripts/chay_tach_tu_dong.py`, 39 test (sandbox Codex không chạy Python; Opus chạy test và đọc mã). Script chạy hệ thống không đọc nhãn. Opus thêm giá trị "co" vào phần cách đọc bộ thông số của B1 trước lần chạy đầu. Số lần thử câu lệnh B1, B2: 0 (chưa chạy).
+- Điểm yếu đã biết của phép ghép tách tự động với tách tay: sạc nhanh lấy con số đầu tiên có đơn vị phút/giờ, có thể là số phút sạc (điều kiện) thay vì giá trị; hai phía đọc cùng cách nên phép ghép phần lớn vẫn đúng. B3 chưa cài: chờ người thực hiện đồng ý tải gói `semviqa` và mô hình.
+
 ## 08/11/2026 — Bước 27
 
 - Opus viết đặc tả `luan_van/buoc27_thiet_ke_quyet_dinh.md` (bản cài của hướng dẫn mục 5–7, luật cần thêm để máy chạy được ghi dấu [luật cài]); Sonnet cài `src/kiemchung/quyet_dinh.py`, `src/kiemchung/ly_do.py`, 155 test. 51 ví dụ V01–V51 của hướng dẫn dựng tay thành bản ghi trích xuất (câu trích thật của `doan.jsonl`), dùng làm kiểm thử hồi quy: 51/51 đúng nhãn, dòng D, loại.

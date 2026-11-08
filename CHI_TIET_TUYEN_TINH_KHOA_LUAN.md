@@ -782,7 +782,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Viết câu lệnh tách từ khung T12.5 ở [T12](#t12); Python giữ tuyên bố có thuộc tính trong tệp cấu hình.
+- [x] Viết câu lệnh tách từ khung T12.5 ở [T12](#t12); Python giữ tuyên bố có thuộc tính trong tệp cấu hình. *(08/11: câu lệnh lần thử 1 của Opus ở `luan_van/buoc29_30_thiet_ke_cau_lenh.md` mục 5; Codex cài `src/kiemchung/tach_tuyen_bo.py`, `scripts/chay_tach_tu_dong.py`, Opus chạy test.)*
 - [ ] So với tuyên bố tách thủ công của tập phát triển: hai tuyên bố được coi là trùng khi cùng thuộc tính và cùng giá trị sau chuẩn hóa. Tính Precision và Recall.
 
 **Làm ra:** `src/kiemchung/tach_tuyen_bo.py`.
