@@ -917,7 +917,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 **Việc cần làm**
 
 - [ ] Viết Chương 3 theo [T8.1](#t8-1): phát biểu bài toán, định nghĩa nhãn, bộ thông số, trích xuất có neo nguồn, chuẩn hóa, bộ quyết định A–D kèm mã giả, tệp cấu hình, sinh lý do, ví dụ xuyên suốt. *(08/11, Opus viết nháp sớm `luan_van/chuong_3.md`, mục 3.1–3.12, 6 bảng và Thuật toán 3.1, theo mã đã cài; chưa đưa lên Google Doc, chưa có Hình 3.1. Sửa lại nếu Bước 28–33 đổi luật.)*
-- [ ] Vẽ lại Hình 1 của đề cương ở độ phân giải cao, mũi tên thẳng, chỉ tô khối chứa điểm mới.
+- [x] Vẽ lại Hình 1 của đề cương ở độ phân giải cao, mũi tên thẳng, chỉ tô khối chứa điểm mới. *(08/11: `luan_van/hinh/hinh_3_1.png`, `.svg`, sinh bằng `scripts/ve_hinh_3_1.py`; tô neo nguồn, kiểm tra đầy đủ và chuẩn hóa, bộ quyết định.)*
 
 **Làm ra:** `luan_van/chuong_3.md`, hình quy trình.
 

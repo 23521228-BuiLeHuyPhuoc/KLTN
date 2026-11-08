@@ -274,7 +274,7 @@ Chương này trình bày phương pháp P theo nguyên tắc để LLM đọc v
 Mục này không đưa lên Google Doc.
 
 - Nháp đầu do Opus viết ngày 08/11/2026 (Bước 35), sớm hơn lịch (30/11) để viết khi mã còn mới; mọi mô tả theo mã ở commit `688a14b` (trích xuất), `fde903c` (bộ quyết định), `1cf2e2e` (P đầu-cuối). Nếu Bước 28–33 đổi luật hay tham số thì sửa lại chương này.
-- Chưa có Hình 3.1 thật: Bước 35 việc 2 yêu cầu vẽ lại Hình 1 của đề cương ở độ phân giải cao, mũi tên thẳng, chỉ tô khối chứa điểm mới (neo nguồn, kiểm tra đầy đủ, bộ quyết định). Bảng 3.1 lặp T5.1; Bảng 3.5, 3.6 lặp hướng dẫn mục 7, 8.
+- Hình 3.1 vẽ ngày 08/11 bằng `scripts/ve_hinh_3_1.py` (Sonnet viết, Opus xem ảnh): `luan_van/hinh/hinh_3_1.png` (300 dpi) và `.svg`; mũi tên chỉ ngang hoặc dọc, chỉ tô ba khối điểm mới. `.venv` không có matplotlib nên script chạy bằng Python hệ thống. Bảng 3.1 lặp T5.1; Bảng 3.5, 3.6 lặp hướng dẫn mục 7, 8.
 - Chương 3 cố ý không nêu số liệu của bài báo khác để khỏi cần số trang mới; các chỗ dẫn về cơ sở lý thuyết trỏ về Chương 2. Trích dẫn duy nhất là [24] (trang Galaxy Buds3 Pro).
 - Thuật ngữ "luật cài" (luật thêm để máy chạy được hướng dẫn) không dùng trong thân chương; các luật đó được trình bày như một phần của phương pháp.
 - Chưa đưa lên Google Doc. Khi đưa lên, Thuật toán 3.1 đặt trong khung chữ đều, đánh số như bảng.
