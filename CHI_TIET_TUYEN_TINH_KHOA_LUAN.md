@@ -628,12 +628,12 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Viết câu lệnh trích xuất từ khung T12.4 ở [T12](#t12), theo lược đồ bảy trường ở [T5.1](#t5-1).
-- [ ] Cài kiểm tra neo nguồn, khâu (b) ở [T5.3](#t5-3): câu trích phải có trong văn bản; con số phải khớp giá trị đã điền; trường không đạt bị bỏ, không đoán.
-- [ ] Cài kiểm tra đầy đủ, khâu (c) ở T5.3: dò các cụm từ điều kiện trong tệp cấu hình để bổ sung điều kiện LLM bỏ sót; vẫn không xác định được điều kiện thì đánh dấu để bộ quyết định kết luận Chưa đủ thông tin (dòng D1a).
-- [ ] Trích xuất điều kiện theo kiểu mở (thêm 26/10, điểm 15 ở [T10](#t10)): với mỗi giá trị trong tài liệu, ghi **mọi** cụm điều kiện gắn với nó, kèm loại (một trong sáu) và câu trích; cụm không khớp cách diễn đạt nào trong tệp cấu hình ghi vào `dieu_kien_khac`, không được bỏ. Câu rào chung trong `ngu_canh_khong_quyet_dinh` không tính. Kiểm thử: giá trị có cụm điều kiện lạ phải còn `dieu_kien_khac` sau khi qua kiểm tra neo nguồn.
-- [ ] Viết kiểm thử cho neo nguồn và kiểm tra đầy đủ: câu trích không có trong nguồn, con số sai, điều kiện bịa, điều kiện bị bỏ sót.
-- [ ] Chạy trên tập phát triển; đếm số trường bị loại và số điều kiện được bổ sung (khâu (d) ở T5.3).
+- [x] Viết câu lệnh trích xuất từ khung T12.4 ở [T12](#t12), theo lược đồ bảy trường ở [T5.1](#t5-1). *(08/11, Opus: `luan_van/buoc22_thiet_ke_trich_xuat.md` mục 3, lần thử 1; hai ví dụ dùng sản phẩm tự đặt. Bước 22 trước đó bổ sung cấu hình theo mục 11.3 của hướng dẫn.)*
+- [x] Cài kiểm tra neo nguồn, khâu (b) ở [T5.3](#t5-3): câu trích phải có trong văn bản; con số phải khớp giá trị đã điền; trường không đạt bị bỏ, không đoán. *(`src/kiemchung/neo_nguon.py`.)*
+- [x] Cài kiểm tra đầy đủ, khâu (c) ở T5.3: dò các cụm từ điều kiện trong tệp cấu hình để bổ sung điều kiện LLM bỏ sót; vẫn không xác định được điều kiện thì đánh dấu để bộ quyết định kết luận Chưa đủ thông tin (dòng D1a). *(`src/kiemchung/trich_xuat.py`: chỉ dò trong dòng chứa giá trị; thêm luật điều kiện dạng số nhận theo đơn vị và luật cặp số "a / b giờ" của tai nghe.)*
+- [x] Trích xuất điều kiện theo kiểu mở (thêm 26/10, điểm 15 ở [T10](#t10)): với mỗi giá trị trong tài liệu, ghi **mọi** cụm điều kiện gắn với nó, kèm loại (một trong sáu) và câu trích; cụm không khớp cách diễn đạt nào trong tệp cấu hình ghi vào `dieu_kien_khac`, không được bỏ. Câu rào chung trong `ngu_canh_khong_quyet_dinh` không tính. Kiểm thử: giá trị có cụm điều kiện lạ phải còn `dieu_kien_khac` sau khi qua kiểm tra neo nguồn.
+- [x] Viết kiểm thử cho neo nguồn và kiểm tra đầy đủ: câu trích không có trong nguồn, con số sai, điều kiện bịa, điều kiện bị bỏ sót. *(`tests/test_neo_nguon.py`, `tests/test_trich_xuat.py`, kể cả cụm lạ còn `dieu_kien_khac` sau neo nguồn.)*
+- [ ] Chạy trên tập phát triển; đếm số trường bị loại và số điều kiện được bổ sung (khâu (d) ở T5.3). *(08/11: `scripts/chay_trich_xuat.py` ghi `ket_qua/trich_xuat/` kèm thống kê; đang chạy trên 66 tuyên bố bộ thử. Phần 16 bài của Apple Watch SE 3, Xiaomi 15T chờ người thực hiện tách tay ở Bước 19.)*
 
 **Làm ra:** `src/kiemchung/trich_xuat.py`, `src/kiemchung/neo_nguon.py`, kiểm thử.
 

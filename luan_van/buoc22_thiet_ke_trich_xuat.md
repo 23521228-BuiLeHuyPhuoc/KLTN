@@ -136,6 +136,7 @@ Với mỗi điều kiện còn lại sau neo nguồn, tìm cụm của cấu h�
    - Điều kiện dạng số (`gia_tri_so`): đọc con số bằng `tim_gia_tri` trong `cum` (rồi trong `trich` nếu `cum` không có số), lấy con số có đơn vị đúng `dieu_kien_so.<tên>.don_vi`; cụm không có số thì tra `gia_tri_ngam` ("sạc đầy" = 100, "toàn màn hình" = 100). Ghi `{"so": …, "don_vi": …}`. Không đọc được số thì điều kiện đó vào `dieu_kien_khac` với lý do `khong_doc_duoc_so`.
 3. Kiểu giá trị (`loai` là `kieu_gia_tri`, hoặc cụm khớp `kieu_gia_tri`, `tu_khang_dinh`, `tu_goi_muc_cao` của `chung.yaml`, `kieu_dung_luong` của nhóm): không ghi ở đây; kiểu giá trị do `tim_kieu_gia_tri` quyết ở mục 7 trên chữ của nguồn, để cụm phải đứng liền con số của chính giá trị.
 4. `cum_khong_phai_dieu_kien` của `chung.yaml`: `cum` trùng hẳn một mục (sau chuẩn hóa) thì bỏ, ghi vào `bo_qua`.
+4b. Điều kiện dạng số nhận theo đơn vị (bổ sung 08/11 khi cài; xét ngay sau bước 2, trước bước 3): cụm không khớp cụm cấu hình nào mà có con số (`tim_gia_tri` trên cụm đã gộp khoảng trắng) có đơn vị trùng đơn vị của đúng một điều kiện dạng số loại `phu_kien` hoặc `dieu_kien_do` trong `dieu_kien_so` của thuộc tính thì ghi điều kiện đó `{"so", "don_vi"}` với `nguon_dieu_kien` là `llm_don_vi` ("sạc tới 50%" là `moc_phan_tram`); hai điều kiện cùng đơn vị trong một thuộc tính thì không áp, và con số chính là giá trị của mục không tính.
 5. Không khớp gì: ghi vào `dieu_kien_khac` `{loai, cum, trich}`. Đây là điều kiện lạ: ở tài liệu thì giá trị đó dẫn tới D1a khi được khớp (luật chặn của Bước 27); ở tuyên bố thì tuyên bố có điều kiện chưa xác định, dẫn tới D1a.
 
 Một `cum` khớp hai giá trị khác nhau của cùng một điều kiện (ví dụ cả "bật ANC" và "tắt ANC") thì điều kiện đó ghi `xung_dot` với cả hai giá trị; bộ quyết định coi là chưa xác định.
@@ -153,6 +154,8 @@ Việc dò:
 2. Kiểu giá trị: `tim_gia_tri` và `tim_kieu_gia_tri` của `chuan_hoa.py` được mở rộng cho dạng "a / b <đơn vị>": cả a và b đều là `GiaTri` cùng đơn vị, và cụm kiểu đứng liền trước a ("Đến 7 / 30 giờ") áp cho cả a và b. Tìm `GiaTri` của con số trong vùng dò (con số bằng `gia_tri`, gần vị trí `trich` nhất), gọi `tim_kieu_gia_tri` với `cum_them` là `kieu_dung_luong` của nhóm nếu có. Kết quả ghi `kieu_gia_tri`, `cum_kieu`, `goi_muc_cao`. Kiểu do LLM ghi mà Python không thấy đứng liền con số thì không dùng, ghi vào `bi_loai` lý do `kieu_khong_gan_so`.
 3. Cặp số gạch chéo (khóa mới `cap_so_gach_cheo` của thuộc tính trong YAML nhóm, hiện chỉ có `tai_nghe.thoi_luong_pin: [tai_nghe, kem_hop_sac]`): vùng dò có dạng "a / b <đơn vị>" với a < b và mục chưa có `bo_phan` thì số a là `tai_nghe`, số b là `kem_hop_sac`, ghi `bo_sung` với `cum` là chuỗi "a / b <đơn vị>". Căn cứ: Buds3 Pro `#038` ("Đến 7 / 30 giờ", chú thích "tai nghe và hộp tai nghe cung cấp tối đa 30 giờ"), `#042`, cách đọc của hướng dẫn ở các ví dụ V-pin Buds3 Pro ("số 6 trong '6 / 26'" là tai nghe).
 4. Sản phẩm của mục tài liệu: `san_pham` null thì là mẫu của trang; có thì `tim_san_pham(chu)`. Ra mẫu khác hoặc `None` thì ghi `khac_san_pham: true` (bộ quyết định bỏ ở bước A). Sản phẩm của tuyên bố: `tim_san_pham` trên chữ tuyên bố, ghi `san_pham_ma`.
+
+Điều kiện dạng số nhận theo đơn vị cũng áp ở kiểm tra đầy đủ (bổ sung 08/11 khi cài): với mỗi điều kiện dạng số của thuộc tính (cùng quy tắc "đúng một điều kiện có đơn vị đó") mà mục chưa có, dò mọi con số có đơn vị đó trong vùng dò, bỏ con số chính là giá trị của mục; thấy đúng một số thì điền và ghi `bo_sung` với cụm là chữ khớp ("50%"), nhiều số khác nhau thì `bo_sung_mo_ho`.
 
 Kiểm tra đầy đủ không đổi điều kiện đã có từ LLM sau neo nguồn; chỉ điền chỗ trống. Không dò `dieu_kien_khac` (cụm lạ không có trong cấu hình nên không dò được); chỗ hở này là giới hạn bao phủ, báo ở Bước 37–38.
 
@@ -194,5 +197,5 @@ Khác: JSON hỏng; tất định (gọi hai lần cùng kết quả); P−NN kh
 ## 12. Giới hạn đã biết
 
 - Cụm tả hoàn cảnh mà cấu hình chưa có (V51 "dưới nắng" cho chế độ tự tăng sáng của Xiaomi) vẫn thành điều kiện đã biết nhưng sai chế độ (`ngoai_troi`); việc ghép hai chế độ để ở Bước 27 như ghi trong `dien_thoai.yaml`.
-- `dt-xiaomi-15t#005` dính chữ "67WHỗ trợ": `tim_gia_tri` không đọc ra 67W, nên giá trị công suất sạc ở đoạn này bị loại ở neo nguồn. Lỗi của chia đoạn, ghi lại, không sửa nguồn.
+- `dt-xiaomi-15t#005` dính chữ "67WHỗ trợ" (lỗi chia đoạn). Đã xử lý khi cài (08/11, theo yêu cầu của Opus): `tim_gia_tri` cho phép ranh giới sau đơn vị là một chữ HOA theo sau bởi một chữ thường, nên 67W đọc được và giá trị công suất sạc của đoạn này không còn bị loại ở neo nguồn. Hệ quả chấp nhận: "2xZoom" cũng ra 2x; "44mm", "5G" không đổi.
 - Luật chép đúng nhãn (QĐ15) và cách hiểu mặc định thuộc Bước 27, không thuộc bước này.

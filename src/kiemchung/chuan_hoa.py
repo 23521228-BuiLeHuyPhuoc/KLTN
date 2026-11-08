@@ -27,6 +27,15 @@ class GiaTri:
     chu: str         # chuỗi khớp, vd. "30 giờ"
     dau: int         # chỉ số bắt đầu con số
     cuoi: int        # chỉ số sau chữ đơn vị
+    dau_nhom: int | None = None   # dạng "a / b <đơn vị>": chỉ số bắt đầu của a, chung cho cả a và b; thường là None
+
+
+@dataclass(frozen=True)
+class So:
+    so: float
+    chu: str         # chuỗi con số như viết ("7,0", "3.000")
+    dau: int
+    cuoi: int
 
 
 @dataclass(frozen=True)
@@ -99,18 +108,48 @@ def tim_gia_tri(chu, chung):
     """Mọi cặp số + đơn vị trong chuỗi, có hoặc không có khoảng trắng ("30 giờ", "45W", "3000nits", "2x").
     Đơn vị dài khớp trước ("mAh" trước "m", "Hz" trước "h") và phải kết thúc ở ranh giới chữ nên "44mm" không
     thành "m"; con số không được dính chữ phía trước nên "IP68", "WR50", "G720" không ra giá trị. Mã IP và mã
-    ISO 22810 do tach_ip, doc_iso_22810 đọc. "1x Arm" hay "2 x 3" cũng ra đơn vị x (zoom); việc loại do thuộc tính."""
+    ISO 22810 do tach_ip, doc_iso_22810 đọc. "1x Arm" hay "2 x 3" cũng ra đơn vị x (zoom); việc loại do thuộc tính.
+    Dạng "a / b <đơn vị>" và "a/b <đơn vị>" ("Đến 7,0/30 giờ") ra hai GiaTri cùng đơn vị, a rồi b; cả hai có
+    dau_nhom là chỉ số đầu của a (a có dau, cuoi là của cả cụm, b có dau, cuoi riêng của b). Chữ dọc, mỗi mảnh một dòng
+    (mỗi chữ "7", "/", "30", "giờ" một dòng), không khớp vì khoảng trắng giữa các mảnh không được là xuống dòng: nơi gọi gộp khoảng trắng trước.
+    Ranh giới sau đơn vị: không còn ký tự chữ hay số, hoặc một chữ HOA theo sau bởi một chữ thường ("67WHỗ trợ" của dt-xiaomi-15t#005,
+    lỗi chia đoạn làm dính từ viết hoa vào đơn vị; "2xZoom" cũng ra 2x). "44mm", "5G", "5000mAh" (mAh khớp trước m) không đổi."""
     chu = _nfc(chu)
     bang = _bang_don_vi(chung)
     don_vi = "|".join(re.escape(a) for a in sorted(bang, key=len, reverse=True))
-    mau = re.compile(rf"(?<![\w.,])(?P<so>[0-9]+(?:[.,][0-9]+)*)[^\S\n]*(?P<dv>{don_vi})(?!\w)", re.IGNORECASE)
+    so_chu = r"[0-9]+(?:[.,][0-9]+)*"
+    mau = re.compile(rf"(?<![\w.,])(?P<so>{so_chu})(?:[^\S\n]*/[^\S\n]*(?P<so2>{so_chu}))?[^\S\n]*(?P<dv>{don_vi})(?=(?P<sau>\w{{0,2}}))",
+                     re.IGNORECASE)
     ket_qua = []
     for m in mau.finditer(chu):
+        sau = m.group("sau")   # sau đơn vị: không còn chữ, hoặc chữ HOA rồi chữ thường ("67WHỗ trợ": từ viết hoa bị dính)
+        if sau and not (len(sau) == 2 and sau[0].isupper() and sau[1].islower()):
+            continue
+        khoa = bang[chuan_hoa_chu(m.group("dv"))]
         try:
             so = doc_so(m.group("so"))
+            so2 = doc_so(m.group("so2")) if m.group("so2") else None
         except ValueError:
             continue
-        ket_qua.append(GiaTri(so, bang[chuan_hoa_chu(m.group("dv"))], m.group(0), m.start("so"), m.end("dv")))
+        if so2 is None:
+            ket_qua.append(GiaTri(so, khoa, m.group(0), m.start("so"), m.end("dv")))
+        else:
+            ket_qua.append(GiaTri(so, khoa, m.group(0), m.start("so"), m.end("dv"), m.start("so")))
+            ket_qua.append(GiaTri(so2, khoa, chu[m.start("so2"):m.end("dv")], m.start("so2"), m.end("dv"), m.start("so")))
+    return ket_qua
+
+
+def tim_so(chu):
+    """Mọi con số trong chuỗi (có hay không đơn vị), theo thứ tự xuất hiện, kèm vị trí. Con số không được dính chữ
+    hay dấu ngăn phía trước nên "IP68", "WR50" không ra số; "3.000" và "4,5" là một số. Chuỗi số doc_so không đọc
+    được ("1,234,567") bị bỏ."""
+    chu = _nfc(chu)
+    ket_qua = []
+    for m in re.finditer(r"(?<![\w.,])[0-9]+(?:[.,][0-9]+)*", chu):
+        try:
+            ket_qua.append(So(doc_so(m.group(0)), m.group(0), m.start(), m.end()))
+        except ValueError:
+            continue
     return ket_qua
 
 
@@ -225,7 +264,10 @@ def _cum_muc_san(chung):
 
 
 def _khoang_bo_qua(c, chung):
-    return [m.span() for cum in chung["tu_khang_dinh"].get("bo_qua_khi_co") or []
+    """Khoảng chữ mà từ khẳng định nằm trong đó thì không tính: bo_qua_khi_co ("không đảm bảo") và tên tính năng
+    chứa từ khẳng định (ten_tinh_nang: "Màn hình Luôn Bật")."""
+    tu_kd = chung["tu_khang_dinh"]
+    return [m.span() for cum in [*(tu_kd.get("bo_qua_khi_co") or []), *(tu_kd.get("ten_tinh_nang") or [])]
             for m in re.finditer(_mau_cum(chuan_hoa_chu(cum)), c)]
 
 
@@ -234,7 +276,7 @@ def _khang_dinh(c, dau, cuoi, chung):
     Quy ước: nhóm chắc chắn (tu_khang_dinh.tu) chỉ cần đứng trước số, cho phép tối đa SO_TOI_DA_TU_GIUA từ
     chỉ gồm chữ giữa từ và số ("luôn đạt 120Hz"); giữa chúng không được có chữ số hay dấu câu nên con số khác
     cắt đứt sự gắn kết. Nhóm mức sàn đứng liền số (khoảng trắng hoặc ':'): "hơn 16 giờ" ở trước,
-    "18 giờ trở lên" ở sau. Cụm nằm trong bo_qua_khi_co ("không đảm bảo") bị bỏ qua. Lưu ý: "40W trở lên" của
+    "18 giờ trở lên" ở sau. Cụm nằm trong bo_qua_khi_co ("không đảm bảo") hay trong tên tính năng ten_tinh_nang ("Màn hình Luôn Bật") bị bỏ qua. Lưu ý: "40W trở lên" của
     bộ tiếp hợp cũng ra khang_dinh ở đây; bộ quyết định chỉ hỏi con số của giá trị, không hỏi con số điều kiện."""
     truoc, sau = c[:dau], c[cuoi:]
     bo_qua = _khoang_bo_qua(c, chung)
@@ -271,7 +313,9 @@ def tim_kieu_gia_tri(cau, gia_tri, chung, cum_them=None):
     cum_them: cụm riêng của nhóm, nhận mục YAML {kieu: {tu_tai_lieu, hieu_biet_chung}} như
     cach_dien_dat.kieu_dung_luong hoặc {kieu: [cụm]}."""
     c = _nfc(cau).lower()
-    dau, cuoi = gia_tri.dau, gia_tri.cuoi
+    # "a / b <đơn vị>": cụm đứng liền trước a áp cho cả b ("Đến 7 / 30 giờ"), nên b lấy vị trí đầu của a.
+    dau = gia_tri.dau if gia_tri.dau_nhom is None else gia_tri.dau_nhom
+    cuoi = gia_tri.cuoi
     cum = _khang_dinh(c, dau, cuoi, chung)
     if cum:
         return KieuGiaTri("khang_dinh", cum, False)

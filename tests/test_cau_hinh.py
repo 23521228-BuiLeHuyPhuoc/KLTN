@@ -180,3 +180,53 @@ def test_anh_sang_manh_khong_con_o_che_do_ngoai_troi():
     # QĐ14 (02/11): "ánh sáng mạnh" chưa được duyệt và trùng "Dưới ánh sáng mạnh" của Xiaomi (tu_tang_sang).
     ngoai_troi = ch.doc_cau_hinh("dien_thoai")["cach_dien_dat"]["che_do_hien_thi"]["ngoai_troi"]
     assert "ánh sáng mạnh" not in ngoai_troi["hieu_biet_chung"]
+
+
+# --- Bước 22: gia_tri_ngam, cap_so_gach_cheo, cum_khong_phai_dieu_kien, ten_tinh_nang ---
+
+def test_khoa_moi_cua_cau_hinh_that():
+    dt = ch.doc_cau_hinh("dien_thoai")["cach_dien_dat"]
+    assert dt["moc_phan_tram"]["gia_tri_so"]["gia_tri_ngam"] == {"sạc đầy": 100}
+    assert dt["dien_tich_do"]["gia_tri_so"]["gia_tri_ngam"] == {"toàn màn hình": 100}
+    assert ch.doc_cau_hinh("tai_nghe")["thuoc_tinh"]["thoi_luong_pin"]["cap_so_gach_cheo"] == ["tai_nghe", "kem_hop_sac"]
+    chung = ch.doc_yaml(ch.THU_MUC / "chung.yaml")
+    assert "cả ngày" in chung["cum_khong_phai_dieu_kien"]
+    assert "Luôn Bật" in chung["tu_khang_dinh"]["ten_tinh_nang"]
+
+
+def test_gia_tri_ngam_hong_bi_bao(tai_lieu, mau):
+    dt = copy.deepcopy(ch.doc_cau_hinh("dien_thoai"))
+    kb = dt["cach_dien_dat"]["moc_phan_tram"]["gia_tri_so"]
+    kb["gia_tri_ngam"] = {"sạc đầy": "một trăm", "sạc nửa": 50}
+    loi = ch.kiem_nhom(dt, *tai_lieu, mau)
+    assert any("gia_tri_ngam 'sạc đầy' phải là số" in d for d in loi)
+    assert any("gia_tri_ngam 'sạc nửa' không phải cụm của giá trị này" in d for d in loi)
+    kb["gia_tri_ngam"] = {"sạc đầy": True}
+    assert any("phải là số" in d for d in ch.kiem_nhom(dt, *tai_lieu, mau))
+    kb["gia_tri_ngam"] = ["sạc đầy"]
+    assert any("gia_tri_ngam phải là bảng" in d for d in ch.kiem_nhom(dt, *tai_lieu, mau))
+
+
+def test_cap_so_gach_cheo_hong_bi_bao(tai_nghe, tai_lieu, mau):
+    tt = tai_nghe["thuoc_tinh"]["thoi_luong_pin"]
+    tt["cap_so_gach_cheo"] = ["tai_nghe", "hop_bi_mat"]
+    assert any("cap_so_gach_cheo 'hop_bi_mat' chưa khai báo" in d for d in ch.kiem_nhom(tai_nghe, *tai_lieu, mau))
+    tt["cap_so_gach_cheo"] = ["tai_nghe"]
+    assert any("phải là danh sách hai giá trị khác nhau" in d for d in ch.kiem_nhom(tai_nghe, *tai_lieu, mau))
+    tt["cap_so_gach_cheo"] = ["tai_nghe", "tai_nghe"]
+    assert any("phải là danh sách hai giá trị khác nhau" in d for d in ch.kiem_nhom(tai_nghe, *tai_lieu, mau))
+    tt["cap_so_gach_cheo"] = ["tai_nghe", "kem_hop_sac"]
+    del tt["dieu_kien_bat_buoc"]["bo_phan"]
+    assert any("cần điều kiện bo_phan" in d for d in ch.kiem_nhom(tai_nghe, *tai_lieu, mau))
+
+
+def test_cum_khong_phai_dieu_kien_va_ten_tinh_nang_phai_la_danh_sach_chuoi(tai_lieu):
+    chung = copy.deepcopy(ch.doc_yaml(ch.THU_MUC / "chung.yaml"))
+    assert ch.kiem_chung(chung, tai_lieu[0]) == []
+    chung["cum_khong_phai_dieu_kien"] = "cả ngày"
+    chung["tu_khang_dinh"]["ten_tinh_nang"] = ["Luôn Bật", 5]
+    loi = ch.kiem_chung(chung, tai_lieu[0])
+    assert "chung.cum_khong_phai_dieu_kien: phải là danh sách chuỗi" in loi
+    assert "chung.tu_khang_dinh.ten_tinh_nang: phải là danh sách chuỗi" in loi
+    del chung["cum_khong_phai_dieu_kien"]
+    assert "chung.cum_khong_phai_dieu_kien: phải là danh sách chuỗi" in ch.kiem_chung(chung, tai_lieu[0])

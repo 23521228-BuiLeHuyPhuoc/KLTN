@@ -56,6 +56,7 @@ THAT = {
     "xiaomi_3200_nits_qc": ("qc-dt-xiaomi-15t-gemini-description-ten_thong_so-1",
                             "tần số quét 120Hz cùng độ sáng tối đa 3200 nits"),
     "xiaomi_typ": ("dt-xiaomi-15t#022", "Pin bền bỉ 5500mAh (typ)"),
+    "xiaomi_67w_dinh": ("dt-xiaomi-15t#005", "Sạc nhanh HyperCharge 67WHỗ trợ PD3.0 / PD2.0"),
     "xiaomi_thong_thuong": ("dt-xiaomi-15t#005", "Pin Xiaomi Surge 5500mAh (thông thường)"),
     "watch_dinh_1000": ("dh-apple-watchse3#007", "Độ sáng đỉnh 1000 nit"),
     "watch_sac_15": ("dh-apple-watchse3#009", "Sạc 15 phút cho thời gian sử dụng bình thường lên đến 8 giờ"),
@@ -656,3 +657,91 @@ def test_tim_phien_ban_tu_dat(cac_cau_hinh):
     assert h.tim_phien_ban("Bản 41mm", ma, cac_cau_hinh) == []
     assert h.tim_phien_ban("GPS 44mm", "dt-apple-iphone17", cac_cau_hinh) == []   # mẫu không có bi_danh_phien_ban
     assert h.tim_phien_ban("GPS", "khong-co-mau", cac_cau_hinh) == []
+
+
+# --- Bước 22: dạng "a / b <đơn vị>", tim_so, tên tính năng ---
+# "Đến 7,0/30 giờ" là chuỗi thật của tn-samsung-buds3pro#042; "Đến 7 / 30 giờ" của #038 là chữ dọc (mỗi mảnh một dòng).
+
+def _doan(ma):
+    with open(GOC / "data" / "nguon" / ma.split("#")[0] / "doan.jsonl", encoding="utf-8") as f:
+        return next(json.loads(d) for d in f if json.loads(d)["id"] == ma)["noi_dung"]
+
+
+def test_cap_so_gach_cheo_chuoi_that_042(chung):
+    van_ban = _doan("tn-samsung-buds3pro#042")
+    assert "Đến 7,0/30 giờ" in van_ban
+    gts = h.tim_gia_tri("Đến 7,0/30 giờ", chung)
+    assert [(g.so, g.don_vi) for g in gts] == [(7.0, "gio"), (30.0, "gio")]
+    assert gts[0].dau_nhom == gts[1].dau_nhom == gts[0].dau == 4
+    assert gts[1].chu == "30 giờ"
+    assert [g.so for g in h.tim_gia_tri(van_ban.replace("\n", " "), chung) if g.don_vi == "gio"][:4] == [7.0, 30.0, 6.0, 26.0]
+
+
+@pytest.mark.parametrize("chu,mong_doi", [
+    ("Đến 7 / 30 giờ", [(7.0, "gio"), (30.0, "gio")]),
+    ("lên tới 6/26 giờ", [(6.0, "gio"), (26.0, "gio")]),
+    ("sạc 50 / 80%", [(50.0, "phan_tram"), (80.0, "phan_tram")]),
+    ("5/ 24 tiếng", [(5.0, "gio"), (24.0, "gio")]),
+])
+def test_cap_so_gach_cheo_tu_dat(chung, chu, mong_doi):
+    assert [(g.so, g.don_vi) for g in h.tim_gia_tri(chu, chung)] == mong_doi
+
+
+def test_chu_doc_phai_gop_khoang_trang_truoc(chung):
+    doc = _doan("tn-samsung-buds3pro#038")
+    assert "Đến\n7\n/\n30\ngiờ" in doc
+    assert [g.so for g in h.tim_gia_tri(doc, chung)] == []     # mỗi mảnh một dòng: không khớp
+    gop = " ".join(doc.split())
+    assert [(g.so, g.don_vi) for g in h.tim_gia_tri(gop, chung)] == [(7.0, "gio"), (30.0, "gio"), (6.0, "gio"), (26.0, "gio")]
+
+
+def test_gach_cheo_khong_pha_cac_dang_cu(chung):
+    assert [g.don_vi for g in h.tim_gia_tri("độ sáng 3000 cd/m²", chung)] == ["nit"]
+    ket = h.tim_gia_tri("Pin 30 giờ / 45 phút sạc", chung)   # "/" đứng sau đơn vị: hai giá trị riêng, không phải cặp
+    assert [(g.so, g.dau_nhom) for g in ket] == [(30.0, None), (45.0, None)]
+    assert h.tim_gia_tri("IP68/WR50", chung) == []
+
+
+def test_kieu_gia_tri_cap_so_ap_cho_ca_b(chung):
+    cau = "Thời gian phát Đến 7,0/30 giờ"
+    a, b = h.tim_gia_tri(cau, chung)
+    ka, kb = h.tim_kieu_gia_tri(cau, a, chung), h.tim_kieu_gia_tri(cau, b, chung)
+    assert (ka.kieu, ka.cum) == (kb.kieu, kb.cum) == ("toi_da", "đến")
+    # Số b đứng đơn lẻ (không thuộc cặp) thì cụm đứng xa không áp.
+    lon = h.tim_gia_tri("Đến 7 giờ, còn 30 giờ", chung)[1]
+    assert h.tim_kieu_gia_tri("Đến 7 giờ, còn 30 giờ", lon, chung).kieu == "khong_neu"
+    ka, kb = (h.tim_kieu_gia_tri("luôn 7/30 giờ", g, chung) for g in h.tim_gia_tri("luôn 7/30 giờ", chung))
+    assert ka.kieu == kb.kieu == "khang_dinh"
+
+
+def test_tim_so_co_va_khong_don_vi():
+    ket = h.tim_so("Thời gian phát nhạc (bật ANC) Lên đến 6, IP57, 3.000 mét, 4,5 giờ, WR50, G720")
+    assert [s.so for s in ket] == [6.0, 3000.0, 4.5]
+    assert [s.chu for s in ket] == ["6", "3.000", "4,5"]
+    assert ket[0].dau == 38 and ket[0].cuoi == 39
+    assert [s.so for s in h.tim_so("Đến 7,0/30 giờ")] == [7.0, 30.0]
+    assert h.tim_so("không có số") == []
+
+
+def test_ten_tinh_nang_chua_tu_khang_dinh_khong_tinh(chung, kieu):
+    cau = "Màn hình Luôn Bật 120Hz"
+    assert kieu(cau)[1].kieu != "khang_dinh"
+    assert kieu("Công nghệ ProMotion 120Hz và tính năng Luôn Bật 120Hz")[1].kieu != "khang_dinh"
+    assert kieu("Luôn kết nối 5G và luôn đạt 120Hz")[1].kieu == "khang_dinh"    # "luôn đạt" nằm ngoài tên tính năng
+    assert kieu("Màn hình luôn đạt 120Hz")[1].kieu == "khang_dinh"
+    assert kieu("Màn hình Luôn Bật, luôn đạt 120Hz")[1].kieu == "khang_dinh"
+
+
+def test_don_vi_dinh_tu_viet_hoa_67w_ho_tro(chung):
+    gts = h.tim_gia_tri(that("xiaomi_67w_dinh"), chung)
+    assert [(g.so, g.don_vi) for g in gts] == [(67.0, "W")]
+    assert gts[0].chu == "67W" and that("xiaomi_67w_dinh")[gts[0].dau:gts[0].cuoi] == "67W"
+    assert [(g.so, g.don_vi) for g in h.tim_gia_tri("Pin 5000mAhDung lượng", chung)] == [(5000.0, "mAh")]   # đơn vị dài vẫn khớp trước
+    assert [(g.so, g.don_vi) for g in h.tim_gia_tri("2xZoom quang học", chung)] == [(2.0, "x")]   # chấp nhận
+
+
+def test_don_vi_dinh_chu_thuong_hoac_chu_hoa_don_van_khong_doc(chung):
+    for chu in ("màn hình 5G", "chuẩn IP68", "tần số 120Hz", "44mm", "67Wh", "67Wi-Fi", "30 giờx", "50mAhx", "7WHO", "5xyz"):
+        da_co = [(g.so, g.don_vi) for g in h.tim_gia_tri(chu, chung)]
+        assert da_co == {"tần số 120Hz": [(120.0, "Hz")]}.get(chu, []), chu
+    assert h.tim_gia_tri("67W Hỗ trợ", chung)[0].don_vi == "W"
