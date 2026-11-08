@@ -106,7 +106,7 @@
 
 - `src/kiemchung/p.py`, `scripts/chay_p.py`: P đầu-cuối, cờ P−ĐK (`bo_doi_chieu`) và P−NN (`bo_neo_nguon`), không đọc nhãn. `src/kiemchung/api.py` (FastAPI, `GET /mau-san-pham`, `POST /kiem-chung`), `Dockerfile`; test kiểm kết quả API trùng với gọi tách tự động rồi `p.kiem_chung`. Chưa build Docker (máy chưa có), chưa thử với LLM thật.
 - Bước 35 viết sớm: `luan_van/chuong_3.md` (Opus) và Hình 3.1 (`luan_van/hinh/hinh_3_1.png`, `scripts/ve_hinh_3_1.py`; `.venv` thiếu matplotlib nên chạy bằng Python hệ thống). Chưa đưa lên Google Doc.
-- Bước 40 làm sớm trong repo CopyPro, nhánh `kiem-chung-thong-so`: gộp `main` (xung đột do `7d7d16b` sửa tiếp các dòng mà commit trùng nội dung của nhánh đã sửa; lấy bản của `main`), rồi backend, giao diện, test (commit `0db3bbc`, chưa push, chờ người thực hiện đồng ý). `yarn test` 51 test qua.
+- Bước 40 làm sớm trong repo CopyPro, nhánh `kiem-chung-thong-so`: gộp `main` (xung đột do `7d7d16b` sửa tiếp các dòng mà commit trùng nội dung của nhánh đã sửa; lấy bản của `main`), rồi backend, giao diện, test (commit `0db3bbc`; người thực hiện đồng ý, đã đẩy nhánh lên GitHub, không merge vào `main`). `yarn test` 51 test qua.
 - Chạy thật: Gemini `gemini-3.6-flash` hết hạn mức ngày của tầng miễn phí sau khoảng 14 lần gọi trích xuất (mỗi lần khoảng 10 nghìn token; 503 rồi 429); chuyển sang `openai/gpt-oss-120b` qua Groq cho trích xuất bộ thử, cũng bị giới hạn tốc độ nên chạy có vòng thử lại. Codex Astra báo mô hình `gpt-6-astra` không hỗ trợ tài khoản ChatGPT; việc code chuyển sang Sonnet.
 
 ## 08/11/2026 — Bước 29, 30 (code tách tự động, B1, B2)
