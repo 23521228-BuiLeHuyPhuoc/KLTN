@@ -54,7 +54,9 @@ def test_dieu_kien_dang_so_da_khai_bao():
     dt = ch.doc_cau_hinh("dien_thoai")["thuoc_tinh"]
     assert dt["sac_nhanh"]["dieu_kien_so"]["bo_tiep_hop"] == {"don_vi": "W", "thoa_khi": "tuyen_bo_lon_hon_hoac_bang"}
     assert dt["sac_nhanh"]["dieu_kien_so"]["moc_phan_tram"]["thoa_khi"] == "tuyen_bo_nho_hon_hoac_bang"
-    assert set(dt["khang_nuoc"]["dieu_kien_so"]) == {"do_sau", "thoi_gian_ngam"}
+    # chenh_lech_nhiet_do: Bước 22, hướng dẫn mục 11.3 (V08), "từ 5K trở xuống" của Xiaomi 15T.
+    assert set(dt["khang_nuoc"]["dieu_kien_so"]) == {"do_sau", "thoi_gian_ngam", "chenh_lech_nhiet_do"}
+    assert dt["khang_nuoc"]["dieu_kien_so"]["chenh_lech_nhiet_do"] == {"don_vi": "K", "thoa_khi": "tuyen_bo_nho_hon_hoac_bang"}
     dh = ch.doc_cau_hinh("dong_ho")["thuoc_tinh"]
     assert set(dh["sac_nhanh"]["dieu_kien_so"]) == {"bo_tiep_hop", "moc_phan_tram", "so_phut_sac"}
     tn = ch.doc_cau_hinh("tai_nghe")["thuoc_tinh"]

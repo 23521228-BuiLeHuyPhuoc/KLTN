@@ -5,8 +5,11 @@
 #   hieu_biet_chung: cách nói thường gặp, chưa có trong tài liệu tập phát triển
 # Bước 16 (02/11/2026, hướng dẫn gán nhãn bản 2) thêm: tu_khang_dinh.tu_muc_san (QĐ4), cum_phu (QĐ3); cụm mới của QĐ2 ở các tệp nhóm.
 # Phụ lục mục 13 của data/huong_dan_gan_nhan.md sinh từ các tệp YAML bằng scripts/sinh_phu_luc_cum.py.
-phien_ban: 2
-ngay: 2026-11-02
+# Bước 22 (08/11/2026) thêm theo hướng dẫn mục 11.3: đơn vị K, cụm quan hệ "trở xuống"/"không quá", hai chú thích quy trình thử
+# vào ngu_canh_khong_quyet_dinh, tên tính năng của từ khẳng định (mục 6.2, V40), cụm không phải điều kiện (mục 2, 6.2); khóa
+# gia_tri_ngam ở các tệp nhóm (cụm điều kiện dạng số không có con số, như "sạc đầy" = 100%).
+phien_ban: 3
+ngay: 2026-11-08
 
 loai_dieu_kien: [che_do_hoat_dong, bo_phan, phu_kien, dieu_kien_do, phien_ban, kieu_gia_tri]
 trang_thai_dieu_kien: [khong_ap_dung, khong_neu, chua_xac_dinh]
@@ -53,8 +56,8 @@ dieu_kien_so:
       tu_tai_lieu: ["trở lên", "hoặc cao hơn"]
       hieu_biet_chung: ["tối thiểu", "ít nhất"]
     toi_da:
-      tu_tai_lieu: ["độ sâu tối đa", "tối đa 30 phút", "sâu tới"]
-      hieu_biet_chung: ["không quá"]
+      tu_tai_lieu: ["độ sâu tối đa", "tối đa 30 phút", "sâu tới", "trở xuống", "không quá"]   # hai cụm sau: Xiaomi 15T #012, #035 (5K)
+      hieu_biet_chung: []
 
 # Chữ gọi mức cao (điểm 12, T10, làm rõ 26/10): dùng để phân biệt từ hai giá trị trở lên thì là chế độ
 # (tra cach_goi_theo_hang); gắn với một giá trị duy nhất thì là kiểu giá trị toi_da.
@@ -91,6 +94,8 @@ tu_khang_dinh:
   tu_muc_san: ["hơn <số>", "trên <số>", "không dưới <số>", "<số> trở lên"]
   pham_vi: cau_trich_gia_tri   # chỉ xét trong câu trích của trường giá trị
   bo_qua_khi_co: ["không đảm bảo", "không được đảm bảo", "không bảo đảm", "không phải lúc nào", "không luôn"]
+  # Tên tính năng chứa từ khẳng định thì không tính (hướng dẫn mục 6.2, V40). Cách nói thường gặp; xử lý như bo_qua_khi_co.
+  ten_tinh_nang: ["Màn hình Luôn Bật", "Luôn Bật", "Luôn kết nối"]
   ghi_chu: chưa thêm "tối thiểu" vì trùng "độ sáng tối thiểu"; Bước 16 đã rà từ khẳng định của bộ thử và chỉ thêm nhóm mức sàn
 
 # Cụm phủ nhiều giá trị của một điều kiện (Bước 16, QĐ3; hướng dẫn mục 6.8). Gắn với con số thì tuyên bố phải đúng ở từng giá trị
@@ -115,6 +120,7 @@ chuan_hoa:
     x: ["x"]
     m: ["m", "mét"]
     phan_tram: ["%"]
+    K: ["K"]          # chênh lệch nhiệt độ của bài thử kháng nước Xiaomi 15T ("5K"); Bước 22
   # Tài liệu tập phát triển dùng cả hai kiểu: "3.000 mét", "3.200 nit" (chấm ngăn hàng nghìn)
   # và "4.5" giờ, "5.4" g của Samsung (chấm thập phân); "13,19 giờ", "7,95 mm" (phẩy thập phân).
   so:
@@ -145,4 +151,14 @@ ngu_canh_khong_quyet_dinh:
     - "không phải là điều kiện cố định"
     - "cạn pin"
     - "logo Apple xuất hiện"
+    # Bước 22, hướng dẫn mục 11.3: chú thích quy trình thử, người gán coi là ngữ cảnh (Buds3 Pro #038, Watch SE 3 #008).
+    - "Thời gian phát được kiểm tra bằng cách ghép nối"
+    - "khi không ghép đôi với iPhone và có bật cảm biến nhịp tim"
   hieu_biet_chung: ["thử nghiệm nội bộ"]
+
+# Cụm khen hay nhấn mạnh, không phải điều kiện và không phải từ khẳng định (hướng dẫn mục 2, 6.2, bảng "Từ hay gặp mà không phải
+# từ khẳng định"). Bước trích xuất bỏ một cụm LLM ghi làm điều kiện khi cụm đó, sau chuẩn hóa, trùng hẳn một mục ở đây (không bỏ cụm
+# chỉ chứa mục này, như "chỉ dùng mạng di động"). Cách nói thường gặp, chép từ hướng dẫn.
+cum_khong_phai_dieu_kien: ["cả ngày", "suốt ngày dài", "suốt cả ngày", "suốt cả ngày dài", "không lo hết pin", "không lo ngắt quãng",
+                           "siêu bền", "bền bỉ", "vượt trội", "tuyệt đối", "trọn vẹn", "không giới hạn", "chỉ", "chỉ cần", "chỉ trong",
+                           "ngay cả"]

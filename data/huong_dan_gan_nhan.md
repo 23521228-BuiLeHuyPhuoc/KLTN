@@ -823,7 +823,7 @@ Các cụm này lấy từ tập phát triển nên được phép bổ sung và
 
 ## 13. Phụ lục: cụm diễn đạt trong cấu hình
 
-Phụ lục chép đúng các cụm trong `data/cau_hinh/chung.yaml`, `dien_thoai.yaml`, `tai_nghe.yaml`, `dong_ho.yaml` (bản ngày 02/11/2026), sinh bằng script từ YAML, không gõ tay (`scripts/sinh_phu_luc_cum.py`). Cấu hình đổi thì sinh lại phụ lục và kiểm khớp, như bảng mục 5.
+Phụ lục chép đúng các cụm trong `data/cau_hinh/chung.yaml`, `dien_thoai.yaml`, `tai_nghe.yaml`, `dong_ho.yaml` (bản ngày 08/11/2026), sinh bằng script từ YAML, không gõ tay (`scripts/sinh_phu_luc_cum.py`). Cấu hình đổi thì sinh lại phụ lục và kiểm khớp, như bảng mục 5.
 
 Cách dùng (mục 6.8):
 
@@ -845,8 +845,8 @@ Cách dùng (mục 6.8):
 |  | `thich_ung` | "thích ứng" | – |
 | Chữ gọi mức cao (`tu_goi_muc_cao`) | một giá trị: `toi_da`; nhiều giá trị: `che_do_theo_hang` | "tối đa", "đỉnh", "cực đại" | "peak" |
 | Quan hệ của điều kiện dạng số (`cum_quan_he`) | `toi_thieu` | "trở lên", "hoặc cao hơn" | "tối thiểu", "ít nhất" |
-|  | `toi_da` | "độ sâu tối đa", "tối đa 30 phút", "sâu tới" | "không quá" |
-| Chỉ là ngữ cảnh (`ngu_canh_khong_quyet_dinh`) | | "phòng thí nghiệm", "tiền sản xuất", "phần mềm tiền phát hành", "kết quả thực tế", "không phải là các điều kiện vĩnh viễn", "không phải là điều kiện cố định", "cạn pin", "logo Apple xuất hiện" | "thử nghiệm nội bộ" |
+|  | `toi_da` | "độ sâu tối đa", "tối đa 30 phút", "sâu tới", "trở xuống", "không quá" | – |
+| Chỉ là ngữ cảnh (`ngu_canh_khong_quyet_dinh`) | | "phòng thí nghiệm", "tiền sản xuất", "phần mềm tiền phát hành", "kết quả thực tế", "không phải là các điều kiện vĩnh viễn", "không phải là điều kiện cố định", "cạn pin", "logo Apple xuất hiện", "Thời gian phát được kiểm tra bằng cách ghép nối", "khi không ghép đôi với iPhone và có bật cảm biến nhịp tim" | "thử nghiệm nội bộ" |
 
 Từ khẳng định (`tu_khang_dinh`), chỉ tính khi gắn với con số của giá trị (mục 6.2):
 
@@ -876,7 +876,7 @@ Cụm phủ nhiều giá trị (`cum_phu.mau`, mục 6.8): "mọi điều kiện
 |  | `hdr` | "(HDR)" | "nội dung HDR" |
 |  | `ngoai_troi` | "(ngoài trời)" | "dưới nắng", "ngoài nắng", "ánh nắng", "dưới ánh nắng" |
 |  | `tu_tang_sang` | "Dưới ánh sáng mạnh", "tự động kích hoạt chế độ tăng mức sáng" | – |
-| `dien_tich_do` | `gia_tri_so` | "25% diện tích", "APL 25%" | – |
+| `dien_tich_do` | `gia_tri_so` | "25% diện tích", "APL 25%" | "toàn màn hình" |
 | `kieu_tan_so` | `toi_da` | "Lên đến 120Hz", "tối đa 120Hz" | – |
 |  | `thich_ung` | "tốc độ làm mới thích ứng" | "tần số quét thích ứng" |
 | `loai_zoom` | `quang_hoc` | "quang học", "Telephoto 2x chất lượng quang học" | "optical", "telephoto" |
@@ -885,6 +885,7 @@ Cụm phủ nhiều giá trị (`cum_phu.mau`, mục 6.8): "mọi điều kiện
 |  | `pham_vi` | "phạm vi thu phóng" | "dải zoom" |
 | `che_do_camera` | `chup_anh` | – | "chụp ảnh", "khi chụp" |
 |  | `quay_video` | "Quay Video" | "khi quay" |
+| `chenh_lech_nhiet_do` | `gia_tri_so` | "chênh lệch nhiệt độ" | – |
 | `do_sau` | `gia_tri_so` | "độ sâu tối đa 6 mét", "độ sâu 3 mét", "sâu tới 3 mét" | "ngâm", "dưới nước" |
 | `thoi_gian_ngam` | `gia_tri_so` | "tối đa 30 phút" | – |
 | `loai_nuoc` | `nuoc_ngot` | "nước ngọt tĩnh lặng" | – |
@@ -930,6 +931,7 @@ Cách gọi độ sáng theo hãng (`thuoc_tinh.do_sang.cach_goi_theo_hang`), ch
 | `hoat_dong` | `su_dung_binh_thuong` | "sử dụng bình thường" | "dùng bình thường", "dùng hằng ngày" |
 |  | `tap_luyen` | "tập luyện ngoài trời" | "tập luyện", "tập thể thao" |
 |  | `theo_doi_giac_ngu` | "theo dõi giấc ngủ" | – |
+|  | `chi_mang_di_dong` (chỉ phía tuyên bố) (chỉ `thoi_luong_pin`) | – | "chỉ dùng mạng di động" |
 |  | `chua_ro_hoat_dong` (chỉ phía tuyên bố) | – | "sử dụng liên tục", "dùng liên tục", "liên tục", "sử dụng", "dùng" |
 | `phien_ban` | `gps` | "(GPS)" | – |
 |  | `gps_cellular` | "(GPS + Cellular)" | "bản di động", "eSIM" |
