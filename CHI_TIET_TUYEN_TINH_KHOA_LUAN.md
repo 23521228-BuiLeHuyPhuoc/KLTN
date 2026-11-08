@@ -823,8 +823,8 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] **P−ĐK:** bỏ bước B; mọi thông số cùng sản phẩm và thuộc tính coi như cùng điều kiện, nên chỉ so giá trị. Bản này phải **tắt cả D1a và D1b**: nếu không, các giá trị khác nhau ở những điều kiện khác nhau (6 và 7 giờ) bị coi là "tài liệu mâu thuẫn" và mọi tuyên bố ra Chưa đủ thông tin ([T5.9](#t5-9)).
-- [ ] **P−NN:** bỏ khâu (b) neo nguồn và khâu (c) kiểm tra đầy đủ ở [T5.3](#t5-3); dùng nguyên đầu ra của LLM.
+- [x] **P−ĐK:** bỏ bước B; mọi thông số cùng sản phẩm và thuộc tính coi như cùng điều kiện, nên chỉ so giá trị. Bản này phải **tắt cả D1a và D1b**: nếu không, các giá trị khác nhau ở những điều kiện khác nhau (6 và 7 giờ) bị coi là "tài liệu mâu thuẫn" và mọi tuyên bố ra Chưa đủ thông tin ([T5.9](#t5-9)). *(cài bằng `quyet_dinh(doi_chieu=False)`: không D1a (trừ trích xuất thất bại), không D1b, không D4)*
+- [x] **P−NN:** bỏ khâu (b) neo nguồn và khâu (c) kiểm tra đầy đủ ở [T5.3](#t5-3); dùng nguyên đầu ra của LLM. *(cài bằng `trich_xuat(neo_nguon=False, kiem_day_du=False)`; khâu hiểu điều kiện vẫn chạy để bộ quyết định có mã điều kiện)*
 - [x] Hai bản là hai cờ cấu hình trong `p.py`, không sao chép mã. *(cờ `bo_doi_chieu`, `bo_neo_nguon`; `scripts/chay_p.py --bo-doi-chieu`; P−NN dùng tệp trích xuất chạy với `--khong-neo-nguon --khong-kiem-day-du`, cùng bộ nhớ đệm LLM.)*
 - [x] Thêm kiểm thử: với P−ĐK, tuyên bố "Galaxy Buds3 Pro nghe nhạc 7 giờ khi bật chống ồn" phải ra Đúng (vì 7 giờ có trong tài liệu). Đây đúng là lỗi mà P khắc phục. *(`tests/test_quyet_dinh.py`, `tests/test_p.py`, ví dụ V31.)*
 - [ ] Chạy hai bản trên tập phát triển.
