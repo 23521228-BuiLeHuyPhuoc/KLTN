@@ -897,8 +897,8 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Cài API theo [T7.2](#t7-2) bằng FastAPI: `GET /mau-san-pham` và `POST /kiem-chung` (tách tuyên bố tự động rồi chạy P với cấu hình đã khóa).
-- [ ] Viết `Dockerfile`; chạy trên máy; thử với 3 quảng cáo của tập phát triển.
+- [x] Cài API theo [T7.2](#t7-2) bằng FastAPI: `GET /mau-san-pham` và `POST /kiem-chung` (tách tuyên bố tự động rồi chạy P với cấu hình đã khóa). *(08/11: `src/kiemchung/api.py` (`tao_app`), 22 test với LLM giả, gồm test kết quả API trùng với gọi `tach_bai` rồi `p.kiem_chung` trực tiếp; cài `fastapi==0.143.0`, `uvicorn==0.54.0` theo `requirements.txt`. Cấu hình hiện hành, chưa khóa (Bước 33).)*
+- [ ] Viết `Dockerfile`; chạy trên máy; thử với 3 quảng cáo của tập phát triển. *(08/11: đã viết `Dockerfile`, `.dockerignore` (không đưa `.env`, `data/nhan`, `ket_qua` vào ảnh); máy chưa có Docker nên chưa build; chưa thử với 3 quảng cáo thật vì Gemini hết hạn mức ngày.)*
 
 **Làm ra:** `src/kiemchung/api.py`, `Dockerfile`.
 
