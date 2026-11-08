@@ -12,7 +12,7 @@ Tách **hoàn toàn bằng tay, không nhờ AI gợi ý**. Tuyên bố tách ta
 |---|---|---|---|
 | Bộ thử (Bước 12), 24 bài iPhone 17 và Galaxy Buds3 Pro | `data/tuyen_bo/doc_bo_thu.md` | `data/tuyen_bo/thu_nhap.csv` | `data/tuyen_bo/thu.jsonl` (`tb-00001` … `tb-00066`) |
 | Tập phát triển (Bước 19), 16 bài Apple Watch SE 3 và Xiaomi 15T | `data/tuyen_bo/doc_phat_trien.md` | `data/tuyen_bo/chinh_nhap.csv` | `data/tuyen_bo/chinh.jsonl` (từ `tb-00067`) |
-| Tập kiểm tra (Bước 23), 64 bài của 8 mẫu | tệp đọc riêng, in ở Bước 23 | nối tiếp vào cuối `data/tuyen_bo/chinh_nhap.csv` | `data/tuyen_bo/chinh.jsonl` |
+| Tập kiểm tra (Bước 23), 64 bài của 8 mẫu | `data/tuyen_bo/doc_kiem_tra.md` | nối tiếp vào cuối `data/tuyen_bo/chinh_nhap.csv` | `data/tuyen_bo/chinh.jsonl` |
 
 ## Làm gì
 
