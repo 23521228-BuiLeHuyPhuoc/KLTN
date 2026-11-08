@@ -41,7 +41,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 - [x] [Bước 18](#b18) · 03/11 · Sinh quảng cáo cho 10 mẫu còn lại
 - [ ] [Bước 19](#b19) · 04/11 · Tách tuyên bố của tập phát triển
 - [ ] [Bước 20](#b20) · 05/11 – 06/11 · Gán nhãn tập phát triển
-- [ ] [Bước 21](#b21) · 07/11 · Chuẩn hóa sản phẩm, giá trị, đơn vị, kiểu giá trị
+- [x] [Bước 21](#b21) · 07/11 · Chuẩn hóa sản phẩm, giá trị, đơn vị, kiểu giá trị
 - [ ] [Bước 22](#b22) · 08/11 – 10/11 · Trích xuất có neo nguồn và kiểm tra đầy đủ
 - [ ] [Bước 23](#b23) · 11/11 · Tách tuyên bố của tập kiểm tra
 - [ ] [Bước 24](#b24) · 12/11 – 13/11 · Gán nhãn tập kiểm tra
@@ -607,8 +607,8 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Cài chuẩn hóa theo [T5.4](#t5-4): đơn vị, số, chuẩn IP, kiểu giá trị, tên sản phẩm và phiên bản (bảng bí danh trong tệp cấu hình).
-- [ ] Viết ít nhất 20 kiểm thử, lấy cách viết thật từ quảng cáo và trang thông số của tập phát triển.
+- [x] Cài chuẩn hóa theo [T5.4](#t5-4): đơn vị, số, chuẩn IP, kiểu giá trị, tên sản phẩm và phiên bản (bảng bí danh trong tệp cấu hình). *(08/11: `src/kiemchung/chuan_hoa.py`: `doc_so`, `chuan_don_vi`, `quy_doi`, `tim_gia_tri`, `tach_ip`, `so_ip` theo nhánh IEC 60529, `doc_iso_22810`, `bang_nhau`, `so_huong`, `tim_kieu_gia_tri` (cụm đứng liền con số của chính giá trị), `tim_san_pham` (khớp dài nhất, chặn `khong_nham_voi`), `tim_phien_ban`. Mọi cụm đọc từ YAML.)*
+- [x] Viết ít nhất 20 kiểm thử, lấy cách viết thật từ quảng cáo và trang thông số của tập phát triển. *(225 ca trong `tests/test_chuan_hoa.py`; 43 chuỗi thật ghi nguồn và có test kiểm là chuỗi con của nguồn, chỉ mở 4 mẫu phát triển. Còn để Bước 22: dạng "Đến 6 / 26 giờ" một đơn vị cho hai số, con số không kèm đơn vị trong dòng bảng, tên tính năng "Luôn Bật" chưa bị loại khỏi từ khẳng định.)*
 
 **Làm ra:** `src/kiemchung/chuan_hoa.py`, `tests/test_chuan_hoa.py`.
 
