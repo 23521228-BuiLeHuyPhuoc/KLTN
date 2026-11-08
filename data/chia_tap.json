@@ -1,0 +1,58 @@
+{
+  "buoc": 26,
+  "ngay": "2026-11-08",
+  "nguon": "data/mau_san_pham.csv (cột tap, chia ở Bước 4 ngày 15/10/2026)",
+  "sha256_mau_san_pham_csv": "81aa9ee67e4b69aa3d75d8157fa8959cfea899c772e076062015f557d9d5eb14",
+  "quy_tac": [
+    "Chia theo mẫu sản phẩm: mọi tuyên bố của một mẫu thuộc tập của mẫu đó (T6.3).",
+    "Bộ thử (2 mẫu thử) thuộc tập phát triển.",
+    "Biến thể cặp tối thiểu đi theo tập của tuyên bố gốc.",
+    "Mọi lựa chọn thiết kế chỉ dựa trên tập phát triển (T3.5 quy tắc 4); nhãn tập kiểm tra chỉ mở lại để gán lại mù ở Bước 32."
+  ],
+  "phat_trien": {
+    "mau": [
+      "dt-apple-iphone17",
+      "dt-xiaomi-15t",
+      "tn-samsung-buds3pro",
+      "dh-apple-watchse3"
+    ],
+    "mau_thu": [
+      "dt-apple-iphone17",
+      "tn-samsung-buds3pro"
+    ],
+    "nhom": [
+      "dien_thoai",
+      "dong_ho",
+      "tai_nghe"
+    ],
+    "hang": [
+      "Apple",
+      "Samsung",
+      "Xiaomi"
+    ]
+  },
+  "kiem_tra": {
+    "mau": [
+      "dt-oppo-findx8",
+      "dt-samsung-galaxys25ultra",
+      "dt-xiaomi-redminote14proplus5g",
+      "tn-apple-airpodspro3",
+      "tn-apple-airpods4",
+      "tn-xiaomi-redmibuds6pro",
+      "dh-samsung-galaxywatch8",
+      "dh-xiaomi-watchs4"
+    ],
+    "nhom": [
+      "dien_thoai",
+      "dong_ho",
+      "tai_nghe"
+    ],
+    "hang": [
+      "Apple",
+      "OPPO",
+      "Samsung",
+      "Xiaomi"
+    ]
+  },
+  "tuyen_bo": "Danh sách mã tuyên bố theo tập ghi sau khi tách tay xong cả hai tập (Bước 19, 23)."
+}
