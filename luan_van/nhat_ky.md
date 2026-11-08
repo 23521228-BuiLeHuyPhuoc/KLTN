@@ -102,6 +102,14 @@
 - Ranh giới giữ nguyên và đã nói với người thực hiện: trang chỉ bắt mâu thuẫn giữa các ô người gán điền, không đọc câu tuyên bố để gợi ý nhãn, vì nhãn chuẩn là đáp án chấm hệ thống P. Nhãn đã gán trước đó chưa có `dong_d` nên phải mở lại chọn dòng; số giây của các tuyên bố này sẽ gồm cả lần xem lại.
 - Thêm khung "Ca đặc biệt" (bảng `CA_DAC_BIET` trong `tao_cong_cu_gan_nhan.py`, 15 mục): tóm tắt bằng lời các quy tắc riêng và ca đã chốt của hướng dẫn (mục 4, 5.1, 6.2–6.6, 11; V03, V18, V21, V28, V35, V36, V40, V42, V45, V47, V48...), lọc theo mẫu và thuộc tính ghi sẵn trên tuyên bố. Có một mục "chưa có quy tắc" cho cụm kiểu "với mọi điều kiện ánh sáng", nhắc ghi câu hỏi nhãn. Bảng viết tay nên phải sửa theo khi hướng dẫn đổi. 358 test đạt.
 
+## 08/11/2026 — Bước 27
+
+- Opus viết đặc tả `luan_van/buoc27_thiet_ke_quyet_dinh.md` (bản cài của hướng dẫn mục 5–7, luật cần thêm để máy chạy được ghi dấu [luật cài]); Sonnet cài `src/kiemchung/quyet_dinh.py`, `src/kiemchung/ly_do.py`, 155 test. 51 ví dụ V01–V51 của hướng dẫn dựng tay thành bản ghi trích xuất (câu trích thật của `doan.jsonl`), dùng làm kiểm thử hồi quy: 51/51 đúng nhãn, dòng D, loại.
+- Lần đầu 49/51: V23 (Xiaomi 15T sạc 67W) và V27 (3200 nit "trên toàn màn hình") ra Đúng thay vì Lệch, vì cùng con số lặp ở đoạn không ghi điều kiện bị coi là "như hãng công bố". Thêm luật lan điều kiện giữa các mục cùng giá trị (hướng dẫn mục 8 coi các đoạn lặp là cùng một dòng thông số), kể cả cụm lạ; không lan khi các đoạn ghi điều kiện khác nhau. V23 cần thêm: QĐ15 không lấy điều kiện có cách hiểu `khong_mua_them` (hướng dẫn mục 5: con số cần bộ sạc bán riêng là Lệch "dù tuyên bố chép đúng con số").
+- Thêm `chung.yaml chep_nhan.bo_chu_dau` ("thời gian", "thời lượng") để tính nhãn của dòng thông số cho QĐ15.
+- Chỗ hướng dẫn cần người thực hiện xem: V48 tiêu đề ghi 30 giờ, dòng lý do ghi 26 giờ; V12 ghi chú `mac_dinh=che_do_hien_thi` trong khi bộ quyết định coi chế độ hiển thị là không áp dụng (trang Watch SE 3 chỉ có một con số) nên không ghi; dòng "P:" của V41, V51 đã cũ vì cấu hình đã bổ sung cụm ở Bước 22. Điểm 5, 6, 14 ở T10 cài theo hướng dẫn bản 2.
+- Chưa làm: đếm ngưỡng QĐ8 (hàm `dem_nguong_qd8` đã có) vì cần nhãn chuẩn; chạy trên bản ghi trích xuất thật (Bước 28).
+
 ## 08/11/2026 — Bước 22 (cài trích xuất có neo nguồn)
 
 - Sonnet cài theo đặc tả của Opus: `src/kiemchung/neo_nguon.py` (khâu b: chuẩn hóa so khớp có bản đồ vị trí, kiểm từng trường; giá trị kháng nước "co"/"khong"), `src/kiemchung/trich_xuat.py` (câu lệnh lần thử 1, hiểu điều kiện kiểu đóng, kiểm tra đầy đủ chỉ trong dòng của giá trị, bộ thông số, cờ cho P−NN), `scripts/chay_trich_xuat.py`; `lay_doan` chuyển sang `truy_hoi.py` để B0 và P dùng chung top-k. `chuan_hoa.py` thêm dạng "a / b <đơn vị>", `tim_so`, tên tính năng của từ khẳng định, ranh giới đơn vị dính chữ hoa ("67WHỗ trợ" của `dt-xiaomi-15t#005`). Câu lệnh và mô tả thuộc tính trong mã sinh từ đặc tả và hướng dẫn tách tay, test so lại.

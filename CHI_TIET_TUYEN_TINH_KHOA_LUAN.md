@@ -47,7 +47,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 - [ ] [Bước 24](#b24) · 12/11 – 13/11 · Gán nhãn tập kiểm tra
 - [ ] [Bước 25](#b25) · 14/11 – 15/11 · Tạo tập cặp tối thiểu
 - [ ] [Bước 26](#b26) · 16/11 · Ghi chính thức cách chia tập, gửi việc cho người gán thứ hai
-- [ ] [Bước 27](#b27) · 17/11 – 19/11 · Cài bộ quyết định A–D, sinh lý do, kiểm thử
+- [x] [Bước 27](#b27) · 17/11 – 19/11 · Cài bộ quyết định A–D, sinh lý do, kiểm thử
 - [ ] [Bước 28](#b28) · 20/11 · Ghép phương pháp P, đo độ đúng trích xuất
 - [ ] [Bước 29](#b29) · 21/11 · Tách và lọc tuyên bố tự động
 - [ ] [Bước 30](#b30) · 22/11 – 23/11 · Cài đặt đối chứng B1, B2, B3
@@ -739,11 +739,11 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Cài bốn bước A–D theo mã giả ở [T5.5](#t5-5), đúng thứ tự trong đề cương; các dòng D1–D6 ở [T4.3](#t4-3).
-- [ ] Sinh lý do từ dấu vết theo mẫu câu ở [T5.6](#t5-6).
-- [ ] Viết kiểm thử theo [T5.8](#t5-8): mỗi dòng D1–D6 (kể cả D1a, D1b) ít nhất 3 kiểm thử (khớp, không khớp, trường hợp biên); mọi ví dụ trong hướng dẫn gán nhãn thành kiểm thử hồi quy.
-- [ ] Cài luật chặn điều kiện lạ (thêm 26/10, điểm 15 ở [T10](#t10), `chung.yaml` mục `dieu_kien_la`): giá trị có `dieu_kien_khac` không bao giờ dẫn tới Đúng; quảng cáo khớp giá trị này ra D1a với nguyên nhân `dieu_kien_la`. "So thẳng" chỉ khi giá trị không kèm cụm điều kiện nào. Kiểm thử ba tình huống ở mục 4 của `luan_van/phan_tich_dieu_kien_ngoai_cau_hinh.md`. Cài luật chung cho nhiều giá trị khác nhau ở cùng điều kiện lạ thành công tắc, mặc định tắt, chọn ở Bước 33.
-- [ ] Chốt điểm 5, 6 và 14 ở [T10](#t10).
+- [x] Cài bốn bước A–D theo mã giả ở [T5.5](#t5-5), đúng thứ tự trong đề cương; các dòng D1–D6 ở [T4.3](#t4-3). *(08/11: `src/kiemchung/quyet_dinh.py` theo đặc tả `luan_van/buoc27_thiet_ke_quyet_dinh.md` của Opus; các luật cài thêm ghi dấu [luật cài]: dạng của sạc nhanh đồng hồ, điều kiện áp dụng, mục tài liệu không ghi điều kiện, lan điều kiện giữa các đoạn cùng con số (V23, V27), QĐ15 không lấy điều kiện bộ sạc bán riêng)*
+- [x] Sinh lý do từ dấu vết theo mẫu câu ở [T5.6](#t5-6). *(`src/kiemchung/ly_do.py`, tám mẫu câu)*
+- [x] Viết kiểm thử theo [T5.8](#t5-8): mỗi dòng D1–D6 (kể cả D1a, D1b) ít nhất 3 kiểm thử (khớp, không khớp, trường hợp biên); mọi ví dụ trong hướng dẫn gán nhãn thành kiểm thử hồi quy. *(155 test trong `tests/test_quyet_dinh.py`; 51/51 ví dụ V01–V51 ra đúng nhãn, dòng D, loại của hướng dẫn, dựng tay ở `tests/du_lieu/vi_du_huong_dan.json` với câu trích thật)*
+- [x] Cài luật chặn điều kiện lạ (thêm 26/10, điểm 15 ở [T10](#t10), `chung.yaml` mục `dieu_kien_la`): giá trị có `dieu_kien_khac` không bao giờ dẫn tới Đúng; quảng cáo khớp giá trị này ra D1a với nguyên nhân `dieu_kien_la`. "So thẳng" chỉ khi giá trị không kèm cụm điều kiện nào. Kiểm thử ba tình huống ở mục 4 của `luan_van/phan_tich_dieu_kien_ngoai_cau_hinh.md`. Cài luật chung cho nhiều giá trị khác nhau ở cùng điều kiện lạ thành công tắc, mặc định tắt, chọn ở Bước 33. *(có công tắc luật chung, mặc định tắt)*
+- [x] Chốt điểm 5, 6 và 14 ở [T10](#t10). *(cài theo hướng dẫn bản 2 đã duyệt: D2 áp cho mức không cao hơn mức "lên đến"; D1b sau D1a, trước D2, có ngoại lệ QĐ13; không xác định được điều kiện thì D1a ngay. Người thực hiện có thể đổi trước Bước 33)*
 
 **Làm ra:** `src/kiemchung/quyet_dinh.py`, `tests/test_quyet_dinh.py`.
 

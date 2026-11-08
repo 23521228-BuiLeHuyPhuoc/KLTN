@@ -27,6 +27,10 @@ chon_gia_tri_khi_khong_neu:
   nhieu_gia_tri_co_dieu_kien: theo_hieu_thong_thuong
   khong_xac_dinh_duoc: D1a
 
+# Bước 27, QĐ15: chữ chung đầu nhãn của một dòng thông số ("Thời gian xem video"); bị bỏ khi tính nhãn để so với chữ tuyên bố.
+chep_nhan:
+  bo_chu_dau: ["thời gian", "thời lượng"]
+
 # Điều kiện lạ trong tài liệu (T10 điểm 15; luan_van/phan_tich_dieu_kien_ngoai_cau_hinh.md).
 # Phát hiện điều kiện làm theo kiểu mở, hiểu điều kiện làm theo kiểu đóng.
 dieu_kien_la:

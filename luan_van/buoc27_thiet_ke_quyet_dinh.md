@@ -30,6 +30,7 @@ Trường giống bản ghi nhãn chuẩn (hướng dẫn mục 8) để so tr�
 2. Tuyên bố gọi sản phẩm khác mẫu (`san_pham_ma` khác `ma_mau`, hoặc tên khớp `khong_nham_voi`): `CHUA_DU`, `D1` (tài liệu của sản phẩm tuyên bố nói không có trong kho).
 3. `cung_tt` = các mục tài liệu cùng `thuoc_tinh`, có `gia_tri`, không `khac_san_pham`. Rỗng: `D1`, không ghi `mac_dinh`.
 4. **Dạng của sạc nhanh đồng hồ** (`don_vi: phut_hoac_gio`) **[luật cài]**: giá trị tính bằng phút là dạng 1 (thời gian sạc tới mốc), bằng giờ là dạng 2 (số giờ dùng sau X phút sạc). Chỉ so trong cùng dạng; `cung_tt` chỉ giữ mục cùng dạng với tuyên bố; điều kiện có `pham_vi_ap_dung` "dạng 1" hay "dạng 2" chỉ áp cho dạng đó. Thuộc tính khác quy về đơn vị của thuộc tính (`quy_doi` giờ ↔ phút).
+5. **Lan điều kiện giữa các mục cùng giá trị** **[luật cài]** (thêm sau Bước 27 cài lần đầu; áp sau khi lập `cung_tt`, trước bước B; P−ĐK không cần). Với mỗi điều kiện bắt buộc `c` (không tính kiểu giá trị): nhóm các mục `cung_tt` có giá trị bằng nhau (`bang`, cùng dạng, cùng đơn vị sau quy đổi). Trong một nhóm, nếu mọi mục có ghi `c` (mọi nguồn) cùng một giá trị (điều kiện số: cùng số và đơn vị) thì mục không ghi `c` nhận giá trị đó, nguồn `lan` (trong `vet.lan` và `nguon_dieu_kien` của bản sao mục; bản ghi đầu vào không bị sửa). Từ hai giá trị khác nhau của `c` trong nhóm thì không lan `c`. Không lan qua mục `khac_san_pham` (đã loại ở ý 3). `dieu_kien_khac` cũng lan: mọi mục trong nhóm nhận hợp các cụm lạ của nhóm (an toàn cho FAR, luật chặn vẫn đúng). Lý do: HD mục 8 coi các đoạn lặp cùng con số là cùng một dòng thông số (V09, V31). Ví dụ V23: `#005` có bộ sạc 67W hoặc cao hơn (chú thích), `#022`, `#046` chỉ ghi "Sạc nhanh HyperCharge 67W"; cùng giá trị 67W nên hai mục sau nhận bộ sạc 67W, và tuyên bố không nêu bộ sạc (hiểu là không mua thêm) ra Lệch D4 thay vì Đúng nhờ `#022`. Ví dụ V27: `#004` ghi 25% diện tích, `#037` không ghi; cùng 3200 nit nên `#037` nhận 25%, và 100% của tuyên bố ra Lệch D4. Hệ quả cho QĐ15: chép nhãn không lấy điều kiện có cách hiểu `khong_mua_them` (V23: nhãn "Sạc nhanh HyperCharge" không làm bộ sạc thành điều kiện của tuyên bố).
 
 ## 3. Bước B: điều kiện của tuyên bố
 
@@ -74,7 +75,7 @@ Không xác định được điều kiện được phủ thì vẫn là điề
 | `nhu_hang_cong_bo` | không ràng buộc (khớp mọi giá trị của `c`) | không ghi |
 | `khong_co_mac_dinh` | D1a (B1), trừ khi so thẳng | ghi (khi D1a) |
 
-**So thẳng** (`chon_gia_tri_khi_khong_neu.mot_gia_tri_khong_dieu_kien`): mọi mục của `cung_tt` cùng bộ phận chỉ có một giá trị (bằng nhau), và không mục nào có điều kiện nào (kể cả `dieu_kien_khac`, kể cả kiểu giá trị do chữ gọi mức cao) thì tuyên bố không nêu điều kiện so thẳng với giá trị đó (V12); không dừng ở D1a vì `khong_co_mac_dinh`. Lý do ghi "tài liệu không nêu điều kiện".
+**So thẳng** (`chon_gia_tri_khi_khong_neu.mot_gia_tri_khong_dieu_kien`): mọi mục của `cung_tt` cùng bộ phận chỉ có một giá trị (bằng nhau), và không mục nào có điều kiện nào (kể cả `dieu_kien_khac`; chữ gọi mức cao như "đỉnh" không tính là điều kiện, vì V12 so thẳng) thì tuyên bố không nêu điều kiện so thẳng với giá trị đó (V12); không dừng ở D1a vì `khong_co_mac_dinh`. Lý do ghi "tài liệu không nêu điều kiện".
 
 ## 4. Điều kiện "áp dụng" và điều kiện của mục tài liệu
 
