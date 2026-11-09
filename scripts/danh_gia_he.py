@@ -11,6 +11,14 @@ thành "-", "ĐK" thành "DK" (P−ĐK -> P-DK, P−NN -> P-NN). Ghi trong --ra:
     nham_lan_<he>.csv   bảng nhầm lẫn từng hệ
     theo_nhom.csv    mô tả theo nhóm sản phẩm, hãng, llm_sinh, che_do (và loại biến đổi với cặp tối thiểu), không CI
     do_nhay.csv      phân tích độ nhạy: đổi nhãn mặc định, ngoai_bang, bỏ D1b, bỏ mau_thuan_khop_ca_hai
+Các tệp sau chỉ ghi khi có tham số (logic ở src/kiemchung/bao_cao_ket_qua.py):
+    recall_k.csv         --recall-k [--cach-tach ...] [--nhan-bang-chung tệp] [--thu-muc-nguon thư mục]: Recall@k của BM25, KTC theo cụm
+    tach_tu_dong.csv     --tach-tu-dong tệp --tach-tay tệp: Precision, Recall của tách tự động (chung, che_do, llm_sinh, nhom)
+    chi_phi.csv          --chi-phi TEN=tệp (lặp lại; P dùng tệp của chay_trich_xuat.py) [--gia-token json] [--tran-mac-dinh TEN=SO]
+    ty_le_theo_che_do.csv  --ty-le-che-do: số, tỷ lệ Lệch và Sai chuẩn theo che_do, KTC theo cụm
+    bao_phu.csv          --bao-phu [--trich-xuat tệp]: độ bao phủ theo hãng, nhóm (bản ghi của hệ chính phải có dong_d, vet)
+    bang_bo_nhom.csv     --bang-bo-nhom: FAR, Recall Đúng của mọi hệ khi giữ/bỏ D1b và mau_thuan_khop_ca_hai của hệ chính
+    loai_bien_doi.csv    --f1-lech-theo-loai (cần --cap-toi-thieu): P, R, F1 nhãn Lệch theo loại biến đổi và cả tập, KTC theo cụm
 Chạy:
     .venv/Scripts/python.exe -X utf8 scripts/danh_gia_he.py --nhan data/nhan/<tệp>.jsonl --tuyen-bo data/tuyen_bo/<tệp>.jsonl
         --he B0=... --he P=... --tap kiem_tra --ra ket_qua/kiem_tra/bang
@@ -24,7 +32,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from kiemchung import danh_gia as dg, thong_ke as tk  # noqa: E402
+from kiemchung import bao_cao_ket_qua as bc, danh_gia as dg, thong_ke as tk, truy_hoi as th  # noqa: E402
 
 TEP_CHIA_TAP = ROOT / "data/chia_tap.json"
 TEP_MAU_SAN_PHAM = ROOT / "data/mau_san_pham.csv"
@@ -336,6 +344,102 @@ COT_NHAY = ["he", "kich_ban", "n", "far_mau", "far", "recall_dung_mau", "recall_
             "so_ca_bo", "ghi_chu"]
 
 
+def duong_cua_he(cac_he, ten):
+    """Đường dẫn của hệ có tên chuẩn hóa là ten trong danh sách TEN=duong_dan."""
+    for muc in cac_he:
+        t, _, duong = muc.partition("=")
+        if chuan_hoa_ten(t) == ten:
+            return duong.strip()
+    raise ValueError(f"không có hệ {ten}")
+
+
+def doc_cap_ten_so(cac, ten_tham_so):
+    """['TEN=SO'] -> {tên chuẩn: số nguyên}."""
+    ket = {}
+    for muc in cac or []:
+        ten, dau, so = muc.partition("=")
+        if not dau or not so.strip().isdigit():
+            raise ValueError(f"{ten_tham_so} phải có dạng TEN=SO, nhận được: {muc!r}")
+        ket[chuan_hoa_ten(ten)] = int(so)
+    return ket
+
+
+def chuan_bi_phu(args, ban_ghi_nhan, ban_ghi_tuyen_bo, hang, he_chinh):
+    """Đọc và kiểm đầu vào của các bảng phụ trước khi ghi tệp nào; trả dict dữ liệu đã đọc (ValueError nếu sai)."""
+    phu = {}
+    ma_hang = {h["id"] for h in hang}
+    if args.recall_k:
+        nguon = doc_jsonl(args.nhan_bang_chung) if args.nhan_bang_chung else ban_ghi_nhan
+        bang_chung = {r["id"]: r.get("bang_chung") or [] for r in nguon}
+        thieu = sorted(ma_hang - set(bang_chung))
+        if thieu:
+            raise ValueError(f"tệp bằng chứng chuẩn thiếu {len(thieu)} tuyên bố: {thieu}")
+        phu["bang_chung"] = bang_chung
+        phu["chu"] = {r["id"]: r for r in ban_ghi_tuyen_bo}
+    if args.tach_tu_dong:
+        mau_sp = doc_mau_san_pham(args.mau_san_pham)
+        for ten, duong in (("tu_dong", args.tach_tu_dong), ("tach_tay", args.tach_tay)):
+            ds = doc_jsonl(duong)
+            thieu = sorted({d["ma_mau"] for d in ds if not d.get("nhom") and d["ma_mau"] not in mau_sp})
+            if thieu:
+                raise ValueError(f"mã mẫu không có trong {args.mau_san_pham.name}: {thieu}")
+            phu[ten] = bc.them_nhom(ds, mau_sp)
+    if args.chi_phi:
+        ban_ghi = {}
+        for muc in args.chi_phi:
+            ten, dau, duong = muc.partition("=")
+            if not dau or not ten.strip() or not duong.strip():
+                raise ValueError(f"--chi-phi phải có dạng TEN=duong_dan.jsonl, nhận được: {muc!r}")
+            ban_ghi[chuan_hoa_ten(ten)] = doc_jsonl(duong.strip())
+        phu["ban_ghi_chi_phi"] = ban_ghi
+        phu["gia_token"] = json.loads(args.gia_token.read_text(encoding="utf-8-sig")) if args.gia_token else None
+        phu["tran"] = doc_cap_ten_so(args.tran_mac_dinh, "--tran-mac-dinh")
+    if args.bao_phu or args.bang_bo_nhom:
+        phu["ban_ghi_p"] = [r for r in doc_jsonl(duong_cua_he(args.he, he_chinh)) if r["id"] in ma_hang]
+        if args.bao_phu and any("dong_d" not in r for r in phu["ban_ghi_p"]):
+            raise ValueError(f"bản ghi của {he_chinh} thiếu dong_d (cần tệp đầu ra của scripts/chay_p.py)")
+    if args.bao_phu and args.trich_xuat:
+        phu["trich_xuat"] = doc_jsonl(args.trich_xuat)
+    return phu
+
+
+def ghi_bang_phu(args, phu, hang, he, ra):
+    """Ghi các CSV tùy chọn theo tham số đã truyền."""
+    n, seed = args.n_bootstrap, args.seed
+    if args.recall_k:
+        dong = []
+        for cach in args.cach_tach or th.CACH_TACH:
+            xep = {h["id"]: [m for m, _ in th.truy_hoi(h["ma_mau"], phu["chu"][h["id"]]["tuyen_bo"], None, cach, args.thu_muc_nguon)]
+                   for h in hang if phu["bang_chung"][h["id"]]}
+            dong += bc.recall_k(hang, xep, phu["bang_chung"], cach, n=n, seed=seed)
+        ghi_csv(ra / "recall_k.csv", ["cach_tach", "k", "trung", "mau_so", "recall", "duoi", "tren", "n_cum", "n_bootstrap", "seed"], dong)
+    if args.tach_tu_dong:
+        ghi_csv(ra / "tach_tu_dong.csv", ["phan_nhom", "gia_tri", "so_tu_dong", "so_tach_tay", "so_cap", "precision", "recall",
+                                          "so_cap_co_dieu_kien", "so_cap_cung_dieu_kien", "ty_le_cung_dieu_kien"],
+                bc.tach_tu_dong(phu["tu_dong"], phu["tach_tay"]))
+    if args.chi_phi:
+        dong = bc.chi_phi(phu["ban_ghi_chi_phi"], {h["id"]: h["cum"] for h in hang}, phu["gia_token"], phu["tran"])
+        ghi_csv(ra / "chi_phi.csv", ["he", "mo_hinh", "so_tuyen_bo", "so_bai", "input_tb", "output_tb", "reasoning_tb", "total_tb",
+                                     "giay_tb", "giay_trung_vi", "giay_tb_moi_bai", "token_tb_moi_bai", "tran_mac_dinh", "so_goi_lai",
+                                     "so_loi", "usd_moi_tuyen_bo", "usd_moi_bai"], dong)
+    if args.ty_le_che_do:
+        ghi_csv(ra / "ty_le_theo_che_do.csv", ["che_do", "n", "so_lech", "ty_le_lech", "lech_duoi", "lech_tren", "so_sai", "ty_le_sai",
+                                               "sai_duoi", "sai_tren"], bc.ty_le_theo_che_do(hang, n, seed))
+    if args.bao_phu:
+        cot = ["chieu", "gia_tri", "n_tuyen_bo", "n_gia_tri_bang_chung", "n_co_dieu_kien_khac", "ty_le_co_dieu_kien_khac"]
+        for c in ("dieu_kien_la", "chua_xac_dinh_khac", "khong_co_mac_dinh", "trich_xuat_that_bai", "mau_thuan_tai_lieu",
+                  "chua_xac_dinh_pham_vi"):
+            cot += [f"n_{c}", f"ty_le_{c}"]
+        ghi_csv(ra / "bao_phu.csv", cot, bc.bao_phu(hang, phu["ban_ghi_p"], phu.get("trich_xuat")))
+    if args.bang_bo_nhom:
+        ghi_csv(ra / "bang_bo_nhom.csv", ["he", "kich_ban", "so_d1b", "so_mau_thuan", "so_giao", "so_ca_bo", "n", "far_tu", "far_mau",
+                                          "far", "recall_dung_tu", "recall_dung_mau", "recall_dung"],
+                bc.bang_bo_nhom(hang, he, phu["ban_ghi_p"]))
+    if args.f1_lech_theo_loai:
+        ghi_csv(ra / "loai_bien_doi.csv", ["he", "loai_bien_doi", "n", "n_lech_chuan", "precision_lech", "recall_lech", "f1_lech",
+                                           "f1_lech_duoi", "f1_lech_tren"], bc.f1_lech_theo_loai(hang, he, n, seed))
+
+
 def main(argv=None):
     for luong in (sys.stdout, sys.stderr):
         if hasattr(luong, "reconfigure"):
@@ -352,9 +456,27 @@ def main(argv=None):
     ap.add_argument("--seed", type=int, default=2026)
     ap.add_argument("--chia-tap", type=Path, default=TEP_CHIA_TAP)
     ap.add_argument("--mau-san-pham", type=Path, default=TEP_MAU_SAN_PHAM)
+    ap.add_argument("--recall-k", action="store_true", help="ghi recall_k.csv (bằng chứng chuẩn: trường bang_chung của tệp nhãn)")
+    ap.add_argument("--cach-tach", action="append", choices=th.CACH_TACH, help="cách tách của recall_k (lặp lại; mặc định cả hai)")
+    ap.add_argument("--nhan-bang-chung", type=Path, help="tệp nhãn lấy bang_chung cho recall_k (mặc định --nhan)")
+    ap.add_argument("--thu-muc-nguon", type=Path, default=th.THU_MUC_NGUON, help="thư mục data/nguon của truy hồi (recall_k)")
+    ap.add_argument("--tach-tu-dong", type=Path, help="jsonl tuyên bố tách tự động (ghi tach_tu_dong.csv, cần --tach-tay)")
+    ap.add_argument("--tach-tay", type=Path, help="jsonl tuyên bố tách tay (ma_qc, ma_mau, thuoc_tinh, tuyen_bo, che_do, llm_sinh)")
+    ap.add_argument("--chi-phi", action="append", metavar="TEN=DUONG_DAN", help="bản ghi đầu ra của một hệ để tính thời gian, chi phí")
+    ap.add_argument("--gia-token", type=Path, help='json {"<mô hình>": {"vao": USD/1M, "ra": USD/1M}}; có thì chi_phi.csv có cột USD')
+    ap.add_argument("--tran-mac-dinh", action="append", metavar="TEN=SO", help="ghi đè trần token ra mặc định (P*: 8192, hệ khác: 4096)")
+    ap.add_argument("--ty-le-che-do", action="store_true", help="ghi ty_le_theo_che_do.csv")
+    ap.add_argument("--bao-phu", action="store_true", help="ghi bao_phu.csv từ bản ghi của --he-chinh")
+    ap.add_argument("--trich-xuat", type=Path, help="jsonl bản ghi trích xuất, cho cột dieu_kien_khac của bao_phu.csv")
+    ap.add_argument("--bang-bo-nhom", action="store_true", help="ghi bang_bo_nhom.csv từ bản ghi của --he-chinh")
+    ap.add_argument("--f1-lech-theo-loai", action="store_true", help="ghi loai_bien_doi.csv (cần --cap-toi-thieu)")
     args = ap.parse_args(argv)
     if args.n_bootstrap < 1:
         ap.error("--n-bootstrap phải dương")
+    if bool(args.tach_tu_dong) != bool(args.tach_tay):
+        ap.error("--tach-tu-dong và --tach-tay phải đi cùng nhau")
+    if args.f1_lech_theo_loai and not args.cap_toi_thieu:
+        ap.error("--f1-lech-theo-loai cần --cap-toi-thieu")
     try:
         he_chinh = chuan_hoa_ten(args.he_chinh)
         he = doc_he(args.he)
@@ -368,9 +490,11 @@ def main(argv=None):
             chuan[r["id"]] = r["nhan"]
         with open(args.chia_tap, encoding="utf-8-sig") as f:
             chia_tap = json.load(f)
-        hang = chon_mau(doc_jsonl(args.tuyen_bo), args.tap, args.cap_toi_thieu, doc_mau_san_pham(args.mau_san_pham), chia_tap)
+        ban_ghi_tuyen_bo = doc_jsonl(args.tuyen_bo)
+        hang = chon_mau(ban_ghi_tuyen_bo, args.tap, args.cap_toi_thieu, doc_mau_san_pham(args.mau_san_pham), chia_tap)
         kiem_day_du(hang, chuan, he)
-        sai = sorted({chuan[h["id"]] for h in hang} - set(dg.NHAN_CHUAN))
+        phu = chuan_bi_phu(args, ban_ghi_nhan, ban_ghi_tuyen_bo, hang, he_chinh)
+        sai =sorted({chuan[h["id"]] for h in hang} - set(dg.NHAN_CHUAN))
         if sai:
             raise ValueError(f"nhãn chuẩn không hợp lệ: {sai}")
     except ValueError as e:
@@ -392,6 +516,7 @@ def main(argv=None):
                 [{"nhan_chuan": x, **b[x], "tong": sum(b[x].values())} for x in dg.NHAN_CHUAN])
     ghi_csv(ra / "theo_nhom.csv", COT_NHOM, theo_nhom(hang, he))
     ghi_csv(ra / "do_nhay.csv", COT_NHAY, do_nhay(hang, he, ban_ghi_nhan))
+    ghi_bang_phu(args, phu, hang, he, ra)
 
     print(f"Mẫu tính: {len(hang)} tuyên bố, {len({h['cum'] for h in hang})} cụm "
           f"({'cặp tối thiểu' if args.cap_toi_thieu else 'tuyên bố thường'}{', tập ' + args.tap if args.tap else ''}); "
