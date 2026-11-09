@@ -41,13 +41,13 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 - [x] [Bước 18](#b18) · 03/11 · Sinh quảng cáo cho 10 mẫu còn lại
 - [ ] [Bước 19](#b19) · 04/11 · Tách tuyên bố của tập phát triển
 - [ ] [Bước 20](#b20) · 05/11 – 06/11 · Gán nhãn tập phát triển
-- [ ] [Bước 21](#b21) · 07/11 · Chuẩn hóa sản phẩm, giá trị, đơn vị, kiểu giá trị
+- [x] [Bước 21](#b21) · 07/11 · Chuẩn hóa sản phẩm, giá trị, đơn vị, kiểu giá trị
 - [ ] [Bước 22](#b22) · 08/11 – 10/11 · Trích xuất có neo nguồn và kiểm tra đầy đủ
 - [ ] [Bước 23](#b23) · 11/11 · Tách tuyên bố của tập kiểm tra
 - [ ] [Bước 24](#b24) · 12/11 – 13/11 · Gán nhãn tập kiểm tra
 - [ ] [Bước 25](#b25) · 14/11 – 15/11 · Tạo tập cặp tối thiểu
 - [ ] [Bước 26](#b26) · 16/11 · Ghi chính thức cách chia tập, gửi việc cho người gán thứ hai
-- [ ] [Bước 27](#b27) · 17/11 – 19/11 · Cài bộ quyết định A–D, sinh lý do, kiểm thử
+- [x] [Bước 27](#b27) · 17/11 – 19/11 · Cài bộ quyết định A–D, sinh lý do, kiểm thử
 - [ ] [Bước 28](#b28) · 20/11 · Ghép phương pháp P, đo độ đúng trích xuất
 - [ ] [Bước 29](#b29) · 21/11 · Tách và lọc tuyên bố tự động
 - [ ] [Bước 30](#b30) · 22/11 – 23/11 · Cài đặt đối chứng B1, B2, B3
@@ -568,7 +568,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Tách hoàn toàn bằng tay như Bước 12 cho 2 mẫu còn lại của tập phát triển (Apple Watch SE 3, Xiaomi 15T); lọc theo tệp cấu hình; gộp tuyên bố trùng trong cùng bài.
+- [ ] Tách hoàn toàn bằng tay như Bước 12 cho 2 mẫu còn lại của tập phát triển (Apple Watch SE 3, Xiaomi 15T); lọc theo tệp cấu hình; gộp tuyên bố trùng trong cùng bài. *(08/11: đã chuẩn bị, chờ người thực hiện tách tay. `data/tuyen_bo/doc_phat_trien.md` in nguyên văn 16 bài (8 bài mỗi mẫu), `data/tuyen_bo/chinh_nhap.csv` chỉ có dòng tiêu đề; hướng dẫn tách tay thêm cột đồng hồ. `scripts/chuyen_tuyen_bo.py ... --tiep-sau data/tuyen_bo/thu.jsonl` đánh mã từ `tb-00067` và chặn bài của mẫu bộ thử; `scripts/ra_tach.py` nhận tệp tuyên bố làm đối số, có `--ma-mau`.)*
 - [ ] Nếu nhiều hơn quy mô đã chốt thì lấy mẫu phân tầng theo nhóm sản phẩm × LLM × chế độ.
 
 **Làm ra:** `data/tuyen_bo/chinh.jsonl` (phần tập phát triển).
@@ -607,8 +607,8 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Cài chuẩn hóa theo [T5.4](#t5-4): đơn vị, số, chuẩn IP, kiểu giá trị, tên sản phẩm và phiên bản (bảng bí danh trong tệp cấu hình).
-- [ ] Viết ít nhất 20 kiểm thử, lấy cách viết thật từ quảng cáo và trang thông số của tập phát triển.
+- [x] Cài chuẩn hóa theo [T5.4](#t5-4): đơn vị, số, chuẩn IP, kiểu giá trị, tên sản phẩm và phiên bản (bảng bí danh trong tệp cấu hình). *(08/11: `src/kiemchung/chuan_hoa.py`: `doc_so`, `chuan_don_vi`, `quy_doi`, `tim_gia_tri`, `tach_ip`, `so_ip` theo nhánh IEC 60529, `doc_iso_22810`, `bang_nhau`, `so_huong`, `tim_kieu_gia_tri` (cụm đứng liền con số của chính giá trị), `tim_san_pham` (khớp dài nhất, chặn `khong_nham_voi`), `tim_phien_ban`. Mọi cụm đọc từ YAML.)*
+- [x] Viết ít nhất 20 kiểm thử, lấy cách viết thật từ quảng cáo và trang thông số của tập phát triển. *(225 ca trong `tests/test_chuan_hoa.py`; 43 chuỗi thật ghi nguồn và có test kiểm là chuỗi con của nguồn, chỉ mở 4 mẫu phát triển. Còn để Bước 22: dạng "Đến 6 / 26 giờ" một đơn vị cho hai số, con số không kèm đơn vị trong dòng bảng, tên tính năng "Luôn Bật" chưa bị loại khỏi từ khẳng định.)*
 
 **Làm ra:** `src/kiemchung/chuan_hoa.py`, `tests/test_chuan_hoa.py`.
 
@@ -628,12 +628,12 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Viết câu lệnh trích xuất từ khung T12.4 ở [T12](#t12), theo lược đồ bảy trường ở [T5.1](#t5-1).
-- [ ] Cài kiểm tra neo nguồn, khâu (b) ở [T5.3](#t5-3): câu trích phải có trong văn bản; con số phải khớp giá trị đã điền; trường không đạt bị bỏ, không đoán.
-- [ ] Cài kiểm tra đầy đủ, khâu (c) ở T5.3: dò các cụm từ điều kiện trong tệp cấu hình để bổ sung điều kiện LLM bỏ sót; vẫn không xác định được điều kiện thì đánh dấu để bộ quyết định kết luận Chưa đủ thông tin (dòng D1a).
-- [ ] Trích xuất điều kiện theo kiểu mở (thêm 26/10, điểm 15 ở [T10](#t10)): với mỗi giá trị trong tài liệu, ghi **mọi** cụm điều kiện gắn với nó, kèm loại (một trong sáu) và câu trích; cụm không khớp cách diễn đạt nào trong tệp cấu hình ghi vào `dieu_kien_khac`, không được bỏ. Câu rào chung trong `ngu_canh_khong_quyet_dinh` không tính. Kiểm thử: giá trị có cụm điều kiện lạ phải còn `dieu_kien_khac` sau khi qua kiểm tra neo nguồn.
-- [ ] Viết kiểm thử cho neo nguồn và kiểm tra đầy đủ: câu trích không có trong nguồn, con số sai, điều kiện bịa, điều kiện bị bỏ sót.
-- [ ] Chạy trên tập phát triển; đếm số trường bị loại và số điều kiện được bổ sung (khâu (d) ở T5.3).
+- [x] Viết câu lệnh trích xuất từ khung T12.4 ở [T12](#t12), theo lược đồ bảy trường ở [T5.1](#t5-1). *(08/11, Opus: `luan_van/buoc22_thiet_ke_trich_xuat.md` mục 3, lần thử 1; hai ví dụ dùng sản phẩm tự đặt. Bước 22 trước đó bổ sung cấu hình theo mục 11.3 của hướng dẫn.)*
+- [x] Cài kiểm tra neo nguồn, khâu (b) ở [T5.3](#t5-3): câu trích phải có trong văn bản; con số phải khớp giá trị đã điền; trường không đạt bị bỏ, không đoán. *(`src/kiemchung/neo_nguon.py`.)*
+- [x] Cài kiểm tra đầy đủ, khâu (c) ở T5.3: dò các cụm từ điều kiện trong tệp cấu hình để bổ sung điều kiện LLM bỏ sót; vẫn không xác định được điều kiện thì đánh dấu để bộ quyết định kết luận Chưa đủ thông tin (dòng D1a). *(`src/kiemchung/trich_xuat.py`: chỉ dò trong dòng chứa giá trị; thêm luật điều kiện dạng số nhận theo đơn vị và luật cặp số "a / b giờ" của tai nghe.)*
+- [x] Trích xuất điều kiện theo kiểu mở (thêm 26/10, điểm 15 ở [T10](#t10)): với mỗi giá trị trong tài liệu, ghi **mọi** cụm điều kiện gắn với nó, kèm loại (một trong sáu) và câu trích; cụm không khớp cách diễn đạt nào trong tệp cấu hình ghi vào `dieu_kien_khac`, không được bỏ. Câu rào chung trong `ngu_canh_khong_quyet_dinh` không tính. Kiểm thử: giá trị có cụm điều kiện lạ phải còn `dieu_kien_khac` sau khi qua kiểm tra neo nguồn.
+- [x] Viết kiểm thử cho neo nguồn và kiểm tra đầy đủ: câu trích không có trong nguồn, con số sai, điều kiện bịa, điều kiện bị bỏ sót. *(`tests/test_neo_nguon.py`, `tests/test_trich_xuat.py`, kể cả cụm lạ còn `dieu_kien_khac` sau neo nguồn.)*
+- [ ] Chạy trên tập phát triển; đếm số trường bị loại và số điều kiện được bổ sung (khâu (d) ở T5.3). *(08/11: `scripts/chay_trich_xuat.py` ghi `ket_qua/trich_xuat/` kèm thống kê; đang chạy trên 66 tuyên bố bộ thử. Phần 16 bài của Apple Watch SE 3, Xiaomi 15T chờ người thực hiện tách tay ở Bước 19.)*
 
 **Làm ra:** `src/kiemchung/trich_xuat.py`, `src/kiemchung/neo_nguon.py`, kiểm thử.
 
@@ -651,7 +651,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Tách hoàn toàn bằng tay như Bước 12 cho 8 mẫu của tập kiểm tra; lọc theo tệp cấu hình; gộp tuyên bố trùng trong cùng bài.
+- [ ] Tách hoàn toàn bằng tay như Bước 12 cho 8 mẫu của tập kiểm tra; lọc theo tệp cấu hình; gộp tuyên bố trùng trong cùng bài. *(08/11: đã in `data/tuyen_bo/doc_kiem_tra.md`, 64 bài, 8 bài mỗi mẫu; tách tiếp vào cuối `data/tuyen_bo/chinh_nhap.csv` sau phần tập phát triển. Chờ người thực hiện, sau Bước 20.)*
 - [ ] Nếu nhiều hơn quy mô đã chốt thì lấy mẫu phân tầng theo nhóm sản phẩm × LLM × chế độ.
 - [ ] Gặp trường hợp lạ thì ghi vào nhật ký để báo trong phần giới hạn; không sửa tệp cấu hình hay hướng dẫn vì trường hợp của tập kiểm tra.
 
@@ -713,7 +713,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Ghi `data/chia_tap.json` theo cách chia ở Bước 4; biến thể cặp tối thiểu đi theo tập của tuyên bố gốc.
+- [x] Ghi `data/chia_tap.json` theo cách chia ở Bước 4; biến thể cặp tối thiểu đi theo tập của tuyên bố gốc. *(08/11: 4 mẫu phát triển, 8 mẫu kiểm tra (đủ ba nhóm, bốn hãng), kèm mã băm `mau_san_pham.csv` và quy tắc; `tests/test_chia_tap.py` kiểm khớp. Danh sách mã tuyên bố theo tập thêm khi tách xong hai tập.)*
 - [ ] Chọn ngẫu nhiên, phân tầng theo nhóm sản phẩm và theo tập: 20% số tuyên bố để tự gán lại ở Bước 32, và khoảng 60 tuyên bố cho người gán thứ hai. Lưu danh sách mã tuyên bố vào `data/nhan/danh_sach_mau.json`, không mở nhãn.
 - [ ] Gửi người gán thứ hai: hướng dẫn bản 2; 10 ví dụ của tập phát triển để gán thử có phản hồi; bảng khoảng 60 tuyên bố (không trùng 10 ví dụ gán thử) kèm đoạn nguồn nhưng **không kèm nhãn**. Hẹn trả kết quả trước 23/11.
 - [ ] Nếu không tìm được người gán thứ hai thì ghi vào nhật ký và theo phương án ở [T9.1](#t9-1).
@@ -739,11 +739,11 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Cài bốn bước A–D theo mã giả ở [T5.5](#t5-5), đúng thứ tự trong đề cương; các dòng D1–D6 ở [T4.3](#t4-3).
-- [ ] Sinh lý do từ dấu vết theo mẫu câu ở [T5.6](#t5-6).
-- [ ] Viết kiểm thử theo [T5.8](#t5-8): mỗi dòng D1–D6 (kể cả D1a, D1b) ít nhất 3 kiểm thử (khớp, không khớp, trường hợp biên); mọi ví dụ trong hướng dẫn gán nhãn thành kiểm thử hồi quy.
-- [ ] Cài luật chặn điều kiện lạ (thêm 26/10, điểm 15 ở [T10](#t10), `chung.yaml` mục `dieu_kien_la`): giá trị có `dieu_kien_khac` không bao giờ dẫn tới Đúng; quảng cáo khớp giá trị này ra D1a với nguyên nhân `dieu_kien_la`. "So thẳng" chỉ khi giá trị không kèm cụm điều kiện nào. Kiểm thử ba tình huống ở mục 4 của `luan_van/phan_tich_dieu_kien_ngoai_cau_hinh.md`. Cài luật chung cho nhiều giá trị khác nhau ở cùng điều kiện lạ thành công tắc, mặc định tắt, chọn ở Bước 33.
-- [ ] Chốt điểm 5, 6 và 14 ở [T10](#t10).
+- [x] Cài bốn bước A–D theo mã giả ở [T5.5](#t5-5), đúng thứ tự trong đề cương; các dòng D1–D6 ở [T4.3](#t4-3). *(08/11: `src/kiemchung/quyet_dinh.py` theo đặc tả `luan_van/buoc27_thiet_ke_quyet_dinh.md` của Opus; các luật cài thêm ghi dấu [luật cài]: dạng của sạc nhanh đồng hồ, điều kiện áp dụng, mục tài liệu không ghi điều kiện, lan điều kiện giữa các đoạn cùng con số (V23, V27), QĐ15 không lấy điều kiện bộ sạc bán riêng)*
+- [x] Sinh lý do từ dấu vết theo mẫu câu ở [T5.6](#t5-6). *(`src/kiemchung/ly_do.py`, tám mẫu câu)*
+- [x] Viết kiểm thử theo [T5.8](#t5-8): mỗi dòng D1–D6 (kể cả D1a, D1b) ít nhất 3 kiểm thử (khớp, không khớp, trường hợp biên); mọi ví dụ trong hướng dẫn gán nhãn thành kiểm thử hồi quy. *(155 test trong `tests/test_quyet_dinh.py`; 51/51 ví dụ V01–V51 ra đúng nhãn, dòng D, loại của hướng dẫn, dựng tay ở `tests/du_lieu/vi_du_huong_dan.json` với câu trích thật)*
+- [x] Cài luật chặn điều kiện lạ (thêm 26/10, điểm 15 ở [T10](#t10), `chung.yaml` mục `dieu_kien_la`): giá trị có `dieu_kien_khac` không bao giờ dẫn tới Đúng; quảng cáo khớp giá trị này ra D1a với nguyên nhân `dieu_kien_la`. "So thẳng" chỉ khi giá trị không kèm cụm điều kiện nào. Kiểm thử ba tình huống ở mục 4 của `luan_van/phan_tich_dieu_kien_ngoai_cau_hinh.md`. Cài luật chung cho nhiều giá trị khác nhau ở cùng điều kiện lạ thành công tắc, mặc định tắt, chọn ở Bước 33. *(có công tắc luật chung, mặc định tắt)*
+- [x] Chốt điểm 5, 6 và 14 ở [T10](#t10). *(cài theo hướng dẫn bản 2 đã duyệt: D2 áp cho mức không cao hơn mức "lên đến"; D1b sau D1a, trước D2, có ngoại lệ QĐ13; không xác định được điều kiện thì D1a ngay. Người thực hiện có thể đổi trước Bước 33)*
 
 **Làm ra:** `src/kiemchung/quyet_dinh.py`, `tests/test_quyet_dinh.py`.
 
@@ -761,7 +761,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Ghép `p.py`: BM25 → trích xuất có neo nguồn → chuẩn hóa → A–D → lý do.
+- [x] Ghép `p.py`: BM25 → trích xuất có neo nguồn → chuẩn hóa → A–D → lý do. *(08/11: `src/kiemchung/p.py` (`kiem_chung`, `kiem_chung_ban_ghi`), `scripts/chay_p.py` chạy P trên tệp kết quả trích xuất, không đọc nhãn; 10 test.)*
 - [ ] Chạy hết tập phát triển, cả tuyên bố thường và biến thể cặp tối thiểu.
 - [ ] Gán tay giá trị đúng của từng trường cho **50 tuyên bố** tập phát triển; tính độ đúng của từng trường.
 - [ ] Xem lỗi của P trên tập phát triển. Lỗi do mã cài sai so với hướng dẫn thì sửa mã. Không sửa hướng dẫn gán nhãn nữa vì tập kiểm tra đã gán theo bản 2; tệp cấu hình chỉ được bổ sung cách diễn đạt thấy trong tập phát triển, trước khi khóa ở Bước 33.
@@ -782,7 +782,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Viết câu lệnh tách từ khung T12.5 ở [T12](#t12); Python giữ tuyên bố có thuộc tính trong tệp cấu hình.
+- [x] Viết câu lệnh tách từ khung T12.5 ở [T12](#t12); Python giữ tuyên bố có thuộc tính trong tệp cấu hình. *(08/11: câu lệnh lần thử 1 của Opus ở `luan_van/buoc29_30_thiet_ke_cau_lenh.md` mục 5; Codex cài `src/kiemchung/tach_tuyen_bo.py`, `scripts/chay_tach_tu_dong.py`, Opus chạy test.)*
 - [ ] So với tuyên bố tách thủ công của tập phát triển: hai tuyên bố được coi là trùng khi cùng thuộc tính và cùng giá trị sau chuẩn hóa. Tính Precision và Recall.
 
 **Làm ra:** `src/kiemchung/tach_tuyen_bo.py`.
@@ -823,10 +823,10 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] **P−ĐK:** bỏ bước B; mọi thông số cùng sản phẩm và thuộc tính coi như cùng điều kiện, nên chỉ so giá trị. Bản này phải **tắt cả D1a và D1b**: nếu không, các giá trị khác nhau ở những điều kiện khác nhau (6 và 7 giờ) bị coi là "tài liệu mâu thuẫn" và mọi tuyên bố ra Chưa đủ thông tin ([T5.9](#t5-9)).
-- [ ] **P−NN:** bỏ khâu (b) neo nguồn và khâu (c) kiểm tra đầy đủ ở [T5.3](#t5-3); dùng nguyên đầu ra của LLM.
-- [ ] Hai bản là hai cờ cấu hình trong `p.py`, không sao chép mã.
-- [ ] Thêm kiểm thử: với P−ĐK, tuyên bố "Galaxy Buds3 Pro nghe nhạc 7 giờ khi bật chống ồn" phải ra Đúng (vì 7 giờ có trong tài liệu). Đây đúng là lỗi mà P khắc phục.
+- [x] **P−ĐK:** bỏ bước B; mọi thông số cùng sản phẩm và thuộc tính coi như cùng điều kiện, nên chỉ so giá trị. Bản này phải **tắt cả D1a và D1b**: nếu không, các giá trị khác nhau ở những điều kiện khác nhau (6 và 7 giờ) bị coi là "tài liệu mâu thuẫn" và mọi tuyên bố ra Chưa đủ thông tin ([T5.9](#t5-9)). *(cài bằng `quyet_dinh(doi_chieu=False)`: không D1a (trừ trích xuất thất bại), không D1b, không D4)*
+- [x] **P−NN:** bỏ khâu (b) neo nguồn và khâu (c) kiểm tra đầy đủ ở [T5.3](#t5-3); dùng nguyên đầu ra của LLM. *(cài bằng `trich_xuat(neo_nguon=False, kiem_day_du=False)`; khâu hiểu điều kiện vẫn chạy để bộ quyết định có mã điều kiện)*
+- [x] Hai bản là hai cờ cấu hình trong `p.py`, không sao chép mã. *(cờ `bo_doi_chieu`, `bo_neo_nguon`; `scripts/chay_p.py --bo-doi-chieu`; P−NN dùng tệp trích xuất chạy với `--khong-neo-nguon --khong-kiem-day-du`, cùng bộ nhớ đệm LLM.)*
+- [x] Thêm kiểm thử: với P−ĐK, tuyên bố "Galaxy Buds3 Pro nghe nhạc 7 giờ khi bật chống ồn" phải ra Đúng (vì 7 giờ có trong tài liệu). Đây đúng là lỗi mà P khắc phục. *(`tests/test_quyet_dinh.py`, `tests/test_p.py`, ví dụ V31.)*
 - [ ] Chạy hai bản trên tập phát triển.
 
 **Làm ra:** cờ `--bo-doi-chieu` và `--bo-neo-nguon` trong `p.py`; đầu ra của hai bản trên tập phát triển.
@@ -897,8 +897,8 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Cài API theo [T7.2](#t7-2) bằng FastAPI: `GET /mau-san-pham` và `POST /kiem-chung` (tách tuyên bố tự động rồi chạy P với cấu hình đã khóa).
-- [ ] Viết `Dockerfile`; chạy trên máy; thử với 3 quảng cáo của tập phát triển.
+- [x] Cài API theo [T7.2](#t7-2) bằng FastAPI: `GET /mau-san-pham` và `POST /kiem-chung` (tách tuyên bố tự động rồi chạy P với cấu hình đã khóa). *(08/11: `src/kiemchung/api.py` (`tao_app`), 22 test với LLM giả, gồm test kết quả API trùng với gọi `tach_bai` rồi `p.kiem_chung` trực tiếp; cài `fastapi==0.143.0`, `uvicorn==0.54.0` theo `requirements.txt`. Cấu hình hiện hành, chưa khóa (Bước 33).)*
+- [ ] Viết `Dockerfile`; chạy trên máy; thử với 3 quảng cáo của tập phát triển. *(08/11: đã viết `Dockerfile`, `.dockerignore` (không đưa `.env`, `data/nhan`, `ket_qua` vào ảnh); máy chưa có Docker nên chưa build; chưa thử với 3 quảng cáo thật vì Gemini hết hạn mức ngày.)*
 
 **Làm ra:** `src/kiemchung/api.py`, `Dockerfile`.
 
@@ -916,8 +916,8 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Viết Chương 3 theo [T8.1](#t8-1): phát biểu bài toán, định nghĩa nhãn, bộ thông số, trích xuất có neo nguồn, chuẩn hóa, bộ quyết định A–D kèm mã giả, tệp cấu hình, sinh lý do, ví dụ xuyên suốt.
-- [ ] Vẽ lại Hình 1 của đề cương ở độ phân giải cao, mũi tên thẳng, chỉ tô khối chứa điểm mới.
+- [ ] Viết Chương 3 theo [T8.1](#t8-1): phát biểu bài toán, định nghĩa nhãn, bộ thông số, trích xuất có neo nguồn, chuẩn hóa, bộ quyết định A–D kèm mã giả, tệp cấu hình, sinh lý do, ví dụ xuyên suốt. *(08/11, Opus viết nháp sớm `luan_van/chuong_3.md`, mục 3.1–3.12, 6 bảng và Thuật toán 3.1, theo mã đã cài; chưa đưa lên Google Doc, chưa có Hình 3.1. Sửa lại nếu Bước 28–33 đổi luật.)*
+- [x] Vẽ lại Hình 1 của đề cương ở độ phân giải cao, mũi tên thẳng, chỉ tô khối chứa điểm mới. *(08/11: `luan_van/hinh/hinh_3_1.png`, `.svg`, sinh bằng `scripts/ve_hinh_3_1.py`; tô neo nguồn, kiểm tra đầy đủ và chuẩn hóa, bộ quyết định.)*
 
 **Làm ra:** `luan_van/chuong_3.md`, hình quy trình.
 
@@ -1046,9 +1046,9 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Backend theo [T7.3](#t7-3): thêm tuyến `POST /api/contents/:id/verify-specs`; dịch vụ `specVerificationService.js` đổi nội dung bài (lưu dạng HTML) sang chữ thường, gọi API kiểm chứng của Bước 34 với giới hạn thời gian 60 giây, rồi lưu kết quả vào `Content.specVerification`; thêm trường này vào hàm `serializeContent` trong `backend/src/services/contentService.js`, nếu không giao diện không nhận được kết quả.
-- [ ] Giao diện theo [T7.4](#t7-4): nút "Kiểm chứng thông số" và ô chọn mẫu sản phẩm đặt trong `GeneratorResults.tsx`, cạnh điểm chất lượng và tỷ lệ đạo văn; bảng kết quả tô màu theo nhãn, luôn có chữ tên nhãn; mỗi tuyên bố xem được đoạn nguồn và lý do. Chỉ kiểm phiên bản đang chọn: nếu phiên bản này chưa được lưu thành bài riêng thì lưu trước bằng `persistGeneratedContent()` rồi gọi `verify-specs` với mã bài đó; không kiểm "bản gộp gốc" mà CopyPro tự lưu khi sinh, vì bản này chứa mọi phiên bản.
-- [ ] Trang chi tiết nội dung hiển thị kết quả đã lưu. Thêm kiểm thử cho nút kiểm chứng và chạy `yarn test` ở `frontend/`: repo đã có kiểm thử tích hợp cho trang tạo bài, trang chi tiết và việc lưu bài, các kiểm thử này phải vẫn qua.
+- [x] Backend theo [T7.3](#t7-3): thêm tuyến `POST /api/contents/:id/verify-specs`; dịch vụ `specVerificationService.js` đổi nội dung bài (lưu dạng HTML) sang chữ thường, gọi API kiểm chứng của Bước 34 với giới hạn thời gian 60 giây, rồi lưu kết quả vào `Content.specVerification`; thêm trường này vào hàm `serializeContent` trong `backend/src/services/contentService.js`, nếu không giao diện không nhận được kết quả. *(08/11, làm sớm: repo CopyPro nhánh `kiem-chung-thong-so`, commit `0db3bbc`, đã đẩy nhánh lên GitHub ngày 08/11 theo đồng ý của người thực hiện, không merge vào `main`; trước đó gộp `main` (`076c2a4`, nhánh chỉ có commit trùng nội dung `c5caee0`, lấy bản của `main`). Backend bỏ thẻ HTML trước khi đổi chữ thường; lỗi dịch vụ trả 503/504/502; route danh sách mẫu `GET /api/contents/spec-products`. Rủi ro: giới hạn 60 giây có thể không đủ vì P gọi LLM một lần mỗi tuyên bố, đo ở Bước 41.)*
+- [x] Giao diện theo [T7.4](#t7-4): nút "Kiểm chứng thông số" và ô chọn mẫu sản phẩm đặt trong `GeneratorResults.tsx`, cạnh điểm chất lượng và tỷ lệ đạo văn; bảng kết quả tô màu theo nhãn, luôn có chữ tên nhãn; mỗi tuyên bố xem được đoạn nguồn và lý do. Chỉ kiểm phiên bản đang chọn: nếu phiên bản này chưa được lưu thành bài riêng thì lưu trước bằng `persistGeneratedContent()` rồi gọi `verify-specs` với mã bài đó; không kiểm "bản gộp gốc" mà CopyPro tự lưu khi sinh, vì bản này chứa mọi phiên bản. *(`SpecVerificationPanel.tsx`, `GeneratorResults.tsx`, `Generator.tsx`; tự lưu phiên bản đang chọn trước khi kiểm.)*
+- [ ] Trang chi tiết nội dung hiển thị kết quả đã lưu. Thêm kiểm thử cho nút kiểm chứng và chạy `yarn test` ở `frontend/`: repo đã có kiểm thử tích hợp cho trang tạo bài, trang chi tiết và việc lưu bài, các kiểm thử này phải vẫn qua. *(`ContentDetail.tsx`; `yarn test` 6 tệp, 51 test qua (có test mới cho nút kiểm chứng và trang chi tiết). Chưa chạy thử tay với dịch vụ Python thật.)*
 
 **Làm ra:** nhánh `kiem-chung-thong-so` trong repo CopyPro.
 

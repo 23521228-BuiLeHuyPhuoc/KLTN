@@ -20,6 +20,9 @@ thuoc_tinh:
       che_do_chong_on: tai nghe có chống ồn chủ động; tài liệu ghi không có thì không áp dụng
       bo_phan: tai nghe có hộp sạc
       hoat_dong: khi hãng công bố riêng theo hoạt động
+    # Bước 22: dòng "a / b giờ" không ghi bộ phận (#038 "Đến 7 / 30 giờ", #042) đọc số nhỏ là tai nghe, số lớn là tổng kèm hộp sạc;
+    # căn cứ chú thích #038 "tai nghe và hộp tai nghe cung cấp tối đa 30 giờ" và cách đọc của hướng dẫn ("số 6 trong '6 / 26'").
+    cap_so_gach_cheo: [tai_nghe, kem_hop_sac]
     can_cu: [tn-samsung-buds3pro#038, tn-samsung-buds3pro#044, tn-samsung-buds3pro#020]
 
   sac_nhanh:                               # số giờ dùng sau X phút sạc

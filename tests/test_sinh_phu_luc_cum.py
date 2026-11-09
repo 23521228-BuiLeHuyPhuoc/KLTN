@@ -69,8 +69,10 @@ def test_gia_tri_co_khoa_phia_duoc_ghi_ro_phia(phu_luc, yaml_cau_hinh):
     assert "| `su_dung_lien_tuc` (chỉ phía tài liệu) |" in phu_luc and "| `chua_ro_hoat_dong` (chỉ phía tuyên bố) |" in phu_luc
     gia_tri_co_phia = [(gt, c["phia"]) for ten in ("dien_thoai", "tai_nghe", "dong_ho")
                        for gts in yaml_cau_hinh[ten]["cach_dien_dat"].values() for gt, c in gts.items() if "phia" in c]
-    # chua_ro_hoat_dong có ở cả ba nhóm (QĐ12, 02/11).
-    assert gia_tri_co_phia == [("su_dung_lien_tuc", "tai_lieu")] + [("chua_ro_hoat_dong", "tuyen_bo")] * 3
+    # chua_ro_hoat_dong có ở cả ba nhóm (QĐ12, 02/11); chi_mang_di_dong của đồng hồ thêm ở Bước 22 (hướng dẫn mục 11.3, V41).
+    assert sorted(gia_tri_co_phia) == sorted([("su_dung_lien_tuc", "tai_lieu")] + [("chua_ro_hoat_dong", "tuyen_bo")] * 3
+                                             + [("chi_mang_di_dong", "tuyen_bo")])
+    assert "| `chi_mang_di_dong` (chỉ phía tuyên bố) (chỉ `thoi_luong_pin`) |" in phu_luc
     assert "| `kem_hop_sac` (chỉ `thoi_luong_pin`) |" in phu_luc
     # Giá trị không có khóa phia thì không bị ghi chú gì.
     assert "| `xem_video` |" in phu_luc and "| `chua_ro_loai_video` |" in phu_luc

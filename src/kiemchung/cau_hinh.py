@@ -14,7 +14,12 @@ Các điều kiểm:
 - khóa tùy chọn "phia" của một giá trị trong cach_dien_dat (giá trị chỉ đọc ở một phía) chỉ nhận tai_lieu hoặc tuyen_bo;
 - khóa tùy chọn "chi_thuoc_tinh" của một giá trị (cụm chỉ là điều kiện của các thuộc tính liệt kê) là danh sách thuộc tính của
   nhóm có điều kiện đó trong dieu_kien_bat_buoc;
-- mỗi điều kiện dạng số (cach_dien_dat có gia_tri_so) khai báo đơn vị và quan hệ so sánh ở dieu_kien_so.
+- mỗi điều kiện dạng số (cach_dien_dat có gia_tri_so) khai báo đơn vị và quan hệ so sánh ở dieu_kien_so;
+- (Bước 22) khóa tùy chọn "gia_tri_ngam" của một giá trị (cụm điều kiện dạng số không có con số, như "sạc đầy" = 100): khóa là một
+  cụm có trong chính giá trị đó, giá trị là số;
+- (Bước 22) khóa tùy chọn "cap_so_gach_cheo" của một thuộc tính: hai giá trị đã khai báo của điều kiện bo_phan, và thuộc tính có
+  bo_phan trong dieu_kien_bat_buoc;
+- (Bước 22) chung.yaml: cum_khong_phai_dieu_kien và tu_khang_dinh.ten_tinh_nang là danh sách chuỗi.
 """
 import csv
 import json
@@ -102,7 +107,41 @@ def kiem_chung(chung, van_ban):
     cum_phu = chung.get("cum_phu") or {}
     if not cum_phu.get("mau"):
         loi.append("chung: thiếu cum_phu.mau (danh sách cụm phủ nhiều giá trị)")
+    for noi, ds in (("chung.cum_khong_phai_dieu_kien", chung.get("cum_khong_phai_dieu_kien")),
+                    ("chung.tu_khang_dinh.ten_tinh_nang", tu_kd.get("ten_tinh_nang"))):
+        if not _la_danh_sach_chuoi(ds):
+            loi.append(f"{noi}: phải là danh sách chuỗi")
     return loi
+
+
+def _la_danh_sach_chuoi(ds):
+    return isinstance(ds, list) and all(isinstance(c, str) and c.strip() for c in ds)
+
+
+def kiem_gia_tri_ngam(noi, kb):
+    """gia_tri_ngam của một giá trị cach_dien_dat: {cụm: số}; cụm phải có trong chính giá trị đó."""
+    ngam = kb["gia_tri_ngam"]
+    if not isinstance(ngam, dict) or not ngam:
+        return [f"{noi}: gia_tri_ngam phải là bảng {{cụm: số}} khác rỗng"]
+    cum_co = {chuan_hoa_chu(c) for k in ("tu_tai_lieu", "hieu_biet_chung") for c in kb.get(k) or []}
+    loi = []
+    for cum, so in ngam.items():
+        if chuan_hoa_chu(str(cum)) not in cum_co:
+            loi.append(f"{noi}: gia_tri_ngam '{cum}' không phải cụm của giá trị này")
+        if isinstance(so, bool) or not isinstance(so, (int, float)):
+            loi.append(f"{noi}: gia_tri_ngam '{cum}' phải là số (đang là {so!r})")
+    return loi
+
+
+def kiem_cap_so_gach_cheo(noi, tt, cach):
+    """cap_so_gach_cheo của một thuộc tính: danh sách đúng hai giá trị đã khai báo của điều kiện bo_phan."""
+    cap = tt["cap_so_gach_cheo"]
+    if "bo_phan" not in (tt.get("dieu_kien_bat_buoc") or {}):
+        return [f"{noi}: cap_so_gach_cheo cần điều kiện bo_phan trong dieu_kien_bat_buoc"]
+    if not isinstance(cap, list) or len(cap) != 2 or len(set(map(str, cap))) != 2:
+        return [f"{noi}: cap_so_gach_cheo phải là danh sách hai giá trị khác nhau của bo_phan"]
+    khai_bao = cach.get("bo_phan") or {}
+    return [f"{noi}: cap_so_gach_cheo '{g}' chưa khai báo trong cach_dien_dat.bo_phan" for g in cap if g not in khai_bao]
 
 
 def kiem_dieu_kien_so(noi, tt, cach, chung):
@@ -172,6 +211,8 @@ def kiem_nhom(cau_hinh, van_ban, ma_phat_trien, mau):
             loi += [f"{noi}: căn cứ '{ma}' không thuộc tập phát triển" for ma in (can_cu or [])
                     if ma not in ma_phat_trien]
         loi += kiem_dieu_kien_so(noi, tt, cach, chung)
+        if "cap_so_gach_cheo" in tt:
+            loi += kiem_cap_so_gach_cheo(noi, tt, cach)
         for hang, tu in (tt.get("cach_goi_theo_hang") or {}).items():
             for chu, che_do in tu.items():
                 loi += [f"{noi}: cách gọi '{chu}' của {hang} trỏ tới chế độ chưa khai báo '{c}'"
@@ -181,6 +222,8 @@ def kiem_nhom(cau_hinh, van_ban, ma_phat_trien, mau):
         loi += kiem_cum(f"{nhom}.cach_dien_dat.{ten_dk}", muc, van_ban)
         loi += [f"{nhom}.cach_dien_dat.{ten_dk}.{gt}: phia '{kb['phia']}' phải là {' hoặc '.join(PHIA_HOP_LE)}"
                 for gt, kb in (muc or {}).items() if isinstance(kb, dict) and "phia" in kb and kb["phia"] not in PHIA_HOP_LE]
+        loi += [m for gt, kb in (muc or {}).items() if isinstance(kb, dict) and "gia_tri_ngam" in kb
+                for m in kiem_gia_tri_ngam(f"{nhom}.cach_dien_dat.{ten_dk}.{gt}", kb)]
         for gt, kb in (muc or {}).items():
             if not isinstance(kb, dict) or "chi_thuoc_tinh" not in kb:
                 continue

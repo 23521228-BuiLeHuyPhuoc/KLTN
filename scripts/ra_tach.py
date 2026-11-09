@@ -1,5 +1,5 @@
-"""Bước 16, QĐ1: hỗ trợ rà tách. Với mỗi tuyên bố trong data/tuyen_bo/thu.jsonl, liệt kê các cụm điều kiện, từ khẳng định
-và cụm phủ nhiều giá trị CÓ trong câu gốc (cau_goc) mà KHÔNG có trong tuyên bố (tuyen_bo). Ghi data/tuyen_bo/ra_tach_thu.md.
+"""Bước 16, QĐ1: hỗ trợ rà tách. Với mỗi tuyên bố trong một tệp tuyên bố (mặc định data/tuyen_bo/thu.jsonl), liệt kê các cụm điều kiện, từ khẳng định
+và cụm phủ nhiều giá trị CÓ trong câu gốc (cau_goc) mà KHÔNG có trong tuyên bố (tuyen_bo). Ghi data/tuyen_bo/ra_tach_<tên tệp>.md.
 
 Người thực hiện dùng danh sách này làm chỗ để xem, rồi tự quyết từng chỗ theo bốn tiêu chí gắn điều kiện (hướng dẫn gán nhãn
 mục 2, data/tuyen_bo/huong_dan_tach_tay.md). Script chỉ so chuỗi một cách tất định: không đề xuất cách sửa, không nêu nhãn,
@@ -25,19 +25,28 @@ dính chữ hay số khác. Chỉ giữ cụm dài nhất ở mỗi chỗ (cụm
 che_do_chong_on=bat) coi là có trong tuyên bố nếu bất kỳ cụm nào của giá trị đó có trong tuyên bố, nên "bật ANC" ở câu gốc không
 bị liệt kê khi tuyên bố ghi "bật chống ồn". Từ khẳng định so theo chữ khớp; cụm phủ coi là có nếu tuyên bố có cụm cùng kiểu.
 
-Chạy: .venv/Scripts/python.exe scripts/ra_tach.py [--ra data/tuyen_bo/ra_tach_thu.md] [--khong-loc-thuoc-tinh]
+Chạy: .venv/Scripts/python.exe scripts/ra_tach.py [TEP_TUYEN_BO | --tuyen-bo TEP_TUYEN_BO] [--ra TEP] [--ma-mau MA [MA ...]]
+          [--khong-loc-thuoc-tinh]
+Mặc định rà data/tuyen_bo/thu.jsonl và ghi data/tuyen_bo/ra_tach_thu.md; tệp khác thì --ra mặc định là ra_tach_<tên tệp>.md cùng
+thư mục (chinh.jsonl -> ra_tach_chinh.md). Ví dụ: scripts/ra_tach.py data/tuyen_bo/chinh.jsonl --ma-mau dh-apple-watchse3 dt-xiaomi-15t.
 
-Cách sửa một tuyên bố (script này không sửa gì; data/tuyen_bo/thu.jsonl do scripts/chuyen_tuyen_bo.py ghi từ
-data/tuyen_bo/thu_nhap.csv, chạy lại trên CSV hiện tại cho ra đúng từng byte của thu.jsonl):
-1. Mở data/tuyen_bo/thu_nhap.csv bằng Excel hoặc Google Sheets (UTF-8). Dòng n của CSV (dòng 1 là tiêu đề, dòng trống bỏ qua)
-   ứng với tb-{n-1:05d}, vì chuyen_tuyen_bo.py đánh mã theo thứ tự dòng. Tìm dòng bằng ma_qc và cau_goc.
+Cách sửa một tuyên bố (script này không sửa gì). Có hai cặp tệp, đều do scripts/chuyen_tuyen_bo.py ghi, chạy lại trên CSV hiện
+tại cho ra đúng từng byte của JSONL:
+- bộ thử: data/tuyen_bo/thu_nhap.csv -> data/tuyen_bo/thu.jsonl; dòng n của CSV ứng với tb-{n-1:05d};
+- tập chính: data/tuyen_bo/chinh_nhap.csv -> data/tuyen_bo/chinh.jsonl với --tiep-sau data/tuyen_bo/thu.jsonl; dòng n của CSV
+  ứng với tb-{n-1+66:05d}.
+1. Mở CSV tương ứng (ví dụ data/tuyen_bo/thu_nhap.csv) bằng Excel hoặc Google Sheets (UTF-8). Dòng n của CSV (dòng 1 là tiêu đề,
+   dòng trống bỏ qua) ứng với tb-{n-1:05d} (bộ thử) hoặc tb-{n-1+66:05d} (tập chính), vì chuyen_tuyen_bo.py đánh mã theo thứ tự
+   dòng. Tìm dòng bằng ma_qc và cau_goc.
 2. Sửa cột tuyen_bo. Giữ nguyên cột cau_goc (chuyen_tuyen_bo.py kiểm câu gốc có nguyên văn trong bài). Ghi vào cột ghi_chu:
    tach_sua=<sửa gì>, ví dụ tach_sua=thêm chế độ nguồn; đã có ghi chú thì nối thêm bằng "; ".
 3. Tách thêm một tuyên bố (tiêu chí 4): thêm dòng ở CUỐI CSV (chép ma_qc và cau_goc, điền tuyen_bo và thuoc_tinh, ghi_chu bắt đầu
-   bằng tach_sua=). Đừng chèn giữa CSV: mã tb-… của các dòng sau sẽ dịch, lệch với nhãn lượt 1 (data/nhan/thu.jsonl,
-   thu_luot1.jsonl) và với kết quả B0, Recall@k đã ghi theo mã.
+   bằng tach_sua=). Đừng chèn giữa CSV: mã tb-… của các dòng sau sẽ dịch, lệch với nhãn đã gán và với kết quả B0, Recall@k đã ghi
+   theo mã.
 4. Lưu CSV (UTF-8) rồi chạy
        .venv/Scripts/python.exe scripts/chuyen_tuyen_bo.py data/tuyen_bo/thu_nhap.csv data/tuyen_bo/thu.jsonl
+   (tập chính: .venv/Scripts/python.exe scripts/chuyen_tuyen_bo.py data/tuyen_bo/chinh_nhap.csv data/tuyen_bo/chinh.jsonl
+   --tiep-sau data/tuyen_bo/thu.jsonl)
    Script kiểm lỗi (câu gốc có trong bài, thuộc tính có trong cấu hình, tuyên bố không trùng trong cùng bài) rồi mới ghi; có lỗi
    thì không ghi gì.
 5. Tuyên bố được nhúng vào trang gán nhãn và đi vào B0: chạy lại scripts/tao_cong_cu_gan_nhan.py để sinh lại trang, scripts/chay_b0.py
@@ -58,7 +67,6 @@ import tao_cong_cu_gan_nhan as tc  # noqa: E402
 GOC = Path(__file__).resolve().parents[1]
 TEP_TUYEN_BO = GOC / "data" / "tuyen_bo" / "thu.jsonl"
 THU_MUC_CAU_HINH = GOC / "data" / "cau_hinh"
-TEP_RA = GOC / "data" / "tuyen_bo" / "ra_tach_thu.md"
 YAML_NHOM = {"dt": "dien_thoai", "tn": "tai_nghe", "dh": "dong_ho"}
 
 NHAN_TU_KHANG_DINH = "từ khẳng định"
@@ -225,19 +233,39 @@ def _o(chu):
     return " ".join(str(chu).split()).replace("|", "\\|")
 
 
-def dung_bao_cao(tuyen_bo, ket_qua, loc_thuoc_tinh=True):
-    """Nội dung data/tuyen_bo/ra_tach_thu.md: tiêu đề, giải thích ngắn, bảng một dòng mỗi tuyên bố, tóm tắt."""
+def duong_dan_hien_thi(tep):
+    """Đường dẫn tương đối so với gốc repo, dấu /; tệp ngoài repo thì giữ đường dẫn đầy đủ (dấu /)."""
+    tep = Path(tep).resolve()
+    try:
+        return tep.relative_to(GOC.resolve()).as_posix()
+    except ValueError:
+        return tep.as_posix()
+
+
+def tep_ra_mac_dinh(tep_tuyen_bo):
+    """ra_tach_<tên tệp không đuôi>.md cùng thư mục với tệp tuyên bố (thu.jsonl -> ra_tach_thu.md)."""
+    tep = Path(tep_tuyen_bo)
+    return tep.parent / f"ra_tach_{tep.stem}.md"
+
+
+def dung_bao_cao(tuyen_bo, ket_qua, loc_thuoc_tinh=True, tep_tuyen_bo=TEP_TUYEN_BO, ma_mau=None):
+    """Nội dung báo cáo: tiêu đề, giải thích ngắn, bảng một dòng mỗi tuyên bố, tóm tắt. tep_tuyen_bo: tệp đầu vào (ghi vào tiêu đề
+    và câu nguồn; thu.jsonl gọi là bộ thử); ma_mau: danh sách mẫu đã lọc (ghi vào báo cáo) hoặc None."""
     co = [t for t in tuyen_bo if ket_qua[t["id"]]]
+    nguon = duong_dan_hien_thi(tep_tuyen_bo)
+    ten_tep = Path(tep_tuyen_bo).name
     dong = [
-        "# Rà tách bộ thử: cụm có trong câu gốc mà không có trong tuyên bố",
+        "# Rà tách bộ thử: cụm có trong câu gốc mà không có trong tuyên bố" if ten_tep == "thu.jsonl"
+        else f"# Rà tách {ten_tep}: cụm có trong câu gốc mà không có trong tuyên bố",
         "",
-        "Sinh bằng `scripts/ra_tach.py` từ `data/tuyen_bo/thu.jsonl` và `data/cau_hinh/*.yaml` (cụm của phụ lục mục 13), từ khẳng "
+        f"Sinh bằng `scripts/ra_tach.py` từ `{nguon}` và `data/cau_hinh/*.yaml` (cụm của phụ lục mục 13), từ khẳng "
         "định (mục 6.2) và cụm phủ nhiều giá trị (mục 6.8) của `data/huong_dan_gan_nhan.md`. Chỉ so chuỗi: không đề xuất cách sửa, "
         "không nêu nhãn. Người thực hiện tự quyết từng chỗ theo bốn tiêu chí gắn điều kiện (mục 2 của hướng dẫn).",
         "",
         "- Cụm thấy ở đây có thể thuộc con số khác của cùng câu gốc hoặc là tên tính năng (tiêu chí 3); không thấy cụm nào không "
         "có nghĩa tuyên bố đủ điều kiện, vì cụm ngoài cấu hình không được dò.",
         "- " + ("Chỉ xét các điều kiện của thuộc tính ghi trên tuyên bố." if loc_thuoc_tinh else "Xét mọi điều kiện của nhóm sản phẩm."),
+        *([f"- Đã lọc theo mẫu: {', '.join(ma_mau)}."] if ma_mau else []),
         f"- {len(co)} / {len(tuyen_bo)} tuyên bố có cụm được liệt kê.",
         "",
         "| Mã | Tuyên bố | Câu gốc | Cụm có trong câu gốc, không có trong tuyên bố |",
@@ -248,27 +276,40 @@ def dung_bao_cao(tuyen_bo, ket_qua, loc_thuoc_tinh=True):
     return "\n".join(dong) + "\n"
 
 
-def chay(tep_tuyen_bo=TEP_TUYEN_BO, tep_ra=TEP_RA, loc_thuoc_tinh=True):
-    """Đọc tuyên bố và hướng dẫn, ghi tep_ra; trả về (danh sách tuyên bố, {id: kết quả}, số tuyên bố có cụm)."""
+def chay(tep_tuyen_bo=TEP_TUYEN_BO, tep_ra=None, loc_thuoc_tinh=True, ma_mau=None):
+    """Đọc tuyên bố và hướng dẫn, ghi tep_ra (mặc định ra_tach_<tên tệp>.md cùng thư mục); ma_mau: chỉ rà các mẫu đó. Trả về
+    (danh sách tuyên bố đã rà, {id: kết quả}, số tuyên bố có cụm)."""
+    tep_ra = tep_ra_mac_dinh(tep_tuyen_bo) if tep_ra is None else tep_ra
     tuyen_bo = [json.loads(d) for d in Path(tep_tuyen_bo).read_text(encoding="utf-8-sig").splitlines() if d.strip()]
+    if ma_mau:
+        tuyen_bo = [t for t in tuyen_bo if t["ma_mau"] in ma_mau]
+        if not tuyen_bo:
+            raise SystemExit(f"không có tuyên bố nào của mẫu {', '.join(ma_mau)} trong {tep_tuyen_bo}")
     tu_khang_dinh = tc.tu_khang_dinh(tc.doc_huong_dan())
     bo_qua = doc_yaml("chung")["tu_khang_dinh"].get("bo_qua_khi_co") or []
     ket_qua = {t["id"]: ra_tach_mot(t, tu_khang_dinh, bo_qua, loc_thuoc_tinh) for t in tuyen_bo}
-    Path(tep_ra).write_text(dung_bao_cao(tuyen_bo, ket_qua, loc_thuoc_tinh), encoding="utf-8", newline="\n")
+    Path(tep_ra).write_text(dung_bao_cao(tuyen_bo, ket_qua, loc_thuoc_tinh, tep_tuyen_bo, ma_mau),
+                                encoding="utf-8", newline="\n")
     return tuyen_bo, ket_qua, sum(1 for v in ket_qua.values() if v)
 
 
 def main(argv=None):
     sys.stdout.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser(description="Rà tách: cụm có trong câu gốc mà không có trong tuyên bố (Bước 16, QĐ1).")
-    ap.add_argument("--tuyen-bo", type=Path, default=TEP_TUYEN_BO, help="mặc định data/tuyen_bo/thu.jsonl")
-    ap.add_argument("--ra", type=Path, default=TEP_RA, help="mặc định data/tuyen_bo/ra_tach_thu.md")
+    ap.add_argument("tep", nargs="?", type=Path, help="tệp tuyên bố (như --tuyen-bo)")
+    ap.add_argument("--tuyen-bo", type=Path, help="mặc định data/tuyen_bo/thu.jsonl")
+    ap.add_argument("--ra", type=Path, help="mặc định ra_tach_<tên tệp>.md cùng thư mục với tệp tuyên bố")
+    ap.add_argument("--ma-mau", nargs="+", metavar="MA", help="chỉ rà tuyên bố của các mẫu này")
     ap.add_argument("--khong-loc-thuoc-tinh", action="store_true", help="xét mọi điều kiện của nhóm, không chỉ của thuộc tính")
     args = ap.parse_args(argv)
-    if not args.tuyen_bo.exists():
-        sys.exit(f"không thấy tệp {args.tuyen_bo}")
-    tuyen_bo, _, so_co = chay(args.tuyen_bo, args.ra, not args.khong_loc_thuoc_tinh)
-    print(f"đã ghi {args.ra}: {so_co} / {len(tuyen_bo)} tuyên bố có cụm được liệt kê")
+    if args.tep and args.tuyen_bo and args.tep.resolve() != args.tuyen_bo.resolve():
+        ap.error(f"đưa hai tệp tuyên bố khác nhau: {args.tep} và --tuyen-bo {args.tuyen_bo}")
+    tep = args.tep or args.tuyen_bo or TEP_TUYEN_BO
+    if not tep.exists():
+        sys.exit(f"không thấy tệp {tep}")
+    ra = args.ra or tep_ra_mac_dinh(tep)
+    tuyen_bo, _, so_co = chay(tep, ra, not args.khong_loc_thuoc_tinh, args.ma_mau)
+    print(f"đã ghi {ra}: {so_co} / {len(tuyen_bo)} tuyên bố có cụm được liệt kê")
 
 
 if __name__ == "__main__":

@@ -44,15 +44,8 @@ _CHO_TRONG = re.compile(r"\{tuyen_bo\}|\{doan_1\.\.k\}")
 _KHOI_MA = re.compile(r"```[ \t]*(?:json)?[ \t]*\r?\n?(.*?)```", re.S | re.I)
 
 
-def lay_doan(ma_mau, tuyen_bo, k=5, cach_tach="am_tiet", thu_muc_nguon=th.THU_MUC_NGUON):
-    """[(mã đoạn, văn bản)] của top-k đoạn BM25 trong tài liệu của đúng mẫu ma_mau, hạng giảm dần."""
-    van_ban = dict(th.doc_doan(ma_mau, thu_muc_nguon))
-    doan = []
-    for ma, _ in th.truy_hoi(ma_mau, tuyen_bo, k, cach_tach, thu_muc_nguon):
-        if not ma.startswith(f"{ma_mau}#") or ma not in van_ban:
-            raise ValueError(f"truy hồi mẫu {ma_mau} trả về đoạn không thuộc mẫu: {ma}")
-        doan.append((ma, van_ban[ma]))
-    return doan
+# Chuyển sang truy_hoi.lay_doan ở Bước 22 để P dùng chung; giữ tên cũ cho test và nơi gọi B0.
+lay_doan = th.lay_doan
 
 
 def ghep_cau_lenh(tuyen_bo, doan):

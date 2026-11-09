@@ -125,6 +125,19 @@ def truy_hoi(ma_mau, tuyen_bo, k, cach_tach="am_tiet", thu_muc_nguon=THU_MUC_NGU
     return lay_chi_muc(ma_mau, cach_tach, thu_muc_nguon).xep_hang(tuyen_bo, k)
 
 
+def lay_doan(ma_mau, tuyen_bo, k=5, cach_tach="am_tiet", thu_muc_nguon=THU_MUC_NGUON):
+    """[(mã đoạn, văn bản)] của top-k đoạn BM25 trong tài liệu của đúng mẫu ma_mau, hạng giảm dần.
+
+    Dùng chung cho B0 và P (Bước 22) để mọi hệ thống có cùng top-k (T5.2)."""
+    van_ban = dict(doc_doan(ma_mau, thu_muc_nguon))
+    doan = []
+    for ma, _ in truy_hoi(ma_mau, tuyen_bo, k, cach_tach, thu_muc_nguon):
+        if not ma.startswith(f"{ma_mau}#") or ma not in van_ban:
+            raise ValueError(f"truy hồi mẫu {ma_mau} trả về đoạn không thuộc mẫu: {ma}")
+        doan.append((ma, van_ban[ma]))
+    return doan
+
+
 # --- Recall@k (T6.4) ---
 
 def hang_bang_chung(ma_xep, bang_chung):

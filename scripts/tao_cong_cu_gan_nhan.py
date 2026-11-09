@@ -18,6 +18,13 @@ Lượt 3 (người thực hiện tự gán lại mù một phần bộ thử đ
 (SEED_XAO) để thứ tự không lộ nhóm. Trang không nhúng nhãn nào (lượt 1, lượt 2, của Claude). Không có --luot thì sinh trang
 lượt 2 như cũ (--luot 2 không kèm --chon là trang đầy đủ 66 tuyên bố).
 
+Tập chính (Bước 20, 24): --bo chinh --ma-mau <các mã mẫu> sinh trang lượt 1, không xáo thứ tự.
+--tuyen-bo mặc định data/tuyen_bo/chinh.jsonl. Chỉ nhận đủ hai mẫu phát triển ngoài bộ thử hoặc đủ tám mẫu kiểm tra
+theo data/mau_san_pham.csv. Khóa nhãn và giao diện riêng theo danh sách mẫu; nhập lại chỉ nhận mã trong trang, luot = 1.
+Tệp tải về chinh_phat_trien.jsonl / chinh_kiem_tra.jsonl và cau_hoi_nhan_chinh_<nhãn bộ>.md.
+Chạy Bước 20: .venv/Scripts/python.exe scripts/tao_cong_cu_gan_nhan.py --bo chinh --ma-mau dh-apple-watchse3 dt-xiaomi-15t
+Mặc định ghi data/nhan/cong_cu_gan_nhan_chinh_phat_trien.html; dùng --ra để chọn tệp mới khác. Không ghi đè tệp đã có.
+
 Ranh giới của công cụ (giữ khi sửa):
 - Được hiện: nội dung hướng dẫn giống nhau cho mọi tuyên bố (cách làm, bảng D1-D6 kèm câu hỏi, ví dụ và mẫu câu, quy
   tắc hay dùng, toàn văn hướng dẫn), hoặc nội dung lọc theo nhóm sản phẩm (tiền tố ma_mau) và thuộc tính đã ghi sẵn
@@ -54,6 +61,7 @@ Lượt 3: .venv/Scripts/python.exe scripts/tao_cong_cu_gan_nhan.py --luot 3 --c
     kiem_nhan.py data/nhan/thu_luot3.jsonl --chon data/nhan/chon_luot3.txt --luot 3)
 """
 import argparse
+import csv
 import html
 import json
 from pathlib import Path
@@ -64,6 +72,8 @@ import unicodedata
 
 GOC = Path(__file__).resolve().parents[1]
 TEP_TUYEN_BO = GOC / "data" / "tuyen_bo" / "thu.jsonl"
+TEP_TUYEN_BO_CHINH = GOC / "data" / "tuyen_bo" / "chinh.jsonl"
+TEP_MAU = GOC / "data" / "mau_san_pham.csv"
 TEP_HUONG_DAN = GOC / "data" / "huong_dan_gan_nhan.md"
 THU_MUC_QC = GOC / "data" / "quang_cao"
 THU_MUC_NGUON = GOC / "data" / "nguon"
@@ -983,13 +993,51 @@ def doan_nhung(d):
     return x
 
 
-def nap_du_lieu(luot=LUOT, ma_chon=None, seed_xao=SEED_XAO):
+def cau_hinh_chinh(ma_mau):
+    """Đối chiếu trọn bộ mẫu với danh mục; khóa lưu không phụ thuộc thứ tự tham số."""
+    ma = set(ma_mau or [])
+    if len(ma) != len(ma_mau or []):
+        sys.exit("--ma-mau không được lặp mã mẫu")
+    with TEP_MAU.open(encoding="utf-8-sig", newline="") as f:
+        mau = list(csv.DictReader(f))
+    phat_trien = {m["ma_mau"] for m in mau if m["tap"] == "phattrien" and m["mau_thu"] == "khong"}
+    kiem_tra = {m["ma_mau"] for m in mau if m["tap"] == "kiemtra"}
+    if ma == phat_trien and len(ma) == 2:
+        nhan_bo = "phat_trien"
+    elif ma == kiem_tra and len(ma) == 8:
+        nhan_bo = "kiem_tra"
+    else:
+        sys.exit("--ma-mau phải là đủ hai mẫu phát triển ngoài bộ thử hoặc đủ tám mẫu kiểm tra trong data/mau_san_pham.csv")
+    hau_to = "_" + "_".join(sorted(ma))
+    return {"bo": "chinh", "nhan_bo": nhan_bo,
+            "khoa_nhan": "gan_nhan_chinh_v2" + hau_to,
+            "khoa_giao_dien": "gan_nhan_giao_dien_chinh_v2" + hau_to,
+            "tep_nhan": f"chinh_{nhan_bo}.jsonl", "tep_hoi": f"cau_hoi_nhan_chinh_{nhan_bo}.md"}
+
+
+def nap_du_lieu(luot=LUOT, ma_chon=None, seed_xao=SEED_XAO, *, bo="thu", tuyen_bo_tep=None, ma_mau=None):
     """Dữ liệu nhúng vào HTML; thoát với thông báo rõ nếu thiếu tệp hoặc hướng dẫn sai cấu trúc.
 
     luot: lượt gán của trang (khóa lưu, tên tệp tải về). ma_chon: nếu có, chỉ đưa các tuyên bố có mã này vào, thứ tự xáo
-    trộn theo seed_xao; bài quảng cáo và đoạn tài liệu cũng chỉ của các tuyên bố đó. Không nhúng nhãn nào."""
-    cau_hinh = cau_hinh_luot(luot)
-    tuyen_bo = [{k: t.get(k, "") for k in TRUONG_TUYEN_BO} for t in doc_jsonl(TEP_TUYEN_BO)]
+    trộn theo seed_xao; bài quảng cáo và đoạn tài liệu cũng chỉ của các tuyên bố đó. Không nhúng nhãn nào.
+    bo="chinh": đọc tuyen_bo_tep (mặc định chinh.jsonl), lọc theo ma_mau, xếp theo id và dùng lượt 1."""
+    if bo == "chinh":
+        if ma_chon is not None:
+            sys.exit("--bo chinh không dùng --chon; chọn bộ bằng --ma-mau")
+        cau_hinh = cau_hinh_chinh(ma_mau)
+        luot = 1
+        tep = Path(tuyen_bo_tep) if tuyen_bo_tep is not None else TEP_TUYEN_BO_CHINH
+        if not tep.is_file():
+            sys.exit(f"thiếu tệp tuyên bố tập chính: {tep}")
+    else:
+        cau_hinh = cau_hinh_luot(luot)
+        tep = TEP_TUYEN_BO
+    tuyen_bo = [{k: t.get(k, "") for k in TRUONG_TUYEN_BO} for t in doc_jsonl(tep)]
+    if bo == "chinh":
+        tap_ma = set(ma_mau)
+        tuyen_bo = sorted((t for t in tuyen_bo if t["ma_mau"] in tap_ma), key=lambda t: t["id"])
+        if not tuyen_bo:
+            sys.exit(f"{tep}: không có tuyên bố nào sau khi lọc --ma-mau")
     if ma_chon is not None:
         tuyen_bo = chon_va_xao(tuyen_bo, ma_chon, seed_xao)
     bai, doan, thieu = {}, {}, []
@@ -1008,11 +1056,14 @@ def nap_du_lieu(luot=LUOT, ma_chon=None, seed_xao=SEED_XAO):
         doan[ma_mau] = [doan_nhung(d) for d in doc_jsonl(duong)]
     if thieu:
         sys.exit("thiếu tệp dữ liệu:\n  " + "\n  ".join(thieu))
-    return {"tuyen_bo": tuyen_bo, "bai": bai, "doan": doan, "huong_dan": dung_huong_dan(doc_huong_dan()),
+    du_lieu = {"tuyen_bo": tuyen_bo, "bai": bai, "doan": doan, "huong_dan": dung_huong_dan(doc_huong_dan()),
             "quy_tac": {"thong_bao": THONG_BAO, "nhac": NHAC, "re_ngoac_kep": RE_NGOAC_KEP, "re_ma_doan": RE_MA_DOAN},
             "trang": {"luot": luot, "khoa_nhan": cau_hinh["khoa_nhan"], "khoa_giao_dien": cau_hinh["khoa_giao_dien"],
                       "tep_nhan": cau_hinh["tep_nhan"], "tep_hoi": cau_hinh["tep_hoi"], "nghi_ms": NGHI_GIAY * 1000},
             "ca_dac_biet": CA_DAC_BIET}
+    if bo == "chinh":
+        du_lieu["trang"].update(bo="chinh", nhan_bo=cau_hinh["nhan_bo"])
+    return du_lieu
 
 
 # Khung "Ca đặc biệt": quy tắc riêng và ca đã chốt của hướng dẫn bản 2, tóm lại bằng lời. Mỗi mục lọc theo ma_mau
@@ -1171,6 +1222,18 @@ def dung_html(du_lieu):
         gan_mu = ("Lượt __LUOT__ gán mù với các lượt trước: không mở nhãn lượt 1, nhãn lượt 2 (kể cả nhãn do Claude gán) và "
                   "các ghi chép về những nhãn đó.")
     mau = MAU_HTML.replace("__GAN_MU__", gan_mu)
+    if t.get("bo") == "chinh":
+        ten_bo = "tập phát triển" if t["nhan_bo"] == "phat_trien" else "tập kiểm tra"
+        buoc = 20 if t["nhan_bo"] == "phat_trien" else 24
+        tieu_de = f"bộ chính - {ten_bo}, {len(du_lieu['tuyen_bo'])} tuyên bố"
+        mau = mau.replace("bộ thử", tieu_de).replace("Bước 16", f"Bước {buoc}")
+        mau = mau.replace(gan_mu, "Lượt 1 của tập chính: tự đọc tuyên bố và tài liệu, tự gán nhãn theo hướng dẫn.")
+        # Chặn mã ngoài bộ trước khi nhập, kể cả khi bản ghi cũng mang luot = 1.
+        moc = "  const { dung: nhan, khac, luot_khac: luotKhac } = tachTheoLuot(moi, LUOT);"
+        mau = mau.replace(moc, """  if (moi.some((o) => o && o.luot === LUOT && !TB.some((tb) => tb.id === o.id))) {
+    alert('Từ chối nhập: có mã tuyên bố không thuộc bộ của trang này.'); return;
+  }
+""" + moc)
     mau = mau.replace("__LUOT__", str(t["luot"])).replace("__TEP_NHAN__", t["tep_nhan"]).replace("__TEP_HOI__", t["tep_hoi"])
     return mau.replace("__DU_LIEU__", json_nhung(du_lieu))
 
@@ -2774,21 +2837,41 @@ def duong_ra_mac_dinh(luot, co_chon):
 def main(argv=None):
     sys.stdout.reconfigure(encoding="utf-8")
     sys.stderr.reconfigure(encoding="utf-8")
-    ap = argparse.ArgumentParser(description="Sinh công cụ gán nhãn chuẩn HTML của bộ thử (Bước 13, 16).")
-    ap.add_argument("--luot", type=int, default=LUOT, help=f"lượt gán của trang, từ 2 (mặc định {LUOT})")
+    ap = argparse.ArgumentParser(description="Sinh công cụ gán nhãn HTML: bộ thử (Bước 13, 16), tập chính (Bước 20, 24).")
+    ap.add_argument("--bo", choices=("thu", "chinh"), default="thu", help="bộ tuyên bố (mặc định: thu)")
+    ap.add_argument("--tuyen-bo", type=Path, help="tệp tuyên bố tập chính (mặc định data/tuyen_bo/chinh.jsonl)")
+    ap.add_argument("--ma-mau", nargs="+", help="đủ mã mẫu của tập phát triển hoặc tập kiểm tra")
+    ap.add_argument("--luot", type=int, default=None, help=f"lượt gán bộ thử, từ 2 (mặc định {LUOT}); tập chính luôn là 1")
     ap.add_argument("--chon", type=Path, default=None,
                     help="tệp mã tuyên bố (mỗi dòng một mã, # là chú thích): chỉ đưa các tuyên bố này vào trang, xáo trộn thứ tự")
     ap.add_argument("--ra", type=Path, default=None, help=f"đường dẫn HTML sinh ra (mặc định {TEP_RA.name} cho lượt {LUOT})")
     args = ap.parse_args(argv)
-    cau_hinh_luot(args.luot)
-    tep_ra = args.ra or duong_ra_mac_dinh(args.luot, args.chon is not None)
-    du_lieu = nap_du_lieu(args.luot, doc_tep_ma(args.chon) if args.chon else None)
+    if args.bo == "chinh":
+        if args.chon is not None or args.luot not in (None, 1):
+            ap.error("--bo chinh chỉ dùng lượt 1 và không dùng --chon")
+        cau_hinh = cau_hinh_chinh(args.ma_mau)
+        tep_ra = args.ra or TEP_RA.with_name(f"cong_cu_gan_nhan_chinh_{cau_hinh['nhan_bo']}.html")
+        du_lieu = nap_du_lieu(bo="chinh", tuyen_bo_tep=args.tuyen_bo, ma_mau=args.ma_mau)
+    else:
+        if args.tuyen_bo is not None or args.ma_mau is not None:
+            ap.error("--tuyen-bo và --ma-mau chỉ dùng với --bo chinh")
+        args.luot = LUOT if args.luot is None else args.luot
+        cau_hinh_luot(args.luot)
+        tep_ra = args.ra or duong_ra_mac_dinh(args.luot, args.chon is not None)
+        du_lieu = nap_du_lieu(args.luot, doc_tep_ma(args.chon) if args.chon else None)
     html_ra = dung_html(du_lieu)
     tep_ra.parent.mkdir(parents=True, exist_ok=True)
-    tep_ra.write_text(html_ra, encoding="utf-8", newline="\n")
+    if args.bo == "chinh":
+        try:
+            with tep_ra.open("x", encoding="utf-8", newline="\n") as f:
+                f.write(html_ra)
+        except FileExistsError:
+            sys.exit(f"tệp đã tồn tại, không ghi đè: {tep_ra}; hãy chọn --ra khác")
+    else:
+        tep_ra.write_text(html_ra, encoding="utf-8", newline="\n")
     so_doan = sum(len(d) for d in du_lieu["doan"].values())
     hd = du_lieu["huong_dan"]
-    print(f"đã sinh {tep_ra}: lượt {args.luot}, {len(du_lieu['tuyen_bo'])} tuyên bố, {len(du_lieu['bai'])} bài, "
+    print(f"đã sinh {tep_ra}: lượt {du_lieu['trang']['luot']}, {len(du_lieu['tuyen_bo'])} tuyên bố, {len(du_lieu['bai'])} bài, "
           f"{so_doan} đoạn của {len(du_lieu['doan'])} mẫu, {tep_ra.stat().st_size / 1024:.0f} KB")
     print(f"hướng dẫn: {len(hd['dong_d'])} dòng D, {len(hd['loai'])} loại, {len(hd['mac_dinh'])} hàng mặc định "
           f"({sum(1 for h in hd['mac_dinh'] if h['khao_sat'])} hàng ghép khảo sát), "

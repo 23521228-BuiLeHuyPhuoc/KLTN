@@ -118,17 +118,21 @@ thuoc_tinh:
       thoi_gian_ngam: dieu_kien_do
       loai_nuoc: dieu_kien_do
       hoat_dong_bi_cam: dieu_kien_do
+      chenh_lech_nhiet_do: dieu_kien_do     # Bước 22, hướng dẫn mục 11.3 (V08)
     hieu_thong_thuong:
       do_sau: nhu_hang_cong_bo
       thoi_gian_ngam: nhu_hang_cong_bo
       loai_nuoc: nhu_hang_cong_bo
       hoat_dong_bi_cam: nhu_hang_cong_bo
+      chenh_lech_nhiet_do: nhu_hang_cong_bo
     pham_vi_ap_dung:
       loai_nuoc: khi hãng nêu; quảng cáo nêu nước biển hay hồ bơi là đổi điều kiện
       hoat_dong_bi_cam: khi hãng nêu; quảng cáo gợi ý hoạt động bị cấm là Lệch
-    dieu_kien_so:                          # iPhone 17: sâu tối đa 6 m, tối đa 30 phút; Xiaomi 15T: 3 m, 30 phút
+      chenh_lech_nhiet_do: khi hãng nêu
+    dieu_kien_so:                          # iPhone 17: sâu tối đa 6 m, tối đa 30 phút; Xiaomi 15T: 3 m, 30 phút, chênh nhiệt độ 5K trở xuống
       do_sau: {don_vi: m, thoa_khi: tuyen_bo_nho_hon_hoac_bang}
       thoi_gian_ngam: {don_vi: phut, thoa_khi: tuyen_bo_nho_hon_hoac_bang}
+      chenh_lech_nhiet_do: {don_vi: K, thoa_khi: tuyen_bo_nho_hon_hoac_bang}
     can_cu: [dt-apple-iphone17#007, dt-xiaomi-15t#012, dt-xiaomi-15t#035]
 
   dung_luong_pin:
@@ -199,6 +203,7 @@ cach_dien_dat:
     gia_tri_so:
       tu_tai_lieu: ["Sạc lên đến 50%", "sạc đầy 100%"]
       hieu_biet_chung: ["sạc đầy"]          # "sạc đầy" hiểu là 100%
+      gia_tri_ngam: {"sạc đầy": 100}       # cụm không có con số: giá trị điều kiện ngầm (Bước 22)
   che_do_hien_thi:
     tieu_chuan:
       tu_tai_lieu: ["(tiêu chuẩn)"]
@@ -219,7 +224,8 @@ cach_dien_dat:
   dien_tich_do:
     gia_tri_so:
       tu_tai_lieu: ["25% diện tích", "APL 25%"]
-      hieu_biet_chung: []
+      hieu_biet_chung: ["toàn màn hình"]    # Bước 22, hướng dẫn mục 11.3 (V27)
+      gia_tri_ngam: {"toàn màn hình": 100}
   kieu_tan_so:
     toi_da:
       tu_tai_lieu: ["Lên đến 120Hz", "tối đa 120Hz"]
@@ -250,6 +256,10 @@ cach_dien_dat:
     quay_video:
       tu_tai_lieu: ["Quay Video"]
       hieu_biet_chung: ["khi quay"]
+  chenh_lech_nhiet_do:                     # Bước 22, hướng dẫn mục 11.3 (V08): điều kiện đo của bài thử, hiểu như hãng công bố
+    gia_tri_so:
+      tu_tai_lieu: ["chênh lệch nhiệt độ"]
+      hieu_biet_chung: []
   do_sau:
     gia_tri_so:
       tu_tai_lieu: ["độ sâu tối đa 6 mét", "độ sâu 3 mét", "sâu tới 3 mét"]

@@ -1,0 +1,20 @@
+# Chỉ src/ và vài mục của data/ được COPY trong Dockerfile; mọi thứ còn lại, nhất là khóa và nhãn, không vào ngữ cảnh build.
+.env
+.env.*
+.git
+.venv
+.claude
+**/__pycache__
+**/*.pyc
+.pytest_cache
+data/nhan
+data/quang_cao
+data/tuyen_bo
+data/thu_llm
+ket_qua
+tests
+scripts
+luan_van
+de_cuong
+*.md
+!data/huong_dan_gan_nhan.md
