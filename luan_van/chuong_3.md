@@ -16,9 +16,9 @@ Bài toán được nêu ở mục 1.2: với bài quảng cáo q, mẫu sản p
 
 **Thuộc tính có điều kiện ràng buộc.** Mỗi nhóm sản phẩm có một danh sách thuộc tính mà hãng thường công bố kèm điều kiện. Đề tài dùng 16 thuộc tính: điện thoại có thời lượng pin, sạc nhanh, công suất sạc, độ sáng, tần số quét, zoom, kháng nước và dung lượng pin; tai nghe có thời lượng pin, sạc nhanh, kháng nước và dung lượng pin; đồng hồ có thời lượng pin, sạc nhanh, kháng nước và độ sáng. Tuyên bố về thuộc tính ngoài danh sách không thuộc phạm vi.
 
-**Điều kiện.** Điều kiện là hoàn cảnh mà con số đạt được. Mỗi điều kiện thuộc một trong sáu loại: chế độ hoạt động, bộ phận, phụ kiện, điều kiện đo, phiên bản và kiểu giá trị (Bảng 3.2). Một số điều kiện là con số kèm quan hệ, gọi là điều kiện dạng số, ví dụ "bộ sạc 40W trở lên" hay "độ sâu tối đa 6 mét". Với mỗi thuộc tính, tệp cấu hình liệt kê các điều kiện bắt buộc, tức các điều kiện mà khi đổi thì con số đổi và người mua không tự suy ra được.
+**Điều kiện.** Điều kiện là hoàn cảnh mà con số đạt được. Mỗi điều kiện thuộc một trong sáu loại: chế độ hoạt động, bộ phận, phụ kiện, điều kiện đo, phiên bản và kiểu giá trị (Bảng 3.1). Một số điều kiện là con số kèm quan hệ, gọi là điều kiện dạng số, ví dụ "bộ sạc 40W trở lên" hay "độ sâu tối đa 6 mét". Với mỗi thuộc tính, tệp cấu hình liệt kê các điều kiện bắt buộc, tức các điều kiện mà khi đổi thì con số đổi và người mua không tự suy ra được.
 
-**Bảng 3.2.** Sáu loại điều kiện
+**Bảng 3.1.** Sáu loại điều kiện
 
 | Loại | Ví dụ trong tài liệu tập phát triển |
 |---|---|
@@ -37,9 +37,9 @@ Bài toán được nêu ở mục 1.2: với bài quảng cáo q, mẫu sản p
 
 ## 3.3. Bộ thông số bảy trường
 
-Mọi tuyên bố và mọi thông số trong tài liệu được biểu diễn bằng cùng một bộ bảy trường (Bảng 3.1), nên bộ quyết định chỉ cần so hai bộ thông số cùng cấu trúc. Sáu loại điều kiện nằm trong các trường phiên bản, bộ phận và trường điều kiện cùng kiểu giá trị.
+Mọi tuyên bố và mọi thông số trong tài liệu được biểu diễn bằng cùng một bộ bảy trường (Bảng 3.2), nên bộ quyết định chỉ cần so hai bộ thông số cùng cấu trúc. Sáu loại điều kiện nằm trong các trường phiên bản, bộ phận và trường điều kiện cùng kiểu giá trị.
 
-**Bảng 3.1.** Bộ thông số bảy trường
+**Bảng 3.2.** Bộ thông số bảy trường
 
 | # | Trường | Ví dụ | Loại điều kiện nằm trong trường |
 |---|---|---|---|
@@ -274,7 +274,7 @@ Chương này trình bày phương pháp P theo nguyên tắc để LLM đọc v
 Mục này không đưa lên Google Doc.
 
 - Nháp đầu do Opus viết ngày 08/11/2026 (Bước 35), sớm hơn lịch (30/11) để viết khi mã còn mới; mọi mô tả theo mã ở commit `688a14b` (trích xuất), `fde903c` (bộ quyết định), `1cf2e2e` (P đầu-cuối). Nếu Bước 28–33 đổi luật hay tham số thì sửa lại chương này.
-- Hình 3.1 vẽ ngày 08/11 bằng `scripts/ve_hinh_3_1.py` (Sonnet viết, Opus xem ảnh): `luan_van/hinh/hinh_3_1.png` (300 dpi) và `.svg`; mũi tên chỉ ngang hoặc dọc, chỉ tô ba khối điểm mới. `.venv` không có matplotlib nên script chạy bằng Python hệ thống. Bảng 3.1 lặp T5.1; Bảng 3.5, 3.6 lặp hướng dẫn mục 7, 8.
+- Hình 3.1 vẽ ngày 08/11 bằng `scripts/ve_hinh_3_1.py` (Sonnet viết, Opus xem ảnh): `luan_van/hinh/hinh_3_1.png` (300 dpi) và `.svg`; mũi tên chỉ ngang hoặc dọc, chỉ tô ba khối điểm mới. `.venv` không có matplotlib nên script chạy bằng Python hệ thống. Bảng 3.2 lặp T5.1; Bảng 3.5, 3.6 lặp hướng dẫn mục 7, 8.
 - Chương 3 cố ý không nêu số liệu của bài báo khác để khỏi cần số trang mới; các chỗ dẫn về cơ sở lý thuyết trỏ về Chương 2. Trích dẫn duy nhất là [24] (trang Galaxy Buds3 Pro).
 - Thuật ngữ "luật cài" (luật thêm để máy chạy được hướng dẫn) không dùng trong thân chương; các luật đó được trình bày như một phần của phương pháp.
 - Chưa đưa lên Google Doc. Khi đưa lên, Thuật toán 3.1 đặt trong khung chữ đều, đánh số như bảng.
