@@ -140,6 +140,11 @@ def _safe_error(exc: Exception) -> LLMError:
     if status == 404:
         return LLMError("model_not_found_or_unavailable", status_code=status)
     if status == 400:
+        body = getattr(exc, "body", None)
+        err = body.get("error", body) if isinstance(body, dict) else None
+        ma = err.get("code") if isinstance(err, dict) else None
+        if ma == "json_validate_failed" or "json_validate_failed" in str(exc):
+            return LLMError("json_validate_failed", status_code=status)  # JSON bị cắt; không ghi nội dung lỗi
         return LLMError("invalid_request_check_api_key_model_parameters", status_code=status)
     if status == 429:
         return LLMError("temporary_api_error", retryable=True, status_code=status, retry_after=_retry_after(exc))
@@ -249,6 +254,15 @@ class LLMClient:
         self.log_path.parent.mkdir(parents=True, exist_ok=True)
         with self.log_path.open("a", encoding="utf-8") as stream:
             stream.write(redact(canonical_json(event)) + "\n")
+
+    def has_cache(self, provider: str, model: str, messages: list[dict[str, str]],
+                  parameters: dict[str, Any] | None = None, *, json_output: bool = False,
+                  output_schema: dict[str, Any] | None = None) -> bool:
+        """Yêu cầu này đã có tệp trong bộ nhớ đệm chưa (không gọi mạng, không ghi log)."""
+        request = build_request(provider, model, messages, parameters,
+                                json_output=json_output, output_schema=output_schema,
+                                mode=self.mode)
+        return (self.cache_dir / f"{request_hash(request)}.json").exists()
 
     def call(self, provider: str, model: str, messages: list[dict[str, str]],
              parameters: dict[str, Any] | None = None, *, json_output: bool = False,

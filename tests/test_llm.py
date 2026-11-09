@@ -242,3 +242,29 @@ def test_git_ignore_and_tracking():
     assert not subprocess.check_output(["git", "ls-files", "--", ".env"], cwd=root, text=True).strip()
     for path in [".env.example", "data/thu_llm/cases.json", "ket_qua/llm_cache/probe.json", "ket_qua/calls.jsonl"]:
         assert subprocess.run(["git", "check-ignore", path], cwd=root, capture_output=True).returncode == 1
+
+
+class _Loi400(Exception):
+    def __init__(self, status_code=400, body=None, msg="x"):
+        super().__init__(msg)
+        self.status_code, self.body = status_code, body
+
+
+def test_safe_error_json_validate_failed():
+    from kiemchung.llm import _safe_error
+    for body in ({"error": {"code": "json_validate_failed", "message": "x"}}, {"code": "json_validate_failed"}):
+        e = _safe_error(_Loi400(body=body))
+        assert (e.code, e.status_code, e.retryable) == ("json_validate_failed", 400, False)
+    assert _safe_error(_Loi400(body=None, msg="Error code: 400 json_validate_failed")).code == "json_validate_failed"
+    assert _safe_error(_Loi400(body={"error": {"code": "other"}})).code == "invalid_request_check_api_key_model_parameters"
+    assert _safe_error(_Loi400()).code == "invalid_request_check_api_key_model_parameters"
+
+
+def test_has_cache(tmp_path):
+    c = client(tmp_path)
+    tham_so = {"temperature": 0, "max_output_tokens": 10}
+    assert not c.has_cache("groq", "model-a", MESSAGES, tham_so, json_output=True)
+    call(c, parameters=tham_so, json_output=True)
+    assert c.has_cache("groq", "model-a", MESSAGES, tham_so, json_output=True)
+    assert not c.has_cache("groq", "model-a", MESSAGES, {**tham_so, "max_output_tokens": 20}, json_output=True)
+    assert not c.has_cache("groq", "model-a", MESSAGES, tham_so)

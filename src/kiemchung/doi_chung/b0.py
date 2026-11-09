@@ -38,7 +38,8 @@ NHIET_DO = 0  # T6.2
 MAX_TOKEN_RA = 4096
 
 ANH_XA_NHAN = {"supported": "DUNG", "refuted": "SAI", "nei": "CHUA_DU"}  # khóa: chữ thường, đã bỏ khoảng trắng đầu cuối
-LOI_NOI_DUNG = frozenset({"empty_blocked_or_incomplete_response"})  # LLMError coi là LOI của tuyên bố, không dừng chạy
+LOI_NOI_DUNG = frozenset({"empty_blocked_or_incomplete_response", "json_validate_failed"})  # LLMError coi là LOI của tuyên bố, không dừng chạy
+LOI_BI_CAT = frozenset({"empty_blocked_or_incomplete_response", "json_validate_failed"})  # đầu ra bị cắt: thử lại trần gấp đôi
 
 _CHO_TRONG = re.compile(r"\{tuyen_bo\}|\{doan_1\.\.k\}")
 _KHOI_MA = re.compile(r"```[ \t]*(?:json)?[ \t]*\r?\n?(.*?)```", re.S | re.I)
@@ -103,6 +104,26 @@ def doc_tra_ve(van_ban):
     return ket_qua
 
 
+def goi_json(client, nha_cung_cap, mo_hinh, messages, nhiet_do, max_token_ra):
+    """Gọi JSON mode, trả (kết quả, trần token đã dùng). Đầu ra bị cắt hoặc JSON hỏng thì gọi lại một lần với trần gấp đôi.
+
+    Nếu bộ nhớ đệm đã có kết quả ở trần gấp đôi (lần chạy trước đã nâng trần) thì gọi thẳng trần đó để chạy lại tất định."""
+    tran2 = 2 * max_token_ra
+    co_dem = getattr(client, "has_cache", None)
+    if co_dem and co_dem(nha_cung_cap, mo_hinh, messages, {"temperature": nhiet_do, "max_output_tokens": tran2},
+                         json_output=True):
+        return client.call(nha_cung_cap, mo_hinh, messages, {"temperature": nhiet_do, "max_output_tokens": tran2},
+                           json_output=True), tran2
+    try:
+        return client.call(nha_cung_cap, mo_hinh, messages,
+                           {"temperature": nhiet_do, "max_output_tokens": max_token_ra}, json_output=True), max_token_ra
+    except LLMError as e:
+        if e.code not in LOI_BI_CAT:
+            raise
+    return client.call(nha_cung_cap, mo_hinh, messages, {"temperature": nhiet_do, "max_output_tokens": tran2},
+                       json_output=True), tran2
+
+
 def kiem_chung_b0(tuyen_bo, client, mo_hinh, k=5, cach_tach="am_tiet", thu_muc_nguon=th.THU_MUC_NGUON,
                   max_token_ra=MAX_TOKEN_RA):
     """Chạy B0 cho một tuyên bố và trả bản ghi để kiểm lại.
@@ -111,7 +132,8 @@ def kiem_chung_b0(tuyen_bo, client, mo_hinh, k=5, cach_tach="am_tiet", thu_muc_n
     Bản ghi: id, ma_mau, tuyen_bo; mo_hinh (đã yêu cầu), nha_cung_cap, mo_hinh_thuc (actual_model); k, cach_tach,
     ma_doan (đã đưa vào câu lệnh, theo hạng); cau_lenh và ma_bam_cau_lenh (SHA-256); tra_ve_tho (văn bản LLM trả);
     nhan_goc, nhan, doan, ly_do, loi (xem doc_tra_ve); finish_reason, usage, thoi_gian_sinh_ms; ma_yeu_cau (mã
-    băm yêu cầu của llm.py, tên tệp trong bộ nhớ đệm) và tu_bo_nho_dem (lần chạy này lấy từ bộ nhớ đệm)."""
+    băm yêu cầu của llm.py, tên tệp trong bộ nhớ đệm) và tu_bo_nho_dem (lần chạy này lấy từ bộ nhớ đệm); tran_token (trần token ra đã dùng, gấp đôi
+    max_token_ra nếu lần đầu bị cắt)."""
     nha_cung_cap = NHA_CUNG_CAP.get(mo_hinh)
     if nha_cung_cap is None:
         raise ValueError(f"mô hình chưa có nhà cung cấp: {mo_hinh!r} (có {', '.join(NHA_CUNG_CAP)})")
@@ -124,10 +146,11 @@ def kiem_chung_b0(tuyen_bo, client, mo_hinh, k=5, cach_tach="am_tiet", thu_muc_n
         "ma_bam_cau_lenh": hashlib.sha256(cau_lenh.encode("utf-8")).hexdigest(), "cau_lenh": cau_lenh,
         "tra_ve_tho": None, "nhan_goc": None, "nhan": "LOI", "doan": [], "ly_do": None, "loi": None,
         "finish_reason": None, "usage": None, "thoi_gian_sinh_ms": None, "ma_yeu_cau": None, "tu_bo_nho_dem": False,
+        "tran_token": None,
     }
     try:
-        tra_ve = client.call(nha_cung_cap, mo_hinh, [{"role": "user", "content": cau_lenh}],
-                             {"temperature": NHIET_DO, "max_output_tokens": max_token_ra}, json_output=True)
+        tra_ve, tran = goi_json(client, nha_cung_cap, mo_hinh, [{"role": "user", "content": cau_lenh}],
+                                NHIET_DO, max_token_ra)
     except LLMError as e:
         if e.code not in LOI_NOI_DUNG:
             raise
@@ -136,7 +159,7 @@ def kiem_chung_b0(tuyen_bo, client, mo_hinh, k=5, cach_tach="am_tiet", thu_muc_n
     ban_ghi.update(
         mo_hinh_thuc=tra_ve.actual_model, tra_ve_tho=tra_ve.text, finish_reason=tra_ve.finish_reason,
         usage=tra_ve.usage, thoi_gian_sinh_ms=tra_ve.generation_ms, ma_yeu_cau=tra_ve.request_hash,
-        tu_bo_nho_dem=tra_ve.cache_hit, **doc_tra_ve(tra_ve.text))
+        tu_bo_nho_dem=tra_ve.cache_hit, tran_token=tran, **doc_tra_ve(tra_ve.text))
     return ban_ghi
 
 
