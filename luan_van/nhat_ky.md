@@ -102,6 +102,13 @@
 - Ranh giới giữ nguyên và đã nói với người thực hiện: trang chỉ bắt mâu thuẫn giữa các ô người gán điền, không đọc câu tuyên bố để gợi ý nhãn, vì nhãn chuẩn là đáp án chấm hệ thống P. Nhãn đã gán trước đó chưa có `dong_d` nên phải mở lại chọn dòng; số giây của các tuyên bố này sẽ gồm cả lần xem lại.
 - Thêm khung "Ca đặc biệt" (bảng `CA_DAC_BIET` trong `tao_cong_cu_gan_nhan.py`, 15 mục): tóm tắt bằng lời các quy tắc riêng và ca đã chốt của hướng dẫn (mục 4, 5.1, 6.2–6.6, 11; V03, V18, V21, V28, V35, V36, V40, V42, V45, V47, V48...), lọc theo mẫu và thuộc tính ghi sẵn trên tuyên bố. Có một mục "chưa có quy tắc" cho cụm kiểu "với mọi điều kiện ánh sáng", nhắc ghi câu hỏi nhãn. Bảng viết tay nên phải sửa theo khi hướng dẫn đổi. 358 test đạt.
 
+## 09/11/2026 — Bước 22.5 (đầu ra bị cắt), Bước 35 (Chương 3 lên Google Doc)
+
+- Trích xuất bộ thử bằng `openai/gpt-oss-120b` dừng hẳn ở tuyên bố thứ 39/66: Groq trả 400 nhiều lần liền, không phải giới hạn tốc độ. Gọi lại đúng yêu cầu đó để chẩn đoán: mô hình suy luận khoảng 5.000 token rồi viết JSON dài vì tuyên bố có nhiều đoạn bằng chứng, chạm trần 8.192 token (`finish_reason = length`); ở chế độ JSON, Groq trả 400 `json_validate_failed` khi JSON bị cắt. `llm.py` gộp mọi 400 thành lỗi "kiểm khóa, mô hình, tham số" nên cả lượt dừng.
+- Sửa (agent `coder`, Opus duyệt): 400 `json_validate_failed` thành lỗi nội dung của riêng tuyên bố; hàm `goi_json` (`doi_chung/b0.py`) gọi lại một lần với trần gấp đôi khi đầu ra bị cắt hoặc JSON hỏng, dùng chung cho P, B0, B1, B2 và tách tự động. Không đổi trần chung, vì đổi tham số làm đổi mã băm và mất 38 kết quả đã có trong bộ nhớ đệm. Khi bộ nhớ đệm đã có kết quả ở trần gấp đôi thì gọi thẳng trần đó, để P−NN và các lần chạy lại dùng đúng đầu ra LLM của P. Bản ghi có thêm trường `tran_token`. Luật này cần ghi vào mục cài đặt ở Chương 4.
+- Chương 3 đã lên Google Doc (tab Báo cáo khóa luận): đủ mục 3.1–3.12, Bảng 3.1–3.6, Thuật toán 3.1, chỗ giữ cho Hình 3.1; thêm 6 bảng vào DANH MỤC BẢNG và Hình 3.1 vào DANH MỤC HÌNH. Ảnh Hình 3.1 người thực hiện tự chèn từ `luan_van/hinh/hinh_3_1.png`.
+- GitHub: tạo và merge PR #18 (gộp 19 commit Bước 19–40 từ nhánh `buoc-35-chuong-3`) qua GitHub REST API bằng thông tin đăng nhập Git sẵn có, vì trình duyệt trong app chưa đăng nhập.
+
 ## 08/11/2026 — Bước 28.1, 31, 34, 35, 40 (làm sớm phần không cần nhãn)
 
 - `src/kiemchung/p.py`, `scripts/chay_p.py`: P đầu-cuối, cờ P−ĐK (`bo_doi_chieu`) và P−NN (`bo_neo_nguon`), không đọc nhãn. `src/kiemchung/api.py` (FastAPI, `GET /mau-san-pham`, `POST /kiem-chung`), `Dockerfile`; test kiểm kết quả API trùng với gọi tách tự động rồi `p.kiem_chung`. Chưa build Docker (máy chưa có), chưa thử với LLM thật.

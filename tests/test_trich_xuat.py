@@ -704,3 +704,16 @@ def test_luat_don_vi_sau_mot_dieu_kien_so_khop_cum_cau_hinh():
     kq = tx.hieu_dieu_kien(cac_dk, "sac_nhanh", "tai_lieu", cfg, (20.0, "phut"))
     assert kq["dieu_kien"]["bo_tiep_hop"] == {"so": 40.0, "don_vi": "W"}
     assert kq["dieu_kien"]["moc_phan_tram"] == {"so": 50.0, "don_vi": "phan_tram"}
+
+
+def test_tran_token_ghi_vao_ban_ghi(tmp_path):
+    tb = thu_tuyen_bo("tb-00040")
+    gia = trich_tu_tb40()
+    def transport(request, timeout_s):
+        if request["parameters"]["max_output_tokens"] < 2000:
+            return LLMResult('{"tuyen_bo', request["provider"], request["model"], "m", {}, "length")
+        return LLMResult(json.dumps(gia, ensure_ascii=False), request["provider"], request["model"], "m", {}, "stop")
+    client = LLMClient(tmp_path / "cache", tmp_path / "calls.jsonl", transport=transport)
+    bg = tx.trich_xuat(tb, tb["ma_mau"], client, MODEL, max_token_ra=1000)
+    assert bg["tran_token"] == 2000 and bg["loi"] is None
+    assert tx.trich_xuat(tb, tb["ma_mau"], client_gia(tmp_path / "k", gia, []), MODEL)["tran_token"] == tx.MAX_TOKEN_RA

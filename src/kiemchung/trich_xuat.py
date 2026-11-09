@@ -22,7 +22,7 @@ from . import truy_hoi as th
 from .cau_hinh import NHOM, THU_MUC, chuan_hoa_chu, doc_cau_hinh, doc_mau, doc_yaml
 from .chuan_hoa import (GiaTri, KieuGiaTri, _cum_cua_muc, _mau_cum, bang_nhau, tim_gia_tri, tim_kieu_gia_tri,
                         tim_san_pham, tim_so)
-from .doi_chung.b0 import LOI_NOI_DUNG, NHA_CUNG_CAP, NHIET_DO, _doc_json
+from .doi_chung.b0 import LOI_NOI_DUNG, NHA_CUNG_CAP, NHIET_DO, _doc_json, goi_json
 from .llm import LLMError, LLMResult
 
 # Chép nguyên văn khối giữa hai dấu <!-- CAU_LENH_TRICH_XUAT: ... --> của luan_van/buoc22_thiet_ke_trich_xuat.md; test so lại.
@@ -672,7 +672,7 @@ def trich_xuat(tuyen_bo, ma_mau, client, mo_hinh, k=5, cach_tach="am_tiet", neo_
     thuoc_tinh tách tay hay nhãn. client: llm.LLMClient. neo_nguon=False, kiem_day_du=False là P−NN (mục 9). nhom mặc định theo
     mau_san_pham.csv. Bản ghi: id, ma_mau, chu_tuyen_bo, mo_hinh, nha_cung_cap, mo_hinh_thuc, k, cach_tach, doan (mã, theo
     hạng), ma_bam_cau_lenh (SHA-256), tuyen_bo, bang_chung, bang_chung_bi_loai, bi_loai, bo_sung, bo_sung_mo_ho, loi,
-    neo_nguon, kiem_day_du, tra_ve_tho, finish_reason, usage, ma_yeu_cau, tu_bo_nho_dem (khác nhau giữa lần chạy đầu và chạy lại;
+    neo_nguon, kiem_day_du, tra_ve_tho, finish_reason, usage, ma_yeu_cau, tran_token (trần token ra đã dùng; gấp đôi max_token_ra nếu lần đầu bị cắt), tu_bo_nho_dem (khác nhau giữa lần chạy đầu và chạy lại;
     nơi ghi tệp nên bỏ trường này để kết quả giống từng byte)."""
     ma_id, chu = (tuyen_bo.get("id"), tuyen_bo["tuyen_bo"]) if isinstance(tuyen_bo, dict) else (None, tuyen_bo)
     nha_cung_cap = NHA_CUNG_CAP.get(mo_hinh)
@@ -688,18 +688,19 @@ def trich_xuat(tuyen_bo, ma_mau, client, mo_hinh, k=5, cach_tach="am_tiet", neo_
         "ma_bam_cau_lenh": hashlib.sha256(cau_lenh.encode("utf-8")).hexdigest(), "tuyen_bo": None, "bang_chung": [],
         "bang_chung_bi_loai": [], "bi_loai": [], "bo_sung": [], "bo_sung_mo_ho": [], "loi": None, "neo_nguon": neo_nguon,
         "kiem_day_du": kiem_day_du, "tra_ve_tho": None, "finish_reason": None, "usage": None, "ma_yeu_cau": None,
-        "tu_bo_nho_dem": False,
+        "tu_bo_nho_dem": False, "tran_token": None,
     }
     try:
-        tra_ve = client.call(nha_cung_cap, mo_hinh, [{"role": "user", "content": cau_lenh}],
-                             {"temperature": NHIET_DO, "max_output_tokens": max_token_ra}, json_output=True)
+        tra_ve, tran = goi_json(client, nha_cung_cap, mo_hinh, [{"role": "user", "content": cau_lenh}],
+                                NHIET_DO, max_token_ra)
     except LLMError as e:
         if e.code not in LOI_NOI_DUNG:
             raise
         ban_ghi["loi"] = f"llm_khong_tra_ve_dung: {e.code}"
         return ban_ghi
     ban_ghi.update(mo_hinh_thuc=tra_ve.actual_model, tra_ve_tho=tra_ve.text, finish_reason=tra_ve.finish_reason,
-                   usage=tra_ve.usage, ma_yeu_cau=tra_ve.request_hash, tu_bo_nho_dem=tra_ve.cache_hit)
+                   usage=tra_ve.usage, ma_yeu_cau=tra_ve.request_hash, tu_bo_nho_dem=tra_ve.cache_hit,
+                   tran_token=tran)
     du_lieu, loi = _doc_json(tra_ve.text)
     if loi:
         ban_ghi["loi"] = loi
