@@ -278,12 +278,12 @@ def test_far_va_recall_dung_du_lieu_nho():
 def test_bang_nham_lan_du_lieu_nho():
     bang = dg.bang_nham_lan(CHUAN, DU_DOAN)
     assert list(bang) == ["DUNG", "SAI", "LECH", "CHUA_DU"]
-    assert all(list(hang) == ["DUNG", "SAI", "CHUA_DU", "LOI"] for hang in bang.values())
+    assert all(list(hang) == ["DUNG", "SAI", "LECH", "CHUA_DU", "LOI"] for hang in bang.values())
     assert bang == {
-        "DUNG": {"DUNG": 1, "SAI": 1, "CHUA_DU": 0, "LOI": 1},
-        "SAI": {"DUNG": 1, "SAI": 0, "CHUA_DU": 0, "LOI": 0},
-        "LECH": {"DUNG": 0, "SAI": 0, "CHUA_DU": 1, "LOI": 1},
-        "CHUA_DU": {"DUNG": 1, "SAI": 0, "CHUA_DU": 0, "LOI": 0},
+        "DUNG": {"DUNG": 1, "SAI": 1, "LECH": 0, "CHUA_DU": 0, "LOI": 1},
+        "SAI": {"DUNG": 1, "SAI": 0, "LECH": 0, "CHUA_DU": 0, "LOI": 0},
+        "LECH": {"DUNG": 0, "SAI": 0, "LECH": 0, "CHUA_DU": 1, "LOI": 1},
+        "CHUA_DU": {"DUNG": 1, "SAI": 0, "LECH": 0, "CHUA_DU": 0, "LOI": 0},
     }
     assert sum(sum(hang.values()) for hang in bang.values()) == len(CHUAN)
 
@@ -302,8 +302,8 @@ def test_danh_sach_loai_bo_khoi_moi_phep_tinh():
     assert dg.tinh_recall_dung(CHUAN, DU_DOAN, loai=["t2"]) == (1, 2)
     assert dg.dem_loi(CHUAN, DU_DOAN, loai=["t2"]) == 1
     bang = dg.bang_nham_lan(CHUAN, DU_DOAN, loai=["t2", "t5"])
-    assert bang["DUNG"] == {"DUNG": 1, "SAI": 1, "CHUA_DU": 0, "LOI": 0}
-    assert bang["CHUA_DU"] == {"DUNG": 0, "SAI": 0, "CHUA_DU": 0, "LOI": 0}
+    assert bang["DUNG"] == {"DUNG": 1, "SAI": 1, "LECH": 0, "CHUA_DU": 0, "LOI": 0}
+    assert bang["CHUA_DU"] == {"DUNG": 0, "SAI": 0, "LECH": 0, "CHUA_DU": 0, "LOI": 0}
     assert dg.mau_danh_gia(CHUAN, DU_DOAN, loai=["t2", "t5"]) == ["t1", "t3", "t4", "t6", "t7"]
 
 
@@ -321,7 +321,7 @@ def test_chi_so_kiem_chat_dau_vao():
     with pytest.raises(ValueError, match="không cùng tập mã"):
         dg.tinh_far(CHUAN, {k: v for k, v in DU_DOAN.items() if k != "t1"})
     with pytest.raises(ValueError, match="nhãn dự đoán không hợp lệ"):
-        dg.tinh_far(CHUAN, {**DU_DOAN, "t1": "LECH"})  # B0 không được ra LECH
+        dg.tinh_far(CHUAN, {**DU_DOAN, "t1": "SUPPORTED"})
     with pytest.raises(ValueError, match="nhãn chuẩn không hợp lệ"):
         dg.tinh_far({**CHUAN, "t1": "LOI"}, DU_DOAN)
     with pytest.raises(ValueError, match="không thuộc bộ thử"):
@@ -352,9 +352,9 @@ def test_bao_cao_co_so_lieu_va_khong_nhan_xet():
     assert "| t5 | dt-a | Tuyên bố \\| số 5 | CHUA_DU | lý do thử |" in chu
     # Loại t5: FAR 1/3 (t3), Recall 1/3 (t1 trong t1, t2, t7), LOI 2 trong mẫu tính và 2 cả bộ.
     assert "| mo-hinh-x | x-v2 | 33,3% (1/3) | 33,3% (1/3) | 2 / 2 | 3 | 3 |" in chu
-    assert "| DUNG | 1 | 1 | 0 | 1 | 3 |" in chu
-    assert "| LECH | 0 | 0 | 1 | 1 | 2 |" in chu
-    assert "| CHUA_DU | 0 | 0 | 0 | 0 | 0 |" in chu  # t5 bị loại
+    assert "| DUNG | 1 | 1 | 0 | 0 | 1 | 3 |" in chu
+    assert "| LECH | 0 | 0 | 0 | 1 | 1 | 2 |" in chu
+    assert "| CHUA_DU | 0 | 0 | 0 | 0 | 0 | 0 |" in chu  # t5 bị loại
     assert "| nhan_la | 2 |" in chu
 
 
