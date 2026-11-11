@@ -255,23 +255,60 @@ class LLMClient:
         with self.log_path.open("a", encoding="utf-8") as stream:
             stream.write(redact(canonical_json(event)) + "\n")
 
+    def _request_digest(self, provider: str, model: str, messages: list[dict[str, str]],
+                        parameters: dict[str, Any] | None, json_output: bool,
+                        output_schema: dict[str, Any] | None) -> tuple[dict[str, Any], str]:
+        request = build_request(provider, model, messages, parameters,
+                                json_output=json_output, output_schema=output_schema,
+                                mode=self.mode)
+        return request, request_hash(request)
+
     def has_cache(self, provider: str, model: str, messages: list[dict[str, str]],
                   parameters: dict[str, Any] | None = None, *, json_output: bool = False,
                   output_schema: dict[str, Any] | None = None) -> bool:
         """Yêu cầu này đã có tệp trong bộ nhớ đệm chưa (không gọi mạng, không ghi log)."""
-        request = build_request(provider, model, messages, parameters,
-                                json_output=json_output, output_schema=output_schema,
-                                mode=self.mode)
-        return (self.cache_dir / f"{request_hash(request)}.json").exists()
+        _, digest = self._request_digest(provider, model, messages, parameters,
+                                         json_output, output_schema)
+        return (self.cache_dir / f"{digest}.json").exists()
+
+    def loi_da_luu(self, provider: str, model: str, messages: list[dict[str, str]],
+                   parameters: dict[str, Any] | None = None, *, json_output: bool = False,
+                   output_schema: dict[str, Any] | None = None) -> str | None:
+        """Mã lỗi nội dung đã lưu cho yêu cầu này (tệp <digest>.loi.json), không thì None; không gọi mạng, không ghi log."""
+        _, digest = self._request_digest(provider, model, messages, parameters,
+                                         json_output, output_schema)
+        loi_file = self.cache_dir / f"{digest}.loi.json"
+        if not loi_file.exists():
+            return None
+        try:
+            code = json.loads(loi_file.read_text(encoding="utf-8"))["error"]
+        except (ValueError, KeyError, TypeError):
+            return None
+        return code if isinstance(code, str) and code else None
+
+    def luu_loi(self, provider: str, model: str, messages: list[dict[str, str]],
+                parameters: dict[str, Any] | None = None, *, json_output: bool = False,
+                output_schema: dict[str, Any] | None = None, code: str) -> None:
+        """Lưu lỗi nội dung (không phải lỗi tạm thời) của yêu cầu này để lần chạy lại không gọi mạng nữa."""
+        started = time.perf_counter()
+        request, digest = self._request_digest(provider, model, messages, parameters,
+                                               json_output, output_schema)
+        payload = {"error": code, "request_hash": digest, "provider": provider, "model": model,
+                   "parameters": request["parameters"], "timestamp": utc_now()}
+        self.cache_dir.mkdir(parents=True, exist_ok=True)
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", suffix=".tmp",
+                                         dir=self.cache_dir, delete=False) as stream:
+            temp_path = Path(stream.name)
+            stream.write(canonical_json(payload) + "\n")
+        temp_path.replace(self.cache_dir / f"{digest}.loi.json")
+        self._log(request, digest, "content_error_saved", started, error=code, usage=None)
 
     def call(self, provider: str, model: str, messages: list[dict[str, str]],
              parameters: dict[str, Any] | None = None, *, json_output: bool = False,
              output_schema: dict[str, Any] | None = None) -> LLMResult:
         started = time.perf_counter()
-        request = build_request(provider, model, messages, parameters,
-                                json_output=json_output, output_schema=output_schema,
-                                mode=self.mode)
-        digest = request_hash(request)
+        request, digest = self._request_digest(provider, model, messages, parameters,
+                                               json_output, output_schema)
         cache_file = self.cache_dir / f"{digest}.json"
         if cache_file.exists():
             try:

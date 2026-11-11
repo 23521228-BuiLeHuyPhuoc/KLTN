@@ -102,6 +102,12 @@
 - Ranh giới giữ nguyên và đã nói với người thực hiện: trang chỉ bắt mâu thuẫn giữa các ô người gán điền, không đọc câu tuyên bố để gợi ý nhãn, vì nhãn chuẩn là đáp án chấm hệ thống P. Nhãn đã gán trước đó chưa có `dong_d` nên phải mở lại chọn dòng; số giây của các tuyên bố này sẽ gồm cả lần xem lại.
 - Thêm khung "Ca đặc biệt" (bảng `CA_DAC_BIET` trong `tao_cong_cu_gan_nhan.py`, 15 mục): tóm tắt bằng lời các quy tắc riêng và ca đã chốt của hướng dẫn (mục 4, 5.1, 6.2–6.6, 11; V03, V18, V21, V28, V35, V36, V40, V42, V45, V47, V48...), lọc theo mẫu và thuộc tính ghi sẵn trên tuyên bố. Có một mục "chưa có quy tắc" cho cụm kiểu "với mọi điều kiện ánh sáng", nhắc ghi câu hỏi nhãn. Bảng viết tay nên phải sửa theo khi hướng dẫn đổi. 358 test đạt.
 
+## 11/11/2026 — Bước 22.5 (lưu lỗi nội dung vào bộ nhớ đệm)
+
+- Trích xuất bộ thử sau hai ngày chạy nền: `openai/gpt-oss-120b` 61/66, `gemini-3.6-flash` 49/66. Số lần gọi thành công mỗi ngày (10/11, 11/11): gpt-oss 13 và 4, Gemini 5 và 6, thấp hơn nhiều so với hạn mức khoảng 20 lần.
+- Nguyên nhân phía Gemini: mô hình hay trả đầu ra rỗng hoặc bị cắt ở trần 8192 vì token suy luận chiếm trần (từ 10/11: 16 lần ở trần 8192, 3 lần ở trần 16384). Khi lần gọi lại ở trần gấp đôi vẫn lỗi, tuyên bố thành LOI nhưng không có gì được lưu, nên mỗi lượt chạy lại tốn 2 lần gọi cho đúng tuyên bố đó rồi gặp 429 trước khi tới tuyên bố mới.
+- Sửa (agent `coder` theo đặc tả của Opus, Opus duyệt): `LLMClient.luu_loi`, `LLMClient.loi_da_luu` ghi và đọc `<mã yêu cầu>.loi.json`; `goi_json` lưu lỗi nội dung ở trần gấp đôi và lần sau ném lại đúng mã, không gọi mạng. Lỗi tạm thời (429, 503, mạng) không lưu. Quy tắc áp chung cho P, B0, B1, B2, tách tự động: mỗi tuyên bố được đúng một lần thử (kèm một lần nâng trần), chạy lại cho kết quả giống hệt. Muốn thử lại thì xóa tệp `.loi.json`. Mã yêu cầu cũ không đổi (có test khóa giá trị). 1354 test đạt, 1 bỏ qua.
+
 ## 09/11/2026 (chiều) — Bước 37 (bảng phụ, hình), hạn mức API
 
 - Trích xuất bộ thử: `openai/gpt-oss-120b` đứng ở 41/66, `gemini-3.6-flash` từ 14 lên 39/66; cả hai chạm hạn mức ngày của tầng miễn phí (429). Theo `ket_qua/trich_xuat/llm_calls.jsonl`: Gemini gọi mới được 22 lần trong ngày rồi bị chặn (khoảng 20 lần mỗi ngày); gpt-oss qua Groq khoảng 20–25 lần mỗi ngày. Mỗi lần gọi trích xuất trung bình khoảng 8,0 nghìn token với gpt-oss (vào 5,1 nghìn) và 9,4 nghìn với Gemini (gồm 3,2 nghìn suy luận). Hai vòng chạy nền thử lại mỗi 15 phút; Gemini bắt đầu lại sau 15:00 ngày 10/11.

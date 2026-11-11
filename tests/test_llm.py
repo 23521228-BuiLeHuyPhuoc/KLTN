@@ -268,3 +268,36 @@ def test_has_cache(tmp_path):
     assert c.has_cache("groq", "model-a", MESSAGES, tham_so, json_output=True)
     assert not c.has_cache("groq", "model-a", MESSAGES, {**tham_so, "max_output_tokens": 20}, json_output=True)
     assert not c.has_cache("groq", "model-a", MESSAGES, tham_so)
+
+
+def test_digest_request_cu_khong_doi(tmp_path):
+    # Giá trị tính bằng code trước khi tách _request_digest: bộ nhớ đệm cũ phải còn khớp.
+    r = build_request("groq", "model-a", [{"role": "user", "content": "cau lenh"}],
+                      {"temperature": 0, "max_output_tokens": 200}, json_output=True, mode="mock")
+    assert request_hash(r) == "aed1d36982da29eec3e10f991d58e53772d59a633a8fb6bccbd41cd008ee7033"
+    r = build_request("gemini", "m", [{"role": "user", "content": "x"}], None, mode="live")
+    assert request_hash(r) == "ade90792df9de49476a001d66c06c9079124b62fa3b4588ccec55f2e688fdc3f"
+    # call và has_cache dùng đúng digest đó cho tên tệp bộ nhớ đệm.
+    c = client(tmp_path)
+    tham_so = {"temperature": 0, "max_output_tokens": 200}
+    call(c, parameters=tham_so, json_output=True)
+    (tep,) = (tmp_path / "cache").glob("*.json")
+    assert tep.stem == request_hash(build_request("groq", "model-a", MESSAGES, tham_so, json_output=True, mode="mock"))
+
+
+def test_luu_loi_va_loi_da_luu(tmp_path):
+    c = client(tmp_path)
+    tham_so = {"temperature": 0, "max_output_tokens": 10}
+    assert c.loi_da_luu("groq", "model-a", MESSAGES, tham_so, json_output=True) is None
+    c.luu_loi("groq", "model-a", MESSAGES, tham_so, json_output=True, code="json_validate_failed")
+    assert c.loi_da_luu("groq", "model-a", MESSAGES, tham_so, json_output=True) == "json_validate_failed"
+    assert c.loi_da_luu("groq", "model-a", MESSAGES, {**tham_so, "max_output_tokens": 20}, json_output=True) is None
+    assert not c.has_cache("groq", "model-a", MESSAGES, tham_so, json_output=True)
+    tep = list((tmp_path / "cache").glob("*.loi.json"))
+    assert len(tep) == 1 and not list((tmp_path / "cache").glob("*.tmp"))
+    du_lieu = json.loads(tep[0].read_text(encoding="utf-8"))
+    assert du_lieu["error"] == "json_validate_failed" and du_lieu["provider"] == "groq"
+    assert du_lieu["request_hash"] + ".loi.json" == tep[0].name and du_lieu["parameters"] == tham_so
+    assert du_lieu["timestamp"]
+    dong = [json.loads(x) for x in (tmp_path / "calls.jsonl").read_text(encoding="utf-8").splitlines()]
+    assert [d["status"] for d in dong] == ["content_error_saved"] and dong[0]["error"] == "json_validate_failed"
