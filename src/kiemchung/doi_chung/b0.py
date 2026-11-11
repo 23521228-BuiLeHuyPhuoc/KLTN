@@ -107,21 +107,36 @@ def doc_tra_ve(van_ban):
 def goi_json(client, nha_cung_cap, mo_hinh, messages, nhiet_do, max_token_ra):
     """Gọi JSON mode, trả (kết quả, trần token đã dùng). Đầu ra bị cắt hoặc JSON hỏng thì gọi lại một lần với trần gấp đôi.
 
-    Nếu bộ nhớ đệm đã có kết quả ở trần gấp đôi (lần chạy trước đã nâng trần) thì gọi thẳng trần đó để chạy lại tất định."""
+    Thứ tự: (a) bộ nhớ đệm đã có kết quả ở trần gấp đôi (lần chạy trước đã nâng trần) thì gọi thẳng trần đó để chạy
+    lại tất định; (b) đã lưu lỗi nội dung ở trần gấp đôi (tệp <mã yêu cầu>.loi.json) thì ném lại đúng mã đó, không
+    gọi mạng; (c) gọi trần thường; (d) bị cắt thì gọi trần gấp đôi, nếu vẫn lỗi nội dung (LOI_NOI_DUNG) thì lưu lỗi
+    rồi ném. Lỗi tạm thời (429, 503, mạng, timeout...) không bao giờ được lưu.
+
+    Muốn thử lại một yêu cầu đã lưu lỗi thì xóa tệp *.loi.json tương ứng. Quy tắc này áp chung cho mọi hệ (P, B0, B1,
+    B2, tách tự động) để chạy lại cho kết quả giống hệt và không tốn thêm lượt gọi."""
     tran2 = 2 * max_token_ra
+    tham_so2 = {"temperature": nhiet_do, "max_output_tokens": tran2}
     co_dem = getattr(client, "has_cache", None)
-    if co_dem and co_dem(nha_cung_cap, mo_hinh, messages, {"temperature": nhiet_do, "max_output_tokens": tran2},
-                         json_output=True):
-        return client.call(nha_cung_cap, mo_hinh, messages, {"temperature": nhiet_do, "max_output_tokens": tran2},
-                           json_output=True), tran2
+    if co_dem and co_dem(nha_cung_cap, mo_hinh, messages, tham_so2, json_output=True):
+        return client.call(nha_cung_cap, mo_hinh, messages, tham_so2, json_output=True), tran2
+    loi_luu = getattr(client, "loi_da_luu", None)
+    if loi_luu:
+        ma = loi_luu(nha_cung_cap, mo_hinh, messages, tham_so2, json_output=True)
+        if ma:
+            raise LLMError(ma)
     try:
         return client.call(nha_cung_cap, mo_hinh, messages,
                            {"temperature": nhiet_do, "max_output_tokens": max_token_ra}, json_output=True), max_token_ra
     except LLMError as e:
         if e.code not in LOI_BI_CAT:
             raise
-    return client.call(nha_cung_cap, mo_hinh, messages, {"temperature": nhiet_do, "max_output_tokens": tran2},
-                       json_output=True), tran2
+    try:
+        return client.call(nha_cung_cap, mo_hinh, messages, tham_so2, json_output=True), tran2
+    except LLMError as e:
+        luu = getattr(client, "luu_loi", None)
+        if luu and e.code in LOI_NOI_DUNG:
+            luu(nha_cung_cap, mo_hinh, messages, tham_so2, json_output=True, code=e.code)
+        raise
 
 
 def kiem_chung_b0(tuyen_bo, client, mo_hinh, k=5, cach_tach="am_tiet", thu_muc_nguon=th.THU_MUC_NGUON,
