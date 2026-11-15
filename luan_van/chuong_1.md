@@ -137,6 +137,6 @@ Mục này không đưa lên Google Doc.
 
 - Viết lại toàn bộ ngày 05/11/2026 (Opus), thay bản do Codex Astra viết ngày 03/11/2026.
 - Đổi tên chương từ "Tổng quan" thành "Mở đầu" để khớp Phụ lục 2 của Khoa (MỞ ĐẦU rồi TỔNG QUAN). Kế hoạch T8.1 vẫn ghi tên cũ.
-- Các ví dụ ở Bảng 1.1 đều giữ chữ "lên đến" trong tuyên bố, nên không phụ thuộc vào quyết định còn mở về việc bỏ chữ "lên đến". Hàng "Đảm bảo..." theo dòng D2 của hướng dẫn. Hàng 6,5 giờ theo ví dụ V44.
+- Các ví dụ ở Bảng 1.1 đều giữ chữ "lên đến" trong tuyên bố, nên không phụ thuộc vào quy tắc bỏ chữ "lên đến" (đã chốt 15/11: bỏ "lên đến" vẫn khớp). Hàng "Đảm bảo..." theo dòng D2 của hướng dẫn. Hàng 6,5 giờ theo ví dụ V44.
 - [22] mới đối chiếu qua bài báo lsvn.vn trích nguyên văn, chưa đối chiếu được văn bản trên Công báo. Phải kiểm trước khi nộp.
 - Số liệu trích dẫn được đối chiếu tự động với văn bản PDF ngày 05/11/2026.
