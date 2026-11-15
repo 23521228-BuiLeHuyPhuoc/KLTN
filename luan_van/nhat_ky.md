@@ -102,6 +102,10 @@
 - Ranh giới giữ nguyên và đã nói với người thực hiện: trang chỉ bắt mâu thuẫn giữa các ô người gán điền, không đọc câu tuyên bố để gợi ý nhãn, vì nhãn chuẩn là đáp án chấm hệ thống P. Nhãn đã gán trước đó chưa có `dong_d` nên phải mở lại chọn dòng; số giây của các tuyên bố này sẽ gồm cả lần xem lại.
 - Thêm khung "Ca đặc biệt" (bảng `CA_DAC_BIET` trong `tao_cong_cu_gan_nhan.py`, 15 mục): tóm tắt bằng lời các quy tắc riêng và ca đã chốt của hướng dẫn (mục 4, 5.1, 6.2–6.6, 11; V03, V18, V21, V28, V35, V36, V40, V42, V45, V47, V48...), lọc theo mẫu và thuộc tính ghi sẵn trên tuyên bố. Có một mục "chưa có quy tắc" cho cụm kiểu "với mọi điều kiện ánh sáng", nhắc ghi câu hỏi nhãn. Bảng viết tay nên phải sửa theo khi hướng dẫn đổi. 358 test đạt.
 
+## 15/11/2026 — Sửa kế hoạch Bước 18 theo quy mô đã chốt
+
+- Người thực hiện nhắc: Bước 16 (02/11) đã đổi quy mô từ 12 xuống 8 bài mỗi mẫu cho 10 mẫu còn lại, nhưng kế hoạch Bước 18 vẫn ghi 10 × 2 × 3 × 2 = 120 bài và "đủ mọi tổ hợp mẫu × LLM × loại bài × chế độ". Đã sửa Bước 18 (việc 1, dòng Xong khi), thêm dòng "Số bài mỗi mẫu" vào T3.3, sửa các ô tương ứng trên Google Sheet và tick Bước 18 (80 bài sinh ngày 03/11). Đề cương chỉ ghi 250–300 tuyên bố, không ghi số bài, nên không lệch.
+
 ## 13–15/11/2026 — Bước 19 (tách tuyên bố của tập phát triển)
 
 - Người thực hiện tách tay 16 bài của Apple Watch SE 3 và Xiaomi 15T trong `data/tuyen_bo/chinh_nhap.xlsx`: mỗi bài một dòng, cột câu chứa các câu có con số đã chọn, cột thuộc tính chứa các mã theo cùng thứ tự. Claude chỉ đổi bảng sang mỗi tuyên bố một dòng (`chinh_nhap_tach.xlsx`): ghép mỗi mã thuộc tính với câu chứa con số của thuộc tính đó trong các câu người thực hiện đã chọn. 6 dòng ghép khác vị trí dòng của bảng gốc (một bài có câu không mang con số nào ở giữa danh sách, hai bài ghi nhiều mã hơn số câu); người thực hiện kiểm lại. Lần ghép đầu theo vị trí bị lệch, đã làm lại.

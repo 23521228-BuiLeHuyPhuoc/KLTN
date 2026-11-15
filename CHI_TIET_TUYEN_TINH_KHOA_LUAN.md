@@ -549,12 +549,12 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [x] Sinh cho 10 mẫu còn lại theo thiết lập của Bước 11: 10 × 2 × 3 × 2 = **120 bài**, điều chỉnh theo quy mô đã chốt ở Bước 16. *(03/11: `scripts/sinh_chinh.py` sinh **80 bài**, 8 bài mỗi mẫu theo quy mô Bước 16. Mỗi cặp LLM × chế độ bỏ loại bài `LOAI_BAI[(i + 2m + d) % 3]`, nên mỗi mẫu có 8/12 tổ hợp, cả 10 mẫu gộp lại đủ 12 tổ hợp, mỗi loại bài 26–27 bài. Thông số cho `ten_thong_so` ghi ở `data/quang_cao/thong_so/`: mẫu tập phát triển lấy theo căn cứ trong cấu hình, mẫu tập kiểm tra theo `chon_doan_kiemtra.json`; tối đa 5.000 ký tự, dài nhất là Xiaomi 15T với 4.961 ký tự.)*
+- [x] Sinh cho 10 mẫu còn lại theo thiết lập của Bước 11, **8 bài mỗi mẫu, tổng 80 bài**: mỗi cặp LLM × chế độ sinh 2 trong 3 loại bài, loại bài bỏ đi xoay vòng giữa các mẫu. *(Sửa 15/11: bản đầu ghi 10 × 2 × 3 × 2 = 120 bài, tức 12 bài mỗi mẫu. Bước 16 (02/11) chốt 8 bài mỗi mẫu vì 12 bài dự kiến khoảng 396 tuyên bố, vượt mục tiêu 250–300.)* *(03/11: `scripts/sinh_chinh.py` sinh **80 bài**, 8 bài mỗi mẫu theo quy mô Bước 16. Mỗi cặp LLM × chế độ bỏ loại bài `LOAI_BAI[(i + 2m + d) % 3]`, nên mỗi mẫu có 8/12 tổ hợp, cả 10 mẫu gộp lại đủ 12 tổ hợp, mỗi loại bài 26–27 bài. Thông số cho `ten_thong_so` ghi ở `data/quang_cao/thong_so/`: mẫu tập phát triển lấy theo căn cứ trong cấu hình, mẫu tập kiểm tra theo `chon_doan_kiemtra.json`; tối đa 5.000 ký tự, dài nhất là Xiaomi 15T với 4.961 ký tự.)*
 - [x] Không đổi câu lệnh và thiết lập so với bộ thử. Nếu cần thêm tuyên bố thì tăng số lần sinh, không sửa câu lệnh. *(Gọi lại `sinh_quang_cao` của Bước 11, không sửa câu lệnh. Kiểm 80/80 bài: prompt CopyPro lưu trùng prompt gửi, đúng mô hình, không dùng mô hình dự phòng, không bài nào bị cắt.)*
 
 **Làm ra:** `data/quang_cao/*.json`.
 
-**Xong khi:** đủ mọi tổ hợp mẫu × LLM × loại bài × chế độ.
+**Xong khi:** mỗi mẫu có đủ 8 bài (2 LLM × 2 chế độ × 2 loại bài); gộp 10 mẫu thì đủ 12 tổ hợp LLM × loại bài × chế độ, mỗi loại bài 26–27 bài. *(Sửa 15/11, bản đầu: đủ mọi tổ hợp mẫu × LLM × loại bài × chế độ.)*
 
 **Tra cứu:** [T3.3](#t3-3) (thiết lập sinh quảng cáo).
 
@@ -1572,6 +1572,7 @@ Tên thư mục và tệp mã nguồn viết không dấu để tránh lỗi tr�
 | Các ô khác trên giao diện | Đối tượng mục tiêu để trống; thanh nhiệt độ giữ 0,7; giới hạn đầu ra 1.800 token (mặc định của độ dài vừa). Các giá trị này được ghi thẳng vào câu lệnh nên script phải dùng đúng như vậy | Mã nguồn CopyPro (`buildPrompt()` trong `Generator.tsx`) |
 | Nhiệt độ và tham số khác | Giữ nguyên tham số backend CopyPro tự đặt: nhiệt độ 0,75 và top-p 0,9 khi gọi Gemini và Groq (không đổi từ commit `09a35a5` đến `4489632`) | Mã nguồn CopyPro |
 | Cách gọi | API `POST /api/contents/generate` của backend CopyPro, đăng nhập bằng tài khoản gói Pro; câu lệnh ghép như `buildPrompt()` của giao diện | Bước 11 |
+| Số bài mỗi mẫu | Bộ thử (iPhone 17, Galaxy Buds3 Pro): 12 bài = 2 LLM × 3 loại bài × 2 chế độ. 10 mẫu còn lại: 8 bài = 2 LLM × 2 chế độ × 2 loại bài, loại bài bỏ đi xoay vòng giữa các mẫu (`scripts/sinh_chinh.py`); tổng 24 + 80 = 104 bài | Chốt 02/11 ở Bước 16 |
 | Số phiên bản mỗi lần gọi | 1, để mỗi lần gọi là một bài | Chốt 28/10, điểm 7 ở [T10](#t10) |
 | Giới hạn token gửi sang nhà cung cấp | Độ dài vừa: 1.800 token cho bài; mô hình suy luận (Gemini 2.5 trở lên, GPT-OSS) cộng thêm 8.192 token cho suy luận. Câu lệnh vẫn ghi "Giới hạn output tối đa: 1800 tokens." như giao diện | CopyPro nhánh `kiem-chung-thong-so`, commit `a338a65` (Bước 11) |
 
