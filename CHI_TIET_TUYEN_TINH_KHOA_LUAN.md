@@ -39,7 +39,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 - [x] [Bước 17](#b17) · 01/11 – 02/11 · Viết nháp Chương 1 và Chương 2
 - [x] [Bước 18](#b18) · 03/11 · Sinh quảng cáo cho 10 mẫu còn lại
-- [ ] [Bước 19](#b19) · 04/11 · Tách tuyên bố của tập phát triển
+- [x] [Bước 19](#b19) · 04/11 · Tách tuyên bố của tập phát triển
 - [ ] [Bước 20](#b20) · 05/11 – 06/11 · Gán nhãn tập phát triển
 - [x] [Bước 21](#b21) · 07/11 · Chuẩn hóa sản phẩm, giá trị, đơn vị, kiểu giá trị
 - [ ] [Bước 22](#b22) · 08/11 – 10/11 · Trích xuất có neo nguồn và kiểm tra đầy đủ
@@ -568,8 +568,8 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Tách hoàn toàn bằng tay như Bước 12 cho 2 mẫu còn lại của tập phát triển (Apple Watch SE 3, Xiaomi 15T); lọc theo tệp cấu hình; gộp tuyên bố trùng trong cùng bài. *(08/11: đã chuẩn bị, chờ người thực hiện tách tay. `data/tuyen_bo/doc_phat_trien.md` in nguyên văn 16 bài (8 bài mỗi mẫu), `data/tuyen_bo/chinh_nhap.csv` chỉ có dòng tiêu đề; hướng dẫn tách tay thêm cột đồng hồ. `scripts/chuyen_tuyen_bo.py ... --tiep-sau data/tuyen_bo/thu.jsonl` đánh mã từ `tb-00067` và chặn bài của mẫu bộ thử; `scripts/ra_tach.py` nhận tệp tuyên bố làm đối số, có `--ma-mau`.)*
-- [ ] Nếu nhiều hơn quy mô đã chốt thì lấy mẫu phân tầng theo nhóm sản phẩm × LLM × chế độ.
+- [x] Tách hoàn toàn bằng tay như Bước 12 cho 2 mẫu còn lại của tập phát triển (Apple Watch SE 3, Xiaomi 15T); lọc theo tệp cấu hình; gộp tuyên bố trùng trong cùng bài. *(15/11: người thực hiện tách tay 16 bài: chọn câu gốc, thuộc tính và tự viết tuyên bố; Claude chỉ đổi bảng sang mỗi tuyên bố một dòng và ghép câu gốc với thuộc tính theo con số, không viết tuyên bố nào. 41 tuyên bố từ 11 bài (`tb-00067`–`tb-00107`; 5 bài chế độ `ten` không có tuyên bố): Apple Watch SE 3 14, Xiaomi 15T 27; `ten_thong_so` 35, `ten` 6. Rà tách bằng `ra_tach_chinh.md` (12/41 tuyên bố có cụm được liệt kê), người thực hiện giữ nguyên. Bảng gốc `chinh_nhap.xlsx`, bảng đã tách `chinh_nhap_tach.xlsx`.)*
+- [x] Nếu nhiều hơn quy mô đã chốt thì lấy mẫu phân tầng theo nhóm sản phẩm × LLM × chế độ. *(15/11: không cần; bộ thử 66 cộng 41 chưa vượt quy mô 250–300 tuyên bố.)*
 
 **Làm ra:** `data/tuyen_bo/chinh.jsonl` (phần tập phát triển).
 
