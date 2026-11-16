@@ -102,6 +102,13 @@
 - Ranh giới giữ nguyên và đã nói với người thực hiện: trang chỉ bắt mâu thuẫn giữa các ô người gán điền, không đọc câu tuyên bố để gợi ý nhãn, vì nhãn chuẩn là đáp án chấm hệ thống P. Nhãn đã gán trước đó chưa có `dong_d` nên phải mở lại chọn dòng; số giây của các tuyên bố này sẽ gồm cả lần xem lại.
 - Thêm khung "Ca đặc biệt" (bảng `CA_DAC_BIET` trong `tao_cong_cu_gan_nhan.py`, 15 mục): tóm tắt bằng lời các quy tắc riêng và ca đã chốt của hướng dẫn (mục 4, 5.1, 6.2–6.6, 11; V03, V18, V21, V28, V35, V36, V40, V42, V45, V47, V48...), lọc theo mẫu và thuộc tính ghi sẵn trên tuyên bố. Có một mục "chưa có quy tắc" cho cụm kiểu "với mọi điều kiện ánh sáng", nhắc ghi câu hỏi nhãn. Bảng viết tay nên phải sửa theo khi hướng dẫn đổi. 358 test đạt.
 
+## 17/11/2026 — Bước 34 (build Docker trên máy cloud)
+
+- Phiên chuyển lên máy cloud (Linux) để làm phần không cần nhãn, không cần khóa trong lúc người thực hiện gán nhãn Bước 20. Máy cloud không có khóa API và không đọc `.env`; bộ nhớ đệm chưa có lần gọi nào cho 43 tuyên bố `chinh.jsonl` (`chay_trich_xuat.py` dừng ở `tb-00067`, `missing_api_key`), nên lần chạy trích xuất trên tập phát triển ở Bước 22 vẫn phải làm trên máy người thực hiện.
+- Build được ảnh từ `Dockerfile` hiện có, không sửa tệp: ảnh gốc `python:3.14-slim`, cài đủ `requirements.txt`. Chạy container không truyền khóa: `GET /mau-san-pham` trả 12 mẫu; `POST /kiem-chung` trả lỗi gọn `missing_api_key:GEMINI_API_KEY`, không lộ chi tiết; trong ảnh không có `.env`, `data/nhan/`. Muốn build trên máy cloud phải lấy ảnh gốc từ `mirror.gcr.io` (Docker Hub trả 429) và thêm chứng chỉ của proxy; đây là cấu hình riêng của máy cloud, không đưa vào repo.
+- Chưa xong Bước 34: còn thử 3 quảng cáo của tập phát triển và so với chạy tách tự động rồi `p.py` trực tiếp, cần khóa Gemini.
+- Test trên Linux: 1354/1355 đạt khi bỏ hai biến môi trường của máy cloud có tên chứa "TOKEN"/"KEY" mà giá trị rất ngắn (`redact` của `llm.py` thay chuỗi đó trong yêu cầu nên báo nhầm `credential_in_request`). Test còn lại, `test_chia_tap_khop_mau_san_pham`, so mã băm `mau_san_pham.csv` ở dạng xuống dòng CRLF của bản checkout Windows, nên chỉ đạt trên máy Windows.
+
 ## 17/11/2026 — Bước 19 (tách lại hai dòng gộp hai thuộc tính)
 
 - Đang gán nhãn Bước 20, người thực hiện thấy `tb-00097` ("dung lượng pin 5500mAh (cho tới 13 giờ sử dụng liên tục)") là hai tuyên bố. Claude quét cả 41 dòng tìm dòng có từ hai con số: `tb-00101` cũng gộp công suất sạc 120 W với "sạc chỉ trong 15 phút"; `tb-00071` có hai giá trị của cùng thời lượng pin (18 và 32 giờ), người thực hiện đã giữ ngày 15/11; 7 dòng sạc nhanh có mốc phần trăm hoặc công suất bộ sạc là điều kiện, không phải giá trị thứ hai.
