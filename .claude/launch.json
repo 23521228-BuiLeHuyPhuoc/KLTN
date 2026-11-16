@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "copypro-backend",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["E:/baitap/NT114/NT114-Git/NT114.Q21-Web-Copy-Writing-kiem-chung/backend/src/server.js"],
+      "port": 4000
+    },
+    {
+      "name": "trang-gan-nhan",
+      "runtimeExecutable": "E:/baitap/KLTN/KLTN/.venv/Scripts/python.exe",
+      "runtimeArgs": ["-m", "http.server", "8765", "--bind", "127.0.0.1", "--directory", "E:/baitap/KLTN/KLTN/data/nhan"],
+      "port": 8765
+    }
+  ]
+}
