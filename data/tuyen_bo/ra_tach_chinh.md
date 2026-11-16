@@ -5,7 +5,7 @@ Sinh bằng `scripts/ra_tach.py` từ `data/tuyen_bo/chinh.jsonl` và `data/cau_
 - Cụm thấy ở đây có thể thuộc con số khác của cùng câu gốc hoặc là tên tính năng (tiêu chí 3); không thấy cụm nào không có nghĩa tuyên bố đủ điều kiện, vì cụm ngoài cấu hình không được dò.
 - Chỉ xét các điều kiện của thuộc tính ghi trên tuyên bố.
 - Đã lọc theo mẫu: dh-apple-watchse3, dt-xiaomi-15t.
-- 12 / 41 tuyên bố có cụm được liệt kê.
+- 14 / 43 tuyên bố có cụm được liệt kê.
 
 | Mã | Tuyên bố | Câu gốc | Cụm có trong câu gốc, không có trong tuyên bố |
 |---|---|---|---|
@@ -39,14 +39,16 @@ Sinh bằng `scripts/ra_tach.py` từ `data/tuyen_bo/chinh.jsonl` và `data/cau_
 | tb-00094 | Xiaomi 15T sạc đầy năng lượng trong 20 phút (với sạc nhanh 120W) | Pin 5000mAh hỗ trợ sạc nhanh 120W, chỉ trong 20 phút bạn đã có đầy năng lượng cho cả ngày. | – |
 | tb-00095 | Xiaomi 15T có độ sáng màn hình 3200 nit | Màn hình AMOLED 6.83” với độ sáng 3200 nit, tần số quét 120Hz và công nghệ bảo vệ mắt TÜV Rheinland, cho hình ảnh rực rỡ và an toàn cho mắt. | – |
 | tb-00096 | Xiaomi 15T có tần số quét màn hình 120Hz | Màn hình AMOLED 6.83” với độ sáng 3200 nit, tần số quét 120Hz và công nghệ bảo vệ mắt TÜV Rheinland, cho hình ảnh rực rỡ và an toàn cho mắt. | – |
-| tb-00097 | Xiaomi 15T có dung lượng pin 5500mAh (cho tới 13 giờ sử dụng liên tục) | Pin 5500mAh cùng sạc nhanh HyperCharge 67W, cho tới 13 giờ sử dụng liên tục và chỉ 50 phút sạc đầy 100 %. | – |
+| tb-00097 | Xiaomi 15T có dung lượng pin 5500mAh | Pin 5500mAh cùng sạc nhanh HyperCharge 67W, cho tới 13 giờ sử dụng liên tục và chỉ 50 phút sạc đầy 100 %. | kieu_gia_tri=toi_da: “tới” |
 | tb-00098 | Xiaomi 15T hỗ trợ sạc nhanh HyperCharge công suất 67W | Pin 5500mAh cùng sạc nhanh HyperCharge 67W, cho tới 13 giờ sử dụng liên tục và chỉ 50 phút sạc đầy 100 %. | kieu_gia_tri=toi_da: “tới” |
 | tb-00099 | Xiaomi 15T sạc đầy 100% pin chỉ trong 50 phút (với sạc nhanh HyperCharge 67W) | Pin 5500mAh cùng sạc nhanh HyperCharge 67W, cho tới 13 giờ sử dụng liên tục và chỉ 50 phút sạc đầy 100 %. | kieu_gia_tri=toi_da: “tới” |
 | tb-00100 | Xiaomi 15T có tần số làm mới màn hình 120 Hz | Màn hình AMOLED 6.7 inch với tần số làm mới 120 Hz hiển thị sắc nét, màu sắc sống động | – |
-| tb-00101 | Xiaomi 15T có công nghệ sạc nhanh công suất 120 W (sạc chỉ trong 15 phút) | Công nghệ sạc nhanh 120 W chỉ trong 15 phút, bạn luôn luôn sẵn sàng. | từ khẳng định: “luôn” |
+| tb-00101 | Xiaomi 15T có công nghệ sạc nhanh công suất 120 W | Công nghệ sạc nhanh 120 W chỉ trong 15 phút, bạn luôn luôn sẵn sàng. | từ khẳng định: “luôn” |
 | tb-00102 | Xiaomi 15T có độ sáng màn hình 3200 nits (ngay cả dưới ánh sáng mạnh) | Caption: Xiaomi 15T mang màn hình 6.83” AMOLED 3200 nits, 120Hz, bảo vệ mắt TÜV Rheinland, cho hình ảnh sáng rõ ngay cả dưới ánh sáng mạnh | – |
 | tb-00103 | Xiaomi 15T có tần số quét màn hình 120Hz | Caption: Xiaomi 15T mang màn hình 6.83” AMOLED 3200 nits, 120Hz, bảo vệ mắt TÜV Rheinland, cho hình ảnh sáng rõ ngay cả dưới ánh sáng mạnh | – |
 | tb-00104 | Xiaomi 15T có dung lượng pin 5500 mAh | Pin 5500 mAh kèm sạc HyperCharge 67W, đầy 100% trong 50 phút | – |
 | tb-00105 | Xiaomi 15T có sạc HyperCharge công suất 67W | Pin 5500 mAh kèm sạc HyperCharge 67W, đầy 100% trong 50 phút | – |
 | tb-00106 | Xiaomi 15T sạc đầy 100% pin trong 50 phút (với sạc HyperCharge 67W) | Pin 5500 mAh kèm sạc HyperCharge 67W, đầy 100% trong 50 phút | – |
 | tb-00107 | Xiaomi 15T đạt chuẩn IP68 chống nước, bụi | chuẩn IP68 chống nước, bụi | – |
+| tb-00108 | Xiaomi 15T có thời lượng pin cho tới 13 giờ sử dụng liên tục | Pin 5500mAh cùng sạc nhanh HyperCharge 67W, cho tới 13 giờ sử dụng liên tục và chỉ 50 phút sạc đầy 100 %. | – |
+| tb-00109 | Xiaomi 15T sạc chỉ trong 15 phút (với công nghệ sạc nhanh 120 W) | Công nghệ sạc nhanh 120 W chỉ trong 15 phút, bạn luôn luôn sẵn sàng. | từ khẳng định: “luôn” |
