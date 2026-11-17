@@ -301,3 +301,37 @@ def test_luu_loi_va_loi_da_luu(tmp_path):
     assert du_lieu["timestamp"]
     dong = [json.loads(x) for x in (tmp_path / "calls.jsonl").read_text(encoding="utf-8").splitlines()]
     assert [d["status"] for d in dong] == ["content_error_saved"] and dong[0]["error"] == "json_validate_failed"
+
+
+class _Loi413(Exception):
+    def __init__(self, retry_after=None):
+        super().__init__("Request too large")
+        self.status_code = 413
+        if retry_after is not None:
+            self.response = type("R", (), {"headers": {"retry-after": retry_after}})()
+
+
+def test_safe_error_413_la_loi_tam_thoi_cho_retry_after():
+    from kiemchung.llm import _safe_error
+    e = _safe_error(_Loi413())
+    assert (e.code, e.retryable, e.status_code, e.retry_after) == ("temporary_api_error", True, 413, None)
+    assert _safe_error(_Loi413("7")).retry_after == 7
+
+
+def test_retry_delay_413_giong_429():
+    from kiemchung.llm import retry_delay
+    e = LLMError("temporary_api_error", retryable=True, status_code=413)
+    assert [retry_delay(e, 1), retry_delay(e, 2)] == [20, 40]
+
+
+def test_client_413_lan_dau_roi_thanh_cong_sau_20s(tmp_path, monkeypatch):
+    waits, calls = [], []
+    monkeypatch.setattr("kiemchung.llm.time.sleep", lambda delay: waits.append(delay))
+    def provider(req, timeout):
+        calls.append(1)
+        if len(calls) == 1:
+            raise _Loi413()
+        return result(req, timeout)
+    assert not call(client(tmp_path, provider)).cache_hit
+    assert len(calls) == 2 and waits == [20]
+    assert not list(tmp_path.rglob("*.loi.json"))
