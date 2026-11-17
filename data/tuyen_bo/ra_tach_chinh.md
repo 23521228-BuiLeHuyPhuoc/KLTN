@@ -5,7 +5,7 @@ Sinh bằng `scripts/ra_tach.py` từ `data/tuyen_bo/chinh.jsonl` và `data/cau_
 - Cụm thấy ở đây có thể thuộc con số khác của cùng câu gốc hoặc là tên tính năng (tiêu chí 3); không thấy cụm nào không có nghĩa tuyên bố đủ điều kiện, vì cụm ngoài cấu hình không được dò.
 - Chỉ xét các điều kiện của thuộc tính ghi trên tuyên bố.
 - Đã lọc theo mẫu: dh-apple-watchse3, dt-xiaomi-15t.
-- 14 / 43 tuyên bố có cụm được liệt kê.
+- 13 / 42 tuyên bố có cụm được liệt kê.
 
 | Mã | Tuyên bố | Câu gốc | Cụm có trong câu gốc, không có trong tuyên bố |
 |---|---|---|---|
@@ -16,7 +16,6 @@ Sinh bằng `scripts/ra_tach.py` từ `data/tuyen_bo/chinh.jsonl` và `data/cau_
 | tb-00071 | Apple Watch SE 3 có thời lượng pin lên đến 18 giờ (khi sử dụng thông thường) và 32 giờ (ở Chế Độ Nguồn Điện Thấp) | Thời lượng pin ấn tượng lên đến 18 giờ sử dụng thông thường và 32 giờ ở Chế Độ Nguồn Điện Thấp. | – |
 | tb-00072 | Apple Watch SE 3 hỗ trợ sạc nhanh đạt 80% pin chỉ trong khoảng 45 phút | Hỗ trợ sạc nhanh vượt trội, đạt 80% pin chỉ trong khoảng 45 phút. | – |
 | tb-00073 | Apple Watch SE 3 có khả năng chống nước ở độ sâu 50m (trong buổi tập bơi lội) | Khả năng chống nước ở độ sâu 50m, sẵn sàng đồng hành trong mọi buổi tập bơi lội. | – |
-| tb-00074 | Apple Watch SE 3 có thời lượng pin bền cả ngày | Pin bền cả ngày, sạc nhanh 45 phút lên 80% giúp bạn luôn sẵn sàng. | từ khẳng định: “luôn” |
 | tb-00075 | Apple Watch SE 3 sạc nhanh 45 phút lên 80% pin | Pin bền cả ngày, sạc nhanh 45 phút lên 80% giúp bạn luôn sẵn sàng. | từ khẳng định: “luôn” |
 | tb-00076 | Apple Watch SE 3 có độ sáng màn hình 1000 nit | Màn hình 44 mm, độ sáng 1000 nit, kính Ion‑X chịu va đập gấp 4 lần. | – |
 | tb-00077 | Apple Watch SE 3 có khả năng chống nước 50 m | Khả năng chống nước 50 m, loa và micrô tích hợp cho gọi và phát nhạc | – |

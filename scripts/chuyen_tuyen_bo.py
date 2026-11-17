@@ -14,6 +14,8 @@ Chạy:
 --tiep-sau TEP_JSONL: đánh số từ mã lớn nhất trong tệp đó + 1; ma_qc đã có trong tệp đó là lỗi (bài thuộc bộ khác, không tách lại).
 Quy ước của tập chính: dòng n của chinh_nhap.csv (dòng 1 là tiêu đề, dòng trống bỏ qua) ứng với tb-{n-1+66:05d}. Chỉ thêm dòng ở
 CUỐI CSV, không chèn giữa, để mã không dịch (Bước 23 sẽ nối tiếp tập kiểm tra vào cùng tệp).
+Bỏ một tuyên bố mà không làm dịch mã: KHÔNG xóa dòng khỏi CSV; ghi vào cột ghi_chu "bo: <lý do>" (lý do bắt buộc). Dòng đó vẫn
+chiếm mã của nó (mã = số đầu + thứ tự dòng dữ liệu không trống) nhưng không ghi vào JSONL và không qua các kiểm khác.
 """
 import argparse
 import csv
@@ -61,11 +63,20 @@ def chuyen(vao, ra, tiep_sau=None):
     thuoc_tinh = {n: set(yaml.safe_load((GOC / "data" / "cau_hinh" / f"{n}.yaml").read_text(encoding="utf-8"))
                          ["thuoc_tinh"]) for n in NHOM.values()}
     bai = {}
-    loi, ket_qua, da_thay = [], [], set()
+    loi, ket_qua, da_thay, da_bo, thu_tu = [], [], set(), [], 0
     with open(vao, encoding="utf-8-sig", newline="") as f:  # utf-8-sig: Excel lưu CSV kèm BOM
         dong = list(csv.DictReader(f))
     for so, d in enumerate(dong, start=2):  # dòng 1 là tiêu đề
         if not any((d.get(c) or "").strip() for c in COT_NHAP):
+            continue
+        thu_tu += 1  # mã theo thứ tự dòng dữ liệu không trống, kể cả dòng bị bỏ
+        ghi_chu = (d.get("ghi_chu") or "").strip()
+        if ghi_chu.lower().startswith("bo:"):
+            ly_do = ghi_chu[3:].strip()
+            if not ly_do:
+                loi.append(f"dòng {so}: 'bo:' phải có lý do sau dấu hai chấm")
+            else:
+                da_bo.append((f"tb-{so_dau + thu_tu:05d}", ly_do))
             continue
         thieu = [c for c in COT_NHAP if not (d.get(c) or "").strip()]
         if thieu:
@@ -96,7 +107,7 @@ def chuyen(vao, ra, tiep_sau=None):
             loi.append(f"dòng {so}: tuyên bố trùng trong cùng bài, cần gộp: {d['tuyen_bo'][:80]}")
         da_thay.add(khoa)
         ket_qua.append({
-            "id": f"tb-{so_dau + len(ket_qua) + 1:05d}", "ma_qc": ma_qc, "ma_mau": b["ma_mau"],
+            "id": f"tb-{so_dau + thu_tu:05d}", "ma_qc": ma_qc, "ma_mau": b["ma_mau"],
             "cau_goc": d["cau_goc"].strip(), "tuyen_bo": d["tuyen_bo"].strip(), "thuoc_tinh": d["thuoc_tinh"].strip(),
             "llm_sinh": b.get("mo_hinh_nha_cung_cap") or b["mo_hinh"], "che_do": b["che_do"], "loai_bai": b["loai_bai"],
             "url_nguon": url[b["ma_mau"]], "ghi_chu": (d.get("ghi_chu") or "").strip(),
@@ -115,6 +126,8 @@ def chuyen(vao, ra, tiep_sau=None):
     print(f"đã ghi {len(ket_qua)} tuyên bố từ {len(theo_bai)} bài vào {ra}")
     if ket_qua:
         print(f"mã đã ghi: {ket_qua[0]['id']} … {ket_qua[-1]['id']}")
+    if da_bo:
+        print(f"Bỏ {len(da_bo)} dòng (giữ mã): " + "; ".join(f"{ma} ({ly_do})" for ma, ly_do in da_bo))
     return 0
 
 

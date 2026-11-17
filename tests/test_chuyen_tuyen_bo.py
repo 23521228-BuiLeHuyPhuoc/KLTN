@@ -112,3 +112,33 @@ def test_sinh_lai_thu_jsonl_dung_tung_byte(tmp_path):
     ra = tmp_path / "thu.jsonl"
     assert ctb.chuyen(csv_, ra) == 0
     assert ra.read_bytes() == THU.read_bytes()
+
+
+def _ba_dong(tmp_path, ghi_chu_giua, thuoc_tinh_giua="do_sang"):
+    ma, g1 = doan(BAI_PHAT_TRIEN, 0, 4)
+    _, g2 = doan(BAI_PHAT_TRIEN, 4, 8)
+    _, g3 = doan(BAI_PHAT_TRIEN, 8, 12)
+    vao = tmp_path / "vao.csv"
+    viet_csv(vao, [[ma, g1, "một", "do_sang", "", ""], [ma, g2, "hai", thuoc_tinh_giua, ghi_chu_giua, ""],
+                   [ma, g3, "ba", "khang_nuoc", "", ""]])
+    return vao
+
+
+def test_dong_bo_giu_ma_cac_dong_sau_khong_dich(tmp_path, capsys):
+    vao, ra = _ba_dong(tmp_path, "BO: không có con số"), tmp_path / "ra.jsonl"
+    assert ctb.chuyen(vao, ra, THU) == 0
+    assert [r["id"] for r in doc(ra)] == ["tb-00067", "tb-00069"]
+    assert "Bỏ 1 dòng (giữ mã): tb-00068 (không có con số)" in capsys.readouterr().out
+
+
+def test_bo_khong_co_ly_do_bao_loi_khong_ghi(tmp_path, capsys):
+    vao, ra = _ba_dong(tmp_path, "bo:  "), tmp_path / "ra.jsonl"
+    assert ctb.chuyen(vao, ra) == 1
+    assert not ra.exists()
+    assert "dòng 3:" in capsys.readouterr().out
+
+
+def test_dong_bo_co_thuoc_tinh_sai_van_khong_bao_loi(tmp_path):
+    vao, ra = _ba_dong(tmp_path, "bo: lý do", "thuoc_tinh_khong_co"), tmp_path / "ra.jsonl"
+    assert ctb.chuyen(vao, ra) == 0
+    assert [r["id"] for r in doc(ra)] == ["tb-00001", "tb-00003"]
