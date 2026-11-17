@@ -120,10 +120,10 @@ def _retry_after(exc: Exception) -> float | None:
 
 
 def retry_delay(error: LLMError, attempt: int) -> float:
-    """Seconds to wait before the next attempt. 429 (rate limit or quota) waits for Retry-After or 20 s, 40 s...;
-    other retryable errors keep the short 1 s, 2 s, 4 s backoff. (Bước 16 review, 02/11/2026: the old 1-2 s retries
-    on 429 only burnt quota.)"""
-    if error.status_code == 429:
+    """Seconds to wait before the next attempt. 413 and 429 (per-minute token budget, rate limit or quota) wait for
+    Retry-After or 20 s, 40 s...; other retryable errors keep the short 1 s, 2 s, 4 s backoff. (Bước 16 review,
+    02/11/2026: the old 1-2 s retries on 429 only burnt quota.)"""
+    if error.status_code in (413, 429):
         if error.retry_after is not None:
             return error.retry_after
         return min(RATE_LIMIT_BASE_S * 2 ** (attempt - 1), RETRY_WAIT_CAP_S)
@@ -146,7 +146,8 @@ def _safe_error(exc: Exception) -> LLMError:
         if ma == "json_validate_failed" or "json_validate_failed" in str(exc):
             return LLMError("json_validate_failed", status_code=status)  # JSON bị cắt; không ghi nội dung lỗi
         return LLMError("invalid_request_check_api_key_model_parameters", status_code=status)
-    if status == 429:
+    # Groq trả 413 khi ngân sách token của phút hiện tại không đủ cho yêu cầu; đo 17–18/11 cùng yêu cầu gọi lại sau khoảng một phút thì qua, nên chờ như 429.
+    if status in (413, 429):
         return LLMError("temporary_api_error", retryable=True, status_code=status, retry_after=_retry_after(exc))
     if status in {408, 409, 500, 502, 503, 504}:
         return LLMError("temporary_api_error", retryable=True, status_code=status)
