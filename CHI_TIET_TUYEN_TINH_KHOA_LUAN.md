@@ -40,7 +40,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 - [x] [Bước 17](#b17) · 01/11 – 02/11 · Viết nháp Chương 1 và Chương 2
 - [x] [Bước 18](#b18) · 03/11 · Sinh quảng cáo cho 10 mẫu còn lại
 - [x] [Bước 19](#b19) · 04/11 · Tách tuyên bố của tập phát triển
-- [ ] [Bước 20](#b20) · 05/11 – 06/11 · Gán nhãn tập phát triển
+- [x] [Bước 20](#b20) · 05/11 – 06/11 · Gán nhãn tập phát triển
 - [x] [Bước 21](#b21) · 07/11 · Chuẩn hóa sản phẩm, giá trị, đơn vị, kiểu giá trị
 - [ ] [Bước 22](#b22) · 08/11 – 10/11 · Trích xuất có neo nguồn và kiểm tra đầy đủ
 - [ ] [Bước 23](#b23) · 11/11 · Tách tuyên bố của tập kiểm tra
