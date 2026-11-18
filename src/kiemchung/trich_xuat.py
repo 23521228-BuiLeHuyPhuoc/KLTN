@@ -15,13 +15,15 @@ dòng của văn bản đoạn có chứa câu trích của giá trị; khoảng
 """
 import hashlib
 import json
+from pathlib import Path
 import re
+import unicodedata
 
 from . import neo_nguon as nn
 from . import truy_hoi as th
 from .cau_hinh import NHOM, THU_MUC, chuan_hoa_chu, doc_cau_hinh, doc_mau, doc_yaml
-from .chuan_hoa import (GiaTri, KieuGiaTri, _cum_cua_muc, _mau_cum, bang_nhau, tim_gia_tri, tim_kieu_gia_tri,
-                        tim_san_pham, tim_so)
+from .chuan_hoa import (GiaTri, KieuGiaTri, _cum_cua_muc, _mau_cum, bang_nhau, don_vi_tuong_thich, quy_doi, tim_gia_tri,
+                        tim_kieu_gia_tri, tim_san_pham, tim_so)
 from .doi_chung.b0 import LOI_NOI_DUNG, NHA_CUNG_CAP, NHIET_DO, _doc_json, goi_json
 from .llm import LLMError, LLMResult
 
@@ -238,9 +240,21 @@ def doc_luoc_do(du_lieu, loai_hop_le):
 
 # --- Dò cụm cấu hình ---
 
-def _ung_vien(cau_hinh, phia, thuoc_tinh):
+def _bo_ngoac(chu):
+    """Thay ngoặc đơn bằng dấu cách (giữ nguyên độ dài chuỗi, nên chỉ số vẫn là của chuỗi gốc). Cụm cấu hình và chữ cần dò đều qua hàm này
+    nên "(ngoài trời)" của YAML khớp "ngoài trời" của LLM và ngược lại (T-01 a)."""
+    return re.sub(r"[()]", " ", chu)
+
+
+def _chuan_cum_cau_hinh(chu):
+    """Cụm cấu hình hay cụm LLM ghi, đã chuẩn hóa chữ, bỏ ngoặc, gộp khoảng trắng."""
+    return chuan_hoa_chu(_bo_ngoac(chu))
+
+
+def _ung_vien(cau_hinh, phia, thuoc_tinh, giu_ngoac=False):
     """[(cụm đã chuẩn hóa, tên điều kiện, khóa giá trị)] của cach_dien_dat, đã bỏ giá trị có phia khác hay chi_thuoc_tinh không
-    gồm thuộc tính đang xét."""
+    gồm thuộc tính đang xét. Cụm bỏ ngoặc (so cụm LLM ghi, _chuan_cum_cau_hinh); giu_ngoac=True giữ ngoặc như YAML ("(HDR)"): dùng
+    khi dò thẳng trong văn bản nguồn (kiểm tra đầy đủ), nơi "HDR" trơ trọi ở chỗ khác của một dòng dài không phải chế độ HDR."""
     ds = []
     for ten_dk, muc in (cau_hinh.get("cach_dien_dat") or {}).items():
         for gt, kb in (muc or {}).items():
@@ -248,7 +262,7 @@ def _ung_vien(cau_hinh, phia, thuoc_tinh):
                 continue
             if "chi_thuoc_tinh" in kb and thuoc_tinh not in kb["chi_thuoc_tinh"]:
                 continue
-            ds += [(c, ten_dk, gt) for c in (chuan_hoa_chu(x) for x in _cum_cua_muc(kb)) if c]
+            ds += [(c, ten_dk, gt) for c in ((chuan_hoa_chu(x) if giu_ngoac else _chuan_cum_cau_hinh(x)) for x in _cum_cua_muc(kb)) if c]
     return ds
 
 
@@ -262,6 +276,53 @@ def _tim_khop(chu, ung_vien):
         if all(x[2] != y[2] or x[1] <= y[0] or y[1] <= x[0] for y in chon):
             chon.append(x)
     return sorted(chon)
+
+
+def _khop_trong_trich(c, trich, ung_vien):
+    """T-01 b: LLM hay rút gọn cụm ("phát" cho "Thời gian phát", "ANC Tắt" cho "(Tính năng ANC Tắt)"). Cụm c (đã chuẩn hóa) không khớp
+    cụm cấu hình nào thì thử trong câu trích: nếu c nằm trọn trong chỗ một cụm cấu hình khớp ở câu trích thì đó là cụm cấu hình ấy.
+    Trả như _tim_khop (tối đa một khớp) hoặc []."""
+    t = _bo_ngoac(chuan_hoa_chu(trich))
+    cho_c = [m.span() for m in re.finditer(_mau_cum(c), t)]
+    if not cho_c:
+        return []
+    for dau, cuoi, ten, gt, cum_cfg in _tim_khop(t, ung_vien):
+        if any(dau <= a and b <= cuoi for a, b in cho_c):
+            return [(dau, cuoi, ten, gt, cum_cfg)]
+    return []
+
+
+def _la_tieu_de(cum, trich, chung):
+    """T-01 d: cụm LLM ghi làm điều kiện nhưng là tiêu đề mục, tên thuộc tính hay tên bộ phận, tên tính năng ("Màn hình", "Kháng Bụi & Nước",
+    "Nguồn Điện Và Thời Lượng Pin", "Sạc nhanh HyperCharge", "Gold Collection"): không đổi con số khi đổi điều kiện (HD mục 4, 6.7 ý 3) nên không
+    phải điều kiện lạ. Cụm không có con số mà mọi từ hoặc thuộc dieu_kien_la.tieu_de.tu_ten_chung (tên gọi chung, chữ khen), tên tính năng
+    của tu_khang_dinh.ten_tinh_nang, từ nối; hoặc là tên riêng (từ viết hoa giữa chữ hay viết liền kiểu HyperCharge) đi cùng ít nhất
+    một từ tên gọi chung, hoặc viết liền kiểu HyperCharge, hoặc đứng một mình thành cả dòng (cụm trùng câu trích). Cụm có chữ báo điều kiện ("chế độ chơi game", "khi
+    bơi") không thuộc loại này vì có từ không phải tên gọi hay tên riêng."""
+    cau_hinh_tieu_de = (chung.get("dieu_kien_la") or {}).get("tieu_de") or {}
+    cum_ten = [chuan_hoa_chu(x).split() for x in [*(cau_hinh_tieu_de.get("tu_ten_chung") or []), *(cau_hinh_tieu_de.get("tu_noi") or []),
+                                                    *((chung.get("tu_khang_dinh") or {}).get("ten_tinh_nang") or [])]]
+    goc = [t.strip(",.;:!?\"'()[]") for t in cum.split()]
+    goc = [t for t in goc if t]
+    if not goc or any(ch.isdigit() for t in goc for ch in t):
+        return False
+    thap = [chuan_hoa_chu(t) for t in goc]
+    phu = [False] * len(thap)
+    for ten in sorted(cum_ten, key=len, reverse=True):
+        for i in range(len(thap) - len(ten) + 1):
+            if thap[i:i + len(ten)] == ten:
+                for j in range(i, i + len(ten)):
+                    phu[j] = True
+    tat_ca_hoa = all(t[0].isupper() or not t[0].isalpha() for t in goc)
+
+    def ten_rieng(t, i):
+        return (len(t) > 1 and (t.isupper() or any(ch.isupper() for ch in t[1:]))) or (t[0].isupper() and (i > 0 or tat_ca_hoa))
+
+    chua = [i for i, p in enumerate(phu) if not p]
+    if any(not ten_rieng(goc[i], i) for i in chua):
+        return False
+    viet_lien = all(re.search(r"[a-zà-ỹ][A-Z]", goc[i]) for i in chua)   # tên riêng viết liền kiểu HyperCharge, ProMotion đứng một mình
+    return not chua or any(phu) or viet_lien or chuan_hoa_chu(_bo_ngoac(cum)).split() == chuan_hoa_chu(_bo_ngoac(trich)).split()
 
 
 def _gop(chu):
@@ -285,15 +346,25 @@ def _gop_ban_do(chu):
     return "".join(ra), bd
 
 
+def _doi_gio_phut(so, tu, den):
+    """Số `so` đơn vị tu theo đơn vị den: cùng đơn vị giữ nguyên, giờ và phút đổi được cho nhau (HD mục 6.3: "trong 1 giờ" so với
+    "tối đa 30 phút"); đơn vị khác thì None (T-20)."""
+    try:
+        return quy_doi(so, tu, den)
+    except ValueError:
+        return None
+
+
 def _so_dieu_kien(don_vi, cac_chu, cum_cfg, ngam, chung):
-    """Con số của điều kiện dạng số (mục 6): GiaTri có đơn vị đúng trong từng chữ của cac_chu theo thứ tự (cụm rồi câu trích), lấy
-    con số gần cụm nhất; không có thì tra gia_tri_ngam theo cụm cấu hình. None nếu không đọc được."""
+    """Con số của điều kiện dạng số (mục 6): GiaTri có đơn vị đúng (giờ và phút đổi cho nhau, kết quả theo don_vi) trong từng chữ của
+    cac_chu theo thứ tự (cụm rồi câu trích), lấy con số gần cụm nhất; không có thì tra gia_tri_ngam theo cụm cấu hình. None nếu
+    không đọc được."""
     for chu in cac_chu:
         gop = _gop(chu)
-        ung = [g for g in tim_gia_tri(gop, chung) if g.don_vi == don_vi]
+        ung = [(g, so) for g in tim_gia_tri(gop, chung) for so in [_doi_gio_phut(g.so, g.don_vi, don_vi)] if so is not None]
         if ung:
             vi_tri = max(gop.lower().find(cum_cfg), 0)
-            return min(ung, key=lambda g: (abs(g.dau - vi_tri), g.dau)).so
+            return min(ung, key=lambda x: (abs(x[0].dau - vi_tri), x[0].dau))[1]
     bang = {chuan_hoa_chu(k): v for k, v in (ngam or {}).items()}
     return bang.get(cum_cfg)
 
@@ -322,12 +393,20 @@ LOAI_NHAN_THEO_DON_VI = ("phu_kien", "dieu_kien_do")   # loại điều kiện �
 
 def dieu_kien_so_theo_don_vi(tt_yaml):
     """{khóa đơn vị: tên điều kiện} của các điều kiện dạng số (dieu_kien_so) loại phu_kien hoặc dieu_kien_do mà đơn vị của nó không
-    trùng đơn vị của điều kiện dạng số nào khác trong cùng thuộc tính (hai điều kiện cùng đơn vị thì không nhận theo đơn vị)."""
+    trùng đơn vị của điều kiện dạng số nào khác trong cùng thuộc tính (hai điều kiện cùng đơn vị thì không nhận theo đơn vị).
+    Giờ và phút đổi được cho nhau (T-20): điều kiện dạng phút còn được nhận khi con số ghi bằng giờ (khóa "gio") và ngược lại, trừ
+    khi thuộc tính đã có điều kiện riêng cho đơn vị kia hoặc chính giá trị của thuộc tính tính bằng giờ/phút (khi đó một con số giờ
+    trong cụm điều kiện nhiều khả năng là giá trị đặt nhầm chỗ, như "lên đến 8 giờ"); hieu_dieu_kien đổi số về đơn vị của điều kiện."""
     bb = tt_yaml.get("dieu_kien_bat_buoc") or {}
     theo = {}
     for ten, kb in (tt_yaml.get("dieu_kien_so") or {}).items():
         theo.setdefault(kb["don_vi"], []).append(ten)
-    return {dv: ds[0] for dv, ds in theo.items() if len(ds) == 1 and bb.get(ds[0]) in LOAI_NHAN_THEO_DON_VI}
+    ra = {dv: ds[0] for dv, ds in theo.items() if len(ds) == 1 and bb.get(ds[0]) in LOAI_NHAN_THEO_DON_VI}
+    if tt_yaml.get("don_vi") not in ("gio", "phut", "phut_hoac_gio"):
+        for dv, kia in (("phut", "gio"), ("gio", "phut")):
+            if dv in ra and kia not in theo:
+                ra[kia] = ra[dv]
+    return ra
 
 
 def _bo_gia_tri_cua_muc(gts, gia_tri):
@@ -366,11 +445,13 @@ def hieu_dieu_kien(cac_dk, thuoc_tinh, phia, cau_hinh, gia_tri=None):
     nguon_ten = {}           # tên điều kiện -> "llm" (cụm cấu hình) hoặc "llm_don_vi"
     gia, trich_dk = {}, {}   # tên điều kiện -> {khóa so sánh: giá trị} theo thứ tự gặp; tên -> câu trích đầu tiên
     for dk in cac_dk:
-        c = chuan_hoa_chu(dk["cum"])
+        c = _chuan_cum_cau_hinh(dk["cum"])
         if any(re.search(_mau_cum(p), c) for p in ngu_canh_cfg):
             ra["ngu_canh"].append(dk["cum"])
             continue
         khop = _tim_khop(c, ung_vien)
+        if not khop and dk["loai"] != "kieu_gia_tri" and _gon(dk["cum"]) not in cum_kieu_cfg:   # cụm kiểu giá trị ("lên đến") không phải cụm rút gọn
+            khop = _khop_trong_trich(c, dk["trich"], ung_vien)
         if khop:
             for _, _, ten, gt, cum_cfg in khop:
                 if ten not in dk_bb:
@@ -393,13 +474,15 @@ def hieu_dieu_kien(cac_dk, thuoc_tinh, phia, cau_hinh, gia_tri=None):
         if so_theo_don_vi:
             for g in so_theo_don_vi:
                 ten = theo_don_vi[g.don_vi]
-                gia.setdefault(ten, {}).setdefault(_khoa_so({"so": g.so, "don_vi": g.don_vi}), {"so": g.so, "don_vi": g.don_vi})
+                dv_dk = dieu_kien_so[ten]["don_vi"]
+                so_dk = {"so": _doi_gio_phut(g.so, g.don_vi, dv_dk), "don_vi": dv_dk}
+                gia.setdefault(ten, {}).setdefault(_khoa_so(so_dk), so_dk)
                 trich_dk.setdefault(ten, dk["trich"])
                 nguon_ten[ten] = "llm" if nguon_ten.get(ten, "llm_don_vi") == "llm" else "llm_don_vi"
             continue
         if dk["loai"] == "kieu_gia_tri" or _gon(dk["cum"]) in cum_kieu_cfg:
             ra["cum_kieu"].append((dk["i"], dk["cum"]))
-        elif c in khong_phai:
+        elif c in khong_phai or _la_tieu_de(dk["cum"], dk["trich"], chung):
             ra["bo_qua"].append(dk["cum"])
         else:
             ra["dieu_kien_khac"].append({"loai": dk["loai"], "cum": dk["cum"], "trich": dk["trich"]})
@@ -408,27 +491,42 @@ def hieu_dieu_kien(cac_dk, thuoc_tinh, phia, cau_hinh, gia_tri=None):
             ra["dieu_kien"][ten] = next(iter(cac_gia_tri.values()))
             ra["trich"][f"dieu_kien.{ten}"] = trich_dk[ten]
             ra["nguon_dieu_kien"][ten] = nguon_ten[ten]
-        else:
+        elif dk_bb.get(ten) != "kieu_gia_tri":
             ra["xung_dot"][ten] = list(cac_gia_tri.values())
+        # Điều kiện loại kieu_gia_tri có hai giá trị trong một mục ("tốc độ làm mới thích ứng lên đến 120Hz": thích ứng và tối đa) không phải
+        # xung đột điều kiện: kiểu giá trị không đổi điều kiện đo (HD mục 6.1: "màn hình 120Hz" khớp "thích ứng lên đến 120Hz"), nên bỏ.
     return ra
 
 
 # --- Kiểm tra đầy đủ (mục 7) ---
+
+NUM_DONG_TIEU_DE = 2   # vung_do: số dòng tiêu đề nhóm tối đa lấy kèm
+
 
 class _Vung:
     """Vùng dò đã gộp khoảng trắng; [lo, hi) là chỗ câu trích của giá trị trong text."""
 
     def __init__(self, text, lo, hi):
         self.text, self.lo, self.hi = text, lo, hi
+        self.nhan = text   # chữ nhãn dòng (vung_do gán lại: dòng giá trị kèm tiêu đề nhóm gần nhất)
 
     def khoang_cach(self, dau):
         return 0 if self.lo <= dau < self.hi else min(abs(dau - self.lo), abs(dau - self.hi))
 
 
-def vung_do(nguon, trich, so=None):
+def vung_do(nguon, trich, so=None, can_tieu_de=None):
     """Vùng dò của một câu trích trong văn bản nguồn: các dòng chứa câu trích (mở rộng tới đầu và cuối dòng), khoảng trắng gộp.
     Câu trích có ở nhiều chỗ thì lấy chỗ đầu tiên có dòng chứa con số bằng so (nếu có so), không thì chỗ đầu. None nếu câu
-    trích không có trong nguồn."""
+    trích không có trong nguồn.
+
+    Dòng chứa ";" và có so: vùng dò chỉ là vế chứa con số (HD mục 6.8: "độ sáng tối đa 1000 nit (tiêu chuẩn); độ sáng đỉnh 1600 nit (HDR); ..."
+    của Apple, mỗi chế độ một vế).
+
+    can_tieu_de (T-01 c): hàm nhận chữ của các dòng đã chọn (gộp khoảng trắng), trả True khi dòng không tự nêu thuộc tính hay điều kiện
+    nào (không có cụm cấu hình). Khi đó vùng dò lấy kèm tối đa NUM_DONG_TIEU_DE dòng liền phía trên không rỗng và không có chữ số
+    (tiêu đề nhóm: "Thời gian phát nhạc (bật ANC)" trên dòng "Lên đến 6"), vì chữ ở tiêu đề nhóm cũng là điều kiện của dòng. Dòng bắt đầu
+    bằng "(" và không có chữ số liền sau dòng đã chọn là chú thích của dòng đó ("Đến 6,0/26 giờ" rồi "(Tính năng ANC Bật)" của #042)
+    nên luôn được lấy kèm; dòng như vậy ở phía trên là chú thích của giá trị trước, không lấy làm tiêu đề."""
     cho = nn.tim_trich(nguon, trich)
     if not cho:
         return None
@@ -447,10 +545,36 @@ def vung_do(nguon, trich, so=None):
                 break
     d, c = chon
     a, b = dong(d, c)
+    if so is not None and ";" in nguon[a:b]:   # dòng liệt kê nhiều giá trị cách nhau ";": chỉ dò trong vế chứa con số (không lẫn chế độ của vế khác)
+        dau_ve = a
+        for ve in nguon[a:b].split(";"):
+            if any(bang_nhau(so, x.so) for x in tim_so(_gop(ve))):
+                a, b = dau_ve, dau_ve + len(ve)
+                break
+            dau_ve += len(ve) + 1
+    a_gan = a   # đầu của dòng tiêu đề gần nhất (hoặc của dòng giá trị nếu không lấy tiêu đề): chữ nhãn dòng của luật chép đúng nhãn
+    if can_tieu_de is not None and can_tieu_de(_gop(nguon[a:b])):
+        for lan in range(NUM_DONG_TIEU_DE):
+            if a == 0:
+                break
+            truoc = nguon[nguon.rfind("\n", 0, a - 1) + 1:a - 1]
+            # dòng "(...)" là chú thích đứng sau giá trị của dòng trước nó ("Đến 7,0/30 giờ" rồi "(Tính năng ANC Tắt)"), không phải tiêu đề nhóm
+            if not truoc.strip() or truoc.lstrip().startswith("(") or any(ch.isdigit() for ch in truoc):
+                break
+            a -= len(truoc) + 1
+            if lan == 0:
+                a_gan = a
+    if b < len(nguon):   # dòng "(...)" không có chữ số liền sau là chú thích của dòng này
+        fin = nguon.find("\n", b + 1)
+        sau = nguon[b + 1:(fin if fin >= 0 else len(nguon))]
+        if sau.lstrip().startswith("(") and not any(ch.isdigit() for ch in sau):
+            b += 1 + len(sau)
     text, bd = _gop_ban_do(nguon[a:b])
     lo = next((i for i, x in enumerate(bd) if x >= d - a), len(bd))
     hi = max((i + 1 for i, x in enumerate(bd) if x < c - a), default=lo)
-    return _Vung(text, lo, hi)
+    vung = _Vung(text, lo, hi)
+    vung.nhan = _gop(nguon[a_gan:b])
+    return vung
 
 
 def vung_tuyen_bo(chu, trich=None):
@@ -482,19 +606,24 @@ def _kieu_tu_cum_llm(cac_cum, chung, cum_them):
     return tot or KieuGiaTri("khong_neu", None, False)
 
 
-def _bo_sung_dieu_kien(muc, vung, phia, chi_so, cau_hinh, thuoc_tinh, bo_sung, mo_ho, gia_tri_muc=None):
+def _bo_sung_dieu_kien(muc, vung, phia, chi_so, cau_hinh, thuoc_tinh, bo_sung, mo_ho, gia_tri_muc=None, van_ban_doan=None):
     """Mục 7.1: điều kiện bắt buộc mà mục chưa có (cả xung_dot) thì dò cụm của điều kiện đó trong vùng dò. Thấy đúng một giá trị
     thì điền và ghi bo_sung; hai giá trị khác nhau (hay con số điều kiện không rõ là số nào) thì không điền, ghi bo_sung_mo_ho.
 
     Điều kiện dạng số nhận theo đơn vị (bổ sung 08/11 khi cài): điều kiện dạng số loại phu_kien hay dieu_kien_do mà đơn vị là của
     riêng nó trong thuộc tính (dieu_kien_so_theo_don_vi) và vẫn chưa có thì dò mọi con số có đơn vị đó trong vùng dò, bỏ con số
     chính là giá trị của mục (gia_tri_muc: (số, khóa đơn vị)). Thấy đúng một số thì điền (cụm là chữ khớp, vd "50%"), nhiều số
-    khác nhau thì bo_sung_mo_ho."""
+    khác nhau thì bo_sung_mo_ho.
+
+    Phụ kiện dạng số ghi ở chú thích (Bước 28; HD mục 4: chú thích có giá trị như nội dung chính, bộ tiếp hợp 20W của Apple Watch SE 3 chỉ
+    nằm trong chú thích; V34): điều kiện loại phu_kien dạng số mà vẫn chưa có sau khi dò vùng dò, ở mục tài liệu, thì dò cụm của nó (cụm
+    cấu hình kèm con số, như "Bộ Tiếp Hợp Nguồn USB-C 20W") trong cả văn bản đoạn (van_ban_doan), vì chú thích của đoạn áp cho mọi dòng
+    của đoạn. Thấy đúng một số thì điền, nhiều số khác nhau thì bo_sung_mo_ho (không đoán dòng nào dùng bộ nào)."""
     chung = cau_hinh["chung"]
     tt_yaml = cau_hinh["thuoc_tinh"][thuoc_tinh]
     dieu_kien_so = tt_yaml.get("dieu_kien_so") or {}
     cach = cau_hinh.get("cach_dien_dat") or {}
-    khop = _tim_khop(chuan_hoa_chu(vung.text), _ung_vien(cau_hinh, phia, thuoc_tinh))
+    khop = _tim_khop(chuan_hoa_chu(vung.text), _ung_vien(cau_hinh, phia, thuoc_tinh, giu_ngoac=True))
     don_vi_rieng = set(dieu_kien_so_theo_don_vi(tt_yaml).values())
     for ten in tt_yaml.get("dieu_kien_bat_buoc") or {}:
         if ten in muc["dieu_kien"] or ten in muc["xung_dot"]:
@@ -525,6 +654,16 @@ def _bo_sung_dieu_kien(muc, vung, phia, chi_so, cau_hinh, thuoc_tinh, bo_sung, m
                     so_dk = {"so": g.so, "don_vi": don_vi}
                     gia.setdefault(_khoa_so(so_dk), so_dk)
                     cum_thay.append(g.chu)
+        if (not gia and not mo_ho_so and van_ban_doan and phia == "tai_lieu" and ten in dieu_kien_so
+                and (tt_yaml.get("dieu_kien_bat_buoc") or {}).get(ten) == "phu_kien"):
+            text = _gop(van_ban_doan)
+            ung_vien = [x for x in _ung_vien(cau_hinh, phia, thuoc_tinh, giu_ngoac=True)]
+            for dau, cuoi, _, gt, cum_cfg in (x for x in _tim_khop(chuan_hoa_chu(text), ung_vien) if x[2] == ten):
+                so = _so_dieu_kien(dieu_kien_so[ten]["don_vi"], [text[dau:cuoi]], cum_cfg, (cach[ten][gt] or {}).get("gia_tri_ngam"), chung)                     if gt == "gia_tri_so" else None
+                if so is not None:
+                    so_dk = {"so": so, "don_vi": dieu_kien_so[ten]["don_vi"]}
+                    gia.setdefault(_khoa_so(so_dk), so_dk)
+                    cum_thay.append(text[dau:cuoi])
         if mo_ho_so or len(gia) > 1:
             mo_ho.append({"phia": phia, "chi_so": chi_so, "dieu_kien": ten, "gia_tri": list(gia.values()), "cum": cum_thay})
         elif gia:
@@ -554,12 +693,60 @@ def _cap_gach_cheo(muc, vung, gt, phia, chi_so, cau_hinh, thuoc_tinh, bo_sung):
 
 # --- Một mục và cả bản ghi ---
 
+LY_DO_DAI_LUONG_KHAC = "dai_luong_khac"
+
+
+def _la_dai_luong_khac(gia_tri, cac_cum, chung):
+    """Giá trị của mục tài liệu là con số của một đại lượng khác mà hướng dẫn xếp ngoài phạm vi (dai_luong_khac của thuộc tính trong
+    YAML, ví dụ "độ sáng tối thiểu" của do_sang, HD mục 2, 6.5): cụm đứng liền trước con số trong câu trích, ở mọi chỗ con số xuất hiện."""
+    if not cac_cum or not isinstance(gia_tri["gia_tri"], float):
+        return False
+    trich = _gop(unicodedata.normalize("NFC", gia_tri["trich"]))
+    cho = [(g.dau, g.cuoi) for g in tim_gia_tri(trich, chung) if bang_nhau(gia_tri["gia_tri"], g.so)] or           [(x.dau, x.cuoi) for x in tim_so(trich) if bang_nhau(gia_tri["gia_tri"], x.so)]
+    cum = [chuan_hoa_chu(c) for c in cac_cum]
+    return bool(cho) and all(any(chuan_hoa_chu(trich[:dau]).rstrip(" :-–").endswith(c) for c in cum) for dau, _ in cho)
+
+
+def _neo_lai_gia_tri_tuyen_bo(gia_tri, chu_tuyen_bo, chung, thuoc_tinh, don_vi_yaml, huong=None):
+    """T-10, phía tuyên bố: gia_tri bị loại vì câu trích LLM lược chữ (trich_khong_co_trong_nguon, ví dụ "tần số quét 120Hz" cho câu
+    "tần số quét màn hình 120Hz"). Tuyên bố là câu đơn có đúng một thuộc tính và một giá trị (HD mục 2), nên nếu chữ tuyên bố có đúng
+    một giá trị số có đơn vị dùng được cho thuộc tính (don_vi_tuong_thich), và nó bằng con số LLM đã trích, thì neo lại vào chuỗi thật
+    đó. Trả chuỗi thật trong chữ tuyên bố, hoặc None (không đọc được số, mã IP/không, không có hay có nhiều hơn một giá trị khớp)."""
+    try:
+        loai, so, _ = nn.doc_gia_tri(gia_tri["chu"], gia_tri["don_vi"], chung, thuoc_tinh, huong)
+    except ValueError:
+        return None
+    if loai != "so" or don_vi_yaml == "ma_ip":
+        return None
+    chu = unicodedata.normalize("NFC", chu_tuyen_bo)
+    khop = [g for g in tim_gia_tri(chu, chung) if don_vi_tuong_thich(g.don_vi, don_vi_yaml)]
+    if len(khop) != 1 or not bang_nhau(so, khop[0].so):   # đúng một giá trị cùng đơn vị với thuộc tính, và bằng con số LLM đã trích
+        return None
+    trich = chu[khop[0].dau:khop[0].cuoi]
+    return trich if nn.co_trong_nguon(chu_tuyen_bo, trich) else None
+
+
 def _xay_muc(muc_tho, nguon, phia, chi_so, ma_doan, thuoc_tinh, ma_mau, cau_hinh, cac_cau_hinh, chu_tuyen_bo, neo, day_du,
              bi_loai, bo_sung, mo_ho):
     """Mục bộ thông số (mục 8) sau neo nguồn, hiểu điều kiện và (nếu day_du) kiểm tra đầy đủ."""
     chung = cau_hinh["chung"]
     tt_yaml = cau_hinh["thuoc_tinh"].get(thuoc_tinh) if thuoc_tinh else None
-    moi, loai = nn.neo_nguon_muc(muc_tho, nguon, chung, nn.don_vi_cua_thuoc_tinh(tt_yaml, chung), neo, thuoc_tinh)
+    khoa_tt, don_vi_yaml = nn.don_vi_cua_thuoc_tinh(tt_yaml, chung), (tt_yaml or {}).get("don_vi")
+    huong = (tt_yaml or {}).get("huong_thuan_loi")
+    moi, loai = nn.neo_nguon_muc(muc_tho, nguon, chung, khoa_tt, neo, thuoc_tinh, don_vi_yaml, huong)
+    if (day_du and phia == "tuyen_bo" and thuoc_tinh and moi["gia_tri"] is None and muc_tho["gia_tri"] is not None
+            and (("gia_tri", nn.LY_DO_TRICH) in loai)):
+        trich_moi = _neo_lai_gia_tri_tuyen_bo(muc_tho["gia_tri"], nguon, chung, thuoc_tinh, don_vi_yaml, huong)
+        if trich_moi:
+            moi2, loai2 = nn.neo_nguon_muc({**muc_tho, "gia_tri": {**muc_tho["gia_tri"], "trich": trich_moi}}, nguon, chung, khoa_tt,
+                                           neo, thuoc_tinh, don_vi_yaml, huong)
+            if moi2["gia_tri"] is not None:
+                moi, loai = moi2, loai2
+                bo_sung.append({"phia": phia, "chi_so": chi_so, "dieu_kien": "gia_tri", "gia_tri": moi["gia_tri"]["gia_tri"],
+                                "cum": trich_moi})
+    if phia == "tai_lieu" and moi["gia_tri"] and _la_dai_luong_khac(moi["gia_tri"], (tt_yaml or {}).get("dai_luong_khac"), chung):
+        moi["gia_tri"] = None
+        loai = [*loai, ("gia_tri", LY_DO_DAI_LUONG_KHAC)]
     for truong, ly_do in loai:
         _loai(bi_loai, phia, chi_so, truong, ly_do)
     gt, sp = moi["gia_tri"], moi["san_pham"]
@@ -574,18 +761,22 @@ def _xay_muc(muc_tho, nguon, phia, chi_so, ma_doan, thuoc_tinh, ma_mau, cau_hinh
            "don_vi": gt["khoa_don_vi"] if gt else None, "dieu_kien": hieu["dieu_kien"], "kieu_gia_tri": None,
            "cum_kieu": None, "goi_muc_cao": False, "dieu_kien_khac": hieu["dieu_kien_khac"],
            "dieu_kien_phu": hieu["dieu_kien_phu"], "ngu_canh": hieu["ngu_canh"], "bo_qua": hieu["bo_qua"],
-           "xung_dot": hieu["xung_dot"], "trich": trich, "nguon_dieu_kien": hieu["nguon_dieu_kien"]}
-    la_so = bool(gt) and nn.doc_gia_tri(gt["chu"], gt["don_vi"], chung, thuoc_tinh)[0] == "so"
+           "xung_dot": hieu["xung_dot"], "trich": trich, "nguon_dieu_kien": hieu["nguon_dieu_kien"], "nhan_dong": None}
+    la_so = bool(gt) and nn.doc_gia_tri(gt["chu"], gt["don_vi"], chung, thuoc_tinh, huong)[0] == "so"
     cum_them = (cau_hinh.get("cach_dien_dat") or {}).get("kieu_dung_luong")
     ket_qua_kieu = None
     if day_du and thuoc_tinh:
         if ma_doan is None:
             vung = vung_tuyen_bo(chu_tuyen_bo, gt["trich"] if gt else None)
         else:
-            vung = vung_do(nguon, gt["trich"], gt["gia_tri"] if la_so else None) if gt and nguon is not None else None
+            ung_cum = _ung_vien(cau_hinh, phia, thuoc_tinh, giu_ngoac=True)
+            vung = (vung_do(nguon, gt["trich"], gt["gia_tri"] if la_so else None, lambda t: not _tim_khop(chuan_hoa_chu(t), ung_cum))
+                    if gt and nguon is not None else None)
         if vung is not None:
+            if ma_doan is not None:
+                muc["nhan_dong"] = vung.nhan   # chữ thật của dòng (kèm tiêu đề nhóm gần nhất phía trên): nhãn dòng cho luật chép đúng nhãn khi câu trích của LLM lược chữ
             _bo_sung_dieu_kien(muc, vung, phia, chi_so, cau_hinh, thuoc_tinh, bo_sung, mo_ho,
-                               (gt["gia_tri"], gt["khoa_don_vi"]) if gt else None)
+                               (gt["gia_tri"], gt["khoa_don_vi"]) if gt else None, nguon if ma_doan is not None else None)
             if la_so:
                 _cap_gach_cheo(muc, vung, gt, phia, chi_so, cau_hinh, thuoc_tinh, bo_sung)
                 g = _chon_gia_tri(vung, gt, chung)
@@ -672,7 +863,7 @@ def trich_xuat(tuyen_bo, ma_mau, client, mo_hinh, k=5, cach_tach="am_tiet", neo_
     thuoc_tinh tách tay hay nhãn. client: llm.LLMClient. neo_nguon=False, kiem_day_du=False là P−NN (mục 9). nhom mặc định theo
     mau_san_pham.csv. Bản ghi: id, ma_mau, chu_tuyen_bo, mo_hinh, nha_cung_cap, mo_hinh_thuc, k, cach_tach, doan (mã, theo
     hạng), ma_bam_cau_lenh (SHA-256), tuyen_bo, bang_chung, bang_chung_bi_loai, bi_loai, bo_sung, bo_sung_mo_ho, loi,
-    neo_nguon, kiem_day_du, tra_ve_tho, finish_reason, usage, ma_yeu_cau, tran_token (trần token ra đã dùng; gấp đôi max_token_ra nếu lần đầu bị cắt), tu_bo_nho_dem (khác nhau giữa lần chạy đầu và chạy lại;
+    neo_nguon, kiem_day_du, tra_ve_tho, finish_reason, usage, ma_yeu_cau, thoi_gian_sinh_ms (generation_ms của lần gọi LLM), tran_token (trần token ra đã dùng; gấp đôi max_token_ra nếu lần đầu bị cắt), tu_bo_nho_dem (khác nhau giữa lần chạy đầu và chạy lại;
     nơi ghi tệp nên bỏ trường này để kết quả giống từng byte)."""
     ma_id, chu = (tuyen_bo.get("id"), tuyen_bo["tuyen_bo"]) if isinstance(tuyen_bo, dict) else (None, tuyen_bo)
     nha_cung_cap = NHA_CUNG_CAP.get(mo_hinh)
@@ -688,7 +879,7 @@ def trich_xuat(tuyen_bo, ma_mau, client, mo_hinh, k=5, cach_tach="am_tiet", neo_
         "ma_bam_cau_lenh": hashlib.sha256(cau_lenh.encode("utf-8")).hexdigest(), "tuyen_bo": None, "bang_chung": [],
         "bang_chung_bi_loai": [], "bi_loai": [], "bo_sung": [], "bo_sung_mo_ho": [], "loi": None, "neo_nguon": neo_nguon,
         "kiem_day_du": kiem_day_du, "tra_ve_tho": None, "finish_reason": None, "usage": None, "ma_yeu_cau": None,
-        "tu_bo_nho_dem": False, "tran_token": None,
+        "tu_bo_nho_dem": False, "tran_token": None, "thoi_gian_sinh_ms": None,
     }
     try:
         tra_ve, tran = goi_json(client, nha_cung_cap, mo_hinh, [{"role": "user", "content": cau_lenh}],
@@ -700,13 +891,43 @@ def trich_xuat(tuyen_bo, ma_mau, client, mo_hinh, k=5, cach_tach="am_tiet", neo_
         return ban_ghi
     ban_ghi.update(mo_hinh_thuc=tra_ve.actual_model, tra_ve_tho=tra_ve.text, finish_reason=tra_ve.finish_reason,
                    usage=tra_ve.usage, ma_yeu_cau=tra_ve.request_hash, tu_bo_nho_dem=tra_ve.cache_hit,
-                   tran_token=tran)
-    du_lieu, loi = _doc_json(tra_ve.text)
+                   tran_token=tran, thoi_gian_sinh_ms=tra_ve.generation_ms)
+    return _hau_xu_ly(ban_ghi, doan, cau_hinh)
+
+
+def _hau_xu_ly(ban_ghi, doan, cau_hinh):
+    """Đọc ban_ghi["tra_ve_tho"] rồi xu_ly (theo cờ neo_nguon, kiem_day_du của bản ghi); ghi đè các trường kết quả của bản ghi.
+    JSON không đọc được thì loi khác None và các trường kết quả giữ rỗng."""
+    du_lieu, loi = _doc_json(ban_ghi["tra_ve_tho"])
     if loi:
         ban_ghi["loi"] = loi
         return ban_ghi
-    ban_ghi.update(xu_ly(du_lieu, chu, doan, ma_mau, cau_hinh, tat_ca_cau_hinh(), neo_nguon, kiem_day_du))
+    ban_ghi.update(xu_ly(du_lieu, ban_ghi["chu_tuyen_bo"], doan, ban_ghi["ma_mau"], cau_hinh, tat_ca_cau_hinh(),
+                         ban_ghi["neo_nguon"], ban_ghi["kiem_day_du"]))
     return ban_ghi
+
+
+def xu_ly_lai(ban_ghi, neo_nguon=None, kiem_day_du=None, thu_muc_nguon=th.THU_MUC_NGUON, thu_muc_cache=None):
+    """Chạy lại phần hậu xử lý (neo nguồn, hiểu điều kiện, kiểm tra đầy đủ) của một bản ghi trích xuất đã lưu, không gọi LLM.
+
+    Đọc lại từ tra_ve_tho và các đoạn theo ban_ghi["doan"] (văn bản đoạn đọc từ thu_muc_nguon). neo_nguon, kiem_day_du khác None thì
+    đổi cờ của bản ghi (P-NN: cả hai False). Bản ghi chưa có tra_ve_tho (lỗi gọi LLM) giữ nguyên. thu_muc_cache khác None và bản ghi
+    chưa có thoi_gian_sinh_ms thì lấy generation_ms từ <thu_muc_cache>/<ma_yeu_cau>.json nếu tệp có. Trả bản ghi mới, không sửa đầu vào."""
+    moi = json.loads(json.dumps(ban_ghi))
+    if thu_muc_cache and moi.get("thoi_gian_sinh_ms") is None and moi.get("ma_yeu_cau"):
+        tep = Path(thu_muc_cache) / f"{moi['ma_yeu_cau']}.json"
+        if tep.is_file():
+            with open(tep, encoding="utf-8") as f:
+                moi["thoi_gian_sinh_ms"] = (json.load(f).get("result") or {}).get("generation_ms")
+    if moi.get("tra_ve_tho") is None:
+        return moi
+    if neo_nguon is not None:
+        moi["neo_nguon"] = neo_nguon
+    if kiem_day_du is not None:
+        moi["kiem_day_du"] = kiem_day_du
+    van_ban = dict(th.doc_doan(moi["ma_mau"], thu_muc_nguon))
+    moi["loi"] = None
+    return _hau_xu_ly(moi, [(ma, van_ban[ma]) for ma in moi["doan"]], lay_cau_hinh(nhom_cua_mau(moi["ma_mau"])))
 
 
 # --- LLM giả ---

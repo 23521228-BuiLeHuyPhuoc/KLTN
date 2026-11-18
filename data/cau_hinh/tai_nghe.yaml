@@ -80,10 +80,10 @@ thuoc_tinh:
 cach_dien_dat:
   che_do_chong_on:
     bat:
-      tu_tai_lieu: ["bật ANC", "Tính năng ANC Bật", "BẬT Tính năng ANC"]
+      tu_tai_lieu: ["bật ANC", "Tính năng ANC Bật", "BẬT Tính năng ANC", "ANC Bật"]   # "ANC Bật": bảng #042 "(Tính năng ANC Bật)", đảo trật tự của "bật ANC" (Bước 28)
       hieu_biet_chung: ["bật chống ồn", "bật khử ồn", "khử tiếng ồn chủ động", "chống ồn chủ động"]
     tat:
-      tu_tai_lieu: ["tắt ANC", "Tính năng ANC Tắt", "Tắt Tính năng ANC"]
+      tu_tai_lieu: ["tắt ANC", "Tính năng ANC Tắt", "Tắt Tính năng ANC", "ANC Tắt"]
       hieu_biet_chung: ["tắt chống ồn", "tắt khử ồn"]
     xuyen_am:                              # hãng không công bố số liệu; quảng cáo nêu thì chưa xác định
       tu_tai_lieu: ["Ambient", "Môi trường xung quanh"]

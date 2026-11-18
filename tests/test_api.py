@@ -29,6 +29,17 @@ def chan_mang(monkeypatch):
     monkeypatch.setattr(socket.socket, "connect", chan)
 
 
+def gia_trich_hop_le(request, timeout_s):
+    """tx.gia_transport có một nhánh trả không phải JSON (loi ở bước trích xuất, T-06: nhãn LOI, API trả 503). Các test mong HTTP 200 dùng biến
+    thể câu lệnh (thêm khoảng trắng cuối) cho tới khi LLM giả trả JSON; kết quả vẫn tất định theo câu lệnh."""
+    goc = request["messages"][-1]
+    for i in range(32):
+        kq = tx.gia_transport({**request, "messages": [{**goc, "content": goc["content"] + " " * i}]}, timeout_s)
+        if not kq.text.startswith("Đây là LLM giả"):
+            return kq
+    raise AssertionError("LLM giả luôn trả không phải JSON")
+
+
 def transport_tach_va_trich(request, timeout_s):
     """Câu lệnh tách thì trả hai tuyên bố tự đặt; còn lại là LLM giả của trích xuất."""
     if request["messages"][-1]["content"].startswith("Tách bài quảng cáo"):
@@ -37,7 +48,7 @@ def transport_tach_va_trich(request, timeout_s):
               {"tuyen_bo": "Galaxy Buds3 Pro nghe nhạc lên đến 30 giờ cùng hộp sạc", "cau_goc": "lên đến 30 giờ",
                "thuoc_tinh_du_kien": "thoi_luong_pin"}]
         return LLMResult(json.dumps(ds, ensure_ascii=False), request["provider"], request["model"], "gia-tach-v1", {}, "stop")
-    return tx.gia_transport(request, timeout_s)
+    return gia_trich_hop_le(request, timeout_s)
 
 
 def tao_client(thu_muc, transport=transport_tach_va_trich):
@@ -159,6 +170,17 @@ def test_loi_llm_o_buoc_trich_xuat_503(tmp_path):
     r = TestClient(api.tao_app(client=tao_client(tmp_path, hong_o_trich), mo_hinh=MODEL)).post(
         "/kiem-chung", json={"van_ban": VAN_BAN, "ma_mau": BUDS})
     assert r.status_code == 503
+
+
+def test_dau_ra_trich_xuat_khong_phai_json_503(tmp_path):
+    """T-06: bước trích xuất gặp JSON không đọc được thì P trả nhãn LOI, API trả 503 (không phát nhãn Chưa đủ thông tin)."""
+    def hong_o_trich(request, timeout_s):
+        if request["messages"][-1]["content"].startswith("Tách bài quảng cáo"):
+            return transport_tach_va_trich(request, timeout_s)
+        return LLMResult("không phải json", request["provider"], request["model"], "gia", {}, "stop")
+    r = TestClient(api.tao_app(client=tao_client(tmp_path, hong_o_trich), mo_hinh=MODEL)).post(
+        "/kiem-chung", json={"van_ban": VAN_BAN, "ma_mau": BUDS})
+    assert r.status_code == 503 and "dau_ra_trich_xuat_khong_dung_duoc" in r.text
 
 
 def test_dau_ra_tach_khong_dung_503(tmp_path):

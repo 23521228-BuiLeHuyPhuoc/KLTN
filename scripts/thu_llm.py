@@ -14,10 +14,10 @@ import time
 
 from dotenv import load_dotenv
 
-from kiemchung.llm import KEY_ENV, LLMClient, LLMError, canonical_json, redact, utc_now
-from kiemchung.thu_llm import SCORE_FIELDS, evaluate, messages_for, mock_transport
-
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from kiemchung.llm import KEY_ENV, LLMClient, LLMError, canonical_json, redact, utc_now  # noqa: E402
+from kiemchung.thu_llm import SCORE_FIELDS, evaluate, messages_for, mock_transport  # noqa: E402
 
 
 def main() -> int:

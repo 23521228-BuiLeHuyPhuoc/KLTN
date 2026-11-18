@@ -93,7 +93,7 @@ Lý do giữ cách hiểu mặc định thay vì trả Chưa đủ thông tin ch
 | Điều kiện | Loại | Giá trị gặp | Phạm vi áp dụng | Không nêu thì hiểu là | Vai trò | Căn cứ | Trạng thái |
 |---|---|---|---|---|---|---|---|
 | Bộ sạc | PK | iPhone: MagSafe hoặc Qi2 lên đến 25W, cần bộ tiếp hợp ≥30W. Xiaomi: HyperCharge 67W, khuyến cáo củ ≥67W, không có trong hộp | Khi hãng nêu bộ sạc | Không mua thêm; quảng cáo không nêu bộ sạc thì Lệch | QĐ | BC | Chốt |
-| Có dây hay không dây | CĐ | 25W là không dây (iPhone); 67W là có dây (Xiaomi) | Máy công bố cả hai cách | Có dây | QĐ | BC | Chốt |
+| Có dây hay không dây | PK | 25W là không dây (iPhone); 67W là có dây (Xiaomi) | Máy công bố cả hai cách | Có dây | QĐ | BC | Chốt. *Sửa ngày 18/11 (rà soát T-29): đổi từ CĐ sang PK cho cùng loại với khóa `cach_sac` của sạc nhanh* |
 | "Lên đến" | KGT | "lên đến 25W" | Mọi số liệu | Mức tối đa; bỏ "lên đến" không tính là Lệch | QĐ | Năng lực tối đa | Chốt |
 
 ### 2.4 Độ sáng (`do_sang`)
@@ -102,7 +102,7 @@ Lý do giữ cách hiểu mặc định thay vì trả Chưa đủ thông tin ch
 
 | Điều kiện | Loại | Giá trị gặp | Phạm vi áp dụng | Không nêu thì hiểu là | Vai trò | Căn cứ | Trạng thái |
 |---|---|---|---|---|---|---|---|
-| Chế độ hiển thị | CĐ | iPhone: tiêu chuẩn 1000, HDR 1600, ngoài trời 3000. Xiaomi: 3200 khi tự tăng sáng dưới ánh sáng mạnh | Mọi số liệu | Chế độ thông thường (tiêu chuẩn) | QĐ | BC, T4.5 | Chốt, xác nhận ở Bước 10 |
+| Chế độ hiển thị | CĐ | iPhone: tiêu chuẩn 1000, HDR 1600, ngoài trời 3000. Xiaomi: 3200 khi tự tăng sáng dưới ánh sáng mạnh | Mọi số liệu | Không có mặc định: quảng cáo không nêu chế độ thì chưa xác định (D1a). *Sửa ngày 18/11 (rà soát T-29): bản trước ghi "chế độ thông thường (tiêu chuẩn)", lệch `dien_thoai.yaml`; khảo sát Bước 10, Q10 (28/10) cho 7/10 người không hiểu "3000 nit" là lúc dùng bình thường, không cách hiểu nào quá nửa* | QĐ | BC, T4.5, khảo sát Q10 | Chốt sau Bước 10 |
 | Phần diện tích đo | ĐĐ | Xiaomi: "trên 25% diện tích màn hình", "APL 25%" | Khi hãng nêu | Như hãng công bố cho chế độ đó | QĐ | BC, T4.5 | Chốt |
 | Cách gọi theo hãng (điểm 12) | CĐ | Apple: "tối đa" là tiêu chuẩn; "đỉnh" là HDR hoặc ngoài trời. Xiaomi: "cực đại" là chế độ tự tăng sáng, đo trên 25% diện tích | Chỉ khi tài liệu dùng chữ đó để phân biệt từ hai giá trị trở lên; chữ gắn với một giá trị duy nhất là kiểu giá trị tối đa (áp cho mọi hãng) | Quảng cáo iPhone chỉ ghi "đỉnh" thì chưa xác định (D1a) | QĐ | BC | Chốt |
 

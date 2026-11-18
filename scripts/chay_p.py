@@ -58,13 +58,15 @@ def tao_thong_ke(ket_qua, he, tep_trich_xuat):
     d1a = [k for k in ket_qua if k["dong_d"] == "D1a"]
     lan = sum(1 for k in ket_qua if k["vet"].get("lan"))
     that_bai = sum(1 for k in ket_qua if "chua_xac_dinh=trich_xuat_that_bai" in k["ghi_chu"])
+    loi = sum(1 for k in ket_qua if k["nhan"] == "LOI")
     dong = [f"# Kết quả {he} (Bước 28, 31)", "", f"- Tệp trích xuất: {tep_trich_xuat}.", f"- Số tuyên bố: {len(ket_qua)}."]
     dong += bang("Phân bố nhãn", dem(k["nhan"] for k in ket_qua))
     dong += bang("Phân bố dòng D", dem(k["dong_d"] for k in ket_qua))
     dong += bang("Phân bố loại", dem(k["loai"] or "(không)" for k in ket_qua))
     dong += bang(f"D1a theo nguyên nhân (tổng {len(d1a)})", dem(nguyen_nhan_d1a(k) for k in d1a))
     dong += ["", "## Khác", "", f"- Số ca dùng luật lan (vet.lan khác rỗng): {lan}.",
-             f"- Số ca trích xuất thất bại: {that_bai}."]
+             f"- Số ca trích xuất thất bại (D1a, LLM trả JSON hợp lệ mà không trích được): {that_bai}.",
+             f"- Số ca LOI (lỗi kỹ thuật gọi LLM hay JSON không đọc được, không phải nhãn): {loi}."]
     return dong
 
 

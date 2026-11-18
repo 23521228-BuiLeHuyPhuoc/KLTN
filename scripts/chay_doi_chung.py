@@ -11,7 +11,7 @@ import time
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from kiemchung.doi_chung import b1, b2
-from kiemchung.doi_chung.chung import NHA_CUNG_CAP, gia_transport
+from kiemchung.doi_chung.chung import MAX_TOKEN_RA, NHA_CUNG_CAP, gia_transport
 from kiemchung.doi_chung.huong_dan import huong_dan_cho_cau_lenh, vi_du_b2, dinh_dang_vi_du
 from kiemchung.llm import LLMClient, LLMError
 
@@ -39,7 +39,7 @@ def tham_so_chung(ap, thu_muc_ra):
     ap.add_argument("--tuyen-bo", type=Path, default=ROOT / "data/tuyen_bo/thu.jsonl")
     ap.add_argument("--ma-mau", help="mã mẫu, có thể cách nhau bằng dấu phẩy")
     ap.add_argument("--mo-hinh", default="gemini-3.6-flash", choices=tuple(NHA_CUNG_CAP))
-    ap.add_argument("--max-token-ra", type=int, default=4096)
+    ap.add_argument("--max-token-ra", type=int, default=MAX_TOKEN_RA)
     ap.add_argument("--nghi-giay", type=float, default=20)
     ap.add_argument("--timeout", type=float, default=90)
     ap.add_argument("--gia", action="store_true")
@@ -75,8 +75,8 @@ def loc_mau(ds, ma_mau):
 
 
 def jsonl_on_dinh(ds):
-    """Không ghi cờ bộ nhớ đệm hoặc thời gian vào JSONL kết quả."""
-    return "".join(json.dumps({k: v for k, v in d.items() if k not in {"tu_bo_nho_dem", "thoi_gian_sinh_ms"}},
+    """Không ghi cờ bộ nhớ đệm vào JSONL kết quả; thoi_gian_sinh_ms được giữ cho chi_phi.csv."""
+    return "".join(json.dumps({k: v for k, v in d.items() if k != "tu_bo_nho_dem"},
                               ensure_ascii=False, sort_keys=True) + "\n" for d in ds)
 
 

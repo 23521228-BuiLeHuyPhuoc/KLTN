@@ -15,7 +15,7 @@ Sau neo_nguon_muc, gia_tri (nếu còn) có thêm "gia_tri" (số thực, {"bui"
 """
 import unicodedata
 
-from .chuan_hoa import bang_nhau, chuan_don_vi, doc_iso_22810, doc_so, tach_ip, tim_gia_tri, tim_so
+from .chuan_hoa import bang_nhau, chuan_don_vi, doc_iso_22810, doc_so, don_vi_tuong_thich, tach_ip, tim_gia_tri, tim_so
 
 LY_DO_DOAN_NGOAI_TOP_K = "doan_ngoai_top_k"
 LY_DO_TRICH = "trich_khong_co_trong_nguon"
@@ -111,11 +111,12 @@ def don_vi_cua_thuoc_tinh(thuoc_tinh_yaml, chung):
     return khoa if khoa in chung["chuan_hoa"]["don_vi"] else None
 
 
-def doc_gia_tri(chu, don_vi, chung, thuoc_tinh=None):
+def doc_gia_tri(chu, don_vi, chung, thuoc_tinh=None, huong=None):
     """Đọc trường giá trị LLM trả, chưa so với câu trích: (loại, giá trị, khóa đơn vị) hoặc ValueError.
 
     loại là "phu_dinh" ("không" -> "khong"), "co" (chỉ thuộc tính khang_nuoc: chu "có" hoặc rỗng -> "co"), "ip" ({"bui", "nuoc"}), "iso" (số mét, đơn vị m) hoặc "so" (doc_so, đơn vị là
-    chuan_don_vi(don_vi) hay None khi don_vi null). Thứ tự thử: phủ định, mã IP, mã ISO 22810, số."""
+    chuan_don_vi(don_vi) hay None khi don_vi null). Thứ tự thử: phủ định, mã IP, mã ISO 22810, số. huong (huong_thuan_loi của thuộc
+    tính) chỉ dùng để đọc khoảng "a-b" (chuan_hoa.doc_so); "theo_dang" (sạc nhanh đồng hồ) thì phút là thấp hơn tốt hơn, giờ là cao hơn."""
     c = chu.strip()
     if c.casefold() in (CHU_KHONG, PHU_DINH):
         return "phu_dinh", PHU_DINH, None
@@ -127,13 +128,14 @@ def doc_gia_tri(chu, don_vi, chung, thuoc_tinh=None):
     met = doc_iso_22810(c, chung)
     if met is not None:
         return "iso", met, "m"
-    so = doc_so(c)
     khoa = None
     if don_vi is not None:
         khoa = chuan_don_vi(don_vi, chung)
         if khoa is None:
             raise ValueError(f"đơn vị không biết: {don_vi!r}")
-    return "so", so, khoa
+    if huong == "theo_dang":
+        huong = "thap_hon_tot_hon" if khoa == "phut" else "cao_hon_tot_hon"
+    return "so", doc_so(c, huong or "cao_hon_tot_hon"), khoa
 
 
 def _kiem_so(so, don_vi, trich, chung, khoa_tt):
@@ -161,15 +163,18 @@ def _co_khang_dinh_nuoc(nt):
     return bool(vi_tri) and f" {CHU_KHONG} " not in f" {nt[:min(vi_tri)]} "
 
 
-def kiem_gia_tri(gia_tri, chung, khoa_tt, thuoc_tinh=None):
+def kiem_gia_tri(gia_tri, chung, khoa_tt, thuoc_tinh=None, don_vi_yaml=None, huong=None):
     """Kiểm một giá trị với câu trích của nó (mục 5): trả {"gia_tri", "khoa_don_vi"} hoặc lý do bị bỏ (chuỗi).
 
     Số: so_khong_khop, don_vi_khong_khop. Mã: IP bằng IP, ISO 22810 bằng ISO 22810, phủ định "không" cùng "kháng nước"
-    hay "chống nước" trong câu trích; khang_nuoc khẳng định ("có"): câu trích có "kháng nước" hay "chống nước" và không
-    có "không" đứng trước cụm đó; không khớp thì ma_khong_khop. Số không đọc được thì so_khong_khop."""
+    hay "chống nước" trong câu trích (không tính "không (được) đảm bảo khả năng kháng nước": rào chắn của chú thích, không phải giá trị
+    "không kháng nước", HD mục 4); khang_nuoc khẳng định ("có"): câu trích có "kháng nước" hay "chống nước" và không
+    có "không" đứng trước cụm đó; không khớp thì ma_khong_khop. Số không đọc được thì so_khong_khop.
+    don_vi_yaml (don_vi của thuộc tính trong YAML, T-09): giá trị số mà đơn vị không tương thích với thuộc tính (don_vi_tuong_thich,
+    ví dụ "3 m" ở thuộc tính mã IP) bị bỏ, lý do don_vi_khong_khop."""
     trich = _gop(gia_tri["trich"])
     try:
-        loai, gt, khoa = doc_gia_tri(gia_tri["chu"], gia_tri["don_vi"], chung, thuoc_tinh)
+        loai, gt, khoa = doc_gia_tri(gia_tri["chu"], gia_tri["don_vi"], chung, thuoc_tinh, huong)
     except ValueError:
         return LY_DO_DON_VI if gia_tri["don_vi"] is not None and _la_so(gia_tri["chu"]) else LY_DO_SO
     if loai == "ip":
@@ -180,9 +185,13 @@ def kiem_gia_tri(gia_tri, chung, khoa_tt, thuoc_tinh=None):
         khop = _co_khang_dinh_nuoc(chuan_so_khop(trich)[0])
     elif loai == "phu_dinh":
         nt, _ = chuan_so_khop(trich)
+        for cum in (chung.get("tu_khang_dinh") or {}).get("bo_qua_khi_co") or []:   # "không (được) đảm bảo" là rào chắn, không phải phủ định
+            nt = f" {nt} ".replace(f" {chuan_so_khop(cum)[0]} ", " ").strip()
         khop = f" {CHU_KHONG} " in f" {nt} " and any(c in nt for c in CUM_PHU_DINH)
     else:
         khoa, ly_do = _kiem_so(gt, gia_tri["don_vi"], trich, chung, khoa_tt)
+        if not ly_do and not don_vi_tuong_thich(khoa, don_vi_yaml):
+            return LY_DO_DON_VI
         return ly_do if ly_do else {"gia_tri": gt, "khoa_don_vi": khoa}
     return {"gia_tri": gt, "khoa_don_vi": khoa} if khop else LY_DO_MA
 
@@ -197,7 +206,7 @@ def _la_so(chu):
 
 # --- Một mục ---
 
-def neo_nguon_muc(muc, nguon, chung, khoa_tt, kiem_nguon=True, thuoc_tinh=None):
+def neo_nguon_muc(muc, nguon, chung, khoa_tt, kiem_nguon=True, thuoc_tinh=None, don_vi_yaml=None, huong=None):
     """Neo nguồn cho một mục (tuyên bố hoặc mục tài liệu): (mục mới, [(trường, lý do)]).
 
     nguon: chữ nguồn của mục (tuyên bố hoặc văn bản đoạn); None thì mọi câu trích coi như không kiểm được nguồn (dùng
@@ -221,14 +230,14 @@ def neo_nguon_muc(muc, nguon, chung, khoa_tt, kiem_nguon=True, thuoc_tinh=None):
         if kiem_nguon and not co_trong_nguon(nguon or "", gt["trich"]):
             bi_loai.append(("gia_tri", LY_DO_TRICH))
         elif kiem_nguon:
-            kq = kiem_gia_tri(gt, chung, khoa_tt, thuoc_tinh)
+            kq = kiem_gia_tri(gt, chung, khoa_tt, thuoc_tinh, don_vi_yaml, huong)
             if isinstance(kq, str):
                 bi_loai.append(("gia_tri", kq))
             else:
                 moi["gia_tri"] = {**gt, **kq}
         else:
             try:
-                loai, so, khoa = doc_gia_tri(gt["chu"], gt["don_vi"], chung, thuoc_tinh)
+                loai, so, khoa = doc_gia_tri(gt["chu"], gt["don_vi"], chung, thuoc_tinh, huong)
             except ValueError:
                 bi_loai.append(("gia_tri", LY_DO_SO))
             else:

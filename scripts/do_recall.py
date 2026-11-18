@@ -1,12 +1,12 @@
 """Bước 14: đo Recall@k (k = 1, 3, 5, 8) của truy hồi BM25 trên bộ thử, cho hai cách tách (âm tiết, từ).
 
 Truy vấn là tuyên bố trong data/tuyen_bo/thu.jsonl, tìm trong doan.jsonl của đúng mẫu của tuyên bố; chuẩn là
-bang_chung trong tệp nhãn (--nhan, mặc định data/nhan/thu.jsonl là lượt 1). Theo T6.4, tuyên bố trúng ở k nếu có ít nhất một đoạn bằng chứng nằm trong
+bang_chung trong tệp nhãn (--nhan, mặc định data/nhan/thu_luot2.jsonl là nhãn chuẩn lượt 2). Theo T6.4, tuyên bố trúng ở k nếu có ít nhất một đoạn bằng chứng nằm trong
 top-k; mẫu số là các tuyên bố có bằng chứng, trừ danh sách --bo. Ghi ket_qua/recall_buoc14.md (chỉ có số liệu, không
 nhận xét). Chỉ đọc dữ liệu, không gọi LLM.
 
 Chạy (lượt 1, đúng như lần đo của Bước 14):
-    .venv/Scripts/python.exe scripts/do_recall.py --nhan data/nhan/thu.jsonl --bo tb-00009,tb-00010
+    .venv/Scripts/python.exe scripts/do_recall.py --nhan data/nhan/thu_luot1.jsonl --bo tb-00009,tb-00010
 Lượt khác: --nhan <tệp nhãn>; --bo mặc định rỗng (rà soát 02/11: không còn đọc cứng nhãn lượt 1 và danh sách loại).
 """
 import argparse
@@ -19,7 +19,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from kiemchung import cau_hinh, truy_hoi as th  # noqa: E402
 
 TEP_TUYEN_BO = ROOT / "data/tuyen_bo/thu.jsonl"
-TEP_NHAN = ROOT / "data/nhan/thu.jsonl"
+TEP_NHAN = ROOT / "data/nhan/thu_luot2.jsonl"
 TEP_RA = ROOT / "ket_qua/recall_buoc14.md"
 BO_LUOT_1 = "tb-00009,tb-00010"  # danh sách loại của lần đo Bước 14 (nhãn lượt 1); không còn là mặc định
 LY_DO_MAC_DINH = "bằng chứng lưu lệch sang tuyên bố kế bên (nhãn lượt 1)"

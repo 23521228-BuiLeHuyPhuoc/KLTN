@@ -89,6 +89,8 @@ def sinh_ly_do(kq, cau_hinh):
     nằm cuối câu."""
     vet, dong = kq["vet"], kq["dong_d"]
     tt = TEN_THUOC_TINH.get(vet.get("thuoc_tinh"), str(vet.get("thuoc_tinh")))
+    if dong == "LOI":
+        return f"Lỗi kỹ thuật khi trích xuất, chưa có nhãn: {vet.get('loi')}."
     if dong == "D1":
         return f"Tài liệu của {vet.get('san_pham')} không có thông số {tt}."
     if dong == "D1a":

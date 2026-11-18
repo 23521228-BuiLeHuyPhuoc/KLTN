@@ -45,7 +45,7 @@ thuoc_tinh:
     kieu_gia_tri_mac_dinh: toi_da           # năng lực tối đa; bỏ "lên đến" không tính Lệch
     dieu_kien_bat_buoc:
       bo_tiep_hop: phu_kien
-      cach_sac: che_do_hoat_dong
+      cach_sac: phu_kien                    # như sac_nhanh: cách sạc (cáp, không dây) là phụ kiện (câu lệnh trích xuất: "phụ kiện hay cách sạc"); Bước 28, T-29
     hieu_thong_thuong:
       bo_tiep_hop: khong_mua_them
       cach_sac: cap
@@ -80,6 +80,9 @@ thuoc_tinh:
     dieu_kien_so:                          # Xiaomi 15T: đo trên 25% diện tích; đo trên phần lớn hơn là điều kiện khắt khe hơn
       dien_tich_do: {don_vi: phan_tram, thoa_khi: tuyen_bo_nho_hon_hoac_bang}
     can_cu: [dt-apple-iphone17#005, dt-xiaomi-15t#004, dt-xiaomi-15t#037, dt-xiaomi-15t#038]
+    # Bước 28: con số của đại lượng khác (HD mục 2, 6.5: "độ sáng tối thiểu" là đại lượng khác, ngoài phạm vi) không phải bằng chứng;
+    # mục tài liệu có cụm này đứng liền trước con số bị loại (trich_xuat._la_dai_luong_khac, lý do dai_luong_khac)
+    dai_luong_khac: ["độ sáng tối thiểu"]
 
   tan_so_quet:
     don_vi: Hz

@@ -2,7 +2,7 @@
 
 **Đề tài:** Phương pháp kiểm chứng tuyên bố về thông số kỹ thuật có điều kiện ràng buộc trong quảng cáo  
 **Sinh viên:** Bùi Lê Huy Phước (23521228) · **CBHD** (cán bộ hướng dẫn): ThS Trần Hồng Nghi · **Hạn nộp:** 31/12/2026  
-Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPhuoc_DeCuongKLTN.pdf) ngày 11/10/2026. Cập nhật lần cuối: 20/10/2026.
+Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPhuoc_DeCuongKLTN.pdf) ngày 11/10/2026. Cập nhật lần cuối: 18/11/2026.
 
 > **Cách dùng file này**
 >
@@ -16,19 +16,19 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Tháng 10/2026**
 
-- [ ] [Bước 1](#b01) · 11/10 – 12/10 · Sửa và nộp đề cương, chốt tên đề tài
+- [x] [Bước 1](#b01) · 11/10 – 12/10 · Sửa và nộp đề cương, chốt tên đề tài
 - 🏁 [**Mốc 1** · 12/10 · Chốt đề cương](#m1)
-- [ ] [Bước 2](#b02) · 13/10 · Dựng môi trường thực nghiệm, thử LLM
+- [x] [Bước 2](#b02) · 13/10 · Dựng môi trường thực nghiệm, thử LLM
 - [x] [Bước 3](#b03) · 14/10 – 15/10 · Khảo sát tài liệu, ghi chú có số trang
 - [x] [Bước 4](#b04) · 16/10 · Chọn 12 mẫu sản phẩm, chia trước hai tập
-- [ ] [Bước 5](#b05) · 17/10 · Thu thập trang thông số của 2 mẫu thử
-- [ ] [Bước 6](#b06) · 18/10 · Thu thập trang thông số của 10 mẫu còn lại
-- [ ] [Bước 7](#b07) · 19/10 · Chia tài liệu thành đoạn
-- [ ] [Bước 8](#b08) · 20/10 – 21/10 · Viết tệp cấu hình điều kiện bắt buộc
-- [ ] [Bước 9](#b09) · 21/10 – 22/10 · Viết hướng dẫn gán nhãn bốn lớp và ví dụ
-- [ ] [Bước 10](#b10) · 23/10 · Khảo sát cách hiểu của 5–10 người đọc
-- [ ] [Bước 11](#b11) · 24/10 – 25/10 · Làm công cụ sinh quảng cáo qua CopyPro
-- [ ] [Bước 12](#b12) · 26/10 · Sinh quảng cáo và tách tuyên bố của bộ thử
+- [x] [Bước 5](#b05) · 17/10 · Thu thập trang thông số của 2 mẫu thử
+- [x] [Bước 6](#b06) · 18/10 · Thu thập trang thông số của 10 mẫu còn lại
+- [x] [Bước 7](#b07) · 19/10 · Chia tài liệu thành đoạn
+- [x] [Bước 8](#b08) · 20/10 – 21/10 · Viết tệp cấu hình điều kiện bắt buộc
+- [x] [Bước 9](#b09) · 21/10 – 22/10 · Viết hướng dẫn gán nhãn bốn lớp và ví dụ
+- [x] [Bước 10](#b10) · 23/10 · Khảo sát cách hiểu của 5–10 người đọc
+- [x] [Bước 11](#b11) · 24/10 – 25/10 · Làm công cụ sinh quảng cáo qua CopyPro
+- [x] [Bước 12](#b12) · 26/10 · Sinh quảng cáo và tách tuyên bố của bộ thử
 - [x] [Bước 13](#b13) · 27/10 · Gán nhãn bộ thử, đo thời gian gán
 - [x] [Bước 14](#b14) · 28/10 · Làm mô-đun truy hồi BM25, đo Recall@k
 - [x] [Bước 15](#b15) · 29/10 · Cài đặt đối chứng B0
@@ -108,9 +108,9 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 - [x] Sửa các lỗi nhỏ: mục Đóng góp ghi tên nhãn tiếng Việt "(Đúng, Sai, Lệch điều kiện, Chưa đủ thông tin)"; thêm dấu chấm cuối rủi ro thứ năm; thống nhất thuật ngữ "tuyên bố" ở ba chỗ còn ghi "phát biểu" (Nội dung 1: "từng tuyên bố nhỏ của FactLens"; Thời gian biểu tháng 09/2026: "kiểm chứng tuyên bố chứa số liệu", "để tuyên bố không thay đổi ý nghĩa"), giữ "phát biểu chính trị" khi nói về dữ liệu của Tang và cộng sự.
 - [x] Sửa định dạng: bản tải từ Google Docs không ghi phông mặc định và cấm nhiều hàng của khung bảng ngắt trang, nên mở ở chỗ khác bị đổi phông và có chỗ trống đến nửa trang. Bản cuối đặt Times New Roman làm phông mặc định, cho các hàng ngắt trang bình thường, chỉ giữ trọn hàng khi cần để tiêu đề không nằm một mình cuối trang (19 trang).
 - [x] Xuất lại PDF, thay tệp `de_cuong/23521228_BuiLeHuyPhuoc_DeCuongKLTN.pdf` trong repo và commit.
-- [ ] Gửi đề cương cho CBHD và nộp theo lịch của Khoa.
-- [ ] Cập nhật tên đề tài trên hệ thống đăng ký; so từng ký tự với đề cương, cả tên tiếng Anh.
-- [ ] Hỏi CBHD có đồng ý nhờ một bạn làm người gán nhãn thứ hai cho khoảng 60 tuyên bố không. Người này nhận việc vào 16/11 ([Bước 26](#b26)).
+- [x] Gửi đề cương cho CBHD và nộp theo lịch của Khoa. *(đánh dấu theo Google Sheet kế hoạch, 18/11, rà soát T-34.)*
+- [x] Cập nhật tên đề tài trên hệ thống đăng ký; so từng ký tự với đề cương, cả tên tiếng Anh. *(đánh dấu theo Google Sheet kế hoạch, 18/11, rà soát T-34.)*
+- [x] Hỏi CBHD có đồng ý nhờ một bạn làm người gán nhãn thứ hai cho khoảng 60 tuyên bố không. Người này nhận việc vào 16/11 ([Bước 26](#b26)). *(đánh dấu theo Google Sheet kế hoạch, 18/11, rà soát T-34.)*
 
 **Làm ra:** đề cương bản nộp; tên đề tài trên hệ thống khớp với đề cương.
 
@@ -138,13 +138,13 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Tạo các thư mục `data/`, `src/kiemchung/`, `tests/`, `scripts/`, `ket_qua/`, `luan_van/` theo [T3.1](#t3-1). Tạo `luan_van/nhat_ky.md` và ghi dòng nhật ký đầu tiên ([T3.5](#t3-5)).
-- [ ] Tạo `requirements.txt`: Python ≥ 3.10, `rank-bm25`, `pyvi` hoặc `underthesea`, `pydantic`, `pyyaml`, `google-genai`, `groq`, `fastapi`, `uvicorn`, `pytest`, `scikit-learn`, `statsmodels`, `pandas`, `matplotlib`, `playwright`.
-- [ ] Tạo `.env.example` chỉ chứa tên biến (`GEMINI_API_KEY`, `GROQ_API_KEY`); khóa thật chỉ để trong `.env` trên máy.
-- [ ] Lịch sử Git của repo từng chứa tệp `.env`. Nếu khóa trong đó chưa thu hồi thì thu hồi ở trang của nhà cung cấp và tạo khóa mới.
-- [ ] Viết `src/kiemchung/llm.py`: một hàm gọi LLM duy nhất, **có bộ nhớ đệm** theo mã băm của (mô hình, câu lệnh, tham số) và ghi nhật ký mọi lần gọi.
-- [ ] Ghi cấu hình máy (CPU, RAM, GPU nếu có), dung lượng ổ đĩa còn trống, hạn mức gọi API miễn phí của Google AI Studio và Groq.
-- [ ] Thử vài LLM (mã nguồn mở chạy trên máy, hoặc qua API như Groq) với 5–10 câu trích xuất mẫu lấy từ các ví dụ ở [T4.6](#t4-6); ghi thời gian và chất lượng sơ bộ.
+- [x] Tạo các thư mục `data/`, `src/kiemchung/`, `tests/`, `scripts/`, `ket_qua/`, `luan_van/` theo [T3.1](#t3-1). Tạo `luan_van/nhat_ky.md` và ghi dòng nhật ký đầu tiên ([T3.5](#t3-5)). *(18/11, rà soát T-34: đã có từ tháng 10, đánh dấu bù.)*
+- [x] Tạo `requirements.txt`: Python ≥ 3.10, `rank-bm25`, `pyvi` hoặc `underthesea`, `pydantic`, `pyyaml`, `google-genai`, `groq`, `fastapi`, `uvicorn`, `pytest`, `scikit-learn`, `statsmodels`, `pandas`, `matplotlib`, `playwright`. *(đánh dấu bù 18/11)*
+- [x] Tạo `.env.example` chỉ chứa tên biến (`GEMINI_API_KEY`, `GROQ_API_KEY`); khóa thật chỉ để trong `.env` trên máy. *(đánh dấu bù 18/11: tệp chỉ có tên biến.)*
+- [x] Lịch sử Git của repo từng chứa tệp `.env`. Nếu khóa trong đó chưa thu hồi thì thu hồi ở trang của nhà cung cấp và tạo khóa mới. *(Google Sheet ghi Xong; đánh dấu theo Sheet 18/11.)*
+- [x] Viết `src/kiemchung/llm.py`: một hàm gọi LLM duy nhất, **có bộ nhớ đệm** theo mã băm của (mô hình, câu lệnh, tham số) và ghi nhật ký mọi lần gọi. *(đánh dấu bù 18/11: có bộ nhớ đệm và nhật ký gọi.)*
+- [x] Ghi cấu hình máy (CPU, RAM, GPU nếu có), dung lượng ổ đĩa còn trống, hạn mức gọi API miễn phí của Google AI Studio và Groq. *(đánh dấu bù 18/11: `ket_qua/thu_llm.md` mục 2 và 5; hạn mức là số công bố, chưa đo quota thật của tài khoản.)*
+- [x] Thử vài LLM (mã nguồn mở chạy trên máy, hoặc qua API như Groq) với 5–10 câu trích xuất mẫu lấy từ các ví dụ ở [T4.6](#t4-6); ghi thời gian và chất lượng sơ bộ. *(Google Sheet ghi Xong; các bước 15, 22 đã gọi API thật.)*
 
 **Làm ra:** cây thư mục, `requirements.txt`, `.env.example`, `src/kiemchung/llm.py`, `ket_qua/thu_llm.md`.
 
@@ -253,7 +253,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Làm ra:** `data/nguon/<ma_mau>/` của 10 mẫu còn lại.
 
-**Xong khi:** đủ 12 mẫu, mỗi mẫu 4 tệp; mọi chú thích điều kiện có mặt trong `page.txt`.
+**Xong khi:** đủ 12 mẫu, mỗi mẫu 4 tệp; mọi chú thích điều kiện có mặt trong `page.txt`. *(18/11, rà soát T-34: đánh dấu xong bước theo Google Sheet; còn tồn: 5 trang quá cao thiếu ảnh `full.png` (T-32), chưa ghi ngoại lệ này vào tiêu chí; 6 chú thích của Galaxy Watch8 và 1 ký hiệu của S25 Ultra chưa có trong `page.txt` (câu hỏi B-03 trong `ra_soat/TONG_HOP_BAT_THUONG.md`).)*
 
 **Đã thực hiện ngày 20/10/2026:** đủ 12 mẫu trong `data/nguon/`, trang chính của mỗi mẫu có 4 tệp, mã băm khớp. `scripts/chup_nguon.py` thêm nhánh PDF (hướng dẫn Galaxy Watch8 lưu thành `bo_sung/tai_lieu.pdf` và `page.txt`). 4 mẫu Xiaomi lưu thủ công từ Chrome, ghi rõ trong `meta.json` và `data/nguon/thu_cong_20261020.json`; 4 trang `bo_sung` của Xiaomi chưa có `full.png`. Đã sao lưu `data/nguon/` lên Google Drive ngày 25/10/2026. Chi tiết trong [nhật ký](luan_van/nhat_ky.md).
 
@@ -356,7 +356,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Làm ra:** `ket_qua/khao_sat_cach_hieu.md` (câu hỏi, số người, tỷ lệ đồng ý từng câu, các chỗ đã sửa).
 
-**Xong khi:** có kết quả khảo sát; tệp cấu hình và hướng dẫn đã sửa theo khảo sát.
+**Xong khi:** có kết quả khảo sát; tệp cấu hình và hướng dẫn đã sửa theo khảo sát. *(18/11, rà soát T-34: đánh dấu xong bước theo Google Sheet; còn tồn: chờ chốt Q06, Q12 so với ngưỡng một nửa đã đặt (T-16 trong `ra_soat/TONG_HOP_BAT_THUONG.md`).)*
 
 **Đã thực hiện ngày 27–28/10/2026:** [khao_sat_cach_hieu.md](ket_qua/khao_sat_cach_hieu.md). Phiếu 15 câu dùng câu quảng cáo do CopyPro tạo (18 bài Gemini 2.5 Flash, `ket_qua/khao_sat_quang_cao_goc.jsonl`), tạo form bằng `ket_qua/tao_google_form.gs`, cách chấm viết trước khi gửi. 10 phiếu, chấm bằng `scripts/tong_hop_khao_sat.py`. Sửa theo khảo sát: "xem video" không rõ loại coi như chưa nêu hoạt động (9/10; V03 thành Lệch); độ sáng điện thoại không có cách hiểu mặc định (7/10; V25, V26, V43 thành Chưa đủ thông tin). Giữ chế độ nguồn đồng hồ và zoom dù 6/10 hiểu khác, lệch khỏi tiêu chí đặt trước vì Q06 trái với Q11 trên cùng người trả lời, mẫu lệch về người học công nghệ thông tin và đổi thì tăng FAR; Bước 37 tính lại với mặc định thay thế. Quy tắc bỏ "lên đến" được ủng hộ (1/10). Ghi nhận cho Bước 11: 13/18 bài CopyPro bị cắt vì token suy luận tính vào giới hạn 1.800 token (mục 9 của tệp kết quả). Chi tiết trong [nhật ký](luan_van/nhat_ky.md).
 
@@ -496,8 +496,9 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
   - bộ thử có ít nhất 10 tuyên bố Lệch không thuộc loại "lên đến"; không đủ thì tăng bài sinh theo [T9.1](#t9-1), vẫn thiếu thì đánh giá nhãn Lệch chủ yếu trên tập cặp tối thiểu và ghi rõ giới hạn;
   - nhờ một người thứ hai gán độc lập ít nhất 30 tuyên bố của bộ thử, gồm mọi tuyên bố Lệch; kappa của riêng nhãn Lệch đạt ít nhất 0,6; không đạt thì sửa hướng dẫn rồi gán lại;
   - bước thử độ bao phủ trên 3 sản phẩm ngoài 12 mẫu (làm trước Bước 9) nhận ra ít nhất 80% cụm điều kiện quyết định; không đạt thì bổ sung luật từ chính 3 trang đó.
+  - *18/11, rà soát T-11:* tiêu chí 1 đạt (17 ca Lệch không thuộc loại "lên đến"). Tiêu chí 2 không đo được như thiết kế vì không có người gán thứ hai; lượt 3 tự gán lại ở Bước 32 thay thế, chưa có số kappa riêng nhãn Lệch. Tiêu chí 3 làm muộn ngày 18/11 (Gemini Carbon tìm trang, Claude kiểm ngẫu nhiên): OPPO Reno14, OPPO Enco Air5 Pro, Galaxy Watch Ultra2 có 168 cụm điều kiện gắn với giá trị, cấu hình nhận ra 78 cụm (46,4%; theo sản phẩm 46,2%, 56,3%, 26,2%), **không đạt** 80%. Chi tiết: `ket_qua/bao_phu/bao_cao_carbon.md`, `ket_qua/bao_phu/cum_3_san_pham.json`. Việc tiếp theo theo điểm dừng: bổ sung luật từ chính 3 trang đó trước Bước 33, chờ người thực hiện duyệt danh sách. Cụm không nhận ra dẫn tới Chưa đủ thông tin (D1a), không dẫn tới Đúng, nên ảnh hưởng chính là Recall nhãn Đúng trên tập kiểm tra.
 - [ ] Nếu sau khi sửa vẫn không đạt: dùng **phương án lùi**: ba nhãn Đúng, Sai, Chưa đủ thông tin cộng cờ "thiếu hoặc đổi điều kiện" kèm loại điều kiện. Giả thuyết 1 (FAR) và câu hỏi 3 giữ nguyên; giả thuyết 2 đo F1 của cờ thay cho F1 nhãn Lệch. Ghi quyết định vào nhật ký và báo CBHD.
-- [ ] Viết báo cáo 1–2 trang và gửi CBHD.
+- [x] Viết báo cáo 1–2 trang và gửi CBHD. *(đánh dấu theo Google Sheet kế hoạch, 18/11, rà soát T-34.)*
 
 **Làm ra:** `ket_qua/bo_thu/bao_cao.md`, hướng dẫn gán nhãn bản 2.
 
@@ -587,7 +588,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [x] Gán nhãn theo hướng dẫn bản 2, như Bước 13: nhãn, mã đoạn, câu trích, lý do, loại biến đổi, số giây. *(17/11: người thực hiện gán 43 tuyên bố trên trang `cong_cu_gan_nhan_chinh_phat_trien.html`, `kiem_nhan.py` không báo lỗi định dạng. Người thực hiện nhờ Claude dò nội dung rồi đồng ý cho Claude sửa: 11 dòng đổi nhãn hoặc loại, 17 dòng sửa ghi chú, bằng chứng hay lý do; 14 dòng giữ nguyên nhãn tự gán. Bỏ `tb-00074` khỏi tập (Bước 19). Còn 42 nhãn: Đúng 30, Lệch 7 (đều `bo_dieu_kien`), Sai 2, Chưa đủ thông tin 3 (đều D1a); trước khi sửa: Đúng 33, Lệch 4, Sai 1, Chưa đủ thông tin 4 (không tính `tb-00074`). Danh sách mã có gợi ý của Claude ở nhật ký ngày 17/11, cần khai báo khi báo độ tin cậy nhãn. Nhãn của 66 tuyên bố bộ thử vẫn ở `data/nhan/thu.jsonl`.)*
+- [x] Gán nhãn theo hướng dẫn bản 2, như Bước 13: nhãn, mã đoạn, câu trích, lý do, loại biến đổi, số giây. *(17/11: người thực hiện gán 43 tuyên bố trên trang `cong_cu_gan_nhan_chinh_phat_trien.html`, `kiem_nhan.py` không báo lỗi định dạng. Người thực hiện nhờ Claude dò nội dung rồi đồng ý cho Claude sửa: 11 dòng đổi nhãn hoặc loại, 17 dòng sửa ghi chú, bằng chứng hay lý do; 14 dòng giữ nguyên nhãn tự gán. Bỏ `tb-00074` khỏi tập (Bước 19). Còn 42 nhãn: Đúng 30, Lệch 7 (đều `bo_dieu_kien`), Sai 2, Chưa đủ thông tin 3 (đều D1a); trước khi sửa: Đúng 33, Lệch 4, Sai 1, Chưa đủ thông tin 4 (không tính `tb-00074`). Danh sách mã có gợi ý của Claude ở nhật ký ngày 17/11, cần khai báo khi báo độ tin cậy nhãn. Nhãn chuẩn của 66 tuyên bố bộ thử ở `data/nhan/thu_luot2.jsonl`. *Sửa ngày 18/11 (rà soát T-03): trước ghi `data/nhan/thu.jsonl`, nhưng tệp đó trùng từng byte `thu_luot1.jsonl` (nhãn lượt 1 đã hủy).*)*
 - [x] Mỗi buổi gán tối đa 60 phút liên tục để tránh mỏi. *(Tổng thời gian gán 1 giờ 3 phút, chưa tính 1 giờ 18 phút đồng hồ đứng vì nghỉ, chia ở 14 tuyên bố.)*
 - [x] Đặt cờ `tai_lieu_mau_thuan` khi tài liệu ghi mâu thuẫn; ghi `ghi_chu` cho điều kiện ngoài sáu loại. *(Không có ca tài liệu mâu thuẫn. Một cụm ngoài cấu hình: `tb-00087` ghi `ngoai_cau_hinh=dưới ánh nắng gắt`.)*
 
@@ -764,7 +765,8 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 - [x] Ghép `p.py`: BM25 → trích xuất có neo nguồn → chuẩn hóa → A–D → lý do. *(08/11: `src/kiemchung/p.py` (`kiem_chung`, `kiem_chung_ban_ghi`), `scripts/chay_p.py` chạy P trên tệp kết quả trích xuất, không đọc nhãn; 10 test.)*
 - [ ] Chạy hết tập phát triển, cả tuyên bố thường và biến thể cặp tối thiểu.
 - [ ] Gán tay giá trị đúng của từng trường cho **50 tuyên bố** tập phát triển; tính độ đúng của từng trường.
-- [ ] Xem lỗi của P trên tập phát triển. Lỗi do mã cài sai so với hướng dẫn thì sửa mã. Không sửa hướng dẫn gán nhãn nữa vì tập kiểm tra đã gán theo bản 2; tệp cấu hình chỉ được bổ sung cách diễn đạt thấy trong tập phát triển, trước khi khóa ở Bước 33.
+- [ ] Xem lỗi của P trên tập phát triển. Lỗi do mã cài sai so với hướng dẫn thì sửa mã. Không sửa hướng dẫn gán nhãn nữa vì tập kiểm tra đã gán theo bản 2; tệp cấu hình chỉ được bổ sung cách diễn đạt thấy trong tập phát triển, trước khi khóa ở Bước 33. *(18/11, rà soát T-01, T-06, T-09, T-10, T-20, T-21, T-22: agent `coder` sửa, Claude kiểm. Đo offline bằng `scripts/do_p_phat_trien.py` trên kết quả trích xuất GPT-OSS đã có, không gọi API: Recall nhãn Đúng của P trên 108 tuyên bố từ 23/64 lên 59/64, FAR giữ 0/44, Macro-F1 từ 0,42 lên 0,80, F1 Lệch 0,82; P−ĐK FAR 37/44; P−NN FAR 1/44, Recall Đúng 50/64. Số trên tập phát triển nay lạc quan vì luật được sửa trên chính tập này. P trả nhãn `LOI` khi lỗi kỹ thuật LLM, như B0–B2. Còn lỗi: giá trị chéo thuộc tính, số trong tên mục, số W của bộ sạc bị lấy làm công suất sạc. Chưa chạy biến thể cặp tối thiểu.)*
+  - Việc kèm theo: sau khi sửa P, đồng bộ `luan_van/chuong_3.md` (mục 3.5.2–3.5.4, 3.6, 3.8, 3.8.1, 3.9) và bản Google Doc với mã. *(Thêm 18/11, rà soát T-24: Chương 3 viết sớm ở Bước 35 nay lệch mã; danh sách chỗ lệch ở nhật ký 18/11.)*
 
 **Làm ra:** `src/kiemchung/p.py`, bảng độ đúng trích xuất trên tập phát triển.
 
@@ -866,7 +868,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Chọn trên tập phát triển: LLM dùng cho P và B0–B2, câu lệnh (kể cả câu lệnh tách tuyên bố tự động của Bước 29), k, cách tách từ, ngưỡng sai số làm tròn, mô hình của B3 (điểm 8 và 9 ở [T10](#t10)).
+- [ ] Chọn trên tập phát triển: LLM dùng cho P và B0–B2, câu lệnh (kể cả câu lệnh tách tuyên bố tự động của Bước 29), k, cách tách từ, mô hình của B3 (điểm 9 ở [T10](#t10)). Ngưỡng sai số làm tròn cố định 1%, không chọn lại (điểm 8 ở T10). *Sửa ngày 18/11 (rà soát T-24): nhãn chuẩn dòng D3 đã gán theo "trong 1%", nên đổi ngưỡng ở bước này sẽ làm P lệch khỏi chính quy tắc đã dùng để gán nhãn.*
 - [ ] Xin CBHD duyệt tiêu chí kết luận giả thuyết ở [T6.6](#t6-6) (điểm 16 ở T10).
 - [ ] Ghi `ket_qua/khoa_cau_hinh.md`: tên và phiên bản LLM, mã băm của từng câu lệnh, k, cách tách từ, ngưỡng, phiên bản tệp cấu hình, mô hình B3, ngày giờ.
 - [ ] Tính mã băm của tệp nhãn tập kiểm tra (đã sửa xong ở Bước 32) và ghi vào cùng tệp. Đây là bước "niêm phong": sau này ai cũng kiểm tra được nhãn không bị sửa.
@@ -976,7 +978,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Làm ra:** `src/kiemchung/danh_gia.py`, `ket_qua/kiem_tra/bang/*.csv`, `ket_qua/kiem_tra/hinh/*.png`.
 
-**Xong khi:** đủ các bảng và hình ở T6.9, trừ phân loại lỗi (Bước 38) và phần mở rộng (Bước 43).
+**Xong khi:** đủ các bảng và hình ở T6.9, trừ phần độ đúng trích xuất trên tập kiểm tra ở bảng 8 và phân loại lỗi (cả hai làm ở Bước 38), và phần mở rộng (Bước 43). *(Sửa ngày 18/11, rà soát T-24: bản trước quên loại trừ độ đúng trích xuất, vốn cần gán tay ở Bước 38.)*
 
 **Tra cứu:** [T6.4](#t6-4) (chỉ số), [T6.5](#t6-5) (thống kê), [T6.7](#t6-7) (cách báo kết quả), [T6.9](#t6-9) (bảng và hình).
 
@@ -1982,7 +1984,7 @@ def quyet_dinh(tb, ung_vien, cau_hinh, doi_chieu=True):     # doi_chieu=False l�
 | `dieu_kien_tuyen_bo` | Xét luật chép đúng nhãn bằng chữ trước mặc định (QĐ15). Đọc điều kiện nêu rõ rồi bổ sung mặc định theo T4.5. Có cụm phủ thì trả cả tập giá trị được phủ và giá trị kém thuận lợi nhất trong các giá trị hãng công bố; giữ cả hoạt động kháng nước bị cấm để xét khác điều kiện. Điều kiện trực tiếp thắng cụm phủ ở vế nói tác dụng (QĐ11). Không dùng con số của tuyên bố để chọn điều kiện; đổi con số không được làm đổi điều kiện. Trả `None` khi P không giải được điều kiện; ghi riêng giới hạn bao phủ của P |
 | `khop_dieu_kien` | Với cụm phủ, so tại giá trị kém thuận lợi nhất đã xác định; hoạt động bị cấm là khác điều kiện được phép. So từng loại trong sáu loại, với các điều kiện bắt buộc của thuộc tính. Luôn so kiểu giá trị khi tuyên bố ghi rõ (tối đa, điển hình, định mức); khi tuyên bố không ghi, lấy kiểu mặc định của thuộc tính |
 | `cung_bo_phan_va_phien_ban` | Các thông số cùng bộ phận và phiên bản với tuyên bố; với P−ĐK là toàn bộ `cung_tt` |
-| `bang` | Bằng nhau sau chuẩn hóa, trong ngưỡng sai số làm tròn chọn ở Bước 33 |
+| `bang` | Bằng nhau sau chuẩn hóa, trong ngưỡng sai số tương đối 1% (cố định, khớp dòng D3 của hướng dẫn; sửa ngày 18/11) |
 | `khop_gia_tri` | Bằng, hoặc kém thuận lợi hơn theo hướng thuận lợi của thuộc tính; mã IP theo cách chốt ở điểm 11 của [T10](#t10) |
 | `loai_bien_doi` | So điều kiện của tuyên bố với điều kiện của thông số để biết loại lệch: bỏ điều kiện, đổi điều kiện, đổi bộ phận, đổi phiên bản, đổi kiểu giá trị. Cụm phủ là nêu rõ, dùng `doi_dieu_kien`. Nhiều giá trị trùng thì chọn giá trị khác ít điều kiện nhất; ưu tiên điều kiện nêu rõ hơn mặc định, rồi bộ phận, phiên bản, kiểu giá trị, các điều kiện còn lại. Lý do ghi đủ các khác biệt |
 
@@ -2362,7 +2364,7 @@ Riêng khi chậm vì gán nhãn (rủi ro "Gán nhãn chậm" trong đề cươ
 | 5 | Dòng D2 có áp dụng khi tuyên bố khẳng định một mức thấp hơn mức "lên đến" không | Có: khẳng định chắc chắn một mức không cao hơn mức "lên đến" ở cùng điều kiện là Lệch điều kiện | [Bước 27](#b27) |
 | 6 | Vị trí kiểm tra "tài liệu ghi mâu thuẫn" (có trong định nghĩa nhãn Chưa đủ thông tin, không có trong chuỗi D) | Ngay sau D1a, trước D2 (dòng D1b). Bản 2 đã chốt ngoại lệ QĐ13: con số khớp cả hai giá trị mâu thuẫn ở điều kiện của tuyên bố thì dò tiếp D2–D3, ghi `mau_thuan_khop_ca_hai` | [Bước 27](#b27) |
 | 7 | Số phiên bản mỗi lần gọi khi sinh quảng cáo (CopyPro mặc định 3) | 1 phiên bản mỗi lần gọi, để mỗi bài là một lần sinh độc lập; nếu giữ 3 thì gom cụm bootstrap theo lần gọi. **Đã chốt 28/10:** 1 phiên bản mỗi lần gọi | [Bước 11](#b11) |
-| 8 | Ngưỡng sai số làm tròn khi so giá trị | 1%, chọn lại trên tập phát triển | [Bước 33](#b33) |
+| 8 | Ngưỡng sai số làm tròn khi so giá trị | 1%, chọn lại trên tập phát triển. **Đã chốt 18/11 (rà soát T-24):** cố định 1%, không chọn lại, vì nhãn chuẩn dòng D3 đã gán theo "trong 1%" | [Bước 33](#b33) |
 | 9 | LLM dùng cho P và B0–B2; LLM mạnh hơn cho B4 | Chọn trên tập phát triển trong số các LLM đã thử ở Bước 2 | [Bước 33](#b33) |
 | 10 | Điều kiện gặp trong dữ liệu mà không xếp được vào sáu loại | Ghi vào `ghi_chu` khi gán nhãn; thống kê và báo trong phần giới hạn | [Bước 13](#b13), [20](#b20), [24](#b24) |
 | 11 | So khớp chuẩn IP: đề cương coi giá trị kém thuận lợi hơn là khớp, nhưng các mức chống nước không xếp thành một thang | Mã IP phải bằng đúng, vì theo IEC 60529 mức 7–8 không mặc nhiên bao gồm mức 5–6. **Đã chốt 26/10, đổi so với đề xuất:** so theo nhánh của IEC 60529: chữ số bụi 0–6 xếp thành thang; chữ số nước tách hai nhánh 0–6 (tia nước) và 7–8 (ngâm), mức 8 khắc nghiệt hơn mức 7, chỉ so trong cùng nhánh. Đồng hồ theo ISO 22810: chuẩn hóa 5ATM = 50 m, mức cao hơn là tốt hơn. Cần trích nguyên văn chuẩn khi viết | [Bước 8](#b08) |

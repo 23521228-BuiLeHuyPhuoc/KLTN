@@ -43,6 +43,17 @@ dieu_kien_la:
   # Phương án 2, chọn ở Bước 33 trên tập phát triển: tài liệu có từ hai giá trị chỉ khác nhau ở cùng một điều kiện lạ
   # thì coi là lựa chọn của người dùng và áp kem_thuan_loi_nhat.
   luat_chung_cho_nhieu_gia_tri: tat
+  # Bước 28, T-01 (d): tiêu đề mục, tên thuộc tính, tên bộ phận, tên tính năng LLM ghi làm điều kiện không đổi con số khi đổi điều kiện
+  # (hướng dẫn mục 4, 6.7 ý 3) nên không phải điều kiện lạ. Cụm không có con số mà mọi từ là tên gọi chung (tu_ten_chung), chữ khen, từ nối
+  # hay tên tính năng của tu_khang_dinh.ten_tinh_nang, hoặc là tên riêng đi cùng một từ tên gọi chung ("Sạc nhanh HyperCharge",
+  # "Công nghệ ProMotion"), hoặc là tên riêng đứng một mình thành cả dòng ("Gold Collection"), thì bỏ khỏi dieu_kien_khac. Cụm có chữ báo
+  # điều kiện ("chế độ chơi game", "khi bơi") không thuộc loại này. Cách nói thường gặp (hieu_biet_chung), chép chữ tiêu đề mục thấy ở
+  # tập phát triển.
+  tieu_de:
+    tu_ten_chung: ["màn hình", "pin", "sạc", "sạc nhanh", "tần số quét", "tốc độ làm mới", "kháng", "chống", "nước", "bụi", "thời lượng pin",
+                   "dung lượng pin", "độ sáng", "hiển thị", "nguồn điện", "công nghệ", "tính năng", "camera", "zoom",
+                   "hàng đầu", "nâng tầm", "khả năng"]
+    tu_noi: ["và", "với", "&", "của", "cho"]
 
 # Điều kiện dạng số (thêm 27/10): điều kiện là một con số kèm quan hệ, không so được bằng chữ.
 # Mỗi điều kiện dạng số khai báo ở thuộc tính (dieu_kien_so: {don_vi, thoa_khi}); cach_dien_dat của nó có khóa gia_tri_so.

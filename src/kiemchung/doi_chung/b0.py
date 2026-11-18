@@ -35,7 +35,7 @@ MO_HINH_MAC_DINH = tuple(NHA_CUNG_CAP)
 
 NHIET_DO = 0  # T6.2
 # Mô hình suy luận tính token suy luận vào giới hạn đầu ra (Bước 10 ghi lại 13/18 bài Gemini bị cắt ở giới hạn thấp).
-MAX_TOKEN_RA = 4096
+MAX_TOKEN_RA = 8192  # bằng P (trich_xuat.MAX_TOKEN_RA), T6.2
 
 ANH_XA_NHAN = {"supported": "DUNG", "refuted": "SAI", "nei": "CHUA_DU"}  # khóa: chữ thường, đã bỏ khoảng trắng đầu cuối
 LOI_NOI_DUNG = frozenset({"empty_blocked_or_incomplete_response", "json_validate_failed"})  # LLMError coi là LOI của tuyên bố, không dừng chạy

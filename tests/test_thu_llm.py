@@ -7,11 +7,11 @@ import sys
 from kiemchung.thu_llm import Extraction, evaluate, messages_for
 
 ROOT = Path(__file__).resolve().parents[1]
-CASES = json.loads((ROOT / "data/thu_llm/cases.json").read_text())
+CASES = json.loads((ROOT / "data/thu_llm/cases.json").read_text(encoding="utf-8"))
 
 
 def test_cases_are_development_examples_and_verbatim():
-    source = (ROOT / "CHI_TIET_TUYEN_TINH_KHOA_LUAN.md").read_text()
+    source = (ROOT / "CHI_TIET_TUYEN_TINH_KHOA_LUAN.md").read_text(encoding="utf-8")
     assert 5 <= len(CASES) <= 10
     assert len({c["id"] for c in CASES}) == len(CASES)
     for c in CASES:
@@ -43,20 +43,21 @@ def test_invalid_schema_scores_no_fields():
 
 
 def test_cli_offline_and_live_preflight(tmp_path):
-    env = dict(os.environ, GEMINI_API_KEY="", GROQ_API_KEY="", GOOGLE_API_KEY="")
+    env = dict(os.environ, GEMINI_API_KEY="", GROQ_API_KEY="", GOOGLE_API_KEY="",
+               PYTHONPATH=os.pathsep.join(filter(None, [str(ROOT / "src"), os.environ.get("PYTHONPATH")])))
     base = [sys.executable, str(ROOT / "scripts/thu_llm.py"),
             "--cache-dir", str(tmp_path / "cache")]
     offline = subprocess.run(base + ["--mode", "offline", "--output", str(tmp_path / "offline")],
-                             env=env, cwd=ROOT, capture_output=True, text=True)
+                             env=env, cwd=ROOT, capture_output=True, text=True, encoding="utf-8")
     assert offline.returncode == 0, offline.stderr
-    manifest = json.loads((tmp_path / "offline/manifest.json").read_text())
+    manifest = json.loads((tmp_path / "offline/manifest.json").read_text(encoding="utf-8"))
     assert len(manifest["source_sha256"]) == 5
     assert all(s["metrics"] is None and s["api_calls_successful"] == 0
                and s["cache_repeats"] == 10 for s in manifest["summaries"])
     live = subprocess.run(base + ["--mode", "live", "--output", str(tmp_path / "live")],
-                          env=env, cwd=ROOT, capture_output=True, text=True)
+                          env=env, cwd=ROOT, capture_output=True, text=True, encoding="utf-8")
     assert live.returncode == 2
-    manifest = json.loads((tmp_path / "live/manifest.json").read_text())
+    manifest = json.loads((tmp_path / "live/manifest.json").read_text(encoding="utf-8"))
     assert all(s["status"] == "blocked" and s["completed_samples"] == 0
                and any(r.startswith("missing_api_key") for r in s["reasons"])
                for s in manifest["summaries"])

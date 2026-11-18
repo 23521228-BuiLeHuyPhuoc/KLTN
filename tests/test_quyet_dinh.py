@@ -13,6 +13,7 @@ import unicodedata
 
 import pytest
 
+from kiemchung import danh_gia as dg
 from kiemchung import ly_do as ld
 from kiemchung import quyet_dinh as qd
 from kiemchung.cau_hinh import doc_cau_hinh
@@ -219,15 +220,29 @@ def test_d1_sac_nhanh_dong_ho_chi_so_trong_cung_dang():
 # --- D1a ---
 
 def test_d1a_trich_xuat_that_bai():
+    """LLM trả JSON hợp lệ mà không trích được thuộc tính hay giá trị: vẫn D1a (T-06 chỉ tách lỗi kỹ thuật ra nhãn LOI)."""
     cf = CF["tai_nghe"]
-    for ban_ghi in ({"ma_mau": "tn-b", "loi": "json_hong", "tuyen_bo": None, "bang_chung": []},
-                    {"ma_mau": "tn-b", "loi": None, "tuyen_bo": muc("thoi_luong_pin", None, "gio", ma=None), "bang_chung": []},
-                    {"ma_mau": "tn-b", "loi": None, "tuyen_bo": {**muc("thoi_luong_pin", 6.0, "gio", ma=None), "thuoc_tinh": None}, "bang_chung": []}):
+    for ban_ghi in ({"ma_mau": "tn-b", "loi": None, "tuyen_bo": muc("thoi_luong_pin", None, "gio", ma=None), "bang_chung": []},
+                    {"ma_mau": "tn-b", "loi": None, "tuyen_bo": {**muc("thoi_luong_pin", 6.0, "gio", ma=None), "thuoc_tinh": None}, "bang_chung": []},
+                    {"ma_mau": "tn-b", "loi": None, "tuyen_bo": None, "bang_chung": []}):
         k = qd.quyet_dinh(ban_ghi, cf)
         assert ket(k) == ("CHUA_DU", "D1a", None) and k["ghi_chu"] == ["chua_xac_dinh=trich_xuat_that_bai"]
         assert k["ly_do"].startswith(MAU_CAU["D1a"])
-    k = qd.quyet_dinh({"ma_mau": "tn-b", "loi": "x", "tuyen_bo": None, "bang_chung": []}, cf, doi_chieu=False)
+    k = qd.quyet_dinh({"ma_mau": "tn-b", "loi": None, "tuyen_bo": None, "bang_chung": []}, cf, doi_chieu=False)
     assert k["dong_d"] == "D1a"   # P−ĐK vẫn D1a khi trích xuất thất bại
+
+
+def test_loi_ky_thuat_ra_nhan_loi_khong_phai_chua_du():
+    """T-06: ban_ghi["loi"] khác rỗng (lỗi gọi LLM, JSON không đọc được) thì nhãn LOI như doi_chung/chung.py, không phải CHUA_DU/D1a."""
+    cf = CF["tai_nghe"]
+    for loi in ("json_hong", "llm_khong_tra_ve_dung: empty_blocked_or_incomplete_response"):
+        for doi_chieu in (True, False):
+            k = qd.quyet_dinh({"ma_mau": "tn-b", "loi": loi, "tuyen_bo": None, "bang_chung": []}, cf, doi_chieu=doi_chieu)
+            assert (k["nhan"], k["dong_d"], k["loai"]) == ("LOI", "LOI", None) and k["ghi_chu"] == [f"loi={loi}"]
+            assert k["ly_do"].startswith("Lỗi kỹ thuật") and loi in k["ly_do"] and k["bang_chung"] == []
+    # LOI được danh_gia.py đếm riêng và không bao giờ là chấp nhận nhầm
+    cap = [("DUNG", "LOI"), ("CHUA_DU", "LOI"), ("SAI", "DUNG")]
+    assert dg.dem_loi_cap(cap) == 2 and dg.dem_far(cap) == (1, 2) and dg.dem_recall_dung(cap) == (0, 1)
 
 
 def test_d1a_ba_loi_vao():
@@ -708,17 +723,25 @@ def test_lan_khong_qua_muc_khac_san_pham():
 
 
 def test_lan_dieu_kien_khac():
+    """T-21: cụm lạ chỉ lan giữa các mục vốn đã có cụm lạ; mục sạch (bảng thông số) không bị nhiễm cụm lạ của đoạn khác."""
     la = [{"loai": "che_do_hoat_dong", "cum": "chế độ chơi game", "trich": "x"}]
     a = pin(10.0, tn_dk(), ma="tn-b#1", khac=la)
     b = pin(10.0, tn_dk(), ma="tn-b#2")   # cùng con số ở đoạn khác, không ghi cụm lạ
-    ds, vet = qd.lan_dieu_kien([a, b], qd.BoiCanh({"ma_mau": "tn-b", "tuyen_bo": pin_tb(10.0) | {"thuoc_tinh": "thoi_luong_pin"}}, CF["tai_nghe"]))
-    assert ds[1]["dieu_kien_khac"] == la and vet == [{"ma_doan": "tn-b#2", "dk": "dieu_kien_khac", "gia_tri": "chế độ chơi game"}]
-    assert b["dieu_kien_khac"] == []
-    k = _lan([a, b], tb_nghe_nhac(10.0))   # luật chặn vẫn đúng: D1a, không ra Đúng
-    assert ket(k) == ("CHUA_DU", "D1a", None) and set(k["bang_chung"]) == {"tn-b#1", "tn-b#2"}
-    c = pin(8.0, tn_dk(), ma="tn-b#3")   # con số khác: không lan
-    bc = qd.BoiCanh({"ma_mau": "tn-b", "tuyen_bo": pin_tb(8.0) | {"thuoc_tinh": "thoi_luong_pin"}}, CF["tai_nghe"])
-    assert qd.lan_dieu_kien([a, b, c], bc)[0][2]["dieu_kien_khac"] == []
+    bc10 = qd.BoiCanh({"ma_mau": "tn-b", "tuyen_bo": pin_tb(10.0) | {"thuoc_tinh": "thoi_luong_pin"}}, CF["tai_nghe"])
+    ds, vet = qd.lan_dieu_kien([a, b], bc10)
+    assert ds[1]["dieu_kien_khac"] == [] and ds[0]["dieu_kien_khac"] == la and vet == []
+    k = _lan([a, b], tb_nghe_nhac(10.0))   # luật chặn vẫn đúng với mục a (có cụm lạ, khớp giá trị): D1a, không ra Đúng
+    assert ket(k) == ("CHUA_DU", "D1a", None) and k["vet"]["lan"] == [] and k["bang_chung"] == ["tn-b#1"]
+    k = _lan([b], tb_nghe_nhac(10.0))   # chỉ có mục sạch: Đúng
+    assert ket(k)[:2] == ("DUNG", "D3")
+    # hai mục đều có cụm lạ: nhận hợp các cụm lạ của nhau
+    la2 = [{"loai": "phu_kien", "cum": "sạc nhanh", "trich": "y"}]
+    c = pin(10.0, tn_dk(), ma="tn-b#3", khac=la2)
+    ds, vet = qd.lan_dieu_kien([a, c, b], bc10)
+    assert [m["cum"] for m in ds[0]["dieu_kien_khac"]] == ["chế độ chơi game", "sạc nhanh"] and ds[2]["dieu_kien_khac"] == []
+    d = pin(8.0, tn_dk(), ma="tn-b#4")   # con số khác: không lan
+    bc8 = qd.BoiCanh({"ma_mau": "tn-b", "tuyen_bo": pin_tb(8.0) | {"thuoc_tinh": "thoi_luong_pin"}}, CF["tai_nghe"])
+    assert qd.lan_dieu_kien([a, b, d], bc8)[0][2]["dieu_kien_khac"] == []
 
 
 def test_p_tru_dk_khong_lan():

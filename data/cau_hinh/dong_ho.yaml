@@ -72,6 +72,9 @@ thuoc_tinh:
       che_do_hien_thi: thong_thuong         # một con số không kèm cụm điều kiện nào thì so thẳng (chung.yaml)
     pham_vi_ap_dung: {}
     can_cu: [dh-apple-watchse3#007]
+    # Bước 28: con số của đại lượng khác (HD mục 2, 6.5: "độ sáng tối thiểu" là đại lượng khác, ngoài phạm vi) không phải bằng chứng;
+    # mục tài liệu có cụm này đứng liền trước con số bị loại (trich_xuat._la_dai_luong_khac, lý do dai_luong_khac)
+    dai_luong_khac: ["độ sáng tối thiểu"]
 
 cach_dien_dat:
   che_do_nguon:
@@ -131,12 +134,12 @@ cach_dien_dat:
       hieu_biet_chung: []
   chuan_do_sau:
     iso_22810:
-      tu_tai_lieu: ["ISO 22810", "độ sâu 50m"]
+      tu_tai_lieu: ["ISO 22810", "độ sâu 50m", "độ sâu 50 mét"]   # "độ sâu 50 mét" là chữ của chú thích #016 (Bước 28)
       hieu_biet_chung: ["5ATM", "WR50"]
   hoat_dong_cho_phep:
     duoc_phep:
-      tu_tai_lieu: ["bơi lội trong bể bơi", "dưới biển"]
-      hieu_biet_chung: []
+      tu_tai_lieu: ["bơi lội trong bể bơi", "dưới biển", "khi bơi"]   # "(chống nước khi bơi)" của #016 (Bước 28)
+      hieu_biet_chung: ["bơi lội"]
     bi_cam:
       tu_tai_lieu: ["lặn với bình dưỡng khí", "lướt ván"]
       hieu_biet_chung: ["lặn sâu"]

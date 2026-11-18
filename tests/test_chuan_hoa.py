@@ -470,6 +470,8 @@ def test_cum_khong_lien_so_khong_tinh(kieu):
     ("Pin ít nhất 18 giờ", "ít nhất"),
     ("Màn hình mọi lúc 120Hz", "mọi lúc"),
     ("Pin đảm bảo kéo dài 6 giờ", "đảm bảo"),     # hai từ ở giữa
+    ("iPhone 17 đảm bảo thời lượng xem video 30 giờ.", "đảm bảo"),   # T-22: bốn từ ở giữa, cùng mệnh đề
+    ("Pin đảm bảo luôn hoạt động bền bỉ suốt 6 giờ", "luôn"),         # bốn từ giữa "luôn" và số, cùng mệnh đề (trước T-22 bị cắt ở hai từ)
 ])
 def test_tu_khang_dinh_nhom_chac_chan(kieu, cau, cum):
     k = kieu(cau)[1]
@@ -477,8 +479,8 @@ def test_tu_khang_dinh_nhom_chac_chan(kieu, cau, cum):
 
 
 @pytest.mark.parametrize("cau", [   # tự đặt
-    "Pin đảm bảo luôn hoạt động bền bỉ suốt 6 giờ",         # ba từ ở giữa
     "Tai nghe B đảm bảo kết nối ổn định, nghe nhạc 8 giờ",   # hướng dẫn mục 6.2: từ ở vế khác của câu
+    "Tai nghe B đảm bảo kết nối ổn định và nghe nhạc 8 giờ",  # từ nối mệnh đề giữa từ khẳng định và con số
     "Đảm bảo 6 giờ pin, thêm 8 giờ",                         # với 8 giờ: con số 6 giờ cắt ngang
 ])
 def test_tu_khang_dinh_khong_gan_voi_con_so(kieu, cau):
