@@ -2,7 +2,7 @@
 
 Với mỗi mô hình và mỗi tuyên bố trong data/tuyen_bo/thu.jsonl: truy hồi top-k đoạn của đúng mẫu, ghép câu lệnh
 T12.1, gọi LLM (nhiệt độ 0, qua bộ nhớ đệm của llm.py), ánh xạ Supported/Refuted/NEI -> DUNG/SAI/CHUA_DU. Nhãn chuẩn
-là nhãn trong tệp --nhan (mặc định data/nhan/thu.jsonl, lượt 1). Ghi:
+là nhãn trong tệp --nhan (mặc định data/nhan/thu_luot2.jsonl, nhãn chuẩn lượt 2). Ghi:
     ket_qua/b0_thu/<tên mô hình>.jsonl   mỗi tuyên bố một dòng, đủ cả tuyên bố bị loại khỏi chỉ số
     ket_qua/b0_buoc15.md                 báo cáo số liệu, không nhận xét
 Chạy với --gia thì dùng LLM giả (không gọi mạng, không cần khóa) và ghi vào b0_thu_gia/ và b0_buoc15_gia.md, báo cáo
@@ -14,8 +14,8 @@ cùng lệnh để tiếp tục. Khóa API đọc từ biến môi trường GEM
 
 Chạy:
     .venv/Scripts/python.exe -X utf8 scripts/chay_b0.py [--mo-hinh MA ...] [--k 5] [--cach-tach am_tiet]
-        [--nhan data/nhan/thu.jsonl] [--bo tb-00009,tb-00010] [--gia]
-Lần chạy Bước 15 dùng nhãn lượt 1 và --bo tb-00009,tb-00010; --bo mặc định rỗng (rà soát 02/11).
+        [--nhan data/nhan/thu_luot2.jsonl] [--bo tb-00009,tb-00010] [--gia]
+Lần chạy Bước 15 dùng nhãn lượt 1 (--nhan data/nhan/thu_luot1.jsonl) và --bo tb-00009,tb-00010; --bo mặc định rỗng (rà soát 02/11).
 """
 import argparse
 import hashlib
@@ -38,7 +38,7 @@ except ImportError:  # chưa cài python-dotenv: --gia và test vẫn chạy; ch
     load_dotenv = None
 
 TEP_TUYEN_BO = ROOT / "data/tuyen_bo/thu.jsonl"
-TEP_NHAN = ROOT / "data/nhan/thu.jsonl"
+TEP_NHAN = ROOT / "data/nhan/thu_luot2.jsonl"
 THU_MUC_RA = ROOT / "ket_qua"
 BO_LUOT_1 = "tb-00009,tb-00010"  # danh sách loại của lần chạy Bước 15 (nhãn lượt 1); không còn là mặc định
 LY_DO_MAC_DINH = "nhãn lượt 1 lưu lệch sang tuyên bố kế bên"

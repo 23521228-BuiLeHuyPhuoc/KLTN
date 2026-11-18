@@ -46,10 +46,10 @@ def test_same_request_once_and_new_client_cache(tmp_path):
     second = call(client(tmp_path, provider))
     assert len(calls) == 1 and not first.cache_hit and second.cache_hit
     assert first.text == second.text
-    events = [json.loads(line) for line in (tmp_path / "calls.jsonl").read_text().splitlines()]
+    events = [json.loads(line) for line in (tmp_path / "calls.jsonl").read_text(encoding="utf-8").splitlines()]
     assert [e["status"] for e in events] == ["success", "cache_hit"]
     assert events[1]["usage"] is None  # Cached token counts are not newly billed usage.
-    entry = json.loads(next((tmp_path / "cache").glob("*.json")).read_text())
+    entry = json.loads(next((tmp_path / "cache").glob("*.json")).read_text(encoding="utf-8"))
     assert entry["request"]["messages"] == MESSAGES
     assert entry["result"]["text"] == first.text
 
@@ -66,8 +66,10 @@ r = c.call("groq", "model-a", [{"role":"system","content":"Return JSON."}, {"rol
 assert r.cache_hit
 print("persistent-cache-ok")
 '''
+    env = dict(os.environ, PYTHONPATH=os.pathsep.join(filter(None, [str(Path(__file__).resolve().parents[1] / "src"),
+                                                                    os.environ.get("PYTHONPATH")])))
     proc = subprocess.run([sys.executable, "-c", code, str(tmp_path / "cache"),
-                           str(tmp_path / "second.jsonl")], capture_output=True, text=True)
+                           str(tmp_path / "second.jsonl")], capture_output=True, text=True, encoding="utf-8", env=env)
     assert proc.returncode == 0, proc.stderr
     assert "persistent-cache-ok" in proc.stdout
 
@@ -129,7 +131,7 @@ def test_upstream_errors_safe_bounded_and_not_cached(tmp_path, monkeypatch, stat
     assert exc.value.retryable == retryable
     assert secret not in str(exc.value)
     assert not list((tmp_path / "cache").glob("*.json"))
-    assert secret not in (tmp_path / "calls.jsonl").read_text()
+    assert secret not in (tmp_path / "calls.jsonl").read_text(encoding="utf-8")
     assert not call(client(tmp_path)).cache_hit
 
 
@@ -158,7 +160,7 @@ def test_credentials_rejected_in_requests_and_responses(tmp_path, monkeypatch):
     with pytest.raises(LLMError, match="credential_in_response"):
         call(client(tmp_path, leaks))
     assert not list((tmp_path / "cache").glob("*.json"))
-    assert secret not in (tmp_path / "calls.jsonl").read_text()
+    assert secret not in (tmp_path / "calls.jsonl").read_text(encoding="utf-8")
 
 
 def test_mock_cannot_satisfy_live_cache(tmp_path):

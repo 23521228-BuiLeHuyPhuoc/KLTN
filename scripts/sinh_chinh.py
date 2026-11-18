@@ -12,9 +12,9 @@ import sys
 import time
 
 import yaml
-from kiemchung import sinh_quang_cao as sqc
-
 GOC = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(GOC / "src"))
+from kiemchung import sinh_quang_cao as sqc  # noqa: E402
 MAU_THU = ("dt-apple-iphone17", "tn-samsung-buds3pro")
 MO_HINH = ("gemini-3-6-flash", "groq-gpt-oss-120b")
 NHOM = {"dt": "dien_thoai", "tn": "tai_nghe", "dh": "dong_ho"}

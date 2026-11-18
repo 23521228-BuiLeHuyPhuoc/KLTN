@@ -6,7 +6,7 @@ biến thể cặp tối thiểu. Cụm bootstrap là ma_qc của tuyên bố; b
 Mọi hệ phải có dự đoán cho mọi tuyên bố trong mẫu, thiếu thì báo lỗi. Tên hệ chuẩn hóa: dấu gạch nối kiểu "−" hay "–"
 thành "-", "ĐK" thành "DK" (P−ĐK -> P-DK, P−NN -> P-NN). Ghi trong --ra:
     bang_chinh.csv   mỗi hệ một dòng: FAR, Recall Đúng, P/R/F1 từng nhãn, Macro-F1 (kèm KTC bootstrap), số LOI
-    mcnemar.csv      hệ chính so với từng hệ còn lại; Holm tính trên họ đối chứng B* (cột trong_ho_holm)
+    mcnemar.csv      hệ chính so với từng hệ còn lại; Holm tính trên họ đối chứng B0-B3 (B4 chỉ là mốc tham chiếu; cột trong_ho_holm)
     gia_thuyet.csv   H1, H2, H3 theo T6.6, hai mức: theo phát biểu và có ý nghĩa thống kê
     nham_lan_<he>.csv   bảng nhầm lẫn từng hệ
     theo_nhom.csv    mô tả theo nhóm sản phẩm, hãng, llm_sinh, che_do (và loại biến đổi với cặp tối thiểu), không CI
@@ -39,12 +39,18 @@ TEP_MAU_SAN_PHAM = ROOT / "data/mau_san_pham.csv"
 MA_CT = re.compile(r"^ct-(\d+)-(.+)$")
 NGUONG_KEM_HON = -0.05  # H1: cận dưới KTC của hiệu Recall Đúng phải lớn hơn mức này
 MUC_Y_NGHIA = 0.05
+HO_HOLM = frozenset({"B0", "B1", "B2", "B3"})
 GHI_CHU_CHEP_NHAN = "số tuyên bố có chep_nhan; cần tính lại tay theo QĐ15, không tự đổi nhãn"
 
 
 def doc_jsonl(duong):
     with open(duong, encoding="utf-8-sig") as f:
         return [json.loads(dong) for dong in f if dong.strip()]
+
+
+def doc_nhieu_jsonl(cac_duong):
+    """Gộp bản ghi của một hay nhiều tệp jsonl theo thứ tự đã nêu (ví dụ thu + chinh của tập phát triển); trùng mã báo ở nơi gọi."""
+    return [r for duong in cac_duong for r in doc_jsonl(duong)]
 
 
 def chuan_hoa_ten(ten):
@@ -210,7 +216,7 @@ def tinh_mcnemar(hang, he, he_chinh):
     for ten in he:
         if ten != he_chinh:
             ket[ten] = tk.mcnemar(chuan, du[he_chinh], du[ten])
-    ho = {t: r["p"] for t, r in ket.items() if t.startswith("B")}
+    ho = {t: r["p"] for t, r in ket.items() if t in HO_HOLM}   # B4 chỉ là mốc tham chiếu, không vào họ kiểm định
     p_holm = tk.holm(ho)
     for t, r in ket.items():
         r["trong_ho_holm"] = t in ho
@@ -369,7 +375,7 @@ def chuan_bi_phu(args, ban_ghi_nhan, ban_ghi_tuyen_bo, hang, he_chinh):
     phu = {}
     ma_hang = {h["id"] for h in hang}
     if args.recall_k:
-        nguon = doc_jsonl(args.nhan_bang_chung) if args.nhan_bang_chung else ban_ghi_nhan
+        nguon = doc_nhieu_jsonl(args.nhan_bang_chung) if args.nhan_bang_chung else ban_ghi_nhan
         bang_chung = {r["id"]: r.get("bang_chung") or [] for r in nguon}
         thieu = sorted(ma_hang - set(bang_chung))
         if thieu:
@@ -445,8 +451,10 @@ def main(argv=None):
         if hasattr(luong, "reconfigure"):
             luong.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser(description="Tính chỉ số, KTC bootstrap, McNemar, Holm cho các hệ (Bước 37).")
-    ap.add_argument("--nhan", type=Path, required=True, help="tệp jsonl nhãn chuẩn (id, nhan, ghi_chu, dong_d)")
-    ap.add_argument("--tuyen-bo", type=Path, required=True, help="tệp jsonl tuyên bố (id, ma_qc, ma_mau, llm_sinh, che_do)")
+    ap.add_argument("--nhan", type=Path, nargs="+", required=True,
+                    help="một hay nhiều tệp jsonl nhãn chuẩn (id, nhan, ghi_chu, dong_d), gộp lại; mã trùng là lỗi")
+    ap.add_argument("--tuyen-bo", type=Path, nargs="+", required=True,
+                    help="một hay nhiều tệp jsonl tuyên bố (id, ma_qc, ma_mau, llm_sinh, che_do), gộp lại; mã trùng là lỗi")
     ap.add_argument("--he", action="append", required=True, metavar="TEN=DUONG_DAN", help="một hệ; lặp lại để thêm hệ")
     ap.add_argument("--tap", choices=("phat_trien", "kiem_tra"), help="lọc theo data/chia_tap.json (mặc định: không lọc)")
     ap.add_argument("--he-chinh", default="P", help="hệ so với các hệ còn lại (mặc định P)")
@@ -458,13 +466,13 @@ def main(argv=None):
     ap.add_argument("--mau-san-pham", type=Path, default=TEP_MAU_SAN_PHAM)
     ap.add_argument("--recall-k", action="store_true", help="ghi recall_k.csv (bằng chứng chuẩn: trường bang_chung của tệp nhãn)")
     ap.add_argument("--cach-tach", action="append", choices=th.CACH_TACH, help="cách tách của recall_k (lặp lại; mặc định cả hai)")
-    ap.add_argument("--nhan-bang-chung", type=Path, help="tệp nhãn lấy bang_chung cho recall_k (mặc định --nhan)")
+    ap.add_argument("--nhan-bang-chung", type=Path, nargs="+", help="tệp nhãn lấy bang_chung cho recall_k (mặc định --nhan)")
     ap.add_argument("--thu-muc-nguon", type=Path, default=th.THU_MUC_NGUON, help="thư mục data/nguon của truy hồi (recall_k)")
     ap.add_argument("--tach-tu-dong", type=Path, help="jsonl tuyên bố tách tự động (ghi tach_tu_dong.csv, cần --tach-tay)")
     ap.add_argument("--tach-tay", type=Path, help="jsonl tuyên bố tách tay (ma_qc, ma_mau, thuoc_tinh, tuyen_bo, che_do, llm_sinh)")
     ap.add_argument("--chi-phi", action="append", metavar="TEN=DUONG_DAN", help="bản ghi đầu ra của một hệ để tính thời gian, chi phí")
     ap.add_argument("--gia-token", type=Path, help='json {"<mô hình>": {"vao": USD/1M, "ra": USD/1M}}; có thì chi_phi.csv có cột USD')
-    ap.add_argument("--tran-mac-dinh", action="append", metavar="TEN=SO", help="ghi đè trần token ra mặc định (P*: 8192, hệ khác: 4096)")
+    ap.add_argument("--tran-mac-dinh", action="append", metavar="TEN=SO", help="ghi đè trần token ra mặc định (mọi hệ mặc định 8192)")
     ap.add_argument("--ty-le-che-do", action="store_true", help="ghi ty_le_theo_che_do.csv")
     ap.add_argument("--bao-phu", action="store_true", help="ghi bao_phu.csv từ bản ghi của --he-chinh")
     ap.add_argument("--trich-xuat", type=Path, help="jsonl bản ghi trích xuất, cho cột dieu_kien_khac của bao_phu.csv")
@@ -482,7 +490,7 @@ def main(argv=None):
         he = doc_he(args.he)
         if he_chinh not in he:
             raise ValueError(f"--he-chinh {he_chinh} không có trong các hệ đã khai báo: {sorted(he)}")
-        ban_ghi_nhan = doc_jsonl(args.nhan)
+        ban_ghi_nhan = doc_nhieu_jsonl(args.nhan)
         chuan = {}
         for r in ban_ghi_nhan:
             if r["id"] in chuan:
@@ -490,7 +498,7 @@ def main(argv=None):
             chuan[r["id"]] = r["nhan"]
         with open(args.chia_tap, encoding="utf-8-sig") as f:
             chia_tap = json.load(f)
-        ban_ghi_tuyen_bo = doc_jsonl(args.tuyen_bo)
+        ban_ghi_tuyen_bo = doc_nhieu_jsonl(args.tuyen_bo)
         hang = chon_mau(ban_ghi_tuyen_bo, args.tap, args.cap_toi_thieu, doc_mau_san_pham(args.mau_san_pham), chia_tap)
         kiem_day_du(hang, chuan, he)
         phu = chuan_bi_phu(args, ban_ghi_nhan, ban_ghi_tuyen_bo, hang, he_chinh)

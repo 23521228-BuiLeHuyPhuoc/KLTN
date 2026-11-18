@@ -20,6 +20,8 @@ Các điều kiểm:
 - (Bước 22) khóa tùy chọn "cap_so_gach_cheo" của một thuộc tính: hai giá trị đã khai báo của điều kiện bo_phan, và thuộc tính có
   bo_phan trong dieu_kien_bat_buoc;
 - (Bước 22) chung.yaml: cum_khong_phai_dieu_kien và tu_khang_dinh.ten_tinh_nang là danh sách chuỗi.
+- (Bước 28) khóa tùy chọn "dai_luong_khac" của một thuộc tính: danh sách cụm (đại lượng khác ngoài phạm vi, như "độ sáng tối thiểu") có trong
+  tài liệu tập phát triển.
 """
 import csv
 import json
@@ -170,7 +172,7 @@ def kiem_dieu_kien_so(noi, tt, cach, chung):
 def thoa_dieu_kien_so(thoa_khi, gia_tri_tuyen_bo, gia_tri_tai_lieu, nguong_bang=0.01):
     """Giá trị điều kiện của tuyên bố có thỏa điều kiện trong tài liệu không (cùng đơn vị).
     Ví dụ bộ tiếp hợp: tài liệu 40W trở lên, tuyên bố 20W thì không thỏa (khác điều kiện)."""
-    bang = abs(gia_tri_tuyen_bo - gia_tri_tai_lieu) <= nguong_bang * abs(gia_tri_tai_lieu)
+    bang = abs(gia_tri_tuyen_bo - gia_tri_tai_lieu) <= nguong_bang * abs(gia_tri_tai_lieu) + 1e-12   # dung sai số thực (30.3 so 30.0)
     if thoa_khi == "bang":
         return bang
     if thoa_khi == "tuyen_bo_lon_hon_hoac_bang":
@@ -213,6 +215,11 @@ def kiem_nhom(cau_hinh, van_ban, ma_phat_trien, mau):
         loi += kiem_dieu_kien_so(noi, tt, cach, chung)
         if "cap_so_gach_cheo" in tt:
             loi += kiem_cap_so_gach_cheo(noi, tt, cach)
+        if "dai_luong_khac" in tt and not _la_danh_sach_chuoi(tt["dai_luong_khac"]):
+            loi.append(f"{noi}: dai_luong_khac phải là danh sách chuỗi")
+        for cum in tt.get("dai_luong_khac") or []:
+            if isinstance(cum, str) and chuan_hoa_chu(cum) not in van_ban:
+                loi.append(f"{noi}: dai_luong_khac '{cum}' không có trong tài liệu tập phát triển")
         for hang, tu in (tt.get("cach_goi_theo_hang") or {}).items():
             for chu, che_do in tu.items():
                 loi += [f"{noi}: cách gọi '{chu}' của {hang} trỏ tới chế độ chưa khai báo '{c}'"

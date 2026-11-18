@@ -135,6 +135,8 @@ def tao_app(client=None, mo_hinh=None, k=None, cach_tach=None, thu_muc_nguon=Non
                 for tb in kq_tach["tuyen_bo"]:
                     kq = pp.kiem_chung(tb["tuyen_bo"], yeu_cau.ma_mau, dung["client"], mo_hinh, k, cach_tach,
                                        thu_muc_nguon=thu_muc_nguon)
+                    if kq["nhan"] == "LOI":   # lỗi kỹ thuật ở bước trích xuất (T-06): không có nhãn, giống đầu ra không dùng được của bước tách
+                        raise LLMError("dau_ra_trich_xuat_khong_dung_duoc")
                     ket_qua.append(_phan_tu(tb, kq, van_doan))
         except LLMError as e:
             raise HTTPException(503, f"Dịch vụ mô hình ngôn ngữ tạm thời không dùng được ({e.code}).") from None

@@ -13,10 +13,11 @@ import re
 import unicodedata
 
 from .cau_hinh import chuan_hoa_chu, doc_mau, thoa_dieu_kien_so
-from .chuan_hoa import MaIP, nguong_bang, quy_doi, so_huong, so_ip, tim_gia_tri, tim_san_pham, tim_so
+from .chuan_hoa import MaIP, don_vi_tuong_thich, nguong_bang, quy_doi, so_huong, so_ip, tim_gia_tri, tim_san_pham, tim_so
 from . import ly_do as _ly_do
 
 DUNG, SAI, LECH, CHUA_DU = "DUNG", "SAI", "LECH", "CHUA_DU"
+LOI = "LOI"   # lỗi kỹ thuật gọi LLM hay JSON không đọc được: không phải nhãn, giống doi_chung/chung.py (T-06)
 TRONG_HOP = "chi_do_trong_hop"   # điều kiện khong_mua_them: chỉ có đồ trong hộp
 NGUONG_QD8 = 0.25                # HD mục 11.2: không đổi sau khi đếm
 KIEU_RO = ("toi_da", "dien_hinh", "dinh_muc", "thich_ung")
@@ -58,6 +59,18 @@ def _bang_hang():
 
 # --- Bối cảnh ---
 
+def dang_sac_nhanh(muc):
+    """Dạng của một mục sạc nhanh đồng hồ (HD mục 6.1, 6.3; T-20): 1 là thời gian tới mốc phần trăm, 2 là số giờ dùng sau một số phút
+    sạc. Xác định theo điều kiện đi kèm (có moc_phan_tram thì dạng 1, có so_phut_sac thì dạng 2), không theo đơn vị của giá trị: "sạc
+    15 phút dùng 90 phút" và "sạc 80% trong 0,5 giờ" đều là câu hợp lệ mà đơn vị đi ngược dạng. Không có điều kiện nào hoặc có cả hai
+    (xung đột) thì dùng đơn vị giá trị (phút: dạng 1; giờ: dạng 2), như bản cũ. None khi không xác định được."""
+    dk = {**(muc.get("dieu_kien") or {}), **{c: None for c in muc.get("xung_dot") or {}}}
+    co1, co2 = "moc_phan_tram" in dk, "so_phut_sac" in dk
+    if co1 != co2:
+        return 1 if co1 else 2
+    return {"phut": 1, "gio": 2}.get(muc.get("don_vi"))
+
+
 class BoiCanh:
     """Dữ liệu cố định của một lần quyết định: thuộc tính, bảng điều kiện, hãng, dạng sạc nhanh của đồng hồ."""
 
@@ -79,7 +92,7 @@ class BoiCanh:
         self.dang = None
         self.huong = self.tt["huong_thuan_loi"]
         if self.tt["don_vi"] == "phut_hoac_gio":   # đặc tả mục 2.4
-            self.dang = {"phut": 1, "gio": 2}.get(self.tb.get("don_vi"))
+            self.dang = dang_sac_nhanh(self.tb)
             if self.huong == "theo_dang":
                 self.huong = "thap_hon_tot_hon" if self.dang == 1 else "cao_hon_tot_hon"
 
@@ -140,11 +153,18 @@ def thuan_loi_hon_moi_gia_tri(tb, cung_bp, bc):
     return bool(khang) and all(so_sanh(tb, u, bc) == "tot_hon" for u in khang)
 
 
+def bang_doi_xung(u, v, bc):
+    """Bằng nhau trong ngưỡng, sai số tương đối so với số lớn hơn trong hai số (max(|a|, |b|)), nên bang_doi_xung(u, v) = (v, u).
+    Dùng khi so hai mục tài liệu với nhau; bang() so tuyên bố với tài liệu thì mẫu số là con số tài liệu (T-22)."""
+    return bang(u, v, bc) or bang(v, u, bc)
+
+
 def gia_tri_khac_nhau(cac_muc, bc):
-    """Đại diện của các giá trị khác nhau (ngoài ngưỡng bằng nhau), theo thứ tự xuất hiện (D1b)."""
+    """Đại diện của các giá trị khác nhau (ngoài ngưỡng bằng nhau, so đối xứng), theo thứ tự xuất hiện (D1b). Số đại diện không
+    phụ thuộc thứ tự mục: [100, 99] và [99, 100] cùng ra một giá trị (T-22)."""
     dai_dien = []
     for u in cac_muc:
-        if not any(bang(u, v, bc) for v in dai_dien):
+        if not any(bang_doi_xung(u, v, bc) for v in dai_dien):
             dai_dien.append(u)
     return dai_dien
 
@@ -155,6 +175,8 @@ def _so_theo_don_vi(u, bc):
     if isinstance(g, bool) or not isinstance(g, (int, float)):
         return None
     dv, dich = u.get("don_vi"), bc.tt["don_vi"]
+    if dich == "phut_hoac_gio":   # sạc nhanh đồng hồ: đổi về đơn vị của tuyên bố để các mục cùng dạng so được với nhau
+        dich = bc.tb.get("don_vi")
     if dv in ("gio", "phut") and dich in ("gio", "phut") and dv != dich:
         return quy_doi(g, dv, dich)
     return g
@@ -182,13 +204,37 @@ def san_pham_khac(ban_ghi, cau_hinh):
 
 
 def cung_thuoc_tinh(ban_ghi, bc):
-    """Đặc tả mục 2.3–2.4: mục tài liệu cùng thuộc tính, có giá trị, không khác sản phẩm; sạc nhanh đồng hồ chỉ giữ cùng dạng."""
+    """Đặc tả mục 2.3–2.4: mục tài liệu cùng thuộc tính, có giá trị, không khác sản phẩm; sạc nhanh đồng hồ chỉ giữ cùng dạng (theo
+    điều kiện đi kèm, dang_sac_nhanh). Giá trị số mà đơn vị không tương thích với thuộc tính (T-09: "3 m", "30 phút" ở thuộc tính mã
+    IP; HD mục 6.9: con số của điều kiện không phải giá trị) không phải mục cùng thuộc tính; giờ và phút đổi được cho nhau."""
     ds = [u for u in ban_ghi.get("bang_chung") or []
           if u.get("thuoc_tinh") == bc.ten_tt and u.get("gia_tri") is not None and not u.get("khac_san_pham")
-          and u.get("san_pham_ma") in (None, bc.ma_mau)]
+          and u.get("san_pham_ma") in (None, bc.ma_mau)
+          and (isinstance(u["gia_tri"], (str, dict, bool)) or don_vi_tuong_thich(u.get("don_vi"), bc.tt["don_vi"]))]
     if bc.dang is not None:
-        ds = [u for u in ds if u.get("don_vi") == bc.tb.get("don_vi")]
+        ds = [u for u in ds if dang_sac_nhanh(u) == bc.dang]
     return ds
+
+
+def muc_bang_nhieu_cot(ds, bc):
+    """Các mục (đối tượng trong ds) nằm trong bảng so sánh nhiều mẫu mà đoạn không ghi tên mẫu theo từng giá trị (T-01 b; HD mục 4: chỉ
+    cột của đúng sản phẩm là bằng chứng, ví dụ #041, #042 của Buds3 Pro: ba cột, không có tên mẫu). Nhận diện bằng cấu trúc, trong các
+    mục cùng một đoạn, cùng điều kiện đã biết, có từ hai giá trị khác nhau: (1) từ ba mục trở lên cùng nhãn dòng (nhan_muc): ba cột của
+    một bảng chứ không phải một sản phẩm tự mâu thuẫn; (2) từ hai mã IP khác nhau mà câu trích chỉ là mã ("IP57", "IPX2" ở #041; câu trích
+    của số thì nhãn rỗng còn do LLM chép lược nên không dùng): không có chữ nào cho biết dòng nào là của sản phẩm. Hai dòng cùng nhãn
+    trong một bảng thông số của một sản phẩm
+    (#044 "Tổng thời gian phát nhạc (Giờ, bật ANC)" ra 26 và 30) vẫn là tài liệu mâu thuẫn như hướng dẫn mục 11.4 (V48). Giá trị của
+    các mục này không rõ thuộc sản phẩm nào nên không dùng làm bằng chứng (kể cả để kết luận mâu thuẫn)."""
+    nhom = {}
+    for u in ds:
+        khoa = (u.get("ma_doan"), nhan_muc(u, bc), json.dumps(u.get("dieu_kien") or {}, sort_keys=True))
+        nhom.setdefault(khoa, []).append(u)
+    bo = []
+    for g in nhom.values():
+        la_ma_ip = all(isinstance(u["gia_tri"], dict) and not nhan_muc(u, bc) for u in g)
+        if (len(g) >= 3 or (len(g) >= 2 and la_ma_ip)) and len(gia_tri_khac_nhau(g, bc)) >= 2:
+            bo += g
+    return bo
 
 
 # --- Điều kiện của mục tài liệu và so điều kiện ---
@@ -273,17 +319,35 @@ def _khop_bp_pb(dk, u, bc):
     return True
 
 
+def _khoa_dk(v):
+    return json.dumps(v, sort_keys=True)
+
+
+def _xung_dot_dk(u, v, bc, bo_qua):
+    """Hai mục cùng con số có xung đột ở một điều kiện đã biết (khác c đang xét): cả hai cùng ghi mà giá trị khác nhau (T-21)."""
+    for c, loai in bc.dk_bb.items():
+        if c == bo_qua or loai == "kieu_gia_tri":
+            continue
+        a, b = (u.get("dieu_kien") or {}).get(c), (v.get("dieu_kien") or {}).get(c)
+        if a is not None and b is not None and _khoa_dk(a) != _khoa_dk(b):
+            return True
+    return False
+
+
 def lan_dieu_kien(cung_tt, bc):
     """Đặc tả mục 2, ý 5 [luật cài]: lan điều kiện giữa các mục cùng giá trị. Với mỗi điều kiện bắt buộc c, nhóm các mục cung_tt có
-    giá trị bằng nhau (bang, cùng đơn vị sau quy đổi); trong nhóm, nếu mọi mục có ghi c đều cùng một giá trị (điều kiện số: cùng số và
-    đơn vị) thì mục không ghi c nhận giá trị đó, nguồn "lan". Từ hai giá trị khác nhau của c trong nhóm thì không lan c. Cụm lạ
-    (dieu_kien_khac) lan như vậy: mọi mục trong nhóm nhận hợp các cụm lạ của nhóm. Trả (danh sách mục đã sao chép, danh sách vết);
-    không sửa bản ghi đầu vào, không lan qua mục khac_san_pham (đã loại khỏi cung_tt)."""
+    giá trị bằng nhau (bang_doi_xung, cùng đơn vị sau quy đổi); mục u không ghi c nhận giá trị của c từ các mục v cùng nhóm có ghi c
+    mà KHÔNG xung đột với u ở bất kỳ điều kiện đã biết nào khác (cả hai ghi mà khác giá trị; điều kiện số: cùng số và đơn vị). Chỉ
+    nhận khi các mục v ấy cùng một giá trị của c, nguồn "lan"; từ hai giá trị khác nhau thì không lan c (T-21: "6 giờ khi bật chống
+    ồn" không nhận hoat_dong của mục "6 giờ khi tắt chống ồn, đàm thoại"). Cụm lạ (dieu_kien_khac) chỉ lan giữa các mục vốn đã có ít
+    nhất một cụm lạ (mỗi mục nhận hợp các cụm lạ của các mục có cụm lạ trong nhóm); mục không có cụm lạ không bị nhiễm cụm lạ của đoạn
+    khác (T-21: tiêu đề mục ở một đoạn không biến mọi dòng bảng thông số cùng con số thành "điều kiện lạ"). Trả (danh sách mục đã
+    sao chép, danh sách vết); không sửa bản ghi đầu vào, không lan qua mục khac_san_pham (đã loại khỏi cung_tt)."""
     ds = [json.loads(json.dumps(u)) for u in cung_tt]
     nhom = []
     for u in ds:
         for g in nhom:
-            if bang(u, g[0], bc):
+            if bang_doi_xung(u, g[0], bc):
                 g.append(u)
                 break
         else:
@@ -292,36 +356,41 @@ def lan_dieu_kien(cung_tt, bc):
     for g in nhom:
         if len(g) < 2:
             continue
+        goc = [json.loads(json.dumps(u)) for u in g]   # xét trên điều kiện ghi sẵn, không tính điều kiện vừa lan
         for c, loai in bc.dk_bb.items():
             if loai == "kieu_gia_tri":
                 continue
-            co = {json.dumps(u["dieu_kien"][c], sort_keys=True) for u in g if (u.get("dieu_kien") or {}).get(c) is not None}
-            if len(co) != 1:
-                continue
-            gia_tri = next(u["dieu_kien"][c] for u in g if (u.get("dieu_kien") or {}).get(c) is not None)
-            for u in g:
-                if (u.get("dieu_kien") or {}).get(c) is None:
-                    u.setdefault("dieu_kien", {})[c] = gia_tri
-                    u.setdefault("nguon_dieu_kien", {})[c] = "lan"
-                    vet.append({"ma_doan": u.get("ma_doan"), "dk": c, "gia_tri": gia_tri})
+            for u, u0 in zip(g, goc):
+                if (u0.get("dieu_kien") or {}).get(c) is not None:
+                    continue
+                co = {_khoa_dk(v["dieu_kien"][c]): v["dieu_kien"][c] for v in goc
+                      if v is not u0 and (v.get("dieu_kien") or {}).get(c) is not None and not _xung_dot_dk(u0, v, bc, c)}
+                if len(co) != 1:
+                    continue
+                gia_tri = next(iter(co.values()))
+                u.setdefault("dieu_kien", {})[c] = gia_tri
+                u.setdefault("nguon_dieu_kien", {})[c] = "lan"
+                vet.append({"ma_doan": u.get("ma_doan"), "dk": c, "gia_tri": gia_tri})
+        co_la = [u for u in g if u.get("dieu_kien_khac")]
         cum = []
-        for u in g:
-            cum += [m for m in u.get("dieu_kien_khac") or [] if m.get("cum") not in [x.get("cum") for x in cum]]
-        if cum:
-            for u in g:
-                co = [m.get("cum") for m in u.get("dieu_kien_khac") or []]
-                for m in cum:
-                    if m.get("cum") not in co:
-                        u.setdefault("dieu_kien_khac", []).append(dict(m))
-                        vet.append({"ma_doan": u.get("ma_doan"), "dk": "dieu_kien_khac", "gia_tri": m.get("cum")})
+        for u in co_la:
+            cum += [m for m in u["dieu_kien_khac"] if m.get("cum") not in [x.get("cum") for x in cum]]
+        for u in co_la:
+            co = [m.get("cum") for m in u["dieu_kien_khac"]]
+            for m in cum:
+                if m.get("cum") not in co:
+                    u["dieu_kien_khac"].append(dict(m))
+                    vet.append({"ma_doan": u.get("ma_doan"), "dk": "dieu_kien_khac", "gia_tri": m.get("cum")})
     return ds, vet
 
 
 # --- Luật chép đúng nhãn (QĐ15) ---
 
-def nhan_muc(u, bc):
-    """Đặc tả mục 3 B2: nhãn của mục tài liệu = câu trích giá trị bỏ con số, đơn vị, cụm kiểu giá trị, dấu câu và chữ chung đầu nhãn."""
-    trich = (u.get("trich") or {}).get("gia_tri")
+def nhan_muc(u, bc, nguon="trich"):
+    """Đặc tả mục 3 B2: nhãn của mục tài liệu = câu trích giá trị bỏ con số, đơn vị, cụm kiểu giá trị, dấu câu và chữ chung đầu nhãn.
+    nguon "nhan_dong": lấy chữ thật của dòng trong nguồn (nhan_dong do bước trích xuất ghi, kèm tiêu đề nhóm phía trên) thay cho câu
+    trích của LLM, vì LLM hay chép lược chữ nhãn ("Lên đến 30 giờ" thay cho "Thời gian xem video: Lên đến 30 giờ")."""
+    trich = u.get("nhan_dong") if nguon == "nhan_dong" else (u.get("trich") or {}).get("gia_tri")
     if not trich:
         return ""
     t = unicodedata.normalize("NFC", trich)
@@ -355,9 +424,9 @@ def chep_nhan(cung_tt, dk, bc):
     chu = chuan_cum(bc.chu)
     ung = []
     for u in cung_tt:
-        n = nhan_muc(u, bc)
-        if n and chua_cum(chu, n):
-            ung.append((len(n.split()), len(n), n, u))
+        for n in {nhan_muc(u, bc), nhan_muc(u, bc, "nhan_dong")}:   # nhãn theo câu trích của LLM và theo chữ thật của dòng
+            if n and chua_cum(chu, n):
+                ung.append((len(n.split()), len(n), n, u))
     if not ung:
         return None
     tot = max(k[:2] for k in ung)
@@ -705,15 +774,19 @@ def _so_tb(tb):
 def quyet_dinh(ban_ghi, cau_hinh, doi_chieu=True, luat_chung_cho_nhieu_gia_tri=None):
     """Bộ quyết định A–D (đặc tả mục 1–8; T5.5). ban_ghi: bản ghi trích xuất của một tuyên bố (Bước 22, mục 8); cau_hinh: doc_cau_hinh của nhóm.
     doi_chieu=False là P−ĐK (T5.9). luat_chung_cho_nhieu_gia_tri: True/False/"bat"/"tat", None thì đọc chung.yaml.
-    Trả dict: nhan (DUNG, SAI, LECH, CHUA_DU), dong_d (D1, D1a, D1b, D2–D6), loai, bang_chung, trich, ly_do, ghi_chu (danh sách chuỗi),
+    Trả dict: nhan (DUNG, SAI, LECH, CHUA_DU, hoặc LOI khi bản ghi có loi), dong_d (D1, D1a, D1b, D2–D6, hoặc LOI), loai, bang_chung, trich, ly_do, ghi_chu (danh sách chuỗi),
     tai_lieu_mau_thuan, vet (dấu vết cho sinh lý do và phân tích lỗi)."""
     chung = cau_hinh["chung"]
     if luat_chung_cho_nhieu_gia_tri is None:
         luat_chung_cho_nhieu_gia_tri = (chung.get("dieu_kien_la") or {}).get("luat_chung_cho_nhieu_gia_tri")
     luat = luat_chung_cho_nhieu_gia_tri in (True, "bat")
     tb = ban_ghi.get("tuyen_bo")
-    # A1: trích xuất thất bại
-    if (ban_ghi.get("loi") or not tb or tb.get("thuoc_tinh") is None or tb.get("gia_tri") is None
+    # Lỗi kỹ thuật (llm_khong_tra_ve_dung, JSON không đọc được): nhãn LOI như B0–B2, danh_gia.py đếm riêng (so_loi), không thành D1a
+    if ban_ghi.get("loi"):
+        return _ket_qua(cau_hinh, LOI, "LOI", None, (), [f"loi={ban_ghi['loi']}"],
+                        vet={"dong": "LOI", "doi_chieu": doi_chieu, "loi": ban_ghi["loi"], "thuoc_tinh": (tb or {}).get("thuoc_tinh")})
+    # A1: LLM trả JSON đúng lược đồ nhưng không trích được thuộc tính hoặc giá trị của tuyên bố
+    if (not tb or tb.get("thuoc_tinh") is None or tb.get("gia_tri") is None
             or tb["thuoc_tinh"] not in cau_hinh["thuoc_tinh"]):
         return _ket_qua(cau_hinh, CHUA_DU, "D1a", None, (), ["chua_xac_dinh=trich_xuat_that_bai"],
                         vet={"dong": "D1a", "doi_chieu": doi_chieu, "nguyen_nhan": {"loai": "trich_xuat_that_bai", "cum": "trich_xuat_that_bai"},
@@ -722,6 +795,10 @@ def quyet_dinh(ban_ghi, cau_hinh, doi_chieu=True, luat_chung_cho_nhieu_gia_tri=N
     base = {"doi_chieu": doi_chieu, "thuoc_tinh": bc.ten_tt, "tuyen_bo": _so_tb(tb)}
     khac_sp = san_pham_khac(ban_ghi, cau_hinh)
     cung_tt = [] if khac_sp else cung_thuoc_tinh(ban_ghi, bc)
+    cot_khong_ro = muc_bang_nhieu_cot(cung_tt, bc)
+    cung_tt = [u for u in cung_tt if not any(u is v for v in cot_khong_ro)]
+    if cot_khong_ro:
+        base["bang_nhieu_cot"] = sorted({u.get("ma_doan") for u in cot_khong_ro})
     if not cung_tt:   # A2, A3: D1
         return _ket_qua(cau_hinh, CHUA_DU, "D1", None, (), (),
                         vet={**base, "dong": "D1", "san_pham": _ten_san_pham(ban_ghi, cau_hinh, khac_sp), "san_pham_khac": khac_sp})

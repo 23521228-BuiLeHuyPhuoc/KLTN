@@ -14,7 +14,10 @@ from .cau_hinh import chuan_hoa_chu
 
 NGUONG_BANG_MAC_DINH = 0.01
 HUONG_HOP_LE = ("cao_hon_tot_hon", "thap_hon_tot_hon")
-SO_TOI_DA_TU_GIUA = 2   # tim_kieu_gia_tri: số từ tối đa giữa từ khẳng định và con số
+SO_TOI_DA_TU_GIUA = 6   # tim_kieu_gia_tri: số từ tối đa giữa từ khẳng định và con số trong cùng mệnh đề ("đảm bảo thời lượng xem video 30 giờ")
+# Từ nối hai mệnh đề: nằm giữa từ khẳng định và con số thì từ khẳng định là của vế khác (HD mục 6.2: "Tai nghe B đảm bảo kết nối ổn định và nghe nhạc 8 giờ").
+TU_NOI_MENH_DE = {"và", "nhưng", "còn", "mà", "song", "rồi"}
+_KHOANG = re.compile(r"([0-9]+(?:[.,][0-9]+)*)\s*[-–—]\s*([0-9]+(?:[.,][0-9]+)*)")
 _SO = re.compile(r"[0-9]+(?:[.,][0-9]+)*")
 _MA_IP = re.compile(r"(?<![A-Za-z0-9])IP\s?([0-6X])([0-8X])(?![A-Za-z0-9])", re.IGNORECASE)
 _MA_ISO = re.compile(r"(?<![A-Za-z0-9])(?:([0-9]+)\s*ATM|WR\s*([0-9]+))(?![A-Za-z0-9])", re.IGNORECASE)
@@ -57,11 +60,17 @@ def _nfc(chu):
 
 # --- Số và đơn vị ---
 
-def doc_so(chu):
-    """Đọc số theo chuan_hoa.so. Dấu phẩy luôn là thập phân; dấu chấm theo sau đúng 3 chữ số là ngăn
+def doc_so(chu, huong="cao_hon_tot_hon"):
+    """Đọc số theo chuan_hoa.so. Khoảng "a-b" ("1-120", "20–30"; T-22, hướng dẫn không nói cách đọc) lấy đầu thuận lợi hơn cho người
+    nói theo huong: cao hơn tốt hơn thì đầu cao, thấp hơn tốt hơn thì đầu thấp. Đó là mức quảng cáo hướng tới, nên con số khó khớp
+    tài liệu hơn (bảo thủ: không làm tăng chấp nhận nhầm). Phần còn lại: Dấu phẩy luôn là thập phân; dấu chấm theo sau đúng 3 chữ số là ngăn
     hàng nghìn ("3.000" = 3000, "1.234.567" = 1234567), theo sau số chữ số khác là thập phân ("4.5").
     Ngoại lệ ngoài YAML: phần nguyên 0 ("0.500") luôn là thập phân. Không phải số thì ValueError."""
     s = chu.strip()
+    kh = _KHOANG.fullmatch(s)
+    if kh:
+        a, b = doc_so(kh.group(1)), doc_so(kh.group(2))
+        return min(a, b) if huong == "thap_hon_tot_hon" else max(a, b)
     if not _SO.fullmatch(s):
         raise ValueError(f"không phải số: {chu!r}")
     if "," in s:
@@ -102,6 +111,20 @@ def quy_doi(gia_tri, tu, den):
     if (tu, den) == ("phut", "gio"):
         return gia_tri / 60
     raise ValueError(f"không đổi được {tu} sang {den}")
+
+
+def don_vi_tuong_thich(khoa, don_vi_yaml):
+    """Khóa đơn vị của một giá trị số có dùng được cho thuộc tính có don_vi (YAML) là don_vi_yaml không (T-09; HD mục 6.1, 6.9: con số
+    của điều kiện như "3 m", "30 phút" không phải giá trị của thuộc tính). don_vi_yaml None là chưa biết thuộc tính: chấp nhận.
+    "ma_ip": giá trị là mã IP hay có/không, không có giá trị số nào (kể cả số không đơn vị); "phut_hoac_gio": phút hoặc giờ;
+    khóa đơn vị: đúng khóa đó, riêng giờ và phút đổi được cho nhau (HD mục 6.2–6.3). khoa None (dòng không ghi đơn vị): chấp nhận."""
+    if don_vi_yaml == "ma_ip":
+        return False
+    if don_vi_yaml is None or khoa is None:
+        return True
+    if don_vi_yaml == "phut_hoac_gio":
+        return khoa in ("gio", "phut")
+    return khoa == don_vi_yaml or {khoa, don_vi_yaml} == {"gio", "phut"}
 
 
 def tim_gia_tri(chu, chung):
@@ -288,7 +311,7 @@ def _khang_dinh(c, dau, cuoi, chung):
     for cum in chung["tu_khang_dinh"].get("tu") or []:
         cum = chuan_hoa_chu(cum)
         m = re.search(_mau_cum(cum) + tu_gia + r"[\s:]*\Z", truoc)
-        if m and hop_le(m.start(), m.start() + len(cum)):
+        if m and hop_le(m.start(), m.start() + len(cum)) and not (set(truoc[m.start() + len(cum):].split()) & TU_NOI_MENH_DE):
             return cum
     cum_truoc, cum_sau = _cum_muc_san(chung)
     for cum in cum_truoc:

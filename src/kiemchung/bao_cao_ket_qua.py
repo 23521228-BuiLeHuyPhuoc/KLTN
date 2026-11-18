@@ -78,11 +78,11 @@ def tach_tu_dong(tu_dong, tach_tay):
 # 3. Thời gian và chi phí
 
 TRAN_MAC_DINH_P = 8192   # = trich_xuat.MAX_TOKEN_RA (P, P-DK, P-NN)
-TRAN_MAC_DINH_KHAC = 4096   # = doi_chung.b0.MAX_TOKEN_RA (B0, B1, B2, B3)
+TRAN_MAC_DINH_KHAC = 8192   # = doi_chung.b0.MAX_TOKEN_RA (B0, B1, B2, B3)
 
 
 def tran_mac_dinh(ten_he, ghi_de=None):
-    """Trần token ra mặc định của hệ: ghi_de[ten_he] nếu có, không thì 8192 cho tên bắt đầu bằng "P", 4096 cho hệ khác."""
+    """Trần token ra mặc định của hệ: ghi_de[ten_he] nếu có, không thì 8192 cho mọi hệ (P và B0-B3 cùng trần, T6.2)."""
     if ghi_de and ten_he in ghi_de:
         return ghi_de[ten_he]
     return TRAN_MAC_DINH_P if ten_he.startswith("P") else TRAN_MAC_DINH_KHAC
@@ -129,8 +129,7 @@ def chi_phi(ban_ghi_theo_he, cum_cua, gia_token=None, tran_ghi_de=None):
     bản ghi không có cả hai bị bỏ). Với P dùng bản ghi trích xuất (chay_trich_xuat.py), vì bản ghi chay_p.py không giữ usage.
 
     Cột: so_tuyen_bo, so_bai, token trung bình mỗi tuyên bố (input, output, reasoning, total; trung bình trên bản ghi có trường đó,
-    ô trống nếu không bản ghi nào có), giay_tb / giay_trung_vi mỗi tuyên bố (từ thoi_gian_sinh_ms, chỉ B0 ghi trường này; hệ khác để
-    trống), giay_tb_moi_bai và token_tb_moi_bai (cộng theo ma_qc rồi lấy trung bình các bài), so_goi_lai (tran_token lớn hơn trần mặc
+    ô trống nếu không bản ghi nào có), giay_tb / giay_trung_vi mỗi tuyên bố (từ thoi_gian_sinh_ms, B0, B1, B2 và bản ghi trích xuất của P ghi trường này; bản ghi không có thì bỏ qua), giay_tb_moi_bai và token_tb_moi_bai (cộng theo ma_qc rồi lấy trung bình các bài), so_goi_lai (tran_token lớn hơn trần mặc
     định của hệ, xem tran_mac_dinh), so_loi (loi khác rỗng hoặc nhan LOI). Có gia_token thì thêm usd_moi_tuyen_bo và usd_moi_bai (xem
     chi_phi_usd), không có hoặc thiếu giá của mô hình thì trống."""
     dong = []

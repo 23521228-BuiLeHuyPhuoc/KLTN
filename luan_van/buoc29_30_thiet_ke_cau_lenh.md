@@ -56,6 +56,8 @@ B1 nhận đúng đầu vào của bộ quyết định trong P: bộ thông s�
 
 `{bo_thong_so_tuyen_bo}`, `{bo_thong_so_tai_lieu}`: JSON của mục tuyên bố và danh sách mục tài liệu, bỏ các khóa nội bộ (`nguon_dieu_kien`, `bo_qua`, `dieu_kien_phu`) và mục `khac_san_pham`; giữ `ma_doan`, `thuoc_tinh`, `gia_tri`, `don_vi`, `dieu_kien`, `kieu_gia_tri`, `cum_kieu`, `dieu_kien_khac`, `ngu_canh`, `trich`. In với `ensure_ascii=False`, khóa sắp xếp, thụt lề 1.
 
+*Sửa ngày 18/11 (rà soát T-12):* bộ quyết định của P có đọc chữ tuyên bố, mã mẫu, hãng, `san_pham_ma`, `goi_muc_cao`, `xung_dot` (cho QĐ15, sản phẩm khác, cách gọi theo hãng), nên B1 nhận thêm các trường đó: phần tuyên bố có `chu_tuyen_bo`, `ma_mau`, `ten_san_pham`, `hang`; mọi mục giữ thêm `san_pham_ma`, `goi_muc_cao`, `xung_dot`. B1 vẫn không nhận kết quả các luật của P (`lan_dieu_kien`, cờ `san_pham_khac` của tuyên bố) và không nhận đoạn tài liệu. Mục `khac_san_pham` vẫn bị bỏ vì P lọc ở khâu trích xuất, trước bộ quyết định. Trần token ra của B0–B2 nâng lên 8192, bằng P. Câu lệnh thêm bốn dòng ở mục "CÁCH ĐỌC BỘ THÔNG SỐ". Câu "B1 không nhận chữ tuyên bố gốc" ở đoạn trên không còn đúng.
+
 <!-- CAU_LENH_B1: bat_dau -->
 ```text
 Bạn gán nhãn cho một tuyên bố quảng cáo về thông số kỹ thuật. Bạn không có văn bản gốc; bạn chỉ có bộ thông số đã trích từ tuyên bố và từ tài liệu chính hãng (JSON dưới đây, mỗi trường kèm câu trích nguyên văn ở "trich"). Theo hướng dẫn gán nhãn, gán cho tuyên bố đúng một trong bốn nhãn: "Đúng", "Sai", "Lệch điều kiện", "Chưa đủ thông tin".
@@ -70,6 +72,10 @@ CÁCH ĐỌC BỘ THÔNG SỐ
 - "dieu_kien_khac": cụm điều kiện chưa có trong cấu hình, kèm loại và câu trích.
 - "ngu_canh": cụm chỉ là ngữ cảnh, không làm đổi nhãn.
 - "gia_tri" của kháng nước là mã IP {"bui": ..., "nuoc": ...}, số mét theo ISO 22810, "khong" (không kháng nước) hoặc "co" (có kháng nước, không nêu mã).
+- Bộ thông số của tuyên bố có thêm "chu_tuyen_bo" (chữ của tuyên bố), "ma_mau", "ten_san_pham", "hang" của sản phẩm được quảng cáo.
+- "san_pham_ma": mã mẫu của sản phẩm mà mục gọi tên; null khi mục không gọi tên sản phẩm.
+- "goi_muc_cao": true khi mục dùng chữ gọi mức cao ("tối đa", "đỉnh", "cực đại") (mục 6.5 của hướng dẫn).
+- "xung_dot": điều kiện mà mục ghi từ hai giá trị trở lên, nên chưa xác định được giá trị của điều kiện đó.
 
 Trả về đúng một đối tượng JSON, không thêm chữ nào khác: {"nhan": "<một trong bốn nhãn>", "ly_do": "<lý do ngắn>"}
 

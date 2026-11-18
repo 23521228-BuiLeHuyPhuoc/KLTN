@@ -88,23 +88,59 @@ def test_bo_thong_so():
            "bo_qua": [], "dieu_kien_phu": [], "dieu_kien": {}, "khac_san_pham": False}
     bg = {"tuyen_bo": muc, "bang_chung": [muc, {**muc, "khac_san_pham": True}]}
     tb, tl = b1.bo_thong_so_cho_b1(bg)
-    assert json.loads(tb) == {k: muc[k] for k in ("thuoc_tinh", "gia_tri", "trich", "dieu_kien")}
-    assert json.loads(tl) == [json.loads(tb)]
+    khoa = ("thuoc_tinh", "gia_tri", "trich", "dieu_kien")
+    assert json.loads(tl) == [{k: muc[k] for k in khoa}]
+    assert {k: v for k, v in json.loads(tb).items() if k in khoa} == {k: muc[k] for k in khoa}
+    assert set(json.loads(tb)) == set(khoa) | {"ma_mau", "ten_san_pham", "hang", "chu_tuyen_bo"}
     assert tb == json.dumps(json.loads(tb), ensure_ascii=False, sort_keys=True, indent=1)
     assert "nguon_dieu_kien" in muc
     assert b1.bo_thong_so_cho_b1({"tuyen_bo": None, "bang_chung": [], "loi": "hỏng"}) == ("null", "[]")
 
 
-def test_chay_b1_loi_dau_vao_va_dem(tmp_path):
+def test_chay_b1_loi_trich_xuat_tra_loi_khong_goi_llm(tmp_path):
     def transport(request, timeout_s):
-        assert '"temperature": 0' in json.dumps(request) or request["params"]["temperature"] == 0
-        return LLMResult('{"nhan":"Đúng"}', request["provider"], request["model"], "gia", {}, "stop")
+        raise AssertionError("không được gọi LLM khi bản ghi trích xuất có loi")
     client = LLMClient(tmp_path / "cache", tmp_path / "calls.jsonl", transport=transport)
     bg = {"id": "tb-1", "ma_mau": "dt-a", "tuyen_bo": None, "bang_chung": [], "loi": "hỏng"}
     r = b1.chay_mot(client, "gemini-3.6-flash", bg, "HD")
-    assert r["nhan"] == "DUNG" and r["loi_trich_xuat"] == "hỏng"
-    assert r["trich_xuat_thieu"]
+    assert r["nhan"] == "LOI" and r["loi_trich_xuat"] == "hỏng" and r["id"] == "tb-1"
+    assert r["trich_xuat_thieu"] and not r["tu_bo_nho_dem"]
+
+
+def test_chay_b1_thieu_trich_xuat_van_goi_llm_va_dem(tmp_path):
+    def transport(request, timeout_s):
+        return LLMResult('{"nhan":"Đúng"}', request["provider"], request["model"], "gia", {}, "stop")
+    client = LLMClient(tmp_path / "cache", tmp_path / "calls.jsonl", transport=transport)
+    bg = {"id": "tb-1", "ma_mau": "dt-a", "tuyen_bo": None, "bang_chung": []}
+    r = b1.chay_mot(client, "gemini-3.6-flash", bg, "HD")
+    assert r["nhan"] == "DUNG" and r["loi_trich_xuat"] is None and r["trich_xuat_thieu"]
+    assert isinstance(r["thoi_gian_sinh_ms"], float)
     assert b1.chay_mot(client, "gemini-3.6-flash", bg, "HD")["tu_bo_nho_dem"]
+
+
+def test_b1_nhan_cung_thong_tin_nhu_p_khong_nhan_luat_cua_p():
+    bg = {"id": "tb-1", "ma_mau": "dt-xiaomi-15t", "chu_tuyen_bo": "Xiaomi 15T sạc 90W",
+          "tuyen_bo": {"thuoc_tinh": "sac_nhanh", "gia_tri": 90, "don_vi": "w", "san_pham_ma": "dt-xiaomi-15t",
+                       "goi_muc_cao": True, "xung_dot": {"che_do": ["a", "b"]}, "kieu_gia_tri": "toi_da",
+                       "cum_kieu": "tối đa", "dieu_kien": {}, "trich": {"gia_tri": "90W"}, "bo_qua": ["x"]},
+          "bang_chung": [{"ma_doan": "d#1", "thuoc_tinh": "sac_nhanh", "gia_tri": 90, "san_pham_ma": "dt-xiaomi-15t",
+                          "xung_dot": {"c": [1, 2]}, "goi_muc_cao": False, "khac_san_pham": False,
+                          "nguon_dieu_kien": {"c": "lan"}},
+                         {"ma_doan": "d#2", "khac_san_pham": True, "gia_tri": 1}]}
+    tb, tl = (json.loads(x) for x in b1.bo_thong_so_cho_b1(bg))
+    for k in ("chu_tuyen_bo", "ma_mau", "ten_san_pham", "hang", "san_pham_ma", "goi_muc_cao", "xung_dot"):
+        assert tb[k] is not None, k
+    assert tb["hang"] == "Xiaomi" and tb["chu_tuyen_bo"] == "Xiaomi 15T sạc 90W"
+    assert "bo_qua" not in tb
+    assert [m["ma_doan"] for m in tl] == ["d#1"]          # khac_san_pham đã bị P lọc ở khâu trích xuất
+    assert tl[0]["san_pham_ma"] == "dt-xiaomi-15t" and tl[0]["xung_dot"] == {"c": [1, 2]}
+    assert "nguon_dieu_kien" not in tl[0]                  # dấu vết luật lan của P không đưa cho B1
+
+
+def test_tran_token_b0_b2_bang_p():
+    from kiemchung import trich_xuat as tx
+    from kiemchung.doi_chung import b0, chung
+    assert b0.MAX_TOKEN_RA == chung.MAX_TOKEN_RA == tx.MAX_TOKEN_RA == 8192
 
 
 @pytest.mark.parametrize("he", ["b1", "b2"])

@@ -162,7 +162,7 @@ def test_gia_tri_sai_kieu_thi_muc_tai_lieu_vao_bi_loai(cac):
 
 def test_tai_lieu_mat_gia_tri_vao_bang_chung_bi_loai_va_tuyen_bo_giu_nguyen(cac):
     tuyen_bo = "Buds B nghe nhạc lên đến 9 giờ"
-    du = {"tuyen_bo": tb_muc(gia_tri=gt("9", "câu không có trong nguồn", "giờ")),
+    du = {"tuyen_bo": tb_muc(gia_tri=gt("19", "câu không có trong nguồn", "giờ")),   # 19 không có trong chữ tuyên bố: T-10 không neo lại được
           "bang_chung": [tl_muc(f"{BUDS}#044", gt("7", "Lên đến 6", None)),                    # số sai
                          tl_muc(f"{BUDS}#044", gt("6", "Lên đến 6 phút bịa", "phút")),         # câu trích không có
                          tl_muc(f"{BUDS}#044", gt("6", "Thời gian phát nhạc (bật ANC)\nLên đến 6", "phút")),   # đơn vị sai
@@ -328,7 +328,12 @@ def test_cap_so_gach_cheo_042_dieu_ra_bo_phan(cac):
     ket = chay_xu_ly(du, "Buds B", doan, cac)
     assert [m["dieu_kien"].get("bo_phan") for m in ket["bang_chung"]] == ["tai_nghe", "kem_hop_sac", "tai_nghe"]
     assert [m["gia_tri"] for m in ket["bang_chung"]] == [7.0, 30.0, 6.0]
-    assert {(b["dieu_kien"], b["cum"]) for b in ket["bo_sung"]} == {("bo_phan", "Đến 7,0/30 giờ"[4:]), ("bo_phan", "6,0/26 giờ")}
+    # Bước 28, T-01 c: dòng chú thích "(Tính năng ANC Tắt)" liền sau và tiêu đề nhóm "Thời Gian Phát" liền trên cũng được dò, nên ngoài bo_phan
+    # còn có chế độ chống ồn và hoạt động của dòng (trước đó vùng dò chỉ là một dòng "Đến 7,0/30 giờ")
+    bo_phan = {(b["dieu_kien"], b["cum"]) for b in ket["bo_sung"] if b["dieu_kien"] == "bo_phan"}
+    assert bo_phan == {("bo_phan", "Đến 7,0/30 giờ"[4:]), ("bo_phan", "6,0/26 giờ")}
+    assert {(b["dieu_kien"], b["gia_tri"]) for b in ket["bo_sung"] if b["dieu_kien"] != "bo_phan"} == {
+        ("che_do_chong_on", "tat"), ("che_do_chong_on", "bat"), ("hoat_dong", "nghe_nhac")}
     assert all(m["kieu_gia_tri"] == "toi_da" and m["cum_kieu"] == "đến" for m in ket["bang_chung"])
     assert all(m["nguon_dieu_kien"]["bo_phan"] == "bo_sung" for m in ket["bang_chung"])
 
@@ -338,7 +343,7 @@ def test_cap_so_khong_ghi_de_bo_phan_cua_llm_va_dung_a_nho_hon_b(cac):
     du = {"tuyen_bo": tb_muc(), "bang_chung": [tl_muc(doan[0][0], gt("30", "Đến 7,0/30 giờ", "giờ"),
                                                       [dk("bo_phan", "hộp sạc", "Đến 7,0/30 giờ hộp sạc")]) | {}]}
     ket = chay_xu_ly(du, "Buds B", [(doan[0][0], doan[0][1] + "\nĐến 7,0/30 giờ hộp sạc")], cac)
-    assert ket["bang_chung"][0]["dieu_kien"]["bo_phan"] == "hop_sac" and ket["bo_sung"] == []
+    assert ket["bang_chung"][0]["dieu_kien"]["bo_phan"] == "hop_sac" and not [b for b in ket["bo_sung"] if b["dieu_kien"] == "bo_phan"]
     ket = chay_xu_ly({"tuyen_bo": tb_muc(), "bang_chung": [tl_muc("x#1", gt("30", "Đến 30 / 7 giờ", "giờ"))]},
                      "Buds B", [("x#1", "Đến 30 / 7 giờ")], cac)
     assert "bo_phan" not in ket["bang_chung"][0]["dieu_kien"]             # a >= b: không áp luật
@@ -587,12 +592,14 @@ def test_dieu_kien_so_theo_don_vi_cua_cau_hinh(dien_thoai, tai_nghe):
         return c["thuoc_tinh"][t]
 
     assert tx.dieu_kien_so_theo_don_vi(tt(dien_thoai, "sac_nhanh")) == {"W": "bo_tiep_hop", "phan_tram": "moc_phan_tram"}
-    assert tx.dieu_kien_so_theo_don_vi(tt(dien_thoai, "khang_nuoc")) == {"m": "do_sau", "phut": "thoi_gian_ngam", "K": "chenh_lech_nhiet_do"}
+    # giờ đổi được sang phút (T-20): "trong 1 giờ" là thời gian ngâm; chỉ khi giá trị của thuộc tính không tính bằng giờ/phút
+    assert tx.dieu_kien_so_theo_don_vi(tt(dien_thoai, "khang_nuoc")) == {"m": "do_sau", "phut": "thoi_gian_ngam", "gio": "thoi_gian_ngam",
+                                                                          "K": "chenh_lech_nhiet_do"}
     assert tx.dieu_kien_so_theo_don_vi(tt(dien_thoai, "do_sang")) == {"phan_tram": "dien_tich_do"}
     dong_ho = tx.lay_cau_hinh("dong_ho")
     assert tx.dieu_kien_so_theo_don_vi(tt(dong_ho, "sac_nhanh")) == {"W": "bo_tiep_hop", "phan_tram": "moc_phan_tram", "phut": "so_phut_sac"}
     assert tx.dieu_kien_so_theo_don_vi(tt(dien_thoai, "thoi_luong_pin")) == {}
-    assert tx.dieu_kien_so_theo_don_vi(tt(tai_nghe, "khang_nuoc")) == {"m": "do_sau", "phut": "thoi_gian_ngam"}
+    assert tx.dieu_kien_so_theo_don_vi(tt(tai_nghe, "khang_nuoc")) == {"m": "do_sau", "phut": "thoi_gian_ngam", "gio": "thoi_gian_ngam"}
     # hai điều kiện cùng đơn vị thì không áp; điều kiện không thuộc phu_kien/dieu_kien_do thì không áp
     gia = {"dieu_kien_bat_buoc": {"a": "dieu_kien_do", "b": "dieu_kien_do", "c": "che_do_hoat_dong"},
            "dieu_kien_so": {"a": {"don_vi": "m"}, "b": {"don_vi": "m"}, "c": {"don_vi": "W"}}}

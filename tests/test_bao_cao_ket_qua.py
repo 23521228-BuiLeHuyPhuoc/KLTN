@@ -77,7 +77,7 @@ def test_them_nhom_chi_dien_cho_dong_thieu():
 
 # Chi phí
 
-def ban_ghi(i, vao, ra, lt=None, tong=None, tran=4096, loi=None, ms=None, mo_hinh="mh", ncc="gemini"):
+def ban_ghi(i, vao, ra, lt=None, tong=None, tran=8192, loi=None, ms=None, mo_hinh="mh", ncc="gemini"):
     usage = {"input_tokens": vao, "output_tokens": ra, "reasoning_tokens": lt, "total_tokens": tong}
     return {"id": f"tb-{i}", "usage": None if vao is None else usage, "tran_token": tran, "loi": loi, "thoi_gian_sinh_ms": ms,
             "mo_hinh": mo_hinh, "nha_cung_cap": ncc}
@@ -85,7 +85,7 @@ def ban_ghi(i, vao, ra, lt=None, tong=None, tran=4096, loi=None, ms=None, mo_hin
 
 def test_chi_phi_token_thoi_gian_goi_lai_va_loi():
     cum = {"tb-1": "a", "tb-2": "a", "tb-3": "b", "tb-9": "z"}
-    b0 = [ban_ghi(1, 100, 10, tong=110, ms=2000), ban_ghi(2, 300, 30, tong=330, ms=4000, tran=8192),
+    b0 = [ban_ghi(1, 100, 10, tong=110, ms=2000), ban_ghi(2, 300, 30, tong=330, ms=4000, tran=16384),
           ban_ghi(3, None, None, loi="llm_khong_tra_ve_dung: x", ms=None)]
     p = [ban_ghi(1, 1000, 100, lt=50, tong=1150, tran=8192), ban_ghi(3, 500, 50, lt=0, tong=550, tran=8192)]
     dong = {d["he"]: d for d in bc.chi_phi({"B0": b0, "P": p}, cum)}
@@ -96,7 +96,7 @@ def test_chi_phi_token_thoi_gian_goi_lai_va_loi():
     assert d["giay_tb"] == 3 and d["giay_trung_vi"] == 3
     # bài a: 2 + 4 giây = 6, bài b không có thời gian bị bỏ; token bài a = 440
     assert d["giay_tb_moi_bai"] == 6 and d["token_tb_moi_bai"] == 440
-    assert d["so_goi_lai"] == 1 and d["so_loi"] == 1 and d["tran_mac_dinh"] == 4096
+    assert d["so_goi_lai"] == 1 and d["so_loi"] == 1 and d["tran_mac_dinh"] == 8192
     assert d["usd_moi_tuyen_bo"] is None and d["usd_moi_bai"] is None
     dp = dong["P"]
     assert dp["tran_mac_dinh"] == 8192 and dp["so_goi_lai"] == 0

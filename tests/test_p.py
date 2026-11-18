@@ -97,7 +97,7 @@ def test_kiem_chung_voi_gia_transport_chay_het(tmp_path):
         for d in tb:
             kq = pp.kiem_chung(d, BUDS, client, MODEL, **kw)
             assert kq["he"] == he and kq["id"] == d["id"], ten
-            assert kq["nhan"] in ("DUNG", "SAI", "LECH", "CHUA_DU") and kq["ly_do"]
+            assert kq["nhan"] in ("DUNG", "SAI", "LECH", "CHUA_DU", "LOI") and kq["ly_do"]   # LOI: nhánh không phải JSON của LLM giả (T-06)
             assert (kq["neo_nguon"], kq["kiem_day_du"]) == ((False, False) if he == "P-NN" else (True, True))
             json.dumps(kq, ensure_ascii=False, sort_keys=True)
 

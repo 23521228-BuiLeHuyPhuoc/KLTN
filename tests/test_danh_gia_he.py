@@ -173,3 +173,40 @@ def test_chuan_hoa_ten_he():
     assert danh_gia_he.chuan_hoa_ten("P−ĐK") == "P-DK"
     assert danh_gia_he.chuan_hoa_ten(" P–NN ") == "P-NN"
     assert danh_gia_he.chuan_hoa_ten("P-NN") == "P-NN"
+
+
+def test_holm_chi_gom_b0_den_b3_khong_co_b4(du_lieu):
+    tmp, tep = du_lieu
+    tep["B4"] = tmp / "he_b4.jsonl"
+    ghi_jsonl(tep["B4"], [{"id": ma(i), "nhan": "DUNG"} for i in QC] + [{"id": "ct-00001-bo_dieu_kien", "nhan": "DUNG"}])
+    ma_thoat, ra = chay(du_lieu)
+    mc = {r["he_doi_chung"]: r for r in doc_csv(ra / "mcnemar.csv")}
+    assert mc["B0"]["trong_ho_holm"] == "True" and mc["B4"]["trong_ho_holm"] == "False" and mc["B4"]["p_holm"] == ""
+    assert mc["B0"]["p_holm"] == mc["B0"]["p"]   # họ chỉ có B0 nên Holm không nhân thêm vì B4
+
+
+def test_nhieu_tep_nhan_va_tuyen_bo_gop_lai(du_lieu):
+    tmp, tep = du_lieu
+    tb = danh_gia_he.doc_jsonl(tmp / "tb.jsonl")
+    nhan = danh_gia_he.doc_jsonl(tmp / "nhan.jsonl")
+    ghi_jsonl(tmp / "tb_a.jsonl", tb[:4]); ghi_jsonl(tmp / "tb_b.jsonl", tb[4:])
+    ghi_jsonl(tmp / "nhan_a.jsonl", nhan[:4]); ghi_jsonl(tmp / "nhan_b.jsonl", nhan[4:])
+    _, ra_mot = chay(du_lieu, ra="mot")
+    argv = ["--nhan", str(tmp / "nhan_a.jsonl"), str(tmp / "nhan_b.jsonl"),
+            "--tuyen-bo", str(tmp / "tb_a.jsonl"), str(tmp / "tb_b.jsonl"),
+            "--chia-tap", str(tmp / "chia_tap.json"), "--mau-san-pham", str(tmp / "mau.csv"),
+            "--ra", str(tmp / "nhieu"), "--n-bootstrap", "100", "--tap", "kiem_tra"]
+    for ten, duong in tep.items():
+        argv += ["--he", f"{ten}={duong}"]
+    assert danh_gia_he.main(argv) == 0
+    assert (tmp / "nhieu/bang_chinh.csv").read_bytes() == (ra_mot / "bang_chinh.csv").read_bytes()
+
+
+def test_nhieu_tep_trung_ma_bao_loi(du_lieu, capsys):
+    tmp, tep = du_lieu
+    argv = ["--nhan", str(tmp / "nhan.jsonl"), str(tmp / "nhan.jsonl"), "--tuyen-bo", str(tmp / "tb.jsonl"),
+            "--chia-tap", str(tmp / "chia_tap.json"), "--mau-san-pham", str(tmp / "mau.csv"), "--ra", str(tmp / "x"),
+            "--he", f"P={tep['P']}"]
+    with pytest.raises(SystemExit):
+        danh_gia_he.main(argv)
+    assert "xuất hiện hai lần" in capsys.readouterr().err

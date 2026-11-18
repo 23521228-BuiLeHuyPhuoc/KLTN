@@ -38,7 +38,7 @@ def goi(client, mo_hinh, cau_lenh, max_token_ra=MAX_TOKEN_RA):
         raise ValueError(f"mô hình chưa có nhà cung cấp: {mo_hinh}")
     kq = dict(mo_hinh=mo_hinh, nha_cung_cap=NHA_CUNG_CAP[mo_hinh], cau_lenh=cau_lenh,
               ma_bam_cau_lenh=hashlib.sha256(cau_lenh.encode("utf-8")).hexdigest(),
-              tra_ve_tho=None, loi=None, tu_bo_nho_dem=False, tran_token=None)
+              tra_ve_tho=None, loi=None, tu_bo_nho_dem=False, tran_token=None, thoi_gian_sinh_ms=None)
     try:
         r, tran = goi_json(client, NHA_CUNG_CAP[mo_hinh], mo_hinh, [{"role": "user", "content": cau_lenh}],
                            0, max_token_ra)
@@ -48,7 +48,7 @@ def goi(client, mo_hinh, cau_lenh, max_token_ra=MAX_TOKEN_RA):
         kq["loi"] = f"llm_khong_tra_ve_dung: {e.code}"
         return kq
     kq.update(tra_ve_tho=r.text, mo_hinh_thuc=r.actual_model, finish_reason=r.finish_reason,
-              usage=r.usage, ma_yeu_cau=r.request_hash, tu_bo_nho_dem=r.cache_hit, tran_token=tran)
+              usage=r.usage, thoi_gian_sinh_ms=r.generation_ms, ma_yeu_cau=r.request_hash, tu_bo_nho_dem=r.cache_hit, tran_token=tran)
     return kq
 
 

@@ -906,8 +906,8 @@ Cách gọi độ sáng theo hãng (`thuoc_tinh.do_sang.cach_goi_theo_hang`), ch
 
 | Điều kiện | Giá trị | Chữ trong tài liệu (`tu_tai_lieu`) | Cách nói thường gặp (`hieu_biet_chung`) |
 |---|---|---|---|
-| `che_do_chong_on` | `bat` | "bật ANC", "Tính năng ANC Bật", "BẬT Tính năng ANC" | "bật chống ồn", "bật khử ồn", "khử tiếng ồn chủ động", "chống ồn chủ động" |
-|  | `tat` | "tắt ANC", "Tính năng ANC Tắt", "Tắt Tính năng ANC" | "tắt chống ồn", "tắt khử ồn" |
+| `che_do_chong_on` | `bat` | "bật ANC", "Tính năng ANC Bật", "BẬT Tính năng ANC", "ANC Bật" | "bật chống ồn", "bật khử ồn", "khử tiếng ồn chủ động", "chống ồn chủ động" |
+|  | `tat` | "tắt ANC", "Tính năng ANC Tắt", "Tắt Tính năng ANC", "ANC Tắt" | "tắt chống ồn", "tắt khử ồn" |
 |  | `xuyen_am` | "Ambient", "Môi trường xung quanh" | "xuyên âm", "âm thanh xung quanh" |
 | `bo_phan` | `tai_nghe` | "tai nghe" | "riêng tai nghe", "mỗi lần sạc" |
 |  | `hop_sac` | "hộp sạc" | "case" |
@@ -939,7 +939,7 @@ Cách gọi độ sáng theo hãng (`thuoc_tinh.do_sang.cach_goi_theo_hang`), ch
 | `cap_sac` | `cap_di_kem` | "Cáp Sạc Nhanh Từ Tính" | "cáp đi kèm" |
 | `moc_phan_tram` | `gia_tri_so` | "Sạc lên đến 80%" | "sạc đầy" |
 | `so_phut_sac` | `gia_tri_so` | "Sạc 15 phút", "Sạc 8 phút" | – |
-| `chuan_do_sau` | `iso_22810` | "ISO 22810", "độ sâu 50m" | "5ATM", "WR50" |
-| `hoat_dong_cho_phep` | `duoc_phep` | "bơi lội trong bể bơi", "dưới biển" | – |
+| `chuan_do_sau` | `iso_22810` | "ISO 22810", "độ sâu 50m", "độ sâu 50 mét" | "5ATM", "WR50" |
+| `hoat_dong_cho_phep` | `duoc_phep` | "bơi lội trong bể bơi", "dưới biển", "khi bơi" | "bơi lội" |
 |  | `bi_cam` | "lặn với bình dưỡng khí", "lướt ván" | "lặn sâu" |
 | `che_do_hien_thi` | `thong_thuong` | – | "bình thường" |

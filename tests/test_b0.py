@@ -394,9 +394,10 @@ def dem_goi_gia(monkeypatch, loi_theo_mo_hinh=None):
 def test_script_chay_gia_het_66_tuyen_bo_ca_hai_mo_hinh(tmp_path, monkeypatch, capsys):
     dem = dem_goi_gia(monkeypatch)
     # Tham số của lần chạy Bước 15 (--bo không còn mặc định từ rà soát 02/11).
-    assert chay_b0.main(["--gia", "--thu-muc-ra", str(tmp_path), "--bo", chay_b0.BO_LUOT_1]) == 0
+    tep_luot1 = ROOT / "data/nhan/thu_luot1.jsonl"   # mặc định của script đã là thu_luot2; Bước 15 dùng lượt 1
+    assert chay_b0.main(["--gia", "--thu-muc-ra", str(tmp_path), "--bo", chay_b0.BO_LUOT_1, "--nhan", str(tep_luot1)]) == 0
     tuyen_bo = chay_b0.doc_jsonl(chay_b0.TEP_TUYEN_BO)
-    chuan = {nh["id"]: nh["nhan"] for nh in chay_b0.doc_jsonl(chay_b0.TEP_NHAN)}
+    chuan = {nh["id"]: nh["nhan"] for nh in chay_b0.doc_jsonl(tep_luot1)}
     assert len(tuyen_bo) == 66
     for mo_hinh, ten in [("gemini-3.6-flash", "gemini-3.6-flash"), ("openai/gpt-oss-120b", "openai_gpt-oss-120b")]:
         ban_ghi = doc_ket_qua(tmp_path, ten)
@@ -480,6 +481,10 @@ def test_script_tu_choi_mo_hinh_la_va_ma_bo_la(tmp_path, capsys):
     with pytest.raises(SystemExit):
         chay_b0.main(["--gia", "--thu-muc-ra", str(tmp_path), "--bo", "tb-99999"])
     assert not list(tmp_path.iterdir())
+
+
+def test_mac_dinh_nhan_la_thu_luot2():
+    assert chay_b0.TEP_NHAN == ROOT / "data/nhan/thu_luot2.jsonl"
 
 
 def test_nhan_va_bo_khong_con_doc_cung_luot_1(tmp_path, monkeypatch):
