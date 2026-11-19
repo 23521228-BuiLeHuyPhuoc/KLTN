@@ -10,11 +10,14 @@ data/mau_san_pham.csv, danh sách thuộc tính hợp lệ của từng nhóm, n
 huong_dan_tach_tay.md rồi chạy lại script là trang cập nhật).
 
 RANH GIỚI (giữ khi sửa): cột cau_goc (chọn câu) và tuyen_bo (câu viết lại) là đáp án chuẩn để chấm bước tách tự động bằng LLM ở
-Bước 29, nên trang KHÔNG được gợi ý câu nào nên chọn, KHÔNG đoán thuộc tính cho câu, KHÔNG tự viết hay điền sẵn tuyên bố.
-Được phép: tô nhạt MỌI chữ số trong bài như nhau (không phân biệt đơn vị, không gắn thuộc tính; có nút bật/tắt) và kiểm tra tất
+Bước 29, nên trang KHÔNG được gợi ý câu nào nên chọn, KHÔNG đoán thuộc tính cho câu, KHÔNG viết lại câu, KHÔNG thêm hay bỏ điều kiện.
+Được phép: điền sẵn bản nháp tuyên bố TẤT ĐỊNH (quy tắc chuỗi, không LLM) từ câu người dùng đã bôi đen: gộp khoảng trắng, bỏ ký hiệu
+đầu dòng, bỏ nhãn khung bài ("Lợi ích chính:"...), xóa các cụm khen theo mục "Bỏ qua" của hướng dẫn (đọc lúc sinh trang), bỏ dấu câu
+cuối, thêm tên sản phẩm vào đầu nếu chưa có; không đụng con số, đơn vị, "lên đến"/"tối đa", từ khẳng định hay điều kiện. Người thực
+hiện tự rà và sửa; dòng còn nguyên bản nháp bị cảnh báo (f) và ô tuyên bố đổi màu. Được phép: tô nhạt MỌI chữ số trong bài như nhau (không phân biệt đơn vị, không gắn thuộc tính; có nút bật/tắt) và kiểm tra tất
 định trên chính các ô người dùng điền: (a) tuyen_bo trống; (b) con số trong tuyen_bo không có trong cau_goc; (c) cau_goc có
 "lên đến"/"tối đa"/"up to" mà tuyen_bo không có; (d) tuyen_bo không chứa tên sản phẩm; thêm (e) cau_goc không còn nằm trong bài
-(chỉ xảy ra khi sinh lại trang từ tệp bài đã đổi). Cảnh báo chỉ là gợi ý rà theo quy tắc 2, 3 của hướng dẫn, không chặn và không
+(chỉ xảy ra khi sinh lại trang từ tệp bài đã đổi); (f) tuyên bố còn là bản nháp tự động chưa sửa. Cảnh báo chỉ là gợi ý rà theo quy tắc 2, 3 của hướng dẫn, không chặn và không
 kết luận đúng sai.
 
 Danh sách thuộc tính hợp lệ của mỗi nhóm lấy từ ĐÚNG nguồn scripts/chuyen_tuyen_bo.py dùng: tên nhóm theo chuyen_tuyen_bo.NHOM,
@@ -235,6 +238,15 @@ def muc_hai(md, tieu_de):
     return "\n".join(ra)
 
 
+def cum_khen_tu_huong_dan(md):
+    """Các cụm trong ngoặc kép ở câu "Cụm khen đứng cạnh một con số (...)" của hướng dẫn, theo thứ tự xuất hiện."""
+    m = re.search(r"Cụm khen đứng cạnh một con số\s*\((.*?)\)", md, flags=re.S)
+    cum = re.findall(r'["“]([^"”]+)["”]', m.group(1)) if m else []
+    if not cum:
+        thoat(f"{TEP_HUONG_DAN.name}: không thấy danh sách cụm khen ở câu 'Cụm khen đứng cạnh một con số (...)'")
+    return cum
+
+
 # ---------- Dữ liệu và HTML ----------
 
 def nap_du_lieu(tep_doc, khoa):
@@ -257,7 +269,7 @@ def nap_du_lieu(tep_doc, khoa):
     cac_mau = list(dict.fromkeys(b["ma_mau"] for b in ra))
     return {"khoa": khoa, "tep_csv": TEN_TEP_CSV, "cot_csv": list(COT_CSV), "bai": ra,
             "mau": {m: {"ten": mau[m]["ten"], "nhom": mau[m]["nhom"]} for m in cac_mau},
-            "thuoc_tinh": thuoc_tinh, "mau_thuoc_tinh": MAU_THUOC_TINH,
+            "thuoc_tinh": thuoc_tinh, "mau_thuoc_tinh": MAU_THUOC_TINH, "cum_khen": cum_khen_tu_huong_dan(md),
             "huong_dan": {"quy_tac_html": gn.chuyen_markdown(muc_hai(md, "5 quy tắc")),
                           "tieu_chi_html": gn.chuyen_markdown(muc_hai(md, "Tiêu chí gắn điều kiện"))}}
 
@@ -292,7 +304,7 @@ header button:hover { background: #46607a; }
 #thanh { width: 140px; height: 10px; background: #567; border-radius: 5px; overflow: hidden; }
 #thanh i { display: block; height: 100%; background: #4caf50; width: 0; }
 header select { font-size: 13px; }
-#chinh { flex: 1; display: grid; grid-template-columns: 250px minmax(0, 1fr) 430px; gap: 6px; padding: 6px; min-height: 0; position: relative; }
+#chinh { flex: 1; display: grid; grid-template-columns: minmax(180px, 250px) minmax(320px, 1fr) minmax(300px, 430px); overflow-x: auto; gap: 6px; padding: 6px; min-height: 0; position: relative; }
 .cot { background: #fff; border: 1px solid #ccd; border-radius: 4px; overflow: auto; min-height: 0; }
 #trai .nhom { background: #e8ecf3; font-weight: 600; padding: 4px 8px; position: sticky; top: 0; z-index: 1; }
 #trai .bai { padding: 4px 8px; border-bottom: 1px solid #eee; cursor: pointer; display: flex; gap: 6px; align-items: baseline; }
@@ -314,6 +326,7 @@ header select { font-size: 13px; }
 .dong textarea { width: 100%; font: inherit; min-height: 54px; margin-top: 4px; resize: vertical; }
 .dong input[type=text] { flex: 1; font: inherit; min-width: 0; }
 .dong select { font: inherit; max-width: 200px; }
+.dong textarea.nhap { background: #fff6dd; border: 2px solid #e0a020; }
 .dong .canh-bao { color: #b45f00; font-size: 12.5px; margin-top: 3px; }
 .dong .xoa { color: #b00020; }
 .dong.thieu { background: #fffaf0; }
@@ -372,6 +385,10 @@ __GIAO_DIEN__
 HAM_THUAN_JS = r"""/* >>> HAM_THUAN: hàm không đụng DOM (test chạy riêng khối này trong node) */
 const CUM_TOI_DA = ['lên đến', 'tối đa', 'up to'];
 const KHONG_GIAN = /\s+/g;
+/* Cụm khen cần bỏ khỏi bản nháp: giao diện gán từ DL.cum_khen (lấy từ huong_dan_tach_tay.md lúc sinh trang). */
+let CUM_KHEN = [];
+const NHAN_KHUNG = ['lợi ích chính', 'đặc điểm nổi bật', 'mô tả ngắn', 'hero headline', 'subheadline', 'tiêu đề', 'lời kêu gọi hành động',
+  'bằng chứng', 'offer', 'cta', 'phiên bản 1', 'phiên bản 2'];
 
 function nfc(s) { return String(s == null ? '' : s).normalize('NFC'); }
 function bo(s) { return nfc(s).replace(KHONG_GIAN, ' ').trim().toLowerCase(); }
@@ -392,6 +409,28 @@ function cacSo(s) {
   return (t.match(/\d+(?:[.,]\d+)*/g) || []).map(chuanSo);
 }
 
+/* Bản nháp tuyên bố, tất định, chỉ xóa và ghép chuỗi (không viết lại câu, không thêm/bỏ con số, "lên đến", điều kiện):
+   gộp khoảng trắng; bỏ ký hiệu đầu dòng; bỏ nhãn khung bài (nhãn khác thì chỉ đổi ":" thành dấu cách); xóa cụm khen nguyên cụm
+   (không phân biệt hoa thường); bỏ dấu câu cuối; thêm tên sản phẩm vào đầu nếu chưa có. */
+function nhapTuyenBo(cauGoc, tenMau) {
+  let s = nfc(cauGoc).replace(KHONG_GIAN, ' ').trim();
+  s = s.replace(/^(?:[•*>]\s*|(?:[-–]|\d+[.)])\s+)/, '');
+  const hai = s.indexOf(':');
+  if (hai > 0) {
+    const truoc = s.slice(0, hai).trim(), sau = s.slice(hai + 1).trim();
+    if (NHAN_KHUNG.includes(bo(truoc))) s = sau;
+    else if (truoc.split(' ').length <= 4 && !/\d/.test(truoc)) s = truoc + ' ' + sau;
+  }
+  CUM_KHEN.slice().sort((x, y) => y.length - x.length).forEach((c) => {
+    s = s.replace(new RegExp('(?<![\\p{L}\\p{N}])' + thoatRe(nfc(c)) + '(?![\\p{L}\\p{N}])', 'giu'), ' ');
+  });
+  s = s.replace(KHONG_GIAN, ' ').replace(/\s+([,;.!?])/g, '$1').replace(/,(?:\s*,)+/g, ',').replace(/^[\s,;]+/, '');
+  s = s.replace(/[\s.!?…;:,]+$/, '').trim();
+  const ten = nfc(tenMau).trim();
+  if (!s) return '';
+  return ten && !bo(s).includes(bo(ten)) ? ten + ' ' + s : s;
+}
+
 /* Kiểm tất định trên các ô người dùng điền. d = dòng, b = {ten_mau, van_ban}. Trả về [{ma, msg}] (không chặn). */
 function kiemDong(d, b) {
   const kq = [];
@@ -410,6 +449,10 @@ function kiemDong(d, b) {
     kq.push({ma: 'c', msg: 'Câu gốc có "lên đến"/"tối đa"/"up to" mà tuyên bố không có (rà quy tắc 3).'});
   }
   if (ten && !tbl.includes(bo(ten))) kq.push({ma: 'd', msg: 'Tuyên bố không chứa tên sản phẩm "' + ten + '" (rà quy tắc 2).'});
+  if (d.nhap === true) {
+    kq.push({ma: 'f', msg: 'Tuyên bố còn là bản nháp tự động, chưa sửa: rà điều kiện theo quy tắc 2, 3 và tiêu chí gắn điều kiện ' +
+      '(điều kiện ở câu trước/sau, cụm thuộc vế khác).'});
+  }
   return kq;
 }
 
@@ -465,7 +508,7 @@ function chuanDong(d, b, ma) {
   if (bd < 0 || b.van_ban.substr(bd, d.cau_goc.length) !== d.cau_goc) bd = b.van_ban.indexOf(d.cau_goc);
   return {id: typeof d.id === 'string' && d.id ? d.id : ma + ':' + Math.random().toString(36).slice(2), t: Number.isFinite(d.t) ? d.t : 0, bd,
           cau_goc: d.cau_goc, thuoc_tinh: d.thuoc_tinh, tuyen_bo: typeof d.tuyen_bo === 'string' ? d.tuyen_bo : '',
-          ghi_chu: typeof d.ghi_chu === 'string' ? d.ghi_chu : ''};
+          ghi_chu: typeof d.ghi_chu === 'string' ? d.ghi_chu : '', nhap: d.nhap === true};
 }
 
 /* Dựng trạng thái từ dữ liệu lưu/sao lưu; chỉ nhận mã bài có trong trang (dsBai: [{ma, van_ban, ds_tt}]). boQua = số dòng bỏ. */
@@ -495,6 +538,7 @@ const BAI = DL.bai.map((b) => Object.assign({}, b, {ds_tt: DL.thuoc_tinh[b.nhom]
 const THEO_MA = {}; BAI.forEach((b) => { THEO_MA[b.ma] = b; });
 const $ = (id) => document.getElementById(id);
 const MAU = DL.mau_thuoc_tinh;
+CUM_KHEN = DL.cum_khen || [];
 /* localStorage có thể bị chặn (trình duyệt tắt lưu trữ): khi đó trang vẫn chạy, chỉ không nhớ lại, nên nhắc dùng Sao lưu JSON. */
 let luuDuoc = true;
 function doc(khoa) { try { return JSON.parse(localStorage.getItem(khoa) || 'null'); } catch (x) { luuDuoc = false; return null; } }
@@ -597,16 +641,27 @@ function veDong(d) {
     e('div', {cls: 'hang'}, sel, e('button', {txt: 'Chèn tên sản phẩm', title: 'Chèn "' + b.ten_mau + '" vào đầu ô tuyên bố', onclick: () => {
       if (bo(ta.value).startsWith(bo(b.ten_mau))) return;
       ta.value = b.ten_mau + (ta.value ? ' ' + ta.value : ''); ta.dispatchEvent(new Event('input')); ta.focus();
+    }}), e('button', {txt: 'Đặt lại nháp', title: 'Điền lại bản nháp tự động từ câu gốc', onclick: () => {
+      const bn = nhapTuyenBo(d.cau_goc, b.ten_mau);
+      if (ta.value !== bn && !confirm('Ô tuyên bố đang khác bản nháp. Thay bằng bản nháp tự động?')) return;
+      ta.value = bn; d.tuyen_bo = bn; d.nhap = true; luu(); lam();
+    }}), e('button', {txt: 'Đã rà, giữ nguyên', title: 'Bản nháp đã đúng quy tắc 2, 3: bỏ đánh dấu nháp mà không sửa chữ', onclick: () => {
+      if (!d.tuyen_bo.trim()) return;
+      d.nhap = false; luu(); lam();
     }}), e('button', {cls: 'xoa', txt: 'Xóa', onclick: () => {
       if (!confirm('Xóa dòng này?\n' + d.cau_goc.slice(0, 120))) return;
       tBai(b.ma).dong = tBai(b.ma).dong.filter((x) => x.id !== d.id); luu(); veBai(); }})),
     ta, e('div', {cls: 'hang'}, ghi), cb);
   kung.style.borderLeftColor = mau;
-  const lam = () => { kung.classList.toggle('thieu', !d.tuyen_bo.trim()); veCanhBao(d, cb); veTrai(); veTienDo(); veTrangThaiBai(); };
+  const lam = () => { kung.classList.toggle('thieu', !d.tuyen_bo.trim()); ta.classList.toggle('nhap', d.nhap === true); veCanhBao(d, cb); veTrai(); veTienDo(); veTrangThaiBai(); };
   sel.onchange = () => { d.thuoc_tinh = sel.value; kung.style.borderLeftColor = MAU[d.thuoc_tinh] || '#888'; luu(); veGiua(); lam(); };
-  ta.oninput = () => { d.tuyen_bo = ta.value; luu(); lam(); };
+  ta.oninput = () => {
+    d.tuyen_bo = ta.value;
+    if (d.nhap && ta.value !== nhapTuyenBo(d.cau_goc, b.ten_mau)) d.nhap = false;
+    luu(); lam();
+  };
   ghi.oninput = () => { d.ghi_chu = ghi.value; luu(); };
-  kung.classList.toggle('thieu', !d.tuyen_bo.trim()); veCanhBao(d, cb);
+  kung.classList.toggle('thieu', !d.tuyen_bo.trim()); ta.classList.toggle('nhap', d.nhap === true); veCanhBao(d, cb);
   return kung;
 }
 
@@ -667,7 +722,8 @@ function hienThanh() {
 }
 function themDong(m) {
   if (!dangChon) return;
-  const b = bai(), d = {id: 'd' + st.tiep, t: st.tiep, bd: dangChon.bd, cau_goc: b.van_ban.slice(dangChon.bd, dangChon.kt), thuoc_tinh: m, tuyen_bo: '', ghi_chu: ''};
+  const b = bai(), d = {id: 'd' + st.tiep, t: st.tiep, bd: dangChon.bd, cau_goc: b.van_ban.slice(dangChon.bd, dangChon.kt), thuoc_tinh: m, tuyen_bo: '', ghi_chu: '', nhap: true};
+  d.tuyen_bo = nhapTuyenBo(d.cau_goc, b.ten_mau);
   st.tiep++;
   tBai(b.ma).dong.push(d);
   if (tBai(b.ma).xong === 'khong') tBai(b.ma).xong = '';
@@ -716,7 +772,9 @@ function taiXuong(ten, noi, kieu) {
 }
 $('nut-csv').onclick = () => {
   const thieu = BAI.reduce((s, b) => s + thieuBai(b), 0), chua = BAI.filter((b) => !tBai(b.ma).xong).length;
-  if ((thieu || chua) && !confirm('Còn ' + thieu + ' dòng thiếu tuyên bố và ' + chua + ' bài chưa xong. Vẫn xuất CSV?')) return;
+  const nhap = BAI.reduce((s, b) => s + tBai(b.ma).dong.filter((d) => d.nhap === true).length, 0);
+  if ((thieu || chua || nhap) && !confirm('Còn ' + thieu + ' dòng thiếu tuyên bố, ' + nhap + ' dòng còn là bản nháp chưa sửa và ' + chua +
+      ' bài chưa xong. Vẫn xuất CSV?')) return;
   taiXuong(DL.tep_csv, taoCsv(BAI, st, DL.cot_csv), 'text/csv;charset=utf-8');
 };
 $('nut-sao-luu').onclick = () => taiXuong('sao_luu_' + KHOA + '.json', JSON.stringify({phien_ban: 1, khoa: KHOA, bai: st.bai}, null, 1), 'application/json');
