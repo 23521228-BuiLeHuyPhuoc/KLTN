@@ -94,6 +94,8 @@ const CUM_TOI_DA = ['lên đến', 'tối đa', 'up to'];
 const KHONG_GIAN = /\s+/g;
 /* Cụm khen cần bỏ khỏi bản nháp: giao diện gán từ DL.cum_khen (lấy từ huong_dan_tach_tay.md lúc sinh trang). */
 let CUM_KHEN = [];
+const DONG_TU_DAU = ['có', 'sạc', 'hỗ trợ', 'đạt', 'cho', 'mang', 'mang lại', 'sở hữu', 'trang bị', 'được', 'chống', 'kháng',
+  'dùng', 'sử dụng', 'nghe', 'hoạt động', 'cung cấp', 'tích hợp', 'lên đến', 'tối đa', 'chỉ', 'đến', 'với'];
 const NHAN_KHUNG = ['lợi ích chính', 'đặc điểm nổi bật', 'mô tả ngắn', 'hero headline', 'subheadline', 'tiêu đề', 'lời kêu gọi hành động',
   'bằng chứng', 'offer', 'cta', 'phiên bản 1', 'phiên bản 2'];
 
@@ -135,7 +137,13 @@ function nhapTuyenBo(cauGoc, tenMau) {
   s = s.replace(/[\s.!?…;:,]+$/, '').trim();
   const ten = nfc(tenMau).trim();
   if (!s) return '';
-  return ten && !bo(s).includes(bo(ten)) ? ten + ' ' + s : s;
+  if (!ten || bo(s).includes(bo(ten))) return s;
+  // Chữ đầu viết hoa kiểu đầu dòng ("Độ sáng") thì viết thường; giữ chữ viết tắt, tên riêng ("HDR", "iPhone", "AMOLED").
+  const m = s.match(/^\p{Lu}\p{Ll}*(?=$|[\s,;:.!?])/u);
+  if (m) s = m[0].toLowerCase() + s.slice(m[0].length);
+  // Thêm "có" để thành câu "<tên> có <thuộc tính> <số>", trừ khi câu đã mở đầu bằng động từ hay cụm mức ("sạc", "hỗ trợ", "lên đến"...).
+  const dau = bo(s);
+  return ten + ' ' + (DONG_TU_DAU.some((d) => dau === d || dau.startsWith(d + ' ')) ? '' : 'có ') + s;
 }
 
 /* Kiểm tất định trên các ô người dùng điền. d = dòng, b = {ten_mau, van_ban}. Trả về [{ma, msg}] (không chặn). */

@@ -283,20 +283,24 @@ def ma_nhap(ca, cum):
 
 CA_NHAP = [
     # (câu gốc, tên mẫu, bản nháp mong đợi)
-    ("- Thời lượng pin lên đến 30 giờ.", "Galaxy Watch8", "Galaxy Watch8 Thời lượng pin lên đến 30 giờ"),
-    ("• Sạc nhanh 50% trong 30 phút!", "Galaxy S25", "Galaxy S25 Sạc nhanh 50% trong 30 phút"),
-    ("1) Pin 5.000 mAh", "Galaxy S25", "Galaxy S25 Pin 5.000 mAh"),
+    ("- Thời lượng pin lên đến 30 giờ.", "Galaxy Watch8", "Galaxy Watch8 có thời lượng pin lên đến 30 giờ"),
+    ("• Sạc nhanh 50% trong 30 phút!", "Galaxy S25", "Galaxy S25 sạc nhanh 50% trong 30 phút"),
+    ("1) Pin 5.000 mAh", "Galaxy S25", "Galaxy S25 có pin 5.000 mAh"),
     # Hành vi mong đợi: chỉ xóa cụm khen và nhãn khung bài, KHÔNG viết lại câu (còn lại "dùng" lửng là chủ ý, người dùng tự sửa).
-    ("Lợi ích chính: Pin bền bỉ 30 giờ, dùng cả ngày", "Galaxy Watch8", "Galaxy Watch8 Pin 30 giờ, dùng"),
-    ("Độ sáng: 3.000 nits", "Galaxy Watch8", "Galaxy Watch8 Độ sáng 3.000 nits"),
-    ("Phiên bản 2: Pin 30 giờ", "Galaxy Watch8", "Galaxy Watch8 Pin 30 giờ"),
+    ("Lợi ích chính: Pin bền bỉ 30 giờ, dùng cả ngày", "Galaxy Watch8", "Galaxy Watch8 có pin 30 giờ, dùng"),
+    ("Độ sáng: 3.000 nits", "Galaxy Watch8", "Galaxy Watch8 có độ sáng 3.000 nits"),
+    ("Phiên bản 2: Pin 30 giờ", "Galaxy Watch8", "Galaxy Watch8 có pin 30 giờ"),
     ("Galaxy Watch8 có pin 30 giờ.", "Galaxy Watch8", "Galaxy Watch8 có pin 30 giờ"),
     ("galaxy watch8: pin\n  lên   đến 30 giờ", "Galaxy Watch8", "galaxy watch8: pin lên đến 30 giờ"),  # tiền tố có chữ số nên giữ nguyên dấu hai chấm
-    ("Pin tối đa 30 giờ, luôn bền", "Galaxy Watch8", "Galaxy Watch8 Pin tối đa 30 giờ, luôn bền"),
-    ("Pin SIÊU BỀN, vượt trội, 5000 mAh", "Galaxy S25", "Galaxy S25 Pin, 5000 mAh"),
-    ("Pin 5000 mAh, trọn vẹn.", "Galaxy S25", "Galaxy S25 Pin 5000 mAh"),
-    ("Pin cả ngày dài 20 giờ", "Galaxy S25", "Galaxy S25 Pin dài 20 giờ"),
-    ("Pin tuyệt đốix 20 giờ", "Galaxy S25", "Galaxy S25 Pin tuyệt đốix 20 giờ"),  # cụm dính chữ cái thì không khớp
+    ("Pin tối đa 30 giờ, luôn bền", "Galaxy Watch8", "Galaxy Watch8 có pin tối đa 30 giờ, luôn bền"),
+    ("Pin SIÊU BỀN, vượt trội, 5000 mAh", "Galaxy S25", "Galaxy S25 có pin, 5000 mAh"),
+    ("Pin 5000 mAh, trọn vẹn.", "Galaxy S25", "Galaxy S25 có pin 5000 mAh"),
+    ("Pin cả ngày dài 20 giờ", "Galaxy S25", "Galaxy S25 có pin dài 20 giờ"),
+    ("Pin tuyệt đốix 20 giờ", "Galaxy S25", "Galaxy S25 có pin tuyệt đốix 20 giờ"),  # cụm dính chữ cái thì không khớp
+    ("HDR 2000 nits", "Galaxy S25", "Galaxy S25 có HDR 2000 nits"),  # chữ viết tắt giữ hoa
+    ("Hỗ trợ sạc nhanh 45W", "Galaxy S25", "Galaxy S25 hỗ trợ sạc nhanh 45W"),  # mở đầu bằng động từ: không thêm "có"
+    ("Lên đến 30 giờ nghe nhạc", "AirPods 4", "AirPods 4 lên đến 30 giờ nghe nhạc"),
+    ("Màn hình Super AMOLED sáng 2000 nits", "Galaxy S25", "Galaxy S25 có màn hình Super AMOLED sáng 2000 nits"),
 ]
 
 
@@ -310,7 +314,7 @@ def test_nhap_tuyen_bo_khong_them_ten_lan_hai_va_giu_so(trang, tmp_path):
     cau = "Pin lên đến 30 giờ, sạc 50% trong 30 phút, luôn ổn định"
     kq = chay_node(trang, ma_nhap([[cau, "Galaxy Watch8"], ["Galaxy Watch8 " + cau, "Galaxy Watch8"], [" . ", "X"]],
                                   CUM_KHEN_HUONG_DAN), tmp_path)
-    assert kq[0] == "Galaxy Watch8 " + cau
+    assert kq[0] == "Galaxy Watch8 có " + cau[0].lower() + cau[1:]
     assert kq[1] == "Galaxy Watch8 " + cau and kq[1].lower().count("galaxy watch8") == 1
     assert kq[2] == ""
     for g in ("lên đến", "30 giờ", "50%", "30 phút", "luôn"):

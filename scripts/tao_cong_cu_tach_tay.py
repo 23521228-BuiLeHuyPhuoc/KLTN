@@ -13,7 +13,7 @@ RANH GIỚI (giữ khi sửa): cột cau_goc (chọn câu) và tuyen_bo (câu vi
 Bước 29, nên trang KHÔNG được gợi ý câu nào nên chọn, KHÔNG đoán thuộc tính cho câu, KHÔNG viết lại câu, KHÔNG thêm hay bỏ điều kiện.
 Được phép: điền sẵn bản nháp tuyên bố TẤT ĐỊNH (quy tắc chuỗi, không LLM) từ câu người dùng đã bôi đen: gộp khoảng trắng, bỏ ký hiệu
 đầu dòng, bỏ nhãn khung bài ("Lợi ích chính:"...), xóa các cụm khen theo mục "Bỏ qua" của hướng dẫn (đọc lúc sinh trang), bỏ dấu câu
-cuối, thêm tên sản phẩm vào đầu nếu chưa có; không đụng con số, đơn vị, "lên đến"/"tối đa", từ khẳng định hay điều kiện. Người thực
+cuối, thêm tên sản phẩm và chữ "có" vào đầu nếu chưa có tên (chữ đầu kiểu đầu dòng viết thường, bỏ "có" khi câu mở đầu bằng động từ như "sạc", "hỗ trợ"); không đụng con số, đơn vị, "lên đến"/"tối đa", từ khẳng định hay điều kiện. Người thực
 hiện tự rà và sửa; dòng còn nguyên bản nháp bị cảnh báo (f) và ô tuyên bố đổi màu. Được phép: tô nhạt MỌI chữ số trong bài như nhau (không phân biệt đơn vị, không gắn thuộc tính; có nút bật/tắt) và kiểm tra tất
 định trên chính các ô người dùng điền: (a) tuyen_bo trống; (b) con số trong tuyen_bo không có trong cau_goc; (c) cau_goc có
 "lên đến"/"tối đa"/"up to" mà tuyen_bo không có; (d) tuyen_bo không chứa tên sản phẩm; thêm (e) cau_goc không còn nằm trong bài
@@ -387,6 +387,8 @@ const CUM_TOI_DA = ['lên đến', 'tối đa', 'up to'];
 const KHONG_GIAN = /\s+/g;
 /* Cụm khen cần bỏ khỏi bản nháp: giao diện gán từ DL.cum_khen (lấy từ huong_dan_tach_tay.md lúc sinh trang). */
 let CUM_KHEN = [];
+const DONG_TU_DAU = ['có', 'sạc', 'hỗ trợ', 'đạt', 'cho', 'mang', 'mang lại', 'sở hữu', 'trang bị', 'được', 'chống', 'kháng',
+  'dùng', 'sử dụng', 'nghe', 'hoạt động', 'cung cấp', 'tích hợp', 'lên đến', 'tối đa', 'chỉ', 'đến', 'với'];
 const NHAN_KHUNG = ['lợi ích chính', 'đặc điểm nổi bật', 'mô tả ngắn', 'hero headline', 'subheadline', 'tiêu đề', 'lời kêu gọi hành động',
   'bằng chứng', 'offer', 'cta', 'phiên bản 1', 'phiên bản 2'];
 
@@ -428,7 +430,13 @@ function nhapTuyenBo(cauGoc, tenMau) {
   s = s.replace(/[\s.!?…;:,]+$/, '').trim();
   const ten = nfc(tenMau).trim();
   if (!s) return '';
-  return ten && !bo(s).includes(bo(ten)) ? ten + ' ' + s : s;
+  if (!ten || bo(s).includes(bo(ten))) return s;
+  // Chữ đầu viết hoa kiểu đầu dòng ("Độ sáng") thì viết thường; giữ chữ viết tắt, tên riêng ("HDR", "iPhone", "AMOLED").
+  const m = s.match(/^\p{Lu}\p{Ll}*(?=$|[\s,;:.!?])/u);
+  if (m) s = m[0].toLowerCase() + s.slice(m[0].length);
+  // Thêm "có" để thành câu "<tên> có <thuộc tính> <số>", trừ khi câu đã mở đầu bằng động từ hay cụm mức ("sạc", "hỗ trợ", "lên đến"...).
+  const dau = bo(s);
+  return ten + ' ' + (DONG_TU_DAU.some((d) => dau === d || dau.startsWith(d + ' ')) ? '' : 'có ') + s;
 }
 
 /* Kiểm tất định trên các ô người dùng điền. d = dòng, b = {ten_mau, van_ban}. Trả về [{ma, msg}] (không chặn). */
