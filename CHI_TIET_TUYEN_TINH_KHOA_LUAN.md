@@ -652,7 +652,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Tách hoàn toàn bằng tay như Bước 12 cho 8 mẫu của tập kiểm tra; lọc theo tệp cấu hình; gộp tuyên bố trùng trong cùng bài. *(08/11: đã in `data/tuyen_bo/doc_kiem_tra.md`, 64 bài, 8 bài mỗi mẫu; tách tiếp vào cuối `data/tuyen_bo/chinh_nhap.csv` sau phần tập phát triển. Chờ người thực hiện, sau Bước 20.)*
+- [ ] Tách hoàn toàn bằng tay như Bước 12 cho 8 mẫu của tập kiểm tra; lọc theo tệp cấu hình; gộp tuyên bố trùng trong cùng bài. *(08/11: đã in `data/tuyen_bo/doc_kiem_tra.md`, 64 bài, 8 bài mỗi mẫu; tách tiếp vào cuối `data/tuyen_bo/chinh_nhap.csv` sau phần tập phát triển. 19/11: có trang tách tay `data/tuyen_bo/cong_cu_tach_kiem_tra.html` (`scripts/tao_cong_cu_tach_tay.py`): người thực hiện bôi đen câu, chọn thuộc tính, tự viết tuyên bố, xuất CSV để nối vào `chinh_nhap.csv`; trang không gợi ý câu, thuộc tính hay tuyên bố. Đang chờ người thực hiện.)*
 - [ ] Nếu nhiều hơn quy mô đã chốt thì lấy mẫu phân tầng theo nhóm sản phẩm × LLM × chế độ.
 - [ ] Gặp trường hợp lạ thì ghi vào nhật ký để báo trong phần giới hạn; không sửa tệp cấu hình hay hướng dẫn vì trường hợp của tập kiểm tra.
 

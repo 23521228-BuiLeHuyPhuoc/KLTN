@@ -14,6 +14,8 @@ Tách **hoàn toàn bằng tay, không nhờ AI gợi ý**. Tuyên bố tách ta
 | Tập phát triển (Bước 19), 16 bài Apple Watch SE 3 và Xiaomi 15T | `data/tuyen_bo/doc_phat_trien.md` | `data/tuyen_bo/chinh_nhap.csv` | `data/tuyen_bo/chinh.jsonl` (từ `tb-00067`) |
 | Tập kiểm tra (Bước 23), 64 bài của 8 mẫu | `data/tuyen_bo/doc_kiem_tra.md` | nối tiếp vào cuối `data/tuyen_bo/chinh_nhap.csv` | `data/tuyen_bo/chinh.jsonl` |
 
+Tập kiểm tra có thể làm trên trang `data/tuyen_bo/cong_cu_tach_kiem_tra.html` (mở bằng trình duyệt, tự lưu): bôi đen câu trong bài, bấm thuộc tính (hoặc phím 1–8), tự viết tuyên bố, bấm "Xuất CSV" rồi gửi tệp để nối vào cuối `chinh_nhap.csv`. Trang không gợi ý chọn câu nào hay viết tuyên bố.
+
 ## Làm gì
 
 1. Mở tệp bài để đọc của bộ đang tách (bảng trên). Mỗi bài có mã bài (`ma_qc`) ở dòng tiêu đề.
