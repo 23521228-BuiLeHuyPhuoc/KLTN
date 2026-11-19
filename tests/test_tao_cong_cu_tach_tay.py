@@ -260,3 +260,73 @@ const kq = {boQua: r.boQua, baiLa: r.baiLa, ma: Object.keys(r.st.bai), tiep: r.s
     assert kq["boQua"] == 3 and kq["baiLa"] == ["qc-la"] and kq["ma"] == ["qc-a"]
     assert kq["xong"] == "co" and kq["tiep"] == 7
     assert kq["dong"] == [["d1", 0, "thoi_luong_pin"], ["d2", 7, "zoom"]]  # d2: vị trí tính lại theo chuỗi
+
+
+# ---------- Bản nháp tuyên bố ----------
+
+CUM_KHEN_HUONG_DAN = ["cả ngày", "suốt ngày dài", "không lo hết pin", "siêu bền", "bền bỉ", "vượt trội", "tuyệt đối", "trọn vẹn",
+                      "không giới hạn"]
+
+
+def test_cum_khen_nhung_khop_huong_dan(trang):
+    _, du = trang
+    md = tt.TEP_HUONG_DAN.read_text(encoding="utf-8-sig")
+    m = re.search(r"Cụm khen đứng cạnh một con số\s*\((.*?)\)", md, flags=re.S)
+    assert du["cum_khen"] == re.findall(r'"([^"]+)"', m.group(1))
+    assert du["cum_khen"] == CUM_KHEN_HUONG_DAN
+
+
+def ma_nhap(ca, cum):
+    return (f"CUM_KHEN = {json.dumps(cum, ensure_ascii=False)};\nconst ca = {json.dumps(ca, ensure_ascii=False)};\n"
+            "const kq = ca.map((c) => nhapTuyenBo(c[0], c[1]));")
+
+
+CA_NHAP = [
+    # (câu gốc, tên mẫu, bản nháp mong đợi)
+    ("- Thời lượng pin lên đến 30 giờ.", "Galaxy Watch8", "Galaxy Watch8 Thời lượng pin lên đến 30 giờ"),
+    ("• Sạc nhanh 50% trong 30 phút!", "Galaxy S25", "Galaxy S25 Sạc nhanh 50% trong 30 phút"),
+    ("1) Pin 5.000 mAh", "Galaxy S25", "Galaxy S25 Pin 5.000 mAh"),
+    # Hành vi mong đợi: chỉ xóa cụm khen và nhãn khung bài, KHÔNG viết lại câu (còn lại "dùng" lửng là chủ ý, người dùng tự sửa).
+    ("Lợi ích chính: Pin bền bỉ 30 giờ, dùng cả ngày", "Galaxy Watch8", "Galaxy Watch8 Pin 30 giờ, dùng"),
+    ("Độ sáng: 3.000 nits", "Galaxy Watch8", "Galaxy Watch8 Độ sáng 3.000 nits"),
+    ("Phiên bản 2: Pin 30 giờ", "Galaxy Watch8", "Galaxy Watch8 Pin 30 giờ"),
+    ("Galaxy Watch8 có pin 30 giờ.", "Galaxy Watch8", "Galaxy Watch8 có pin 30 giờ"),
+    ("galaxy watch8: pin\n  lên   đến 30 giờ", "Galaxy Watch8", "galaxy watch8: pin lên đến 30 giờ"),  # tiền tố có chữ số nên giữ nguyên dấu hai chấm
+    ("Pin tối đa 30 giờ, luôn bền", "Galaxy Watch8", "Galaxy Watch8 Pin tối đa 30 giờ, luôn bền"),
+    ("Pin SIÊU BỀN, vượt trội, 5000 mAh", "Galaxy S25", "Galaxy S25 Pin, 5000 mAh"),
+    ("Pin 5000 mAh, trọn vẹn.", "Galaxy S25", "Galaxy S25 Pin 5000 mAh"),
+    ("Pin cả ngày dài 20 giờ", "Galaxy S25", "Galaxy S25 Pin dài 20 giờ"),
+    ("Pin tuyệt đốix 20 giờ", "Galaxy S25", "Galaxy S25 Pin tuyệt đốix 20 giờ"),  # cụm dính chữ cái thì không khớp
+]
+
+
+def test_nhap_tuyen_bo_trong_node(trang, tmp_path):
+    kq = chay_node(trang, ma_nhap([[g, t] for g, t, _ in CA_NHAP], CUM_KHEN_HUONG_DAN), tmp_path)
+    for (g, _, mong), got in zip(CA_NHAP, kq):
+        assert got == mong, g
+
+
+def test_nhap_tuyen_bo_khong_them_ten_lan_hai_va_giu_so(trang, tmp_path):
+    cau = "Pin lên đến 30 giờ, sạc 50% trong 30 phút, luôn ổn định"
+    kq = chay_node(trang, ma_nhap([[cau, "Galaxy Watch8"], ["Galaxy Watch8 " + cau, "Galaxy Watch8"], [" . ", "X"]],
+                                  CUM_KHEN_HUONG_DAN), tmp_path)
+    assert kq[0] == "Galaxy Watch8 " + cau
+    assert kq[1] == "Galaxy Watch8 " + cau and kq[1].lower().count("galaxy watch8") == 1
+    assert kq[2] == ""
+    for g in ("lên đến", "30 giờ", "50%", "30 phút", "luôn"):
+        assert g in kq[0]
+
+
+def test_canh_bao_f_khi_con_nhap_va_chuan_dong_doc_du_lieu_cu(trang, tmp_path):
+    ma = r"""
+const b = {ten_mau: 'Galaxy Watch8', van_ban: 'Pin 20 giờ'};
+const d = (nhap) => ({bd: 0, cau_goc: 'Pin 20 giờ', tuyen_bo: 'Galaxy Watch8 Pin 20 giờ', thuoc_tinh: 'zoom', ghi_chu: '', nhap});
+const cu = {cau_goc: 'Pin 20 giờ', thuoc_tinh: 'zoom', tuyen_bo: 'x'};
+const bb = {van_ban: 'Pin 20 giờ', ds_tt: ['zoom']};
+const kq = {bat: kiemDong(d(true), b).map((x) => x.ma), tat: kiemDong(d(false), b).map((x) => x.ma),
+  khong: kiemDong(Object.assign(d(true), {nhap: undefined}), b).map((x) => x.ma),
+  cu: chuanDong(cu, bb, 'qc-a').nhap, moi: chuanDong(Object.assign({}, cu, {nhap: true}), bb, 'qc-a').nhap,
+  la: chuanDong(Object.assign({}, cu, {nhap: 'true'}), bb, 'qc-a').nhap};
+"""
+    kq = chay_node(trang, ma, tmp_path)
+    assert kq == {"bat": ["f"], "tat": [], "khong": [], "cu": False, "moi": True, "la": False}
