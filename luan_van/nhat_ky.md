@@ -115,6 +115,13 @@
 - Kế hoạch (T-03, T-24, T-34): ngưỡng sai số 1% cố định, không chọn lại ở Bước 33 (khớp dòng D3 của hướng dẫn); "Xong khi" của Bước 37 loại trừ độ đúng trích xuất trên tập kiểm tra; ô đánh dấu đầu tệp và thân bài đồng bộ theo Google Sheet. Hai chỗ Sheet và tệp kế hoạch còn khác, để người thực hiện quyết: Bước 17 (Sheet ghi Đang làm, tệp ghi xong) và việc 35.1 (Sheet ghi Xong, tệp chưa đánh dấu).
 - `luan_van/chuong_3.md` nay lệch mã ở mục 3.5.2–3.5.4 (neo nguồn, hiểu điều kiện, vùng dò), 3.6 (khoảng a-b, cửa sổ từ khẳng định), 3.8 và 3.8.1 (`LOI`, lan điều kiện, bảng nhiều cột, dạng sạc nhanh đồng hồ). Đã ghi vào Bước 28.
 
+## 21/11/2026 — Bước 22 (xong phần Gemini, xong bước)
+
+- Vòng chạy nền của Gemini xong lúc 21:31 ngày 21/11, sau ba lần chạy lại vì phiên khởi động lại. Thống kê gộp ở `ket_qua/trich_xuat/thong_ke_phat_trien_gemini-3.6-flash_k5_am_tiet.md`.
+- Gemini: 108 tuyên bố, 2 LOI (`tb-00050`, `tb-00066`: đầu ra rỗng hoặc bị cắt ở cả hai trần token, đã lưu `.loi.json`, không gọi lại). 509 mục tài liệu, giữ 497, loại 12; 64 trường bị loại (`trich_khong_co_trong_nguon` 36, `kieu_khong_gan_so` 18, `dai_luong_khac` 8, `cum_khong_trong_trich` 2); kiểm tra đầy đủ bổ sung 195 điều kiện (`bo_phan` 132, `kieu_tan_so` 21, `hoat_dong` 17); 9 lần thấy hai giá trị nên không điền; 24 mục tài liệu `khac_san_pham`. Thuộc tính trích khớp tách tay 106/108, hai tuyên bố lệch chính là hai LOI.
+- So với GPT-OSS (632 mục, loại 203 trường, bổ sung 377 điều kiện, 168/630 mục còn `dieu_kien_khac`): Gemini trích ít mục hơn và ít cụm lạ hơn (45/497 mục). Cụm lạ của Gemini vẫn có tiêu đề hay nhãn cột chứ không phải điều kiện ("Màn hình 6.83" bảo vệ mắt" x10, "Thời gian sử dụng" x9, "phát" x16, "khi sạc đầy" x11). GPT-OSS loại nhiều vì `cum_khong_trong_trich`, Gemini loại nhiều vì `trich_khong_co_trong_nguon`. Đây là số liệu đầu vào cho Bước 33 chọn LLM; tỉ lệ LOI 2/108 của Gemini cũng tính vào lựa chọn đó.
+- Bước 22 xong: kiểm thử đạt, chạy hết tập phát triển với cả hai LLM, có thống kê trường bị loại và điều kiện được bổ sung.
+
 ## 19/11/2026 — Bước 23 (trang tách tay cho tập kiểm tra), Bước 22 (Gemini)
 
 - Người thực hiện nhờ làm trang web để tách tay nhanh hơn chép vào Excel. Agent `coder` làm `scripts/tao_cong_cu_tach_tay.py` theo đặc tả của Opus, sinh `data/tuyen_bo/cong_cu_tach_kiem_tra.html` (64 bài, 8 mẫu × 8 bài, một tệp tự chứa, lưu trong trình duyệt). Cách dùng: bôi đen câu trong bài, bấm thuộc tính hợp lệ của nhóm (hoặc phím 1–8), tự viết tuyên bố, xuất CSV đúng cột của `chinh_nhap.csv` (BOM, CRLF). Danh sách thuộc tính đọc từ yaml nhóm như `chuyen_tuyen_bo.py`; bảng thuộc tính, 5 quy tắc, tiêu chí gắn điều kiện đọc từ `huong_dan_tach_tay.md` lúc sinh trang.

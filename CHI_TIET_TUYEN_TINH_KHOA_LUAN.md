@@ -42,7 +42,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 - [x] [Bước 19](#b19) · 04/11 · Tách tuyên bố của tập phát triển
 - [x] [Bước 20](#b20) · 05/11 – 06/11 · Gán nhãn tập phát triển
 - [x] [Bước 21](#b21) · 07/11 · Chuẩn hóa sản phẩm, giá trị, đơn vị, kiểu giá trị
-- [ ] [Bước 22](#b22) · 08/11 – 10/11 · Trích xuất có neo nguồn và kiểm tra đầy đủ
+- [x] [Bước 22](#b22) · 08/11 – 10/11 · Trích xuất có neo nguồn và kiểm tra đầy đủ
 - [ ] [Bước 23](#b23) · 11/11 · Tách tuyên bố của tập kiểm tra
 - [ ] [Bước 24](#b24) · 12/11 – 13/11 · Gán nhãn tập kiểm tra
 - [ ] [Bước 25](#b25) · 14/11 – 15/11 · Tạo tập cặp tối thiểu
@@ -634,7 +634,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 - [x] Cài kiểm tra đầy đủ, khâu (c) ở T5.3: dò các cụm từ điều kiện trong tệp cấu hình để bổ sung điều kiện LLM bỏ sót; vẫn không xác định được điều kiện thì đánh dấu để bộ quyết định kết luận Chưa đủ thông tin (dòng D1a). *(`src/kiemchung/trich_xuat.py`: chỉ dò trong dòng chứa giá trị; thêm luật điều kiện dạng số nhận theo đơn vị và luật cặp số "a / b giờ" của tai nghe.)*
 - [x] Trích xuất điều kiện theo kiểu mở (thêm 26/10, điểm 15 ở [T10](#t10)): với mỗi giá trị trong tài liệu, ghi **mọi** cụm điều kiện gắn với nó, kèm loại (một trong sáu) và câu trích; cụm không khớp cách diễn đạt nào trong tệp cấu hình ghi vào `dieu_kien_khac`, không được bỏ. Câu rào chung trong `ngu_canh_khong_quyet_dinh` không tính. Kiểm thử: giá trị có cụm điều kiện lạ phải còn `dieu_kien_khac` sau khi qua kiểm tra neo nguồn.
 - [x] Viết kiểm thử cho neo nguồn và kiểm tra đầy đủ: câu trích không có trong nguồn, con số sai, điều kiện bịa, điều kiện bị bỏ sót. *(`tests/test_neo_nguon.py`, `tests/test_trich_xuat.py`, kể cả cụm lạ còn `dieu_kien_khac` sau neo nguồn.)*
-- [ ] Chạy trên tập phát triển; đếm số trường bị loại và số điều kiện được bổ sung (khâu (d) ở T5.3). *(08/11: `scripts/chay_trich_xuat.py` ghi `ket_qua/trich_xuat/` kèm thống kê. 18/11: tập phát triển là 108 tuyên bố, gồm 66 của bộ thử và 42 của `chinh.jsonl`; chạy cả hai LLM để Bước 33 chọn. GPT-OSS xong 108/108, thống kê gộp bằng `scripts/gop_thong_ke_trich_xuat.py`; Gemini còn 58 lượt gọi, đang chạy nền.)*
+- [x] Chạy trên tập phát triển; đếm số trường bị loại và số điều kiện được bổ sung (khâu (d) ở T5.3). *(08/11: `scripts/chay_trich_xuat.py` ghi `ket_qua/trich_xuat/` kèm thống kê. 18/11: tập phát triển là 108 tuyên bố, gồm 66 của bộ thử và 42 của `chinh.jsonl`; chạy cả hai LLM để Bước 33 chọn. GPT-OSS xong 108/108, thống kê gộp bằng `scripts/gop_thong_ke_trich_xuat.py`; 21/11: Gemini xong 108 tuyên bố, 2 LOI (`tb-00050`, `tb-00066`), thống kê ở `thong_ke_phat_trien_gemini-3.6-flash_k5_am_tiet.md`.)*
 
 **Làm ra:** `src/kiemchung/trich_xuat.py`, `src/kiemchung/neo_nguon.py`, kiểm thử.
 
