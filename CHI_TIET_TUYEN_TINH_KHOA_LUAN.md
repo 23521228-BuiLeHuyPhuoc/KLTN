@@ -672,7 +672,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Gán nhãn như Bước 20, cùng hướng dẫn bản 2; mỗi buổi tối đa 60 phút liên tục.
+- [ ] Gán nhãn như Bước 20, cùng hướng dẫn bản 2; mỗi buổi tối đa 60 phút liên tục. *(23/11: sinh trang `data/nhan/cong_cu_gan_nhan_chinh_kiem_tra.html` bằng `scripts/tao_cong_cu_gan_nhan.py --bo chinh --ma-mau <8 mẫu kiểm tra>`: 216 tuyên bố, 53 bài, 1036 đoạn; mở qua cấu hình `trang-gan-nhan` (http://localhost:8765). Tải về `chinh_kiem_tra.jsonl`. Claude chỉ kiểm hình thức nhãn tập kiểm tra, không đề xuất đổi nhãn.)*
 - [ ] Đặt cờ `tai_lieu_mau_thuan` và ghi `ghi_chu` như Bước 20.
 - [ ] Không sửa hướng dẫn hay tệp cấu hình vì trường hợp gặp ở tập kiểm tra; ghi vào `ghi_chu` và nhật ký.
 - [ ] Từ đây, nhãn tập kiểm tra chỉ được mở lại để gán lại mù ở Bước 32.
