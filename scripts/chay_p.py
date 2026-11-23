@@ -15,7 +15,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from kiemchung import p as pp  # noqa: E402
+from kiemchung import p as pp, tap  # noqa: E402
 
 THU_MUC_RA = ROOT / "ket_qua/p"
 
@@ -78,9 +78,10 @@ def main(argv=None):
     ap.add_argument("--trich-xuat", type=Path, required=True, help="tệp jsonl kết quả của scripts/chay_trich_xuat.py")
     ap.add_argument("--bo-doi-chieu", action="store_true", help="P-DK: bỏ đối chiếu điều kiện (không dùng với tệp P-NN)")
     ap.add_argument("--thu-muc-ra", type=Path, default=THU_MUC_RA, help=f"thư mục kết quả (mặc định {THU_MUC_RA.relative_to(ROOT)})")
+    tap.them_co_cho_phep(ap)
     args = ap.parse_args(argv)
 
-    ban_ghi = doc_jsonl(args.trich_xuat)
+    ban_ghi = tap.loc_va_bao(doc_jsonl(args.trich_xuat), args.cho_phep_tap_kiem_tra)
     if not ban_ghi:
         ap.error("tệp trích xuất rỗng")
     thiet_lap = {(b["neo_nguon"], b["kiem_day_du"]) for b in ban_ghi}

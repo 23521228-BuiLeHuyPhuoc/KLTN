@@ -25,7 +25,7 @@ import time
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from kiemchung import truy_hoi as th, trich_xuat as tx  # noqa: E402
+from kiemchung import tap, truy_hoi as th, trich_xuat as tx  # noqa: E402
 from kiemchung.doi_chung.b0 import NHA_CUNG_CAP, NHIET_DO  # noqa: E402
 from kiemchung.llm import LLMClient, LLMError  # noqa: E402
 
@@ -170,6 +170,7 @@ def main(argv=None):
     ap.add_argument("--khong-neo-nguon", action="store_true", help="tắt neo nguồn (P−NN, dùng cùng --khong-kiem-day-du)")
     ap.add_argument("--khong-kiem-day-du", action="store_true", help="tắt kiểm tra đầy đủ (P−NN, dùng cùng --khong-neo-nguon)")
     ap.add_argument("--thu-muc-ra", type=Path, default=THU_MUC_RA, help=f"thư mục kết quả (mặc định {THU_MUC_RA.relative_to(ROOT)})")
+    tap.them_co_cho_phep(ap)
     args = ap.parse_args(argv)
 
     if args.mo_hinh not in NHA_CUNG_CAP:
@@ -178,7 +179,7 @@ def main(argv=None):
         ap.error("--k phải từ 1 trở lên")
     neo_nguon, kiem_day_du = not args.khong_neo_nguon, not args.khong_kiem_day_du
 
-    tuyen_bo = doc_jsonl(args.tuyen_bo)
+    tuyen_bo = tap.loc_va_bao(doc_jsonl(args.tuyen_bo), args.cho_phep_tap_kiem_tra)
     if args.ma_mau:
         tuyen_bo = [tb for tb in tuyen_bo if tb["ma_mau"] in set(args.ma_mau)]
     if not tuyen_bo:

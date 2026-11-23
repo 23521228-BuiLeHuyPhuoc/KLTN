@@ -10,6 +10,7 @@ import time
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from kiemchung import tap
 from kiemchung.doi_chung import b1, b2
 from kiemchung.doi_chung.chung import MAX_TOKEN_RA, NHA_CUNG_CAP, gia_transport
 from kiemchung.doi_chung.huong_dan import huong_dan_cho_cau_lenh, vi_du_b2, dinh_dang_vi_du
@@ -44,6 +45,7 @@ def tham_so_chung(ap, thu_muc_ra):
     ap.add_argument("--timeout", type=float, default=90)
     ap.add_argument("--gia", action="store_true")
     ap.add_argument("--thu-muc-ra", type=Path, default=thu_muc_ra)
+    tap.them_co_cho_phep(ap)
 
 
 def kiem_tham_so(ap, args):
@@ -95,7 +97,7 @@ def main(argv=None):
     if args.k < 1:
         ap.error("--k phải dương")
     tep = args.trich_xuat if args.he == "b1" else args.tuyen_bo
-    ds = loc_mau(doc_jsonl(tep), args.ma_mau)
+    ds = loc_mau(tap.loc_va_bao(doc_jsonl(tep), args.cho_phep_tap_kiem_tra), args.ma_mau)
     hd = huong_dan_cho_cau_lenh()
     vd = dinh_dang_vi_du(vi_du_b2()) if args.he == "b2" else None
     client = tao_client(args, gia_transport)

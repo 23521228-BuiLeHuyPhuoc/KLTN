@@ -11,7 +11,7 @@ sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from chay_doi_chung import (doc_jsonl, ghi_tep, ten_tep, tham_so_chung, kiem_tham_so,
                            tao_client, loc_mau, jsonl_on_dinh)
-from kiemchung import tach_tuyen_bo as tach
+from kiemchung import tach_tuyen_bo as tach, tap
 from kiemchung.llm import LLMError
 
 THU_MUC_QUANG_CAO = ROOT / "data/quang_cao"
@@ -68,7 +68,7 @@ def main(argv=None):
     tham_so_chung(ap, ROOT / "ket_qua/tach_tu_dong")
     args = ap.parse_args(argv)
     kiem_tham_so(ap, args)
-    tay = loc_mau(doc_jsonl(args.tuyen_bo), args.ma_mau)
+    tay = loc_mau(tap.loc_va_bao(doc_jsonl(args.tuyen_bo), args.cho_phep_tap_kiem_tra), args.ma_mau)
     bai = doc_bai(THU_MUC_QUANG_CAO, {d["ma_mau"] for d in tay})
     theo_ma = {b["ma_qc"]: b for b in bai}
     thieu = {d["ma_qc"] for d in tay} - theo_ma.keys()
