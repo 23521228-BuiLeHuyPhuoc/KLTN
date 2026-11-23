@@ -18,7 +18,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import chay_trich_xuat as cx  # noqa: E402  (nạp luôn đường dẫn src cho kiemchung)
-from kiemchung import trich_xuat as tx, truy_hoi as th  # noqa: E402
+from kiemchung import tap, trich_xuat as tx, truy_hoi as th  # noqa: E402
 
 TUYEN_BO_MAC_DINH = [ROOT / "data/tuyen_bo/thu.jsonl", ROOT / "data/tuyen_bo/chinh.jsonl"]
 
@@ -45,6 +45,7 @@ def main(argv=None):
     ap.add_argument("--thu-muc", type=Path, default=cx.THU_MUC_RA, help="thư mục kết quả (mặc định ket_qua/trich_xuat)")
     ap.add_argument("--ten", default="phat_trien", help="tên tập gộp, dùng đặt tên tệp thống kê (mặc định phat_trien)")
     ap.add_argument("--gia", action="store_true", help="gộp kết quả chạy --gia (thư mục và tệp có hậu tố _gia)")
+    tap.them_co_cho_phep(ap)
     args = ap.parse_args(argv)
 
     neo_nguon, kiem_day_du = not args.khong_neo_nguon, not args.khong_kiem_day_du
@@ -60,7 +61,7 @@ def main(argv=None):
 
     ban_ghi, tuyen_bo_goc, tom_tat, loi = [], {}, [], []
     for tep_tb, tep in zip(args.tuyen_bo, tep_kq):
-        tb = cx.doc_jsonl(tep_tb)
+        tb = tap.loc_va_bao(cx.doc_jsonl(tep_tb), args.cho_phep_tap_kiem_tra)
         kq = cx.doc_jsonl(tep)
         id_tb, id_kq = {d["id"] for d in tb}, {d["id"] for d in kq}
         trung = sorted(tuyen_bo_goc.keys() & id_tb)

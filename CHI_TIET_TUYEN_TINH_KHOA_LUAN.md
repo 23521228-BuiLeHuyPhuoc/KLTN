@@ -43,7 +43,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 - [x] [Bước 20](#b20) · 05/11 – 06/11 · Gán nhãn tập phát triển
 - [x] [Bước 21](#b21) · 07/11 · Chuẩn hóa sản phẩm, giá trị, đơn vị, kiểu giá trị
 - [x] [Bước 22](#b22) · 08/11 – 10/11 · Trích xuất có neo nguồn và kiểm tra đầy đủ
-- [ ] [Bước 23](#b23) · 11/11 · Tách tuyên bố của tập kiểm tra
+- [x] [Bước 23](#b23) · 11/11 · Tách tuyên bố của tập kiểm tra
 - [ ] [Bước 24](#b24) · 12/11 – 13/11 · Gán nhãn tập kiểm tra
 - [ ] [Bước 25](#b25) · 14/11 – 15/11 · Tạo tập cặp tối thiểu
 - [ ] [Bước 26](#b26) · 16/11 · Ghi chính thức cách chia tập, gửi việc cho người gán thứ hai
@@ -518,7 +518,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 ## Tháng 11/2026 · Dữ liệu chính, phương pháp P, đối chứng, khóa cấu hình
 
-> **Cuối tháng phải có:** đủ dữ liệu (250–300 tuyên bố và 100–120 biến thể cặp tối thiểu) có nhãn và có số đo độ tin cậy nhãn; P, B0–B3, P−ĐK, P−NN chạy trên tập phát triển; cấu hình đã khóa trước khi chạy tập kiểm tra ([Mốc 3](#m3), 27/11).
+> **Cuối tháng phải có:** đủ dữ liệu (324 tuyên bố, sửa từ 250–300 ngày 23/11, và 100–120 biến thể cặp tối thiểu) có nhãn và có số đo độ tin cậy nhãn; P, B0–B3, P−ĐK, P−NN chạy trên tập phát triển; cấu hình đã khóa trước khi chạy tập kiểm tra ([Mốc 3](#m3), 27/11).
 
 <a id="b17"></a>
 
@@ -652,13 +652,13 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Tách hoàn toàn bằng tay như Bước 12 cho 8 mẫu của tập kiểm tra; lọc theo tệp cấu hình; gộp tuyên bố trùng trong cùng bài. *(08/11: đã in `data/tuyen_bo/doc_kiem_tra.md`, 64 bài, 8 bài mỗi mẫu; tách tiếp vào cuối `data/tuyen_bo/chinh_nhap.csv` sau phần tập phát triển. 19/11: có trang tách tay `data/tuyen_bo/cong_cu_tach_kiem_tra.html` (`scripts/tao_cong_cu_tach_tay.py`): người thực hiện bôi đen câu, chọn thuộc tính, tự viết tuyên bố, xuất CSV để nối vào `chinh_nhap.csv`; trang không gợi ý câu, thuộc tính hay tuyên bố. Đang chờ người thực hiện.)*
-- [ ] Nếu nhiều hơn quy mô đã chốt thì lấy mẫu phân tầng theo nhóm sản phẩm × LLM × chế độ.
-- [ ] Gặp trường hợp lạ thì ghi vào nhật ký để báo trong phần giới hạn; không sửa tệp cấu hình hay hướng dẫn vì trường hợp của tập kiểm tra.
+- [x] Tách hoàn toàn bằng tay như Bước 12 cho 8 mẫu của tập kiểm tra; lọc theo tệp cấu hình; gộp tuyên bố trùng trong cùng bài. *(08/11: đã in `data/tuyen_bo/doc_kiem_tra.md`, 64 bài, 8 bài mỗi mẫu; tách tiếp vào cuối `data/tuyen_bo/chinh_nhap.csv` sau phần tập phát triển. 19/11: có trang tách tay `data/tuyen_bo/cong_cu_tach_kiem_tra.html` (`scripts/tao_cong_cu_tach_tay.py`): người thực hiện bôi đen câu, chọn thuộc tính, tự viết tuyên bố, xuất CSV để nối vào `chinh_nhap.csv`; trang không gợi ý câu, thuộc tính hay tuyên bố. 22/11: người thực hiện tách xong 189 tuyên bố từ 52/64 bài, bản xuất gốc lưu ở `data/tuyen_bo/tach_kiem_tra_xuat_goc.csv`. 23/11: Claude rà từng dòng và dò mọi con số trong 64 bài, người thực hiện duyệt từng mục: đổi thuộc tính 10 dòng, tách 12 dòng có hai, ba giá trị, gộp 4 cặp trùng (giữ lần nhắc đầu trong bài), bỏ 2 dòng, thêm 19 tuyên bố sót; mỗi dòng sửa có `tach_sua=` trong `ghi_chu`. Kết quả 216 tuyên bố `tb-00110`–`tb-00325`, đủ 8 mẫu, 3 nhóm, 4 hãng. Chi tiết ở nhật ký 23/11.)*
+- [x] Nếu nhiều hơn quy mô đã chốt thì lấy mẫu phân tầng theo nhóm sản phẩm × LLM × chế độ. *(23/11: tổng 66 + 42 + 216 = 324, vượt 250–300 khoảng 8%; người thực hiện chọn giữ đủ, không lấy mẫu. Quy mô ở các mục khác đã sửa theo.)*
+- [x] Gặp trường hợp lạ thì ghi vào nhật ký để báo trong phần giới hạn; không sửa tệp cấu hình hay hướng dẫn vì trường hợp của tập kiểm tra. *(23/11: ghi ở nhật ký: IP6X chống bụi của đồng hồ, tổng thời lượng kèm phần chia nhỏ, "lên đến" và không "lên đến" cùng một số. Không sửa cấu hình hay hướng dẫn.)*
 
 **Làm ra:** `data/tuyen_bo/chinh.jsonl` (thêm phần tập kiểm tra).
 
-**Xong khi:** tính cả bộ thử, toàn bộ dữ liệu có 250–300 tuyên bố; nhóm nào và hãng nào trong tập kiểm tra cũng có tuyên bố.
+**Xong khi:** tính cả bộ thử, toàn bộ dữ liệu có khoảng 324 tuyên bố (Bước 16 chốt 250–300; 23/11 người thực hiện giữ đủ 324, không lấy mẫu); nhóm nào và hãng nào trong tập kiểm tra cũng có tuyên bố.
 
 **Tra cứu:** [T4.1](#t4-1) (tách tuyên bố), [T3.5](#t3-5) (quy tắc 4: bảo vệ tập kiểm tra).
 
@@ -1372,7 +1372,7 @@ Tiêu chí kết luận "đạt" hay "không đạt" được ghi trước ở [
 | Mẫu sản phẩm | Khoảng 12 mẫu (khoảng 5 điện thoại, 4 tai nghe, 3 đồng hồ) của ít nhất ba hãng (dự kiến Apple, Samsung, Xiaomi, OPPO), đang bán chính hãng tại Việt Nam |
 | Bằng chứng | Chỉ tài liệu văn bản chính hãng của đúng mẫu sản phẩm |
 | Quảng cáo | Do CopyPro tạo ở ngành Công nghệ; 2 LLM thuộc hai họ mô hình (dự kiến Gemini 3.6 Flash và GPT-OSS 120B qua Groq); 3 loại bài (mô tả sản phẩm, bài đăng mạng xã hội, landing page); 2 chế độ (chỉ nhập tên sản phẩm; nhập thêm đoạn thông số chính hãng vào ô thông tin bổ sung) |
-| Quy mô dữ liệu | Khoảng 250–300 tuyên bố và 100–120 biến thể cặp tối thiểu |
+| Quy mô dữ liệu | 324 tuyên bố (66 bộ thử, 42 phát triển, 216 kiểm tra; sửa từ 250–300 ngày 23/11) và 100–120 biến thể cặp tối thiểu |
 | Ngoài phạm vi | Thông số không kèm điều kiện (khối lượng, kích thước, phiên bản Bluetooth); tuyên bố cảm tính; so sánh với sản phẩm khác; giá và khuyến mãi; đo hiệu năng thực tế; kết luận pháp lý; quảng cáo do người viết; tự nhận diện sản phẩm. Máy tính xách tay, tivi, đồ gia dụng không thuộc phạm vi thực nghiệm; khả năng mở rộng chỉ thử trên máy tính bảng (phần mở rộng) |
 
 <a id="t1-7"></a>
@@ -2483,7 +2483,7 @@ Các mục dưới cho thấy mọi việc trong "Thời gian biểu", mọi "K�
 
 | Kết quả mong đợi trong đề cương | Sản phẩm cụ thể | Bước |
 |---|---|---|
-| Bộ dữ liệu khoảng 250–300 tuyên bố và 100–120 biến thể cặp tối thiểu của khoảng 12 mẫu, kèm tài liệu, nhãn bốn lớp, lý do, hướng dẫn gán nhãn và tệp điều kiện bắt buộc | Thư mục `data/` và thẻ dữ liệu | [4](#b04)–[13](#b13), [16](#b16), [18](#b18)–[20](#b20), [23](#b23)–[26](#b26), [32](#b32), [45](#b45) |
+| Bộ dữ liệu 324 tuyên bố và 100–120 biến thể cặp tối thiểu của khoảng 12 mẫu, kèm tài liệu, nhãn bốn lớp, lý do, hướng dẫn gán nhãn và tệp điều kiện bắt buộc | Thư mục `data/` và thẻ dữ liệu | [4](#b04)–[13](#b13), [16](#b16), [18](#b18)–[20](#b20), [23](#b23)–[26](#b26), [32](#b32), [45](#b45) |
 | Hệ thống trả về bốn nhãn kèm đoạn nguồn và lý do | `src/kiemchung/p.py`, `api.py` | [28](#b28), [34](#b34) |
 | P, B0–B3 và hai bản bỏ thành phần chạy được trên cùng dữ liệu; mã nguồn P có kiểm thử cho từng quy tắc | `src/kiemchung/`, `tests/` | [15](#b15), [27](#b27)–[31](#b31) |
 | Báo cáo thực nghiệm về FAR và nhãn Lệch điều kiện, kể cả khi không cải thiện | Chương 4 | [37](#b37)–[39](#b39), [42](#b42) |

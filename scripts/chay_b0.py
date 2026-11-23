@@ -28,7 +28,7 @@ import time
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from kiemchung import danh_gia as dg, truy_hoi as th  # noqa: E402
+from kiemchung import danh_gia as dg, tap, truy_hoi as th  # noqa: E402
 from kiemchung.doi_chung import b0  # noqa: E402
 from kiemchung.llm import LLMClient, LLMError  # noqa: E402
 
@@ -180,6 +180,7 @@ def main(argv=None):
                     help=f"giây nghỉ sau mỗi lần gọi thật (mặc định {NGHI_MAC_DINH}; không áp dụng khi lấy từ bộ nhớ đệm "
                          "hoặc --gia)")
     ap.add_argument("--timeout", type=float, default=TIMEOUT_MAC_DINH, help=f"giây chờ mỗi lần gọi (mặc định {TIMEOUT_MAC_DINH})")
+    tap.them_co_cho_phep(ap)
     args = ap.parse_args(argv)
 
     mo_hinh = list(dict.fromkeys(args.mo_hinh))
@@ -191,7 +192,7 @@ def main(argv=None):
     if args.k < 1:
         ap.error("--k phải từ 1 trở lên")
 
-    tuyen_bo = doc_jsonl(TEP_TUYEN_BO)
+    tuyen_bo = tap.loc_va_bao(doc_jsonl(TEP_TUYEN_BO), args.cho_phep_tap_kiem_tra)
     dong_nhan = doc_jsonl(args.nhan)
     chuan = {nh["id"]: nh["nhan"] for nh in dong_nhan}
     try:
