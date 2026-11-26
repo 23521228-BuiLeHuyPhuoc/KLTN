@@ -1,0 +1,518 @@
+# Giải thích nhãn nháp tập kiểm tra (AI gán theo hướng dẫn bản 2, chờ người thực hiện duyệt)
+
+> **Lưu ý phương pháp:** Nhãn trong `data/nhan/chinh_kiem_tra_ai.jsonl` do AI gán nháp theo `data/huong_dan_gan_nhan.md` (bản 2, cập nhật 02/11/2026) để người thực hiện nhập vào trang `data/nhan/cong_cu_gan_nhan_chinh_kiem_tra.html` và tự duyệt từng câu (tương tự lượt 2 bộ thử; cần khai báo rõ giới hạn này trong nhật ký Bước 24 và Chương 4). Không sửa hướng dẫn hay tệp cấu hình.
+
+## Tóm tắt phân bố (216 tuyên bố: `tb-00110`–`tb-00325`)
+
+- **Nhãn:** DUNG 172, LECH 22, SAI 4, CHUA_DU 18
+- **Dòng D:** D1 4, D1a 3, D1b 4, D2 1, D3 172, D4 21, D5 4, D6 7
+- **Loại biến đổi (LECH và SAI):** `bo_dieu_kien` 19, `doi_dieu_kien` 1, `doi_bo_phan` 1, `doi_phien_ban` 0, `doi_kieu_gia_tri` 1, `doi_gia_tri` 4
+- **Tài liệu mâu thuẫn (`tai_lieu_mau_thuan=true`):** 4 tuyên bố (đều là `dung_luong_pin` 5630 mAh của `dt-oppo-findx8`; thêm 2 câu 5000 mAh dùng ngoại lệ QĐ13 `mau_thuan_khop_ca_hai`).
+
+## Danh sách ca PHÂN VÂN cần người thực hiện kiểm tra kỹ khi duyệt
+
+- **tb-00110:** PHÂN VÂN: cụm “mọi lúc” nằm ở vế tác dụng “hiển thị sắc nét mọi lúc”, không đứng liền “3.000 nits” (mục 6.2) nên tạm chọn D3 Đúng; nếu coi gắn với con số thì đổi thành D2 Lệch (`khang_dinh=mọi lúc`).
+- **tb-00135:** PHÂN VÂN: trang Xiaomi Watch S4 có 2 mức sáng (“Độ sáng HBM” 1.500 nit và “Độ sáng cực đại” 2.200 nit). Tạm chọn D3 Đúng theo mục 6.5 & QĐ15 (`chep_nhan=độ sáng cực đại`, diện tích cục bộ hiểu như hãng công bố); nếu coi “cực đại” chỉ là kiểu giá trị tối đa và bỏ điều kiện một phần màn hình thì ra D4 Lệch `bo_dieu_kien` (áp dụng cho cả tb-00140).
+- **tb-00146:** PHÂN VÂN: tuyên bố “độ sáng lên tới 1.500 nit” không nêu HBM trong khi tài liệu tách HBM (1.500 nit) và cực đại (2.200 nit). Tạm chọn D4 Lệch `bo_dieu_kien` theo mặc định đồng hồ chế độ thông thường; nếu coi HBM toàn màn hình là mức thông thường thì thành D3 Đúng.
+- **tb-00149:** PHÂN VÂN: “thực tế đạt trên 14 ngày” có từ khẳng định mức sàn “trên” đứng liền 14 ngày (≤ 15 ngày tối đa ở chế độ thông thường, chú thích “Kết quả thực tế có thể khác.”) nên tạm chọn D2 Lệch; nhưng đoạn 15 có câu quảng bá “Thời lượng pin 15 ngày đảm bảo thời gian sử dụng trên 2 tuần”, nếu coi hãng tự khẳng định mức sàn thì có thể cân nhắc D3 Đúng.
+- **tb-00157:** PHÂN VÂN: OPPO Find X8 có 3 mức sáng (“Độ sáng bình thường” 800 nits, “HBM” 1600 nits, “Độ sáng tối đa” 4500 nits (Typical, 1%APL)). Tạm chọn D3 Đúng theo QĐ15 (`chep_nhan=độ sáng tối đa`); nhưng đoạn 03 có “(Typical, 1%APL )” trong ngoặc và chú thích 61 gọi 1.600 nits là “độ sáng tối đa kích thích”, nếu coi thiếu chữ điều kiện theo QĐ15 thì ra D1a Chưa đủ (áp dụng cho cả tb-00167).
+- **tb-00161:** PHÂN VÂN: sạc không dây AirVOOC 50W — hộp máy (đoạn 13) chỉ ghi “Sạc x 1, Cáp USB x 1”, không có đế sạc không dây; nhưng tài liệu không ghi chú thích bán riêng cho sạc không dây 50W (chú thích 2 đoạn 55 gắn với phụ kiện từ tính OPPO Mag). Tạm chọn D3 Đúng; nếu coi đế sạc không dây không có trong hộp là phụ kiện mua thêm thì ra D4 Lệch `bo_dieu_kien` (áp dụng cho tb-00170, tb-00181, tb-00194).
+- **tb-00230:** PHÂN VÂN: “chuẩn IP68 kháng nước, bão” (có thể LLM sinh nhầm từ “bụi”). Tạm chọn D1a Chưa đủ (`chua_xac_dinh=bão`) theo lối 3 của D1a (cụm không giải được); nếu coi “bão” là điều kiện môi trường ngoài bài thử nước ngọt tĩnh 1,5 m thì ra D4 Lệch `doi_dieu_kien`.
+- **tb-00233:** PHÂN VÂN: tài liệu Redmi Note 14 Pro+ 5G chỉ công bố một mức độ sáng duy nhất (“Độ sáng cực đại 3000 nit”) và không kèm điều kiện chế độ hay APL ở bất kỳ đoạn nào, nên tạm chọn D3 Đúng theo mục 6.4 & 6.5 (giống V12; không ghi `mac_dinh=che_do_hien_thi` vì khóa đó không có mặc định); nếu coi “cực đại” ở Xiaomi luôn không nêu chế độ như V43 thì ra D1a Chưa đủ (áp dụng cho tb-00247, tb-00256).
+- **tb-00262:** PHÂN VÂN: “độ sáng 3000 nit rõ ràng dưới ánh nắng mạnh” — tài liệu Redmi Note 14 Pro+ 5G chỉ có một con số 3000 nit không kèm điều kiện chế độ, tương tự `tb-00069` tập phát triển nên tạm chọn D3 Đúng; phương án biên là D6 Chưa đủ nếu coi tài liệu không công bố số ở chế độ ngoài trời.
+- **tb-00304:** PHÂN VÂN: “hộp sạc MagSafe hỗ trợ Qi, USB-C, cho 24 giờ năng lượng chỉ với một lần sạc” — chủ ngữ là hộp sạc nên tạm chọn D4 Lệch `doi_bo_phan` theo mục 6.8 ý 6; nếu hiểu thoáng là tai nghe dùng kèm hộp sạc thì ra D3 Đúng.
+- **tb-00309:** PHÂN VÂN: sạc nhanh Redmi Buds 6 Pro “5 phút cho 2 giờ phát nhạc” — chú thích 2 đoạn 25 ghi “Điều kiện thử nghiệm: … tắt chức năng khử tiếng ồn”. Bảng mục 5 cho sạc nhanh tai nghe chưa có khóa `che_do_chong_on`; tạm áp dụng mục 6.7 ý 4 (QĐ10) lấy chế độ kém thuận lợi nhất (bật chống ồn) nên chọn D4 Lệch `bo_dieu_kien` kèm `mac_dinh=bo_phan,ngoai_bang`; nếu coi chú thích thử nghiệm tắt khử tiếng ồn của sạc nhanh là ngữ cảnh không xét ngoài 2 khóa cấu hình thì ra D3 Đúng (áp dụng cho tb-00312, tb-00316, tb-00323).
+
+## 1. `dh-samsung-galaxywatch8` (23 tuyên bố: `tb-00110`–`tb-00132`)
+
+- **Số liệu nguồn:** Độ sáng lên tới 3.000 nits (`#014`, `#102`, `#111`, không tách chế độ); Pin 30 giờ khi Bật AOD (`#104`, `#113`; chú ý `#105` là Watch6) và 40 giờ khi Tắt AOD (`#124`); Kháng nước/bụi: 5ATM (50 m / 10 phút theo ISO 22810:2010, `#103`, `#124`, `#595`), IPX8 (1,5 m / 30 phút theo IEC 60529, `#103`, `#595`), IP6X (IEC 60529, `#103`, `#595`). Không công bố sạc nhanh.
+
+- **tb-00110 · DUNG D3 · **PHÂN VÂN**.** “Galaxy Watch8 có màn hình cực sáng 3.000 nits hiển thị sắc nét mọi lúc” (`do_sang`).
+  - Bằng chứng: `dh-samsung-galaxywatch8#014`, `dh-samsung-galaxywatch8#102`, `dh-samsung-galaxywatch8#111`. Tài liệu Watch8 chỉ công bố một mức độ sáng 3.000 nits không kèm điều kiện chế độ; “cực sáng” là từ khen, “mọi lúc” bổ nghĩa cho “hiển thị sắc nét” ở vế tác dụng chứ không gắn trực tiếp với con số (mục 6.2) nên không dừng ở D2 (quảng cáo bỏ "lên đến"). Ghi chú: `mac_dinh=che_do_hien_thi`.
+  - *Phương án khác (PHÂN VÂN):* Nếu hiểu “mọi lúc” gắn với 3.000 nits (“lên tới 3.000 nits” thành luôn đạt 3.000 nits mọi lúc) thì dừng ở D2 LECH (`doi_kieu_gia_tri`, `khang_dinh=mọi lúc`).
+- **tb-00111 · DUNG D3.** “Galaxy Watch8 có thời gian sử dụng lên tới 30 giờ ngay cả khi bật chế độ Màn hình luôn bật (Always On Display)” (`thoi_luong_pin`).
+  - Bằng chứng: `dh-samsung-galaxywatch8#104`, `dh-samsung-galaxywatch8#113`. Khớp với tài liệu: “Cả hai đều có thời gian sử dụng lên tới 30 giờ ở chế độ Always On Display (AOD).”. Tuyên bố nêu rõ chế độ Always On Display (“Màn hình luôn bật” là tên tính năng, không phải từ khẳng định), mặc định chế độ nguồn thường và sử dụng bình thường; 30 giờ khớp. Ghi chú: `mac_dinh=che_do_nguon,hoat_dong; ngoai_cau_hinh=Always On Display`.
+- **tb-00112 · DUNG D3.** “Galaxy Watch8 kháng nước 5ATM đạt chuẩn ISO 22810:2010 ở độ sâu tới 50 m” (`khang_nuoc`).
+  - Bằng chứng: `dh-samsung-galaxywatch8#103`, `dh-samsung-galaxywatch8#124`, `dh-samsung-galaxywatch8#595`. Khớp với tài liệu: “Chứng nhận cấp độ kháng nước 5ATM: Đã được thử nghiệm bằng cách thả chìm thiết bị ở độ sâu 50 m trong nước thường trong 10 phút, để yên và không có bất kỳ chuyển động nào để đáp ứng các yêu cầu của ISO 22810:2010.”.
+- **tb-00113 · DUNG D3.** “Galaxy Watch8 có chuẩn kháng nước IPX8” (`khang_nuoc`).
+  - Bằng chứng: `dh-samsung-galaxywatch8#103`, `dh-samsung-galaxywatch8#595`. Khớp với tài liệu: “Chứng nhận cấp độ kháng nước IPX8: Đã được thử nghiệm bằng cách thả chìm thiết bị ở độ sâu 1,5 m trong nước thường trong 30 phút, để yên và không có bất kỳ chuyển động nào để đáp ứng các yêu cầu của IEC 60529.”.
+- **tb-00114 · DUNG D3.** “Galaxy Watch8 có chuẩn kháng bụi IP6X theo tiêu chuẩn IEC 60529” (`khang_nuoc`).
+  - Bằng chứng: `dh-samsung-galaxywatch8#103`, `dh-samsung-galaxywatch8#595`. Khớp với tài liệu: “Chứng nhận cấp độ kháng bụi IP6X: Đã được thử nghiệm để đáp ứng các yêu cầu của IEC 60529.”.
+- **tb-00115 · DUNG D3.** “Galaxy Watch8 có độ sáng lên tới 3.000 nits” (`do_sang`).
+  - Bằng chứng: `dh-samsung-galaxywatch8#014`, `dh-samsung-galaxywatch8#102`, `dh-samsung-galaxywatch8#111`. Khớp với tài liệu: “độ sáng lên tới 3.000 nits”. Tài liệu chỉ có một con số độ sáng và không kèm điều kiện chế độ hiển thị, nên so thẳng; 3.000 nits khớp. Ghi chú: `mac_dinh=che_do_hien_thi`.
+- **tb-00116 · DUNG D3.** “Galaxy Watch8 có thời lượng pin lên đến 30 giờ ở chế độ Always On Display” (`thoi_luong_pin`).
+  - Bằng chứng: `dh-samsung-galaxywatch8#104`, `dh-samsung-galaxywatch8#113`. Khớp với tài liệu: “Cả hai đều có thời gian sử dụng lên tới 30 giờ ở chế độ Always On Display (AOD).”. Tuyên bố nêu rõ chế độ Always On Display, mặc định chế độ nguồn thường và sử dụng bình thường; 30 giờ khớp. Ghi chú: `mac_dinh=che_do_nguon,hoat_dong; ngoai_cau_hinh=Always On Display`.
+- **tb-00117 · DUNG D3.** “Galaxy Watch8 có khả năng kháng nước 5ATM” (`khang_nuoc`).
+  - Bằng chứng: `dh-samsung-galaxywatch8#103`, `dh-samsung-galaxywatch8#124`, `dh-samsung-galaxywatch8#595`. Khớp với tài liệu: “Chứng nhận cấp độ kháng nước 5ATM: Đã được thử nghiệm bằng cách thả chìm thiết bị ở độ sâu 50 m trong nước thường trong 10 phút, để yên và không có bất kỳ chuyển động nào để đáp ứng các yêu cầu của ISO 22810:2010.”.
+- **tb-00118 · DUNG D3.** “Galaxy Watch8 có khả năng kháng nước IPX8” (`khang_nuoc`).
+  - Bằng chứng: `dh-samsung-galaxywatch8#103`, `dh-samsung-galaxywatch8#595`. Khớp với tài liệu: “Chứng nhận cấp độ kháng nước IPX8: Đã được thử nghiệm bằng cách thả chìm thiết bị ở độ sâu 1,5 m trong nước thường trong 30 phút, để yên và không có bất kỳ chuyển động nào để đáp ứng các yêu cầu của IEC 60529.”.
+- **tb-00119 · DUNG D3.** “Galaxy Watch8 có màn hình 3.000 nits” (`do_sang`).
+  - Bằng chứng: `dh-samsung-galaxywatch8#014`, `dh-samsung-galaxywatch8#102`, `dh-samsung-galaxywatch8#111`. Khớp với tài liệu: “độ sáng lên tới 3.000 nits”. Tài liệu chỉ có một con số độ sáng và không kèm điều kiện chế độ hiển thị, nên so thẳng; 3.000 nits khớp (quảng cáo bỏ "lên đến"). Ghi chú: `mac_dinh=che_do_hien_thi`.
+- **tb-00120 · DUNG D3.** “Galaxy Watch8 có chuẩn kháng bụi IP6X” (`khang_nuoc`).
+  - Bằng chứng: `dh-samsung-galaxywatch8#103`, `dh-samsung-galaxywatch8#595`. Khớp với tài liệu: “Chứng nhận cấp độ kháng bụi IP6X: Đã được thử nghiệm để đáp ứng các yêu cầu của IEC 60529.”.
+- **tb-00121 · DUNG D3.** “Galaxy Watch8 có kháng nước 5ATM” (`khang_nuoc`).
+  - Bằng chứng: `dh-samsung-galaxywatch8#103`, `dh-samsung-galaxywatch8#124`, `dh-samsung-galaxywatch8#595`. Khớp với tài liệu: “Chứng nhận cấp độ kháng nước 5ATM: Đã được thử nghiệm bằng cách thả chìm thiết bị ở độ sâu 50 m trong nước thường trong 10 phút, để yên và không có bất kỳ chuyển động nào để đáp ứng các yêu cầu của ISO 22810:2010.”.
+- **tb-00122 · DUNG D3.** “Galaxy Watch8 có màn hình siêu sáng 3.000 nits” (`do_sang`).
+  - Bằng chứng: `dh-samsung-galaxywatch8#014`, `dh-samsung-galaxywatch8#102`, `dh-samsung-galaxywatch8#111`. Khớp với tài liệu: “độ sáng lên tới 3.000 nits”. Tài liệu chỉ có một con số độ sáng và không kèm điều kiện chế độ hiển thị, nên so thẳng; 3.000 nits khớp (quảng cáo bỏ "lên đến"). Ghi chú: `mac_dinh=che_do_hien_thi`.
+- **tb-00123 · DUNG D3.** “Galaxy Watch8 có thời lượng pin lên tới 30 giờ ở chế độ Always On Display” (`thoi_luong_pin`).
+  - Bằng chứng: `dh-samsung-galaxywatch8#104`, `dh-samsung-galaxywatch8#113`. Khớp với tài liệu: “Cả hai đều có thời gian sử dụng lên tới 30 giờ ở chế độ Always On Display (AOD).”. Tuyên bố nêu rõ chế độ Always On Display, mặc định chế độ nguồn thường và sử dụng bình thường; 30 giờ khớp. Ghi chú: `mac_dinh=che_do_nguon,hoat_dong; ngoai_cau_hinh=Always On Display`.
+- **tb-00124 · DUNG D3.** “Galaxy Watch8 có khả năng kháng nước 5ATM” (`khang_nuoc`).
+  - Bằng chứng: `dh-samsung-galaxywatch8#103`, `dh-samsung-galaxywatch8#124`, `dh-samsung-galaxywatch8#595`. Khớp với tài liệu: “Chứng nhận cấp độ kháng nước 5ATM: Đã được thử nghiệm bằng cách thả chìm thiết bị ở độ sâu 50 m trong nước thường trong 10 phút, để yên và không có bất kỳ chuyển động nào để đáp ứng các yêu cầu của ISO 22810:2010.”.
+- **tb-00125 · DUNG D3.** “Galaxy Watch8 có khả năng kháng nước IPX8” (`khang_nuoc`).
+  - Bằng chứng: `dh-samsung-galaxywatch8#103`, `dh-samsung-galaxywatch8#595`. Khớp với tài liệu: “Chứng nhận cấp độ kháng nước IPX8: Đã được thử nghiệm bằng cách thả chìm thiết bị ở độ sâu 1,5 m trong nước thường trong 30 phút, để yên và không có bất kỳ chuyển động nào để đáp ứng các yêu cầu của IEC 60529.”.
+- **tb-00126 · DUNG D3.** “Galaxy Watch8 có màn hình sáng tới 3.000 nits” (`do_sang`).
+  - Bằng chứng: `dh-samsung-galaxywatch8#014`, `dh-samsung-galaxywatch8#102`, `dh-samsung-galaxywatch8#111`. Khớp với tài liệu: “độ sáng lên tới 3.000 nits”. Tài liệu chỉ có một con số độ sáng và không kèm điều kiện chế độ hiển thị, nên so thẳng; 3.000 nits khớp. Ghi chú: `mac_dinh=che_do_hien_thi`.
+- **tb-00127 · DUNG D3.** “Galaxy Watch8 kháng bụi IP6X” (`khang_nuoc`).
+  - Bằng chứng: `dh-samsung-galaxywatch8#103`, `dh-samsung-galaxywatch8#595`. Khớp với tài liệu: “Chứng nhận cấp độ kháng bụi IP6X: Đã được thử nghiệm để đáp ứng các yêu cầu của IEC 60529.”.
+- **tb-00128 · DUNG D3.** “Galaxy Watch8 có độ sáng lên tới 3.000 nits” (`do_sang`).
+  - Bằng chứng: `dh-samsung-galaxywatch8#014`, `dh-samsung-galaxywatch8#102`, `dh-samsung-galaxywatch8#111`. Khớp với tài liệu: “độ sáng lên tới 3.000 nits”. Tài liệu chỉ có một con số độ sáng và không kèm điều kiện chế độ hiển thị, nên so thẳng; 3.000 nits khớp. Ghi chú: `mac_dinh=che_do_hien_thi`.
+- **tb-00129 · DUNG D3.** “Galaxy Watch8 cho tới 30 giờ sử dụng liên tục ở chế độ Always On Display” (`thoi_luong_pin`).
+  - Bằng chứng: `dh-samsung-galaxywatch8#104`, `dh-samsung-galaxywatch8#113`. Khớp với tài liệu: “Cả hai đều có thời gian sử dụng lên tới 30 giờ ở chế độ Always On Display (AOD).”. “Sử dụng liên tục” không nêu hoạt động cụ thể nên hiểu mặc định sử dụng bình thường, chế độ nguồn thường, kèm chế độ Always On Display đã nêu; 30 giờ khớp. Ghi chú: `mac_dinh=che_do_nguon,hoat_dong; ngoai_cau_hinh=Always On Display`.
+- **tb-00130 · DUNG D3.** “Galaxy Watch8 kháng nước 5ATM” (`khang_nuoc`).
+  - Bằng chứng: `dh-samsung-galaxywatch8#103`, `dh-samsung-galaxywatch8#124`, `dh-samsung-galaxywatch8#595`. Khớp với tài liệu: “Chứng nhận cấp độ kháng nước 5ATM: Đã được thử nghiệm bằng cách thả chìm thiết bị ở độ sâu 50 m trong nước thường trong 10 phút, để yên và không có bất kỳ chuyển động nào để đáp ứng các yêu cầu của ISO 22810:2010.”.
+- **tb-00131 · DUNG D3.** “Galaxy Watch8 kháng nước IPX8” (`khang_nuoc`).
+  - Bằng chứng: `dh-samsung-galaxywatch8#103`, `dh-samsung-galaxywatch8#595`. Khớp với tài liệu: “Chứng nhận cấp độ kháng nước IPX8: Đã được thử nghiệm bằng cách thả chìm thiết bị ở độ sâu 1,5 m trong nước thường trong 30 phút, để yên và không có bất kỳ chuyển động nào để đáp ứng các yêu cầu của IEC 60529.”.
+- **tb-00132 · DUNG D3.** “Galaxy Watch8 kháng bụi IP6X” (`khang_nuoc`).
+  - Bằng chứng: `dh-samsung-galaxywatch8#103`, `dh-samsung-galaxywatch8#595`. Khớp với tài liệu: “Chứng nhận cấp độ kháng bụi IP6X: Đã được thử nghiệm để đáp ứng các yêu cầu của IEC 60529.”.
+
+## 2. `dh-xiaomi-watchs4` (22 tuyên bố: `tb-00133`–`tb-00154`)
+
+- **Số liệu nguồn:** Pin 15 ngày ở chế độ sử dụng thông thường (`#005`, `#014`, `#015`, `#033` CT16); Sạc nhanh: 5 phút sạc dùng 2 ngày (`#015`), hộp có sẵn đế sạc từ tính (`#006`); Độ sáng có 2 mức tách riêng: HBM 1.500 nit (`#005`, `#015`) và Độ sáng cực đại 2.200 nit khi một phần màn hình sáng lên (`#015`); Kháng nước 5ATM (`#005`).
+
+- **tb-00133 · DUNG D3.** “Xiaomi Watch S4 có thời lượng hoạt động lên đến 15 ngày” (`thoi_luong_pin`).
+  - Bằng chứng: `dh-xiaomi-watchs4#005`, `dh-xiaomi-watchs4#014`, `dh-xiaomi-watchs4#015`, `dh-xiaomi-watchs4#033`. Khớp với tài liệu: “Thời lượng pin lên đến 15 ngày”. Không nêu chế độ nguồn và hoạt động cụ thể (“hoạt động” chưa chỉ hoạt động cụ thể) nên hiểu mặc định chế độ thường, sử dụng bình thường; 15 ngày khớp. Ghi chú: `mac_dinh=che_do_nguon,hoat_dong`.
+- **tb-00134 · DUNG D3.** “Xiaomi Watch S4 có tính năng sạc nhanh 5 phút dùng đủ 2 ngày” (`sac_nhanh`).
+  - Bằng chứng: `dh-xiaomi-watchs4#015`. Khớp với tài liệu: “Sạc 5 phút, dùng 2 ngày”. Hộp có sẵn đế sạc từ tính, tài liệu không yêu cầu bộ tiếp hợp bán riêng; “dùng đủ” không phải từ khẳng định; 5 phút và 2 ngày khớp. Ghi chú: `mac_dinh=bo_tiep_hop,cap_sac,hoat_dong`.
+- **tb-00135 · DUNG D3 · **PHÂN VÂN**.** “Xiaomi Watch S4 có độ sáng cực đại 2.200 nit” (`do_sang`).
+  - Bằng chứng: `dh-xiaomi-watchs4#015`. Khớp với tài liệu: “2.200 nit Độ sáng cực đại”. Trang có hai mức sáng riêng (“Độ sáng HBM” 1.500 nit và “Độ sáng cực đại” 2.200 nit) nên “độ sáng cực đại” là nhãn/chế độ của mức 2.200 nit; điều kiện vùng sáng cục bộ hiểu như hãng công bố. Ghi chú: `chep_nhan=độ sáng cực đại; ngoai_cau_hinh=độ sáng cực đại`.
+  - *Phương án khác (PHÂN VÂN):* Nếu coi “cực đại” chỉ là kiểu giá trị tối đa (không phải tên chế độ theo mục 6.5) và người mua hiểu cho toàn màn hình / chế độ thông thường thì sẽ ra D4 LECH (`bo_dieu_kien`, `mac_dinh=che_do_hien_thi`).
+- **tb-00136 · DUNG D3.** “Xiaomi Watch S4 có khả năng chống nước 5ATM” (`khang_nuoc`).
+  - Bằng chứng: `dh-xiaomi-watchs4#005`. Khớp với tài liệu: “Khả năng chống nước: 5ATM”.
+- **tb-00137 · DUNG D3.** “Xiaomi Watch S4 có thời lượng pin ấn tượng lên đến 15 ngày sử dụng liên tục chỉ với một lần sạc đầy” (`thoi_luong_pin`).
+  - Bằng chứng: `dh-xiaomi-watchs4#005`, `dh-xiaomi-watchs4#014`, `dh-xiaomi-watchs4#015`, `dh-xiaomi-watchs4#033`. Khớp với tài liệu: “Thời lượng pin lên đến 15 ngày”. Không nêu chế độ nguồn và hoạt động cụ thể (“sử dụng liên tục” coi như chưa nêu hoạt động) nên hiểu mặc định chế độ thường, sử dụng bình thường; 15 ngày khớp. Ghi chú: `mac_dinh=che_do_nguon,hoat_dong`.
+- **tb-00138 · DUNG D3.** “Xiaomi Watch S4 có thời lượng pin ấn tượng lên đến 15 ngày” (`thoi_luong_pin`).
+  - Bằng chứng: `dh-xiaomi-watchs4#005`, `dh-xiaomi-watchs4#014`, `dh-xiaomi-watchs4#015`, `dh-xiaomi-watchs4#033`. Khớp với tài liệu: “Thời lượng pin lên đến 15 ngày”. Không nêu chế độ nguồn và hoạt động cụ thể nên hiểu mặc định chế độ thường, sử dụng bình thường; 15 ngày khớp. Ghi chú: `mac_dinh=che_do_nguon,hoat_dong`.
+- **tb-00139 · DUNG D3.** “Xiaomi Watch S4 có độ sáng HBM 1.500 nit” (`do_sang`).
+  - Bằng chứng: `dh-xiaomi-watchs4#005`, `dh-xiaomi-watchs4#015`. Khớp với tài liệu: “độ sáng cao đến 1.500 nit ở chế độ HBM.”. Tuyên bố nêu rõ chế độ HBM; 1.500 nit khớp. Ghi chú: `ngoai_cau_hinh=HBM`.
+- **tb-00140 · DUNG D3 · **PHÂN VÂN**.** “Xiaomi Watch S4 có độ sáng cực đại 2.200 nit” (`do_sang`).
+  - Bằng chứng: `dh-xiaomi-watchs4#015`. Khớp với tài liệu: “2.200 nit Độ sáng cực đại”. Trang có hai mức sáng riêng (“Độ sáng HBM” 1.500 nit và “Độ sáng cực đại” 2.200 nit) nên “độ sáng cực đại” là nhãn/chế độ của mức 2.200 nit; điều kiện vùng sáng cục bộ hiểu như hãng công bố. Ghi chú: `chep_nhan=độ sáng cực đại; ngoai_cau_hinh=độ sáng cực đại`.
+  - *Phương án khác (PHÂN VÂN):* Nếu coi “cực đại” chỉ là kiểu giá trị tối đa (không phải tên chế độ theo mục 6.5) và người mua hiểu cho toàn màn hình / chế độ thông thường thì sẽ ra D4 LECH (`bo_dieu_kien`, `mac_dinh=che_do_hien_thi`).
+- **tb-00141 · DUNG D3.** “Xiaomi Watch S4 có thời lượng pin 15 ngày” (`thoi_luong_pin`).
+  - Bằng chứng: `dh-xiaomi-watchs4#005`, `dh-xiaomi-watchs4#014`, `dh-xiaomi-watchs4#015`, `dh-xiaomi-watchs4#033`. Khớp với tài liệu: “Thời lượng pin lên đến 15 ngày”. Không nêu chế độ nguồn và hoạt động cụ thể nên hiểu mặc định chế độ thường, sử dụng bình thường; 15 ngày khớp (quảng cáo bỏ "lên đến"). Ghi chú: `mac_dinh=che_do_nguon,hoat_dong`.
+- **tb-00142 · DUNG D3.** “Xiaomi Watch S4 sạc nhanh chỉ 5 phút sạc cho 2 ngày sử dụng” (`sac_nhanh`).
+  - Bằng chứng: `dh-xiaomi-watchs4#015`. Khớp với tài liệu: “Sạc 5 phút, dùng 2 ngày”. Hộp có sẵn đế sạc từ tính, tài liệu không yêu cầu bộ tiếp hợp bán riêng; “chỉ” không phải từ khẳng định; 5 phút và 2 ngày khớp. Ghi chú: `mac_dinh=bo_tiep_hop,cap_sac,hoat_dong`.
+- **tb-00143 · DUNG D3.** “Xiaomi Watch S4 đạt chuẩn chống nước 5ATM” (`khang_nuoc`).
+  - Bằng chứng: `dh-xiaomi-watchs4#005`. Khớp với tài liệu: “Khả năng chống nước: 5ATM”.
+- **tb-00144 · DUNG D3.** “Xiaomi Watch S4 có thời lượng sử dụng lên tới 14 ngày chỉ với một lần sạc” (`thoi_luong_pin`).
+  - Bằng chứng: `dh-xiaomi-watchs4#005`, `dh-xiaomi-watchs4#014`, `dh-xiaomi-watchs4#015`, `dh-xiaomi-watchs4#033`. Khớp với tài liệu: “Thời lượng pin lên đến 15 ngày”. Không nêu chế độ nguồn và hoạt động cụ thể nên hiểu mặc định chế độ thường, sử dụng bình thường; 14 ngày thấp hơn (kém thuận lợi hơn) 15 ngày, vẫn khớp. Ghi chú: `mac_dinh=che_do_nguon,hoat_dong`.
+- **tb-00145 · DUNG D3.** “Xiaomi Watch S4 có pin kéo dài 15 ngày” (`thoi_luong_pin`).
+  - Bằng chứng: `dh-xiaomi-watchs4#005`, `dh-xiaomi-watchs4#014`, `dh-xiaomi-watchs4#015`, `dh-xiaomi-watchs4#033`. Khớp với tài liệu: “Thời lượng pin lên đến 15 ngày”. Không nêu chế độ nguồn và hoạt động cụ thể nên hiểu mặc định chế độ thường, sử dụng bình thường; 15 ngày khớp (quảng cáo bỏ "lên đến"). Ghi chú: `mac_dinh=che_do_nguon,hoat_dong`.
+- **tb-00146 · LECH D4 `bo_dieu_kien` · **PHÂN VÂN**.** “Xiaomi Watch S4 có độ sáng lên tới 1.500 nit” (`do_sang`).
+  - Bằng chứng: `dh-xiaomi-watchs4#005`, `dh-xiaomi-watchs4#015`. Giá trị 1.500 nit chỉ đạt khi bật chế độ HBM; tuyên bố không nêu chế độ hiển thị nên được hiểu là chế độ thông thường (tài liệu công bố hai mức sáng theo chế độ). Nguồn: “độ sáng cao đến 1.500 nit ở chế độ HBM.”. Ghi chú: `mac_dinh=che_do_hien_thi; ngoai_cau_hinh=HBM`.
+  - *Phương án khác (PHÂN VÂN):* Chú thích đoạn 15 giải thích “Độ sáng HBM là độ sáng tối đa khi toàn bộ màn hình sáng lên”; nếu coi HBM là độ sáng toàn màn hình tương ứng chế độ thông thường của đồng hồ thì có thể cân nhắc D3 Đúng.
+- **tb-00147 · DUNG D3.** “Xiaomi Watch S4 có thời lượng pin lên đến 15 ngày” (`thoi_luong_pin`).
+  - Bằng chứng: `dh-xiaomi-watchs4#005`, `dh-xiaomi-watchs4#014`, `dh-xiaomi-watchs4#015`, `dh-xiaomi-watchs4#033`. Khớp với tài liệu: “Thời lượng pin lên đến 15 ngày”. Không nêu chế độ nguồn và hoạt động cụ thể nên hiểu mặc định chế độ thường, sử dụng bình thường; 15 ngày khớp. Ghi chú: `mac_dinh=che_do_nguon,hoat_dong`.
+- **tb-00148 · DUNG D3.** “Xiaomi Watch S4 chỉ cần sạc 5 phút là có thể sử dụng liên tục 2 ngày” (`sac_nhanh`).
+  - Bằng chứng: `dh-xiaomi-watchs4#015`. Khớp với tài liệu: “Sạc 5 phút, dùng 2 ngày”. Hộp có sẵn đế sạc từ tính, tài liệu không yêu cầu bộ tiếp hợp bán riêng; “chỉ” không phải từ khẳng định; 5 phút và 2 ngày khớp. Ghi chú: `mac_dinh=bo_tiep_hop,cap_sac,hoat_dong`.
+- **tb-00149 · LECH D2 `doi_kieu_gia_tri` · **PHÂN VÂN**.** “Xiaomi Watch S4 có thời lượng pin thực tế đạt trên 14 ngày” (`thoi_luong_pin`).
+  - Bằng chứng: `dh-xiaomi-watchs4#005`, `dh-xiaomi-watchs4#014`, `dh-xiaomi-watchs4#015`, `dh-xiaomi-watchs4#033`. Tài liệu ghi mức tối đa: “Thời lượng pin lên đến 15 ngày” và chú thích “Kết quả thực tế có thể khác.”; tuyên bố viết thành mức chắc chắn đạt bằng từ khẳng định “trên 14 ngày” (mức sàn 14 không cao hơn 15). Ghi chú: `khang_dinh=trên; mac_dinh=che_do_nguon,hoat_dong`.
+  - *Phương án khác (PHÂN VÂN):* Đoạn 15 có câu quảng bá “Thời lượng pin 15 ngày đảm bảo thời gian sử dụng trên 2 tuần” (2 tuần = 14 ngày); nếu coi hãng đã tự khẳng định mức sàn trên 14 ngày thì có thể cân nhắc D3 Đúng.
+- **tb-00150 · DUNG D3.** “Xiaomi Watch S4 có pin kéo dài tới 14 ngày” (`thoi_luong_pin`).
+  - Bằng chứng: `dh-xiaomi-watchs4#005`, `dh-xiaomi-watchs4#014`, `dh-xiaomi-watchs4#015`, `dh-xiaomi-watchs4#033`. Khớp với tài liệu: “Thời lượng pin lên đến 15 ngày”. Không nêu chế độ nguồn và hoạt động cụ thể nên hiểu mặc định chế độ thường, sử dụng bình thường; 14 ngày thấp hơn (kém thuận lợi hơn) 15 ngày, vẫn khớp. Ghi chú: `mac_dinh=che_do_nguon,hoat_dong`.
+- **tb-00151 · DUNG D3.** “Xiaomi Watch S4 có độ sáng lên tới 1.500 nit (HBM)” (`do_sang`).
+  - Bằng chứng: `dh-xiaomi-watchs4#005`, `dh-xiaomi-watchs4#015`. Khớp với tài liệu: “độ sáng cao đến 1.500 nit ở chế độ HBM.”. Tuyên bố nêu rõ chế độ HBM; 1.500 nit khớp. Ghi chú: `ngoai_cau_hinh=HBM`.
+- **tb-00152 · DUNG D3.** “Xiaomi Watch S4 có thời lượng sử dụng lên tới 15 ngày” (`thoi_luong_pin`).
+  - Bằng chứng: `dh-xiaomi-watchs4#005`, `dh-xiaomi-watchs4#014`, `dh-xiaomi-watchs4#015`, `dh-xiaomi-watchs4#033`. Khớp với tài liệu: “Thời lượng pin lên đến 15 ngày”. Không nêu chế độ nguồn và hoạt động cụ thể (“sử dụng” đứng riêng coi như chưa nêu hoạt động) nên hiểu mặc định chế độ thường, sử dụng bình thường; 15 ngày khớp. Ghi chú: `mac_dinh=che_do_nguon,hoat_dong`.
+- **tb-00153 · DUNG D3.** “Xiaomi Watch S4 chỉ cần sạc 5 phút là đủ dùng 2 ngày” (`sac_nhanh`).
+  - Bằng chứng: `dh-xiaomi-watchs4#015`. Khớp với tài liệu: “Sạc 5 phút, dùng 2 ngày”. Hộp có sẵn đế sạc từ tính, tài liệu không yêu cầu bộ tiếp hợp bán riêng; “chỉ cần” và “đủ dùng” không phải từ khẳng định; 5 phút và 2 ngày khớp. Ghi chú: `mac_dinh=bo_tiep_hop,cap_sac,hoat_dong`.
+- **tb-00154 · DUNG D3.** “Xiaomi Watch S4 có khả năng chống nước 5ATM” (`khang_nuoc`).
+  - Bằng chứng: `dh-xiaomi-watchs4#005`. Khớp với tài liệu: “Khả năng chống nước: 5ATM”.
+
+## 3. `dt-oppo-findx8` (42 tuyên bố: `tb-00155`–`tb-00196`)
+
+- **Số liệu nguồn:** Tần số quét tối đa 120Hz (`#003`, `#060`, `#061`); Độ sáng 3 mức: bình thường 800 nits, HBM 1600 nits, độ sáng tối đa 4500 nits (Typical, 1%APL) (`#003`, `#061`); Dung lượng pin **mâu thuẫn nội bộ** giữa bảng thông số `#006` (tiêu chuẩn 5490 mAh / định mức 5630 mAh) và trang tổng quan `#023`, `#054` (tiêu chuẩn 5630 mAh / định mức 5490 mAh); Thời lượng pin: phát trực tuyến 21 giờ (`#023`), quay Dolby Vision 6.5 giờ ở nhiệt độ phòng và 5.1 giờ ở -20°C (`#054`); Sạc có dây SuperVOOC 80W (củ sạc có trong hộp `#013`), sạc không dây AirVOOC 50W (`#007`, `#023`, `#055`); Sạc nhanh (phút): không có số nào; Kháng nước IP68 & IP69 (`#060`); Zoom quang học 3x, zoom số tới 18x (video) / 120x (chụp ảnh, AI tái tạo 60x–120x) (`#006`, `#028`, `#029`, `#030`).
+
+- **tb-00155 · DUNG D3.** “OPPO Find X8 có màn hình AMOLED 120Hz” (`tan_so_quet`).
+  - Bằng chứng: `dt-oppo-findx8#003`, `dt-oppo-findx8#060`, `dt-oppo-findx8#061`. Khớp với tài liệu: “Tần số quét Tối đa: 120Hz”. Không nêu kiểu tần số nên hiểu mặc định là mức tối đa; 120Hz khớp. Ghi chú: `mac_dinh=kieu_tan_so`.
+- **tb-00156 · DUNG D3.** “OPPO Find X8 có màn hình ProXDR 120Hz” (`tan_so_quet`).
+  - Bằng chứng: `dt-oppo-findx8#003`, `dt-oppo-findx8#060`, `dt-oppo-findx8#061`. Khớp với tài liệu: “Tần số quét Tối đa: 120Hz”. Không nêu kiểu tần số nên hiểu mặc định là mức tối đa; 120Hz khớp. Ghi chú: `mac_dinh=kieu_tan_so`.
+- **tb-00157 · DUNG D3 · **PHÂN VÂN**.** “OPPO Find X8 có độ sáng tối đa 4500nits” (`do_sang`).
+  - Bằng chứng: `dt-oppo-findx8#003`, `dt-oppo-findx8#061`. Khớp với tài liệu: “Độ sáng tối đa: 4500nits (Typical, 1%APL )”. Tài liệu tách ba mức sáng riêng (“Độ sáng bình thường”, “HBM”, “Độ sáng tối đa”) nên cụm “độ sáng tối đa” chép đúng nhãn mức 4500 nits; diện tích đo (1% APL) hiểu như hãng công bố. Ghi chú: `chep_nhan=độ sáng tối đa; ngoai_cau_hinh=Độ sáng tối đa`.
+  - *Phương án khác (PHÂN VÂN):* Chữ “1%APL” nằm trong ngoặc ở bảng thông số và chú thích gọi 1.600 nits là “độ sáng tối đa kích thích”; nếu coi thiếu chữ điều kiện theo QĐ15 hoặc “tối đa” chỉ là kiểu giá trị thì D1a CHUA_DU (`mac_dinh=che_do_hien_thi`).
+- **tb-00158 · CHUA_DU D1b.** “OPPO Find X8 có dung lượng pin 5630mAh” (`dung_luong_pin`).
+  - Bằng chứng: `dt-oppo-findx8#006`, `dt-oppo-findx8#023`, `dt-oppo-findx8#054`. Tài liệu ghi hai giá trị khác nhau cho dung lượng pin ở điều kiện điển hình (tiêu chuẩn): “Giá trị tiêu chuẩn: 5490mAh/21.25Wh” và “5.630mAh là giá trị tiêu chuẩn của dung lượng pin.”. Ghi chú: `mac_dinh=kieu_dung_luong`.
+- **tb-00159 · DUNG D3.** “OPPO Find X8 hỗ trợ phát trực tuyến liên tục 21 giờ” (`thoi_luong_pin`).
+  - Bằng chứng: `dt-oppo-findx8#023`. Khớp với tài liệu: “Viên pin OPPO Silicon-carbon 5.630mAh có thể hỗ trợ phát trực tuyến xuyên suốt 21 giờ liên tục”. Tuyên bố nêu đúng hoạt động phát trực tuyến (“liên tục” không làm đổi hoạt động), 21 giờ khớp. Ghi chú: `ngoai_cau_hinh=phát trực tuyến`.
+- **tb-00160 · DUNG D3.** “OPPO Find X8 sạc nhanh SuperVOOC 80W” (`cong_suat_sac`).
+  - Bằng chứng: `dt-oppo-findx8#007`, `dt-oppo-findx8#013`, `dt-oppo-findx8#023`, `dt-oppo-findx8#055`. Khớp với tài liệu: “sạc có dây SuperVOOCTM 80W”. Không nêu bộ tiếp hợp và cách sạc nên hiểu mặc định không mua thêm và sạc có dây; trong hộp có sẵn củ sạc (“Sạc x 1”), 80W khớp. Ghi chú: `mac_dinh=bo_tiep_hop,cach_sac`.
+- **tb-00161 · DUNG D3 · **PHÂN VÂN**.** “OPPO Find X8 sạc không dây 50W” (`cong_suat_sac`).
+  - Bằng chứng: `dt-oppo-findx8#007`, `dt-oppo-findx8#023`, `dt-oppo-findx8#055`. Khớp với tài liệu: “Sạc không dây AirVOOC 50W”. Tuyên bố nêu rõ sạc không dây, mặc định không mua thêm bộ tiếp hợp; tài liệu không ghi yêu cầu bộ tiếp hợp hay đế sạc bán riêng cho mức 50W; 50W khớp. Ghi chú: `mac_dinh=bo_tiep_hop`.
+  - *Phương án khác (PHÂN VÂN):* Thành phần trong hộp chỉ liệt kê “Sạc x 1, Cáp USB x 1”, không có đế sạc không dây AirVOOC 50W; nếu tính bộ tiếp hợp/đế sạc không dây là phụ kiện phải mua riêng không có trong hộp thì ra D4 LECH (`bo_dieu_kien`, `mac_dinh=bo_tiep_hop`).
+- **tb-00162 · DUNG D3.** “OPPO Find X8 có chuẩn kháng nước IP68” (`khang_nuoc`).
+  - Bằng chứng: `dt-oppo-findx8#060`. Khớp với tài liệu: “khả năng kháng nước và bụi IP68 & IP69”. Điều kiện thử hiểu như hãng công bố; mã IP68 khớp.
+- **tb-00163 · DUNG D3.** “OPPO Find X8 có chuẩn kháng nước IP69” (`khang_nuoc`).
+  - Bằng chứng: `dt-oppo-findx8#060`. Khớp với tài liệu: “khả năng kháng nước và bụi IP68 & IP69”. Điều kiện thử hiểu như hãng công bố; mã IP69 khớp.
+- **tb-00164 · LECH D4 `bo_dieu_kien`.** “OPPO Find X8 chụp ảnh ở mọi khoảng cách đến 120x” (`zoom`).
+  - Bằng chứng: `dt-oppo-findx8#028`, `dt-oppo-findx8#029`. Giá trị 120x chỉ đạt ở zoom kỹ thuật số/AI (dải thu phóng tới 120x); tuyên bố nêu chụp ảnh nhưng không nêu loại zoom nên được hiểu là zoom quang học (3x). Nguồn: “Với tiêu cự thu phóng từ 60x đến 120x, các bộ máy trên thiết bị sẽ tái tạo lại hình ảnh ở cấp độ pixel”. Ghi chú: `mac_dinh=loai_zoom,dai_luong`.
+- **tb-00165 · DUNG D3.** “OPPO Find X8 quay phim Dolby Vision liên tục tới 5.1 giờ ngay cả trong môi trường âm 20 độ C” (`thoi_luong_pin`).
+  - Bằng chứng: `dt-oppo-findx8#054`. Khớp với tài liệu: “5.1h -20℃ Quay phim liên tục ở chế độ Dolby Vision”. Tuyên bố nêu đúng hoạt động quay phim Dolby Vision và nhiệt độ âm 20 độ C (“ngay cả” mở đầu điều kiện, không phải từ khẳng định); 5.1 giờ khớp. Ghi chú: `ngoai_cau_hinh=quay phim Dolby Vision, âm 20 độ C`.
+- **tb-00166 · DUNG D3.** “OPPO Find X8 có màn hình ProXDR 120Hz” (`tan_so_quet`).
+  - Bằng chứng: `dt-oppo-findx8#003`, `dt-oppo-findx8#060`, `dt-oppo-findx8#061`. Khớp với tài liệu: “Tần số quét Tối đa: 120Hz”. Không nêu kiểu tần số nên hiểu mặc định là mức tối đa; 120Hz khớp. Ghi chú: `mac_dinh=kieu_tan_so`.
+- **tb-00167 · DUNG D3 · **PHÂN VÂN**.** “OPPO Find X8 có độ sáng tối đa 4500 nits” (`do_sang`).
+  - Bằng chứng: `dt-oppo-findx8#003`, `dt-oppo-findx8#061`. Khớp với tài liệu: “Độ sáng tối đa: 4500nits (Typical, 1%APL )”. Tài liệu tách ba mức sáng riêng (“Độ sáng bình thường”, “HBM”, “Độ sáng tối đa”) nên cụm “độ sáng tối đa” chép đúng nhãn mức 4500 nits; diện tích đo (1% APL) hiểu như hãng công bố. Ghi chú: `chep_nhan=độ sáng tối đa; ngoai_cau_hinh=Độ sáng tối đa`.
+  - *Phương án khác (PHÂN VÂN):* Chữ “1%APL” nằm trong ngoặc ở bảng thông số và chú thích gọi 1.600 nits là “độ sáng tối đa kích thích”; nếu coi thiếu chữ điều kiện theo QĐ15 hoặc “tối đa” chỉ là kiểu giá trị thì D1a CHUA_DU (`mac_dinh=che_do_hien_thi`).
+- **tb-00168 · CHUA_DU D1b.** “OPPO Find X8 có viên pin Silicon-carbon 5630mAh dung lượng lớn” (`dung_luong_pin`).
+  - Bằng chứng: `dt-oppo-findx8#006`, `dt-oppo-findx8#023`, `dt-oppo-findx8#054`. Tài liệu ghi hai giá trị khác nhau cho dung lượng pin ở điều kiện điển hình (tiêu chuẩn): “Giá trị tiêu chuẩn: 5490mAh/21.25Wh” và “5.630mAh là giá trị tiêu chuẩn của dung lượng pin.”. Ghi chú: `mac_dinh=kieu_dung_luong`.
+- **tb-00169 · DUNG D3.** “OPPO Find X8 sạc nhanh SuperVOOC 80W” (`cong_suat_sac`).
+  - Bằng chứng: `dt-oppo-findx8#007`, `dt-oppo-findx8#013`, `dt-oppo-findx8#023`, `dt-oppo-findx8#055`. Khớp với tài liệu: “sạc có dây SuperVOOCTM 80W”. Không nêu bộ tiếp hợp và cách sạc nên hiểu mặc định không mua thêm và sạc có dây; trong hộp có sẵn củ sạc (“Sạc x 1”), 80W khớp. Ghi chú: `mac_dinh=bo_tiep_hop,cach_sac`.
+- **tb-00170 · DUNG D3 · **PHÂN VÂN**.** “OPPO Find X8 sạc không dây 50W tiện lợi” (`cong_suat_sac`).
+  - Bằng chứng: `dt-oppo-findx8#007`, `dt-oppo-findx8#023`, `dt-oppo-findx8#055`. Khớp với tài liệu: “Sạc không dây AirVOOC 50W”. Tuyên bố nêu rõ sạc không dây, mặc định không mua thêm bộ tiếp hợp; tài liệu không ghi yêu cầu bộ tiếp hợp hay đế sạc bán riêng cho mức 50W; 50W khớp. Ghi chú: `mac_dinh=bo_tiep_hop`.
+  - *Phương án khác (PHÂN VÂN):* Thành phần trong hộp chỉ liệt kê “Sạc x 1, Cáp USB x 1”, không có đế sạc không dây AirVOOC 50W; nếu tính bộ tiếp hợp/đế sạc không dây là phụ kiện phải mua riêng không có trong hộp thì ra D4 LECH (`bo_dieu_kien`, `mac_dinh=bo_tiep_hop`).
+- **tb-00171 · DUNG D3.** “OPPO Find X8 có độ bền chuẩn IP68” (`khang_nuoc`).
+  - Bằng chứng: `dt-oppo-findx8#060`. Khớp với tài liệu: “khả năng kháng nước và bụi IP68 & IP69”. Điều kiện thử hiểu như hãng công bố; mã IP68 khớp.
+- **tb-00172 · DUNG D3.** “OPPO Find X8 có độ bền chuẩn IP69” (`khang_nuoc`).
+  - Bằng chứng: `dt-oppo-findx8#060`. Khớp với tài liệu: “khả năng kháng nước và bụi IP68 & IP69”. Điều kiện thử hiểu như hãng công bố; mã IP69 khớp.
+- **tb-00173 · DUNG D3.** “OPPO Find X8 có pin 5000mAh” (`dung_luong_pin`).
+  - Bằng chứng: `dt-oppo-findx8#006`, `dt-oppo-findx8#023`, `dt-oppo-findx8#054`. Khớp với tài liệu: “Giá trị tiêu chuẩn: 5490mAh/21.25Wh” và “5.630mAh là giá trị tiêu chuẩn của dung lượng pin.”. Tài liệu ghi mâu thuẫn 5490 mAh và 5630 mAh ở mức điển hình, nhưng 5000 mAh thấp hơn (kém thuận lợi hơn) cả hai giá trị nên không dừng ở D1b mà khớp ở D3 (QĐ13). Ghi chú: `mac_dinh=kieu_dung_luong; mau_thuan_khop_ca_hai=5490mAh/5630mAh`.
+- **tb-00174 · DUNG D3.** “OPPO Find X8 hỗ trợ sạc nhanh 80W” (`cong_suat_sac`).
+  - Bằng chứng: `dt-oppo-findx8#007`, `dt-oppo-findx8#013`, `dt-oppo-findx8#023`, `dt-oppo-findx8#055`. Khớp với tài liệu: “sạc có dây SuperVOOCTM 80W”. Không nêu bộ tiếp hợp và cách sạc nên hiểu mặc định không mua thêm và sạc có dây; trong hộp có sẵn củ sạc (“Sạc x 1”), 80W khớp. Ghi chú: `mac_dinh=bo_tiep_hop,cach_sac`.
+- **tb-00175 · DUNG D3.** “OPPO Find X8 có màn hình LTPO 120Hz” (`tan_so_quet`).
+  - Bằng chứng: `dt-oppo-findx8#003`, `dt-oppo-findx8#060`, `dt-oppo-findx8#061`. Khớp với tài liệu: “Tần số quét Tối đa: 120Hz”. Không nêu kiểu tần số nên hiểu mặc định là mức tối đa; 120Hz khớp. Ghi chú: `mac_dinh=kieu_tan_so`.
+- **tb-00176 · DUNG D3.** “OPPO Find X8 có màn hình 120 Hz” (`tan_so_quet`).
+  - Bằng chứng: `dt-oppo-findx8#003`, `dt-oppo-findx8#060`, `dt-oppo-findx8#061`. Khớp với tài liệu: “Tần số quét Tối đa: 120Hz”. Không nêu kiểu tần số nên hiểu mặc định là mức tối đa; 120Hz khớp. Ghi chú: `mac_dinh=kieu_tan_so`.
+- **tb-00177 · CHUA_DU D1a.** “OPPO Find X8 có độ sáng lên tới 4500 nits” (`do_sang`).
+  - Bằng chứng: `dt-oppo-findx8#003`, `dt-oppo-findx8#061`. Chưa xác định được điều kiện của tuyên bố: tuyên bố không nêu chế độ hiển thị, và độ sáng điện thoại không có cách hiểu mặc định. Tài liệu chỉ công bố “Độ sáng tối đa: 4500nits (Typical, 1%APL )” (cục bộ 1% APL). Ghi chú: `mac_dinh=che_do_hien_thi`.
+- **tb-00178 · CHUA_DU D1b.** “OPPO Find X8 có pin silicon‑carbon 5630 mAh” (`dung_luong_pin`).
+  - Bằng chứng: `dt-oppo-findx8#006`, `dt-oppo-findx8#023`, `dt-oppo-findx8#054`. Tài liệu ghi hai giá trị khác nhau cho dung lượng pin ở điều kiện điển hình (tiêu chuẩn): “Giá trị tiêu chuẩn: 5490mAh/21.25Wh” và “5.630mAh là giá trị tiêu chuẩn của dung lượng pin.”. Ghi chú: `mac_dinh=kieu_dung_luong`.
+- **tb-00179 · DUNG D3.** “OPPO Find X8 cho tới 21 giờ phát trực tuyến liên tục” (`thoi_luong_pin`).
+  - Bằng chứng: `dt-oppo-findx8#023`. Khớp với tài liệu: “Viên pin OPPO Silicon-carbon 5.630mAh có thể hỗ trợ phát trực tuyến xuyên suốt 21 giờ liên tục”. Tuyên bố nêu đúng hoạt động phát trực tuyến (“liên tục” không làm đổi hoạt động), 21 giờ khớp. Ghi chú: `ngoai_cau_hinh=phát trực tuyến`.
+- **tb-00180 · DUNG D3.** “OPPO Find X8 sạc nhanh 80 W có dây” (`cong_suat_sac`).
+  - Bằng chứng: `dt-oppo-findx8#007`, `dt-oppo-findx8#013`, `dt-oppo-findx8#023`, `dt-oppo-findx8#055`. Khớp với tài liệu: “sạc có dây SuperVOOCTM 80W”. Tuyên bố nêu rõ sạc có dây, mặc định không mua thêm bộ tiếp hợp (trong hộp có sẵn củ sạc “Sạc x 1”); 80 W khớp. Ghi chú: `mac_dinh=bo_tiep_hop`.
+- **tb-00181 · DUNG D3 · **PHÂN VÂN**.** “OPPO Find X8 có 50 W không dây” (`cong_suat_sac`).
+  - Bằng chứng: `dt-oppo-findx8#007`, `dt-oppo-findx8#023`, `dt-oppo-findx8#055`. Khớp với tài liệu: “Sạc không dây AirVOOC 50W”. Tuyên bố nêu rõ sạc không dây, mặc định không mua thêm bộ tiếp hợp; tài liệu không ghi yêu cầu bộ tiếp hợp hay đế sạc bán riêng cho mức 50W; 50W khớp. Ghi chú: `mac_dinh=bo_tiep_hop`.
+  - *Phương án khác (PHÂN VÂN):* Thành phần trong hộp chỉ liệt kê “Sạc x 1, Cáp USB x 1”, không có đế sạc không dây AirVOOC 50W; nếu tính bộ tiếp hợp/đế sạc không dây là phụ kiện phải mua riêng không có trong hộp thì ra D4 LECH (`bo_dieu_kien`, `mac_dinh=bo_tiep_hop`).
+- **tb-00182 · DUNG D3.** “OPPO Find X8 có zoom quang học 3×” (`zoom`).
+  - Bằng chứng: `dt-oppo-findx8#028`, `dt-oppo-findx8#029`, `dt-oppo-findx8#030`. Khớp với tài liệu: “Camera Tele Tiềm Vọng 3x”. Tuyên bố nêu zoom quang học, mặc định độ phóng đại khi chụp ảnh; 3x khớp. Ghi chú: `mac_dinh=dai_luong,che_do_camera`.
+- **tb-00183 · DUNG D3.** “OPPO Find X8 có chuẩn IP68” (`khang_nuoc`).
+  - Bằng chứng: `dt-oppo-findx8#060`. Khớp với tài liệu: “khả năng kháng nước và bụi IP68 & IP69”. Điều kiện thử hiểu như hãng công bố; mã IP68 khớp.
+- **tb-00184 · DUNG D3.** “OPPO Find X8 có chuẩn IP69” (`khang_nuoc`).
+  - Bằng chứng: `dt-oppo-findx8#060`. Khớp với tài liệu: “khả năng kháng nước và bụi IP68 & IP69”. Điều kiện thử hiểu như hãng công bố; mã IP69 khớp.
+- **tb-00185 · DUNG D3.** “OPPO Find X8 có pin 5000mAh” (`dung_luong_pin`).
+  - Bằng chứng: `dt-oppo-findx8#006`, `dt-oppo-findx8#023`, `dt-oppo-findx8#054`. Khớp với tài liệu: “Giá trị tiêu chuẩn: 5490mAh/21.25Wh” và “5.630mAh là giá trị tiêu chuẩn của dung lượng pin.”. Tài liệu ghi mâu thuẫn 5490 mAh và 5630 mAh ở mức điển hình, nhưng 5000 mAh thấp hơn (kém thuận lợi hơn) cả hai giá trị nên không dừng ở D1b mà khớp ở D3 (QĐ13). Ghi chú: `mac_dinh=kieu_dung_luong; mau_thuan_khop_ca_hai=5490mAh/5630mAh`.
+- **tb-00186 · DUNG D3.** “OPPO Find X8 hỗ trợ sạc nhanh 80W” (`cong_suat_sac`).
+  - Bằng chứng: `dt-oppo-findx8#007`, `dt-oppo-findx8#013`, `dt-oppo-findx8#023`, `dt-oppo-findx8#055`. Khớp với tài liệu: “sạc có dây SuperVOOCTM 80W”. Không nêu bộ tiếp hợp và cách sạc nên hiểu mặc định không mua thêm và sạc có dây; trong hộp có sẵn củ sạc (“Sạc x 1”), 80W khớp. Ghi chú: `mac_dinh=bo_tiep_hop,cach_sac`.
+- **tb-00187 · CHUA_DU D1.** “OPPO Find X8 sạc đầy trong vòng 30 phút” (`sac_nhanh`).
+  - Bằng chứng: (trống). Tài liệu của OPPO Find X8 không có thông số sạc nhanh (thời gian sạc tới mốc phần trăm).
+- **tb-00188 · DUNG D3.** “OPPO Find X8 có màn hình 6.59” ProXDR 120Hz” (`tan_so_quet`).
+  - Bằng chứng: `dt-oppo-findx8#003`, `dt-oppo-findx8#060`, `dt-oppo-findx8#061`. Khớp với tài liệu: “Tần số quét Tối đa: 120Hz”. Không nêu kiểu tần số nên hiểu mặc định là mức tối đa; 120Hz khớp. Ghi chú: `mac_dinh=kieu_tan_so`.
+- **tb-00189 · CHUA_DU D1a.** “OPPO Find X8 có độ sáng lên tới 4500 nits” (`do_sang`).
+  - Bằng chứng: `dt-oppo-findx8#003`, `dt-oppo-findx8#061`. Chưa xác định được điều kiện của tuyên bố: tuyên bố không nêu chế độ hiển thị, và độ sáng điện thoại không có cách hiểu mặc định. Tài liệu chỉ công bố “Độ sáng tối đa: 4500nits (Typical, 1%APL )” (cục bộ 1% APL). Ghi chú: `mac_dinh=che_do_hien_thi`.
+- **tb-00190 · LECH D4 `bo_dieu_kien`.** “OPPO Find X8 có zoom lên tới 120x” (`zoom`).
+  - Bằng chứng: `dt-oppo-findx8#028`, `dt-oppo-findx8#029`. Giá trị 120x chỉ đạt ở zoom kỹ thuật số/AI; tuyên bố không nêu loại zoom nên được hiểu là zoom quang học (3x), độ phóng đại khi chụp ảnh. Nguồn: “Với tiêu cự thu phóng từ 60x đến 120x, các bộ máy trên thiết bị sẽ tái tạo lại hình ảnh ở cấp độ pixel”. Ghi chú: `mac_dinh=loai_zoom,dai_luong,che_do_camera`.
+- **tb-00191 · CHUA_DU D1b.** “OPPO Find X8 có pin silicon‑carbon 5630 mAh” (`dung_luong_pin`).
+  - Bằng chứng: `dt-oppo-findx8#006`, `dt-oppo-findx8#023`, `dt-oppo-findx8#054`. Tài liệu ghi hai giá trị khác nhau cho dung lượng pin ở điều kiện điển hình (tiêu chuẩn): “Giá trị tiêu chuẩn: 5490mAh/21.25Wh” và “5.630mAh là giá trị tiêu chuẩn của dung lượng pin.”. Ghi chú: `mac_dinh=kieu_dung_luong`.
+- **tb-00192 · DUNG D3.** “OPPO Find X8 cho tới 21 giờ phát trực tuyến liên tục” (`thoi_luong_pin`).
+  - Bằng chứng: `dt-oppo-findx8#023`. Khớp với tài liệu: “Viên pin OPPO Silicon-carbon 5.630mAh có thể hỗ trợ phát trực tuyến xuyên suốt 21 giờ liên tục”. Tuyên bố nêu đúng hoạt động phát trực tuyến (“liên tục” không làm đổi hoạt động), 21 giờ khớp. Ghi chú: `ngoai_cau_hinh=phát trực tuyến`.
+- **tb-00193 · DUNG D3.** “OPPO Find X8 sạc nhanh 80W SuperVOOC” (`cong_suat_sac`).
+  - Bằng chứng: `dt-oppo-findx8#007`, `dt-oppo-findx8#013`, `dt-oppo-findx8#023`, `dt-oppo-findx8#055`. Khớp với tài liệu: “sạc có dây SuperVOOCTM 80W”. Không nêu bộ tiếp hợp và cách sạc nên hiểu mặc định không mua thêm và sạc có dây; trong hộp có sẵn củ sạc (“Sạc x 1”), 80W khớp. Ghi chú: `mac_dinh=bo_tiep_hop,cach_sac`.
+- **tb-00194 · DUNG D3 · **PHÂN VÂN**.** “OPPO Find X8 sạc không dây 50W AirVOOC” (`cong_suat_sac`).
+  - Bằng chứng: `dt-oppo-findx8#007`, `dt-oppo-findx8#023`, `dt-oppo-findx8#055`. Khớp với tài liệu: “Sạc không dây AirVOOC 50W”. Tuyên bố nêu rõ sạc không dây, mặc định không mua thêm bộ tiếp hợp; tài liệu không ghi yêu cầu bộ tiếp hợp hay đế sạc bán riêng cho mức 50W; 50W khớp. Ghi chú: `mac_dinh=bo_tiep_hop`.
+  - *Phương án khác (PHÂN VÂN):* Thành phần trong hộp chỉ liệt kê “Sạc x 1, Cáp USB x 1”, không có đế sạc không dây AirVOOC 50W; nếu tính bộ tiếp hợp/đế sạc không dây là phụ kiện phải mua riêng không có trong hộp thì ra D4 LECH (`bo_dieu_kien`, `mac_dinh=bo_tiep_hop`).
+- **tb-00195 · DUNG D3.** “OPPO Find X8 có khả năng chịu nước, bụi IP68” (`khang_nuoc`).
+  - Bằng chứng: `dt-oppo-findx8#060`. Khớp với tài liệu: “khả năng kháng nước và bụi IP68 & IP69”. Điều kiện thử hiểu như hãng công bố; mã IP68 khớp.
+- **tb-00196 · DUNG D3.** “OPPO Find X8 có khả năng chịu nước, bụi IP69” (`khang_nuoc`).
+  - Bằng chứng: `dt-oppo-findx8#060`. Khớp với tài liệu: “khả năng kháng nước và bụi IP68 & IP69”. Điều kiện thử hiểu như hãng công bố; mã IP69 khớp.
+
+## 4. `dt-samsung-galaxys25ultra` (34 tuyên bố: `tb-00197`–`tb-00230`)
+
+- **Số liệu nguồn:** Dung lượng pin Typical 5000 mAh (`#013`, `#018`, `#022`, `#153`; định mức 4855 mAh ở `#016`, `#147`); Thời lượng pin phát video lên tới 31 giờ (`#013`, `#018`, `#022`, `#035`, `#128`); Kháng nước IP68 (1,5 m / 30 phút, `#018`, `#019`, `#038`, `#147`, `#155`); Tần số làm tươi 120 Hz (`#005`); Zoom quang học 3x và 5x (2x, 10x chất lượng quang học), zoom kỹ thuật số lên đến 100x (`#007`, `#022`, `#024`, `#111`, `#112`, `#115`, `#154`); Công suất sạc (W) và độ sáng (nit): không có số nào.
+
+- **tb-00197 · DUNG D3.** “Galaxy S25 Ultra có dung lượng pin 5000 mAh” (`dung_luong_pin`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#013`, `dt-samsung-galaxys25ultra#018`, `dt-samsung-galaxys25ultra#022`, `dt-samsung-galaxys25ultra#153`. Khớp với tài liệu: “Dung lượng pin (mAh, Typical) 5000”. Không nêu kiểu dung lượng nên hiểu mặc định điển hình; 5000 mAh khớp. Ghi chú: `mac_dinh=kieu_dung_luong`.
+- **tb-00198 · DUNG D3.** “Galaxy S25 Ultra có thời gian phát video lên đến 31 giờ” (`thoi_luong_pin`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#013`, `dt-samsung-galaxys25ultra#018`, `dt-samsung-galaxys25ultra#022`, `dt-samsung-galaxys25ultra#035`, `dt-samsung-galaxys25ultra#128`. Khớp với tài liệu: “Thời gian phát lại Video (Giờ) Lên tới 31”. Cụm “phát video” chưa nêu rõ trực tuyến hay tải sẵn nên lấy hoạt động kém thuận lợi nhất hãng công bố; tài liệu chỉ công bố duy nhất một mức 31 giờ nên 31 giờ khớp. Ghi chú: `mac_dinh=hoat_dong; ngoai_cau_hinh=phát video`.
+- **tb-00199 · DUNG D3.** “Galaxy S25 Ultra có khả năng kháng nước IP68” (`khang_nuoc`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#018`, `dt-samsung-galaxys25ultra#019`, `dt-samsung-galaxys25ultra#038`, `dt-samsung-galaxys25ultra#147`, `dt-samsung-galaxys25ultra#155`. Khớp với tài liệu: “xếp hạng IP68, cho phép thiết bị chịu nước ở độ sâu tối đa 1.5 mét trong tối đa 30 phút.”. Điều kiện thử không nêu nên hiểu như hãng công bố; mã IP68 khớp.
+- **tb-00200 · DUNG D3.** “Galaxy S25 Ultra có tần số quét 120 Hz” (`tan_so_quet`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#005`. Khớp với tài liệu: “Tần số làm tươi màn hình (Màn hình chính) 120 Hz”. Không nêu kiểu tần số nên hiểu mặc định mức tối đa; 120 Hz khớp. Ghi chú: `mac_dinh=kieu_tan_so`.
+- **tb-00201 · DUNG D3.** “Galaxy S25 Ultra có zoom kỹ thuật số lên đến 100x” (`zoom`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#007`, `dt-samsung-galaxys25ultra#022`, `dt-samsung-galaxys25ultra#115`. Khớp với tài liệu: “Zoom kỹ thuật số lên đến 100x”. Tuyên bố nêu rõ zoom kỹ thuật số; 100x khớp.
+- **tb-00202 · DUNG D3.** “Galaxy S25 Ultra có tần số quét 120Hz” (`tan_so_quet`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#005`. Khớp với tài liệu: “Tần số làm tươi màn hình (Màn hình chính) 120 Hz”. Không nêu kiểu tần số nên hiểu mặc định mức tối đa; 120 Hz khớp. Ghi chú: `mac_dinh=kieu_tan_so`.
+- **tb-00203 · LECH D4 `bo_dieu_kien`.** “Galaxy S25 Ultra có zoom 100x” (`zoom`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#007`, `dt-samsung-galaxys25ultra#022`, `dt-samsung-galaxys25ultra#115`. Giá trị 100x chỉ đạt ở zoom kỹ thuật số; tuyên bố không nêu loại zoom nên được hiểu là zoom quang học (3x và 5x). Nguồn: “Zoom kỹ thuật số lên đến 100x”. Ghi chú: `mac_dinh=loai_zoom`.
+- **tb-00204 · DUNG D3.** “Galaxy S25 Ultra có zoom quang học 3x” (`zoom`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#007`, `dt-samsung-galaxys25ultra#022`, `dt-samsung-galaxys25ultra#024`, `dt-samsung-galaxys25ultra#111`, `dt-samsung-galaxys25ultra#112`, `dt-samsung-galaxys25ultra#154`. Khớp với tài liệu: “Zoom quang học 3x và 5x”. Tuyên bố nêu rõ zoom quang học; 3x khớp.
+- **tb-00205 · DUNG D3.** “Galaxy S25 Ultra có zoom quang học 5x” (`zoom`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#007`, `dt-samsung-galaxys25ultra#022`, `dt-samsung-galaxys25ultra#024`, `dt-samsung-galaxys25ultra#111`, `dt-samsung-galaxys25ultra#112`, `dt-samsung-galaxys25ultra#154`. Khớp với tài liệu: “Zoom quang học 3x và 5x”. Tuyên bố nêu rõ zoom quang học; 5x khớp.
+- **tb-00206 · DUNG D3.** “Galaxy S25 Ultra có zoom kỹ thuật số lên đến 100x” (`zoom`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#007`, `dt-samsung-galaxys25ultra#022`, `dt-samsung-galaxys25ultra#115`. Khớp với tài liệu: “Zoom kỹ thuật số lên đến 100x”. Tuyên bố nêu rõ zoom kỹ thuật số; 100x khớp.
+- **tb-00207 · DUNG D3.** “Galaxy S25 Ultra có pin dung lượng 5000mAh” (`dung_luong_pin`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#013`, `dt-samsung-galaxys25ultra#018`, `dt-samsung-galaxys25ultra#022`, `dt-samsung-galaxys25ultra#153`. Khớp với tài liệu: “Dung lượng pin (mAh, Typical) 5000”. Không nêu kiểu dung lượng nên hiểu mặc định điển hình; 5000 mAh khớp. Ghi chú: `mac_dinh=kieu_dung_luong`.
+- **tb-00208 · DUNG D3.** “Galaxy S25 Ultra có thời gian phát video liên tục lên tới 31 giờ” (`thoi_luong_pin`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#013`, `dt-samsung-galaxys25ultra#018`, `dt-samsung-galaxys25ultra#022`, `dt-samsung-galaxys25ultra#035`, `dt-samsung-galaxys25ultra#128`. Khớp với tài liệu: “Thời gian phát lại Video (Giờ) Lên tới 31”. Cụm “phát video” chưa nêu rõ trực tuyến hay tải sẵn nên lấy hoạt động kém thuận lợi nhất hãng công bố; tài liệu chỉ công bố duy nhất một mức 31 giờ nên 31 giờ khớp. Ghi chú: `mac_dinh=hoat_dong; ngoai_cau_hinh=phát video`.
+- **tb-00209 · DUNG D3.** “Galaxy S25 Ultra có độ bền chuẩn IP68” (`khang_nuoc`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#018`, `dt-samsung-galaxys25ultra#019`, `dt-samsung-galaxys25ultra#038`, `dt-samsung-galaxys25ultra#147`, `dt-samsung-galaxys25ultra#155`. Khớp với tài liệu: “xếp hạng IP68, cho phép thiết bị chịu nước ở độ sâu tối đa 1.5 mét trong tối đa 30 phút.”. Điều kiện thử không nêu nên hiểu như hãng công bố; mã IP68 khớp.
+- **tb-00210 · DUNG D3.** “Galaxy S25 Ultra kháng nước ở độ sâu 1.5m trong 30 phút đạt chuẩn IP68” (`khang_nuoc`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#018`, `dt-samsung-galaxys25ultra#019`, `dt-samsung-galaxys25ultra#038`, `dt-samsung-galaxys25ultra#147`, `dt-samsung-galaxys25ultra#155`. Khớp với tài liệu: “xếp hạng IP68, cho phép thiết bị chịu nước ở độ sâu tối đa 1.5 mét trong tối đa 30 phút.”. Điều kiện thử 1,5 m và 30 phút khớp mức tối đa hãng công bố; mã IP68 khớp.
+- **tb-00211 · SAI D5 `doi_gia_tri`.** “Galaxy S25 Ultra có pin 6000mAh” (`dung_luong_pin`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#013`, `dt-samsung-galaxys25ultra#018`, `dt-samsung-galaxys25ultra#022`, `dt-samsung-galaxys25ultra#153`, `dt-samsung-galaxys25ultra#016`, `dt-samsung-galaxys25ultra#147`. Tài liệu ghi 5000 mAh ở mức điển hình (“Dung lượng pin (mAh, Typical) 5000”) và 4855 mAh ở mức định mức; tuyên bố ghi 6000 mAh, cao hơn mọi giá trị công bố và không trùng giá trị nào. Ghi chú: `mac_dinh=kieu_dung_luong`.
+- **tb-00212 · CHUA_DU D1.** “Galaxy S25 Ultra sạc nhanh 65W” (`cong_suat_sac`).
+  - Bằng chứng: (trống). Tài liệu của Galaxy S25 Ultra không có thông số công suất sạc.
+- **tb-00213 · DUNG D3.** “Galaxy S25 Ultra có siêu màn hình Dynamic AMOLED 2X 120 Hz” (`tan_so_quet`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#005`. Khớp với tài liệu: “Tần số làm tươi màn hình (Màn hình chính) 120 Hz”. Không nêu kiểu tần số nên hiểu mặc định mức tối đa; 120 Hz khớp. Ghi chú: `mac_dinh=kieu_tan_so`.
+- **tb-00214 · LECH D4 `bo_dieu_kien`.** “Galaxy S25 Ultra có camera Zoom 100x” (`zoom`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#007`, `dt-samsung-galaxys25ultra#022`, `dt-samsung-galaxys25ultra#115`. Giá trị 100x chỉ đạt ở zoom kỹ thuật số; tuyên bố không nêu loại zoom nên được hiểu là zoom quang học (3x và 5x). Nguồn: “Zoom kỹ thuật số lên đến 100x”. Ghi chú: `mac_dinh=loai_zoom`.
+- **tb-00215 · DUNG D3.** “Galaxy S25 Ultra có màn hình 6.9” Quad HD+ 3120 × 1440, 120 Hz mượt mà” (`tan_so_quet`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#005`. Khớp với tài liệu: “Tần số làm tươi màn hình (Màn hình chính) 120 Hz”. Không nêu kiểu tần số nên hiểu mặc định mức tối đa; 120 Hz khớp. Ghi chú: `mac_dinh=kieu_tan_so`.
+- **tb-00216 · DUNG D3.** “Galaxy S25 Ultra có zoom quang học 3x” (`zoom`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#007`, `dt-samsung-galaxys25ultra#022`, `dt-samsung-galaxys25ultra#024`, `dt-samsung-galaxys25ultra#111`, `dt-samsung-galaxys25ultra#112`, `dt-samsung-galaxys25ultra#154`. Khớp với tài liệu: “Zoom quang học 3x và 5x”. Tuyên bố nêu rõ zoom quang học; 3x khớp.
+- **tb-00217 · DUNG D3.** “Galaxy S25 Ultra có zoom quang học 5x” (`zoom`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#007`, `dt-samsung-galaxys25ultra#022`, `dt-samsung-galaxys25ultra#024`, `dt-samsung-galaxys25ultra#111`, `dt-samsung-galaxys25ultra#112`, `dt-samsung-galaxys25ultra#154`. Khớp với tài liệu: “Zoom quang học 3x và 5x”. Tuyên bố nêu rõ zoom quang học; 5x khớp.
+- **tb-00218 · DUNG D3.** “Galaxy S25 Ultra có zoom kỹ thuật số lên tới 100x” (`zoom`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#007`, `dt-samsung-galaxys25ultra#022`, `dt-samsung-galaxys25ultra#115`. Khớp với tài liệu: “Zoom kỹ thuật số lên đến 100x”. Tuyên bố nêu rõ zoom kỹ thuật số; 100x khớp.
+- **tb-00219 · DUNG D3.** “Galaxy S25 Ultra có pin 5000 mAh” (`dung_luong_pin`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#013`, `dt-samsung-galaxys25ultra#018`, `dt-samsung-galaxys25ultra#022`, `dt-samsung-galaxys25ultra#153`. Khớp với tài liệu: “Dung lượng pin (mAh, Typical) 5000”. Không nêu kiểu dung lượng nên hiểu mặc định điển hình; 5000 mAh khớp. Ghi chú: `mac_dinh=kieu_dung_luong`.
+- **tb-00220 · DUNG D3.** “Galaxy S25 Ultra có thời gian phát video lên tới 31 giờ” (`thoi_luong_pin`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#013`, `dt-samsung-galaxys25ultra#018`, `dt-samsung-galaxys25ultra#022`, `dt-samsung-galaxys25ultra#035`, `dt-samsung-galaxys25ultra#128`. Khớp với tài liệu: “Thời gian phát lại Video (Giờ) Lên tới 31”. Cụm “phát video” chưa nêu rõ trực tuyến hay tải sẵn nên lấy hoạt động kém thuận lợi nhất hãng công bố; tài liệu chỉ công bố duy nhất một mức 31 giờ nên 31 giờ khớp. Ghi chú: `mac_dinh=hoat_dong; ngoai_cau_hinh=phát video`.
+- **tb-00221 · DUNG D3.** “Galaxy S25 Ultra có chuẩn IP68 chống nước/độ 1.5 m trong 30 phút” (`khang_nuoc`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#018`, `dt-samsung-galaxys25ultra#019`, `dt-samsung-galaxys25ultra#038`, `dt-samsung-galaxys25ultra#147`, `dt-samsung-galaxys25ultra#155`. Khớp với tài liệu: “xếp hạng IP68, cho phép thiết bị chịu nước ở độ sâu tối đa 1.5 mét trong tối đa 30 phút.”. Điều kiện thử 1,5 m và 30 phút khớp mức tối đa hãng công bố; mã IP68 khớp.
+- **tb-00222 · SAI D5 `doi_gia_tri`.** “Galaxy S25 Ultra có pin 6000 mAh” (`dung_luong_pin`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#013`, `dt-samsung-galaxys25ultra#018`, `dt-samsung-galaxys25ultra#022`, `dt-samsung-galaxys25ultra#153`, `dt-samsung-galaxys25ultra#016`, `dt-samsung-galaxys25ultra#147`. Tài liệu ghi 5000 mAh ở mức điển hình (“Dung lượng pin (mAh, Typical) 5000”) và 4855 mAh ở mức định mức; tuyên bố ghi 6000 mAh, cao hơn mọi giá trị công bố và không trùng giá trị nào. Ghi chú: `mac_dinh=kieu_dung_luong`.
+- **tb-00223 · CHUA_DU D1.** “Galaxy S25 Ultra sạc nhanh 80W” (`cong_suat_sac`).
+  - Bằng chứng: (trống). Tài liệu của Galaxy S25 Ultra không có thông số công suất sạc.
+- **tb-00224 · DUNG D3.** “Galaxy S25 Ultra có tần số 120 Hz” (`tan_so_quet`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#005`. Khớp với tài liệu: “Tần số làm tươi màn hình (Màn hình chính) 120 Hz”. Không nêu kiểu tần số nên hiểu mặc định mức tối đa; 120 Hz khớp. Ghi chú: `mac_dinh=kieu_tan_so`.
+- **tb-00225 · DUNG D3.** “Galaxy S25 Ultra có zoom quang học 3x” (`zoom`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#007`, `dt-samsung-galaxys25ultra#022`, `dt-samsung-galaxys25ultra#024`, `dt-samsung-galaxys25ultra#111`, `dt-samsung-galaxys25ultra#112`, `dt-samsung-galaxys25ultra#154`. Khớp với tài liệu: “Zoom quang học 3x và 5x”. Tuyên bố nêu rõ zoom quang học; 3x khớp.
+- **tb-00226 · DUNG D3.** “Galaxy S25 Ultra có zoom quang học 5x” (`zoom`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#007`, `dt-samsung-galaxys25ultra#022`, `dt-samsung-galaxys25ultra#024`, `dt-samsung-galaxys25ultra#111`, `dt-samsung-galaxys25ultra#112`, `dt-samsung-galaxys25ultra#154`. Khớp với tài liệu: “Zoom quang học 3x và 5x”. Tuyên bố nêu rõ zoom quang học; 5x khớp.
+- **tb-00227 · DUNG D3.** “Galaxy S25 Ultra có 100x kỹ thuật số” (`zoom`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#007`, `dt-samsung-galaxys25ultra#022`, `dt-samsung-galaxys25ultra#115`. Khớp với tài liệu: “Zoom kỹ thuật số lên đến 100x”. Tuyên bố nêu rõ zoom kỹ thuật số; 100x khớp (quảng cáo bỏ "lên đến").
+- **tb-00228 · DUNG D3.** “Galaxy S25 Ultra có pin 5000 mAh” (`dung_luong_pin`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#013`, `dt-samsung-galaxys25ultra#018`, `dt-samsung-galaxys25ultra#022`, `dt-samsung-galaxys25ultra#153`. Khớp với tài liệu: “Dung lượng pin (mAh, Typical) 5000”. Không nêu kiểu dung lượng nên hiểu mặc định điển hình; 5000 mAh khớp. Ghi chú: `mac_dinh=kieu_dung_luong`.
+- **tb-00229 · DUNG D3.** “Galaxy S25 Ultra cho tới 31 giờ phát video” (`thoi_luong_pin`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#013`, `dt-samsung-galaxys25ultra#018`, `dt-samsung-galaxys25ultra#022`, `dt-samsung-galaxys25ultra#035`, `dt-samsung-galaxys25ultra#128`. Khớp với tài liệu: “Thời gian phát lại Video (Giờ) Lên tới 31”. Cụm “phát video” chưa nêu rõ trực tuyến hay tải sẵn nên lấy hoạt động kém thuận lợi nhất hãng công bố; tài liệu chỉ công bố duy nhất một mức 31 giờ nên 31 giờ khớp. Ghi chú: `mac_dinh=hoat_dong; ngoai_cau_hinh=phát video`.
+- **tb-00230 · CHUA_DU D1a · **PHÂN VÂN**.** “Galaxy S25 Ultra có chuẩn IP68 kháng nước, bão” (`khang_nuoc`).
+  - Bằng chứng: `dt-samsung-galaxys25ultra#018`, `dt-samsung-galaxys25ultra#019`, `dt-samsung-galaxys25ultra#038`, `dt-samsung-galaxys25ultra#147`, `dt-samsung-galaxys25ultra#155`. Chưa xác định được điều kiện của tuyên bố: “bão” (cụm lạ không xác định được điều kiện thử nghiệm kháng nước trong tài liệu). Ghi chú: `chua_xac_dinh=bão`.
+  - *Phương án khác (PHÂN VÂN):* Chữ “bão” nhiều khả năng do LLM sinh nhầm từ “bụi”. Nếu coi “bão” là điều kiện môi trường ngoài bài thử nước ngọt tĩnh 1,5 m thì ra D4 LECH (`doi_dieu_kien`, `ngoai_cau_hinh=bão`).
+
+## 5. `dt-xiaomi-redminote14proplus5g` (34 tuyên bố: `tb-00231`–`tb-00264`)
+
+- **Số liệu nguồn:** Kháng nước IP68 (1,5 m / 30 phút / ΔT ≤ 5K, `#008`, `#018`, `#035`, `#063`, `#064`); Tần số quét lên đến 120Hz (`#003`, `#018`); Độ sáng duy nhất một con số: Độ sáng cực đại 3000 nit (`#003`, `#054`, không kèm điều kiện chế độ hay APL); Pin 5110 mAh điển hình (`#006`, `#018`, `#059`, `#063`, `#064`); Công suất sạc HyperCharge 120W, củ sạc 120W đi kèm trong hộp (`#006`, `#010`, `#018`, `#059`, `#063`); Sạc nhanh (phút): không có số nào; Thời lượng pin (`#059`): Mạng xã hội 19,5 giờ, Xem video phát trực tuyến 9 giờ, Điều hướng 15 giờ; Zoom quang học 2X và 4X (`#021`).
+
+- **tb-00231 · DUNG D3.** “Redmi Note 14 Pro+ 5G có chuẩn kháng nước, kháng bụi IP68” (`khang_nuoc`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#008`, `dt-xiaomi-redminote14proplus5g#018`, `dt-xiaomi-redminote14proplus5g#035`, `dt-xiaomi-redminote14proplus5g#063`, `dt-xiaomi-redminote14proplus5g#064`. Khớp với tài liệu: “Chống nước và chống bụi IP68”. Điều kiện thử hiểu như hãng công bố; mã IP68 khớp.
+- **tb-00232 · DUNG D3.** “Redmi Note 14 Pro+ 5G có màn hình AMOLED 1.5K 120Hz” (`tan_so_quet`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#003`, `dt-xiaomi-redminote14proplus5g#018`. Khớp với tài liệu: “Tốc độ làm mới: Lên đến 120Hz”. Không nêu kiểu tần số nên hiểu mặc định mức tối đa; 120Hz khớp (quảng cáo bỏ "lên đến"). Ghi chú: `mac_dinh=kieu_tan_so`.
+- **tb-00233 · DUNG D3 · **PHÂN VÂN**.** “Redmi Note 14 Pro+ 5G có độ sáng cực đại 3000 nit” (`do_sang`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#003`, `dt-xiaomi-redminote14proplus5g#054`. Khớp với tài liệu: “Độ sáng: Độ sáng cực đại 3000 nit”. Tài liệu chỉ có một con số độ sáng, không kèm điều kiện chế độ hay phần diện tích đo nào (nên “cực đại” chỉ là kiểu giá trị tối đa), so thẳng; tài liệu không nêu điều kiện.
+  - *Phương án khác (PHÂN VÂN):* Nếu coi “cực đại” ở điện thoại Xiaomi vẫn khiến tuyên bố không nêu chế độ hiển thị (như V43, dù tài liệu không nêu điều kiện chế độ/APL) thì sẽ thành D1a CHUA_DU (`mac_dinh=che_do_hien_thi`).
+- **tb-00234 · DUNG D3.** “Redmi Note 14 Pro+ 5G có pin 5110mAh” (`dung_luong_pin`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#006`, `dt-xiaomi-redminote14proplus5g#018`, `dt-xiaomi-redminote14proplus5g#059`, `dt-xiaomi-redminote14proplus5g#063`, `dt-xiaomi-redminote14proplus5g#064`. Khớp với tài liệu: “5110mAh (điển hình)”. Không nêu kiểu dung lượng nên hiểu mặc định điển hình; 5110 mAh khớp. Ghi chú: `mac_dinh=kieu_dung_luong`.
+- **tb-00235 · DUNG D3.** “Redmi Note 14 Pro+ 5G sạc nhanh HyperCharge 120W” (`cong_suat_sac`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#006`, `dt-xiaomi-redminote14proplus5g#010`, `dt-xiaomi-redminote14proplus5g#018`, `dt-xiaomi-redminote14proplus5g#059`, `dt-xiaomi-redminote14proplus5g#063`. Khớp với tài liệu: “Sạc nhanh HyperCharge 120WCủ sạc 120W đi kèm”. Củ sạc 120W có sẵn trong hộp nên mặc định không mua thêm vẫn đạt; 120W khớp. Ghi chú: `mac_dinh=bo_tiep_hop`.
+- **tb-00236 · DUNG D3.** “Redmi Note 14 Pro+ 5G có camera thu phóng quang học 4X” (`zoom`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#021`. Khớp với tài liệu: “Với khả năng thu phóng quang học 2X và 4X”. Tuyên bố nêu rõ thu phóng quang học; 4X khớp.
+- **tb-00237 · DUNG D3.** “Redmi Note 14 Pro+ 5G có chuẩn kháng nước và bụi IP68” (`khang_nuoc`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#008`, `dt-xiaomi-redminote14proplus5g#018`, `dt-xiaomi-redminote14proplus5g#035`, `dt-xiaomi-redminote14proplus5g#063`, `dt-xiaomi-redminote14proplus5g#064`. Khớp với tài liệu: “Chống nước và chống bụi IP68”. Điều kiện thử hiểu như hãng công bố; mã IP68 khớp.
+- **tb-00238 · DUNG D3.** “Redmi Note 14 Pro+ 5G sạc siêu nhanh công suất 120W” (`cong_suat_sac`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#006`, `dt-xiaomi-redminote14proplus5g#010`, `dt-xiaomi-redminote14proplus5g#018`, `dt-xiaomi-redminote14proplus5g#059`, `dt-xiaomi-redminote14proplus5g#063`. Khớp với tài liệu: “Sạc nhanh HyperCharge 120WCủ sạc 120W đi kèm”. Củ sạc 120W có sẵn trong hộp nên mặc định không mua thêm vẫn đạt; 120W khớp. Ghi chú: `mac_dinh=bo_tiep_hop`.
+- **tb-00239 · DUNG D3.** “Redmi Note 14 Pro+ 5G có màn hình AMOLED 1.5K 120Hz” (`tan_so_quet`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#003`, `dt-xiaomi-redminote14proplus5g#018`. Khớp với tài liệu: “Tốc độ làm mới: Lên đến 120Hz”. Không nêu kiểu tần số nên hiểu mặc định mức tối đa; 120Hz khớp (quảng cáo bỏ "lên đến"). Ghi chú: `mac_dinh=kieu_tan_so`.
+- **tb-00240 · DUNG D3.** “Redmi Note 14 Pro+ 5G có chuẩn chống nước và bụi IP68” (`khang_nuoc`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#008`, `dt-xiaomi-redminote14proplus5g#018`, `dt-xiaomi-redminote14proplus5g#035`, `dt-xiaomi-redminote14proplus5g#063`, `dt-xiaomi-redminote14proplus5g#064`. Khớp với tài liệu: “Chống nước và chống bụi IP68”. Điều kiện thử hiểu như hãng công bố; mã IP68 khớp.
+- **tb-00241 · DUNG D3.** “Redmi Note 14 Pro+ 5G có viên pin 5110mAh” (`dung_luong_pin`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#006`, `dt-xiaomi-redminote14proplus5g#018`, `dt-xiaomi-redminote14proplus5g#059`, `dt-xiaomi-redminote14proplus5g#063`, `dt-xiaomi-redminote14proplus5g#064`. Khớp với tài liệu: “5110mAh (điển hình)”. Không nêu kiểu dung lượng nên hiểu mặc định điển hình; 5110 mAh khớp. Ghi chú: `mac_dinh=kieu_dung_luong`.
+- **tb-00242 · DUNG D3.** “Redmi Note 14 Pro+ 5G sạc nhanh 120W HyperCharge” (`cong_suat_sac`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#006`, `dt-xiaomi-redminote14proplus5g#010`, `dt-xiaomi-redminote14proplus5g#018`, `dt-xiaomi-redminote14proplus5g#059`, `dt-xiaomi-redminote14proplus5g#063`. Khớp với tài liệu: “Sạc nhanh HyperCharge 120WCủ sạc 120W đi kèm”. Củ sạc 120W có sẵn trong hộp nên mặc định không mua thêm vẫn đạt; 120W khớp. Ghi chú: `mac_dinh=bo_tiep_hop`.
+- **tb-00243 · DUNG D3.** “Redmi Note 14 Pro+ 5G có camera thu phóng quang học 4X” (`zoom`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#021`. Khớp với tài liệu: “Với khả năng thu phóng quang học 2X và 4X”. Tuyên bố nêu rõ thu phóng quang học; 4X khớp.
+- **tb-00244 · DUNG D3.** “Redmi Note 14 Pro+ 5G có pin 5110mAh” (`dung_luong_pin`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#006`, `dt-xiaomi-redminote14proplus5g#018`, `dt-xiaomi-redminote14proplus5g#059`, `dt-xiaomi-redminote14proplus5g#063`, `dt-xiaomi-redminote14proplus5g#064`. Khớp với tài liệu: “5110mAh (điển hình)”. Không nêu kiểu dung lượng nên hiểu mặc định điển hình; 5110 mAh khớp. Ghi chú: `mac_dinh=kieu_dung_luong`.
+- **tb-00245 · DUNG D3.** “Redmi Note 14 Pro+ 5G có tần số làm mới 120Hz” (`tan_so_quet`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#003`, `dt-xiaomi-redminote14proplus5g#018`. Khớp với tài liệu: “Tốc độ làm mới: Lên đến 120Hz”. Không nêu kiểu tần số nên hiểu mặc định mức tối đa; 120Hz khớp (quảng cáo bỏ "lên đến"). Ghi chú: `mac_dinh=kieu_tan_so`.
+- **tb-00246 · DUNG D3.** “Redmi Note 14 Pro+ 5G có công nghệ HyperCharge 120W” (`cong_suat_sac`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#006`, `dt-xiaomi-redminote14proplus5g#010`, `dt-xiaomi-redminote14proplus5g#018`, `dt-xiaomi-redminote14proplus5g#059`, `dt-xiaomi-redminote14proplus5g#063`. Khớp với tài liệu: “Sạc nhanh HyperCharge 120WCủ sạc 120W đi kèm”. Củ sạc 120W có sẵn trong hộp nên mặc định không mua thêm vẫn đạt; 120W khớp. Ghi chú: `mac_dinh=bo_tiep_hop`.
+- **tb-00247 · DUNG D3 · **PHÂN VÂN**.** “Redmi Note 14 Pro+ 5G có độ sáng cực đại 3000 nit” (`do_sang`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#003`, `dt-xiaomi-redminote14proplus5g#054`. Khớp với tài liệu: “Độ sáng: Độ sáng cực đại 3000 nit”. Tài liệu chỉ có một con số độ sáng, không kèm điều kiện chế độ hay phần diện tích đo nào (nên “cực đại” chỉ là kiểu giá trị tối đa), so thẳng; tài liệu không nêu điều kiện.
+  - *Phương án khác (PHÂN VÂN):* Nếu coi “cực đại” ở điện thoại Xiaomi vẫn khiến tuyên bố không nêu chế độ hiển thị (như V43, dù tài liệu không nêu điều kiện chế độ/APL) thì sẽ thành D1a CHUA_DU (`mac_dinh=che_do_hien_thi`).
+- **tb-00248 · DUNG D3.** “Redmi Note 14 Pro+ 5G có khả năng chống bụi và nước chuẩn IP68” (`khang_nuoc`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#008`, `dt-xiaomi-redminote14proplus5g#018`, `dt-xiaomi-redminote14proplus5g#035`, `dt-xiaomi-redminote14proplus5g#063`, `dt-xiaomi-redminote14proplus5g#064`. Khớp với tài liệu: “Chống nước và chống bụi IP68”. Điều kiện thử hiểu như hãng công bố; mã IP68 khớp.
+- **tb-00249 · DUNG D3.** “Redmi Note 14 Pro+ 5G có ống kính thu phóng quang học 2X” (`zoom`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#021`. Khớp với tài liệu: “Với khả năng thu phóng quang học 2X và 4X”. Tuyên bố nêu rõ thu phóng quang học; 2X khớp.
+- **tb-00250 · DUNG D3.** “Redmi Note 14 Pro+ 5G có ống kính thu phóng quang học 4X” (`zoom`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#021`. Khớp với tài liệu: “Với khả năng thu phóng quang học 2X và 4X”. Tuyên bố nêu rõ thu phóng quang học; 4X khớp.
+- **tb-00251 · DUNG D3.** “Redmi Note 14 Pro+ 5G có pin 5000mAh” (`dung_luong_pin`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#006`, `dt-xiaomi-redminote14proplus5g#018`, `dt-xiaomi-redminote14proplus5g#059`, `dt-xiaomi-redminote14proplus5g#063`, `dt-xiaomi-redminote14proplus5g#064`. Khớp với tài liệu: “5110mAh (điển hình)”. Không nêu kiểu dung lượng nên hiểu mặc định điển hình; 5000 mAh thấp hơn (kém thuận lợi hơn) 5110 mAh, vẫn khớp. Ghi chú: `mac_dinh=kieu_dung_luong`.
+- **tb-00252 · DUNG D3.** “Redmi Note 14 Pro+ 5G sạc nhanh 67W” (`cong_suat_sac`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#006`, `dt-xiaomi-redminote14proplus5g#010`, `dt-xiaomi-redminote14proplus5g#018`, `dt-xiaomi-redminote14proplus5g#059`, `dt-xiaomi-redminote14proplus5g#063`. Khớp với tài liệu: “Sạc nhanh HyperCharge 120WCủ sạc 120W đi kèm”. Củ sạc 120W có sẵn trong hộp nên mặc định không mua thêm vẫn đạt; 67W thấp hơn (kém thuận lợi hơn) 120W, vẫn khớp. Ghi chú: `mac_dinh=bo_tiep_hop`.
+- **tb-00253 · DUNG D3.** “Redmi Note 14 Pro+ 5G có pin 5110 mAh” (`dung_luong_pin`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#006`, `dt-xiaomi-redminote14proplus5g#018`, `dt-xiaomi-redminote14proplus5g#059`, `dt-xiaomi-redminote14proplus5g#063`, `dt-xiaomi-redminote14proplus5g#064`. Khớp với tài liệu: “5110mAh (điển hình)”. Không nêu kiểu dung lượng nên hiểu mặc định điển hình; 5110 mAh khớp. Ghi chú: `mac_dinh=kieu_dung_luong`.
+- **tb-00254 · DUNG D3.** “Redmi Note 14 Pro+ 5G sạc 120W” (`cong_suat_sac`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#006`, `dt-xiaomi-redminote14proplus5g#010`, `dt-xiaomi-redminote14proplus5g#018`, `dt-xiaomi-redminote14proplus5g#059`, `dt-xiaomi-redminote14proplus5g#063`. Khớp với tài liệu: “Sạc nhanh HyperCharge 120WCủ sạc 120W đi kèm”. Củ sạc 120W có sẵn trong hộp nên mặc định không mua thêm vẫn đạt; 120W khớp. Ghi chú: `mac_dinh=bo_tiep_hop`.
+- **tb-00255 · DUNG D3.** “Redmi Note 14 Pro+ 5G có màn hình AMOLED Crystal Res 6,67” 120 Hz” (`tan_so_quet`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#003`, `dt-xiaomi-redminote14proplus5g#018`. Khớp với tài liệu: “Tốc độ làm mới: Lên đến 120Hz”. Không nêu kiểu tần số nên hiểu mặc định mức tối đa; 120Hz khớp (quảng cáo bỏ "lên đến"). Ghi chú: `mac_dinh=kieu_tan_so`.
+- **tb-00256 · DUNG D3 · **PHÂN VÂN**.** “Redmi Note 14 Pro+ 5G có độ sáng cực đại 3000 nit” (`do_sang`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#003`, `dt-xiaomi-redminote14proplus5g#054`. Khớp với tài liệu: “Độ sáng: Độ sáng cực đại 3000 nit”. Tài liệu chỉ có một con số độ sáng, không kèm điều kiện chế độ hay phần diện tích đo nào (nên “cực đại” chỉ là kiểu giá trị tối đa), so thẳng; tài liệu không nêu điều kiện.
+  - *Phương án khác (PHÂN VÂN):* Nếu coi “cực đại” ở điện thoại Xiaomi vẫn khiến tuyên bố không nêu chế độ hiển thị (như V43, dù tài liệu không nêu điều kiện chế độ/APL) thì sẽ thành D1a CHUA_DU (`mac_dinh=che_do_hien_thi`).
+- **tb-00257 · CHUA_DU D1.** “Redmi Note 14 Pro+ 5G chỉ 15 phút đầy 100 %” (`sac_nhanh`).
+  - Bằng chứng: (trống). Tài liệu của Redmi Note 14 Pro+ 5G không có thông số sạc nhanh (thời gian sạc tới mốc phần trăm).
+- **tb-00258 · LECH D4 `bo_dieu_kien` · **PHÂN VÂN**.** “Redmi Note 14 Pro+ 5G dùng liên tục tới 19,5 giờ xem video” (`thoi_luong_pin`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#059`. Giá trị 19,5 giờ chỉ đạt khi dùng Mạng xã hội; tuyên bố ghi “xem video” không kèm “tải sẵn” hay “trực tuyến” và không chép đủ nhãn “Xem video phát trực tuyến” nên coi như chưa nêu hoạt động, lấy hoạt động kém thuận lợi nhất là Xem video phát trực tuyến (9 giờ). Nguồn: “19,5 giờ Mạng xã hội”. Ghi chú: `mac_dinh=hoat_dong; ngoai_cau_hinh=Mạng xã hội`.
+  - *Phương án khác (PHÂN VÂN):* Theo mục 5 và cấu hình điện thoại, “xem video” là `chua_ro_loai_video` (coi như chưa nêu hoạt động) nên chọn `bo_dieu_kien` kèm `mac_dinh=hoat_dong`; nếu coi tuyên bố đã nêu hoạt động xem video khác với “Mạng xã hội” thì đổi loại thành `doi_dieu_kien` và bỏ `mac_dinh=hoat_dong` (nhãn LECH D4 không đổi).
+- **tb-00259 · DUNG D3.** “Redmi Note 14 Pro+ 5G dùng liên tục tới 9 giờ lướt mạng xã hội” (`thoi_luong_pin`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#059`. Khớp với tài liệu: “19,5 giờ Mạng xã hội”. Ở hoạt động lướt mạng xã hội tài liệu ghi 19,5 giờ; tuyên bố ghi 9 giờ, thấp hơn (kém thuận lợi hơn) nên khớp ở D3. Ghi chú: `ngoai_cau_hinh=lướt mạng xã hội`.
+- **tb-00260 · LECH D4 `doi_dieu_kien`.** “Redmi Note 14 Pro+ 5G dùng liên tục tới 15 giờ chơi game” (`thoi_luong_pin`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#059`. Giá trị 15 giờ chỉ đạt khi Điều hướng; tuyên bố nêu chơi game. Nguồn: “15 giờ Điều hướng”. Ghi chú: `ngoai_cau_hinh=chơi game, Điều hướng`.
+- **tb-00261 · DUNG D3.** “Redmi Note 14 Pro+ 5G có bảo vệ IP68” (`khang_nuoc`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#008`, `dt-xiaomi-redminote14proplus5g#018`, `dt-xiaomi-redminote14proplus5g#035`, `dt-xiaomi-redminote14proplus5g#063`, `dt-xiaomi-redminote14proplus5g#064`. Khớp với tài liệu: “Chống nước và chống bụi IP68”. Điều kiện thử hiểu như hãng công bố; mã IP68 khớp.
+- **tb-00262 · DUNG D3 · **PHÂN VÂN**.** “Redmi Note 14 Pro+ 5G có độ sáng 3000 nit rõ ràng dưới ánh nắng mạnh” (`do_sang`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#003`, `dt-xiaomi-redminote14proplus5g#054`. Khớp với tài liệu: “Độ sáng: Độ sáng cực đại 3000 nit”. Tài liệu chỉ có một con số độ sáng, không kèm điều kiện chế độ nào nên so thẳng; tài liệu không nêu điều kiện. “Dưới ánh nắng mạnh” chỉ điều kiện ngoài trời, nhưng tài liệu không công bố con số nào ở chế độ khác nên không có giá trị để ra Lệch; 3000 nit khớp.
+  - *Phương án khác (PHÂN VÂN):* Tuyên bố nêu “dưới ánh nắng mạnh” (chế độ ngoài trời / dưới ánh sáng mạnh) nhưng tài liệu không nêu điều kiện chế độ nào cho mức 3000 nit; giữ D3 so thẳng như tb-00069, phương án biên là D6 CHUA_DU.
+- **tb-00263 · DUNG D3.** “Redmi Note 14 Pro+ 5G có pin 5000mAh” (`dung_luong_pin`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#006`, `dt-xiaomi-redminote14proplus5g#018`, `dt-xiaomi-redminote14proplus5g#059`, `dt-xiaomi-redminote14proplus5g#063`, `dt-xiaomi-redminote14proplus5g#064`. Khớp với tài liệu: “5110mAh (điển hình)”. Không nêu kiểu dung lượng nên hiểu mặc định điển hình; 5000 mAh thấp hơn (kém thuận lợi hơn) 5110 mAh, vẫn khớp. Ghi chú: `mac_dinh=kieu_dung_luong`.
+- **tb-00264 · DUNG D3.** “Redmi Note 14 Pro+ 5G sạc nhanh 67W” (`cong_suat_sac`).
+  - Bằng chứng: `dt-xiaomi-redminote14proplus5g#006`, `dt-xiaomi-redminote14proplus5g#010`, `dt-xiaomi-redminote14proplus5g#018`, `dt-xiaomi-redminote14proplus5g#059`, `dt-xiaomi-redminote14proplus5g#063`. Khớp với tài liệu: “Sạc nhanh HyperCharge 120WCủ sạc 120W đi kèm”. Củ sạc 120W có sẵn trong hộp nên mặc định không mua thêm vẫn đạt; 67W thấp hơn (kém thuận lợi hơn) 120W, vẫn khớp. Ghi chú: `mac_dinh=bo_tiep_hop`.
+
+## 6. `tn-apple-airpods4` (20 tuyên bố: `tb-00265`–`tb-00284`)
+
+- **Số liệu nguồn (bản thường, KHÔNG có chống ồn chủ động → `che_do_chong_on` không áp dụng):** Chống nước/bụi IP54 cho cả tai nghe và hộp sạc (`#004`, `#005`); Thời gian nghe: tối đa 5 giờ riêng tai nghe mỗi lần sạc, tối đa 30 giờ cùng hộp sạc USB-C (`#006`); Sạc nhanh: 5 phút trong hộp sạc tăng khoảng 1 giờ nghe (`#006`).
+
+- **tb-00265 · DUNG D3.** “AirPods 4 có tổng thời gian nghe lên đến 30 giờ cùng hộp sạc USB-C tiện lợi” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-apple-airpods4#006`. Khớp với tài liệu: “AirPods 4 với Hộp Sạc (USB-C) Thời gian nghe lên đến 30 giờ”. Tuyên bố nêu kèm hộp sạc và chép đúng nhãn “Thời gian nghe”; 30 giờ khớp. Ghi chú: `chep_nhan=thời gian nghe`.
+- **tb-00266 · DUNG D3.** “AirPods 4 chống nước đạt chuẩn IP54” (`khang_nuoc`).
+  - Bằng chứng: `tn-apple-airpods4#004`, `tn-apple-airpods4#005`. Khớp với tài liệu: “đạt mức IP54 theo tiêu chuẩn IEC 60529”. Không nêu bộ phận nên hiểu mặc định tai nghe; mã IP54 khớp. Ghi chú: `mac_dinh=bo_phan`.
+- **tb-00267 · DUNG D3.** “AirPods 4 sạc nhanh chỉ với 5 phút trong hộp sạc giúp kéo dài thời gian nghe thêm khoảng 1 giờ” (`sac_nhanh`).
+  - Bằng chứng: `tn-apple-airpods4#006`. Khớp với tài liệu: “5 phút để trong hộp sạc có thể tăng thời gian nghe khoảng 1 giờ”. Tuyên bố nêu rõ sạc 5 phút trong hộp, mặc định bộ phận tai nghe; 1 giờ khớp. Ghi chú: `mac_dinh=bo_phan`.
+- **tb-00268 · LECH D4 `bo_dieu_kien`.** “AirPods 4 có thời lượng pin ấn tượng lên đến 30 giờ” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-apple-airpods4#006`. Giá trị 30 giờ chỉ đạt khi dùng kèm hộp sạc; tuyên bố không nêu bộ phận nên được hiểu là chỉ tai nghe (5 giờ), mặc định nghe nhạc. Nguồn: “AirPods 4 với Hộp Sạc (USB-C) Thời gian nghe lên đến 30 giờ”. Ghi chú: `mac_dinh=bo_phan,hoat_dong`.
+- **tb-00269 · DUNG D3.** “AirPods 4 có chuẩn kháng nước IP54” (`khang_nuoc`).
+  - Bằng chứng: `tn-apple-airpods4#004`, `tn-apple-airpods4#005`. Khớp với tài liệu: “đạt mức IP54 theo tiêu chuẩn IEC 60529”. Không nêu bộ phận nên hiểu mặc định tai nghe; mã IP54 khớp. Ghi chú: `mac_dinh=bo_phan`.
+- **tb-00270 · DUNG D3.** “AirPods 4 có thể tận hưởng âm nhạc liên tục lên đến 5 giờ chỉ với một lần sạc đầy” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-apple-airpods4#006`. Khớp với tài liệu: “AirPods 4 Thời gian nghe lên đến 5 giờ với một lần sạc”. Tuyên bố nêu âm nhạc (nghe nhạc) và một lần sạc đầy (riêng tai nghe); 5 giờ khớp. Ghi chú: `ngoai_cau_hinh=âm nhạc, một lần sạc đầy`.
+- **tb-00271 · DUNG D3.** “AirPods 4 có tổng thời gian nghe được mở rộng lên tới 30 giờ khi kết hợp cùng hộp sạc USB-C” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-apple-airpods4#006`. Khớp với tài liệu: “AirPods 4 với Hộp Sạc (USB-C) Thời gian nghe lên đến 30 giờ”. Tuyên bố nêu kèm hộp sạc và chép đúng nhãn “Thời gian nghe”; 30 giờ khớp. Ghi chú: `chep_nhan=thời gian nghe`.
+- **tb-00272 · DUNG D3.** “AirPods 4 có 1 giờ sử dụng chỉ sau 5 phút đặt trong hộp sạc” (`sac_nhanh`).
+  - Bằng chứng: `tn-apple-airpods4#006`. Khớp với tài liệu: “5 phút để trong hộp sạc có thể tăng thời gian nghe khoảng 1 giờ”. Tuyên bố nêu rõ sạc 5 phút trong hộp, mặc định bộ phận tai nghe; 1 giờ khớp. Ghi chú: `mac_dinh=bo_phan`.
+- **tb-00273 · DUNG D3.** “AirPods 4 có khả năng chống nước đạt chuẩn IP54” (`khang_nuoc`).
+  - Bằng chứng: `tn-apple-airpods4#004`, `tn-apple-airpods4#005`. Khớp với tài liệu: “đạt mức IP54 theo tiêu chuẩn IEC 60529”. Không nêu bộ phận nên hiểu mặc định tai nghe; mã IP54 khớp. Ghi chú: `mac_dinh=bo_phan`.
+- **tb-00274 · DUNG D3.** “AirPods 4 có thời lượng pin lên đến 30 giờ (kèm hộp sạc)” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-apple-airpods4#006`. Khớp với tài liệu: “AirPods 4 với Hộp Sạc (USB-C) Thời gian nghe lên đến 30 giờ”. Tuyên bố nêu kèm hộp sạc, mặc định hoạt động nghe nhạc; 30 giờ khớp. Ghi chú: `mac_dinh=hoat_dong`.
+- **tb-00275 · LECH D4 `bo_dieu_kien`.** “AirPods 4 có thời lượng pin lên tới 30 giờ” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-apple-airpods4#006`. Giá trị 30 giờ chỉ đạt khi dùng kèm hộp sạc; tuyên bố không nêu bộ phận nên được hiểu là chỉ tai nghe (5 giờ), mặc định nghe nhạc. Nguồn: “AirPods 4 với Hộp Sạc (USB-C) Thời gian nghe lên đến 30 giờ”. Ghi chú: `mac_dinh=bo_phan,hoat_dong`.
+- **tb-00276 · DUNG D3.** “AirPods 4 có chống nước chuẩn IP54” (`khang_nuoc`).
+  - Bằng chứng: `tn-apple-airpods4#004`, `tn-apple-airpods4#005`. Khớp với tài liệu: “đạt mức IP54 theo tiêu chuẩn IEC 60529”. Không nêu bộ phận nên hiểu mặc định tai nghe; mã IP54 khớp. Ghi chú: `mac_dinh=bo_phan`.
+- **tb-00277 · DUNG D3.** “AirPods 4 có thời lượng pin 5 giờ nghe nhạc liên tục mỗi lần sạc” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-apple-airpods4#006`. Khớp với tài liệu: “AirPods 4 Thời gian nghe lên đến 5 giờ với một lần sạc”. Nêu rõ nghe nhạc và mỗi lần sạc (tai nghe); 5 giờ khớp (quảng cáo bỏ "lên đến").
+- **tb-00278 · DUNG D3.** “AirPods 4 có thời lượng pin tổng cộng 30 giờ với hộp sạc USB‑C” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-apple-airpods4#006`. Khớp với tài liệu: “AirPods 4 với Hộp Sạc (USB-C) Thời gian nghe lên đến 30 giờ”. Tuyên bố nêu tổng cộng với hộp sạc, mặc định hoạt động nghe nhạc; 30 giờ khớp (quảng cáo bỏ "lên đến"). Ghi chú: `mac_dinh=hoat_dong`.
+- **tb-00279 · DUNG D3.** “AirPods 4 chỉ 5 phút sạc trong hộp đã tăng thêm 1 giờ thời gian sử dụng” (`sac_nhanh`).
+  - Bằng chứng: `tn-apple-airpods4#006`. Khớp với tài liệu: “5 phút để trong hộp sạc có thể tăng thời gian nghe khoảng 1 giờ”. Tuyên bố nêu rõ sạc 5 phút trong hộp, mặc định bộ phận tai nghe; 1 giờ khớp. Ghi chú: `mac_dinh=bo_phan`.
+- **tb-00280 · LECH D4 `bo_dieu_kien`.** “AirPods 4 có pin kéo dài tới 30 giờ” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-apple-airpods4#006`. Giá trị 30 giờ chỉ đạt khi dùng kèm hộp sạc; tuyên bố không nêu bộ phận nên được hiểu là chỉ tai nghe (5 giờ), mặc định nghe nhạc. Nguồn: “AirPods 4 với Hộp Sạc (USB-C) Thời gian nghe lên đến 30 giờ”. Ghi chú: `mac_dinh=bo_phan,hoat_dong`.
+- **tb-00281 · DUNG D3.** “AirPods 4 với chuẩn IP54 (chúng chống bụi, chống mồ hôi và chống nước)” (`khang_nuoc`).
+  - Bằng chứng: `tn-apple-airpods4#004`, `tn-apple-airpods4#005`. Khớp với tài liệu: “đạt mức IP54 theo tiêu chuẩn IEC 60529”. Không nêu bộ phận nên hiểu mặc định tai nghe; mã IP54 khớp. Ghi chú: `mac_dinh=bo_phan`.
+- **tb-00282 · DUNG D3.** “AirPods 4 cung cấp tới 30 giờ nghe nhạc liên tục với hộp sạc USB-C siêu gọn” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-apple-airpods4#006`. Khớp với tài liệu: “AirPods 4 với Hộp Sạc (USB-C) Thời gian nghe lên đến 30 giờ”. Nêu nghe nhạc và kèm hộp sạc (“với hộp sạc USB-C”); 30 giờ khớp. Ghi chú: `ngoai_cau_hinh=với hộp sạc`.
+- **tb-00283 · DUNG D3.** “AirPods 4 chỉ cần 5 phút sạc, bạn sẽ có thêm 1 giờ âm nhạc với hộp sạc USB-C siêu gọn” (`sac_nhanh`).
+  - Bằng chứng: `tn-apple-airpods4#006`. Khớp với tài liệu: “5 phút để trong hộp sạc có thể tăng thời gian nghe khoảng 1 giờ”. Tuyên bố nêu rõ sạc 5 phút với hộp sạc USB-C, mặc định bộ phận tai nghe; 1 giờ khớp. Ghi chú: `mac_dinh=bo_phan`.
+- **tb-00284 · DUNG D3.** “AirPods 4 có thời gian nghe lên đến 5 giờ cho mỗi lần sạc” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-apple-airpods4#006`. Khớp với tài liệu: “AirPods 4 Thời gian nghe lên đến 5 giờ với một lần sạc”. Tuyên bố chép đúng nhãn “Thời gian nghe” và nêu mỗi lần sạc (tai nghe); 5 giờ khớp. Ghi chú: `chep_nhan=thời gian nghe`.
+
+## 7. `tn-apple-airpodspro3` (21 tuyên bố: `tb-00285`–`tb-00305`)
+
+- **Số liệu nguồn:** Chống nước/bụi IP57 cho cả tai nghe và hộp sạc (`#006`); Thời gian nghe riêng tai nghe: 8 giờ khi bật ANC (7,5 giờ bật Âm Thanh Không Gian), 6,5 giờ cảm biến nhịp tim (Xuyên Âm), 10 giờ Thiết Bị Trợ Thính (Xuyên Âm) (`#007`); Tổng kèm hộp sạc MagSafe khi bật ANC: 24 giờ (`#008`); Sạc nhanh: 5 phút trong hộp tăng khoảng 1 giờ nghe (`#008`).
+
+- **tb-00285 · DUNG D3.** “AirPods Pro 3 có khả năng chống nước IP57” (`khang_nuoc`).
+  - Bằng chứng: `tn-apple-airpodspro3#006`. Khớp với tài liệu: “Chống bụi, chống mồ hôi và chống nước (IP57): AirPods Pro và hộp sạc”. Không nêu bộ phận nên hiểu mặc định tai nghe; mã IP57 khớp. Ghi chú: `mac_dinh=bo_phan`.
+- **tb-00286 · DUNG D3.** “AirPods Pro 3 có thời lượng pin lên đến 8 giờ nghe liên tục khi bật Chủ Động Khử Tiếng Ồn” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-apple-airpodspro3#007`. Khớp với tài liệu: “Thời gian nghe lên đến 8 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn”. Nêu bật Chủ Động Khử Tiếng Ồn, mặc định tai nghe và nghe nhạc; 8 giờ khớp. Ghi chú: `mac_dinh=bo_phan,hoat_dong`.
+- **tb-00287 · DUNG D3.** “AirPods Pro 3 có thời lượng pin tổng cộng 24 giờ cùng hộp sạc MagSafe USB-C” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-apple-airpodspro3#008`. Khớp với tài liệu: “AirPods Pro 3 với Hộp Sạc MagSafe (USB-C) Thời gian nghe lên đến 24 giờ khi bật tính năng Chủ Động Khử Tiếng Ồn”. Nêu kèm hộp sạc, mặc định bật chống ồn và nghe nhạc; 24 giờ khớp (quảng cáo bỏ "lên đến"). Ghi chú: `mac_dinh=che_do_chong_on,hoat_dong`.
+- **tb-00288 · DUNG D3.** “AirPods Pro 3 có tính năng sạc nhanh 5 phút mang lại ngay 1 giờ sử dụng” (`sac_nhanh`).
+  - Bằng chứng: `tn-apple-airpodspro3#008`. Khớp với tài liệu: “5 phút để trong hộp sạc có thể tăng thời gian nghe khoảng 1 giờ”. Nêu rõ sạc 5 phút, mặc định bộ phận tai nghe; 1 giờ khớp. Ghi chú: `mac_dinh=bo_phan`.
+- **tb-00289 · DUNG D3.** “AirPods Pro 3 có tính năng Thiết Bị Trợ Thính lên đến 10 giờ” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-apple-airpodspro3#007`. Khớp với tài liệu: “Thời gian nghe lên đến 10 giờ với một lần sạc cho người dùng tính năng Thiết Bị Trợ Thính”. Tuyên bố nêu rõ tính năng Thiết Bị Trợ Thính, mặc định tai nghe (chế độ chống ồn không áp dụng cho tính năng trợ thính); 10 giờ khớp. Ghi chú: `mac_dinh=bo_phan; ngoai_cau_hinh=Thiết Bị Trợ Thính`.
+- **tb-00290 · DUNG D3.** “AirPods Pro 3 chống nước IP57 cho cả tai nghe và hộp sạc” (`khang_nuoc`).
+  - Bằng chứng: `tn-apple-airpodspro3#006`. Khớp với tài liệu: “Chống bụi, chống mồ hôi và chống nước (IP57): AirPods Pro và hộp sạc”. Tuyên bố nêu rõ cả tai nghe và hộp sạc; mã IP57 khớp.
+- **tb-00291 · DUNG D3.** “AirPods Pro 3 có chống nước IP57” (`khang_nuoc`).
+  - Bằng chứng: `tn-apple-airpodspro3#006`. Khớp với tài liệu: “Chống bụi, chống mồ hôi và chống nước (IP57): AirPods Pro và hộp sạc”. Không nêu bộ phận nên hiểu mặc định tai nghe; mã IP57 khớp. Ghi chú: `mac_dinh=bo_phan`.
+- **tb-00292 · DUNG D3.** “AirPods Pro 3 có thời lượng pin lên đến 8 giờ nghe liên tục khi bật Chủ Động Khử Tiếng Ồn” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-apple-airpodspro3#007`. Khớp với tài liệu: “Thời gian nghe lên đến 8 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn”. Nêu bật Chủ Động Khử Tiếng Ồn, mặc định tai nghe và nghe nhạc; 8 giờ khớp. Ghi chú: `mac_dinh=bo_phan,hoat_dong`.
+- **tb-00293 · DUNG D3.** “AirPods Pro 3 có thời lượng pin tổng cộng 24 giờ cùng hộp sạc MagSafe USB-C” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-apple-airpodspro3#008`. Khớp với tài liệu: “AirPods Pro 3 với Hộp Sạc MagSafe (USB-C) Thời gian nghe lên đến 24 giờ khi bật tính năng Chủ Động Khử Tiếng Ồn”. Nêu kèm hộp sạc, mặc định bật chống ồn và nghe nhạc; 24 giờ khớp (quảng cáo bỏ "lên đến"). Ghi chú: `mac_dinh=che_do_chong_on,hoat_dong`.
+- **tb-00294 · DUNG D3.** “AirPods Pro 3 sạc nhanh thông minh chỉ 5 phút trong hộp sạc mang lại 1 giờ nghe nhạc không gián đoạn” (`sac_nhanh`).
+  - Bằng chứng: `tn-apple-airpodspro3#008`. Khớp với tài liệu: “5 phút để trong hộp sạc có thể tăng thời gian nghe khoảng 1 giờ”. Nêu rõ sạc 5 phút, mặc định bộ phận tai nghe; 1 giờ khớp. Ghi chú: `mac_dinh=bo_phan`.
+- **tb-00295 · DUNG D3.** “AirPods Pro 3 có thời lượng pin lên tới 6 giờ liên tục” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-apple-airpodspro3#007`. Khớp với tài liệu: “Thời gian nghe lên đến 8 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn”. Không nêu chế độ chống ồn, bộ phận và hoạt động nên hiểu mặc định bật chống ồn, tai nghe, nghe nhạc; 6 giờ thấp hơn (kém thuận lợi hơn) 8 giờ, vẫn khớp. Ghi chú: `mac_dinh=che_do_chong_on,bo_phan,hoat_dong`.
+- **tb-00296 · SAI D5 `doi_gia_tri`.** “AirPods Pro 3 chống nước IPX4” (`khang_nuoc`).
+  - Bằng chứng: `tn-apple-airpodspro3#006`. Tài liệu ghi mã IP57 (nhánh ngâm nước) cho tai nghe và hộp sạc; tuyên bố ghi IPX4 (nhánh tia nước), khác nhánh không khớp và không trùng mã nào trong tài liệu. Ghi chú: `mac_dinh=bo_phan`.
+- **tb-00297 · DUNG D3.** “AirPods Pro 3 có chống nước chuẩn IP57” (`khang_nuoc`).
+  - Bằng chứng: `tn-apple-airpodspro3#006`. Khớp với tài liệu: “Chống bụi, chống mồ hôi và chống nước (IP57): AirPods Pro và hộp sạc”. Không nêu bộ phận nên hiểu mặc định tai nghe; mã IP57 khớp. Ghi chú: `mac_dinh=bo_phan`.
+- **tb-00298 · DUNG D3.** “AirPods Pro 3 chỉ 5 phút trong hộp tăng thời gian nghe thêm 1 giờ với hộp sạc MagSafe (USB‑C)” (`sac_nhanh`).
+  - Bằng chứng: `tn-apple-airpodspro3#008`. Khớp với tài liệu: “5 phút để trong hộp sạc có thể tăng thời gian nghe khoảng 1 giờ”. Nêu rõ sạc 5 phút, mặc định bộ phận tai nghe; 1 giờ khớp. Ghi chú: `mac_dinh=bo_phan`.
+- **tb-00299 · DUNG D3.** “AirPods Pro 3 có tổng thời gian nghe lên tới 24 giờ với MagSafe (USB‑C)” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-apple-airpodspro3#008`. Khớp với tài liệu: “AirPods Pro 3 với Hộp Sạc MagSafe (USB-C) Thời gian nghe lên đến 24 giờ khi bật tính năng Chủ Động Khử Tiếng Ồn”. Nêu tổng thời gian kèm hộp sạc MagSafe, mặc định bật chống ồn và nghe nhạc; 24 giờ khớp. Ghi chú: `mac_dinh=che_do_chong_on,hoat_dong`.
+- **tb-00300 · DUNG D3.** “AirPods Pro 3 có thời lượng pin lên tới 6 giờ sử dụng liên tục” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-apple-airpodspro3#007`. Khớp với tài liệu: “Thời gian nghe lên đến 8 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn”. Không nêu chế độ chống ồn, bộ phận và hoạt động nên hiểu mặc định bật chống ồn, tai nghe, nghe nhạc; 6 giờ thấp hơn (kém thuận lợi hơn) 8 giờ, vẫn khớp. Ghi chú: `mac_dinh=che_do_chong_on,bo_phan,hoat_dong`.
+- **tb-00301 · SAI D5 `doi_gia_tri`.** “AirPods Pro 3 có thời lượng pin 30 giờ với hộp sạc không dây” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-apple-airpodspro3#008`. Tài liệu ghi tối đa 24 giờ cho tai nghe kèm hộp sạc khi bật chống ồn (“AirPods Pro 3 với Hộp Sạc MagSafe (USB-C) Thời gian nghe lên đến 24 giờ khi bật tính năng Chủ Động Khử Tiếng Ồn”); tuyên bố ghi 30 giờ, cao hơn mọi giá trị công bố (cao nhất 24 giờ) và không trùng giá trị nào. Ghi chú: `mac_dinh=che_do_chong_on,hoat_dong; ngoai_cau_hinh=với hộp sạc không dây`.
+- **tb-00302 · DUNG D3.** “AirPods Pro 3 cho tới 8 giờ nghe liên tục” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-apple-airpodspro3#007`. Khớp với tài liệu: “Thời gian nghe lên đến 8 giờ với một lần sạc khi bật tính năng Chủ Động Khử Tiếng Ồn”. Không nêu chế độ chống ồn, bộ phận và hoạt động nên hiểu mặc định bật chống ồn, tai nghe, nghe nhạc; 8 giờ khớp. Ghi chú: `mac_dinh=che_do_chong_on,bo_phan,hoat_dong`.
+- **tb-00303 · DUNG D3.** “AirPods Pro 3 có chống nước chuẩn IP57” (`khang_nuoc`).
+  - Bằng chứng: `tn-apple-airpodspro3#006`. Khớp với tài liệu: “Chống bụi, chống mồ hôi và chống nước (IP57): AirPods Pro và hộp sạc”. Không nêu bộ phận nên hiểu mặc định tai nghe; mã IP57 khớp. Ghi chú: `mac_dinh=bo_phan`.
+- **tb-00304 · LECH D4 `doi_bo_phan` · **PHÂN VÂN**.** “AirPods Pro 3 có hộp sạc MagSafe hỗ trợ Qi, USB‑C, cho 24 giờ năng lượng chỉ với một lần sạc” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-apple-airpodspro3#008`. Giá trị 24 giờ là tổng thời gian nghe của cả tai nghe và hộp sạc; tuyên bố nói hộp sạc MagSafe cho 24 giờ năng lượng (chủ ngữ là hộp sạc riêng, không phải tổng kèm hộp sạc), mặc định bật chống ồn và nghe nhạc. Nguồn: “AirPods Pro 3 với Hộp Sạc MagSafe (USB-C) Thời gian nghe lên đến 24 giờ khi bật tính năng Chủ Động Khử Tiếng Ồn”. Ghi chú: `mac_dinh=che_do_chong_on,hoat_dong`.
+  - *Phương án khác (PHÂN VÂN):* Nếu đọc thoáng “hộp sạc MagSafe … cho 24 giờ năng lượng chỉ với một lần sạc” theo nghĩa cả bộ tai nghe và hộp sạc thì ra D3 Đúng.
+- **tb-00305 · DUNG D3.** “AirPods Pro 3 chỉ 5 phút sạc, bạn có thêm 1 giờ nghe nhạc” (`sac_nhanh`).
+  - Bằng chứng: `tn-apple-airpodspro3#008`. Khớp với tài liệu: “5 phút để trong hộp sạc có thể tăng thời gian nghe khoảng 1 giờ”. Nêu rõ sạc 5 phút, mặc định bộ phận tai nghe; 1 giờ khớp. Ghi chú: `mac_dinh=bo_phan`.
+
+## 8. `tn-xiaomi-redmibuds6pro` (20 tuyên bố: `tb-00306`–`tb-00325`)
+
+- **Số liệu nguồn (đều đo khi TẮT chống ồn; không công bố số nào khi BẬT ANC):** Kháng nước IP54 chỉ cho tai nghe (`#026`); Dung lượng pin: tai nghe 54 mAh, hộp sạc 480 mAh (`#002`); Thời lượng pin khi tắt chống ồn: 9,5 giờ sau một lần sạc, 36 giờ cùng hộp sạc (`#025`, không công bố số riêng cho hộp sạc); Sạc nhanh: 5 phút sạc cho 2 giờ phát nhạc, chú thích thử nghiệm ghi tắt chức năng khử tiếng ồn (`#025`).
+
+- **tb-00306 · LECH D4 `bo_dieu_kien`.** “Redmi Buds 6 Pro có thời gian phát nhạc liên tục lên đến 36 giờ khi dùng kèm hộp sạc” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-xiaomi-redmibuds6pro#025`. Giá trị 36 giờ chỉ đạt khi tắt chống ồn; tuyên bố không nêu chế độ chống ồn nên được hiểu là bật chống ồn (cùng bộ phận kèm hộp sạc và phát nhạc đã nêu). Nguồn: “tắt chức năng chống ồn”. Ghi chú: `mac_dinh=che_do_chong_on`.
+- **tb-00307 · DUNG D3.** “Redmi Buds 6 Pro có chuẩn kháng nước IP54” (`khang_nuoc`).
+  - Bằng chứng: `tn-xiaomi-redmibuds6pro#026`. Khớp với tài liệu: “Thử nghiệm khả năng chống nước IP54”. Không nêu bộ phận nên hiểu mặc định tai nghe; mã IP54 khớp. Ghi chú: `mac_dinh=bo_phan`.
+- **tb-00308 · LECH D4 `bo_dieu_kien`.** “Redmi Buds 6 Pro có thời lượng sử dụng lên tới 36 giờ” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-xiaomi-redmibuds6pro#025`. Giá trị 36 giờ chỉ đạt khi dùng kèm hộp sạc và tắt chống ồn; tuyên bố không nêu chế độ chống ồn, bộ phận và hoạt động nên được hiểu là bật chống ồn, chỉ tai nghe, nghe nhạc. Nguồn: “36 giờ Sử dụng cùng với hộp sạc”. Ghi chú: `mac_dinh=che_do_chong_on,bo_phan,hoat_dong`.
+- **tb-00309 · LECH D4 `bo_dieu_kien` · **PHÂN VÂN**.** “Redmi Buds 6 Pro có tính năng sạc nhanh 5 phút cho 2 giờ phát nhạc” (`sac_nhanh`).
+  - Bằng chứng: `tn-xiaomi-redmibuds6pro#025`. Giá trị 2 giờ sau 5 phút sạc chỉ đạt khi tắt chức năng khử tiếng ồn; tuyên bố không nêu chế độ chống ồn nên theo nguyên tắc chung (mục 6.7 ý 4) hiểu là chế độ kém thuận lợi nhất (bật chống ồn). Nguồn: “Điều kiện thử nghiệm: Tai nghe bật codec AAC, âm lượng 50% và tắt chức năng khử tiếng ồn.”. Ghi chú: `mac_dinh=bo_phan,ngoai_bang; ngoai_cau_hinh=tắt chức năng khử tiếng ồn`.
+  - *Phương án khác (PHÂN VÂN):* Bảng mục 5 cho sạc nhanh tai nghe chưa có khóa `che_do_chong_on`; nếu coi chú thích thử nghiệm “tắt chức năng khử tiếng ồn” là điều kiện phòng thí nghiệm (không xét ngoài hai khóa trong cấu hình tai nghe) thì ra D3 Đúng.
+- **tb-00310 · LECH D4 `bo_dieu_kien`.** “Redmi Buds 6 Pro có tổng thời gian sử dụng lên tới 36 giờ cùng hộp sạc” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-xiaomi-redmibuds6pro#025`. Giá trị 36 giờ chỉ đạt khi tắt chống ồn; tuyên bố không nêu chế độ chống ồn và hoạt động nên được hiểu là bật chống ồn và nghe nhạc (kèm hộp sạc đã nêu). Nguồn: “tắt chức năng chống ồn”. Ghi chú: `mac_dinh=che_do_chong_on,hoat_dong`.
+- **tb-00311 · LECH D4 `bo_dieu_kien`.** “Redmi Buds 6 Pro có thời lượng pin lên tới 36 giờ khi kết hợp cùng hộp sạc” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-xiaomi-redmibuds6pro#025`. Giá trị 36 giờ chỉ đạt khi tắt chống ồn; tuyên bố không nêu chế độ chống ồn và hoạt động nên được hiểu là bật chống ồn và nghe nhạc (kèm hộp sạc đã nêu). Nguồn: “tắt chức năng chống ồn”. Ghi chú: `mac_dinh=che_do_chong_on,hoat_dong`.
+- **tb-00312 · LECH D4 `bo_dieu_kien` · **PHÂN VÂN**.** “Redmi Buds 6 Pro sạc nhanh chỉ 5 phút sạc cho 2 giờ nghe nhạc liên tục” (`sac_nhanh`).
+  - Bằng chứng: `tn-xiaomi-redmibuds6pro#025`. Giá trị 2 giờ sau 5 phút sạc chỉ đạt khi tắt chức năng khử tiếng ồn; tuyên bố không nêu chế độ chống ồn nên theo nguyên tắc chung (mục 6.7 ý 4) hiểu là chế độ kém thuận lợi nhất (bật chống ồn). Nguồn: “Điều kiện thử nghiệm: Tai nghe bật codec AAC, âm lượng 50% và tắt chức năng khử tiếng ồn.”. Ghi chú: `mac_dinh=bo_phan,ngoai_bang; ngoai_cau_hinh=tắt chức năng khử tiếng ồn`.
+  - *Phương án khác (PHÂN VÂN):* Bảng mục 5 cho sạc nhanh tai nghe chưa có khóa `che_do_chong_on`; nếu coi chú thích thử nghiệm “tắt chức năng khử tiếng ồn” là điều kiện phòng thí nghiệm (không xét ngoài hai khóa trong cấu hình tai nghe) thì ra D3 Đúng.
+- **tb-00313 · LECH D4 `bo_dieu_kien`.** “Redmi Buds 6 Pro có thời lượng pin lên tới 36 giờ gồm tai nghe và hộp sạc” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-xiaomi-redmibuds6pro#025`. Giá trị 36 giờ chỉ đạt khi tắt chống ồn; tuyên bố không nêu chế độ chống ồn và hoạt động nên được hiểu là bật chống ồn và nghe nhạc (kèm hộp sạc đã nêu qua “gồm tai nghe và hộp sạc”). Nguồn: “tắt chức năng chống ồn”. Ghi chú: `mac_dinh=che_do_chong_on,hoat_dong; ngoai_cau_hinh=gồm tai nghe và hộp sạc`.
+- **tb-00314 · CHUA_DU D6.** “Redmi Buds 6 Pro có thời lượng pin 2 giờ ở tai nghe” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-xiaomi-redmibuds6pro#025`. Tài liệu không công bố thời lượng pin tai nghe khi bật chống ồn (chỉ công bố 9,5 giờ khi tắt chức năng chống ồn); 2 giờ không trùng số nào của thuộc tính thời lượng pin và không cao hơn mọi giá trị của tai nghe. Ghi chú: `mac_dinh=che_do_chong_on,hoat_dong`.
+- **tb-00315 · CHUA_DU D6.** “Redmi Buds 6 Pro có thêm 34 giờ thời lượng pin từ hộp sạc” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-xiaomi-redmibuds6pro#025`. Tài liệu không công bố thời lượng pin riêng của hộp sạc (chỉ công bố 9,5 giờ cho tai nghe và 36 giờ kèm hộp sạc khi tắt chống ồn; không tự trừ hai số để tạo giá trị mới); 34 giờ không trùng số nào và không cao hơn mọi giá trị công bố. Ghi chú: `mac_dinh=che_do_chong_on,hoat_dong`.
+- **tb-00316 · LECH D4 `bo_dieu_kien` · **PHÂN VÂN**.** “Redmi Buds 6 Pro sạc nhanh 5 phút chỉ đủ phát nhạc 2 giờ” (`sac_nhanh`).
+  - Bằng chứng: `tn-xiaomi-redmibuds6pro#025`. Giá trị 2 giờ sau 5 phút sạc chỉ đạt khi tắt chức năng khử tiếng ồn; tuyên bố không nêu chế độ chống ồn nên theo nguyên tắc chung (mục 6.7 ý 4) hiểu là chế độ kém thuận lợi nhất (bật chống ồn). Nguồn: “Điều kiện thử nghiệm: Tai nghe bật codec AAC, âm lượng 50% và tắt chức năng khử tiếng ồn.”. Ghi chú: `mac_dinh=bo_phan,ngoai_bang; ngoai_cau_hinh=tắt chức năng khử tiếng ồn`.
+  - *Phương án khác (PHÂN VÂN):* Bảng mục 5 cho sạc nhanh tai nghe chưa có khóa `che_do_chong_on`; nếu coi chú thích thử nghiệm “tắt chức năng khử tiếng ồn” là điều kiện phòng thí nghiệm (không xét ngoài hai khóa trong cấu hình tai nghe) thì ra D3 Đúng.
+- **tb-00317 · DUNG D3.** “Redmi Buds 6 Pro có pin tích hợp 54 mAh (tai nghe)” (`dung_luong_pin`).
+  - Bằng chứng: `tn-xiaomi-redmibuds6pro#002`. Khớp với tài liệu: “Dung lượng pin Tai nghe: 54mAh”. Nêu rõ tai nghe; 54 mAh khớp.
+- **tb-00318 · DUNG D3.** “Redmi Buds 6 Pro có pin 480 mAh (hộp sạc)” (`dung_luong_pin`).
+  - Bằng chứng: `tn-xiaomi-redmibuds6pro#002`. Khớp với tài liệu: “Dung lượng pin Tai nghe: 54mAh Hộp sạc: 480mAh”. Nêu rõ hộp sạc; 480 mAh khớp.
+- **tb-00319 · CHUA_DU D6.** “Redmi Buds 6 Pro có thời lượng pin lên tới 30 giờ gồm tai nghe và hộp sạc” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-xiaomi-redmibuds6pro#025`. Tài liệu không công bố thời lượng pin kèm hộp sạc khi bật chống ồn (chỉ công bố 36 giờ khi tắt chức năng chống ồn); 30 giờ không trùng số nào và không cao hơn mọi giá trị công bố. Ghi chú: `mac_dinh=che_do_chong_on,hoat_dong; ngoai_cau_hinh=gồm tai nghe và hộp sạc`.
+- **tb-00320 · CHUA_DU D6.** “Redmi Buds 6 Pro có 5 giờ nghe liên tục sau mỗi lần sạc” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-xiaomi-redmibuds6pro#025`. Tài liệu không công bố thời lượng pin tai nghe khi bật chống ồn (chỉ công bố 9,5 giờ khi tắt chức năng chống ồn); 5 giờ không trùng số nào và không cao hơn mọi giá trị của tai nghe. Ghi chú: `mac_dinh=che_do_chong_on,hoat_dong`.
+- **tb-00321 · CHUA_DU D6.** “Redmi Buds 6 Pro có 25 giờ dự phòng trong hộp sạc” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-xiaomi-redmibuds6pro#025`. Tài liệu không công bố thời lượng pin riêng của hộp sạc (chỉ công bố 9,5 giờ cho tai nghe và 36 giờ kèm hộp sạc khi tắt chống ồn; không tự trừ hai số để tạo giá trị mới); 25 giờ không trùng số nào và không cao hơn mọi giá trị công bố. Ghi chú: `mac_dinh=che_do_chong_on,hoat_dong`.
+- **tb-00322 · LECH D4 `bo_dieu_kien`.** “Redmi Buds 6 Pro có thời lượng pin 36 giờ cùng hộp sạc” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-xiaomi-redmibuds6pro#025`. Giá trị 36 giờ chỉ đạt khi tắt chống ồn; tuyên bố không nêu chế độ chống ồn và hoạt động nên được hiểu là bật chống ồn và nghe nhạc (kèm hộp sạc đã nêu). Nguồn: “tắt chức năng chống ồn”. Ghi chú: `mac_dinh=che_do_chong_on,hoat_dong`.
+- **tb-00323 · LECH D4 `bo_dieu_kien` · **PHÂN VÂN**.** “Redmi Buds 6 Pro chỉ 5 phút sạc nhanh cho 2 giờ phát nhạc” (`sac_nhanh`).
+  - Bằng chứng: `tn-xiaomi-redmibuds6pro#025`. Giá trị 2 giờ sau 5 phút sạc chỉ đạt khi tắt chức năng khử tiếng ồn; tuyên bố không nêu chế độ chống ồn nên theo nguyên tắc chung (mục 6.7 ý 4) hiểu là chế độ kém thuận lợi nhất (bật chống ồn). Nguồn: “Điều kiện thử nghiệm: Tai nghe bật codec AAC, âm lượng 50% và tắt chức năng khử tiếng ồn.”. Ghi chú: `mac_dinh=bo_phan,ngoai_bang; ngoai_cau_hinh=tắt chức năng khử tiếng ồn`.
+  - *Phương án khác (PHÂN VÂN):* Bảng mục 5 cho sạc nhanh tai nghe chưa có khóa `che_do_chong_on`; nếu coi chú thích thử nghiệm “tắt chức năng khử tiếng ồn” là điều kiện phòng thí nghiệm (không xét ngoài hai khóa trong cấu hình tai nghe) thì ra D3 Đúng.
+- **tb-00324 · CHUA_DU D6.** “Redmi Buds 6 Pro có pin lên tới 8 giờ liên tục” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-xiaomi-redmibuds6pro#025`. Tài liệu không công bố thời lượng pin tai nghe khi bật chống ồn (chỉ công bố 9,5 giờ khi tắt chức năng chống ồn); 8 giờ không trùng số nào và không cao hơn mọi giá trị của tai nghe. Ghi chú: `mac_dinh=che_do_chong_on,bo_phan,hoat_dong`.
+- **tb-00325 · CHUA_DU D6.** “Redmi Buds 6 Pro có kèm hộp sạc nhanh cho 24 giờ sử dụng không gián đoạn” (`thoi_luong_pin`).
+  - Bằng chứng: `tn-xiaomi-redmibuds6pro#025`. Tài liệu không công bố thời lượng pin kèm hộp sạc khi bật chống ồn (chỉ công bố 36 giờ khi tắt chức năng chống ồn); 24 giờ không trùng số nào và không cao hơn mọi giá trị công bố. Ghi chú: `mac_dinh=che_do_chong_on,hoat_dong`.
