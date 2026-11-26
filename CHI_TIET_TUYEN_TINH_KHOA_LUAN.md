@@ -44,7 +44,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 - [x] [Bước 21](#b21) · 07/11 · Chuẩn hóa sản phẩm, giá trị, đơn vị, kiểu giá trị
 - [x] [Bước 22](#b22) · 08/11 – 10/11 · Trích xuất có neo nguồn và kiểm tra đầy đủ
 - [x] [Bước 23](#b23) · 11/11 · Tách tuyên bố của tập kiểm tra
-- [ ] [Bước 24](#b24) · 12/11 – 13/11 · Gán nhãn tập kiểm tra
+- [x] [Bước 24](#b24) · 12/11 – 13/11 · Gán nhãn tập kiểm tra
 - [ ] [Bước 25](#b25) · 14/11 – 15/11 · Tạo tập cặp tối thiểu
 - [ ] [Bước 26](#b26) · 16/11 · Ghi chính thức cách chia tập, gửi việc cho người gán thứ hai
 - [x] [Bước 27](#b27) · 17/11 – 19/11 · Cài bộ quyết định A–D, sinh lý do, kiểm thử
@@ -672,14 +672,14 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Gán nhãn như Bước 20, cùng hướng dẫn bản 2; mỗi buổi tối đa 60 phút liên tục. *(23/11: sinh trang `data/nhan/cong_cu_gan_nhan_chinh_kiem_tra.html` bằng `scripts/tao_cong_cu_gan_nhan.py --bo chinh --ma-mau <8 mẫu kiểm tra>`: 216 tuyên bố, 53 bài, 1036 đoạn; mở qua cấu hình `trang-gan-nhan` (http://localhost:8765). Tải về `chinh_kiem_tra.jsonl`. Claude chỉ kiểm hình thức nhãn tập kiểm tra, không đề xuất đổi nhãn.)*
-- [ ] Đặt cờ `tai_lieu_mau_thuan` và ghi `ghi_chu` như Bước 20.
-- [ ] Không sửa hướng dẫn hay tệp cấu hình vì trường hợp gặp ở tập kiểm tra; ghi vào `ghi_chu` và nhật ký.
-- [ ] Từ đây, nhãn tập kiểm tra chỉ được mở lại để gán lại mù ở Bước 32.
+- [x] Gán nhãn như Bước 20, cùng hướng dẫn bản 2; mỗi buổi tối đa 60 phút liên tục. *(23/11: sinh trang `data/nhan/cong_cu_gan_nhan_chinh_kiem_tra.html` bằng `scripts/tao_cong_cu_gan_nhan.py --bo chinh --ma-mau <8 mẫu kiểm tra>`: 216 tuyên bố, 53 bài, 1036 đoạn; mở qua cấu hình `trang-gan-nhan` (http://localhost:8765). Dự định ban đầu: người thực hiện tự gán, Claude chỉ kiểm hình thức. **Thực tế (23–26/11):** Gemini (Antigravity) gán nháp cả 216 nhãn theo yêu cầu người thực hiện (`data/nhan/chinh_kiem_tra_ai.jsonl`, lý giải và câu hỏi đi kèm); người thực hiện nhập bản nháp vào trang, duyệt từng câu, không sửa câu nào; Claude rà lại theo yêu cầu người thực hiện, đối chiếu từng câu với tài liệu, đưa 4 ca biên và các chỗ thiếu ghi chú; người thực hiện chốt từng ca, Claude ghi vào tệp. Khai báo đầy đủ ở nhật ký 26/11, Chương 4 và phần giới hạn.)*
+- [x] Đặt cờ `tai_lieu_mau_thuan` và ghi `ghi_chu` như Bước 20. *(4 tuyên bố có `tai_lieu_mau_thuan`, đều là pin 5630 mAh của OPPO Find X8; 2 tuyên bố có `mau_thuan_khop_ca_hai`.)*
+- [x] Không sửa hướng dẫn hay tệp cấu hình vì trường hợp gặp ở tập kiểm tra; ghi vào `ghi_chu` và nhật ký. *(7 câu hỏi nhãn ở `data/nhan/cau_hoi_nhan_chinh_kiem_tra.md`.)*
+- [x] Từ đây, nhãn tập kiểm tra chỉ được mở lại để gán lại mù ở Bước 32.
 
-**Làm ra:** `data/nhan/chinh.jsonl` (thêm phần tập kiểm tra).
+**Làm ra:** `data/nhan/chinh_kiem_tra.jsonl` (216 nhãn tập kiểm tra), `data/nhan/cau_hoi_nhan_chinh_kiem_tra.md`. *(26/11: lưu tệp riêng thay vì nối vào `data/nhan/chinh.jsonl`, vì `scripts/do_p_phat_trien.py` đọc `chinh.jsonl` làm nhãn chuẩn của tập phát triển và đòi khớp đúng tập mã dự đoán; tách tệp cũng giữ nhãn tập kiểm tra xa các công cụ của tập phát triển.)*
 
-**Xong khi:** mọi tuyên bố có nhãn, bằng chứng, lý do và thời gian.
+**Xong khi:** mọi tuyên bố có nhãn, bằng chứng và lý do. *(26/11: bỏ yêu cầu thời gian cho tập kiểm tra. Nhãn đi từ bản nháp AI nên trường `giay` là 1 giây mỗi câu, không phải thời gian gán thật; ghi ở phần giới hạn.)*
 
 **Tra cứu:** [T4](#t4) (hướng dẫn gán nhãn), [T3.5](#t3-5) (bảo vệ tập kiểm tra).
 
@@ -847,7 +847,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] **Gán lại mù** 20% số tuyên bố đã chọn ở Bước 26, ẩn nhãn cũ. Lần gán đầu xong muộn nhất ngày 13/11 (tập kiểm tra), nên từ 24/11 mọi tuyên bố đã cách lần gán đầu ít nhất 10 ngày.
+- [ ] **Gán lại mù** 20% số tuyên bố đã chọn ở Bước 26, ẩn nhãn cũ. Lần gán đầu xong muộn nhất ngày 13/11 (tập kiểm tra), nên từ 24/11 mọi tuyên bố đã cách lần gán đầu ít nhất 10 ngày. *(26/11: nhãn tập kiểm tra chốt ngày 26/11, nên phần tập kiểm tra chỉ gán lại từ 06/12. Nhãn này đi từ bản nháp Gemini do người thực hiện duyệt, nên kappa trong một người ở phần tập kiểm tra đo mức người thực hiện, khi gán mù, đồng ý với bộ nhãn có AI hỗ trợ; báo riêng với phần tập phát triển.)*
 - [ ] Nhận kết quả của người gán thứ hai.
 - [ ] Tính kappa của Cohen (mức đồng thuận giữa hai lần gán, đã trừ phần trùng do ngẫu nhiên) trong một người và giữa hai người, **trước** khi thảo luận thống nhất.
 - [ ] Nhãn chuẩn sai rõ ràng thì sửa và ghi vào `ket_qua/sua_nhan.md`. Mọi lần sửa phải xong ở bước này, trước khi niêm phong, và không dựa trên đầu ra của bất kỳ hệ thống nào.
@@ -1638,7 +1638,7 @@ Dừng ở D1a phải ghi nguyên nhân: `mac_dinh=<khóa không có mặc đị
    - Từ Bước 4, khi hai tập đã được chia trước, mọi lựa chọn (câu lệnh, k, mô hình, ngưỡng, tệp cấu hình, ví dụ trong hướng dẫn) chỉ dựa trên tập phát triển. Bước 26 chỉ ghi chính thức ranh giới đó.
    - Nhãn tập kiểm tra chỉ được mở lại để gán lại mù ở Bước 32.
    - Tập kiểm tra chỉ chạy một lần, sau khi có tag `khoa-cau-hinh`.
-5. **Dùng AI hỗ trợ.** Được dùng để viết mã và sửa câu chữ. Không dùng AI để gán nhãn chuẩn. Luôn kiểm lại trích dẫn trên bài gốc.
+5. **Dùng AI hỗ trợ.** Được dùng để viết mã và sửa câu chữ. Không dùng AI để gán nhãn chuẩn, trừ hai ngoại lệ người thực hiện đã chọn và phải khai báo: lượt 2 bộ thử do Claude gán nháp, người thực hiện duyệt (02/11, Bước 16); nhãn tập kiểm tra do Gemini gán nháp, người thực hiện duyệt từng câu, Claude rà lại theo yêu cầu (26/11, Bước 24). Chương 4 ghi rõ nguồn gốc nhãn; phần giới hạn nêu rủi ro người duyệt bị bản nháp dẫn dắt và rủi ro đáp án cùng họ mô hình với hệ thống được chấm. Luôn kiểm lại trích dẫn trên bài gốc.
 6. **Sao lưu.** Ảnh chụp trang thông số lưu thêm một bản ngoài máy, ví dụ trên Google Drive.
 7. **Đề cương là chuẩn.** Khi đề cương và kế hoạch khác nhau, sửa kế hoạch cho khớp rồi ghi một dòng vào nhật ký.
 8. **Chỉ đánh dấu xong khi đạt "Xong khi".** Một bước chỉ được đánh dấu xong trong danh sách việc khi đạt đủ tiêu chí "Xong khi" của bước đó.

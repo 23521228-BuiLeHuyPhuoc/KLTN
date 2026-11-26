@@ -1,0 +1,9 @@
+# Câu hỏi nhãn (bộ chính - tập kiểm tra, 216 tuyên bố, lượt 1)
+
+- tb-00149 (qc-dh-xiaomi-watchs4-gptoss-landing-ten_thong_so-1): Trang giới thiệu (`dh-xiaomi-watchs4#015`, trang bổ sung) tự ghi "Thời lượng pin 15 ngày đảm bảo thời gian sử dụng trên 2 tuần". Hướng dẫn chưa nói khi tài liệu tự hứa mức sàn thì từ khẳng định "trên 14 ngày" của tuyên bố có còn dẫn tới D2 không. Tạm chọn D2 theo chữ của dòng D2; cách đọc khác là D3 (tài liệu đã có lời hứa này).
+- tb-00161 (qc-dt-oppo-findx8-gemini-landing-ten_thong_so-1): Sạc không dây: hộp chỉ có củ sạc dây ("Sạc x 1"), không có đế sạc không dây; tài liệu không ghi mức 50W cần đế bán riêng. Hướng dẫn chưa có quy tắc cho phụ kiện của sạc không dây. Tạm chọn D3 (không dùng hiểu biết ngoài tài liệu, mục 4); nếu tính cả đế sạc vào "không mua thêm" thì thành D4 `bo_dieu_kien`.
+- tb-00170 (qc-dt-oppo-findx8-gemini-social-ten_thong_so-1): Cùng trường hợp tb-00161 (sạc không dây 50W, hộp không có đế sạc không dây).
+- tb-00181 (qc-dt-oppo-findx8-gptoss-description-ten_thong_so-1): Cùng trường hợp tb-00161 (sạc không dây 50W, hộp không có đế sạc không dây).
+- tb-00194 (qc-dt-oppo-findx8-gptoss-social-ten_thong_so-1): Cùng trường hợp tb-00161 (sạc không dây 50W, hộp không có đế sạc không dây).
+- tb-00230 (qc-dt-samsung-galaxys25ultra-gptoss-social-ten_thong_so-1): Cụm "bão" không có trong phụ lục. Tạm đọc theo mục 6.6, 6.7 là điều kiện nước hãng không thử (hãng chỉ thử ngâm nước ngọt 1,5 m trong 30 phút), nên D4 `doi_dieu_kien`; cách đọc khác là cụm không giải được (D1a `chua_xac_dinh=bão`).
+- tb-00289 (qc-tn-apple-airpodspro3-gemini-landing-ten_thong_so-1): Tính năng gắn sẵn chế độ: chú thích ghi bài đo Thiết Bị Trợ Thính bật Xuyên Âm. Hướng dẫn chưa nói khi tuyên bố nêu một tính năng đã gắn chế độ thì có lấy mặc định "bật chống ồn" (mục 5) không. Tạm chọn D3 (chế độ do tính năng quyết định); đọc chặt mặc định thì thành D4 `bo_dieu_kien`.
