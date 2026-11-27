@@ -68,6 +68,7 @@ Lượt 3: .venv/Scripts/python.exe scripts/tao_cong_cu_gan_nhan.py --luot 3 --c
 """
 import argparse
 import csv
+import difflib
 import html
 import json
 from pathlib import Path
@@ -995,11 +996,52 @@ def dung_huong_dan(md):
 
 # ---------- Dữ liệu và HTML ----------
 
+DAU_CT = re.compile(r"\d+(?:,\d+)*|[*†‡]+")  # một dấu: số, danh sách số "2,3", hoặc ký hiệu * † ‡
+
+
+def vi_tri_dau(noi_dung, goc):
+    """Chỗ số chú thích của trang hãng nằm trong noi_dung: [[vị_trí, "12"], ...], vị_trí là chỉ số trong chuỗi JavaScript
+    (đơn vị UTF-16, khác chỉ số của Python khi có ký tự ngoài BMP); chèn dấu vào đó thì được lại noi_dung_goc, trừ khoảng
+    trắng quanh dấu. noi_dung chỉ khác goc ở các chỗ chèn dấu (số, danh sách số "2,3", hoặc */†/‡; trang Xiaomi còn thay một
+    khoảng trắng bằng "**"). Thấy delete, replace khác thế, hay chữ chèn không phải dấu thì không tin phép so, trả []."""
+    if not goc or goc == noi_dung:
+        return []
+    dau = []
+    for tag, i1, i2, j1, j2 in difflib.SequenceMatcher(None, noi_dung, goc, autojunk=False).get_opcodes():
+        if tag == "equal":
+            continue
+        chu = re.sub(r",\s+", ",", goc[j1:j2]).split()
+        thay_trang = tag == "replace" and not noi_dung[i1:i2].strip()  # chỉ thay khoảng trắng bằng dấu, chữ vẫn giữ nguyên
+        if tag not in ("insert", "replace") or (tag == "replace" and not thay_trang) \
+                or not chu or not all(DAU_CT.fullmatch(c) for c in chu):
+            return []
+        vt = len(noi_dung[:i1].encode("utf-16-le")) // 2
+        dau.extend([vt, c] for c in chu)
+    return dau
+
+
+def ghep_dau_chu_thich(dau, so_chu_thich):
+    """Dấu của từng chú thích (cùng thứ tự với chu_thich), hoặc None nếu không ghép được. Ghép khi mọi dấu là số (danh sách
+    "2,3" tính từng số) và số dấu khác nhau (theo thứ tự xuất hiện đầu tiên, bỏ lặp) bằng đúng số chú thích; dấu * hay số lệch
+    (số thứ tự của cả trang, không phải số nào cũng có chú thích trong đoạn) thì không khẳng định ghép với số nào."""
+    so = [n for _, c in dau for n in c.split(",")]
+    khac = list(dict.fromkeys(so))
+    if so_chu_thich and len(khac) == so_chu_thich and all(n.isdigit() for n in khac):
+        return khac
+    return None
+
+
 def doan_nhung(d):
-    """Đoạn nhúng vào trang. noi_dung_goc chỉ nhúng khi khác noi_dung (đoạn đã bỏ số chú thích) để trang không phình ra."""
+    """Đoạn nhúng vào trang. noi_dung_goc chỉ nhúng khi khác noi_dung (đoạn đã bỏ số chú thích) để trang không phình ra.
+    dau (vị trí số chú thích trong noi_dung) và dau_ct (dấu của từng chú thích, hoặc null) chỉ có khi đoạn có số chú thích:
+    trang vẽ chúng thành chữ nhỏ, không đưa vào nội dung để câu trích vẫn là chuỗi con nguyên văn của noi_dung."""
     x = {"id": d["id"], "noi_dung": d["noi_dung"], "chu_thich": list(d.get("chu_thich") or [])}
     if d.get("noi_dung_goc", d["noi_dung"]) != d["noi_dung"]:
         x["noi_dung_goc"] = d["noi_dung_goc"]
+        dau = vi_tri_dau(d["noi_dung"], d["noi_dung_goc"])
+        if dau:
+            x["dau"] = dau
+            x["dau_ct"] = ghep_dau_chu_thich(dau, len(x["chu_thich"]))
     return x
 
 
@@ -1498,7 +1540,14 @@ details.hd[open] > summary { border-bottom: 1px solid var(--vien); border-radius
 .doan button { user-select: none; -webkit-user-select: none; }
 .noi-dung { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14px; }
 .chu-thich { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; color: var(--phu); margin-top: 6px; padding-top: 4px; border-top: 1px dashed var(--vien); }
-.chu-thich::before { content: "Chú thích: "; font-style: italic; }
+.chu-thich:not(.co-so)::before { content: "Chú thích: "; font-style: italic; }
+.chu-thich.co-so { border-top: 0; border-left: 3px solid var(--vien); background: var(--nen); padding: 2px 6px; margin-top: 3px; }
+.chu-thich.noi-bat { border-left-color: var(--nhan); background: var(--canh-bao-nen); color: inherit; }
+/* Số chú thích (chữ nhỏ trên đầu dòng và số đầu chú thích) chỉ để đọc: không bôi đen, không vào câu trích. */
+.dau-ct, .so-ct { user-select: none; -webkit-user-select: none; }
+.dau-ct { font-size: 0.7em; line-height: 0; color: var(--nhan); font-weight: 600; cursor: help; }
+.dau-ct.noi-bat { background: var(--canh-bao-nen); }
+.so-ct { font-weight: 600; margin-right: 4px; }
 
 /* Khung phủ bên phải: toàn văn hướng dẫn */
 #huong-dan { position: fixed; top: 0; right: 0; bottom: 0; width: min(780px, 94vw); z-index: 50; display: flex; flex-direction: column;
@@ -1890,6 +1939,37 @@ function tachTheoLuot(moi, luot) {
 const quaNghi = (bayGio, hoatDongCuoi, nghiMs) => bayGio - hoatDongCuoi > nghiMs;
 function congGio(r, dt, nghi) { if (nghi) r.ms_nghi += dt; else r.ms += dt; }
 /* <<< LUAT_KIEM */
+
+/* >>> DAU_CT: số chú thích của trang hãng hiện thành chữ nhỏ, không phải một phần của nội dung (test chạy riêng khối này trong node) */
+// Cắt noi_dung thành các mảnh {chu} và {dau} theo dau = [[vị trí, "12"], ...]; ghép các {chu} lại luôn được đúng noi_dung.
+function chiaTheoDau(nd, dau) {
+  const ra = [];
+  let o = 0;
+  for (const [vt, c] of (dau || []).slice().sort((a, b) => a[0] - b[0])) {
+    const v = Math.min(Math.max(vt, o), nd.length);
+    if (v > o) ra.push({ chu: nd.slice(o, v) });
+    ra.push({ dau: c });
+    o = v;
+  }
+  if (o < nd.length) ra.push({ chu: nd.slice(o) });
+  return ra;
+}
+// Chữ của một phần bôi đen (DocumentFragment từ Range.cloneContents) mà không có số chú thích (sup.dau-ct, span.so-ct), mã đoạn,
+// nút và phần tử ẩn. Chỉ dùng nodeType, nodeValue, tagName, className, hidden, childNodes nên chạy được trên DOM giả.
+const BO_QUA_BOI_DEN = ['dau-ct', 'so-ct', 'ma'];
+const KHOI_BOI_DEN = ['DIV', 'ARTICLE', 'P', 'LI', 'SECTION', 'BR'];
+function chuBoiDen(nut) {
+  if (nut.nodeType === 3) return nut.nodeValue;
+  if (nut.nodeType === 1) {
+    if (nut.hidden || nut.tagName === 'BUTTON') return '';
+    const lop = String(nut.className || '').split(/\s+/);
+    if (BO_QUA_BOI_DEN.some((l) => lop.includes(l))) return '';
+  }
+  let s = '';
+  for (const con of nut.childNodes) s += chuBoiDen(con);
+  return nut.nodeType === 1 && KHOI_BOI_DEN.includes(nut.tagName) ? s + ' ' : s;
+}
+/* <<< DAU_CT */
 
 const DOAN_MAP = {};
 for (const m of Object.keys(DL.doan)) {
@@ -2634,8 +2714,27 @@ function dungDoan() {
       const nut = el('button', 'nho', 'Thêm làm bằng chứng');
       nut.type = 'button'; nut.dataset.id = d.id;
       dau.append(el('span', 'ma', d.id), nut);
-      a.append(dau, el('div', 'noi-dung', d.noi_dung));
-      for (const c of d.chu_thich || []) a.append(el('div', 'chu-thich', c));
+      const nd = el('div', 'noi-dung');
+      for (const m of chiaTheoDau(d.noi_dung, d.dau)) {
+        if (m.chu !== undefined) { nd.append(m.chu); continue; }
+        const s = el('sup', 'dau-ct', m.dau);
+        if (d.dau_ct && d.dau_ct.includes(m.dau)) s.dataset.so = m.dau;
+        nd.append(s);
+      }
+      a.append(dau, nd);
+      // Nhãn số của chú thích: số của trang hãng nếu ghép được; không thì chỉ thứ tự trong đoạn ("*1"), không nói là số nào.
+      const co = d.dau && d.dau.length;
+      (d.chu_thich || []).forEach((c, i) => {
+        const ct = el('div', co ? 'chu-thich co-so' : 'chu-thich');
+        if (co) {
+          const so = el('span', 'so-ct', d.dau_ct ? d.dau_ct[i] : '*' + (i + 1));
+          if (d.dau_ct) ct.dataset.so = d.dau_ct[i];
+          else so.title = 'Thứ tự chú thích trong đoạn; chưa ghép được với số trong nội dung';
+          ct.append(so);
+        }
+        ct.append(c);
+        a.append(ct);
+      });
       goc.append(a);
       doanEls.push({ el: a, nut: nut, id: d.id, kho: chuanHoa(d.noi_dung + ' ' + (d.chu_thich || []).join(' ')).toLowerCase() });
     }
@@ -2678,7 +2777,10 @@ function layBoiDen() {
     hienTin('nhac-trich', 'Chưa có đoạn nào được bôi đen trong cột phải (tài liệu).');
     return;
   }
-  const t = sel.toString().replace(KT, ' ').trim();
+  // Không dùng sel.toString(): lấy chữ từ bản sao phần bôi đen và bỏ số chú thích (dau-ct, so-ct) để câu trích vẫn nguyên văn.
+  let t = '';
+  for (let i = 0; i < sel.rangeCount; i++) t += ' ' + chuBoiDen(sel.getRangeAt(i).cloneContents());
+  t = t.replace(KT, ' ').trim();
   if (!t) { hienTin('nhac-trich', 'Phần bôi đen không có chữ.'); return; }
   const o = $('trich');
   const cu = o.value.trim();
@@ -2872,6 +2974,16 @@ $('bang-chung').addEventListener('click', (e) => {
   const a = e.target.closest('button[data-ma]');
   if (a) cuonToiDoan(a.dataset.ma);
 });
+// Rê chuột vào số nhỏ trong nội dung thì làm nổi chú thích cùng số (chỉ với đoạn đã ghép được số).
+function noiBatCt(e, bat) {
+  const s = e.target.closest && e.target.closest('sup.dau-ct');
+  if (!s || !s.dataset.so) return;
+  for (const x of s.closest('article').querySelectorAll('[data-so]')) {
+    if (x.dataset.so === s.dataset.so) x.classList.toggle('noi-bat', bat);
+  }
+}
+$('doan').addEventListener('mouseover', (e) => noiBatCt(e, true));
+$('doan').addEventListener('mouseout', (e) => noiBatCt(e, false));
 $('doan').addEventListener('click', (e) => {
   const b = e.target.closest('button[data-id]');
   if (!b || b.disabled) return;
