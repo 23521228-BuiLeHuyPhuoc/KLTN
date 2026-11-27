@@ -45,7 +45,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 - [x] [Bước 22](#b22) · 08/11 – 10/11 · Trích xuất có neo nguồn và kiểm tra đầy đủ
 - [x] [Bước 23](#b23) · 11/11 · Tách tuyên bố của tập kiểm tra
 - [x] [Bước 24](#b24) · 12/11 – 13/11 · Gán nhãn tập kiểm tra
-- [ ] [Bước 25](#b25) · 14/11 – 15/11 · Tạo tập cặp tối thiểu
+- [ ] [Bước 25](#b25) · 14/11 – 15/11 · Tạo tập cặp tối thiểu *(làm sau phần chọn mẫu của Bước 26)*
 - [ ] [Bước 26](#b26) · 16/11 · Ghi chính thức cách chia tập, gửi việc cho người gán thứ hai
 - [x] [Bước 27](#b27) · 17/11 – 19/11 · Cài bộ quyết định A–D, sinh lý do, kiểm thử
 - [ ] [Bước 28](#b28) · 20/11 · Ghép phương pháp P, đo độ đúng trích xuất
@@ -693,7 +693,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 
 **Việc cần làm**
 
-- [ ] Từ các tuyên bố Đúng của cả hai tập, tạo 6 loại biến thể theo [T4.7](#t4-7): bỏ điều kiện, đổi điều kiện, đổi bộ phận, đổi kiểu giá trị (biến mức "lên đến" thành mức chắc chắn đạt), đổi giá trị, đổi phiên bản.
+- [ ] Từ các tuyên bố Đúng của cả hai tập, tạo 6 loại biến thể theo [T4.7](#t4-7): bỏ điều kiện, đổi điều kiện, đổi bộ phận, đổi kiểu giá trị (biến mức "lên đến" thành mức chắc chắn đạt), đổi giá trị, đổi phiên bản. *(26/11, người thực hiện duyệt thứ tự mới: làm sau việc chọn mẫu gán lại của Bước 26. Nguồn là tuyên bố Đúng của tập chính, gồm phần phát triển và phần kiểm tra, trừ các câu nằm trong danh sách gán lại mù ở Bước 32, để người thực hiện không xem lại nhãn của chúng trước khi gán lại. Chưa lấy gốc từ bộ thử cho tới khi xong lượt 3. Claude viết câu biến thể kèm đoạn tài liệu, **không kèm nhãn dự kiến**; người thực hiện gán nhãn từng biến thể trên trang; Claude so với nhãn suy từ cách tạo, chỗ khác thì hai bên xem lại.)*
 - [ ] Mỗi biến thể chỉ khác tuyên bố gốc ở một chỗ. Với các loại đổi điều kiện, bộ phận, phiên bản: giữ con số và đổi sang chỗ có giá trị kém hơn; đổi theo chiều ngược lại thì con số thành kém thuận lợi hơn, vẫn khớp và ra Đúng.
 - [ ] **Kiểm tra lại nhãn của từng biến thể bằng tay.**
 - [ ] Đặt mã theo dạng `ct-<số của tuyên bố gốc>-<loại>` ([T3.2](#t3-2)); biến thể thuộc tập của tuyên bố gốc.
@@ -715,7 +715,7 @@ Kế hoạch bám theo [đề cương bản cuối](de_cuong/23521228_BuiLeHuyPh
 **Việc cần làm**
 
 - [x] Ghi `data/chia_tap.json` theo cách chia ở Bước 4; biến thể cặp tối thiểu đi theo tập của tuyên bố gốc. *(08/11: 4 mẫu phát triển, 8 mẫu kiểm tra (đủ ba nhóm, bốn hãng), kèm mã băm `mau_san_pham.csv` và quy tắc; `tests/test_chia_tap.py` kiểm khớp. Danh sách mã tuyên bố theo tập thêm khi tách xong hai tập.)*
-- [ ] Chọn ngẫu nhiên, phân tầng theo nhóm sản phẩm và theo tập: 20% số tuyên bố để tự gán lại ở Bước 32, và khoảng 60 tuyên bố cho người gán thứ hai. Lưu danh sách mã tuyên bố vào `data/nhan/danh_sach_mau.json`, không mở nhãn.
+- [ ] Chọn ngẫu nhiên, phân tầng theo nhóm sản phẩm và theo tập: 20% số tuyên bố để tự gán lại ở Bước 32, và khoảng 60 tuyên bố cho người gán thứ hai. Lưu danh sách mã tuyên bố vào `data/nhan/danh_sach_mau.json`, không mở nhãn. *(26/11: phần 20% làm trước Bước 25 bằng `scripts/chon_mau_gan_lai.py`, quần thể là 258 tuyên bố tập chính; bộ thử không chọn vì đã có lượt 3. Phần 60 tuyên bố cho người thứ hai chờ CBHD.)*
 - [ ] Gửi người gán thứ hai: hướng dẫn bản 2; 10 ví dụ của tập phát triển để gán thử có phản hồi; bảng khoảng 60 tuyên bố (không trùng 10 ví dụ gán thử) kèm đoạn nguồn nhưng **không kèm nhãn**. Hẹn trả kết quả trước 23/11.
 - [ ] Nếu không tìm được người gán thứ hai thì ghi vào nhật ký và theo phương án ở [T9.1](#t9-1).
 - [ ] Commit và đẩy lên GitHub.
