@@ -115,6 +115,13 @@
 - Kế hoạch (T-03, T-24, T-34): ngưỡng sai số 1% cố định, không chọn lại ở Bước 33 (khớp dòng D3 của hướng dẫn); "Xong khi" của Bước 37 loại trừ độ đúng trích xuất trên tập kiểm tra; ô đánh dấu đầu tệp và thân bài đồng bộ theo Google Sheet. Hai chỗ Sheet và tệp kế hoạch còn khác, để người thực hiện quyết: Bước 17 (Sheet ghi Đang làm, tệp ghi xong) và việc 35.1 (Sheet ghi Xong, tệp chưa đánh dấu).
 - `luan_van/chuong_3.md` nay lệch mã ở mục 3.5.2–3.5.4 (neo nguồn, hiểu điều kiện, vùng dò), 3.6 (khoảng a-b, cửa sổ từ khẳng định), 3.8 và 3.8.1 (`LOI`, lan điều kiện, bảng nhiều cột, dạng sạc nhanh đồng hồ). Đã ghi vào Bước 28.
 
+## 26–27/11/2026 — Bước 26 (chọn mẫu gán lại), đổi thứ tự với Bước 25
+
+- Người thực hiện duyệt đề xuất của Claude: làm phần chọn mẫu của Bước 26 trước Bước 25. Lý do là kế hoạch cũ có hai chỗ đụng nhau. Một: lấy gốc biến thể từ bộ thử thì khi kiểm nhãn biến thể, người thực hiện sẽ thấy câu nào của bộ thử là Đúng, và lượt 3 mất tính mù. Hai: Bước 25 cần biết câu nào của tập kiểm tra là Đúng, trong khi 20% tập kiểm tra sẽ được gán lại mù ở Bước 32.
+- Agent `coder` viết `scripts/chon_mau_gan_lai.py` và `tests/test_chon_mau_gan_lai.py` (13 test, có test chặn mọi lệnh mở tệp dưới `data/nhan/`). Quần thể là 258 tuyên bố của tập chính; bộ thử không chọn vì đã có lượt 3 (30 tuyên bố). Chọn 52 tuyên bố (20%), phân tầng theo (tập, nhóm), chia bằng phần dư lớn nhất, seed 20261126: kiểm tra đồng hồ 9/45, điện thoại 22/110, tai nghe 12/61; phát triển đồng hồ 3/13, điện thoại 6/29. Kết quả ở `data/nhan/danh_sach_mau.json`. Claude kiểm lại: tính tay phần chia khớp, chạy lại ra đúng tệp, không mã nào thuộc bộ thử.
+- Phần 60 tuyên bố cho người gán thứ hai chưa chọn, chờ CBHD.
+- Bước 25 sẽ lấy gốc từ tuyên bố Đúng của tập chính trừ 52 câu này, chưa lấy bộ thử. Claude viết biến thể không kèm nhãn dự kiến, người thực hiện gán nhãn từng biến thể, rồi Claude so với nhãn suy từ cách tạo. Kế hoạch đã ghi thứ tự mới ở Bước 25, Bước 26 và danh sách tháng 11.
+
 ## 23–26/11/2026 — Bước 24 (xong gán nhãn tập kiểm tra)
 
 - 23/11: sinh trang gán nhãn 216 tuyên bố (PR #37). Cùng ngày người thực hiện nhờ Gemini (Antigravity) đọc hướng dẫn rồi gán nhãn trên trang; sáng 26/11 nhờ rà lại. Lúc 07:11 ngày 26/11 Gemini ghi `data/nhan/chinh_kiem_tra_ai.jsonl` (216 nhãn, `nguoi_gan: "ai"`, `giay: 1`), `data/nhan/ly_giai_chinh_kiem_tra_ai.md`, `data/nhan/cau_hoi_nhan_chinh_kiem_tra_ai.md`. Người thực hiện nhập bản nháp vào trang, duyệt từng câu và đồng ý cả 216 câu; tệp xuất lúc 15:39 giống bản nháp từng chữ.

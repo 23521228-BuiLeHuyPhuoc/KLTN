@@ -1,0 +1,87 @@
+{
+  "buoc": 26,
+  "ngay": "26/11/2026",
+  "seed": 20261126,
+  "ty_le": 0.2,
+  "quan_the": "258 tuyên bố tập chính (tb-00067–tb-00325); không gồm bộ thử, đã có lượt 3",
+  "so_quan_the": 258,
+  "theo_tang": {
+    "kiem_tra/dh": {
+      "quan_the": 45,
+      "chon": 9
+    },
+    "kiem_tra/dt": {
+      "quan_the": 110,
+      "chon": 22
+    },
+    "kiem_tra/tn": {
+      "quan_the": 61,
+      "chon": 12
+    },
+    "phat_trien/dh": {
+      "quan_the": 13,
+      "chon": 3
+    },
+    "phat_trien/dt": {
+      "quan_the": 29,
+      "chon": 6
+    }
+  },
+  "gan_lai_buoc32": [
+    "tb-00069",
+    "tb-00072",
+    "tb-00079",
+    "tb-00085",
+    "tb-00087",
+    "tb-00091",
+    "tb-00095",
+    "tb-00100",
+    "tb-00105",
+    "tb-00112",
+    "tb-00115",
+    "tb-00124",
+    "tb-00128",
+    "tb-00130",
+    "tb-00138",
+    "tb-00140",
+    "tb-00149",
+    "tb-00151",
+    "tb-00164",
+    "tb-00168",
+    "tb-00171",
+    "tb-00181",
+    "tb-00185",
+    "tb-00186",
+    "tb-00199",
+    "tb-00200",
+    "tb-00202",
+    "tb-00205",
+    "tb-00206",
+    "tb-00207",
+    "tb-00218",
+    "tb-00223",
+    "tb-00224",
+    "tb-00227",
+    "tb-00228",
+    "tb-00238",
+    "tb-00243",
+    "tb-00251",
+    "tb-00255",
+    "tb-00264",
+    "tb-00266",
+    "tb-00267",
+    "tb-00276",
+    "tb-00281",
+    "tb-00283",
+    "tb-00288",
+    "tb-00290",
+    "tb-00291",
+    "tb-00294",
+    "tb-00298",
+    "tb-00303",
+    "tb-00323"
+  ],
+  "nguoi_thu_hai": [],
+  "ghi_chu_nguoi_thu_hai": "Chưa có người gán thứ hai; chờ CBHD",
+  "quy_tac": "Chọn ngẫu nhiên phân tầng theo (tập, nhóm): tổng round(ty_le × N), chia cho các tầng theo tỉ lệ bằng phương pháp phần dư lớn nhất, mỗi tầng không rỗng có ít nhất 1. Trong mỗi tầng xếp mã tăng dần rồi random.Random(seed).sample, duyệt các tầng theo thứ tự tên tầng."
+}
