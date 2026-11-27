@@ -25,6 +25,12 @@ Tệp tải về chinh_phat_trien.jsonl / chinh_kiem_tra.jsonl và cau_hoi_nhan_
 Chạy Bước 20: .venv/Scripts/python.exe scripts/tao_cong_cu_gan_nhan.py --bo chinh --ma-mau dh-apple-watchse3 dt-xiaomi-15t
 Mặc định ghi data/nhan/cong_cu_gan_nhan_chinh_phat_trien.html; dùng --ra để chọn tệp mới khác. Không ghi đè tệp đã có.
 
+Tập cặp tối thiểu (Bước 25): --bo cap sinh trang lượt 1 từ data/cap_toi_thieu.jsonl (--tuyen-bo chọn tệp khác; không dùng
+--ma-mau). Người gán gán MÙ từng biến thể: dữ liệu nhúng chỉ giữ id (để xuất tệp), ma_mau, tuyen_bo, thuoc_tinh; goc, loai, tap,
+ma_qc, cau_goc, llm_sinh, che_do, loai_bai, url_nguon, ghi_chu bỏ trống, không nạp bài quảng cáo. Giao diện không hiện id mà hiện
+"Biến thể N/M"; thứ tự xáo trộn theo --seed-xao (mặc định 20261127). Tệp tải về cap_toi_thieu_nhan.jsonl (id thật),
+cau_hoi_nhan_cap.md (ghi "Biến thể N"). Mặc định ghi data/nhan/cong_cu_gan_nhan_cap.html, không ghi đè tệp đã có.
+
 Ranh giới của công cụ (giữ khi sửa):
 - Được hiện: nội dung hướng dẫn giống nhau cho mọi tuyên bố (cách làm, bảng D1-D6 kèm câu hỏi, ví dụ và mẫu câu, quy
   tắc hay dùng, toàn văn hướng dẫn), hoặc nội dung lọc theo nhóm sản phẩm (tiền tố ma_mau) và thuộc tính đã ghi sẵn
@@ -73,6 +79,7 @@ import unicodedata
 GOC = Path(__file__).resolve().parents[1]
 TEP_TUYEN_BO = GOC / "data" / "tuyen_bo" / "thu.jsonl"
 TEP_TUYEN_BO_CHINH = GOC / "data" / "tuyen_bo" / "chinh.jsonl"
+TEP_CAP = GOC / "data" / "cap_toi_thieu.jsonl"
 TEP_MAU = GOC / "data" / "mau_san_pham.csv"
 TEP_HUONG_DAN = GOC / "data" / "huong_dan_gan_nhan.md"
 THU_MUC_QC = GOC / "data" / "quang_cao"
@@ -93,6 +100,9 @@ TEN_TEP_HOI = f"cau_hoi_nhan_luot{LUOT}.md"
 # Trang chọn một phần bộ thử (--chon): thứ tự hiển thị xáo trộn theo seed này, phụ thuộc tập mã chứ không phụ thuộc thứ tự
 # trong tệp chọn, nên sinh lại trang vẫn ra đúng thứ tự cũ (chỉ số tuyên bố đang mở lưu trong trình duyệt vẫn đúng).
 SEED_XAO = 20261102
+# Tập cặp tối thiểu (--bo cap): seed xáo thứ tự hiển thị; các trường tuyên bố bị bỏ trống trong dữ liệu nhúng để gán mù.
+SEED_XAO_CAP = 20261127
+TRUONG_AN_CAP = ("ma_qc", "cau_goc", "llm_sinh", "che_do", "loai_bai", "url_nguon", "ghi_chu")
 NGHI_GIAY = 180  # S21: không thao tác quá chừng này giây thì đồng hồ dừng đếm
 MA_LOAI = ("bo_dieu_kien", "doi_dieu_kien", "doi_bo_phan", "doi_phien_ban", "doi_kieu_gia_tri", "doi_gia_tri")
 
@@ -1015,12 +1025,76 @@ def cau_hinh_chinh(ma_mau):
             "tep_nhan": f"chinh_{nhan_bo}.jsonl", "tep_hoi": f"cau_hoi_nhan_chinh_{nhan_bo}.md"}
 
 
-def nap_du_lieu(luot=LUOT, ma_chon=None, seed_xao=SEED_XAO, *, bo="thu", tuyen_bo_tep=None, ma_mau=None):
+def cau_hinh_cap():
+    """Khóa lưu và tên tệp riêng của trang tập cặp tối thiểu (không trùng trang nào khác)."""
+    return {"bo": "cap", "khoa_nhan": "gan_nhan_cap_v1", "khoa_giao_dien": "gan_nhan_giao_dien_cap_v1",
+            "tep_nhan": "cap_toi_thieu_nhan.jsonl", "tep_hoi": "cau_hoi_nhan_cap.md"}
+
+
+def xao_cap(cac_cap, seed=SEED_XAO_CAP):
+    """Xáo trộn có seed (xếp theo id trước, nên không phụ thuộc thứ tự trong tệp), rồi hoán vị tham lam sao cho hai biến
+    thể liền nhau khác tuyên bố gốc và khác loại biến đổi khi còn cách; hết cách thì chỉ cần khác gốc."""
+    ds = sorted(cac_cap, key=lambda t: t["id"])
+    random.Random(seed).shuffle(ds)
+    for i in range(1, len(ds)):
+        truoc = ds[i - 1]
+        for nghiem in (lambda t: t.get("goc") != truoc.get("goc") and t.get("loai") != truoc.get("loai"),
+                       lambda t: t.get("goc") != truoc.get("goc")):
+            j = next((k for k in range(i, len(ds)) if nghiem(ds[k])), None)
+            if j is not None:
+                ds[i], ds[j] = ds[j], ds[i]
+                break
+    return ds
+
+
+def nap_du_lieu(luot=LUOT, ma_chon=None, seed_xao=SEED_XAO, *, bo="thu", tuyen_bo_tep=None, ma_mau=None,
+                seed_cap=SEED_XAO_CAP):
     """Dữ liệu nhúng vào HTML; thoát với thông báo rõ nếu thiếu tệp hoặc hướng dẫn sai cấu trúc.
 
     luot: lượt gán của trang (khóa lưu, tên tệp tải về). ma_chon: nếu có, chỉ đưa các tuyên bố có mã này vào, thứ tự xáo
     trộn theo seed_xao; bài quảng cáo và đoạn tài liệu cũng chỉ của các tuyên bố đó. Không nhúng nhãn nào.
-    bo="chinh": đọc tuyen_bo_tep (mặc định chinh.jsonl), lọc theo ma_mau, xếp theo id và dùng lượt 1."""
+    bo="chinh": đọc tuyen_bo_tep (mặc định chinh.jsonl), lọc theo ma_mau, xếp theo id và dùng lượt 1.
+    bo="cap": đọc tuyen_bo_tep (mặc định cap_toi_thieu.jsonl), nạp mọi biến thể, xáo theo seed_cap (mặc định SEED_XAO_CAP),
+    lượt 1, gán mù: bỏ trống các trường gợi ý nhãn, không nạp bài quảng cáo."""
+    if bo == "cap":
+        if ma_chon is not None or ma_mau is not None:
+            sys.exit("--bo cap không dùng --chon hay --ma-mau")
+        cau_hinh = cau_hinh_cap()
+        luot = 1
+        tep = Path(tuyen_bo_tep) if tuyen_bo_tep is not None else TEP_CAP
+        if not tep.is_file():
+            sys.exit(f"thiếu tệp cặp tối thiểu: {tep}")
+        cac_cap = doc_jsonl(tep)
+        if not cac_cap:
+            sys.exit(f"{tep}: không có biến thể nào")
+        for t in cac_cap:
+            for k in ("id", "ma_mau", "tuyen_bo", "thuoc_tinh"):
+                if not t.get(k):
+                    sys.exit(f"{tep}: biến thể {t.get('id')!r} thiếu trường {k}")
+        ma_id = [t["id"] for t in cac_cap]
+        if len(set(ma_id)) != len(ma_id):
+            sys.exit(f"{tep}: có id lặp")
+        tuyen_bo = []
+        for t in xao_cap(cac_cap, seed_cap):
+            x = {k: t.get(k, "") for k in TRUONG_TUYEN_BO}
+            x.update({k: "" for k in TRUONG_AN_CAP})
+            tuyen_bo.append(x)
+        thieu = []
+        doan = {}
+        for ma in sorted({t["ma_mau"] for t in tuyen_bo}):
+            duong = THU_MUC_NGUON / ma / "doan.jsonl"
+            if not duong.exists():
+                thieu.append(str(duong))
+                continue
+            doan[ma] = [doan_nhung(d) for d in doc_jsonl(duong)]
+        if thieu:
+            sys.exit("thiếu tệp dữ liệu:\n  " + "\n  ".join(thieu))
+        return {"tuyen_bo": tuyen_bo, "bai": {}, "doan": doan, "huong_dan": dung_huong_dan(doc_huong_dan()),
+                "quy_tac": {"thong_bao": THONG_BAO, "nhac": NHAC, "re_ngoac_kep": RE_NGOAC_KEP, "re_ma_doan": RE_MA_DOAN},
+                "trang": {"luot": luot, "khoa_nhan": cau_hinh["khoa_nhan"], "khoa_giao_dien": cau_hinh["khoa_giao_dien"],
+                          "tep_nhan": cau_hinh["tep_nhan"], "tep_hoi": cau_hinh["tep_hoi"], "nghi_ms": NGHI_GIAY * 1000,
+                          "bo": "cap"},
+                "ca_dac_biet": CA_DAC_BIET}
     if bo == "chinh":
         if ma_chon is not None:
             sys.exit("--bo chinh không dùng --chon; chọn bộ bằng --ma-mau")
@@ -1213,6 +1287,49 @@ def json_nhung(du_lieu):
     return json.dumps(du_lieu, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c")
 
 
+def _mau_cap(mau, gan_mu):
+    """Mẫu HTML của trang tập cặp tối thiểu: gán mù, giao diện không hiện id (thay bằng "Biến thể N/M"), không có bài quảng
+    cáo. Chỉ thay chữ trên mẫu dùng chung; mỗi chỗ thay phải khớp đúng một lần, nếu không thì mẫu đã đổi và phải sửa ở đây."""
+    def thay(cu, moi):
+        nonlocal mau
+        if mau.count(cu) != 1:
+            sys.exit(f"mẫu HTML đã đổi, chỗ thay của --bo cap không còn khớp: {cu[:70]!r}")
+        mau = mau.replace(cu, moi)
+    thay("bộ thử (Bước 16 · lượt __LUOT__)", "Tập cặp tối thiểu (Bước 25)")
+    thay("bộ thử, lượt __LUOT__", "Tập cặp tối thiểu (Bước 25)")
+    thay(gan_mu, "Tập cặp tối thiểu (Bước 25), lượt 1: gán mù từng biến thể, tự đọc tuyên bố và tài liệu, tự gán nhãn theo "
+                 "hướng dẫn. Trang không có bài quảng cáo và không nói biến thể này thuộc loại nào.")
+    thay("(bộ thử, lượt ' + LUOT + ')", "(Tập cặp tối thiểu - Bước 25)")
+    # Không hiện id: tên hiển thị là số thứ tự trong danh sách đã xáo. id thật chỉ dùng làm khóa lưu và để xuất tệp.
+    thay("const TB = DL.tuyen_bo;\n", "const TB = DL.tuyen_bo;\nconst TENHT = new Map(TB.map((t, i) => [t.id, 'Biến thể ' + (i + 1)]));\n")
+    thay("el('span', 'ma-muc', tb.id)", "el('span', 'ma-muc', TENHT.get(tb.id))")
+    thay("$('the-ma').textContent = tb.id + '  (' + (state.idx + 1) + '/' + TB.length + ')';",
+         "$('the-ma').textContent = 'Biến thể ' + (state.idx + 1) + '/' + TB.length;")
+    thay("[['Thuộc tính', tb.thuoc_tinh], ['Mã bài', tb.ma_qc], ['LLM', tb.llm_sinh], ['Chế độ', tb.che_do], ['Loại bài', tb.loai_bai]]",
+         "[['Thuộc tính', tb.thuoc_tinh], ['Mẫu', tb.ma_mau]]")
+    thay("const b = el('button', 'lien-ket', id);", "const b = el('button', 'lien-ket', TENHT.get(id));")
+    thay("dong.push('- ' + tb.id + ' (' + tb.ma_qc + '): ' + q);", "dong.push('- ' + TENHT.get(tb.id) + ': ' + q);")
+    thay(r"const m = dong.match(/^- (tb-\d+) \([^)]*\): (.*)$/);" + "\n      if (m) { hoi.push([m[1], m[2]]); return; }",
+         r"const m = dong.match(/^- Biến thể (\d+): (.*)$/);" + "\n      if (m) { hoi.push([(TB[Number(m[1]) - 1] || {}).id || 'Biến thể ' + m[1], m[2]]); return; }")
+    thay("loi.push('id ' + o.id + ' không có trong danh sách tuyên bố')",
+         "loi.push((TENHT.get(o.id) || 'một bản ghi') + ' không có trong danh sách tuyên bố')")
+    thay("loi.push(o.id + ' không qua kiểm: '", "loi.push(TENHT.get(o.id) + ' không qua kiểm: '")
+    thay("thieuDong.join(', ')", "thieuDong.map((x) => TENHT.get(x)).join(', ')")
+    thay("loi.push('câu hỏi của ' + id + ': không có trong danh sách tuyên bố')",
+         "loi.push('câu hỏi của ' + (TENHT.get(id) || id) + ': không có trong danh sách tuyên bố')")
+    # Không có bài quảng cáo: ẩn khung bài, không tô câu gốc.
+    thay('<div class="khung">\n      <details class="hd" id="kh-bai">', '<div class="khung" hidden>\n      <details class="hd" id="kh-bai">')
+    thay("box.textContent = '(không có bài ' + tb.ma_qc + ')';", "box.textContent = '(biến thể không có bài gốc)';")
+    thay("Gán theo chữ của tuyên bố; bài quảng cáo (đóng sẵn) chỉ để kiểm tách.", "Gán theo chữ của tuyên bố; trang này không có bài quảng cáo.")
+    # Chặn mã ngoài bộ trước khi nhập (như tập chính).
+    moc = "  const { dung: nhan, khac, luot_khac: luotKhac } = tachTheoLuot(moi, LUOT);"
+    thay(moc, """  if (moi.some((o) => o && o.luot === LUOT && !TB.some((tb) => tb.id === o.id))) {
+    alert('Từ chối nhập: có mã tuyên bố không thuộc bộ của trang này.'); return;
+  }
+""" + moc)
+    return mau
+
+
 def dung_html(du_lieu):
     """Điền chữ phụ thuộc lượt (tiêu đề, tên tệp tải về) trước, nhúng dữ liệu JSON sau cùng."""
     t = du_lieu["trang"]
@@ -1234,6 +1351,8 @@ def dung_html(du_lieu):
     alert('Từ chối nhập: có mã tuyên bố không thuộc bộ của trang này.'); return;
   }
 """ + moc)
+    if t.get("bo") == "cap":
+        mau = _mau_cap(mau, gan_mu)
     mau = mau.replace("__LUOT__", str(t["luot"])).replace("__TEP_NHAN__", t["tep_nhan"]).replace("__TEP_HOI__", t["tep_hoi"])
     return mau.replace("__DU_LIEU__", json_nhung(du_lieu))
 
@@ -2838,15 +2957,24 @@ def main(argv=None):
     sys.stdout.reconfigure(encoding="utf-8")
     sys.stderr.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser(description="Sinh công cụ gán nhãn HTML: bộ thử (Bước 13, 16), tập chính (Bước 20, 24).")
-    ap.add_argument("--bo", choices=("thu", "chinh"), default="thu", help="bộ tuyên bố (mặc định: thu)")
-    ap.add_argument("--tuyen-bo", type=Path, help="tệp tuyên bố tập chính (mặc định data/tuyen_bo/chinh.jsonl)")
+    ap.add_argument("--bo", choices=("thu", "chinh", "cap"), default="thu", help="bộ tuyên bố (mặc định: thu)")
+    ap.add_argument("--tuyen-bo", type=Path, help="tệp tuyên bố tập chính (mặc định data/tuyen_bo/chinh.jsonl) hoặc tập cặp (mặc định data/cap_toi_thieu.jsonl)")
     ap.add_argument("--ma-mau", nargs="+", help="đủ mã mẫu của tập phát triển hoặc tập kiểm tra")
     ap.add_argument("--luot", type=int, default=None, help=f"lượt gán bộ thử, từ 2 (mặc định {LUOT}); tập chính luôn là 1")
     ap.add_argument("--chon", type=Path, default=None,
                     help="tệp mã tuyên bố (mỗi dòng một mã, # là chú thích): chỉ đưa các tuyên bố này vào trang, xáo trộn thứ tự")
+    ap.add_argument("--seed-xao", type=int, default=None, help=f"seed xáo thứ tự của --bo cap (mặc định {SEED_XAO_CAP})")
     ap.add_argument("--ra", type=Path, default=None, help=f"đường dẫn HTML sinh ra (mặc định {TEP_RA.name} cho lượt {LUOT})")
     args = ap.parse_args(argv)
-    if args.bo == "chinh":
+    if args.seed_xao is not None and args.bo != "cap":
+        ap.error("--seed-xao chỉ dùng với --bo cap")
+    if args.bo == "cap":
+        if args.ma_mau is not None or args.chon is not None or args.luot not in (None, 1):
+            ap.error("--bo cap không dùng --ma-mau, --chon; chỉ lượt 1")
+        tep_ra = args.ra or TEP_RA.with_name("cong_cu_gan_nhan_cap.html")
+        du_lieu = nap_du_lieu(bo="cap", tuyen_bo_tep=args.tuyen_bo,
+                              seed_cap=SEED_XAO_CAP if args.seed_xao is None else args.seed_xao)
+    elif args.bo == "chinh":
         if args.chon is not None or args.luot not in (None, 1):
             ap.error("--bo chinh chỉ dùng lượt 1 và không dùng --chon")
         cau_hinh = cau_hinh_chinh(args.ma_mau)
@@ -2861,7 +2989,7 @@ def main(argv=None):
         du_lieu = nap_du_lieu(args.luot, doc_tep_ma(args.chon) if args.chon else None)
     html_ra = dung_html(du_lieu)
     tep_ra.parent.mkdir(parents=True, exist_ok=True)
-    if args.bo == "chinh":
+    if args.bo in ("chinh", "cap"):
         try:
             with tep_ra.open("x", encoding="utf-8", newline="\n") as f:
                 f.write(html_ra)
