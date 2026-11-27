@@ -15,8 +15,10 @@ spec = importlib.util.spec_from_file_location("cong_cu_chinh", ROOT / "scripts/t
 tc = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(tc)
 MA_PHAT_TRIEN = ["dh-apple-watchse3", "dt-xiaomi-15t"]
-# Dấu vân tay mẫu HTML trước khi thêm tập chính, chuẩn hóa xuống dòng như Python đọc mã nguồn.
-SHA_MAU_CU = "bd0c3e2618e6fb4e75e7e6af8895d98d22c30b6fb304708cac13204cfa6a3405"
+# Dấu vân tay mẫu HTML trước khi thêm tập chính, chuẩn hóa xuống dòng như Python đọc mã nguồn. Đã đo lại một lần vì thêm hiện
+# số chú thích của trang hãng (CSS, JS hiện số, hàm lấy phần bôi đen); dữ liệu nhúng thêm dau/dau_ct nên html_theo_ma_cu dùng
+# tc.nap_du_lieu hiện tại, vẫn khớp từng byte.
+SHA_MAU_CU = "8f1d640f35a0afc79b46111c8c982d4e26c4dce9b07b593c9a1f4a727ff3bc97"
 
 
 def du_lieu_nhung(html):

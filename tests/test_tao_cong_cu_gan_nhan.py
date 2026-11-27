@@ -619,7 +619,9 @@ def khoi_luat_kiem(html):
 
 def test_doan_nhung_chi_them_noi_dung_goc_khi_khac():
     d = {"id": "m#001", "ma_mau": "m", "noi_dung": "Pin\n20 phút", "noi_dung_goc": "Pin\n20 phút6", "chu_thich": ["a"], "dong": [1, 2]}
-    assert tc.doan_nhung(d) == {"id": "m#001", "noi_dung": "Pin\n20 phút", "noi_dung_goc": "Pin\n20 phút6", "chu_thich": ["a"]}
+    # Đổi vì thêm số chú thích: đoạn có số chú thích còn mang dau (vị trí) và dau_ct (ghép được: 1 dấu, 1 chú thích).
+    assert tc.doan_nhung(d) == {"id": "m#001", "noi_dung": "Pin\n20 phút", "noi_dung_goc": "Pin\n20 phút6", "chu_thich": ["a"],
+                               "dau": [[11, "6"]], "dau_ct": ["6"]}
     giong = dict(d, noi_dung_goc="Pin\n20 phút")
     assert tc.doan_nhung(giong) == {"id": "m#001", "noi_dung": "Pin\n20 phút", "chu_thich": ["a"]}  # không nhúng hai lần
     cu = {"id": "m#002", "noi_dung": "Pin", "chu_thich": None}  # doan.jsonl cũ chưa có noi_dung_goc
@@ -1209,3 +1211,134 @@ def test_lenh_tu_choi_luot_2_mot_phan_khong_co_ra_va_luot_1(tmp_path):
     assert "phải có --ra" in thoat(tc.main, ["--luot", "2", "--chon", str(chon)])
     assert "--luot phải là số nguyên từ 2" in thoat(tc.main, ["--luot", "1", "--ra", str(tmp_path / "x.html")])
     assert not (tmp_path / "x.html").exists()
+
+
+
+# ---------- Số chú thích của trang hãng hiện thành chữ nhỏ (dau, dau_ct) ----------
+
+def doan_that(ma_mau, so):
+    """Đoạn thật trong data/nguon (không thuộc data/nhan)."""
+    for d in tc.doc_jsonl(tc.THU_MUC_NGUON / ma_mau / "doan.jsonl"):
+        if d["id"] == f"{ma_mau}#{so}":
+            return d
+    pytest.skip(f"không có đoạn {ma_mau}#{so}")
+
+
+def chen_dau(noi_dung, dau):
+    """Chèn dấu vào noi_dung theo dau (vị trí tính theo UTF-16)."""
+    u, o, ra = noi_dung.encode("utf-16-le"), 0, ""
+    for vt, c in dau:
+        ra += u[o * 2:vt * 2].decode("utf-16-le") + c
+        o = vt
+    return ra + u[o * 2:].decode("utf-16-le")
+
+
+@pytest.mark.parametrize("ma, so, dau, dau_ct", [
+    ("tn-apple-airpodspro3", "007", ["12", "13", "14", "15"], ["12", "13", "14", "15"]),
+    ("dt-oppo-findx8", "054", ["7", "8", "9", "9"], ["7", "8", "9"]),            # số 9 lặp hai lần: bỏ lặp khi ghép
+    ("dh-xiaomi-watchs4", "015", ["*"] * 6, None),                                  # dấu sao: không ghép với số nào
+    ("dt-samsung-galaxys25ultra", "038", ["5", "7", "8", "34"], None),              # 4 số khác nhau, chỉ 3 chú thích
+])
+def test_vi_tri_va_ghep_dau_cua_bon_doan_that(ma, so, dau, dau_ct):
+    d = doan_that(ma, so)
+    x = tc.doan_nhung(d)
+    assert [c for _, c in x["dau"]] == dau
+    assert x["dau_ct"] == dau_ct
+    vt = [v for v, _ in x["dau"]]
+    assert vt == sorted(vt) and all(0 < v <= len(d["noi_dung"]) for v in vt)
+    # Dấu đặt vào đúng chỗ thì noi_dung quay về noi_dung_goc (chỉ khác khoảng trắng quanh dấu); noi_dung không bị đụng tới.
+    assert chen_dau(d["noi_dung"], x["dau"]).replace(" ", "") == d["noi_dung_goc"].replace(" ", "")
+    assert x["noi_dung"] == d["noi_dung"] != d["noi_dung_goc"]
+
+
+def test_dau_chi_co_khi_noi_dung_khac_goc_va_tin_duoc():
+    assert tc.vi_tri_dau("Pin 20 giờ", "Pin 20 giờ") == []
+    assert tc.vi_tri_dau("Pin 20 giờ", "") == []
+    assert tc.vi_tri_dau("Pin 20 giờ", "Pin 20 giờ 7") == [[10, "7"]]               # khoảng trắng thừa quanh dấu bị bỏ
+    assert tc.vi_tri_dau("Pin 20 giờ", "Pin 20 giờ7") == [[10, "7"]]
+    assert tc.vi_tri_dau("Pin 20 giờ", "Pin 20 giờ 2, 3") == [[10, "2,3"]]          # danh sách số là một dấu
+    assert tc.vi_tri_dau("Sạc 40W", "Sạc 40W*") == [[7, "*"]]
+    assert tc.vi_tri_dau("Sạc 40W", "Sạc 40W†‡") == [[7, "†‡"]]
+    # Không tin phép so: chữ chèn không phải dấu, có xóa, có thay chữ.
+    assert tc.vi_tri_dau("Sạc 40W", "Sạc nhanh 40W") == []
+    assert tc.vi_tri_dau("Sạc nhanh 40W", "Sạc 40W") == []
+    assert tc.vi_tri_dau("Sạc 40W", "Sạc 45W") == []
+    # Ký tự ngoài BMP (hai đơn vị UTF-16): vị trí tính theo JavaScript.
+    assert tc.vi_tri_dau("😀 Pin", "😀 Pin1") == [[6, "1"]]
+
+
+def test_ghep_dau_chu_thich():
+    assert tc.ghep_dau_chu_thich([[1, "12"], [2, "13"]], 2) == ["12", "13"]
+    assert tc.ghep_dau_chu_thich([[1, "9"], [2, "9"], [3, "8"]], 2) == ["9", "8"]      # thứ tự xuất hiện đầu tiên
+    assert tc.ghep_dau_chu_thich([[1, "2,3"], [2, "4"]], 3) == ["2", "3", "4"]
+    assert tc.ghep_dau_chu_thich([[1, "5"], [2, "7"]], 1) is None                     # số dấu khác số chú thích
+    assert tc.ghep_dau_chu_thich([[1, "*"]], 1) is None
+    assert tc.ghep_dau_chu_thich([[1, "5"]], 0) is None
+
+
+def test_du_lieu_nhung_co_dau(trang):
+    html, du_lieu = trang
+    co = [d for ds in du_lieu["doan"].values() for d in ds if "dau" in d]
+    assert co, "bộ thử phải có đoạn mang dau"
+    nhung = json.loads(re.search(r'<script id="du-lieu" type="application/json">(.*?)</script>', html, flags=re.S).group(1))
+    assert [d for ds in nhung["doan"].values() for d in ds if "dau" in d] == co
+    for d in co:
+        assert "dau_ct" in d and "noi_dung_goc" in d and d["dau"] and all(isinstance(v, int) for v, _ in d["dau"])
+    assert all("dau_ct" not in d for ds in du_lieu["doan"].values() for d in ds if "dau" not in d)
+
+
+def test_trang_khong_dua_so_chu_thich_vao_cau_trich(trang):
+    html, _ = trang
+    assert ".dau-ct, .so-ct { user-select: none;" in html
+    assert "sel.toString().replace" not in html and "chuBoiDen(sel.getRangeAt(i).cloneContents())" in html
+    assert html.count("/* >>> DAU_CT") == 1 and html.count("/* <<< DAU_CT */") == 1
+
+
+def test_javascript_bo_so_nho_khi_lay_phan_boi_den(trang, tmp_path):
+    node = shutil.which("node")
+    if not node:
+        pytest.skip("không có node")
+    html, _ = trang
+    khoi = re.search(r"/\* >>> DAU_CT.*?/\* <<< DAU_CT \*/", html, flags=re.S).group(0)
+    x = tc.doan_nhung(doan_that("tn-apple-airpodspro3", "007"))
+    js = khoi + "\nconst ND = " + json.dumps(x["noi_dung"]) + ", DAU = " + json.dumps(x["dau"]) + r"""
+const assert = require('node:assert/strict');
+// DOM giả tối thiểu: chỉ các trường mà chuBoiDen đọc.
+const T = (s) => ({ nodeType: 3, nodeValue: s });
+const E = (tagName, className, con, hidden) => ({ nodeType: 1, tagName, className, childNodes: con, hidden: !!hidden });
+const F = (con) => ({ nodeType: 11, childNodes: con });
+const gon = (s) => s.replace(/\s+/g, ' ').trim();
+
+// chiaTheoDau: ghép các mảnh chữ lại đúng noi_dung; mỗi số nhỏ nằm đúng vị trí đã tính.
+const mang = chiaTheoDau(ND, DAU);
+assert.equal(mang.filter((m) => m.chu !== undefined).map((m) => m.chu).join(''), ND);
+let da = 0, o = 0;
+for (const m of mang) {
+  if (m.chu !== undefined) { o += m.chu.length; continue; }
+  assert.deepEqual([o, m.dau], DAU[da++]);
+}
+assert.equal(da, DAU.length);
+assert.deepEqual(chiaTheoDau('abc', []), [{ chu: 'abc' }]);
+assert.deepEqual(chiaTheoDau('abc', [[3, '1']]), [{ chu: 'abc' }, { dau: '1' }]);
+assert.deepEqual(chiaTheoDau('abc', [[0, '1'], [1, '2'], [1, '3']]),
+  [{ dau: '1' }, { chu: 'a' }, { dau: '2' }, { dau: '3' }, { chu: 'bc' }]);
+
+// Dựng noi-dung như trang dựng (chữ + sup.dau-ct) rồi bôi đen: chữ lấy được phải đúng noi_dung, không có số nhỏ.
+const con = mang.map((m) => (m.chu !== undefined ? T(m.chu) : E('SUP', 'dau-ct', [T(m.dau)])));
+assert.equal(chuBoiDen(E('DIV', 'noi-dung', con)), ND + ' ');
+const doan = E('ARTICLE', 'doan', [
+  E('DIV', 'doan-dau', [E('SPAN', 'ma', [T('tn-apple-airpodspro3#007')]), E('BUTTON', 'nho', [T('Thêm làm bằng chứng')])]),
+  E('DIV', 'noi-dung', con),
+  E('DIV', 'chu-thich co-so', [E('SPAN', 'so-ct', [T('12')]), T('Cần có iOS')]),
+]);
+assert.equal(gon(chuBoiDen(F([doan]))), gon(ND) + ' Cần có iOS');
+// Phần bôi đen có sup hoặc nhãn chú thích ở giữa hay ở đầu: số nhỏ bị bỏ, chữ còn nguyên.
+assert.equal(chuBoiDen(F([T('ứng dụng Tìm'), E('SUP', 'dau-ct', [T('12')]), T(' và')])), 'ứng dụng Tìm và');
+assert.equal(chuBoiDen(F([E('SPAN', 'so-ct', [T('*1')]), T('Chú thích')])), 'Chú thích');
+// Đoạn đang bị lọc ẩn không vào phần bôi đen; hai khối liền nhau không dính chữ.
+assert.equal(gon(chuBoiDen(F([E('ARTICLE', 'doan', [T('a')], true), E('DIV', '', [T('b')]), E('DIV', '', [T('c')])]))), 'b c');
+"""
+    tep = tmp_path / "dau_ct.js"
+    tep.write_text(js, encoding="utf-8")
+    kq = subprocess.run([node, str(tep)], capture_output=True, text=True, encoding="utf-8")
+    assert kq.returncode == 0, kq.stderr

@@ -19,9 +19,11 @@ MA_MAU = ["dh-apple-watchse3", "dt-xiaomi-15t"]
 SO_GOC, SO_LOAI, SO_MOI_GOC_LOAI = 4, 6, 1
 # Mã băm của trang cũ sinh bằng tham số cố định, đo trước khi thêm --bo cap, với hướng dẫn thay bằng bản giả (để không phụ
 # thuộc nội dung data/huong_dan_gan_nhan.md, vốn đang được sửa). Đổi mẫu HTML hay dữ liệu bộ thử thì phải đo lại có chủ ý.
-SHA_THU_LUOT2 = "f2029df59f1954a53a50aa955bfe41b57ff6d334b8f08191c4e0f1b1301c36b9"
-SHA_THU_LUOT3 = "2c016aaa87005d6102bcfb2f31f35a61baab73b04f38cdaa2c4dffe93733342e"
-SHA_CHINH = "be3c3ef2080c00b2288a5a263ad8a780b40b75ec69a26e869c0a00d466acbf96"
+# Đã đo lại một lần vì thêm hiện số chú thích của trang hãng: so với trang cũ, dữ liệu nhúng chỉ thêm trường dau và dau_ct
+# của các đoạn có số chú thích, mẫu chỉ thêm CSS, JS hiện số và sửa hàm lấy phần bôi đen (đã đối chiếu bằng diff bỏ phần dữ liệu).
+SHA_THU_LUOT2 = "a56696105df8f7ebe04730efa517696e0c5ccaf210d445d85a1d4ba5b7eb6f08"
+SHA_THU_LUOT3 = "2120104dce764a9d1289e72f052650c64b356bf520919c5acb1f31a3e0c35ca3"
+SHA_CHINH = "fbd5cf3f8d72f1370e7c5daf5b1067482a9be209ba155ceaa100da36f6e532ae"
 
 
 def du_lieu_nhung(html):
